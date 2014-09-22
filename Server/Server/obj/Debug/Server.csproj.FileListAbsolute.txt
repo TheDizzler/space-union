@@ -1,0 +1,6 @@
+D:\Git Repository\space-union\Server\Server\bin\Debug\Server.exe.config
+D:\Git Repository\space-union\Server\Server\bin\Debug\Server.exe
+D:\Git Repository\space-union\Server\Server\bin\Debug\Server.pdb
+D:\Git Repository\space-union\Server\Server\obj\Debug\Server.csprojResolveAssemblyReference.cache
+D:\Git Repository\space-union\Server\Server\obj\Debug\Server.exe
+D:\Git Repository\space-union\Server\Server\obj\Debug\Server.pdb
