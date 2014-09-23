@@ -1,1 +1,5 @@
 D:\Git Repository\space-union\Server\Server Application\Server Application\bin\Debug\Server Application.exe.config
+D:\Git Repository\space-union\Server\Server Application\Server Application\bin\Debug\Server Application.exe
+D:\Git Repository\space-union\Server\Server Application\Server Application\bin\Debug\Server Application.pdb
+D:\Git Repository\space-union\Server\Server Application\Server Application\obj\Debug\Server Application.exe
+D:\Git Repository\space-union\Server\Server Application\Server Application\obj\Debug\Server Application.pdb

@@ -1,0 +1,6 @@
+D:\Git Repository\space-union\Server\TestServer\TestServer\bin\Debug\TestServer.exe.config
+D:\Git Repository\space-union\Server\TestServer\TestServer\bin\Debug\TestServer.exe
+D:\Git Repository\space-union\Server\TestServer\TestServer\bin\Debug\TestServer.pdb
+D:\Git Repository\space-union\Server\TestServer\TestServer\obj\Debug\TestServer.csprojResolveAssemblyReference.cache
+D:\Git Repository\space-union\Server\TestServer\TestServer\obj\Debug\TestServer.exe
+D:\Git Repository\space-union\Server\TestServer\TestServer\obj\Debug\TestServer.pdb
