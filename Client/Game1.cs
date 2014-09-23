@@ -58,7 +58,6 @@ namespace SpaceUnion {
 
 			// TODO: Add your update logic here
 
-			// Controller logic goes in here
 			base.Update(gameTime);
 		}
 
@@ -69,7 +68,7 @@ namespace SpaceUnion {
 		protected override void Draw(GameTime gameTime) {
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
-			// TODO: Add your drawing code here
+			// Graphics code here
 
 			base.Draw(gameTime);
 		}
