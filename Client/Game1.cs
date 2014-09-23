@@ -56,8 +56,6 @@ namespace SpaceUnion {
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
 
-			// TODO: Add your update logic here
-
 			// Controller logic goes in here
 			base.Update(gameTime);
 		}
