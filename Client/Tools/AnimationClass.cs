@@ -11,10 +11,11 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 namespace SpaceUnion {
+
 	/// <summary>
 	/// Used sprite animations
 	/// </summary>
-	class AnimationClass {
+	public class AnimationClass {
 
 		public Rectangle[] frames;
 		public Color color = Color.White;
@@ -38,8 +39,5 @@ namespace SpaceUnion {
 			anima.frameCount = frameCount;
 			return anima;
 		}
-	}
-}
-
 	}
 }

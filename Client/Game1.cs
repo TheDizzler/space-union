@@ -8,12 +8,15 @@ namespace SpaceUnion {
 	/// </summary>
 	public class Game1 : Game {
 		GraphicsDeviceManager graphics;
-		SpriteBatch spriteBatch;
+		SpriteBatch batch;
 
 		/* Textures should be moved to an asset manager */
 		private  Texture2D ufoTexture;
 		private  Texture2D triTexture;
 		private  Texture2D wrenchTexture;
+
+
+		private  Ship ufo;
 
 
 		public Game1()
@@ -47,11 +50,14 @@ namespace SpaceUnion {
 		/// </summary>
 		protected override void LoadContent() {
 			// Create a new SpriteBatch, which can be used to draw textures.
-			spriteBatch = new SpriteBatch(GraphicsDevice);
+			batch = new SpriteBatch(GraphicsDevice);
 
 			ufoTexture = Content.Load<Texture2D>("circleship (128x128)");
-			triTexture = Content.Load<Texture2D>("triangleship (128x128)");
 			wrenchTexture = Content.Load<Texture2D>("wrenchship");
+			triTexture = Content.Load<Texture2D>("triangleship (128x128)");
+			
+
+			ufo = new Ship(ufoTexture, new Vector2(250, 250));
 		}
 
 		/// <summary>
@@ -84,10 +90,11 @@ namespace SpaceUnion {
 
 			GraphicsDevice.Clear(Color.Black);
 
-			spriteBatch.Begin();
+			batch.Begin();
 			// Graphics code here
 
-
+			ufo.draw(batch);
+			batch.End();
 			base.Draw(gameTime);
 		}
 	}

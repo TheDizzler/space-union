@@ -13,8 +13,14 @@ namespace SpaceUnion {
 	public abstract class Sprite {
 
 		protected Texture2D texture;
+		/// <summary>
+		/// Sprite dimensions
+		/// </summary>
+		public int height, width;
+		/// <summary>
+		/// Game world x,y co-ordinates
+		/// </summary>
 		public Vector2 position;
-		protected Vector2 velocity;
 		/// <summary>
 		/// The center point of the sprite
 		/// </summary>
@@ -36,26 +42,10 @@ namespace SpaceUnion {
 		}
 		// End of animations
 
-		public float maxHealth;
-		public float currentHealth;
-
-		/// <summary>
-		/// Get % health remaining
-		/// </summary>
-		public float HealthPercentage {
-			get { return currentHealth / maxHealth; }
-		}
-
-		public bool alive = true;
-
-		internal float attackDelay;
-		protected float attackTimer;
+		
 
 		
-		/// <summary>
-		/// Sprite dimensions
-		/// </summary>
-		public int height, width;
+		
 
 		/// <summary>
 		/// Constructor. May want to remove position as a required param.
@@ -65,7 +55,7 @@ namespace SpaceUnion {
 		public Sprite(Texture2D tex, Vector2 pos) {
 			texture = tex;
 			position = pos;
-			velocity = Vector2.Zero;
+			
 
 			origin = new Vector2(texture.Width / 2, texture.Height / 2);
 		}
