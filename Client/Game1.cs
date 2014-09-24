@@ -10,10 +10,24 @@ namespace SpaceUnion {
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
+		/* Textures should be moved to an asset manager */
+		private  Texture2D ufoTexture;
+		private  Texture2D triTexture;
+		private  Texture2D wrenchTexture;
+
+
 		public Game1()
 			: base() {
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
+
+			graphics.IsFullScreen = false;
+
+			//Changes the settings just applied
+			graphics.ApplyChanges();
+
+
+			IsMouseVisible = true;
 		}
 
 		/// <summary>
@@ -23,7 +37,6 @@ namespace SpaceUnion {
 		/// and initialize them as well.
 		/// </summary>
 		protected override void Initialize() {
-			// TODO: Add your initialization logic here
 
 			base.Initialize();
 		}
@@ -36,7 +49,9 @@ namespace SpaceUnion {
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			// TODO: use this.Content to load your game content here
+			ufoTexture = Content.Load<Texture2D>("circleship (128x128)");
+			triTexture = Content.Load<Texture2D>("triangleship (128x128)");
+			wrenchTexture = Content.Load<Texture2D>("wrenchship");
 		}
 
 		/// <summary>
@@ -66,9 +81,12 @@ namespace SpaceUnion {
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime) {
-			GraphicsDevice.Clear(Color.CornflowerBlue);
 
+			GraphicsDevice.Clear(Color.Black);
+
+			spriteBatch.Begin();
 			// Graphics code here
+
 
 			base.Draw(gameTime);
 		}
