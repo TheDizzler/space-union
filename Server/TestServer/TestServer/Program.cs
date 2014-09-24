@@ -17,7 +17,7 @@ namespace TestServer
         {
             Console.WriteLine("Current IP: " + GetLocalIPv4Address().ToString());
             Console.WriteLine("Size of Datagram: " + ObjectToBytes(new Datagram()).Length);
-            receiverip = "ip";
+            receiverip = "192.168.1.102";
             UdpClient client = new UdpClient(6969);
             try
             {
@@ -30,7 +30,6 @@ namespace TestServer
             {
                 Console.WriteLine(e.ToString());
             }
-
         }
 
         private static byte[] ObjectToBytes(Object target)
