@@ -25,6 +25,14 @@ namespace TestServer
                 client.Connect(receiverip, 6969);
                 data = ObjectToBytes(new Datagram() { Health = 69 });
                 client.Send(data, data.Length);
+                Console.WriteLine("Receive data: ");
+                if (Console.ReadLine() == "y")
+                {
+                    IPEndPoint ip = new IPEndPoint(IPAddress.Any, 0);
+                    byte[] input = client.Receive(ref ip);
+                    Datagram received = (Datagram)BytesToObject(input);
+                    Console.WriteLine("Received: " + received.Health);
+                }
             }
             catch (Exception e)
             {
@@ -42,6 +50,18 @@ namespace TestServer
             {
                 bf.Serialize(ms, target);
                 return ms.ToArray();
+            }
+        }
+
+        private static Object BytesToObject(byte[] target)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            using (MemoryStream ms = new MemoryStream())
+            {
+                ms.Write(target, 0, target.Length);
+                ms.Seek(0, SeekOrigin.Begin);
+                Object data = (Object)bf.Deserialize(ms);
+                return data;
             }
         }
 
