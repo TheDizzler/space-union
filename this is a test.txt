@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 this branch is for UI!!!
+=======
+this is for graphics branch!!
+>>>>>>> b3e96261d137b97591c5c2ea5cd5b8bc4a8bfb0f
