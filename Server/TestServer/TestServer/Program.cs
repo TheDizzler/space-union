@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TestServer
@@ -18,13 +19,22 @@ namespace TestServer
             Console.WriteLine("Current IP: " + GetLocalIPv4Address().ToString());
             Console.WriteLine("Size of Datagram: " + ObjectToBytes(new Datagram()).Length);
             receiverip = "192.168.1.102";
-            UdpClient client = new UdpClient(6969);
+            UdpClient client = new UdpClient();
             try
             {
                 byte[] data;
-                client.Connect(receiverip, 6969);
-                data = ObjectToBytes(new Datagram() { Health = 69 });
-                client.Send(data, data.Length);
+                
+                short x = 0;
+                Console.WriteLine(DateTime.Now.ToString("HH:mm:ss:fff"));
+                while (x != 1000)
+                {
+                    data = ObjectToBytes(new Datagram() { Health = x });
+                    client.Send(data, data.Length, receiverip, 6969);
+                    x++;
+                    Thread.Sleep(5);
+                }
+                Console.WriteLine(DateTime.Now.ToString("HH:mm:ss:fff"));
+                /*
                 Console.WriteLine("Receive data: ");
                 if (Console.ReadLine() == "y")
                 {
@@ -33,6 +43,7 @@ namespace TestServer
                     Datagram received = (Datagram)BytesToObject(input);
                     Console.WriteLine("Received: " + received.Health);
                 }
+                */
             }
             catch (Exception e)
             {
