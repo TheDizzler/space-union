@@ -15,6 +15,7 @@ namespace SpaceUnion {
 		private  Texture2D triTexture;
 		private  Texture2D wrenchTexture;
 
+		SpriteFont debugFont;
 
 		private  Ship ufo;
 
@@ -55,7 +56,8 @@ namespace SpaceUnion {
 			ufoTexture = Content.Load<Texture2D>("circleship (128x128)");
 			wrenchTexture = Content.Load<Texture2D>("wrenchship");
 			triTexture = Content.Load<Texture2D>("triangleship (128x128)");
-			
+
+			//debugFont = Content.Load<SpriteFont>("myFont");
 
 			ufo = new Ship(ufoTexture, new Vector2(250, 250));
 		}
@@ -74,11 +76,25 @@ namespace SpaceUnion {
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update(GameTime gameTime) {
+
+
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
 
 			// Controller logic goes in here
 
+			if(Keyboard.GetState().IsKeyDown(Keys.A)) {		// rotate left
+
+				ufo.rotateLeft();
+			} else if (Keyboard.GetState().IsKeyDown(Keys.D)) {		// rotate left
+
+				ufo.rotateRight();
+			}
+
+			if (Keyboard.GetState().IsKeyDown(Keys.W)) {		// rotate left
+
+				ufo.thrust();
+			}
 			base.Update(gameTime);
 		}
 
@@ -94,8 +110,16 @@ namespace SpaceUnion {
 			// Graphics code here
 
 			ufo.draw(batch);
+			//drawText();
 			batch.End();
 			base.Draw(gameTime);
 		}
+
+
+		//private void drawText() {
+			
+		//	int currentAngle = (int) MathHelper.ToDegrees(ufo.rotation);
+		//	batch.DrawString(debugFont, "angle: " + currentAngle.ToString(), new Vector2(20, 20), Color.AliceBlue);
+		//}
 	}
 }

@@ -25,7 +25,7 @@ namespace SpaceUnion {
 		/// The center point of the sprite
 		/// </summary>
 		protected Vector2 origin;
-		protected float rotation;
+		public float rotation;
 
 		/// <summary>
 		/// Animation related variables

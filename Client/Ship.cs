@@ -36,5 +36,22 @@ namespace SpaceUnion {
 
 			velocity = Vector2.Zero;
 		}
+
+
+
+		public void rotateLeft() {
+
+			rotation -= .05f;
+		}
+
+		public void rotateRight() {
+
+			rotation += .05f;
+		}
+
+		internal void thrust() {
+			
+
+		}
 	}
 }
