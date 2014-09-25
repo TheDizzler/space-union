@@ -40,7 +40,6 @@ namespace SpaceUnion {
 
 
 		public void rotateLeft() {
-
 			rotation -= .05f;
 		}
 
