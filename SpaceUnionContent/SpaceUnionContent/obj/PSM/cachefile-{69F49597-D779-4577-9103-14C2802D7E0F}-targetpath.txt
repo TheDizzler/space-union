@@ -1,0 +1,6 @@
+Content\Backgrounds\background.xnb
+Content\Spaceships\shuttle.xnb
+Content\SpriteFonts\SpriteFont1.xnb
+Content\Spaceships\circleship (128x128).png
+Content\Spaceships\triangleship (128x128).png
+Content\Spaceships\wrenchship.png

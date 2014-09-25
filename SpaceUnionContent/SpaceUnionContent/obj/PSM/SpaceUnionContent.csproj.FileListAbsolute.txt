@@ -1,0 +1,10 @@
+C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\circleship (128x128).png
+C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\triangleship (128x128).png
+C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\wrenchship.png
+C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\IgnoreMe.dll
+C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\SpaceUnionContent.csprojResolveAssemblyReference.cache
+C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\IgnoreMe.dll
+C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.xnb
+C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.xnb
+C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb
