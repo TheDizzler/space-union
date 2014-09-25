@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -22,18 +23,23 @@ namespace TestServer
             UdpClient client = new UdpClient();
             try
             {
-                byte[] data;
-                
-                short x = 0;
-                Console.WriteLine(DateTime.Now.ToString("HH:mm:ss:fff"));
-                while (x != 1000)
+                for (int n = 0; n < 100; n++)
                 {
-                    data = ObjectToBytes(new Datagram() { Health = x });
-                    client.Send(data, data.Length, receiverip, 6969);
-                    x++;
-                    Thread.Sleep(5);
+                    byte[] data;
+                    short x = 0;
+                    DateTime time = DateTime.Now;
+                    while (x != 1000)
+                    {
+                        //data = Compress(ObjectToBytes(new Datagram() { Health = x }));
+                        data = ObjectToBytes(new Datagram() { Health = x });
+                        client.Send(data, data.Length, receiverip, 6969);
+                        x++;
+                        Thread.Sleep(1);
+                    }
+                    Console.WriteLine("Transmission: " + n + " - " + (DateTime.Now - time));
                 }
-                Console.WriteLine(DateTime.Now.ToString("HH:mm:ss:fff"));
+                //no compression - 994, 995, 991    
+                // compression -   997, 992, 994
                 /*
                 Console.WriteLine("Receive data: ");
                 if (Console.ReadLine() == "y")
@@ -72,6 +78,18 @@ namespace TestServer
                 ms.Seek(0, SeekOrigin.Begin);
                 Object data = (Object)bf.Deserialize(ms);
                 return data;
+            }
+        }
+
+        public static byte[] Compress(byte[] raw)
+        {
+            using (MemoryStream memory = new MemoryStream())
+            {
+                using (GZipStream gzip = new GZipStream(memory, CompressionMode.Compress, true))
+                {
+                    gzip.Write(raw, 0, raw.Length);
+                }
+                return memory.ToArray();
             }
         }
 
