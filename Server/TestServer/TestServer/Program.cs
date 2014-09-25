@@ -20,7 +20,7 @@ namespace TestServer
             
         }
 
-        private static byte[] ObjectToBytes(Object target)
+        private static byte[] objectToBytes(Object target)
         {
             if (target == null)
                 return null;
@@ -32,7 +32,7 @@ namespace TestServer
             }
         }
 
-        private static Object BytesToObject(byte[] target)
+        private static Object bytesToObject(byte[] target)
         {
             BinaryFormatter bf = new BinaryFormatter();
             using (MemoryStream ms = new MemoryStream())
@@ -44,9 +44,9 @@ namespace TestServer
             }
         }
 
-        private static byte[] Decompress(byte[] gzip)
+        private static byte[] decompress(byte[] data)
         {
-            using (GZipStream stream = new GZipStream(new MemoryStream(gzip), CompressionMode.Decompress))
+            using (GZipStream gzip = new GZipStream(new MemoryStream(data), CompressionMode.Decompress))
             {
                 const int size = 4096;
                 byte[] buffer = new byte[size];
@@ -55,7 +55,7 @@ namespace TestServer
                     int count = 0;
                     do
                     {
-                        count = stream.Read(buffer, 0, size);
+                        count = gzip.Read(buffer, 0, size);
                         if (count > 0)
                         {
                             ms.Write(buffer, 0, count);
@@ -67,15 +67,15 @@ namespace TestServer
             }
         }
 
-        private static byte[] Compress(byte[] raw)
+        private static byte[] compress(byte[] data)
         {
-            using (MemoryStream memory = new MemoryStream())
+            using (MemoryStream ms = new MemoryStream())
             {
-                using (GZipStream gzip = new GZipStream(memory, CompressionMode.Compress, true))
+                using (GZipStream gzip = new GZipStream(ms, CompressionMode.Compress, true))
                 {
-                    gzip.Write(raw, 0, raw.Length);
+                    gzip.Write(data, 0, data.Length);
                 }
-                return memory.ToArray();
+                return ms.ToArray();
             }
         }
 
