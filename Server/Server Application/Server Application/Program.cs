@@ -10,7 +10,7 @@ namespace Server_Application
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Space Union Server.");
+            Console.WriteLine("Space Union Server");
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TestServer
@@ -16,49 +17,7 @@ namespace TestServer
         static string receiverip;
         static void Main(string[] args)
         {
-            Console.WriteLine("Current IP: " + GetLocalIPv4Address().ToString());
-            Console.WriteLine("Size of Datagram: " + ObjectToBytes(new Datagram()).Length);
-            receiverip = "ip";
-            UdpClient client = new UdpClient(6969);
-            try
-            {   
-                IPEndPoint ip = new IPEndPoint(IPAddress.Any, 0);
-                List<int> average = new List<int>();
-                for (int n = 0; n < 100; n++)
-                {
-                    DateTime time = DateTime.Now;
-                    short x = 0;
-                    List<short> temp = new List<short>();
-                    while (x != 1000)
-                    {
-                        byte[] input = client.Receive(ref ip);
-                        if (x == 0)
-                            time = DateTime.Now;
-                        //short c = ((Datagram)BytesToObject(Decompress(input))).Health;
-                        short c = ((Datagram)BytesToObject(input)).Health;
-                        temp.Add(c);
-                        if (c == 999)
-                            break;
-                        //Datagram received = (Datagram)BytesToObject(input);
-                        x++;
-                    }
-                    Console.WriteLine(DateTime.Now - time);
-                    Console.WriteLine("Transmission: " + n + " - List size: " + temp.Count);
-                    average.Add(temp.Count);
-                    Console.WriteLine();
-                }
-                int total = 0;
-                foreach (int x in average)
-                {
-                    total += x;
-                }
-                Console.WriteLine("Average packets received: " + total / average.Count);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
-
+            
         }
 
         private static byte[] ObjectToBytes(Object target)
@@ -85,7 +44,7 @@ namespace TestServer
             }
         }
 
-        static byte[] Decompress(byte[] gzip)
+        private static byte[] Decompress(byte[] gzip)
         {
             using (GZipStream stream = new GZipStream(new MemoryStream(gzip), CompressionMode.Decompress))
             {
@@ -105,7 +64,18 @@ namespace TestServer
                     while (count > 0);
                     return ms.ToArray();
                 }
+            }
+        }
 
+        private static byte[] Compress(byte[] raw)
+        {
+            using (MemoryStream memory = new MemoryStream())
+            {
+                using (GZipStream gzip = new GZipStream(memory, CompressionMode.Compress, true))
+                {
+                    gzip.Write(raw, 0, raw.Length);
+                }
+                return memory.ToArray();
             }
         }
 
