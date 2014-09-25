@@ -58,6 +58,7 @@ namespace SpaceUnion {
 
 			// TODO: Add your update logic here
 
+			// Controller logic goes in here
 			base.Update(gameTime);
 		}
 
