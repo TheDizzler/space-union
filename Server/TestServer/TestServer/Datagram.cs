@@ -15,10 +15,10 @@ namespace TestServer
         short ylocation;
         short xnoselocation;
         short ynoselocation;
-        byte health;
+        short health;
         byte energy;
 
-        public byte Health
+        public short Health
         {
             get { return health; }
             set { health = value; }
