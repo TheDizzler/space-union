@@ -8,6 +8,12 @@ namespace Server_Application
 {
     class GameData
     {
-
+        int gameroom;
+        int username;
+        byte health;
+        short xposition;
+        short yposition;
+        float angle;
+        //projectiles fired, direction, velocity
     }
 }
