@@ -21,18 +21,12 @@ namespace SpaceUnion
         SpriteBatch spriteBatch;
         private Texture2D background;
         private Texture2D shuttle;
-        private Texture2D earth;
+        //private Texture2D circleship;
         private SpriteFont font;
-        private float spaceshipX = 500;
-        private float spaceshipY = 300;
-        private float angle, momentumAngle = 0;
         private KeyboardState state;
-        private float velocity = 0;
-        private float currentSpeed = 0;
-        private float accelSpeed = 0.5f;
-        private float maxSpeed = 7;
-        private Boolean winflag = false;
-        float shipVelocityDirectionX, shipVelocityDirectionY; //Calculated variables to determine X and Y movement
+
+        private Ship playerShip;
+
         public Game1()
             : base()
         {
@@ -48,7 +42,6 @@ namespace SpaceUnion
         /// </summary>
         protected override void Initialize()
         {
-
             base.Initialize();
         }
 
@@ -63,6 +56,7 @@ namespace SpaceUnion
             background = Content.Load<Texture2D>("Backgrounds/background");
             shuttle = Content.Load<Texture2D>("Spaceships/shuttle");
             font = Content.Load<SpriteFont>("SpriteFonts/SpriteFont1"); // Use the name of your sprite font file here instead of 'Score'.
+            playerShip = new Ship(shuttle, new Vector2(200, 200)); //Create new player ship
         }
 
         /// <summary>
@@ -74,87 +68,73 @@ namespace SpaceUnion
             // TODO: Unload any non ContentManager content here
         }
 
-        //Collision check with screen boundries
-        protected void checkScreenWrap()
-        {
-            if (spaceshipX < -5)
-                spaceshipX = Window.ClientBounds.Width + 3;
-            if (spaceshipX > Window.ClientBounds.Width + 5)
-                spaceshipX = -3;
-            if (spaceshipY < -5)
-                spaceshipY = Window.ClientBounds.Height;
-            if (spaceshipY > Window.ClientBounds.Height + 5)
-                spaceshipY = 0;
-        }
+        
+        
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
+        /// 
+        /// Checks player edge wrap around.
+        /// 
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            //Check if ship will wrap around edges
-            checkScreenWrap();
-
-            state = Keyboard.GetState();
-
-            spaceshipX += shipVelocityDirectionX;
-            spaceshipY -= shipVelocityDirectionY;
+            playerShip.checkScreenWrap(Window); //Check if ship will wrap around edges
+            state = Keyboard.GetState(); //Get which keys are pressed or released
 
             //Up Key toggles back thruster
             if (state.IsKeyDown(Keys.Up))
             {
-                //Checking if speed doesnt exceed the ship's maximum speed
-                if (currentSpeed < maxSpeed)
-                {
-                    currentSpeed += accelSpeed;
-                }
-                //Ships cannot exceed maximum speed
-                else {
-                    currentSpeed = maxSpeed;
-                }
-
-                //Update Ship Velocity Direction
-                shipVelocityDirectionX = (float)Math.Sin(angle) * currentSpeed;
-                shipVelocityDirectionY = (float)Math.Cos(angle) * currentSpeed;
+                playerShip.thrust();
             }
-
-            
 
             //Left Key rotates ship left
             if (state.IsKeyDown(Keys.Left))
             {
-                if (angle > 6.283185 || angle < -6.283185)
-                {
-                    angle = angle % 6.283185f;
-                }
-                angle -= 0.15f;
+                playerShip.rotateLeft();
             }
+
             //Right Key rotates ship right
             else if (state.IsKeyDown(Keys.Right))
             {
-                if (angle > 6.283185 || angle < -6.283185)
-                {
-                    angle = angle % 6.283185f;
-                }
-                angle += 0.15f;
+                playerShip.rotateRight();
             }
 
             //Space key activates debugging brake
             if (state.IsKeyDown(Keys.Space))
             {
-                shipVelocityDirectionX = 0;
-                shipVelocityDirectionY = 0;
-                currentSpeed = 0;
+                playerShip.stop();
             }
-
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             // TODO: Add your update logic here
 
             base.Update(gameTime);
+        }
+
+        /// <summary>
+        /// Draws the stars background and debug information.
+        /// </summary>
+        protected void drawWorld()
+        {
+            spriteBatch.Draw(background, new Rectangle(0, 0, 800, 480), Color.White);
+            spriteBatch.DrawString(font, "Radian Angle =" + playerShip.getAngle(), new Vector2(100, 20), Color.Red);
+            spriteBatch.DrawString(font, "Degree Angle =" + (playerShip.getAngle() * (180 / Math.PI)), new Vector2(100, 50), Color.Red);
+            spriteBatch.DrawString(font, "X =" + playerShip.getShipVelocityDirectionX() 
+                + " y = " + playerShip.getShipVelocityDirectionY(), new Vector2(100, 80), Color.Red);
+            spriteBatch.DrawString(font, "X =" + playerShip.getSpaceshipX() 
+                + " y = " + playerShip.getSpaceshipY(), new Vector2(100, 110), Color.Red);
+        }
+
+        /// <summary>
+        /// Draws the ship
+        /// </summary>
+        protected void drawShip()
+        {
+            playerShip.draw(spriteBatch);
         }
 
         /// <summary>
@@ -165,19 +145,10 @@ namespace SpaceUnion
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-
-            spriteBatch.Draw(background, new Rectangle(0, 0, 800, 480), Color.White);
-            spriteBatch.DrawString(font, "Radian Angle =" + angle, new Vector2(100, 20), Color.Red);
-            spriteBatch.DrawString(font, "Degree Angle =" + (angle * (180 / Math.PI)), new Vector2(100, 50), Color.Red);
-            spriteBatch.DrawString(font, "X =" + shipVelocityDirectionX + " y = " + shipVelocityDirectionY, new Vector2(100, 80), Color.Red);
-            spriteBatch.DrawString(font, "X =" + spaceshipX + " y = " + spaceshipY, new Vector2(100, 110), Color.Red);
-
-            Vector2 location = new Vector2(spaceshipX, spaceshipY);
-            Rectangle sourceRectangle = new Rectangle(0, 0, shuttle.Width, shuttle.Height);
-            Vector2 origin = new Vector2(shuttle.Width / 2, shuttle.Height / 2);
-            spriteBatch.Draw(shuttle, location, sourceRectangle, Color.White, angle, origin, 0.1f, SpriteEffects.None, 1);
+            
+            drawWorld(); //Draws background
+            drawShip();  //Draws player space ship
             spriteBatch.End();
-            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }

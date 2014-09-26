@@ -11,6 +11,24 @@
       <Time>2014-09-25T09:55:15.1972331-07:00</Time>
     </Item>
     <Item>
+      <Source>SpriteFonts\SpriteFont1.spritefont</Source>
+      <Name>SpriteFonts\SpriteFont1</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb</Output>
+      <Time>2014-09-25T09:55:47.9860706-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Spaceships\circleship (128x128).png</Source>
+      <Name>Spaceships\circleship (128x128)</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\circleship (128x128).xnb</Output>
+      <Time>2014-09-25T09:51:33.8054276-07:00</Time>
+    </Item>
+    <Item>
       <Source>Spaceships\shuttle.png</Source>
       <Name>Spaceships\shuttle</Name>
       <Importer>TextureImporter</Importer>
@@ -20,13 +38,22 @@
       <Time>2014-09-25T09:55:35.6621793-07:00</Time>
     </Item>
     <Item>
-      <Source>SpriteFonts\SpriteFont1.spritefont</Source>
-      <Name>SpriteFonts\SpriteFont1</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
+      <Source>Spaceships\triangleship (128x128).png</Source>
+      <Name>Spaceships\triangleship (128x128)</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb</Output>
-      <Time>2014-09-25T09:55:47.9860706-07:00</Time>
+      <Output>C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\triangleship (128x128).xnb</Output>
+      <Time>2014-09-25T09:51:33.8124334-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Spaceships\wrenchship.png</Source>
+      <Name>Spaceships\wrenchship</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\wrenchship.xnb</Output>
+      <Time>2014-09-25T09:51:33.8194363-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
