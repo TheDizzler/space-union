@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 namespace SpaceUnion {
 	class Camera {
 
-		private const float zoomUpperLimit = 1.5f;
+		private const float zoomUpperLimit = 2.5f;
 		private const float zoomLowerLimit = .5f;
 		private const float zoomIncrement = .1f;
 		private float previousScroll = 0f;
@@ -41,7 +41,6 @@ namespace SpaceUnion {
 
 			worldWidth = wrldWidth;
 			worldHeight = wrldHeight;
-			//transform = Matrix.Identity;
 			zoomRation = initZoom;
 			rotation = 0.0f;
 			pos = Vector2.Zero;
@@ -73,8 +72,8 @@ namespace SpaceUnion {
 				float rightBarrier = worldWidth - (float) viewport.Width * .5f / zoomRation;
 				float topBarrier = worldWidth - (float) viewport.Height * .5f / zoomRation;
 				float bottomBarrier = (float) viewport.Height * .5f / zoomRation;
-				pos.X = value.X - 100;
-				pos.Y = value.Y - 100;
+				pos.X = value.X - viewport.Width / 2;
+				pos.Y = value.Y - viewport.Height / 2;
 				if (pos.X < leftBarrier)
 					pos.X = leftBarrier;
 				if (pos.X > rightBarrier)

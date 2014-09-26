@@ -116,7 +116,7 @@ namespace SpaceUnion {
 				Exit();
 
 			camera.zoom(mouse.ScrollWheelValue);
-			camera.Position = playerShip.origin;
+			camera.Position = playerShip.Position;
 			
 
 
