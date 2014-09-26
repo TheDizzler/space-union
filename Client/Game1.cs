@@ -1,37 +1,38 @@
-﻿using Microsoft.Xna.Framework;
+﻿#region Using Statements
+using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Storage;
+using Microsoft.Xna.Framework.GamerServices;
+using SpaceUnion.Tools;
+#endregion
 
 namespace SpaceUnion {
 	/// <summary>
 	/// This is the main type for your game
 	/// </summary>
 	public class Game1 : Game {
+
 		GraphicsDeviceManager graphics;
-		SpriteBatch batch;
+		SpriteBatch spriteBatch;
 
-		/* Textures should be moved to an asset manager */
-		private  Texture2D ufoTexture;
-		private  Texture2D triTexture;
-		private  Texture2D wrenchTexture;
+		public static AssetManager assets;
 
-		SpriteFont debugFont;
 
-		private  Ship ufo;
 
+		private KeyboardState state;
+
+		private Ship playerShip;
 
 		public Game1()
 			: base() {
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
 
-			graphics.IsFullScreen = false;
-
-			//Changes the settings just applied
-			graphics.ApplyChanges();
-
-
-			IsMouseVisible = true;
+			assets = new AssetManager(Content);
 		}
 
 		/// <summary>
@@ -41,7 +42,6 @@ namespace SpaceUnion {
 		/// and initialize them as well.
 		/// </summary>
 		protected override void Initialize() {
-
 			base.Initialize();
 		}
 
@@ -51,15 +51,14 @@ namespace SpaceUnion {
 		/// </summary>
 		protected override void LoadContent() {
 			// Create a new SpriteBatch, which can be used to draw textures.
-			batch = new SpriteBatch(GraphicsDevice);
+			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			ufoTexture = Content.Load<Texture2D>("circleship (128x128)");
-			wrenchTexture = Content.Load<Texture2D>("wrenchship");
-			triTexture = Content.Load<Texture2D>("triangleship (128x128)");
+			assets.loadContent(); // All sprite get loaded in to here
 
-			//debugFont = Content.Load<SpriteFont>("myFont");
 
-			ufo = new Ship(ufoTexture, new Vector2(250, 250));
+			playerShip = new Ship(assets.ufo, new Vector2(200, 200)); //Create new player ship
+
+
 		}
 
 		/// <summary>
@@ -70,56 +69,83 @@ namespace SpaceUnion {
 			// TODO: Unload any non ContentManager content here
 		}
 
+
+
+
 		/// <summary>
 		/// Allows the game to run logic such as updating the world,
 		/// checking for collisions, gathering input, and playing audio.
+		/// 
+		/// Checks player edge wrap around.
+		/// 
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update(GameTime gameTime) {
+			playerShip.checkScreenWrap(Window); //Check if ship will wrap around edges
+			state = Keyboard.GetState(); //Get which keys are pressed or released
 
+			//Up Key toggles back thruster
+			if (state.IsKeyDown(Keys.Up)) {
+				playerShip.thrust();
+			}
+
+			//Left Key rotates ship left
+			if (state.IsKeyDown(Keys.Left)) {
+				playerShip.rotateLeft();
+			}
+
+			//Right Key rotates ship right
+			else if (state.IsKeyDown(Keys.Right)) {
+				playerShip.rotateRight();
+			}
+
+			//Space key activates debugging brake
+			if (state.IsKeyDown(Keys.Space)) {
+				playerShip.stop();
+			}
 
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
 
-			// Controller logic goes in here
 
-			if(Keyboard.GetState().IsKeyDown(Keys.A)) {		// rotate left
-
-				ufo.rotateLeft();
-			} else if (Keyboard.GetState().IsKeyDown(Keys.D)) {		// rotate left
-
-				ufo.rotateRight();
-			}
-
-			if (Keyboard.GetState().IsKeyDown(Keys.W)) {		// rotate left
-
-				ufo.thrust();
-			}
 			base.Update(gameTime);
 		}
+
+		/// <summary>
+		/// Draws the stars background and debug information.
+		/// </summary>
+		protected void drawWorld() {
+			SpriteFont font = assets.font;
+			spriteBatch.Draw(assets.background, new Rectangle(0, 0, 800, 480), Color.White);
+			spriteBatch.DrawString(font, "Radian Angle =" + playerShip.getAngle(), new Vector2(100, 20), Color.Red);
+			spriteBatch.DrawString(font, "Degree Angle =" + (playerShip.getAngle() * (180 / Math.PI)), new Vector2(100, 50), Color.Red);
+			spriteBatch.DrawString(font, "X =" + playerShip.getShipVelocityDirectionX()
+				+ " y = " + playerShip.getShipVelocityDirectionY(), new Vector2(100, 80), Color.Red);
+			spriteBatch.DrawString(font, "X =" + playerShip.getSpaceshipX()
+				+ " y = " + playerShip.getSpaceshipY(), new Vector2(100, 110), Color.Red);
+		}
+
 
 		/// <summary>
 		/// This is called when the game should draw itself.
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime) {
+			GraphicsDevice.Clear(Color.CornflowerBlue);
+			spriteBatch.Begin();
 
-			GraphicsDevice.Clear(Color.Black);
 
-			batch.Begin();
-			// Graphics code here
 
-			ufo.draw(batch);
-			//drawText();
-			batch.End();
+			drawWorld(); //Draws background
+
+			playerShip.draw(spriteBatch); //Draws player space ship
+
+
+
+
+			spriteBatch.End();
+
 			base.Draw(gameTime);
 		}
-
-
-		//private void drawText() {
-			
-		//	int currentAngle = (int) MathHelper.ToDegrees(ufo.rotation);
-		//	batch.DrawString(debugFont, "angle: " + currentAngle.ToString(), new Vector2(20, 20), Color.AliceBlue);
-		//}
 	}
 }
