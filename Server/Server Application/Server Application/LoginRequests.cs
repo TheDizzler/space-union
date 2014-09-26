@@ -8,5 +8,6 @@ namespace Server_Application
 {
     class LoginRequests
     {
+
     }
 }
