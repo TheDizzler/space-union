@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,16 +14,22 @@ namespace Server_Application
     class Program
     {
         static void Main(string[] args)
-        {
-            string input;
+        {   
             menuSetup();
-            while ((input = Console.ReadLine()) != "exit") 
+            while (true)
             {
+                menuSetup();
+                string input = Console.ReadLine();
                 switch (input)
                 {
                     case "help":
                         helpMenu();
                         break;
+                    case "ip":
+                        getLocalIPv4Address();
+                        break;
+                    case "exit":
+                        return;
                     default:
                         menuSetup();
                         break;
@@ -73,8 +81,26 @@ namespace Server_Application
             Console.WriteLine("games - Displays the number of currently running games.");
             Console.WriteLine("players - Displays the number of currently active players.");
             Console.WriteLine("threads - Displays the number of currently running threads.");
+            Console.WriteLine("ip - Displays the current IP address.");
             Console.WriteLine("exit - Shuts down the server.");
             Console.ReadLine();
+        }
+
+        /// <summary>
+        /// Gets the current IP address.
+        /// </summary>
+        /// <returns>Returns the current IP address.</returns>
+        private static void getLocalIPv4Address()
+        {
+            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (IPAddress ipv4 in host.AddressList)
+            {
+                if (ipv4.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    Console.WriteLine("Current IP address is: " + ipv4.ToString());
+                    Console.ReadLine();
+                }
+            }
         }
     }
 }
