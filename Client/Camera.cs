@@ -27,5 +27,30 @@ namespace SpaceUnion {
 		int scroll;
 
 		
+		public Camera(Viewport vport) {
+
+			zoom = 1.0f;
+			scroll = 1;
+			rotation = 0.0f;
+			position = Vector2.Zero;
+			viewport = vport;
+		}
+
+		/// <summary>
+		/// Update camera view.
+		/// </summary>
+		public void update() {
+
+			input();
+
+
+		}
+
+
+		private void input(Mouse mouse) {
+			
+			mouseState = mouse.GetState();
+
+		}
 	}
 }
