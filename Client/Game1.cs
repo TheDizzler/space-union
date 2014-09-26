@@ -59,10 +59,10 @@ namespace SpaceUnion {
 
 			
 			//Create new player ship
-			playerShip = new Ship(assets.ufo, new Vector2(200, 200)); 
+			playerShip = new Ship(assets.ufo, new Vector2(200, 200));
 
-			//Viewport viewport = new Viewport(playerShip.position.X - 50, playerShip.position.Y - 50, 100, 100);
-			//camera = new Camera(viewport);
+			Viewport viewport = new Viewport(playerShip.position.X - 50, playerShip.position.Y - 50, 100, 100);
+			camera = new Camera(viewport);
 
 		}
 
@@ -90,20 +90,20 @@ namespace SpaceUnion {
 			state = Keyboard.GetState(); //Get which keys are pressed or released
 
 
-			//camera.update(Mouse.GetState());
+			camera.update(Mouse.GetState());
 
 			//Up Key toggles back thruster
-			if (state.IsKeyDown(Keys.Up)) {
+			if (state.IsKeyDown(Keys.Up) || state.IsKeyDown(Keys.W)) {
 				playerShip.thrust();
 			}
 
 			//Left Key rotates ship left
-			if (state.IsKeyDown(Keys.Left)) {
+			if (state.IsKeyDown(Keys.Left) || state.IsKeyDown(Keys.A)) {
 				playerShip.rotateLeft();
 			}
 
 			//Right Key rotates ship right
-			else if (state.IsKeyDown(Keys.Right)) {
+			else if (state.IsKeyDown(Keys.Right) || state.IsKeyDown(Keys.D)) {
 				playerShip.rotateRight();
 			}
 
