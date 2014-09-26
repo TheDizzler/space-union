@@ -102,7 +102,16 @@ namespace Server_Application
         /// <returns>Returns the current IP address.</returns>
         private static void getLocalIPv4Address()
         {
-            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+            IPHostEntry host = null;
+            try
+            {
+                host = Dns.GetHostEntry(Dns.GetHostName());
+            }
+            catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return; }
+            catch (ArgumentOutOfRangeException e) { Console.WriteLine(e.ToString()); return; }
+            catch (ArgumentException e) { Console.WriteLine(e.ToString()); return; }
+            catch (SocketException e) { Console.WriteLine(e.ToString()); return; }
+
             foreach (IPAddress ipv4 in host.AddressList)
             {
                 if (ipv4.AddressFamily == AddressFamily.InterNetwork)

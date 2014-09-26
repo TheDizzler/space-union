@@ -4,7 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,11 +25,47 @@ namespace Server_Application
         /// <param name="data">The data to transmit.</param>
         /// <param name="ipaddress">The IP address of the target client.</param>
         /// <param name="port">The port number for the data to be received at.</param>
-        public static void sendData(object data, string ipaddress, int port)
+        public static void sendUDPData(object data, string ipaddress, int port)
         {
             UdpClient client = new UdpClient();
             byte[] output = objectToBytes(data);
-            client.Send(output, output.Length, ipaddress, port);
+            try
+            {
+                client.Send(output, output.Length, ipaddress, port);
+            }
+            catch (ArgumentException e) { Console.WriteLine(e.ToString()); return; }
+            catch (ObjectDisposedException e) { Console.WriteLine(e.ToString()); return; }
+            catch (InvalidOperationException e) { Console.WriteLine(e.ToString()); return; }
+            catch (SocketException e) { Console.WriteLine(e.ToString()); return; }
+        }
+
+        /// <summary>
+        /// Receives data from a specified port.
+        /// </summary>
+        /// <param name="port">The port from which to listen from.</param>
+        /// <returns>Returns the data received from the specified port.</returns>
+        public static object receiveUDPData(int port)
+        {
+            UdpClient client = new UdpClient(port);
+            IPEndPoint ip = new IPEndPoint(IPAddress.Any, 0);
+            try
+            {
+                byte[] data = client.Receive(ref ip);
+                return bytesToObject(data);
+            }
+            catch (ObjectDisposedException e) { Console.WriteLine(e.ToString()); return null; }
+            catch (SocketException e) { Console.WriteLine(e.ToString()); return null; }
+        }
+
+        public static void sendTCPData()
+        {
+
+        }
+
+        public static object receiveTCPData()
+        {
+
+            return null;
         }
 
         /// <summary>
@@ -37,13 +75,17 @@ namespace Server_Application
         /// <returns>An array of bytes of the input.</returns>
         public static byte[] objectToBytes(Object target)
         {
-            if (target == null)
-                return null;
             BinaryFormatter bf = new BinaryFormatter();
             using (MemoryStream ms = new MemoryStream())
             {
-                bf.Serialize(ms, target);
-                return ms.ToArray();
+                try
+                {
+                    bf.Serialize(ms, target);
+                    return ms.ToArray();
+                }
+                catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return null; }
+                catch (SerializationException e) { Console.WriteLine(e.ToString()); return null; }
+                catch (SecurityException e) { Console.WriteLine(e.ToString()); return null; }
             }
         }
 
@@ -57,9 +99,35 @@ namespace Server_Application
             BinaryFormatter bf = new BinaryFormatter();
             using (MemoryStream ms = new MemoryStream())
             {
-                ms.Write(target, 0, target.Length);
-                ms.Seek(0, SeekOrigin.Begin);
-                Object data = (Object)bf.Deserialize(ms);
+                try
+                {
+                    ms.Write(target, 0, target.Length);
+                }
+                catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return null; }
+                catch (NotSupportedException e) { Console.WriteLine(e.ToString()); return null; }
+                catch (ArgumentOutOfRangeException e) { Console.WriteLine(e.ToString()); return null; }
+                catch (ArgumentException e) { Console.WriteLine(e.ToString()); return null; }
+                catch (IOException e) { Console.WriteLine(e.ToString()); return null; }
+                catch (ObjectDisposedException e) { Console.WriteLine(e.ToString()); return null; }
+
+                try
+                {
+                    ms.Seek(0, SeekOrigin.Begin);
+                }
+                catch (IOException e) { Console.WriteLine(e.ToString()); return null; }
+                catch (ArgumentOutOfRangeException e) { Console.WriteLine(e.ToString()); return null; }
+                catch (ArgumentException e) { Console.WriteLine(e.ToString()); return null; }
+                catch (ObjectDisposedException e) { Console.WriteLine(e.ToString()); return null; }
+
+                object data = null;
+                try
+                {
+                    data = (Object)bf.Deserialize(ms);
+                }
+                catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return null; }
+                catch (SerializationException e) { Console.WriteLine(e.ToString()); return null; }
+                catch (SecurityException e) { Console.WriteLine(e.ToString()); return null; }
+
                 return data;
             }
         }
