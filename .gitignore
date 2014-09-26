@@ -6,3 +6,5 @@ Client/*.suo
 Server/bin/*
 Server/obj/*
 Server/*.suo
+SpaceUnionContent/SpaceUnionContentContent/bin/*
+SpaceUnionContent/SpaceUnionContent/bin/*
