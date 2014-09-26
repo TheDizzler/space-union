@@ -1,4 +1,4 @@
-
+#files and directories to be ignored when comitting
 
 Client/bin/*
 Client/obj/*
