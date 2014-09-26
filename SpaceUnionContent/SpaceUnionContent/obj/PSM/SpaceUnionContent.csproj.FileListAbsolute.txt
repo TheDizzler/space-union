@@ -5,10 +5,13 @@ C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Ignor
 C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\SpaceUnionContent.csprojResolveAssemblyReference.cache
 C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\IgnoreMe.dll
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.xnb
 C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb
 C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.png
 C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\circleship (128x128).xnb
 C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.xnb
 C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\triangleship (128x128).xnb
 C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\wrenchship.xnb
+C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.png
+C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.xnb
+C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.jpg
+C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.xnb

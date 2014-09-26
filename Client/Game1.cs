@@ -16,22 +16,44 @@ namespace SpaceUnion
     /// </summary>
     public class Game1 : Game
     {
-
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        private Texture2D background;
-        private Texture2D shuttle;
-        //private Texture2D circleship;
-        private SpriteFont font;
-        private KeyboardState state;
+        GameplayScreen gameplayScreen;
+        MainMenuScreen mainMenuScreen;
+        private const int SCREEN_WIDTH = 800;
+        private const int SCREEN_HEIGHT = 480;
+        
+        /// <summary>
+        /// Game State Enum to track game states
+        /// </summary>
+        enum GameState { 
+            MainMenu,
+            Playing,
+            Options,
+        }
 
-        private Ship playerShip;
+        GameState currentGameState = GameState.MainMenu;
+
+        public int getScreenWidth() {
+            return SCREEN_WIDTH;
+        }
+
+        public int getScreenHeight() {
+            return SCREEN_HEIGHT;
+        }
 
         public Game1()
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+        }
+
+        public void StartGame()
+        {
+            gameplayScreen = new GameplayScreen(this);
+            currentGameState = GameState.Playing;
+            IsMouseVisible = false;
         }
 
         /// <summary>
@@ -53,10 +75,13 @@ namespace SpaceUnion
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            background = Content.Load<Texture2D>("Backgrounds/background");
-            shuttle = Content.Load<Texture2D>("Spaceships/shuttle");
-            font = Content.Load<SpriteFont>("SpriteFonts/SpriteFont1"); // Use the name of your sprite font file here instead of 'Score'.
-            playerShip = new Ship(shuttle, new Vector2(200, 200)); //Create new player ship
+            //Load Main Menu
+            mainMenuScreen = new MainMenuScreen(this);
+            IsMouseVisible = true;
+            graphics.PreferredBackBufferWidth = SCREEN_WIDTH;
+            graphics.PreferredBackBufferHeight = SCREEN_HEIGHT;
+            
+            graphics.ApplyChanges();
         }
 
         /// <summary>
@@ -68,8 +93,6 @@ namespace SpaceUnion
             // TODO: Unload any non ContentManager content here
         }
 
-        
-        
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
@@ -81,60 +104,23 @@ namespace SpaceUnion
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            playerShip.checkScreenWrap(Window); //Check if ship will wrap around edges
-            state = Keyboard.GetState(); //Get which keys are pressed or released
-
-            //Up Key toggles back thruster
-            if (state.IsKeyDown(Keys.Up))
-            {
-                playerShip.thrust();
-            }
-
-            //Left Key rotates ship left
-            if (state.IsKeyDown(Keys.Left))
-            {
-                playerShip.rotateLeft();
-            }
-
-            //Right Key rotates ship right
-            else if (state.IsKeyDown(Keys.Right))
-            {
-                playerShip.rotateRight();
-            }
-
-            //Space key activates debugging brake
-            if (state.IsKeyDown(Keys.Space))
-            {
-                playerShip.stop();
-            }
-
+            //Allows Game to Exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            // TODO: Add your update logic here
+
+            switch (currentGameState) { 
+                case GameState.MainMenu:
+                    mainMenuScreen.Update();
+                    break;
+                case GameState.Playing:
+                    gameplayScreen.Update(gameTime);
+                    break;
+                default:
+                    break;
+            }
+            
 
             base.Update(gameTime);
-        }
-
-        /// <summary>
-        /// Draws the stars background and debug information.
-        /// </summary>
-        protected void drawWorld()
-        {
-            spriteBatch.Draw(background, new Rectangle(0, 0, 800, 480), Color.White);
-            spriteBatch.DrawString(font, "Radian Angle =" + playerShip.getAngle(), new Vector2(100, 20), Color.Red);
-            spriteBatch.DrawString(font, "Degree Angle =" + (playerShip.getAngle() * (180 / Math.PI)), new Vector2(100, 50), Color.Red);
-            spriteBatch.DrawString(font, "X =" + playerShip.getShipVelocityDirectionX() 
-                + " y = " + playerShip.getShipVelocityDirectionY(), new Vector2(100, 80), Color.Red);
-            spriteBatch.DrawString(font, "X =" + playerShip.getSpaceshipX() 
-                + " y = " + playerShip.getSpaceshipY(), new Vector2(100, 110), Color.Red);
-        }
-
-        /// <summary>
-        /// Draws the ship
-        /// </summary>
-        protected void drawShip()
-        {
-            playerShip.draw(spriteBatch);
         }
 
         /// <summary>
@@ -144,10 +130,21 @@ namespace SpaceUnion
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin();
             
-            drawWorld(); //Draws background
-            drawShip();  //Draws player space ship
+            spriteBatch.Begin();
+
+            switch (currentGameState)
+            {
+                case GameState.MainMenu:
+                    mainMenuScreen.Draw(spriteBatch);
+                    break;
+                case GameState.Playing:
+                    gameplayScreen.Draw(spriteBatch);
+                    break;
+                default:
+                    break;
+            }
+
             spriteBatch.End();
 
             base.Draw(gameTime);

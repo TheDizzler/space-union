@@ -15,8 +15,8 @@ namespace SpaceUnion {
 
 		protected Vector2 velocity;
 
-		public float maxHealth;
-		public float currentHealth;
+		//public float maxHealth;
+		//public float currentHealth;
         private float angle = 0; //Angle in radians of ship orientation
         private float spaceshipX = 500; //Horizontal position of spaceship
         private float spaceshipY = 300; //Vertical position of spaceship
@@ -49,17 +49,19 @@ namespace SpaceUnion {
             return shipVelocityDirectionY;
         }
 
+        /*
 		/// <summary>
 		/// Get % health remaining
 		/// </summary>
 		public float HealthPercentage {
 			get { return currentHealth / maxHealth; }
 		}
+        */
 
 		public bool alive = true;
 
-		internal float attackDelay;
-		protected float attackTimer;
+		//internal float attackDelay;
+		//protected float attackTimer;
 
         
 
@@ -93,6 +95,10 @@ namespace SpaceUnion {
             }
         }
 
+        /// <summary>
+        /// Draws the space ship on the game screen
+        /// </summary>
+        /// <param name="sBatch"></param>
         public override void draw(SpriteBatch sBatch)
         {
             spaceshipX += shipVelocityDirectionX;
@@ -135,7 +141,10 @@ namespace SpaceUnion {
             currentSpeed = 0;
         }
 
-
+        /// <summary>
+        /// Power to main thruster
+        /// Does not exceed a max speed cap
+        /// </summary>
 		internal void thrust() {
             //Checking if speed doesnt exceed the ship's maximum speed
             if (currentSpeed < maxSpeed)
@@ -147,7 +156,6 @@ namespace SpaceUnion {
             {
                 currentSpeed = maxSpeed;
             }
-            
 
             //Update Ship Velocity Direction
             shipVelocityDirectionX = (float)Math.Sin(angle) * currentSpeed;
