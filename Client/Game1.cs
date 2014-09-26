@@ -61,7 +61,7 @@ namespace SpaceUnion {
 			//Create new player ship
 			playerShip = new Ship(assets.ufo, new Vector2(200, 200));
 
-			Viewport viewport = new Viewport(playerShip.position.X - 50, playerShip.position.Y - 50, 100, 100);
+			Viewport viewport = new Viewport((int)playerShip.getX() - 50, (int)playerShip.getY() - 50, 100, 100);
 			camera = new Camera(viewport);
 
 		}
@@ -129,8 +129,8 @@ namespace SpaceUnion {
 			spriteBatch.DrawString(font, "Degree Angle =" + (playerShip.getAngle() * (180 / Math.PI)), new Vector2(100, 50), Color.Red);
 			spriteBatch.DrawString(font, "X =" + playerShip.getShipVelocityDirectionX()
 				+ " y = " + playerShip.getShipVelocityDirectionY(), new Vector2(100, 80), Color.Red);
-			spriteBatch.DrawString(font, "X =" + playerShip.position.X
-				+ " y = " + playerShip.position.Y, new Vector2(100, 110), Color.Red);
+			spriteBatch.DrawString(font, "X =" + playerShip.getX()
+				+ " y = " + playerShip.getY(), new Vector2(100, 110), Color.Red);
 		}
 
 

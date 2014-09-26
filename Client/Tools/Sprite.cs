@@ -20,7 +20,7 @@ namespace SpaceUnion {
 		/// <summary>
 		/// Game world x,y co-ordinates
 		/// </summary>
-		public Vector2 position;
+		protected Vector2 position;
 		/// <summary>
 		/// The center point of the sprite
 		/// </summary>
@@ -43,9 +43,16 @@ namespace SpaceUnion {
 		// End of animations
 
 		
+		public float getX() {
 
-		
-		
+			return position.X;
+		}
+
+
+		public float getY() {
+
+			return position.Y;
+		}
 
 		/// <summary>
 		/// Constructor. May want to remove position as a required param.
