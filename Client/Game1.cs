@@ -61,8 +61,8 @@ namespace SpaceUnion {
 			//Create new player ship
 			playerShip = new Ship(assets.ufo, new Vector2(200, 200));
 
-			Viewport viewport = new Viewport((int)playerShip.getX() - 50, (int)playerShip.getY() - 50, 100, 100);
-			camera = new Camera(viewport);
+			//Viewport viewport = new Viewport(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+			camera = new Camera(new Viewport(), 800, 480, 1.0f);
 
 		}
 
@@ -88,9 +88,9 @@ namespace SpaceUnion {
 		protected override void Update(GameTime gameTime) {
 			playerShip.checkScreenWrap(Window); //Check if ship will wrap around edges
 			state = Keyboard.GetState(); //Get which keys are pressed or released
+			MouseState mouse = Mouse.GetState();
 
-
-			camera.update(Mouse.GetState());
+			
 
 			//Up Key toggles back thruster
 			if (state.IsKeyDown(Keys.Up) || state.IsKeyDown(Keys.W)) {
@@ -115,6 +115,11 @@ namespace SpaceUnion {
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
 
+			camera.zoom(mouse.ScrollWheelValue);
+			camera.Position = playerShip.origin;
+			
+
+
 
 			base.Update(gameTime);
 		}
@@ -124,13 +129,18 @@ namespace SpaceUnion {
 		/// </summary>
 		protected void drawWorld() {
 			SpriteFont font = assets.font;
-			spriteBatch.Draw(assets.background, new Rectangle(0, 0, 800, 480), Color.White);
+
+			spriteBatch.Draw(assets.background, new Rectangle(0, 0, 800, 480), null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+
+			//spriteBatch.Draw(assets.background, new Rectangle(0, 0, 800, 480), Color.White);
 			spriteBatch.DrawString(font, "Radian Angle =" + playerShip.getAngle(), new Vector2(100, 20), Color.Red);
 			spriteBatch.DrawString(font, "Degree Angle =" + (playerShip.getAngle() * (180 / Math.PI)), new Vector2(100, 50), Color.Red);
 			spriteBatch.DrawString(font, "X =" + playerShip.getShipVelocityDirectionX()
 				+ " y = " + playerShip.getShipVelocityDirectionY(), new Vector2(100, 80), Color.Red);
 			spriteBatch.DrawString(font, "X =" + playerShip.getX()
 				+ " y = " + playerShip.getY(), new Vector2(100, 110), Color.Red);
+
+			
 		}
 
 
@@ -139,9 +149,11 @@ namespace SpaceUnion {
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime) {
-			GraphicsDevice.Clear(Color.CornflowerBlue);
-			spriteBatch.Begin();
+			GraphicsDevice.Clear(Color.Black);
 
+			//GraphicsDevice.Viewport = camera.viewport;
+
+			spriteBatch.Begin(SpriteSortMode.BackToFront, null, null, null, null, null, camera.getTransformation());
 			
 
 			drawWorld(); //Draws background

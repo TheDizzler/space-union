@@ -24,7 +24,7 @@ namespace SpaceUnion {
 		/// <summary>
 		/// The center point of the sprite
 		/// </summary>
-		protected Vector2 origin;
+		public Vector2 origin;
 		public float rotation;
 
 		/// <summary>
@@ -42,7 +42,8 @@ namespace SpaceUnion {
 		}
 		// End of animations
 
-		
+		public Vector2 Position { get { return this.position; } }
+
 		public float getX() {
 
 			return position.X;
@@ -62,7 +63,7 @@ namespace SpaceUnion {
 		public Sprite(Texture2D tex, Vector2 pos) {
 			texture = tex;
 			position = pos;
-			
+
 
 			origin = new Vector2(texture.Width / 2, texture.Height / 2);
 		}
