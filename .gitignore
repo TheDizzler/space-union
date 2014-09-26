@@ -2,7 +2,7 @@
 
 Client/bin/*
 Client/obj/*
-Client/*.suo
+Client/*.v11.suo
 Server/bin/*
 Server/obj/*
 Server/*.suo
