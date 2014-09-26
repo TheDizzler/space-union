@@ -6,26 +6,19 @@ using System.Threading.Tasks;
 
 namespace Server_Application
 {
-    class DataWrapper
+    [Serializable]
+    class Data
     {
         byte type;
-        object data;
 
-        public DataWrapper(byte type, object data)
+        public Data(byte type)
         {
             this.type = type;
-            this.data = data;
         }
 
         public byte Type
         {
             set { type = value; }
-            get { return type; }
-        }
-
-        public object Data
-        {
-            set { data = value; }
             get { return type; }
         }
     }

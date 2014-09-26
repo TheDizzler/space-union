@@ -21,7 +21,7 @@ namespace Server_Application
 
 
 
-        private static byte[] objectToBytes(Object target)
+        public static byte[] objectToBytes(Object target)
         {
             if (target == null)
                 return null;

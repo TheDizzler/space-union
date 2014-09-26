@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Server_Application
 {
-    class GameData
+    [Serializable]
+    class GameData : Data
     {
+
         int gameroom;
         string ipaddress;
         short port;
@@ -16,6 +18,9 @@ namespace Server_Application
         float angle;
         byte health;
         //projectiles fired, direction, velocity
+
+
+        public GameData(byte type) : base(type) { }
 
         public int GameRoom
         {
