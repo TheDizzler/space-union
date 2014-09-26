@@ -21,7 +21,7 @@ namespace SpaceUnion {
 
 		public static AssetManager assets;
 
-
+		Camera camera;
 
 		private KeyboardState state;
 
@@ -52,12 +52,17 @@ namespace SpaceUnion {
 		protected override void LoadContent() {
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
+			
+
 
 			assets.loadContent(); // All sprite get loaded in to here
 
+			
+			//Create new player ship
+			playerShip = new Ship(assets.ufo, new Vector2(200, 200)); 
 
-			playerShip = new Ship(assets.ufo, new Vector2(200, 200)); //Create new player ship
-
+			//Viewport viewport = new Viewport(playerShip.position.X - 50, playerShip.position.Y - 50, 100, 100);
+			//camera = new Camera(viewport);
 
 		}
 
@@ -83,6 +88,9 @@ namespace SpaceUnion {
 		protected override void Update(GameTime gameTime) {
 			playerShip.checkScreenWrap(Window); //Check if ship will wrap around edges
 			state = Keyboard.GetState(); //Get which keys are pressed or released
+
+
+			//camera.update(Mouse.GetState());
 
 			//Up Key toggles back thruster
 			if (state.IsKeyDown(Keys.Up)) {
@@ -121,8 +129,8 @@ namespace SpaceUnion {
 			spriteBatch.DrawString(font, "Degree Angle =" + (playerShip.getAngle() * (180 / Math.PI)), new Vector2(100, 50), Color.Red);
 			spriteBatch.DrawString(font, "X =" + playerShip.getShipVelocityDirectionX()
 				+ " y = " + playerShip.getShipVelocityDirectionY(), new Vector2(100, 80), Color.Red);
-			spriteBatch.DrawString(font, "X =" + playerShip.getSpaceshipX()
-				+ " y = " + playerShip.getSpaceshipY(), new Vector2(100, 110), Color.Red);
+			spriteBatch.DrawString(font, "X =" + playerShip.position.X
+				+ " y = " + playerShip.position.Y, new Vector2(100, 110), Color.Red);
 		}
 
 
@@ -134,7 +142,7 @@ namespace SpaceUnion {
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 			spriteBatch.Begin();
 
-
+			
 
 			drawWorld(); //Draws background
 

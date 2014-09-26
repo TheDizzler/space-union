@@ -39,17 +39,18 @@ namespace SpaceUnion {
 		/// <summary>
 		/// Update camera view.
 		/// </summary>
-		public void update() {
+		public void update(MouseState mstat) {
 
+			mouseState = mstat;
 			input();
 
 
 		}
 
 
-		private void input(Mouse mouse) {
+		private void input() {
+
 			
-			mouseState = mouse.GetState();
 
 		}
 	}
