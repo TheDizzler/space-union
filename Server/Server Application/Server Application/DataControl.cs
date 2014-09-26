@@ -10,8 +10,19 @@ using System.Threading.Tasks;
 
 namespace Server_Application
 {
+    /// <summary>
+    /// This class primarily houses methods used in the
+    /// transmission and reception of data from different
+    /// clients.
+    /// </summary>
     class DataControl
     {
+        /// <summary>
+        /// Sends data to the specified IP address and port.
+        /// </summary>
+        /// <param name="data">The data to transmit.</param>
+        /// <param name="ipaddress">The IP address of the target client.</param>
+        /// <param name="port">The port number for the data to be received at.</param>
         public static void sendData(object data, string ipaddress, int port)
         {
             UdpClient client = new UdpClient();
@@ -19,8 +30,11 @@ namespace Server_Application
             client.Send(output, output.Length, ipaddress, port);
         }
 
-
-
+        /// <summary>
+        /// Converts an object to an array of bytes.
+        /// </summary>
+        /// <param name="target">Object to convert.</param>
+        /// <returns>An array of bytes of the input.</returns>
         public static byte[] objectToBytes(Object target)
         {
             if (target == null)
@@ -33,7 +47,12 @@ namespace Server_Application
             }
         }
 
-        private static Object bytesToObject(byte[] target)
+        /// <summary>
+        /// Converts an array of bytse to an object.
+        /// </summary>
+        /// <param name="target">The array of bytes to convert.</param>
+        /// <returns>An object converted from the input.</returns>
+        public static Object bytesToObject(byte[] target)
         {
             BinaryFormatter bf = new BinaryFormatter();
             using (MemoryStream ms = new MemoryStream())

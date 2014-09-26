@@ -11,6 +11,13 @@ using System.Windows;
 
 namespace Server_Application
 {
+    /// <summary>
+    /// The main server application. The main thread of the application handles
+    /// the input from an administrator at the server console. The setup for the
+    /// server and all the processing of incoming communication requests
+    /// are handled on other threads arnd are started up by the method
+    /// serverSetup() before the primary while loop.
+    /// </summary>
     class Program
     {
         static void Main(string[] args)
@@ -27,6 +34,9 @@ namespace Server_Application
                         break;
                     case "ip":
                         getLocalIPv4Address();
+                        break;
+                    case "threads":
+                        threadsRunning();
                         break;
                     case "exit":
                         return;
