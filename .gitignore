@@ -1,15 +1,56 @@
 #files and directories to be ignored when comitting
 
-Client/bin/
-Client/obj/
-Client/SpaceUnion.v11.suo
-Server/bin/
-Server/obj/
-Server/SpaceUnion.v11.suo
-SpaceUnionContent/SpaceUnionContentContent/bin/
-SpaceUnionContent/SpaceUnionContent/bin/
-SpaceUnionContent/SpaceUnionContent/obj/PSM
-!IgnoreMe.dll
-*.cache
+#Client/bin/
+#Client/obj/
+#Client/SpaceUnion.v11.suo
+#Server/bin/
+#Server/obj/
+#Server/SpaceUnion.v11.suo
+#SpaceUnionContent/SpaceUnionContentContent/bin/
+#SpaceUnionContent/SpaceUnionContent/bin/
+#*.cache
+#*.suo
+#SpaceUnionContentContent.contentproj.FileListAbsolute.txt
+#SpaceUnionContent.csproj.FileListAbsolute.txt
+#ContentPipeline-{69F49597-D779-4577-9103-14C2802D7E0F}.xml
+
+#Visual Studio files
+*.pidb
+*.userprefs
+*.[Oo]bj
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*.vssscc
+*_i.c
+*_p.c
+*.ncb
 *.suo
-SpaceUnionContentContent.contentproj.FileListAbsolute.txt
+*.tlb
+*.tlh
+*.bak
+*.[Cc]ache
+*.ilk
+*.log
+*.lib
+*.sbr
+*.sdf
+ipch/
+obj/
+[Bb]in
+[Dd]ebug*/
+[Rr]elease*/
+Ankh.NoLoad
+#Tooling
+_ReSharper*/
+*.resharper
+[Tt]est[Rr]esult*
+#Project files
+[Bb]uild/
+#Subversion files
+.svn
+# Office Temp Files
+~$*
