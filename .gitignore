@@ -10,5 +10,6 @@ SpaceUnionContent/SpaceUnionContentContent/bin/
 SpaceUnionContent/SpaceUnionContentContent/obj/
 SpaceUnionContent/SpaceUnionContent/bin/
 SpaceUnionContent/SpaceUnionContent/obj/
+!.dll
 *.cache
 *.suo
