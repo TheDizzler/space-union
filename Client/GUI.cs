@@ -14,6 +14,8 @@ namespace SpaceUnion {
 	class GUI {
 
 
+		const int guiHeight = 80;
+
 		SpriteFont font;
 
 		Texture2D guiRectangle;
@@ -32,7 +34,7 @@ namespace SpaceUnion {
 
 			int guiY = window.ClientBounds.Height - 80;
 			int guiWidth = window.ClientBounds.Width;
-			int guiHeight = 80;
+			
 
 			rect = new Rectangle(0, guiY, guiWidth, guiHeight);
 
@@ -43,7 +45,7 @@ namespace SpaceUnion {
 		}
 
 
-		public void draw(SpriteBatch spriteBatch, GameTime gameTime) {
+		public void draw(SpriteBatch spriteBatch) {
 
 			spriteBatch.Draw(guiRectangle, rect, Color.DarkSlateBlue);
 

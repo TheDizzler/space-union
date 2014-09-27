@@ -149,10 +149,18 @@ namespace SpaceUnion {
 		protected void drawWorld() {
 			
 
-			//spriteBatch.Draw(Assets.background, new Rectangle(0, 0, 800, 480), null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
-			spriteBatch.Draw(Assets.starfield1, new Rectangle(0, 0, 800, 600), null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
-			spriteBatch.Draw(Assets.starfield2, new Rectangle(0, 0, worldWidth, worldHeight), null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
-			spriteBatch.Draw(Assets.starfield3, new Rectangle(0, 0, 800, 600), null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+			/* Parallax Scrolling BG */
+			spriteBatch.Draw(Assets.starfield2,
+				new Rectangle((int) (camera.Position.X * .9), (int) (camera.Position.Y * .9), worldWidth/4, worldHeight/4),
+				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+			spriteBatch.Draw(Assets.starfield1,
+				new Rectangle((int) (camera.Position.X * 0.7), (int) (camera.Position.Y * 0.7), worldWidth, worldHeight),
+				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+			spriteBatch.Draw(Assets.starfield3,
+				new Rectangle((int) (camera.Position.X * .5), (int) (camera.Position.Y *.5f), worldWidth, worldHeight),
+				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+
+
 			//spriteBatch.Draw(Assets.background, new Rectangle(0, 0, 800, 480), Color.White);
 
 
@@ -172,10 +180,7 @@ namespace SpaceUnion {
 
 
 
-
-			//GraphicsDevice.Viewport = camera.viewport;
-
-			spriteBatch.Begin(SpriteSortMode.BackToFront, null, null, null, null, null, camera.getTransformation());
+			spriteBatch.Begin(SpriteSortMode.BackToFront, null, SamplerState.LinearWrap, null, null, null, camera.getTransformation());
 
 
 			drawWorld(); //Draws background

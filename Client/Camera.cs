@@ -79,10 +79,10 @@ namespace SpaceUnion {
 					pos.X = leftBarrier;
 				if (pos.X > rightBarrier)
 					pos.X = rightBarrier;
-				if (pos.Y > topBarrier)
-					pos.Y = topBarrier;
-				if (pos.Y < bottomBarrier)
-					pos.Y = bottomBarrier;
+				//if (pos.Y > topBarrier)
+				//	pos.Y = topBarrier;
+				//if (pos.Y < bottomBarrier)
+				//	pos.Y = bottomBarrier;
 			}
 		}
 
@@ -100,7 +100,7 @@ namespace SpaceUnion {
 		public Matrix getTransformation() {
 			transform =
 			   Matrix.CreateTranslation(new Vector3(-pos.X, -pos.Y, 0)) *
-			   Matrix.CreateRotationZ(rotation) *
+			   //Matrix.CreateRotationZ(rotation) *
 			   Matrix.CreateScale(new Vector3(Zoom, Zoom, 1)) *
 			   Matrix.CreateTranslation(new Vector3(viewport.Width * 0.5f, viewport.Height * 0.5f, 0));
 
