@@ -2,6 +2,11 @@
 
 Client/bin/*
 Client/obj/*
+Client/SpaceUnion.v11.suo
 Server/bin/*
 Server/obj/*
+Server/SpaceUnion.v11.suo
+SpaceUnionContent/SpaceUnionContentContent/bin/*
+SpaceUnionContent/SpaceUnionContent/bin/*
+*.cache
 *.suo
