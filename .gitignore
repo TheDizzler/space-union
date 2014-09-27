@@ -7,9 +7,9 @@ Server/bin/
 Server/obj/
 Server/SpaceUnion.v11.suo
 SpaceUnionContent/SpaceUnionContentContent/bin/
-SpaceUnionContent/SpaceUnionContentContent/obj/
 SpaceUnionContent/SpaceUnionContent/bin/
-SpaceUnionContent/SpaceUnionContent/obj/
-!.dll
+SpaceUnionContent/SpaceUnionContent/obj/PSM
+!IgnoreMe.dll
 *.cache
 *.suo
+SpaceUnionContentContent.contentproj.FileListAbsolute.txt
