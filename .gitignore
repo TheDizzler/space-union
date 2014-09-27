@@ -1,12 +1,14 @@
 #files and directories to be ignored when comitting
 
-Client/bin/*
-Client/obj/*
+Client/bin/
+Client/obj/
 Client/SpaceUnion.v11.suo
-Server/bin/*
-Server/obj/*
+Server/bin/
+Server/obj/
 Server/SpaceUnion.v11.suo
-SpaceUnionContent/SpaceUnionContentContent/bin/*
-SpaceUnionContent/SpaceUnionContent/bin/*
+SpaceUnionContent/SpaceUnionContentContent/bin/
+SpaceUnionContent/SpaceUnionContentContent/obj/
+SpaceUnionContent/SpaceUnionContent/bin/
+SpaceUnionContent/SpaceUnionContent/obj/
 *.cache
 *.suo
