@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace SpaceUnion {
+namespace SpaceUnion.Tools {
 
 	/// <summary>
 	/// The base class for all objects that have visual representation
@@ -60,7 +60,7 @@ namespace SpaceUnion {
 		/// </summary>
 		/// <param name="tex"></param>
 		/// <param name="pos"></param>
-		public Sprite(Texture2D tex, Vector2 pos) {
+		protected Sprite(Texture2D tex, Vector2 pos) {
 			texture = tex;
 			position = pos;
 
@@ -75,6 +75,7 @@ namespace SpaceUnion {
 		/// <param name="name"></param>
 		/// <param name="row"></param>
 		/// <param name="frameCount"></param>
+		/// <param name="frameSize"></param>
 		/// <param name="anima"></param>
 		public virtual void addAnimation(string name, int row, int frameCount,
 			int frameSize, AnimationClass anima) {

@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Camera.cs" />
+    <Compile Include="GUI.cs" />
     <Compile Include="Tools\AnimationClass.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />

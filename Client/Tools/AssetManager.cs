@@ -21,10 +21,14 @@ namespace SpaceUnion.Tools {
 		// misc graphics
 		public SpriteFont font;
 
+		public Texture2D guiRectangle;
+
 
 		// bgs and doodads
 		public Texture2D background;
-		public Texture2D starfield1; // a background layer
+		public Texture2D starfield1; // stackable background layer
+		public Texture2D starfield2; // stackable background layer
+		public Texture2D starfield3; // stackable background layer
 
 		// space objects
 		public Texture2D earth;
@@ -37,25 +41,32 @@ namespace SpaceUnion.Tools {
 		public Texture2D ufo;
 		public Texture2D wedge;
 		public Texture2D wrench;
-		
 
 
-		public AssetManager(ContentManager Content) {
-			
-			this.Content = Content;
+
+		public AssetManager(ContentManager cntnt) {
+
+			Content = cntnt;
 		}
 
 
 
 
-		internal void loadContent() {
+		internal void loadContent(GraphicsDevice graphicsDevice) {
 
 
 			background = Content.Load<Texture2D>("Backgrounds/background");
-			font = Content.Load<SpriteFont>("SpriteFonts/SpriteFont1"); // Use the name of your sprite font file here instead of 'Score'.
+			font = Content.Load<SpriteFont>("SpriteFonts/SpriteFont1");
 			shuttle = Content.Load<Texture2D>("Spaceships/shuttle");
 
+
+			guiRectangle = new Texture2D(graphicsDevice, 1, 1);
+			guiRectangle.SetData(new[] { Color.White });
+
+
 			starfield1 = Content.Load<Texture2D>("Backgrounds/starfield (800x600)");
+			starfield2 = Content.Load<Texture2D>("Backgrounds/doodlebg");
+			starfield3 = Content.Load<Texture2D>("Backgrounds/beautifulbg");
 
 			ufo = Content.Load<Texture2D>("Spaceships/circleship (128x128)");
 			wedge = Content.Load<Texture2D>("Spaceships/triangleship (128x128)");

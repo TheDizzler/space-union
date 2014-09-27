@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Linq;
 using System.Text;
+using SpaceUnion.Tools;
 
 namespace SpaceUnion {
 
@@ -65,15 +66,15 @@ namespace SpaceUnion {
 		/// </summary>
 		public void checkScreenWrap(GameWindow Window) {
 			if (position.X < -5) {
-				position.X = Window.ClientBounds.Width + 3;
+				position.X = Game1.worldWidth + 3;
 			}
-			if (position.X > Window.ClientBounds.Width + 5) {
+			if (position.X > Game1.worldWidth + 5) {
 				position.X = -3;
 			}
 			if (position.Y < -5) {
-				position.Y = Window.ClientBounds.Height;
+				position.Y = Game1.worldHeight;
 			}
-			if (position.Y > Window.ClientBounds.Height + 5) {
+			if (position.Y > Game1.worldHeight + 5) {
 				position.Y = 0;
 			}
 		}

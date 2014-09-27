@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace SpaceUnion {
+
 	class Camera {
 
 		private const float zoomUpperLimit = 2.5f;
@@ -14,7 +15,7 @@ namespace SpaceUnion {
 		private const float zoomIncrement = .1f;
 		private float previousScroll = 0f;
 
-		private float zoomRation;
+		private float zoomRatio;
 
 		/// <summary>
 		/// Camera View Matrix
@@ -41,25 +42,25 @@ namespace SpaceUnion {
 
 			worldWidth = wrldWidth;
 			worldHeight = wrldHeight;
-			zoomRation = initZoom;
+			zoomRatio = initZoom;
 			rotation = 0.0f;
 			pos = Vector2.Zero;
 		}
 
 
 		public float Zoom {
-			get { return zoomRation; }
+			get { return zoomRatio; }
 			set {
-				zoomRation = value;
-				if (zoomRation < zoomLowerLimit)
-					zoomRation = zoomLowerLimit;
-				if (zoomRation > zoomUpperLimit)
-					zoomRation = zoomUpperLimit;
+				zoomRatio = value;
+				if (zoomRatio < zoomLowerLimit)
+					zoomRatio = zoomLowerLimit;
+				if (zoomRatio > zoomUpperLimit)
+					zoomRatio = zoomUpperLimit;
 			}
 		}
 
 
-		public void Move(Vector2 amount) {
+		public void move(Vector2 amount) {
 
 			pos += amount;
 		}
@@ -68,10 +69,10 @@ namespace SpaceUnion {
 		public Vector2 Position {
 			get { return pos; }
 			set {
-				float leftBarrier = (float) viewport.Width * .5f / zoomRation;
-				float rightBarrier = worldWidth - (float) viewport.Width * .5f / zoomRation;
-				float topBarrier = worldWidth - (float) viewport.Height * .5f / zoomRation;
-				float bottomBarrier = (float) viewport.Height * .5f / zoomRation;
+				float leftBarrier = (float) viewport.Width * .5f / zoomRatio;
+				float rightBarrier = worldWidth - (float) viewport.Width * .5f / zoomRatio;
+				float topBarrier = worldHeight - (float) viewport.Height * .5f / zoomRatio;
+				float bottomBarrier = (float) viewport.Height * .5f / zoomRatio;
 				pos.X = value.X - viewport.Width / 2;
 				pos.Y = value.Y - viewport.Height / 2;
 				if (pos.X < leftBarrier)
@@ -85,8 +86,10 @@ namespace SpaceUnion {
 			}
 		}
 
-
-		public void update(GameTime gameTime, float rotation, Vector2 position, float zoom) {
+		/// <summary>
+		/// Update camera view.
+		/// </summary>
+		public void update(GameTime gameTime, float rotatn, Vector2 position, float zoom) {
 
 			transform = Matrix.CreateTranslation(position.X, position.Y, 0) *
 				Matrix.CreateTranslation(viewport.Width, viewport.Height, 0);
@@ -104,36 +107,6 @@ namespace SpaceUnion {
 			return transform;
 		}
 
-
-		/// <summary>
-		/// Update camera view.
-		/// </summary>
-		public void update(MouseState mstat, Vector2 position) {
-
-			//mouseState = mstat;
-			//input(mstat);
-
-			//zoom = MathHelper.Clamp(zoom, 0.0f, 10.0f);
-
-			//transform =
-			//	Matrix.CreateScale(zoom, zoom, 0) *
-			//	Matrix.CreateTranslation(position.X, position.Y, 0);
-
-			//inverseTransform = Matrix.Invert(transform);
-		}
-
-
-		//private void input(MouseState mstat) {
-
-		//	if (mstat.ScrollWheelValue > scroll) {
-
-		//		zoom += 0.1f;
-		//		scroll = mstat.ScrollWheelValue;
-		//	} else if (mstat.ScrollWheelValue < scroll) {
-		//		zoom -= 0.1f;
-		//		scroll = mstat.ScrollWheelValue;
-		//	}
-		//}
 
 		internal void zoom(int scrollWheelVal) {
 			if (scrollWheelVal > previousScroll)
