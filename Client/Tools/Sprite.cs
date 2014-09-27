@@ -25,7 +25,16 @@ namespace SpaceUnion.Tools {
 		/// The center point of the sprite
 		/// </summary>
 		public Vector2 origin;
-		public float rotation;
+		/// <summary>
+		/// Angle in radians of ship orientation
+		/// </summary>
+		protected float rotation;
+
+		public double getRotation() {
+			return rotation;
+		}
+
+		protected float scale = 1.0f;
 
 		/// <summary>
 		/// Animation related variables
@@ -42,17 +51,31 @@ namespace SpaceUnion.Tools {
 		}
 		// End of animations
 
+		/// <summary>
+		/// Get sprites position from top left corner
+		/// </summary>
 		public Vector2 Position { get { return this.position; } }
 
+		/// <summary>
+		/// Get sprites center position in game world coordinates
+		/// </summary>
+		public Vector2 CenterPosition { get { return new Vector2(getX(), getY()); } }
+		/// <summary>
+		/// Get sprite's center X position
+		/// </summary>
+		/// <returns></returns>
 		public float getX() {
 
-			return position.X;
+			return position.X - width/2;
 		}
 
-
+		/// <summary>
+		/// Get sprite's center Y position
+		/// </summary>
+		/// <returns></returns>
 		public float getY() {
 
-			return position.Y;
+			return position.Y - height/2;
 		}
 
 		/// <summary>
@@ -96,7 +119,7 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		/// <param name="sBatch"></param>
 		public virtual void draw(SpriteBatch sBatch) {
-			sBatch.Draw(texture, position, null, Color.White, rotation, origin, 1.0f, SpriteEffects.None, 0);
+			sBatch.Draw(texture, position, null, Color.White, rotation, origin, scale, SpriteEffects.None, 0);
 		}
 
 

@@ -18,8 +18,7 @@ namespace SpaceUnion {
 
 		public float maxHealth;
 		public float currentHealth;
-		private float angle = 0; //Angle in radians of ship orientation
-		private Texture2D shipTexture;  //Ship Texture
+		
 		private float shipVelocityDirectionX = 0; //Amount of pixels the ship moves horizontally per frame (Calculated by sine of angle)
 		private float shipVelocityDirectionY = 0; //Amount of pixels the ship moves vertically per frame (Calculated by cosine of angle)
 		private float maxSpeed = 7;
@@ -28,9 +27,6 @@ namespace SpaceUnion {
 		private float currentSpeed = 0;
 
 
-		public float getAngle() {
-			return angle;
-		}
 
 		public float getShipVelocityDirectionX() {
 			return shipVelocityDirectionX;
@@ -51,13 +47,15 @@ namespace SpaceUnion {
 
 		internal float attackDelay;
 		protected float attackTimer;
+		
 
 
 
 		public Ship(Texture2D tex, Vector2 pos)
 			: base(tex, pos) {
-			shipTexture = tex;
 			velocity = Vector2.Zero;
+
+			scale = .3f;
 		}
 
 		/// <summary>
@@ -79,14 +77,32 @@ namespace SpaceUnion {
 			}
 		}
 
-		public override void draw(SpriteBatch sBatch) {
-			position.X += shipVelocityDirectionX;
-			position.Y -= shipVelocityDirectionY;
+		public void checkScreenStop(GameWindow Window) {
+			if (position.X <= 0) {
+				position.X = 0;
+			}
+			if (position.X >= Game1.worldWidth) {
+				position.X = Game1.worldWidth;
+			}
+			if (position.Y <= 0) {
+				position.Y = 0;
+			}
+			if (position.Y >= Game1.worldHeight) {
+				position.Y = Game1.worldHeight;
+			}
+		}
 
-			Vector2 location = new Vector2(position.X, position.Y);
-			Rectangle sourceRectangle = new Rectangle(0, 0, shipTexture.Width, shipTexture.Height);
-			Vector2 origin = new Vector2(shipTexture.Width / 2, shipTexture.Height / 2);
-			sBatch.Draw(shipTexture, location, null, Color.White, angle, origin, 0.1f, SpriteEffects.None, 0);
+		/* !!Never have update code in draw function!! */
+		public override void draw(SpriteBatch sBatch) {
+			
+
+			//Vector2 location = new Vector2(position.X, position.Y);
+			//Rectangle sourceRectangle = new Rectangle(0, 0, shipTexture.Width, shipTexture.Height);
+			//Vector2 origin = new Vector2(shipTexture.Width / 2, shipTexture.Height / 2);
+			//sBatch.Draw(shipTexture, location, null, Color.White, angle, origin, 0.1f, SpriteEffects.None, 0);
+
+
+			base.draw(sBatch);
 		}
 
 		/// <summary>
@@ -94,10 +110,10 @@ namespace SpaceUnion {
 		/// Resets the angle to 0 when completing a full rotation, which prevents integer overflow.
 		/// </summary>
 		public void rotateLeft() {
-			if (angle > 6.283185 || angle < -6.283185) {
-				angle = angle % 6.283185f;
+			if (rotation > 6.283185 || rotation < -6.283185) {
+				rotation = rotation % 6.283185f;
 			}
-			angle -= 0.15f;
+			rotation -= 0.15f;
 		}
 
 		/// <summary>
@@ -105,10 +121,10 @@ namespace SpaceUnion {
 		/// Resets the angle to 0 when completing a full rotation, which prevents integer overflow.
 		/// </summary>
 		internal void rotateRight() {
-			if (angle > 6.283185 || angle < -6.283185) {
-				angle = angle % 6.283185f;
+			if (rotation > 6.283185 || rotation < -6.283185) {
+				rotation = rotation % 6.283185f;
 			}
-			angle += 0.15f;
+			rotation += 0.15f;
 		}
 
 		//Debugging Ship Brake
@@ -131,8 +147,11 @@ namespace SpaceUnion {
 
 
 			//Update Ship Velocity Direction
-			shipVelocityDirectionX = (float) Math.Sin(angle) * currentSpeed;
-			shipVelocityDirectionY = (float) Math.Cos(angle) * currentSpeed;
+			shipVelocityDirectionX = (float) Math.Sin(rotation) * currentSpeed;
+			shipVelocityDirectionY = (float) Math.Cos(rotation) * currentSpeed;
+
+			position.X += shipVelocityDirectionX;
+			position.Y -= shipVelocityDirectionY;
 		}
 	}
 }

@@ -21,7 +21,7 @@ namespace SpaceUnion {
 
 		public static AssetManager Assets;
 
-		Camera camera;
+		Camera mainCamera;
 
 		private KeyboardState state;
 
@@ -64,15 +64,16 @@ namespace SpaceUnion {
 
 			Assets.loadContent(GraphicsDevice); // All sprite get loaded in to here
 
+			gui = new GUI(Window);
 
 			//Create new player ship
-			playerShip = new Ship(Assets.ufo, new Vector2(200, 200));
+			playerShip = new Ship(Assets.ufo, new Vector2(600, 600));
 
-			Viewport viewport = new Viewport((int) playerShip.getX(), (int) playerShip.getY(),
-				GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Width / 2);
-			camera = new Camera(viewport, worldWidth, worldHeight, 2.0f);
+			Viewport mainViewport = new Viewport((int) playerShip.getX(), (int) playerShip.getY(),
+				GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height - GUI.guiHeight);
+			mainCamera = new Camera(mainViewport, worldWidth, worldHeight, 1.0f);
 
-			gui = new GUI(Window);
+			
 			
 
 		}
@@ -99,8 +100,8 @@ namespace SpaceUnion {
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update(GameTime gameTime) {
 
-			playerShip.checkScreenWrap(Window); //Check if ship will wrap around edges
-
+			//playerShip.checkScreenWrap(Window); //Check if ship will wrap around edges
+			playerShip.checkScreenStop(Window);
 			state = Keyboard.GetState(); //Get which keys are pressed or released
 			MouseState mouse = Mouse.GetState();
 
@@ -129,12 +130,13 @@ namespace SpaceUnion {
 			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
 
-			camera.zoom(mouse.ScrollWheelValue);
-			camera.Position = playerShip.Position;
+			mainCamera.setZoom(mouse.ScrollWheelValue);
+			mainCamera.Position = playerShip.CenterPosition; // center the camera to player's position
+			mainCamera.update(gameTime);
 
-
-			// Transform mouse input from view to world position
-			Matrix inverse = Matrix.Invert(camera.getTransformation());
+			/* Transform mouse input from view to world position
+			 * NOT currently used but may be useful in the future*/
+			Matrix inverse = Matrix.Invert(mainCamera.getTransformation());
 			Vector2 mousePos = Vector2.Transform(
 			   new Vector2(mouse.X, mouse.Y), inverse);
 
@@ -151,22 +153,23 @@ namespace SpaceUnion {
 
 			/* Parallax Scrolling BG */
 			spriteBatch.Draw(Assets.starfield2,
-				new Rectangle((int) (camera.Position.X * .9), (int) (camera.Position.Y * .9), worldWidth/4, worldHeight/4),
+				new Rectangle((int) (mainCamera.Position.X * .9), (int) (mainCamera.Position.Y * .9), worldWidth/4, worldHeight/4),
 				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
 			spriteBatch.Draw(Assets.starfield1,
-				new Rectangle((int) (camera.Position.X * 0.7), (int) (camera.Position.Y * 0.7), worldWidth, worldHeight),
+				new Rectangle((int) (mainCamera.Position.X * 0.7), (int) (mainCamera.Position.Y * 0.7), 1600, 1200),
+				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+			spriteBatch.Draw(Assets.starfield1,
+				new Rectangle((int) (mainCamera.Position.X * 0.6), (int) (mainCamera.Position.Y * 0.6), 2400, 1800),
+				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+			spriteBatch.Draw(Assets.starfield1,
+				new Rectangle((int) (mainCamera.Position.X * 0.4), (int) (mainCamera.Position.Y * 0.4), 800, 600),
 				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
 			spriteBatch.Draw(Assets.starfield3,
-				new Rectangle((int) (camera.Position.X * .5), (int) (camera.Position.Y *.5f), worldWidth, worldHeight),
+				new Rectangle((int) (mainCamera.Position.X * .5), (int) (mainCamera.Position.Y *.5f), worldWidth/10, worldHeight/10),
 				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
 
 
 			//spriteBatch.Draw(Assets.background, new Rectangle(0, 0, 800, 480), Color.White);
-
-
-			
-
-
 		}
 
 
@@ -180,7 +183,8 @@ namespace SpaceUnion {
 
 
 
-			spriteBatch.Begin(SpriteSortMode.BackToFront, null, SamplerState.LinearWrap, null, null, null, camera.getTransformation());
+			spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend,
+				SamplerState.LinearWrap, null, null, null, mainCamera.getTransformation());
 
 
 			drawWorld(); //Draws background
@@ -188,9 +192,9 @@ namespace SpaceUnion {
 			playerShip.draw(spriteBatch); //Draws player space ship
 
 
-
-
 			spriteBatch.End();
+
+
 
 
 			/* GUI spritebatch
