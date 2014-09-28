@@ -8,12 +8,12 @@ Content\Backgrounds\beautifulbg.xnb
 Content\Backgrounds\doodlebg.xnb
 Content\SpriteFonts\SpriteFont1.xnb
 Content\Buttons\playbutton.xnb
+Content\Backgrounds\starfield (800x600).png
+Content\Backgrounds\beautifulbg.png
+Content\Backgrounds\doodlebg.png
 Content\Buttons\playbutton.png
 Content\Backgrounds\background.jpg
 Content\Spaceships\circleship (128x128).png
 Content\Spaceships\shuttle.png
 Content\Spaceships\triangleship (128x128).png
 Content\Spaceships\wrenchship.png
-Content\Backgrounds\starfield (800x600).png
-Content\Backgrounds\beautifulbg.png
-Content\Backgrounds\doodlebg.png

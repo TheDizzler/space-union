@@ -26,7 +26,7 @@ namespace SpaceUnion {
 		Rectangle rect;
 		Vector2 line1Pos, line2Pos, line3Pos, line4Pos;
 
-		public GUI(GameWindow window) {
+		public GUI(GameWindow window, Ship ship) {
 
 			guiRectangle = Game1.Assets.guiRectangle;
 			font = Game1.Assets.font;
@@ -34,7 +34,8 @@ namespace SpaceUnion {
 
 			int guiY = window.ClientBounds.Height - 80;
 			int guiWidth = window.ClientBounds.Width;
-			
+
+			playerShip = ship;
 
 			rect = new Rectangle(0, guiY, guiWidth, guiHeight);
 
@@ -49,8 +50,9 @@ namespace SpaceUnion {
 
 			spriteBatch.Draw(guiRectangle, rect, Color.DarkSlateBlue); // the gui display
 
-			spriteBatch.DrawString(font, "Radian Angle =" + playerShip.getRotation(),
-				line1Pos, Color.Red,0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
+			if (font != null)
+				spriteBatch.DrawString(font, "Radian Angle =" + playerShip.getRotation(),
+					line1Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
 			spriteBatch.DrawString(font, "Degree Angle =" + (playerShip.getRotation() * (180 / Math.PI)),
 				line2Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
 			spriteBatch.DrawString(font, "X =" + playerShip.getShipVelocityDirectionX()

@@ -16,16 +16,13 @@ namespace SpaceUnion {
 
 		protected Vector2 velocity;
 
-		public float maxHealth;
-		public float currentHealth;
-		
+
 		private float shipVelocityDirectionX = 0; //Amount of pixels the ship moves horizontally per frame (Calculated by sine of angle)
 		private float shipVelocityDirectionY = 0; //Amount of pixels the ship moves vertically per frame (Calculated by cosine of angle)
 		private float maxSpeed = 7;
 
 		private float accelSpeed = 0.5f;
 		private float currentSpeed = 0;
-
 
 
 		public float getShipVelocityDirectionX() {
@@ -36,23 +33,26 @@ namespace SpaceUnion {
 			return shipVelocityDirectionY;
 		}
 
+		/*
+		public float maxHealth;
+		public float currentHealth;
+        
 		/// <summary>
 		/// Get % health remaining
 		/// </summary>
 		public float HealthPercentage {
 			get { return currentHealth / maxHealth; }
 		}
+        */
 
-		public bool alive = true;
 
-		internal float attackDelay;
-		protected float attackTimer;
-		
-
+		//internal float attackDelay;
+		//protected float attackTimer;
 
 
 		public Ship(Texture2D tex, Vector2 pos)
 			: base(tex, pos) {
+
 			velocity = Vector2.Zero;
 
 			scale = .3f;
@@ -64,15 +64,15 @@ namespace SpaceUnion {
 		/// </summary>
 		public void checkScreenWrap(GameWindow Window) {
 			if (position.X < -5) {
-				position.X = Game1.worldWidth + 3;
+				position.X = GameplayScreen.worldWidth + 3;
 			}
-			if (position.X > Game1.worldWidth + 5) {
+			if (position.X > GameplayScreen.worldWidth + 5) {
 				position.X = -3;
 			}
 			if (position.Y < -5) {
-				position.Y = Game1.worldHeight;
+				position.Y = GameplayScreen.worldHeight;
 			}
-			if (position.Y > Game1.worldHeight + 5) {
+			if (position.Y > GameplayScreen.worldHeight + 5) {
 				position.Y = 0;
 			}
 		}
@@ -81,20 +81,20 @@ namespace SpaceUnion {
 			if (position.X <= 0) {
 				position.X = 0;
 			}
-			if (position.X >= Game1.worldWidth) {
-				position.X = Game1.worldWidth;
+			if (position.X >= GameplayScreen.worldWidth) {
+				position.X = GameplayScreen.worldWidth;
 			}
 			if (position.Y <= 0) {
 				position.Y = 0;
 			}
-			if (position.Y >= Game1.worldHeight) {
-				position.Y = Game1.worldHeight;
+			if (position.Y >= GameplayScreen.worldHeight) {
+				position.Y = GameplayScreen.worldHeight;
 			}
 		}
 
 		/* !!Never have update code in draw function!! */
 		public override void draw(SpriteBatch sBatch) {
-			
+
 
 			//Vector2 location = new Vector2(position.X, position.Y);
 			//Rectangle sourceRectangle = new Rectangle(0, 0, shipTexture.Width, shipTexture.Height);
@@ -134,14 +134,16 @@ namespace SpaceUnion {
 			currentSpeed = 0;
 		}
 
-
+		/// <summary>
+		/// Power to main thruster
+		/// Does not exceed a max speed cap
+		/// </summary>
 		internal void thrust() {
+
 			//Checking if speed doesnt exceed the ship's maximum speed
 			if (currentSpeed < maxSpeed) {
 				currentSpeed += accelSpeed;
-			}
-				//Ships cannot exceed maximum speed
-			else {
+			} else { //Ships cannot exceed maximum speed
 				currentSpeed = maxSpeed;
 			}
 
