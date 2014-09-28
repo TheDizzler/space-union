@@ -1,1 +1,0 @@
-D:\Git Repository\space-union\Server\TestClient\TestClient\bin\Debug\TestClient.exe.config
