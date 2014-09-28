@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceUnion", "SpaceUnion.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceUnionContent", "..\SpaceUnionContent\SpaceUnionContent\SpaceUnionContent.csproj", "{9E4DE6AE-A715-4255-9CD6-FD886C92E542}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "SpaceUnionContentContent", "..\SpaceUnionContent\SpaceUnionContentContent\SpaceUnionContentContent.contentproj", "{69F49597-D779-4577-9103-14C2802D7E0F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceUnionContentContent", "..\SpaceUnionContent\SpaceUnionContentContent\SpaceUnionContentContent.contentproj", "{69F49597-D779-4577-9103-14C2802D7E0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
