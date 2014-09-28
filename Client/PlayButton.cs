@@ -62,9 +62,9 @@ namespace SpaceUnion {
 		override public void draw(SpriteBatch spriteBatch) {
 
 			if (isDown)
-				spriteBatch.Draw(texture, buttonRectangle, Color.BurlyWood);
-			else if (isHovered)
 				spriteBatch.Draw(texture, buttonRectangle, Color.Red);
+			else if (isHovered)
+				spriteBatch.Draw(texture, buttonRectangle, Color.CadetBlue);
 			else
 				spriteBatch.Draw(texture, buttonRectangle, Color.Blue);
 		}
