@@ -41,10 +41,12 @@ namespace SpaceUnion {
 
 		public int getScreenWidth() {
 			return Window.ClientBounds.Width;
+			//return SCREEN_WIDTH;
 		}
 
 		public int getScreenHeight() {
 			return Window.ClientBounds.Height;
+			//return SCREEN_HEIGHT;
 		}
 
 		public Game1()

@@ -38,7 +38,7 @@ namespace SpaceUnion {
 			Assets = Game1.Assets;
 			playerShip = new Ship(Assets.ufo, new Vector2(200, 200)); //Create new player ship
 
-			gui = new GUI(game.Window, playerShip);
+			gui = new GUI(game, playerShip);
 
 			Viewport mainViewport = new Viewport((int) playerShip.getX(), (int) playerShip.getY(),
 				game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height - GUI.guiHeight);

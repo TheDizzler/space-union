@@ -124,7 +124,7 @@ namespace SpaceUnion.Tools {
 
 
 		/// <summary>
-		/// Draw to toolbar
+		/// Draw to toolbar *LEGACY CODE*
 		/// </summary>
 		/// <param name="spriteBatch"></param>
 		/// <param name="portraitPosition"></param>

@@ -15,8 +15,8 @@ namespace SpaceUnion {
 		public MainMenuScreen(Game1 game) {
 			this.game = game;
 			texture = game.Content.Load<Texture2D>("Buttons/playbutton");
-			btnPlay = new PlayButton(game.Content.Load<Texture2D>("Buttons/playbutton"), game.GraphicsDevice);
-			btnPlay.setPosition(new Vector2(game.getScreenWidth() / 2, game.getScreenHeight() / 2));
+			btnPlay = new PlayButton(Game1.Assets.playButton, game.GraphicsDevice);
+			btnPlay.setPosition(new Vector2((game.getScreenWidth()  - btnPlay.width)/2, (game.getScreenHeight() - btnPlay.height)/ 2));
 		}
 
 		public void Update() {

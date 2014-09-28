@@ -20,20 +20,18 @@ namespace SpaceUnion {
 
 		Texture2D guiRectangle;
 
-		//private GameWindow window;
 		private  Ship playerShip;
 
 		Rectangle rect;
 		Vector2 line1Pos, line2Pos, line3Pos, line4Pos;
 
-		public GUI(GameWindow window, Ship ship) {
+		public GUI(Game1 game, Ship ship) {
 
 			guiRectangle = Game1.Assets.guiRectangle;
 			font = Game1.Assets.font;
-			//window = wndw;
 
-			int guiY = window.ClientBounds.Height - 80;
-			int guiWidth = window.ClientBounds.Width;
+			int guiY = game.getScreenHeight() - 80;
+			int guiWidth = game.getScreenWidth();
 
 			playerShip = ship;
 
@@ -50,9 +48,8 @@ namespace SpaceUnion {
 
 			spriteBatch.Draw(guiRectangle, rect, Color.DarkSlateBlue); // the gui display
 
-			if (font != null)
-				spriteBatch.DrawString(font, "Radian Angle =" + playerShip.getRotation(),
-					line1Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
+			spriteBatch.DrawString(font, "Radian Angle =" + playerShip.getRotation(),
+				line1Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
 			spriteBatch.DrawString(font, "Degree Angle =" + (playerShip.getRotation() * (180 / Math.PI)),
 				line2Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
 			spriteBatch.DrawString(font, "X =" + playerShip.getShipVelocityDirectionX()

@@ -12,39 +12,61 @@ namespace SpaceUnion {
 	class PlayButton : Sprite {
 
 		Rectangle buttonRectangle;
-		public Vector2 size;
+		//public Vector2 size;
 
 		public bool isClicked = false;
+		private bool isDown = false;
+		private bool isHovered = false;
+		private ButtonState lastState;
+
 
 		public PlayButton(Texture2D newTexture, GraphicsDevice graphics)
 			: base(newTexture, Vector2.Zero) {
 
-			texture = newTexture;
-			size = new Vector2(300, 150);
+			//size = new Vector2(300, 150);
+			width = 300;
+			height = 150;
+			//buttonRectangle = new Rectangle((int) position.X, (int) position.Y, (int) size.X, (int) size.Y);
 		}
-		
+
 
 		public void Update(MouseState mouse) {
-			buttonRectangle = new Rectangle((int) position.X, (int) position.Y, (int) size.X, (int) size.Y);
-			Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
-			if (mouse.LeftButton == ButtonState.Pressed
-				&& mouseRectangle.Intersects(buttonRectangle)) {
 
-				isClicked = true;
+			ButtonState currentState = mouse.LeftButton;
+			Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
+
+			if (mouseRectangle.Intersects(buttonRectangle)) {
+				isHovered = true;
+			} else
+				isHovered = false;
+
+			if (isHovered && currentState == ButtonState.Pressed) {
+				isDown = true;
 			} else {
-				isClicked = false;
+				isDown = false;
 			}
 
 
+			if (isHovered && lastState == ButtonState.Pressed && currentState != ButtonState.Pressed)
+				isClicked = true;
+
+			lastState = currentState;
 
 		}
 
 		public void setPosition(Vector2 newPosition) {
 			position = newPosition;
+			buttonRectangle = new Rectangle((int) position.X, (int) position.Y, (int) width, (int) height);
 		}
 
-		public void draw(SpriteBatch spriteBatch) {
-			spriteBatch.Draw(texture, buttonRectangle, Color.Blue);
+		override public void draw(SpriteBatch spriteBatch) {
+
+			if (isDown)
+				spriteBatch.Draw(texture, buttonRectangle, Color.BurlyWood);
+			else if (isHovered)
+				spriteBatch.Draw(texture, buttonRectangle, Color.Red);
+			else
+				spriteBatch.Draw(texture, buttonRectangle, Color.Blue);
 		}
 	}
 }

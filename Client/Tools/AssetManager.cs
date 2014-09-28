@@ -22,8 +22,7 @@ namespace SpaceUnion.Tools {
 		public SpriteFont font;
 
 		public Texture2D guiRectangle;
-
-
+		public Texture2D playButton;
 		// bgs and doodads
 		public Texture2D background;
 		public Texture2D starfield1; // stackable background layer
@@ -59,6 +58,7 @@ namespace SpaceUnion.Tools {
 			font = Content.Load<SpriteFont>("SpriteFonts/SpriteFont1");
 			shuttle = Content.Load<Texture2D>("Spaceships/shuttle");
 
+			playButton = Content.Load<Texture2D>("Buttons/playbutton");
 
 			guiRectangle = new Texture2D(graphicsDevice, 1, 1);
 			guiRectangle.SetData(new[] { Color.White });
