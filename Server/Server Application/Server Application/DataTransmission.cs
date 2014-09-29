@@ -8,7 +8,6 @@ namespace Server_Application
 {
     class DataTransmission
     {
-        TcpListener loginrequests;
-        TcpListener messagerequests
+
     }
 }

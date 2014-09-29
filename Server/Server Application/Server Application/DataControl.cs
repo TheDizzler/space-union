@@ -44,9 +44,8 @@ namespace Server_Application
         /// </summary>
         /// <param name="port">The port from which to listen from.</param>
         /// <returns>Returns the data received from the specified port.</returns>
-        public static object receiveUDPData(int port)
+        public static object receiveUDPData(UdpClient client, int port)
         {
-            UdpClient client = new UdpClient(port);
             IPEndPoint ip = new IPEndPoint(IPAddress.Any, 0);
             try
             {
