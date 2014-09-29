@@ -8,6 +8,16 @@ namespace Server_Application
 {
     class DatabaseRequests
     {
+        public static void getUserID()
+        {
+
+        }
+
+        public static void getUserPassword()
+        {
+
+        }
+
 
     }
 }
