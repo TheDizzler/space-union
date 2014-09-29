@@ -45,6 +45,8 @@
     <Compile Include="Data.cs" />
     <Compile Include="DatabaseRequests.cs" />
     <Compile Include="DataControl.cs" />
+    <Compile Include="DataReceiving.cs" />
+    <Compile Include="DataTransmission.cs" />
     <Compile Include="GameData.cs" />
     <Compile Include="LoginRequests.cs" />
     <Compile Include="Physics.cs" />

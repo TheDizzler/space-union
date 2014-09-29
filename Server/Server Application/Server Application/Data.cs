@@ -22,6 +22,10 @@ namespace Server_Application
         /// </summary>
         byte type;
 
+        /// <summary>
+        /// Constructs a Data object.
+        /// </summary>
+        /// <param name="type">A variable used to define what class this is.</param>
         public Data(byte type)
         {
             this.type = type;
