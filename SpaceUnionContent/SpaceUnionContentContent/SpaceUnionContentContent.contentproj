@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
+<<<<<<< HEAD
     <ProjectGuid>{69F49597-D779-4577-9103-14C2802D7E0F}</ProjectGuid>
+=======
+    <ProjectGuid>{AE1621DD-70B4-4092-9BD0-337869C416EF}</ProjectGuid>
+>>>>>>> fd528aae28659982905cd39391d981a1d04ae037
     <ProjectTypeGuids>{96E2B04D-8817-42c6-938A-82C39BA4D311};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <Configuration Condition=" '$(Configuration)' == '' ">Windows</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -48,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="Buttons\playbutton.png">
       <Name>playbutton</Name>
       <Importer>TextureImporter</Importer>
@@ -100,6 +105,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+=======
+>>>>>>> fd528aae28659982905cd39391d981a1d04ae037
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--
