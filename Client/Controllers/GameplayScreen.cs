@@ -17,6 +17,7 @@ namespace SpaceUnion
         private SpriteBatch spriteBatch;
         private Ship playerShip;
         private Game1 game;
+        private Boolean collide = false;
 
         private int SCREEN_WIDTH;
         private int SCREEN_HEIGHT;
@@ -27,7 +28,7 @@ namespace SpaceUnion
             SCREEN_HEIGHT = game.getScreenHeight();
             SCREEN_WIDTH = game.getScreenWidth();
             background = game.Content.Load<Texture2D>("Backgrounds/background");
-            shuttle = game.Content.Load<Texture2D>("Spaceships/shuttle");
+            shuttle = game.Content.Load<Texture2D>("Spaceships/spaceshiptest");
             font = game.Content.Load<SpriteFont>("SpriteFonts/SpriteFont1"); // Use the name of your sprite font file here instead of 'Score'.
             playerShip = new Ship(shuttle, new Vector2(200, 200)); //Create new player ship
         }
@@ -46,7 +47,29 @@ namespace SpaceUnion
                 + " y = " + playerShip.getSpaceshipY(), new Vector2(100, 110), Color.Red);
         }
 
-        /// <summary>
+        /*
+        public void UpdateCollisions() 
+        {
+            // Use the Rectangle's built-in intersect function to 
+            // determine if two objects are overlapping
+            Rectangle rectangle1;
+            Rectangle rectangle2;
+
+            // Only create the rectangle once for the player
+            rectangle1 = playerShip.getHitBox();
+            rectangle2 = enemyShip.getHitBox();
+            if (rectangle1.Intersects(rectangle2))
+            {
+                collide = true;
+            }
+            else {
+                collide = false;
+            }
+        }
+        */
+
+         
+        /// <summary> 
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
         /// 
@@ -57,6 +80,7 @@ namespace SpaceUnion
         public void Update(GameTime gameTime)
         {
             playerShip.checkScreenWrap(game.Window); //Check if ship will wrap around edges
+            //UpdateCollisions();
             state = Keyboard.GetState(); //Get which keys are pressed or released
 
             //Up Key toggles back thruster
@@ -80,7 +104,8 @@ namespace SpaceUnion
             //Space key activates debugging brake
             if (state.IsKeyDown(Keys.Space))
             {
-                playerShip.stop();
+               playerShip.stop();
+                
             }
 
         }

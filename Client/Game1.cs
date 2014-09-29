@@ -56,6 +56,12 @@ namespace SpaceUnion
             IsMouseVisible = false;
         }
 
+        public void EndGame() 
+        {
+            currentGameState = GameState.MainMenu;
+            IsMouseVisible = true;
+        }
+
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -80,7 +86,6 @@ namespace SpaceUnion
             IsMouseVisible = true;
             graphics.PreferredBackBufferWidth = SCREEN_WIDTH;
             graphics.PreferredBackBufferHeight = SCREEN_HEIGHT;
-            
             graphics.ApplyChanges();
         }
 

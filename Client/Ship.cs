@@ -25,8 +25,22 @@ namespace SpaceUnion {
         private float shipVelocityDirectionY = 0; //Amount of pixels the ship moves vertically per frame (Calculated by cosine of angle)
         private float maxSpeed = 7;
 
+        private int shipWidth = 128; //Dimensions of sprite
+        private int shipHeight = 128; //Dimensions of sprite
+
         private float accelSpeed = 0.5f;
         private float currentSpeed = 0;
+
+        public int getWidth()
+        {
+            return shipWidth;
+        }
+
+        public int getHeight() 
+        {
+            return shipHeight;
+        }
+
 
         public float getSpaceshipY(){
             return spaceshipY;
@@ -61,15 +75,25 @@ namespace SpaceUnion {
 		public bool alive = true;
 
 		//internal float attackDelay;
-		//protected float attackTimer;
+		//protected float attackTimer;        
 
-        
-
-		public Ship(Texture2D tex, Vector2 pos)
-			: base(tex, pos) {
-                shipTexture = tex;
+		public Ship(Texture2D tex, Vector2 pos): base(tex, pos) {
+            shipTexture = tex;
 			velocity = Vector2.Zero;
+            
 		}
+
+        /// <summary>
+        /// Return spaceship hitbox.
+        /// Translates the spaceship origin to top left.
+        /// </summary>
+        /// <returns></returns>
+        public Rectangle getHitBox() 
+        {
+            Rectangle hitbox = new Rectangle((int)spaceshipX-(width/2),
+                (int)spaceshipY-(height/2), width, height);
+            return hitbox;
+        }
 
         /// <summary>
         /// Collision check between ship and screen boundries.
@@ -104,10 +128,9 @@ namespace SpaceUnion {
             spaceshipX += shipVelocityDirectionX;
             spaceshipY -= shipVelocityDirectionY;
 
+            Vector2 origin = new Vector2(shipWidth / 2, shipHeight / 2);
             Vector2 location = new Vector2(spaceshipX, spaceshipY);
-            Rectangle sourceRectangle = new Rectangle(0, 0, shipTexture.Width, shipTexture.Height);
-            Vector2 origin = new Vector2(shipTexture.Width / 2, shipTexture.Height / 2);
-            sBatch.Draw(shipTexture, location, null, Color.White, angle, origin, 0.1f, SpriteEffects.None, 0);
+            sBatch.Draw(shipTexture, location, null, Color.White, angle, origin, 1f, SpriteEffects.None, 0);
         }
 
         /// <summary>
@@ -119,7 +142,7 @@ namespace SpaceUnion {
             {
                 angle = angle % 6.283185f;
             }
-            angle -= 0.15f;
+            angle -= 0.07f;
 		}
 
         /// <summary>
@@ -131,7 +154,7 @@ namespace SpaceUnion {
             {
                 angle = angle % 6.283185f;
             }
-            angle += 0.15f;
+            angle += 0.07f;
 		}
 
         //Debugging Ship Brake

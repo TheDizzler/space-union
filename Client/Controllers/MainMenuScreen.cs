@@ -29,7 +29,8 @@ namespace SpaceUnion
             
             if(btnPlay.isClicked == true)
             {
-              game.StartGame();
+                btnPlay.isClicked = false;
+                game.StartGame();
             }
         }
 
