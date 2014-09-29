@@ -44,7 +44,7 @@ namespace Server_Application
         /// </summary>
         /// <param name="port">The port from which to listen from.</param>
         /// <returns>Returns the data received from the specified port.</returns>
-        public static object receiveUDPData(UdpClient client, int port)
+        public static object receiveUDPData(UdpClient client)
         {
             IPEndPoint ip = new IPEndPoint(IPAddress.Any, 0);
             try
@@ -97,7 +97,7 @@ namespace Server_Application
         /// Receive data through a specified TCP listener.
         /// </summary>
         /// <param name="listener">The TCP listener through which to receive data.</param>
-        public static void receiveTCPData(TcpListener listener)
+        public static object receiveTCPData(TcpListener listener)
         {
             //should be called after the listener.start() is called
             Socket socket = listener.AcceptSocket();
@@ -108,6 +108,7 @@ namespace Server_Application
                 input[x] = received[x];
             object output = bytesToObject(input);
             socket.Close();
+            return output;
         }
 
         /// <summary>
