@@ -8,7 +8,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.xnb</Output>
-      <Time>2014-09-25T21:54:07.3394484-07:00</Time>
+      <Time>2014-09-29T14:11:19.8362368-07:00</Time>
     </Item>
     <Item>
       <Source>Backgrounds\background.jpg</Source>
@@ -17,7 +17,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.xnb</Output>
-      <Time>2014-09-25T09:55:15.1972331-07:00</Time>
+      <Time>2014-09-29T14:11:19.8352367-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\circleship (128x128).png</Source>
@@ -26,7 +26,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\circleship (128x128).xnb</Output>
-      <Time>2014-09-25T09:51:33.8054276-07:00</Time>
+      <Time>2014-09-29T14:11:19.8402412-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\shuttle.png</Source>
@@ -35,7 +35,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.xnb</Output>
-      <Time>2014-09-25T09:55:35.6621793-07:00</Time>
+      <Time>2014-09-29T14:11:19.8432426-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\triangleship (128x128).png</Source>
@@ -44,7 +44,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\triangleship (128x128).xnb</Output>
-      <Time>2014-09-25T09:51:33.8124334-07:00</Time>
+      <Time>2014-09-29T14:11:19.8462446-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\wrenchship.png</Source>
@@ -53,7 +53,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\wrenchship.xnb</Output>
-      <Time>2014-09-25T09:51:33.8194363-07:00</Time>
+      <Time>2014-09-29T14:11:19.848246-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\spaceshiptest.png</Source>
@@ -62,7 +62,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.xnb</Output>
-      <Time>2014-09-26T23:25:04.2741024-07:00</Time>
+      <Time>2014-09-29T14:11:19.8452445-07:00</Time>
     </Item>
     <Item>
       <Source>SpriteFonts\SpriteFont1.spritefont</Source>
@@ -71,7 +71,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb</Output>
-      <Time>2014-09-25T09:55:47.9860706-07:00</Time>
+      <Time>2014-09-29T14:11:19.8502467-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

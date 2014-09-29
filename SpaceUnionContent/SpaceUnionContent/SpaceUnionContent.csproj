@@ -3,7 +3,6 @@
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.ContentPipeline.targets" />
   <PropertyGroup>
     <ProjectGuid>{9E4DE6AE-A715-4255-9CD6-FD886C92E542}</ProjectGuid>
-    <ProjectGuid>{9E4DE6AE-A715-4255-9CD6-FD886C92E542}</ProjectGuid>
     <ProjectTypeGuids>{6D335F3A-9D43-41b4-9D22-F6F17C4BE596};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <Configuration Condition=" '$(Configuration)' == '' ">Windows</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -18,7 +17,6 @@
     <XnaPlatform>Windows</XnaPlatform>
     <XnaProfile>HiDef</XnaProfile>
     <XnaCrossPlatformGroupID>34af34eb-c5ec-4414-95d9-fb9b396cc028</XnaCrossPlatformGroupID>
-    <XnaCrossPlatformGroupID>bd4b7c0e-1934-4de5-9989-aa3c6246a4d1</XnaCrossPlatformGroupID>
     <XnaOutputType>Library</XnaOutputType>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
