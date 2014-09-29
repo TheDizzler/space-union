@@ -19,6 +19,9 @@ namespace Server_Application
     /// </summary>
     class DataControl
     {
+        public static const int numberOfUdpClients = 6;
+        public static const int numberOfTcpClients = 2;
+
         /// <summary>
         /// Sends data to the specified IP address and port.
         /// </summary>
