@@ -11,33 +11,31 @@ namespace Server_Application
 {
     class DataReceiving
     {
-        public const int numberOfUdpClients = 6;
-        public const int numberOfTcpListeners = 2;
 
         /// <summary>
         /// Listens to data from clients (1 for each)
         /// </summary>
-        UdpClient[] clients = new UdpClient[numberOfUdpClients];
+        UdpClient[] clients = new UdpClient[DataControl.numberOfUdpClients];
 
         /// <summary>
         /// listeners[0] for login requests.
         /// listeners[1] for chat messages. 
 
         /// </summary>
-        TcpListener[] listeners = new TcpListener[numberOfTcpListeners];
+        TcpListener[] listeners = new TcpListener[DataControl.numberOfTcpClients];
 
         public DataReceiving()
         {
             // Initialize the UDP clients
-            for (int x = 0; x < numberOfUdpClients; x++)
+            for (int x = 0; x < DataControl.numberOfUdpClients; x++)
                 clients[x] = new UdpClient(6964 + x);
 
             // Initialize the TCP clients.
-            for (int x = 0; x < numberOfTcpListeners; x++) 
+            for (int x = 0; x < DataControl.numberOfTcpClients; x++) 
                 listeners[x] = new TcpListener(IPAddress.Parse("0.0.0.0"), 6980 + x);
 
             // Begin running the UDP client listeners.
-            for (int x = 0; x < numberOfUdpClients; x++)
+            for (int x = 0; x < DataControl.numberOfUdpClients; x++)
                 new Thread(receiveClientData).Start(clients[x]);
 
             new Thread(receiveLoginRequests).Start();

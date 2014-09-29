@@ -21,10 +21,10 @@ namespace Server_Application
     class Program
     {
         static void Main(string[] args)
-        {   
-            menuSetup();
+        {
             while (true)
             {
+                serverSetup();
                 menuSetup();
                 string input = Console.ReadLine();
                 switch (input)
@@ -37,6 +37,9 @@ namespace Server_Application
                         break;
                     case "threads":
                         threadsRunning();
+                        break;
+                    case "clear":
+                        menuSetup();
                         break;
                     case "exit":
                         return;
@@ -92,6 +95,7 @@ namespace Server_Application
             Console.WriteLine("players - Displays the number of currently active players.");
             Console.WriteLine("threads - Displays the number of currently running threads.");
             Console.WriteLine("ip - Displays the current IP address.");
+            Console.WriteLine("clear - Clears the console screen.");
             Console.WriteLine("exit - Shuts down the server.");
             Console.ReadLine();
         }
