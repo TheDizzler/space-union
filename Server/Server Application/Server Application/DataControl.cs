@@ -57,15 +57,58 @@ namespace Server_Application
             catch (SocketException e) { Console.WriteLine(e.ToString()); return null; }
         }
 
-        public static void sendTCPData()
+        /// <summary>
+        /// Sends data to the specified IP address and port.
+        /// </summary>
+        /// <param name="client">The TCP client through which to send data.</param>
+        /// <param name="input">The object to send through the TCP client.</param>
+        /// <param name="ipaddress">The IP address to which to send data.</param>
+        /// <param name="port">The port to which to send data.</param>
+        public static void sendTCPData(TcpClient client, object input, string ipaddress, int port)
         {
-
+            try
+            {
+                client.Connect(ipaddress, port);
+            }
+            catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return; }
+            catch (ArgumentOutOfRangeException e) { Console.WriteLine(e.ToString()); return; }
+            catch (SocketException e) { Console.WriteLine(e.ToString()); return; }
+            catch (ObjectDisposedException e) { Console.WriteLine(e.ToString()); return; }
+            Stream stream = null;
+            try
+            {
+                stream = client.GetStream();
+            }
+            catch (ObjectDisposedException e) { Console.WriteLine(e.ToString()); return; }
+            catch (InvalidOperationException e) { Console.WriteLine(e.ToString()); return; }
+            byte[] data = objectToBytes(input);
+            try
+            {
+                stream.Write(data, 0, data.Length);
+            }
+            catch (ArgumentOutOfRangeException e) { Console.WriteLine(e.ToString()); return; }
+            catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return; }
+            catch (ArgumentException e) { Console.WriteLine(e.ToString()); return; }
+            catch (IOException e) { Console.WriteLine(e.ToString()); return; }
+            catch (NotSupportedException e) { Console.WriteLine(e.ToString()); return; }
+            catch (ObjectDisposedException e) { Console.WriteLine(e.ToString()); return; }
         }
 
-        public static object receiveTCPData()
+        /// <summary>
+        /// Receive data through a specified TCP listener.
+        /// </summary>
+        /// <param name="listener">The TCP listener through which to receive data.</param>
+        public static void receiveTCPData(TcpListener listener)
         {
-
-            return null;
+            //should be called after the listener.start() is called
+            Socket socket = listener.AcceptSocket();
+            byte[] received = new byte[2048];
+            int size = socket.Receive(received);
+            byte[] input = new byte[size];
+            for (int x = 0; x < size; x++)
+                input[x] = received[x];
+            object output = bytesToObject(input);
+            socket.Close();
         }
 
         /// <summary>
