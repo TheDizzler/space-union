@@ -8,6 +8,6 @@ namespace Server_Application
 {
     class DataTransmission
     {
-
+        
     }
 }
