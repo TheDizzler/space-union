@@ -5,7 +5,6 @@ Content\Spaceships\circleship (128x128).xnb
 Content\Spaceships\shuttle.xnb
 Content\Spaceships\triangleship (128x128).xnb
 Content\Spaceships\wrenchship.xnb
-Content\Spaceships\spaceshiptest.xnb
 Content\Backgrounds\beautifulbg.xnb
 Content\Backgrounds\doodlebg.xnb
 Content\SpriteFonts\SpriteFont1.xnb
@@ -15,7 +14,7 @@ Content\Spaceships\circleship (128x128).png
 Content\Spaceships\shuttle.png
 Content\Spaceships\triangleship (128x128).png
 Content\Spaceships\wrenchship.png
-Content\Backgrounds\starfield (800x600).png
 Content\Spaceships\spaceshiptest.png
+Content\Backgrounds\starfield (800x600).png
 Content\Backgrounds\beautifulbg.png
 Content\Backgrounds\doodlebg.png
