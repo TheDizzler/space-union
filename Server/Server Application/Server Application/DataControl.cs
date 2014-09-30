@@ -19,20 +19,16 @@ namespace Server_Application
     /// </summary>
     class DataControl
     {
+        /// <summary>
+        /// The number of total UDP outgoing or incoming connections. This number
+        /// is equal to the maximum amount of players who can be in a game room.
+        /// </summary>
         public static const int NumberOfUdpClients = 6;
+        /// <summary>
+        /// The number of TCP clients, specifically used for login requests and 
+        /// message sent through the in game chat.
+        /// </summary>
         public static const int NumberOfTcpClients = 2;
-        public static const int PortSendPlayerOne = 6964;
-        public static const int PortSendPlayerTwo = 6965;
-        public static const int PortSendPlayerThree = 6966;
-        public static const int PortSendPlayerFour = 6967;
-        public static const int PortSendPlayerFive = 6968;
-        public static const int PortSendPlayerSix = 6969;
-        public static const int PortReceivePlayerOne = 6970;
-        public static const int PortReceivePlayerTwo = 6971;
-        public static const int PortReceivePlayerThree = 6972;
-        public static const int PortReceivePlayerFour = 6973;
-        public static const int PortReceivePlayerFive = 6974;
-        public static const int PortReceivePlayerSix = 6975;
 
         /// <summary>
         /// Sends data to the specified IP address and port.

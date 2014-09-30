@@ -9,6 +9,12 @@ using System.Threading;
 
 namespace Server_Application
 {
+    /// <summary>
+    /// This is the class responsible for receiving data from clients. It will
+    /// route this information to other classes like DataTransmission or 
+    /// DatabaseRequests to either send back to the client or make a request
+    /// from the database.
+    /// </summary>
     class DataReceiving
     {
 
@@ -28,7 +34,7 @@ namespace Server_Application
         {
             // Initialize the UDP clients
             for (int x = 0; x < DataControl.NumberOfUdpClients; x++)
-                UDPListeners[x] = new UdpClient(DataControl.PortReceivePlayerOne + x);
+                UDPListeners[x] = new UdpClient(6964 + x);
 
             // Initialize the TCP clients.
             for (int x = 0; x < DataControl.NumberOfTcpClients; x++) 
