@@ -54,3 +54,6 @@ _ReSharper*/
 .svn
 # Office Temp Files
 ~$*
+#Monogame files
+SpaceUnionContentContent.contentproj.FileListAbsolute.txt
+SpaceUnionContent.csproj.FileListAbsolute.txt
