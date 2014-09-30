@@ -43,10 +43,21 @@ namespace Server_Application
         /// The health of the player's ship.
         /// </summary>
         byte health;
+        /// <summary>
+        /// The amount of players the current user has killed.
+        /// </summary>
+        byte kills;
+        /// <summary>
+        /// The amount of times the current user has died.
+        /// </summary>
+        byte deaths;
 
         //projectiles fired, direction, velocity
 
-
+        /// <summary>
+        /// A constructor for this class, does not initiate any data.
+        /// </summary>
+        /// <param name="type">The type of the class, used to cast an object to this class.</param>
         public GameData(byte type) : base(type) { }
 
         /// <summary>
@@ -104,6 +115,22 @@ namespace Server_Application
         {
             set { health = value; }
             get { return health; }
+        }
+        /// <summary>
+        /// The amount of players the current user has killed.
+        /// </summary>
+        public byte Kills
+        {
+            set { kills = value; }
+            get { return kills; }
+        }
+        /// <summary>
+        /// The amount of times the current user has died.
+        /// </summary>
+        public byte Deaths
+        {
+            set { deaths = value; }
+            get { return deaths; }
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Server_Application
     /// </summary>
     class DataTransmission
     {
+        //int port = ((IPEndPoint)socket.Client.LocalEndPoint).Port;
         UdpClient[] UDPClients = new UdpClient[DataControl.NumberOfUdpClients];
         TcpClient[] TCPClients = new TcpClient[DataControl.NumberOfTcpClients];
 
@@ -27,6 +28,24 @@ namespace Server_Application
             // Initialize the TCP clients.
             for (int x = 0; x < DataControl.NumberOfTcpClients; x++)
                 TCPClients[x] = new TcpClient();
+        }
+
+        public void respondToLoginRequest()
+        {
+
+        }
+
+        public void sendChatMessages()
+        {
+
+        }
+
+        public void sendClientData()
+        {
+            while (true)
+            {
+
+            }
         }
     }
 }

@@ -17,10 +17,22 @@ namespace Server_Application
     {
         DataReceiving receiving;
         DataTransmission transmission;
+        List<Gameroom> gamerooms;
+        /// <summary>
+        /// Total list of online players.
+        /// </summary>
+        List<Player> onlineplayers;
+        /// <summary>
+        /// Only players who are currently looking for a game match.
+        /// </summary>
+        List<Player> searchingplayers;
         public Server()
         {
             receiving = new DataReceiving();
             transmission = new DataTransmission();
+            gamerooms = new List<Gameroom>();
+            onlineplayers = new List<Player>();
+            searchingplayers = new List<Player>();
         }
     }
 }
