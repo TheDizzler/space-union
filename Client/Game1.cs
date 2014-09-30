@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using SpaceUnion.Controllers;
 using SpaceUnion.Tools;
 #endregion
 
@@ -53,6 +54,8 @@ namespace SpaceUnion {
 			: base() {
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
+
+			IsFixedTimeStep = false;
 
 			Assets = new AssetManager(Content);
 		}

@@ -40,6 +40,7 @@
     <Compile Include="Controllers\GameplayScreen.cs" />
     <Compile Include="Controllers\MainMenuScreen.cs" />
     <Compile Include="PlayButton.cs" />
+    <Compile Include="StellarObjects\Planet.cs" />
     <Compile Include="Tools\AnimationClass.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />

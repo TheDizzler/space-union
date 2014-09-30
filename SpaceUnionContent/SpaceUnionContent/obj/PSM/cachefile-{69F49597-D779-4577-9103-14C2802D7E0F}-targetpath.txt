@@ -8,6 +8,7 @@ Content\Backgrounds\beautifulbg.xnb
 Content\Backgrounds\doodlebg.xnb
 Content\SpriteFonts\SpriteFont1.xnb
 Content\Buttons\playbutton.xnb
+Content\StellarObjects\waterplanet (256x256).xnb
 Content\Backgrounds\starfield (800x600).png
 Content\Backgrounds\beautifulbg.png
 Content\Backgrounds\doodlebg.png

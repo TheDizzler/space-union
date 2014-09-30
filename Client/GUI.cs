@@ -52,10 +52,13 @@ namespace SpaceUnion {
 				line1Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
 			spriteBatch.DrawString(font, "Degree Angle =" + (playerShip.getRotation() * (180 / Math.PI)),
 				line2Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
-			spriteBatch.DrawString(font, "X =" + playerShip.getShipVelocityDirectionX()
+			//spriteBatch.DrawString(font, "X =" + playerShip.getShipVelocityDirectionX()
+			//	+ " y = " + playerShip.getShipVelocityDirectionY(),
+				//line3Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
+			spriteBatch.DrawString(font, "ship velocity X =" + playerShip.getShipVelocityDirectionX()
 				+ " y = " + playerShip.getShipVelocityDirectionY(),
 				line3Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
-			spriteBatch.DrawString(font, "X =" + playerShip.getX() + " y = " + playerShip.getY(),
+			spriteBatch.DrawString(font, "Ship position X =" + playerShip.getX() + " y = " + playerShip.getY(),
 				line4Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
 		}
 

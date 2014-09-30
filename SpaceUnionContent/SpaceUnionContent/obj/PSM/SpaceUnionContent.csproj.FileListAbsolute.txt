@@ -21,3 +21,4 @@ C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\obj\PSM\IgnoreMe.dll
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.jpg
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\waterplanet (256x256).xnb

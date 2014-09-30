@@ -5,8 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SpaceUnion.StellarObjects;
 
-namespace SpaceUnion {
+
+namespace SpaceUnion.Controllers {
 
 	class GameplayScreen {
 
@@ -14,6 +16,7 @@ namespace SpaceUnion {
 		private MouseState mouseState;
 		private SpriteBatch spriteBatch;
 		private Ship playerShip;
+		private Planet planet;
 		private Game1 game;
 
 		Camera mainCamera;
@@ -37,6 +40,7 @@ namespace SpaceUnion {
 
 			Assets = Game1.Assets;
 			playerShip = new Ship(Assets.ufo, new Vector2(200, 200)); //Create new player ship
+			planet = new Planet(Assets.waterPlanet, new Vector2(1000, 1000));
 
 			gui = new GUI(game, playerShip);
 
@@ -46,16 +50,9 @@ namespace SpaceUnion {
 		}
 
 		/// <summary>
-		/// Draws the stars background and debug information.
+		/// Draws the stars background.
 		/// </summary>
 		protected void drawWorld() {
-			//spriteBatch.Draw(background, new Rectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), Color.White);
-			//spriteBatch.DrawString(font, "Radian Angle =" + playerShip.getAngle(), new Vector2(100, 20), Color.Red);
-			//spriteBatch.DrawString(font, "Degree Angle =" + (playerShip.getAngle() * (180 / Math.PI)), new Vector2(100, 50), Color.Red);
-			//spriteBatch.DrawString(font, "X =" + playerShip.getShipVelocityDirectionX()
-			//	+ " y = " + playerShip.getShipVelocityDirectionY(), new Vector2(100, 80), Color.Red);
-			//spriteBatch.DrawString(font, "X =" + playerShip.getSpaceshipX()
-			//	+ " y = " + playerShip.getSpaceshipY(), new Vector2(100, 110), Color.Red);
 
 			/* Parallax Scrolling BG */
 			spriteBatch.Draw(Assets.starfield2,
@@ -79,7 +76,7 @@ namespace SpaceUnion {
 		/// Allows the game to run logic such as updating the world,
 		/// checking for collisions, gathering input, and playing audio.
 		/// 
-		/// Checks player edge wrap around.
+		/// Checks player edge wrap around/edge stop.
 		/// 
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
@@ -93,23 +90,28 @@ namespace SpaceUnion {
 
 			//Up Key toggles back thruster
 			if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W)) {
-				playerShip.thrust();
+				playerShip.thrust(gameTime);
 			}
 
 			//Left Key rotates ship left
 			if (keyState.IsKeyDown(Keys.Left) || keyState.IsKeyDown(Keys.A)) {
-				playerShip.rotateLeft();
+				playerShip.rotateLeft(gameTime);
 			}
 
 			//Right Key rotates ship right
 			else if (keyState.IsKeyDown(Keys.Right) || keyState.IsKeyDown(Keys.D)) {
-				playerShip.rotateRight();
+				playerShip.rotateRight(gameTime);
 			}
 
 			//Space key activates debugging brake
 			if (keyState.IsKeyDown(Keys.Space)) {
 				playerShip.stop();
 			}
+
+
+			playerShip.update(gameTime);
+
+			planet.update(gameTime, playerShip);
 
 			mainCamera.setZoom(mouseState.ScrollWheelValue);
 			mainCamera.Position = playerShip.CenterPosition; // center the camera to player's position
@@ -135,7 +137,7 @@ namespace SpaceUnion {
 			drawWorld(); //Draws background
 
 			playerShip.draw(spriteBatch); //Draws player space ship
-
+			planet.draw(spriteBatch);
 
 			spriteBatch.End();
 

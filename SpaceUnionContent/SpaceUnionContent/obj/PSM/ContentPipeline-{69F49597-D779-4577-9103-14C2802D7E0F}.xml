@@ -8,7 +8,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).xnb</Output>
-      <Time>2014-09-27T22:29:23.6686451-07:00</Time>
+      <Time>2014-09-29T18:07:10.2019848-07:00</Time>
     </Item>
     <Item>
       <Source>Backgrounds\background.jpg</Source>
@@ -17,7 +17,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.xnb</Output>
-      <Time>2014-09-27T22:29:23.6046414-07:00</Time>
+      <Time>2014-09-29T18:07:10.1989847-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\circleship (128x128).png</Source>
@@ -26,7 +26,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\circleship (128x128).xnb</Output>
-      <Time>2014-09-27T22:29:23.684646-07:00</Time>
+      <Time>2014-09-29T18:07:10.204985-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\shuttle.png</Source>
@@ -35,7 +35,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.xnb</Output>
-      <Time>2014-09-27T22:29:23.702647-07:00</Time>
+      <Time>2014-09-29T18:07:10.2079852-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\triangleship (128x128).png</Source>
@@ -44,7 +44,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\triangleship (128x128).xnb</Output>
-      <Time>2014-09-27T22:29:23.7096474-07:00</Time>
+      <Time>2014-09-29T18:07:10.2099853-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\wrenchship.png</Source>
@@ -53,7 +53,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\wrenchship.xnb</Output>
-      <Time>2014-09-27T22:29:23.7216481-07:00</Time>
+      <Time>2014-09-29T18:07:10.2109853-07:00</Time>
     </Item>
     <Item>
       <Source>Backgrounds\beautifulbg.png</Source>
@@ -62,7 +62,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\beautifulbg.xnb</Output>
-      <Time>2014-09-27T22:29:23.6256426-07:00</Time>
+      <Time>2014-09-29T18:07:10.1989847-07:00</Time>
     </Item>
     <Item>
       <Source>Backgrounds\doodlebg.png</Source>
@@ -71,7 +71,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\doodlebg.xnb</Output>
-      <Time>2014-09-27T22:29:23.6416435-07:00</Time>
+      <Time>2014-09-29T18:07:10.2009848-07:00</Time>
     </Item>
     <Item>
       <Source>SpriteFonts\SpriteFont1.spritefont</Source>
@@ -80,7 +80,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb</Output>
-      <Time>2014-09-27T22:29:23.7336488-07:00</Time>
+      <Time>2014-09-29T18:07:10.2239861-07:00</Time>
     </Item>
     <Item>
       <Source>Buttons\playbutton.png</Source>
@@ -89,7 +89,16 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.xnb</Output>
-      <Time>2014-09-27T22:45:19.3503069-07:00</Time>
+      <Time>2014-09-29T18:07:10.2029849-07:00</Time>
+    </Item>
+    <Item>
+      <Source>StellarObjects\waterplanet (256x256).png</Source>
+      <Name>StellarObjects\waterplanet (256x256)</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\waterplanet (256x256).xnb</Output>
+      <Time>2014-09-29T22:25:22.7753394-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

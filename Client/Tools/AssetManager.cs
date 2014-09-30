@@ -31,7 +31,7 @@ namespace SpaceUnion.Tools {
 
 		// space objects
 		public Texture2D earth;
-
+		public Texture2D waterPlanet;
 
 
 		// ships and platforms
@@ -67,6 +67,8 @@ namespace SpaceUnion.Tools {
 			starfield1 = Content.Load<Texture2D>("Backgrounds/starfield (800x600)");
 			starfield2 = Content.Load<Texture2D>("Backgrounds/doodlebg");
 			starfield3 = Content.Load<Texture2D>("Backgrounds/beautifulbg");
+
+			waterPlanet = Content.Load<Texture2D>("StellarObjects/waterplanet (256x256)");
 
 			ufo = Content.Load<Texture2D>("Spaceships/circleship (128x128)");
 			wedge = Content.Load<Texture2D>("Spaceships/triangleship (128x128)");
