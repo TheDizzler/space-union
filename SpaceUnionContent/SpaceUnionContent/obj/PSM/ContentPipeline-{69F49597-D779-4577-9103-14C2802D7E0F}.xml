@@ -2,6 +2,15 @@
 <XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
   <Asset Type="Pipeline:BuildItemCollection">
     <Item>
+      <Source>Backgrounds\starfield (800x600).png</Source>
+      <Name>Backgrounds\starfield (800x600)</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).xnb</Output>
+      <Time>2014-09-29T17:18:28.7921419-07:00</Time>
+    </Item>
+    <Item>
       <Source>Buttons\playbutton.png</Source>
       <Name>Buttons\playbutton</Name>
       <Importer>TextureImporter</Importer>
@@ -56,13 +65,22 @@
       <Time>2014-09-29T14:11:19.848246-07:00</Time>
     </Item>
     <Item>
-      <Source>Spaceships\spaceshiptest.png</Source>
-      <Name>Spaceships\spaceshiptest</Name>
+      <Source>Backgrounds\beautifulbg.png</Source>
+      <Name>Backgrounds\beautifulbg</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.xnb</Output>
-      <Time>2014-09-29T14:11:19.8452445-07:00</Time>
+      <Output>C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\beautifulbg.xnb</Output>
+      <Time>2014-09-29T17:18:28.7901434-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Backgrounds\doodlebg.png</Source>
+      <Name>Backgrounds\doodlebg</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\doodlebg.xnb</Output>
+      <Time>2014-09-29T17:18:28.7911418-07:00</Time>
     </Item>
     <Item>
       <Source>SpriteFonts\SpriteFont1.spritefont</Source>

@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace SpaceUnion {
+namespace SpaceUnion.Tools {
 
 	/// <summary>
 	/// The base class for all objects that have visual representation
@@ -20,12 +20,21 @@ namespace SpaceUnion {
 		/// <summary>
 		/// Game world x,y co-ordinates
 		/// </summary>
-		public Vector2 position;
+		protected Vector2 position;
 		/// <summary>
 		/// The center point of the sprite
 		/// </summary>
-		protected Vector2 origin;
-		public float rotation;
+		public Vector2 origin;
+		/// <summary>
+		/// Angle in radians of ship orientation
+		/// </summary>
+		protected float rotation;
+
+		public double getRotation() {
+			return rotation;
+		}
+
+		protected float scale = 1.0f;
 
 		/// <summary>
 		/// Animation related variables
@@ -42,20 +51,42 @@ namespace SpaceUnion {
 		}
 		// End of animations
 
-		
+		/// <summary>
+		/// Get sprites position from top left corner
+		/// </summary>
+		public Vector2 Position { get { return this.position; } }
 
-		
-		
+		/// <summary>
+		/// Get sprites center position in game world coordinates
+		/// </summary>
+		public Vector2 CenterPosition { get { return new Vector2(getX(), getY()); } }
+		/// <summary>
+		/// Get sprite's center X position
+		/// </summary>
+		/// <returns></returns>
+		public float getX() {
+
+			return position.X - width/2;
+		}
+
+		/// <summary>
+		/// Get sprite's center Y position
+		/// </summary>
+		/// <returns></returns>
+		public float getY() {
+
+			return position.Y - height/2;
+		}
 
 		/// <summary>
 		/// Constructor. May want to remove position as a required param.
 		/// </summary>
 		/// <param name="tex"></param>
 		/// <param name="pos"></param>
-		public Sprite(Texture2D tex, Vector2 pos) {
+		protected Sprite(Texture2D tex, Vector2 pos) {
 			texture = tex;
 			position = pos;
-			
+
 
 			origin = new Vector2(texture.Width / 2, texture.Height / 2);
 		}
@@ -67,6 +98,7 @@ namespace SpaceUnion {
 		/// <param name="name"></param>
 		/// <param name="row"></param>
 		/// <param name="frameCount"></param>
+		/// <param name="frameSize"></param>
 		/// <param name="anima"></param>
 		public virtual void addAnimation(string name, int row, int frameCount,
 			int frameSize, AnimationClass anima) {
@@ -87,12 +119,12 @@ namespace SpaceUnion {
 		/// </summary>
 		/// <param name="sBatch"></param>
 		public virtual void draw(SpriteBatch sBatch) {
-			sBatch.Draw(texture, position, null, Color.White, rotation, origin, 1.0f, SpriteEffects.None, 0);
+			sBatch.Draw(texture, position, null, Color.White, rotation, origin, scale, SpriteEffects.None, 0);
 		}
 
 
 		/// <summary>
-		/// Draw to toolbar
+		/// Draw to toolbar *LEGACY CODE*
 		/// </summary>
 		/// <param name="spriteBatch"></param>
 		/// <param name="portraitPosition"></param>

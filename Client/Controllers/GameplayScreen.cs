@@ -6,124 +6,151 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SpaceUnion
-{
-    class GameplayScreen
-    {
-        private Texture2D background;
-        private Texture2D shuttle;
-        private SpriteFont font;
-        private KeyboardState state;
-        private SpriteBatch spriteBatch;
-        private Ship playerShip;
-        private Game1 game;
-        private Boolean collide = false;
+namespace SpaceUnion {
 
-        private int SCREEN_WIDTH;
-        private int SCREEN_HEIGHT;
+	class GameplayScreen {
 
-        public GameplayScreen(Game1 game)
-        {
-            this.game = game;
-            SCREEN_HEIGHT = game.getScreenHeight();
-            SCREEN_WIDTH = game.getScreenWidth();
-            background = game.Content.Load<Texture2D>("Backgrounds/background");
-            shuttle = game.Content.Load<Texture2D>("Spaceships/spaceshiptest");
-            font = game.Content.Load<SpriteFont>("SpriteFonts/SpriteFont1"); // Use the name of your sprite font file here instead of 'Score'.
-            playerShip = new Ship(shuttle, new Vector2(200, 200)); //Create new player ship
-        }
+		private KeyboardState keyState;
+		private MouseState mouseState;
+		private SpriteBatch spriteBatch;
+		private Ship playerShip;
+		private Game1 game;
 
-        /// <summary>
-        /// Draws the stars background and debug information.
-        /// </summary>
-        protected void DrawWorld()
-        {
-            spriteBatch.Draw(background, new Rectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), Color.White);
-            spriteBatch.DrawString(font, "Radian Angle =" + playerShip.getAngle(), new Vector2(100, 20), Color.Red);
-            spriteBatch.DrawString(font, "Degree Angle =" + (playerShip.getAngle() * (180 / Math.PI)), new Vector2(100, 50), Color.Red);
-            spriteBatch.DrawString(font, "X =" + playerShip.getShipVelocityDirectionX()
-                + " y = " + playerShip.getShipVelocityDirectionY(), new Vector2(100, 80), Color.Red);
-            spriteBatch.DrawString(font, "X =" + playerShip.getSpaceshipX()
-                + " y = " + playerShip.getSpaceshipY(), new Vector2(100, 110), Color.Red);
-        }
+		Camera mainCamera;
+		GUI gui;
 
-        /*
-        public void UpdateCollisions() 
-        {
-            // Use the Rectangle's built-in intersect function to 
-            // determine if two objects are overlapping
-            Rectangle rectangle1;
-            Rectangle rectangle2;
+		private Tools.AssetManager Assets;
 
-            // Only create the rectangle once for the player
-            rectangle1 = playerShip.getHitBox();
-            rectangle2 = enemyShip.getHitBox();
-            if (rectangle1.Intersects(rectangle2))
-            {
-                collide = true;
-            }
-            else {
-                collide = false;
-            }
-        }
-        */
+		static public int worldWidth = 4000;
+		static public int worldHeight = 2000;
 
-         
-        /// <summary> 
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// 
-        /// Checks player edge wrap around.
-        /// 
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        public void Update(GameTime gameTime)
-        {
-            playerShip.checkScreenWrap(game.Window); //Check if ship will wrap around edges
-            //UpdateCollisions();
-            state = Keyboard.GetState(); //Get which keys are pressed or released
+		private int SCREEN_WIDTH;
+		private int SCREEN_HEIGHT;
 
-            //Up Key toggles back thruster
-            if (state.IsKeyDown(Keys.Up))
-            {
-                playerShip.thrust();
-            }
 
-            //Left Key rotates ship left
-            if (state.IsKeyDown(Keys.Left))
-            {
-                playerShip.rotateLeft();
-            }
+		public GameplayScreen(Game1 game, SpriteBatch batch) {
+			this.game = game;
+			SCREEN_HEIGHT = game.getScreenHeight();
+			SCREEN_WIDTH = game.getScreenWidth();
 
-            //Right Key rotates ship right
-            else if (state.IsKeyDown(Keys.Right))
-            {
-                playerShip.rotateRight();
-            }
+			spriteBatch = batch;
 
-            //Space key activates debugging brake
-            if (state.IsKeyDown(Keys.Space))
-            {
-               playerShip.stop();
-                
-            }
+			Assets = Game1.Assets;
+			playerShip = new Ship(Assets.spaceShipTest, new Vector2(200, 200)); //Create new player ship
 
-        }
+			gui = new GUI(game, playerShip);
 
-        /// <summary>
-        /// Draws the ship
-        /// </summary>
-        protected void DrawShip()
-        {
-            playerShip.draw(spriteBatch);
-        }
+			Viewport mainViewport = new Viewport((int) playerShip.getX(), (int) playerShip.getY(),
+				game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height - GUI.guiHeight);
+			mainCamera = new Camera(mainViewport, worldWidth, worldHeight, 1.0f);
+		}
 
-        public void Draw(SpriteBatch sBatch)
-        {
-            spriteBatch = sBatch;
-            DrawWorld(); //Draws background
-            DrawShip();  //Draws player space ship
-        }
+		/// <summary>
+		/// Draws the stars background and debug information.
+		/// </summary>
+		protected void drawWorld() {
+			//spriteBatch.Draw(background, new Rectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), Color.White);
+			//spriteBatch.DrawString(font, "Radian Angle =" + playerShip.getAngle(), new Vector2(100, 20), Color.Red);
+			//spriteBatch.DrawString(font, "Degree Angle =" + (playerShip.getAngle() * (180 / Math.PI)), new Vector2(100, 50), Color.Red);
+			//spriteBatch.DrawString(font, "X =" + playerShip.getShipVelocityDirectionX()
+			//	+ " y = " + playerShip.getShipVelocityDirectionY(), new Vector2(100, 80), Color.Red);
+			//spriteBatch.DrawString(font, "X =" + playerShip.getSpaceshipX()
+			//	+ " y = " + playerShip.getSpaceshipY(), new Vector2(100, 110), Color.Red);
 
-    }
+			/* Parallax Scrolling BG */
+			spriteBatch.Draw(Assets.starfield2,
+				new Rectangle((int) (mainCamera.Position.X * .9), (int) (mainCamera.Position.Y * .9), worldWidth / 4, worldHeight / 4),
+				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+			spriteBatch.Draw(Assets.starfield1,
+				new Rectangle((int) (mainCamera.Position.X * 0.7), (int) (mainCamera.Position.Y * 0.7), 1600, 1200),
+				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+			spriteBatch.Draw(Assets.starfield1,
+				new Rectangle((int) (mainCamera.Position.X * 0.6), (int) (mainCamera.Position.Y * 0.6), 2400, 1800),
+				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+			spriteBatch.Draw(Assets.starfield1,
+				new Rectangle((int) (mainCamera.Position.X * 0.4), (int) (mainCamera.Position.Y * 0.4), 800, 600),
+				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+			spriteBatch.Draw(Assets.starfield3,
+				new Rectangle((int) (mainCamera.Position.X * .5), (int) (mainCamera.Position.Y * .5f), worldWidth / 10, worldHeight / 10),
+				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+		}
+
+		/// <summary>
+		/// Allows the game to run logic such as updating the world,
+		/// checking for collisions, gathering input, and playing audio.
+		/// 
+		/// Checks player edge wrap around.
+		/// 
+		/// </summary>
+		/// <param name="gameTime">Provides a snapshot of timing values.</param>
+		public void Update(GameTime gameTime) {
+			//playerShip.checkScreenWrap(Window); //Check if ship will wrap around edges
+			playerShip.checkScreenStop(game.Window);
+			keyState = Keyboard.GetState(); //Get which keys are pressed or released
+			mouseState = Mouse.GetState();
+
+
+
+			//Up Key toggles back thruster
+			if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W)) {
+				playerShip.thrust();
+			}
+
+			//Left Key rotates ship left
+			if (keyState.IsKeyDown(Keys.Left) || keyState.IsKeyDown(Keys.A)) {
+				playerShip.rotateLeft();
+			}
+
+			//Right Key rotates ship right
+			else if (keyState.IsKeyDown(Keys.Right) || keyState.IsKeyDown(Keys.D)) {
+				playerShip.rotateRight();
+			}
+
+			//Space key activates debugging brake
+			if (keyState.IsKeyDown(Keys.Space)) {
+				playerShip.stop();
+			}
+
+			mainCamera.setZoom(mouseState.ScrollWheelValue);
+			mainCamera.Position = playerShip.CenterPosition; // center the camera to player's position
+			mainCamera.update(gameTime);
+
+			/* Transform mouse input from view to world position
+			 * NOT currently used but may be useful in the future*/
+			Matrix inverse = Matrix.Invert(mainCamera.getTransformation());
+			Vector2 mousePos = Vector2.Transform(
+			   new Vector2(mouseState.X, mouseState.Y), inverse);
+
+			gui.update(playerShip);
+		}
+
+
+		public void draw() {
+
+			/* Main camera sprite batch */
+			spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend,
+				SamplerState.LinearWrap, null, null, null, mainCamera.getTransformation());
+
+
+			drawWorld(); //Draws background
+
+			playerShip.draw(spriteBatch); //Draws player space ship
+
+
+			spriteBatch.End();
+
+
+
+
+			/* GUI spritebatch. Anything drawn here will remain
+			 * static and not be affected by cameras. */
+			spriteBatch.Begin();
+
+			gui.draw(spriteBatch);
+
+
+			spriteBatch.End();
+		}
+
+	}
 }
