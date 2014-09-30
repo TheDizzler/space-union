@@ -21,11 +21,8 @@ namespace Server_Application
 
         public DataTransmission()
         {
-            // Initialize the UDP clients
             for (int x = 0; x < DataControl.NumberOfUdpClients; x++)
-                UDPClients[x] = new UdpClient(6964 + x);
-
-            // Initialize the TCP clients.
+                UDPClients[x] = new UdpClient(6944 + x);
             for (int x = 0; x < DataControl.NumberOfTcpClients; x++)
                 TCPClients[x] = new TcpClient();
         }
@@ -42,10 +39,7 @@ namespace Server_Application
 
         public void sendClientData()
         {
-            while (true)
-            {
 
-            }
         }
     }
 }
