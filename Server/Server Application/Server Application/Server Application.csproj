@@ -48,6 +48,7 @@
     <Compile Include="DataReceiving.cs" />
     <Compile Include="DataTransmission.cs" />
     <Compile Include="GameData.cs" />
+    <Compile Include="LoginData.cs" />
     <Compile Include="LoginRequests.cs" />
     <Compile Include="Physics.cs" />
     <Compile Include="Program.cs" />

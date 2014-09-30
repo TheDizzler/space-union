@@ -19,8 +19,20 @@ namespace Server_Application
     /// </summary>
     class DataControl
     {
-        public static const int numberOfUdpClients = 6;
-        public static const int numberOfTcpClients = 2;
+        public static const int NumberOfUdpClients = 6;
+        public static const int NumberOfTcpClients = 2;
+        public static const int PortSendPlayerOne = 6964;
+        public static const int PortSendPlayerTwo = 6965;
+        public static const int PortSendPlayerThree = 6966;
+        public static const int PortSendPlayerFour = 6967;
+        public static const int PortSendPlayerFive = 6968;
+        public static const int PortSendPlayerSix = 6969;
+        public static const int PortReceivePlayerOne = 6970;
+        public static const int PortReceivePlayerTwo = 6971;
+        public static const int PortReceivePlayerThree = 6972;
+        public static const int PortReceivePlayerFour = 6973;
+        public static const int PortReceivePlayerFive = 6974;
+        public static const int PortReceivePlayerSix = 6975;
 
         /// <summary>
         /// Sends data to the specified IP address and port.
@@ -28,9 +40,8 @@ namespace Server_Application
         /// <param name="data">The data to transmit.</param>
         /// <param name="ipaddress">The IP address of the target client.</param>
         /// <param name="port">The port number for the data to be received at.</param>
-        public static void sendUDPData(object data, string ipaddress, int port)
+        public static void sendUDPData(UdpClient client, object data, string ipaddress, int port)
         {
-            UdpClient client = new UdpClient();
             byte[] output = objectToBytes(data);
             try
             {
