@@ -17,5 +17,28 @@ namespace Server_Application
         {
             list = new List<GameData>();
         }
+
+        public List<GameData> getPlayerList()
+        {
+            return list;
+        }
+
+        public void removePlayer(GameData user)
+        {
+            foreach (GameData player in list)
+            {
+                if (player.Username == user.Username)
+                {
+                    list.Remove(player);
+                    return;
+                }
+            }
+        }
+
+        public int Gameroom
+        {
+            set { gameroom = value; }
+            get { return gameroom; }
+        }
     }
 }
