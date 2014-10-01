@@ -35,7 +35,7 @@ namespace SpaceUnionDatabase
         /// <summary>
         /// Returns the connection string used to connect to the space union database
         /// </summary>
-        public static string connectionString
+        public static string CONNECTION_STRING
         {
             get 
             {
