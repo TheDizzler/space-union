@@ -17,16 +17,14 @@ namespace Server_Application
     /// </summary>
     class DataReceiving
     {
-
         /// <summary>
-        /// Listens to data from clients (1 for each)
+        /// Listens to data from clients (1 for each client)
         /// </summary>
         UdpClient[] UDPListeners = new UdpClient[DataControl.NumberOfUdpClients];
 
         /// <summary>
         /// listeners[0] for login requests.
         /// listeners[1] for chat messages. 
-
         /// </summary>
         TcpListener[] TCPListeners = new TcpListener[DataControl.NumberOfTcpClients];
 
@@ -54,7 +52,12 @@ namespace Server_Application
             {
                 Object loginData = DataControl.receiveTCPData(TCPListeners[0]);
 
-                // do whatever for the login requests
+                // do whatever for the login 
+
+                if (LoginRequests.validateUserData((Player)loginData))
+                {
+                    // add the client to the list of active userse
+                }
             }
         }
 
