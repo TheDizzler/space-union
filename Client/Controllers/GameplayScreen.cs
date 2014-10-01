@@ -42,7 +42,7 @@ namespace SpaceUnion.Controllers {
 			playerShip = new Ship(Assets.ufo, new Vector2(200, 200)); //Create new player ship
 			planet = new Planet(Assets.waterPlanet, new Vector2(1000, 1000));
 
-			gui = new GUI(game, playerShip);
+			gui = new GUI(game, playerShip, planet);
 
 			Viewport mainViewport = new Viewport((int) playerShip.getX(), (int) playerShip.getY(),
 				game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height - GUI.guiHeight);

@@ -31,7 +31,7 @@ namespace SpaceUnion {
 
 		protected float maxSpeed = 7;
 
-		protected float accelSpeed = 3.5f;
+		protected float accelSpeed = 4.5f;
 		protected float currentSpeed = 0;
 		/// <summary>
 		/// Turn speed in degrees per second
