@@ -150,9 +150,12 @@ namespace SpaceUnion {
 			//Update Ship Velocity Direction
 			shipVelocityDirectionX = (float) Math.Sin(rotation) * currentSpeed;
 			shipVelocityDirectionY = (float) Math.Cos(rotation) * currentSpeed;
-
-			position.X += shipVelocityDirectionX;
-			position.Y -= shipVelocityDirectionY;
 		}
+
+        internal void update() 
+        {
+            position.X += shipVelocityDirectionX;
+            position.Y -= shipVelocityDirectionY;
+        }
 	}
 }

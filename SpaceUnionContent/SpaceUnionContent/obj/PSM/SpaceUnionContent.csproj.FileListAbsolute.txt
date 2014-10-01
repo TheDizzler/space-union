@@ -46,3 +46,5 @@ C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\
 C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\SpaceUnionContent.csprojResolveAssemblyReference.cache
 C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\IgnoreMe.dll
+C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\galaxy.xnb
+C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\galaxy.png

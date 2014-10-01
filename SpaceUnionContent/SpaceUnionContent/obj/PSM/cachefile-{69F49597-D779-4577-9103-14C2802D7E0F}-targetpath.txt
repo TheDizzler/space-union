@@ -8,8 +8,10 @@ Content\Spaceships\wrenchship.xnb
 Content\Backgrounds\beautifulbg.xnb
 Content\Backgrounds\doodlebg.xnb
 Content\SpriteFonts\SpriteFont1.xnb
+Content\Backgrounds\galaxy.xnb
 Content\Spaceships\spaceshiptest.png
 Content\Backgrounds\starfield (800x600).png
+Content\Backgrounds\galaxy.png
 Content\Backgrounds\beautifulbg.png
 Content\Backgrounds\doodlebg.png
 Content\Buttons\playbutton.png

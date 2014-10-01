@@ -91,6 +91,15 @@
       <Output>C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb</Output>
       <Time>2014-09-29T14:11:19.8502467-07:00</Time>
     </Item>
+    <Item>
+      <Source>Backgrounds\galaxy.png</Source>
+      <Name>Backgrounds\galaxy</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\galaxy.xnb</Output>
+      <Time>2014-09-29T20:34:59.8852107-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{69F49597-D779-4577-9103-14C2802D7E0F}</ContentProjectGUID>

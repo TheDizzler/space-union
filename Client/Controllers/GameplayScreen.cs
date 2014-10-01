@@ -121,6 +121,7 @@ namespace SpaceUnion {
 			Vector2 mousePos = Vector2.Transform(
 			   new Vector2(mouseState.X, mouseState.Y), inverse);
 
+            playerShip.update();
 			gui.update(playerShip);
 		}
 

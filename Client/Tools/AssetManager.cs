@@ -66,7 +66,7 @@ namespace SpaceUnion.Tools {
 
 
 			starfield1 = Content.Load<Texture2D>("Backgrounds/starfield (800x600)");
-			starfield2 = Content.Load<Texture2D>("Backgrounds/doodlebg");
+			starfield2 = Content.Load<Texture2D>("Backgrounds/galaxy");
 			starfield3 = Content.Load<Texture2D>("Backgrounds/beautifulbg");
 
             spaceShipTest = Content.Load<Texture2D>("Spaceships/spaceshiptest");

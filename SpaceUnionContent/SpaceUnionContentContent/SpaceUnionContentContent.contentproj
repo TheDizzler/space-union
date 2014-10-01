@@ -101,6 +101,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backgrounds\galaxy.png">
+      <Name>galaxy</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Content Include="Spaceships\spaceshiptest.png">
       <Name>spaceshiptest</Name>
       <Importer>TextureImporter</Importer>
