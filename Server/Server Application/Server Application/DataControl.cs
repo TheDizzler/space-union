@@ -19,8 +19,16 @@ namespace Server_Application
     /// </summary>
     class DataControl
     {
-        public static const int numberOfUdpClients = 6;
-        public static const int numberOfTcpClients = 2;
+        /// <summary>
+        /// The number of total UDP outgoing or incoming connections. This number
+        /// is equal to the maximum amount of players who can be in a game room.
+        /// </summary>
+        public static const int NumberOfUdpClients = 6;
+        /// <summary>
+        /// The number of TCP clients, specifically used for login requests and 
+        /// message sent through the in game chat.
+        /// </summary>
+        public static const int NumberOfTcpClients = 2;
 
         /// <summary>
         /// Sends data to the specified IP address and port.
@@ -28,9 +36,8 @@ namespace Server_Application
         /// <param name="data">The data to transmit.</param>
         /// <param name="ipaddress">The IP address of the target client.</param>
         /// <param name="port">The port number for the data to be received at.</param>
-        public static void sendUDPData(object data, string ipaddress, int port)
+        public static void sendUDPData(UdpClient client, object data, string ipaddress, int port)
         {
-            UdpClient client = new UdpClient();
             byte[] output = objectToBytes(data);
             try
             {
