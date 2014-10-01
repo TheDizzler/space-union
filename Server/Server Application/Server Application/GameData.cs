@@ -16,6 +16,10 @@ namespace Server_Application
     class GameData : Data
     {
         /// <summary>
+        /// The username of the player.
+        /// </summary>
+        string username;
+        /// <summary>
         /// The game room in which the current player is located.
         /// </summary>
         int gameroom;
@@ -60,6 +64,14 @@ namespace Server_Application
         /// <param name="type">The type of the class, used to cast an object to this class.</param>
         public GameData(byte type) : base(type) { }
 
+        /// <summary>
+        /// The username of the player.
+        /// </summary>
+        public string Username
+        {
+            set { username = value; }
+            get { return username; }
+        }
         /// <summary>
         /// The game room in which the current player is located.
         /// </summary>

@@ -29,10 +29,22 @@ namespace Server_Application
         public Server()
         {
             receiving = new DataReceiving();
-            transmission = new DataTransmission();
+            transmission = new DataTransmission(this);
             gamerooms = new List<Gameroom>();
             onlineplayers = new List<Player>();
             searchingplayers = new List<Player>();
+        }
+
+        public Gameroom getGameroom(int roomnum)
+        {
+            foreach (Gameroom room in gamerooms)
+            {
+                if (room.Gameroom == roomnum)
+                {
+                    return room;
+                }
+            }
+            return null;
         }
     }
 }

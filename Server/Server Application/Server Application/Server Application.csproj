@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\..\..\bu.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="DatabaseRequests.cs" />
     <Compile Include="DataControl.cs" />
@@ -54,6 +53,7 @@
     <Compile Include="LoginRequests.cs" />
     <Compile Include="Physics.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server.cs" />
   </ItemGroup>

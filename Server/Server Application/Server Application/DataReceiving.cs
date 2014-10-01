@@ -20,36 +20,17 @@ namespace Server_Application
         /// <summary>
         /// Listens to data from clients (1 for each client)
         /// </summary>
-<<<<<<< HEAD
-        UdpClient[] UDPListeners = new UdpClient[DataControl.numberOfUdpClients];
-=======
         UdpClient[] UDPListeners = new UdpClient[DataControl.NumberOfUdpClients];
->>>>>>> 9f26a3b6bfaf5b8147258a00afa8def71fd60b60
 
         /// <summary>
         /// listeners[0] for login requests.
         /// listeners[1] for chat messages. 
         /// </summary>
-<<<<<<< HEAD
-        TcpListener[] TCPListeners = new TcpListener[DataControl.numberOfTcpClients];
-=======
         TcpListener[] TCPListeners = new TcpListener[DataControl.NumberOfTcpClients];
->>>>>>> 9f26a3b6bfaf5b8147258a00afa8def71fd60b60
 
         public DataReceiving()
         {
             // Initialize the UDP clients
-<<<<<<< HEAD
-            for (int x = 0; x < DataControl.numberOfUdpClients; x++)
-                UDPListeners[x] = new UdpClient(6964 + x);
-
-            // Initialize the TCP clients.
-            for (int x = 0; x < DataControl.numberOfTcpClients; x++) 
-                TCPListeners[x] = new TcpListener(IPAddress.Parse("0.0.0.0"), 6980 + x);
-
-            // Begin running the UDP client listeners.
-            for (int x = 0; x < DataControl.numberOfUdpClients; x++)
-=======
             for (int x = 0; x < DataControl.NumberOfUdpClients; x++)
                 UDPListeners[x] = new UdpClient(6964 + x);
 
@@ -59,7 +40,6 @@ namespace Server_Application
 
             // Begin running the UDP client listeners.
             for (int x = 0; x < DataControl.NumberOfUdpClients; x++)
->>>>>>> 9f26a3b6bfaf5b8147258a00afa8def71fd60b60
                 new Thread(receiveClientData).Start(UDPListeners[x]);
 
             new Thread(receiveLoginRequests).Start();
@@ -72,7 +52,12 @@ namespace Server_Application
             {
                 Object loginData = DataControl.receiveTCPData(TCPListeners[0]);
 
-                // do whatever for the login requests
+                // do whatever for the login 
+
+                if (LoginRequests.validateUserData((Player)loginData))
+                {
+                    // add the client to the list of active userse
+                }
             }
         }
 
