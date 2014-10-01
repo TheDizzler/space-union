@@ -12,7 +12,6 @@ namespace SpaceUnion {
 	class PlayButton : Sprite {
 
 		Rectangle buttonRectangle;
-		//public Vector2 size;
 
 		public bool isClicked = false;
 		private bool isDown = false;
@@ -23,7 +22,6 @@ namespace SpaceUnion {
 		public PlayButton(Texture2D newTexture, GraphicsDevice graphics)
 			: base(newTexture, Vector2.Zero) {
 
-			//size = new Vector2(300, 150);
 			width = 300;
 			height = 150;
 			//buttonRectangle = new Rectangle((int) position.X, (int) position.Y, (int) size.X, (int) size.Y);

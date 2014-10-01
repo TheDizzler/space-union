@@ -14,7 +14,7 @@ namespace SpaceUnion.StellarObjects {
 		/// <summary>
 		/// How much gravitational 'power' the planet has
 		/// </summary>
-		float mass = 5000;
+		float mass = 200000;
 
 		/// <summary>
 		/// Range at which gravitational effects are concidered negligable
@@ -33,6 +33,13 @@ namespace SpaceUnion.StellarObjects {
 
 		}
 
+
+		public Planet(Texture2D tex, Vector2 pos, float mass, float range)
+			: base(tex, pos) {
+
+			this.mass = mass;
+			this.range = range;
+		}
 
 		public void update(GameTime gameTime, Ship ship) {
 
@@ -55,8 +62,8 @@ namespace SpaceUnion.StellarObjects {
 				double angle = Math.Atan2(this.CenterPosition.Y - ship.CenterPosition.Y, this.CenterPosition.X - ship.CenterPosition.X);
 				// Find the vector to apply to the ships velocity
 				Vector2 pullVector = new Vector2(
-					(float) Math.Cos(angle) * pullForce,
-					(float) -Math.Sin(angle) * pullForce);
+					(float) Math.Cos(angle) * pullForce * (float) gameTime.ElapsedGameTime.TotalSeconds,
+					(float) -Math.Sin(angle) * pullForce * (float) gameTime.ElapsedGameTime.TotalSeconds);
 				Vector2.Add(ref ship.velocity, ref pullVector, out ship.velocity);
 			}
 

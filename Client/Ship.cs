@@ -24,7 +24,7 @@ namespace SpaceUnion {
 		/// The current speed and direction of ship
 		/// </summary>
 		public Vector2 velocity;
-		protected Vector2 impulse;
+		//protected Vector2 impulse;
 
 		//private float shipVelocityDirectionX = 0; //Amount of pixels the ship moves horizontally per frame (Calculated by sine of angle)
 		//private float shipVelocityDirectionY = 0; //Amount of pixels the ship moves vertically per frame (Calculated by cosine of angle)
@@ -109,21 +109,14 @@ namespace SpaceUnion {
 		/* !!Never have update code in draw function!! */
 		public override void draw(SpriteBatch sBatch) {
 
-
-			//Vector2 location = new Vector2(position.X, position.Y);
-			//Rectangle sourceRectangle = new Rectangle(0, 0, shipTexture.Width, shipTexture.Height);
-			//Vector2 origin = new Vector2(shipTexture.Width / 2, shipTexture.Height / 2);
-			//sBatch.Draw(shipTexture, location, null, Color.White, angle, origin, 0.1f, SpriteEffects.None, 0);
-
-
 			base.draw(sBatch);
 		}
 
 
 		public void update(GameTime gameTime) {
-
-			position.X += velocity.X ;
-			position.Y -= velocity.Y ;
+			// Elapsed time is taken into consideration in thrust and planet.pull
+			position.X += velocity.X;
+			position.Y -= velocity.Y;
 		}
 
 		/// <summary>
@@ -183,7 +176,7 @@ namespace SpaceUnion {
 			acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
 
 			Vector2.Add(ref velocity, ref acceleration, out velocity);
-			
+
 		}
 	}
 }

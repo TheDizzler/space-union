@@ -109,9 +109,10 @@ namespace SpaceUnion.Controllers {
 			}
 
 
+			planet.update(gameTime, playerShip);
 			playerShip.update(gameTime);
 
-			planet.update(gameTime, playerShip);
+			
 
 			mainCamera.setZoom(mouseState.ScrollWheelValue);
 			mainCamera.Position = playerShip.CenterPosition; // center the camera to player's position

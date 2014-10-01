@@ -87,6 +87,8 @@ namespace SpaceUnion.Tools {
 			texture = tex;
 			position = pos;
 
+			width = texture.Width;
+			height = texture.Height;
 
 			origin = new Vector2(texture.Width / 2, texture.Height / 2);
 		}
