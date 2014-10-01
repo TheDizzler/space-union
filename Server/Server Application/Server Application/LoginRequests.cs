@@ -8,6 +8,22 @@ namespace Server_Application
 {
     class LoginRequests
     {
+
         
+        /// <summary>
+        /// Reitrieve the username from the database.
+        /// </summary>
+        public string retrieveUsername()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// Retrieve the user password from the database.
+        /// </summary>
+        public string retrieveUserPassword()
+        {
+            return null;
+        }
     }
 }

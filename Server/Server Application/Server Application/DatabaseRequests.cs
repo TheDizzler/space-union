@@ -17,10 +17,5 @@ namespace Server_Application
         {
 
         }
-
-        public static void getUserStats()
-        {
-
-        }
     }
 }
