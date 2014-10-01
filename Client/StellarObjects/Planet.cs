@@ -21,7 +21,9 @@ namespace SpaceUnion.StellarObjects {
 		/// </summary>
 		float range = 500;
 
-
+		/// <summary>
+		/// For testing
+		/// </summary>
 		public double angle;
 
 
@@ -52,16 +54,6 @@ namespace SpaceUnion.StellarObjects {
 				// angle in radians 
 				double angle = Math.Atan2(this.CenterPosition.Y - ship.CenterPosition.Y, this.CenterPosition.X - ship.CenterPosition.X);
 				// Find the vector to apply to the ships velocity
-				//Vector2 pullVector = new Vector2((float) Math.Sin(angle), (float) Math.Cos(angle));
-				//pullVector *=mass / (distance * distance);
-
-				//Vector2 pullVector = Vector2.Zero;
-				//if (this.CenterPosition.Y - ship.CenterPosition.Y > 0) { // if this is below ship
-				//	pullVector.Y = (float) Math.Cos(angle) * pullForce;
-				//} else {
-
-				//}
-
 				Vector2 pullVector = new Vector2(
 					(float) Math.Cos(angle) * pullForce,
 					(float) -Math.Sin(angle) * pullForce);
