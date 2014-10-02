@@ -20,26 +20,26 @@ namespace Server_Application
         /// <summary>
         /// Listens to data from clients (1 for each client)
         /// </summary>
-        UdpClient[] UDPListeners = new UdpClient[DataControl.NumberOfUdpClients];
+        UdpClient[] UDPListeners = new UdpClient[Constants.NumberOfUdpClients];
 
         /// <summary>
         /// listeners[0] for login requests.
         /// listeners[1] for chat messages. 
         /// </summary>
-        TcpListener[] TCPListeners = new TcpListener[DataControl.NumberOfTcpClients];
+        TcpListener[] TCPListeners = new TcpListener[Constants.NumberOfTcpClients];
 
         public DataReceiving()
         {
             // Initialize the UDP clients
-            for (int x = 0; x < DataControl.NumberOfUdpClients; x++)
+            for (int x = 0; x < Constants.NumberOfUdpClients; x++)
                 UDPListeners[x] = new UdpClient(6964 + x);
 
             // Initialize the TCP clients.
-            for (int x = 0; x < DataControl.NumberOfTcpClients; x++) 
+            for (int x = 0; x < Constants.NumberOfTcpClients; x++) 
                 TCPListeners[x] = new TcpListener(IPAddress.Parse("0.0.0.0"), 6980 + x);
 
             // Begin running the UDP client listeners.
-            for (int x = 0; x < DataControl.NumberOfUdpClients; x++)
+            for (int x = 0; x < Constants.NumberOfUdpClients; x++)
                 new Thread(receiveClientData).Start(UDPListeners[x]);
 
             // Begin running the TCP login request listener.

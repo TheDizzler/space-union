@@ -16,9 +16,8 @@ namespace Server_Application
     /// </summary>
     class DataTransmission
     {
-        //int port = ((IPEndPoint)socket.Client.LocalEndPoint).Port;
-        UdpClient[] UDPClients = new UdpClient[DataControl.NumberOfUdpClients];
-        TcpClient[] TCPClients = new TcpClient[DataControl.NumberOfTcpClients];
+        UdpClient[] UDPClients = new UdpClient[Constants.NumberOfUdpClients];
+        TcpClient[] TCPClients = new TcpClient[Constants.NumberOfTcpClients];
         List<GameMessage> messages;
         List<GameData> gamedata;
         List<Player> loginrequests;
@@ -27,15 +26,15 @@ namespace Server_Application
 
         public DataTransmission(Server owner)
         {
-            for (int x = 0; x < DataControl.NumberOfUdpClients; x++)
+            for (int x = 0; x < Constants.NumberOfUdpClients; x++)
                 UDPClients[x] = new UdpClient(6944 + x);
-            for (int x = 0; x < DataControl.NumberOfTcpClients; x++)
+            for (int x = 0; x < Constants.NumberOfTcpClients; x++)
                 TCPClients[x] = new TcpClient();
-            this.owner = owner;
             messages = new List<GameMessage>();
             gamedata = new List<GameData>();
             loginrequests = new List<Player>();
             errormessages = new List<ErrorMessage>();
+            this.owner = owner;
         }
 
         public void addMessageToQueue(Data message)
@@ -43,33 +42,35 @@ namespace Server_Application
             if (message == null)
                 return;
                 
-            try{
+            try
+            {
                 switch (message.Type)
                 {
-                    case 1:
+                    case Constants.GAME_DATA:
                         gamedata.Add((GameData)message);
                         break;
-                    case 2:
+                    case Constants.CHAT_MESSAGE:
                         messages.Add((GameMessage)message);
                         break;
-                    case 3:
+                    case Constants.ERROR_MESSAGE:
                         errormessages.Add((ErrorMessage)message);
                         break;
                 }
-            } catch(InvalidCastException e) { Console.WriteLine(e.ToString()); return; }
+            } 
+            catch(InvalidCastException e) { Console.WriteLine(e.ToString()); return; }
         }
 
         private Data removeFromQueue(byte type)
         {
             switch (type)
             {
-                case 0:
+                case Constants.LOGIN_REQUEST:
                     return removeLoginRequestFromQueue();
-                case 1:
+                case Constants.GAME_DATA:
                     break;
-                case 2:
+                case Constants.CHAT_MESSAGE:
                     return removeMessageFromQueue();
-                case 3:
+                case Constants.ERROR_MESSAGE:
                     return removeErrorMessageFromQueue();
             }
             return null;
@@ -127,19 +128,19 @@ namespace Server_Application
                 bool valid = true; //validate with the database, if username/pass combo wrong return false
                 if (valid)
                 {
-                    DataControl.sendTCPData(TCPClients[0], request, request.IPAddress, DataControl.TCPLoginClient);
+                    DataControl.sendTCPData(TCPClients[0], request, request.IPAddress, Constants.TCPLoginClient);
                 }
                 else
                 {
                     ErrorMessage message = null; //Create an error message saying invalid data
-                    DataControl.sendTCPData(TCPClients[2], message, message.Player.IPAddress, DataControl.TCPErrorClient);
+                    DataControl.sendTCPData(TCPClients[2], message, message.Player.IPAddress, Constants.TCPErrorClient);
                 }
             }
         }
 
         public void sendClientData()
         {
-
+            
         }
 
         /// <summary>
@@ -160,7 +161,7 @@ namespace Server_Application
                 {
                     if (player.Username != message.Username)
                     {
-                        DataControl.sendTCPData(TCPClients[1], message, player.IP, DataControl.TCPMessageClient);
+                        DataControl.sendTCPData(TCPClients[1], message, player.IP, Constants.TCPMessageClient);
                     }
                 }
             }
@@ -179,7 +180,7 @@ namespace Server_Application
                     Thread.Sleep(5);
                     continue;
                 }
-                DataControl.sendTCPData(TCPClients[2], message, message.Player.IPAddress, DataControl.TCPErrorClient);
+                DataControl.sendTCPData(TCPClients[2], message, message.Player.IPAddress, Constants.TCPErrorClient);
             }
         }
     }
