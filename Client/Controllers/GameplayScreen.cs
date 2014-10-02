@@ -6,85 +6,89 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SpaceUnion {
+namespace SpaceUnion
+{
 
-	class GameplayScreen {
+    class GameplayScreen
+    {
 
-		private KeyboardState keyState;
-		private MouseState mouseState;
-		private SpriteBatch spriteBatch;
-		private Ship playerShip;
-		private Game1 game;
+        private KeyboardState keyState;
+        private MouseState mouseState;
+        private SpriteBatch spriteBatch;
+        private Ship playerShip;
+        private Game1 game;
 
         List<Projectile> projectiles;
 
         // The rate of fire of the player laser
         TimeSpan fireTime;
-        TimeSpan previousFireTime; 
+        TimeSpan previousFireTime;
 
-		Camera mainCamera;
-		GUI gui;
+        Camera mainCamera;
+        GUI gui;
 
-		private Tools.AssetManager Assets;
+        private Tools.AssetManager Assets;
 
-		static public int worldWidth = 4000;
-		static public int worldHeight = 2000;
+        static public int worldWidth = 4000;
+        static public int worldHeight = 2000;
 
-		private int SCREEN_WIDTH;
-		private int SCREEN_HEIGHT;
+        private int SCREEN_WIDTH;
+        private int SCREEN_HEIGHT;
 
 
-		public GameplayScreen(Game1 game, SpriteBatch batch) {
-			this.game = game;
-			SCREEN_HEIGHT = game.getScreenHeight();
-			SCREEN_WIDTH = game.getScreenWidth();
+        public GameplayScreen(Game1 game, SpriteBatch batch)
+        {
+            this.game = game;
+            SCREEN_HEIGHT = game.getScreenHeight();
+            SCREEN_WIDTH = game.getScreenWidth();
 
-			spriteBatch = batch;
+            spriteBatch = batch;
 
-			Assets = Game1.Assets;
-			playerShip = new Ship(Assets.spaceShipTest, new Vector2(200, 200)); //Create new player ship
+            Assets = Game1.Assets;
+            playerShip = new Ship(Assets.spaceShipTest, new Vector2(200, 200)); //Create new player ship
 
-			gui = new GUI(game, playerShip);
+            gui = new GUI(game, playerShip);
 
-			Viewport mainViewport = new Viewport((int) playerShip.getX(), (int) playerShip.getY(),
-				game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height - GUI.guiHeight);
-			mainCamera = new Camera(mainViewport, worldWidth, worldHeight, 1.0f);
+            Viewport mainViewport = new Viewport((int)playerShip.getX(), (int)playerShip.getY(),
+                game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height - GUI.guiHeight);
+            mainCamera = new Camera(mainViewport, worldWidth, worldHeight, 1.0f);
 
             projectiles = new List<Projectile>();
 
             // Set the laser to fire every quarter second
             fireTime = TimeSpan.FromSeconds(.15f);
-		}
+        }
 
-		/// <summary>
-		/// Draws the stars background and debug information.
-		/// </summary>
-		protected void drawWorld() {
-			//spriteBatch.Draw(background, new Rectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), Color.White);
-			//spriteBatch.DrawString(font, "Radian Angle =" + playerShip.getAngle(), new Vector2(100, 20), Color.Red);
-			//spriteBatch.DrawString(font, "Degree Angle =" + (playerShip.getAngle() * (180 / Math.PI)), new Vector2(100, 50), Color.Red);
-			//spriteBatch.DrawString(font, "X =" + playerShip.getShipVelocityDirectionX()
-			//	+ " y = " + playerShip.getShipVelocityDirectionY(), new Vector2(100, 80), Color.Red);
-			//spriteBatch.DrawString(font, "X =" + playerShip.getSpaceshipX()
-			//	+ " y = " + playerShip.getSpaceshipY(), new Vector2(100, 110), Color.Red);
+        /// <summary>
+        /// Draws the stars background and debug information.
+        /// </summary>
+        protected void drawWorld()
+        {
+            //spriteBatch.Draw(background, new Rectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), Color.White);
+            //spriteBatch.DrawString(font, "Radian Angle =" + playerShip.getAngle(), new Vector2(100, 20), Color.Red);
+            //spriteBatch.DrawString(font, "Degree Angle =" + (playerShip.getAngle() * (180 / Math.PI)), new Vector2(100, 50), Color.Red);
+            //spriteBatch.DrawString(font, "X =" + playerShip.getShipVelocityDirectionX()
+            //	+ " y = " + playerShip.getShipVelocityDirectionY(), new Vector2(100, 80), Color.Red);
+            //spriteBatch.DrawString(font, "X =" + playerShip.getSpaceshipX()
+            //	+ " y = " + playerShip.getSpaceshipY(), new Vector2(100, 110), Color.Red);
 
-			/* Parallax Scrolling BG */
-			spriteBatch.Draw(Assets.starfield2,
-				new Rectangle((int) (mainCamera.Position.X * .9), (int) (mainCamera.Position.Y * .9), worldWidth / 4, worldHeight / 4),
-				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
-			spriteBatch.Draw(Assets.starfield1,
-				new Rectangle((int) (mainCamera.Position.X * 0.7), (int) (mainCamera.Position.Y * 0.7), 1600, 1200),
-				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
-			spriteBatch.Draw(Assets.starfield1,
-				new Rectangle((int) (mainCamera.Position.X * 0.6), (int) (mainCamera.Position.Y * 0.6), 2400, 1800),
-				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
-			spriteBatch.Draw(Assets.starfield1,
-				new Rectangle((int) (mainCamera.Position.X * 0.4), (int) (mainCamera.Position.Y * 0.4), 800, 600),
-				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
-			spriteBatch.Draw(Assets.starfield3,
-				new Rectangle((int) (mainCamera.Position.X * .5), (int) (mainCamera.Position.Y * .5f), worldWidth / 10, worldHeight / 10),
-				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
-		}
+            /* Parallax Scrolling BG */
+            spriteBatch.Draw(Assets.starfield2,
+                new Rectangle((int)(mainCamera.Position.X * .9), (int)(mainCamera.Position.Y * .9), worldWidth / 4, worldHeight / 4),
+                null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(Assets.starfield1,
+                new Rectangle((int)(mainCamera.Position.X * 0.7), (int)(mainCamera.Position.Y * 0.7), 1600, 1200),
+                null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(Assets.starfield1,
+                new Rectangle((int)(mainCamera.Position.X * 0.6), (int)(mainCamera.Position.Y * 0.6), 2400, 1800),
+                null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(Assets.starfield1,
+                new Rectangle((int)(mainCamera.Position.X * 0.4), (int)(mainCamera.Position.Y * 0.4), 800, 600),
+                null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(Assets.starfield3,
+                new Rectangle((int)(mainCamera.Position.X * .5), (int)(mainCamera.Position.Y * .5f), worldWidth / 10, worldHeight / 10),
+                null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+        }
 
         private void AddProjectile(Vector2 position)
         {
@@ -93,67 +97,74 @@ namespace SpaceUnion {
             projectiles.Add(projectile);
         }
 
-		/// <summary>
-		/// Allows the game to run logic such as updating the world,
-		/// checking for collisions, gathering input, and playing audio.
-		/// 
-		/// Checks player edge wrap around.
-		/// 
-		/// </summary>
-		/// <param name="gameTime">Provides a snapshot of timing values.</param>
-		public void Update(GameTime gameTime) {
-			//playerShip.checkScreenWrap(Window); //Check if ship will wrap around edges
-			playerShip.checkScreenStop(game.Window);
-			keyState = Keyboard.GetState(); //Get which keys are pressed or released
-			mouseState = Mouse.GetState();
+        /// <summary>
+        /// Allows the game to run logic such as updating the world,
+        /// checking for collisions, gathering input, and playing audio.
+        /// 
+        /// Checks player edge wrap around.
+        /// 
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        public void Update(GameTime gameTime)
+        {
+            //playerShip.checkScreenWrap(Window); //Check if ship will wrap around edges
+            playerShip.checkScreenStop(game.Window);
+            keyState = Keyboard.GetState(); //Get which keys are pressed or released
+            mouseState = Mouse.GetState();
 
 
 
-			//Up Key toggles back thruster
-			if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W)) {
-				playerShip.thrust();
-			}
-
-			//Left Key rotates ship left
-			if (keyState.IsKeyDown(Keys.Left) || keyState.IsKeyDown(Keys.A)) {
-				playerShip.rotateLeft();
-			}
-
-			//Right Key rotates ship right
-			else if (keyState.IsKeyDown(Keys.Right) || keyState.IsKeyDown(Keys.D)) {
-				playerShip.rotateRight();
-			}
-
-			//Space key activates debugging brake
-			if (keyState.IsKeyDown(Keys.Space)) {
-				playerShip.stop();
-			}
-
-			mainCamera.setZoom(mouseState.ScrollWheelValue);
-			mainCamera.Position = playerShip.CenterPosition; // center the camera to player's position
-			mainCamera.update(gameTime);
-
-			/* Transform mouse input from view to world position
-			 * NOT currently used but may be useful in the future*/
-			Matrix inverse = Matrix.Invert(mainCamera.getTransformation());
-			Vector2 mousePos = Vector2.Transform(
-			   new Vector2(mouseState.X, mouseState.Y), inverse);
-            if (keyState.IsKeyDown(Keys.F)) {
-            // Fire only every interval we set as the fireTime
-            if (gameTime.TotalGameTime - previousFireTime > fireTime)
+            //Up Key toggles back thruster
+            if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W))
             {
-                // Reset our current time
-                previousFireTime = gameTime.TotalGameTime;
-
-                // Add the projectile, but add it to the front and center of the player
-                AddProjectile(playerShip.Position + new Vector2(0, 0));
+                playerShip.thrust();
             }
+
+            //Left Key rotates ship left
+            if (keyState.IsKeyDown(Keys.Left) || keyState.IsKeyDown(Keys.A))
+            {
+                playerShip.rotateLeft();
+            }
+
+            //Right Key rotates ship right
+            if (keyState.IsKeyDown(Keys.Right) || keyState.IsKeyDown(Keys.D))
+            {
+                playerShip.rotateRight();
+            }
+
+            //Space key activates debugging brake
+            if (keyState.IsKeyDown(Keys.Space))
+            {
+                playerShip.stop();
+            }
+
+            mainCamera.setZoom(mouseState.ScrollWheelValue);
+            mainCamera.Position = playerShip.CenterPosition; // center the camera to player's position
+            mainCamera.update(gameTime);
+
+            /* Transform mouse input from view to world position
+             * NOT currently used but may be useful in the future*/
+            Matrix inverse = Matrix.Invert(mainCamera.getTransformation());
+            Vector2 mousePos = Vector2.Transform(
+               new Vector2(mouseState.X, mouseState.Y), inverse);
+
+            if (keyState.IsKeyDown(Keys.LeftControl))
+            {
+                // Fire only every interval we set as the fireTime
+                if (gameTime.TotalGameTime - previousFireTime > fireTime)
+                {
+                    // Reset our current time
+                    previousFireTime = gameTime.TotalGameTime;
+
+                    // Add the projectile, but add it to the front and center of the player
+                    AddProjectile(playerShip.Position + new Vector2(0, 0));
                 }
+            }
 
             playerShip.update();
-			gui.update(playerShip);
+            gui.update(playerShip);
             UpdateProjectiles();
-		}
+        }
 
         private void UpdateProjectiles()
         {
@@ -162,7 +173,7 @@ namespace SpaceUnion {
             {
                 projectiles[i].Update();
 
-                if (projectiles[i].Active == false)
+                if (projectiles[i].getActive() == false)
                 {
                     projectiles.RemoveAt(i);
                 }
@@ -170,16 +181,17 @@ namespace SpaceUnion {
         }
 
 
-		public void draw() {
+        public void draw()
+        {
 
-			/* Main camera sprite batch */
-			spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend,
-				SamplerState.LinearWrap, null, null, null, mainCamera.getTransformation());
+            /* Main camera sprite batch */
+            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend,
+                SamplerState.LinearWrap, null, null, null, mainCamera.getTransformation());
 
 
-			drawWorld(); //Draws background
+            drawWorld(); //Draws background
 
-			playerShip.draw(spriteBatch); //Draws player space ship
+            playerShip.draw(spriteBatch); //Draws player space ship
 
             // Draw the Projectiles
             for (int i = 0; i < projectiles.Count; i++)
@@ -188,20 +200,20 @@ namespace SpaceUnion {
             }
 
 
-			spriteBatch.End();
+            spriteBatch.End();
 
 
 
 
-			/* GUI spritebatch. Anything drawn here will remain
-			 * static and not be affected by cameras. */
-			spriteBatch.Begin();
+            /* GUI spritebatch. Anything drawn here will remain
+             * static and not be affected by cameras. */
+            spriteBatch.Begin();
 
-			gui.draw(spriteBatch);
+            gui.draw(spriteBatch);
 
 
-			spriteBatch.End();
-		}
+            spriteBatch.End();
+        }
 
-	}
+    }
 }

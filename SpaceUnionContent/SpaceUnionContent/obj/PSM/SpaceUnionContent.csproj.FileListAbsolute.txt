@@ -76,3 +76,5 @@ C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-un
 C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\IgnoreMe.dll
 C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.xnb
 C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.png
+C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.xnb
+C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.png

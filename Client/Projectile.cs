@@ -10,17 +10,12 @@ namespace SpaceUnion
 {
     class Projectile : Sprite
     {
-        // Image representing the Projectile
-        public Texture2D Texture;
+        
+        public Texture2D Texture; // Image representing the Projectile
 
-        // State of the Projectile
-        public bool Active;
+        private bool Active; // State of the Projectile
 
-        // The amount of damage the projectile can inflict to an enemy
-        public int Damage;
-
-        // Represents the viewable boundary of the game
-        Viewport viewport;
+        Viewport viewport; // Represents the viewable boundary of the game
 
         // Get the width of the projectile ship
         public int Width
@@ -39,6 +34,8 @@ namespace SpaceUnion
 
         private float projectileVelocityDirectionX;
         private float projectileVelocityDirectionY;
+        private int projectileTTL = 50;  //The projectile will disappear after these many updates
+        private int projectileDamage; // The amount of damage the projectile can inflict to an enemy
 
 
          public Projectile(Texture2D texture, Vector2 position, Ship ship)
@@ -54,17 +51,22 @@ namespace SpaceUnion
             this.viewport = viewport;
 
             Active = true;
-
-            Damage = 2;
-
+            projectileDamage = 2;
         }
 
         public void Update()
         {
-            // Projectiles always move to the right
-            position.X += projectileVelocityDirectionX;
-            position.Y -= projectileVelocityDirectionY;
-
+            if (projectileTTL > 0)
+            {
+                // Projectiles always move to the right
+                position.X += projectileVelocityDirectionX;
+                position.Y -= projectileVelocityDirectionY;
+                projectileTTL--;
+            }
+            else 
+            {
+                Active = false;
+            }
         }
 
         public override void draw(SpriteBatch sBatch)
@@ -72,5 +74,9 @@ namespace SpaceUnion
             sBatch.Draw(texture, position, null, Color.White, rotation, origin, scale, SpriteEffects.None, 0);
         }
 
+        public bool getActive()
+        {
+            return Active;
+        }
     }
 }
