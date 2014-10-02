@@ -7,7 +7,7 @@ namespace SpaceUnionDatabase
     /// Provides static methods to connect and disconnect to the 
     /// database
     /// </summary>
-    class SpaceUnionConnect
+    protected class SpaceUnionConnect
     {
         /// <summary>
         /// Sets up a new connection to the database
