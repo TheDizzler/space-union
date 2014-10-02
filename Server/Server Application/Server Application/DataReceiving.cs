@@ -42,25 +42,33 @@ namespace Server_Application
             for (int x = 0; x < DataControl.NumberOfUdpClients; x++)
                 new Thread(receiveClientData).Start(UDPListeners[x]);
 
+            // Begin running the TCP login request listener.
             new Thread(receiveLoginRequests).Start();
+
+            // Begin running the TCP chat message listener.
             new Thread(receiveChatMessages).Start();
         }
 
+        /// <summary>
+        /// Begin receiving login requests from clients and
+        /// handle each request in a separate thread.
+        /// </summary>
         public void receiveLoginRequests()
         {
             while (true)
             {
+                // The received login data from a client.
                 Object loginData = DataControl.receiveTCPData(TCPListeners[0]);
 
-                // do whatever for the login 
-
-                if (LoginRequests.validateUserData((Player)loginData))
-                {
-                    // add the client to the list of active userse
-                }
+                // Handle the login request in a thread.
+                new Thread(LoginRequests.handleLoginRequest).Start(loginData);
             }
         }
 
+        /// <summary>
+        /// Begin receiving chat messages from clients and 
+        /// handle each received message in a separate thread.
+        /// </summary>
         public void receiveChatMessages()
         {
             while (true)
@@ -71,11 +79,16 @@ namespace Server_Application
             }
         }
 
-        public void receiveClientData(Object udpClient)
+        /// <summary>
+        /// Begin receiving game data from clients and
+        /// handle each received game data in a separate thread.
+        /// </summary>
+        /// <param name="UDPListener"></param>
+        public void receiveClientData(Object UDPListener)
         {
             while (true)
             {
-                Object clientData = DataControl.receiveUDPData((UdpClient)udpClient);
+                Object clientData = DataControl.receiveUDPData((UdpClient)UDPListener);
 
                 // do whatever to handle client data
             }

@@ -21,6 +21,7 @@ namespace Server_Application
         TcpClient[] TCPClients = new TcpClient[DataControl.NumberOfTcpClients];
         List<GameMessage> messages;
         List<GameData> gamedata;
+        List<ErrorMessage> errorMessages;
         Server owner;
 
         public DataTransmission(Server owner)
@@ -32,10 +33,25 @@ namespace Server_Application
             this.owner = owner;
         }
 
-        public void addMessageToQueue(GameMessage message)
+        public void addMessageToQueue(Data message)
         {
-            if(message != null)
-                messages.Add(message);
+            if (message == null)
+                return;
+                
+            try{
+                switch (message.Type)
+                {
+                    case 1:
+                        gamedata.Add((GameData)message);
+                        break;
+                    case 2:
+                        messages.Add((GameMessage)message);
+                        break;
+                    case 3:
+                        errorMessages.Add((ErrorMessage)message);
+                        break;
+                }
+            } catch(InvalidCastException e) { Console.WriteLine(e.ToString()); return; }
         }
 
         private GameMessage removeMessageFromQueue()
@@ -74,6 +90,11 @@ namespace Server_Application
         }
 
         public void sendClientData()
+        {
+
+        }
+
+        public void sendErrorMessage()
         {
 
         }

@@ -12,7 +12,8 @@ namespace Server_Application
     class Gameroom
     {
         List<GameData> list;
-        int gameroom;
+        public int Gameroom { get; set; }
+
         public Gameroom()
         {
             list = new List<GameData>();
@@ -33,12 +34,6 @@ namespace Server_Application
                     return;
                 }
             }
-        }
-
-        public int Gameroom
-        {
-            set { gameroom = value; }
-            get { return gameroom; }
         }
     }
 }

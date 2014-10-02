@@ -13,11 +13,20 @@ namespace Server_Application
     class LoginRequests
     {
         /// <summary>
+        /// Handle the login request.
+        /// </summary>
+        /// <param name="loginData">Login request data to process.</param>
+        public static void handleLoginRequest(Object loginData)
+        {
+
+        }
+
+        /// <summary>
         /// Validate the user login data by matching it against information in the database.
         /// </summary>
         /// <param name="loginData">The login data to validate.</param>
         /// <returns>True if the login data was successfully validated.</returns>
-        public static Boolean validateUserData(Player loginData)
+        private static Boolean validateUserData(Player loginData)
         {
             string username = loginData.Username;
             string password = loginData.Password;
@@ -43,7 +52,7 @@ namespace Server_Application
         /// </summary>
         /// <param name="userID">The user ID to search for in the database.</param>
         /// <returns>True if the username exists in the database.</returns>
-        public static Boolean checkUsername(string username)
+        private static Boolean checkUsername(string username)
         {
             // (Placeholder) Call a function from the DatabaseRequests class.
 
@@ -54,7 +63,7 @@ namespace Server_Application
         /// Check the user password by matching it against the user name's associated password.
         /// </summary>
         /// <returns></returns>
-        public static Boolean checkUserPW(string username, string password)
+        private static Boolean checkUserPW(string username, string password)
         {
             // (Placeholder) Call a function from the DatabaseRequests class.
 
