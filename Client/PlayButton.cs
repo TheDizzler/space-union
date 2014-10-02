@@ -9,19 +9,13 @@ using SpaceUnion.Tools;
 
 
 namespace SpaceUnion {
-	class PlayButton : Sprite {
+	class PlayButton : SpaceUnion.Tools.GeneralButton {
 
-		Rectangle buttonRectangle;
-		//public Vector2 size;
-
-		public bool isClicked = false;
-		private bool isDown = false;
-		private bool isHovered = false;
-		private ButtonState lastState;
+		
 
 
 		public PlayButton(Texture2D newTexture, GraphicsDevice graphics)
-			: base(newTexture, Vector2.Zero) {
+			: base(newTexture, graphics) {
 
 			//size = new Vector2(300, 150);
 			width = 300;
@@ -30,43 +24,5 @@ namespace SpaceUnion {
 		}
 
 
-		public void Update(MouseState mouse) {
-
-			ButtonState currentState = mouse.LeftButton;
-			Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
-
-			if (mouseRectangle.Intersects(buttonRectangle)) {
-				isHovered = true;
-			} else
-				isHovered = false;
-
-			if (isHovered && currentState == ButtonState.Pressed) {
-				isDown = true;
-			} else {
-				isDown = false;
-			}
-
-
-			if (isHovered && lastState == ButtonState.Pressed && currentState != ButtonState.Pressed)
-				isClicked = true;
-
-			lastState = currentState;
-
-		}
-
-		public void setPosition(Vector2 newPosition) {
-			position = newPosition;
-			buttonRectangle = new Rectangle((int) position.X, (int) position.Y, (int) width, (int) height);
-		}
-
-		override public void draw(SpriteBatch spriteBatch) {
-
-			if (isDown)
-				spriteBatch.Draw(texture, buttonRectangle, Color.Red);
-			else if (isHovered)
-				spriteBatch.Draw(texture, buttonRectangle, Color.CadetBlue);
-			else
-				spriteBatch.Draw(texture, buttonRectangle, Color.Blue);
-		}
 	}
 }

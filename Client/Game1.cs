@@ -28,6 +28,7 @@ namespace SpaceUnion {
 
 		GameplayScreen gameplayScreen;
 		MainMenuScreen mainMenuScreen;
+        ShipSelectionScreen shipselectionScreen;
 
 		/// <summary>
 		/// Game State Enum to track game states
@@ -36,6 +37,7 @@ namespace SpaceUnion {
 			MainMenu,
 			Playing,
 			Options,
+            Select,
 		}
 
 		GameState currentGameState = GameState.MainMenu;
@@ -82,6 +84,7 @@ namespace SpaceUnion {
 			Assets.loadContent(GraphicsDevice);
 			//Load Main Menu
 			mainMenuScreen = new MainMenuScreen(this);
+            shipselectionScreen = new ShipSelectionScreen(this);
 			IsMouseVisible = true;
 			//graphics.PreferredBackBufferWidth = SCREEN_WIDTH;
 			//graphics.PreferredBackBufferHeight = SCREEN_HEIGHT;
@@ -120,6 +123,9 @@ namespace SpaceUnion {
 				case GameState.Playing:
 					gameplayScreen.Update(gameTime);
 					break;
+                case GameState.Select:
+                    shipselectionScreen.Update();
+                    break;
 				default:
 					break;
 			}
@@ -144,14 +150,27 @@ namespace SpaceUnion {
 				case GameState.Playing:
 					gameplayScreen.draw();
 					break;
+                case GameState.Select:
+                    shipselectionScreen.draw(spriteBatch);
+                    break;
 				default:
 					break;
 			}
 
 			base.Draw(gameTime);
 		}
-
-
+        public void GoToMain()
+        {
+           
+            currentGameState = GameState.MainMenu;
+            IsMouseVisible = true;
+        }
+        public void GoToSelect()
+        {
+            shipselectionScreen = new ShipSelectionScreen(this);
+            currentGameState = GameState.Select;
+            IsMouseVisible = true;
+        }
 		public void StartGame() {
 			gameplayScreen = new GameplayScreen(this, spriteBatch);
 			Viewport v = GraphicsDevice.Viewport;

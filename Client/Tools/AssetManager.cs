@@ -40,6 +40,7 @@ namespace SpaceUnion.Tools {
 		public Texture2D ufo;
 		public Texture2D wedge;
 		public Texture2D wrench;
+        public Texture2D confirm;
 
 
 
@@ -59,6 +60,7 @@ namespace SpaceUnion.Tools {
 			shuttle = Content.Load<Texture2D>("Spaceships/shuttle");
 
 			playButton = Content.Load<Texture2D>("Buttons/playbutton");
+            confirm = Content.Load<Texture2D>("Buttons/confirm");
 
 			guiRectangle = new Texture2D(graphicsDevice, 1, 1);
 			guiRectangle.SetData(new[] { Color.White });
@@ -73,6 +75,7 @@ namespace SpaceUnion.Tools {
 			ufo = Content.Load<Texture2D>("Spaceships/circleship (128x128)");
 			wedge = Content.Load<Texture2D>("Spaceships/triangleship (128x128)");
 			wrench = Content.Load<Texture2D>("Spaceships/wrenchship");
+            
 		}
 	}
 }
