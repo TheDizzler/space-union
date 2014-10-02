@@ -14,10 +14,10 @@ namespace Server_Application
     /// it is cast to one. The type variable allows us to switch on it
     /// and cast the newly converted object to the right class.
     /// Here are the different possible type values:
-    /// 0 = LoginData class
+    /// 0 = Player class
     /// 1 = GameData class
-    /// 2 = GameMessage
-    /// 3 = ErrorMessage
+    /// 2 = GameMessage class
+    /// 3 = ErrorMessage class
     /// </summary>
     [Serializable]
     class Data
