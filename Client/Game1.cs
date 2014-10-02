@@ -27,6 +27,7 @@ namespace SpaceUnion {
 
 		GameplayScreen gameplayScreen;
 		MainMenuScreen mainMenuScreen;
+        TeamBattleScreen teamBattleScreen;
 
 		/// <summary>
 		/// Game State Enum to track game states
@@ -35,6 +36,7 @@ namespace SpaceUnion {
 			MainMenu,
 			Playing,
 			Options,
+            TeamBattle,
 		}
 
 		GameState currentGameState = GameState.MainMenu;
@@ -117,6 +119,9 @@ namespace SpaceUnion {
 				case GameState.Playing:
 					gameplayScreen.Update(gameTime);
 					break;
+                case GameState.TeamBattle:
+                    teamBattleScreen.Update(gameTime);
+                    break;
 				default:
 					break;
 			}
@@ -141,6 +146,9 @@ namespace SpaceUnion {
 				case GameState.Playing:
 					gameplayScreen.draw();
 					break;
+                case GameState.TeamBattle:
+                    teamBattleScreen.draw();
+                    break;
 				default:
 					break;
 			}
@@ -155,5 +163,11 @@ namespace SpaceUnion {
 			currentGameState = GameState.Playing;
 			IsMouseVisible = false;
 		}
+
+        public void EndMatch() 
+        {
+            currentGameState = GameState.MainMenu;
+            IsMouseVisible = true;
+        }
 	}
 }
