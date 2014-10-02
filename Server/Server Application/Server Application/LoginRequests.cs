@@ -18,7 +18,10 @@ namespace Server_Application
         /// <param name="loginData">Login request data to process.</param>
         public static void handleLoginRequest(Object loginData)
         {
+            if (validateUserData((Player)loginData))
+            {
 
+            }
         }
 
         /// <summary>

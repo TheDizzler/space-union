@@ -26,6 +26,7 @@ namespace Server_Application
         /// Only players who are currently looking for a game match.
         /// </summary>
         List<Player> searchingplayers;
+
         public Server()
         {
             receiving = new DataReceiving();
@@ -47,6 +48,16 @@ namespace Server_Application
             return null;
         }
 
-        public
+        /// <summary>
+        /// Add the given player to the list of online players.
+        /// </summary>
+        /// <param name="player">The playey to mark as online.</param>
+        public void addOnlinePlayer(Player player)
+        {
+            if (player != null)
+            {
+                onlineplayers.Add(player);
+            }
+        }
     }
 }

@@ -25,8 +25,6 @@ namespace Server_Application
         List<ErrorMessage> errormessages;
         Server owner;
 
-        public static const int GAME_DATA = 1;
-
         public DataTransmission(Server owner)
         {
             for (int x = 0; x < DataControl.NumberOfUdpClients; x++)
@@ -53,13 +51,13 @@ namespace Server_Application
             {
                 switch (message.Type)
                 {
-                    case 1:
+                    case Constants.GAME_DATA:
                         gamedata.Add((GameData)message);
                         break;
-                    case 2:
+                    case Constants.GAME_MESSAGE:
                         messages.Add((GameMessage)message);
                         break;
-                    case 3:
+                    case Constants.ERROR_MESSAGE:
                         errormessages.Add((ErrorMessage)message);
                         break;
                 }
@@ -70,13 +68,13 @@ namespace Server_Application
         {
             switch (type)
             {
-                case 0:
+                case Constants.PLAYER:
                     return removeLoginRequestFromQueue();
-                case 1:
+                case Constants.GAME_DATA:
                     break;
-                case 2:
+                case Constants.GAME_MESSAGE:
                     return removeMessageFromQueue();
-                case 3:
+                case Constants.ERROR_MESSAGE:
                     return removeErrorMessageFromQueue();
             }
             return null;
@@ -121,13 +119,16 @@ namespace Server_Application
             return message;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void respondToLoginRequest()
         {
             while (true)
             {
                 if (loginrequests.Count == 0)
                 {
-                    Thread.Sleep(5);
+                    Thread.Sleep(Constants.UDP_TRANSMISSION_DELAY);
                     continue;
                 }
                 Player request = (Player)removeFromQueue(0);
@@ -159,7 +160,7 @@ namespace Server_Application
                 GameMessage message = (GameMessage)removeFromQueue(2);
                 if (message == null)
                 {
-                    Thread.Sleep(5);
+                    Thread.Sleep(Constants.UDP_TRANSMISSION_DELAY);
                     continue;
                 }
                 Gameroom room = owner.getGameroom(message.Gameroom);
@@ -183,7 +184,7 @@ namespace Server_Application
                 ErrorMessage message = (ErrorMessage)removeFromQueue(3);
                 if (message == null)
                 {
-                    Thread.Sleep(5);
+                    Thread.Sleep(Constants.UDP_TRANSMISSION_DELAY);
                     continue;
                 }
                 DataControl.sendTCPData(TCPClients[2], message, message.Player.IPAddress, DataControl.TCPErrorClient);
