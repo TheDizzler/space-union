@@ -16,6 +16,12 @@ namespace SpaceUnion {
 		private Ship playerShip;
 		private Game1 game;
 
+        List<Projectile> projectiles;
+
+        // The rate of fire of the player laser
+        TimeSpan fireTime;
+        TimeSpan previousFireTime; 
+
 		Camera mainCamera;
 		GUI gui;
 
@@ -43,6 +49,11 @@ namespace SpaceUnion {
 			Viewport mainViewport = new Viewport((int) playerShip.getX(), (int) playerShip.getY(),
 				game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height - GUI.guiHeight);
 			mainCamera = new Camera(mainViewport, worldWidth, worldHeight, 1.0f);
+
+            projectiles = new List<Projectile>();
+
+            // Set the laser to fire every quarter second
+            fireTime = TimeSpan.FromSeconds(.15f);
 		}
 
 		/// <summary>
@@ -74,6 +85,13 @@ namespace SpaceUnion {
 				new Rectangle((int) (mainCamera.Position.X * .5), (int) (mainCamera.Position.Y * .5f), worldWidth / 10, worldHeight / 10),
 				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
 		}
+
+        private void AddProjectile(Vector2 position)
+        {
+            Projectile projectile = new Projectile(Assets.laser, playerShip.Position, playerShip);
+            projectile.Initialize(game.GraphicsDevice.Viewport, Assets.laser);
+            projectiles.Add(projectile);
+        }
 
 		/// <summary>
 		/// Allows the game to run logic such as updating the world,
@@ -120,10 +138,36 @@ namespace SpaceUnion {
 			Matrix inverse = Matrix.Invert(mainCamera.getTransformation());
 			Vector2 mousePos = Vector2.Transform(
 			   new Vector2(mouseState.X, mouseState.Y), inverse);
+            if (keyState.IsKeyDown(Keys.F)) {
+            // Fire only every interval we set as the fireTime
+            if (gameTime.TotalGameTime - previousFireTime > fireTime)
+            {
+                // Reset our current time
+                previousFireTime = gameTime.TotalGameTime;
+
+                // Add the projectile, but add it to the front and center of the player
+                AddProjectile(playerShip.Position + new Vector2(0, 0));
+            }
+                }
 
             playerShip.update();
 			gui.update(playerShip);
+            UpdateProjectiles();
 		}
+
+        private void UpdateProjectiles()
+        {
+            // Update the Projectiles
+            for (int i = projectiles.Count - 1; i >= 0; i--)
+            {
+                projectiles[i].Update();
+
+                if (projectiles[i].Active == false)
+                {
+                    projectiles.RemoveAt(i);
+                }
+            }
+        }
 
 
 		public void draw() {
@@ -136,6 +180,12 @@ namespace SpaceUnion {
 			drawWorld(); //Draws background
 
 			playerShip.draw(spriteBatch); //Draws player space ship
+
+            // Draw the Projectiles
+            for (int i = 0; i < projectiles.Count; i++)
+            {
+                projectiles[i].draw(spriteBatch);
+            }
 
 
 			spriteBatch.End();

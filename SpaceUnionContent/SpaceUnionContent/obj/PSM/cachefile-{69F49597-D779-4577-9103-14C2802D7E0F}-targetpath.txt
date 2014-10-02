@@ -5,10 +5,11 @@ Content\Spaceships\circleship (128x128).xnb
 Content\Spaceships\shuttle.xnb
 Content\Spaceships\triangleship (128x128).xnb
 Content\Spaceships\wrenchship.xnb
+Content\Backgrounds\galaxy.xnb
 Content\Backgrounds\beautifulbg.xnb
 Content\Backgrounds\doodlebg.xnb
 Content\SpriteFonts\SpriteFont1.xnb
-Content\Backgrounds\galaxy.xnb
+Content\Projectiles\laser.xnb
 Content\Spaceships\spaceshiptest.png
 Content\Backgrounds\starfield (800x600).png
 Content\Backgrounds\galaxy.png
@@ -20,3 +21,4 @@ Content\Spaceships\circleship (128x128).png
 Content\Spaceships\shuttle.png
 Content\Spaceships\triangleship (128x128).png
 Content\Spaceships\wrenchship.png
+Content\Projectiles\laser.png
