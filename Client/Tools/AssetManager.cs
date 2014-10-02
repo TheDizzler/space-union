@@ -42,6 +42,9 @@ namespace SpaceUnion.Tools {
 		public Texture2D wedge;
 		public Texture2D wrench;
 
+        // projectiles
+        public Texture2D laser;
+
 
 
 		public AssetManager(ContentManager cntnt) {
@@ -73,6 +76,8 @@ namespace SpaceUnion.Tools {
 			ufo = Content.Load<Texture2D>("Spaceships/circleship (128x128)");
 			wedge = Content.Load<Texture2D>("Spaceships/triangleship (128x128)");
 			wrench = Content.Load<Texture2D>("Spaceships/wrenchship");
+
+            laser = Content.Load<Texture2D>("Projectiles/laser");
 		}
 	}
 }
