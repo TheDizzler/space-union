@@ -9,6 +9,7 @@ namespace Server_Application
     [Serializable]
     class ErrorMessage : Data
     {
+        public Player Player { get; set; }
         public string MessageCode { get; set; }
 
         /// <summary>
