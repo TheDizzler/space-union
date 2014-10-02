@@ -23,9 +23,7 @@ namespace Server_Application
         List<Player> loginrequests;
         List<ErrorMessage> errormessages;
         Server owner;
-
-        public static const int GAME_DATA = 1;
-
+        //int port = ((IPEndPoint)udpclient.Client.LocalEndPoint).Port;
         public DataTransmission(Server owner)
         {
             for (int x = 0; x < Constants.NumberOfUdpClients; x++)
@@ -47,7 +45,6 @@ namespace Server_Application
         {
             if (message == null)
                 return;
-                
             try
             {
                 switch (message.Type)
