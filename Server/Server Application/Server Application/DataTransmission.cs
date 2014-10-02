@@ -24,6 +24,8 @@ namespace Server_Application
         List<ErrorMessage> errorMessages;
         Server owner;
 
+        public static const int GAME_DATA = 1;
+
         public DataTransmission(Server owner)
         {
             for (int x = 0; x < DataControl.NumberOfUdpClients; x++)
@@ -33,12 +35,17 @@ namespace Server_Application
             this.owner = owner;
         }
 
+        /// <summary>
+        /// Add the given message to the appropriate queue.
+        /// </summary>
+        /// <param name="message">The message to add to a queue.</param>
         public void addMessageToQueue(Data message)
         {
             if (message == null)
                 return;
                 
-            try{
+            try
+            {
                 switch (message.Type)
                 {
                     case 1:
