@@ -19,7 +19,7 @@ namespace SpaceUnionDatabase
         public bool
         addNewUser(string username, string password, string email)
         {
-            using (MySqlConnection conn = SpaceUnionDatabase.Connect())
+            using (MySqlConnection conn = this.Connect() )
             {
                 try
                 {
@@ -59,7 +59,7 @@ namespace SpaceUnionDatabase
         userLogin(string username, string password, ref string[] userInfo)
         {
 
-            using (MySqlConnection conn = SpaceUnionDatabase.Connect())
+            using (MySqlConnection conn = this.Connect() )
             {
                 try
                 {    
@@ -119,6 +119,15 @@ namespace SpaceUnionDatabase
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Sets up a new connection to the database
+        /// </summary>
+        /// <returns>A new database connection</returns>
+        private MySqlConnection Connect()
+        {
+            return new MySqlConnection(SpaceUnionConnectSettings.CONNECTION_STRING);
         }
     }
 }

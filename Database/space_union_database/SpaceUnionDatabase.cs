@@ -9,13 +9,6 @@ namespace SpaceUnionDatabase
 {
     class SpaceUnionDatabase
     {
-        /// <summary>
-        /// Sets up a new connection to the database
-        /// </summary>
-        /// <returns>A new database connection</returns>
-        public static MySqlConnection Connect()
-        {
-            return new MySqlConnection(SpaceUnionConnectSettings.CONNECTION_STRING);
-        }
+
     }
 }
