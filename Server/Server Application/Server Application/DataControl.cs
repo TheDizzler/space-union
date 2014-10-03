@@ -100,7 +100,7 @@ namespace Server_Application
         {
             //should be called after the listener.start() is called
             Socket socket = listener.AcceptSocket();
-            byte[] received = new byte[2048];
+            byte[] received = new byte[1024];
             int size = socket.Receive(received);
             byte[] input = new byte[size];
             for (int x = 0; x < size; x++)

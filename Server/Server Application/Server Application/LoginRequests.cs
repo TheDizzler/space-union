@@ -16,9 +16,15 @@ namespace Server_Application
         /// Handle the login request.
         /// </summary>
         /// <param name="loginData">Login request data to process.</param>
-        public static void handleLoginRequest(Object loginData)
+        /// <param name="owner">The </param>
+        public static void handleLoginRequest(Object loginData, Server owner)
         {
+            Player playerData = (Player)loginData;
 
+            if (validateUserData(playerData))
+            {
+                owner.addOnlinePlayer(playerData);   
+            }
         }
 
         /// <summary>
@@ -26,10 +32,10 @@ namespace Server_Application
         /// </summary>
         /// <param name="loginData">The login data to validate.</param>
         /// <returns>True if the login data was successfully validated.</returns>
-        private static Boolean validateUserData(Player loginData)
+        private static Boolean validateUserData(Player playerData)
         {
-            string username = loginData.Username;
-            string password = loginData.Password;
+            string username = playerData.Username;
+            string password = playerData.Password;
 
             // User name validation failed
             if (!checkUsername(username))
@@ -56,7 +62,7 @@ namespace Server_Application
         {
             // (Placeholder) Call a function from the DatabaseRequests class.
 
-            return false;
+            return true;
         }
 
         /// <summary>
@@ -67,7 +73,7 @@ namespace Server_Application
         {
             // (Placeholder) Call a function from the DatabaseRequests class.
 
-            return false;
+            return true;
         }
     }
 }

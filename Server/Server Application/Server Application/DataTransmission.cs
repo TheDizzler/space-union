@@ -20,7 +20,7 @@ namespace Server_Application
         TcpClient[] TCPClients = new TcpClient[Constants.NumberOfTcpClients];
         List<GameData>[] UDPQueue = new List<GameData>[6];
         List<GameMessage> messages;
-        List<GameData> gamedata;
+        List<GameData> gamedata;//
         List<Player> loginrequests;
         List<ErrorMessage> errormessages;
         Server owner;
@@ -38,13 +38,35 @@ namespace Server_Application
             loginrequests = new List<Player>();
             errormessages = new List<ErrorMessage>();
             this.owner = owner;
+            setup();
+        }
+
+        /// <summary>
+        /// Sets up the server by starting all of its main components in new threads.
+        /// </summary>
+        private void setup()
+        {
+            try
+            {
+                new Thread(sendLoginValidationMessage).Start();
+                new Thread(sendChatMessages).Start();
+                new Thread(sendErrorMessage).Start();
+                for (byte x = 0; x < Constants.NumberOfUdpClients; x++)
+                {
+                    byte player = x;
+                    new Thread(() => sendClientData(player)).Start();
+                }
+            }
+            catch (ThreadStateException e) { Console.WriteLine("Server has crashed." + e.ToString()); return; }
+            catch (OutOfMemoryException e) { Console.WriteLine("Server has crashed." + e.ToString()); return; }
+            catch (InvalidOperationException e) { Console.WriteLine("Server has crashed." + e.ToString()); return; }
         }
 
         /// <summary>
         /// Validates the oldest login request and replies with either permission to
         /// login to the game or a denial.
         /// </summary>
-        public void sendLoginValidationMessage()
+        private void sendLoginValidationMessage()
         {
             while (true)
             {
@@ -54,7 +76,7 @@ namespace Server_Application
                     continue;
                 }
                 Player request = (Player)removeFromQueue(Constants.LOGIN_REQUEST);
-                bool valid = true; //validate with the database, if username/pass combo wrong return false
+                bool valid = false; //validate with the database, if username/pass combo wrong return false
                 if (valid)
                 {
                     DataControl.sendTCPData(TCPClients[0], request, request.IPAddress, Constants.TCPLoginClient);
@@ -62,7 +84,7 @@ namespace Server_Application
                 else
                 {
                     ErrorMessage message = null; //Create an error message saying invalid data
-                    DataControl.sendTCPData(TCPClients[2], message, message.Player.IPAddress, Constants.TCPErrorClient);
+                    addMessageToQueue(message);
                 }
             }
         }
@@ -70,7 +92,7 @@ namespace Server_Application
         /// <summary>
         /// Sends a chat message to every player in the game room.
         /// </summary>
-        public void sendChatMessages()
+        private void sendChatMessages()
         {
             while (true)
             {
@@ -81,6 +103,8 @@ namespace Server_Application
                     continue;
                 }
                 Gameroom room = owner.getGameroom(message.Gameroom);
+                if (room == null)
+                    continue;
                 foreach (GameData player in room.getPlayerList())
                 {
                     if (player.Username != message.Username)
@@ -94,7 +118,7 @@ namespace Server_Application
         /// <summary>
         /// Sends an error message to a client.
         /// </summary>
-        public void sendErrorMessage()
+        private void sendErrorMessage()
         {
             while (true)
             {
@@ -111,9 +135,18 @@ namespace Server_Application
         /// <summary>
         /// Updates all currently active game clients with current positions.
         /// </summary>
-        public void sendClientData()
+        private void sendClientData(byte player)
         {
-
+            while (true)
+            {
+                GameData data = getGameData(player);
+                if (data == null)
+                {
+                    Thread.Sleep(1);
+                    continue;
+                }   
+                DataControl.sendUDPData(UDPClients[player], data, data.IP, ((IPEndPoint)UDPClients[player].Client.LocalEndPoint).Port);
+            }
         }
 
         /// <summary>
@@ -153,7 +186,7 @@ namespace Server_Application
         {
             for (int x = 0; x < Constants.NumberOfUdpClients; x++)
             {
-                if (message.Port == Constants.UDPOutPortOne + x)
+                if (message.PortReceive == Constants.UDPOutPortOne + x)
                 {
                     UDPQueue[x].Add(message);
                     return;
@@ -172,14 +205,26 @@ namespace Server_Application
             {
                 case Constants.LOGIN_REQUEST:
                     return removeLoginRequestFromQueue();
-                case Constants.GAME_DATA:
-                    break;
                 case Constants.CHAT_MESSAGE:
                     return removeMessageFromQueue();
                 case Constants.ERROR_MESSAGE:
                     return removeErrorMessageFromQueue();
             }
             return null;
+        }
+
+        /// <summary>
+        /// Removes an item from the GameData queue.
+        /// </summary>
+        /// <param name="queue">The queue from which to remove.</param>
+        /// <returns></returns>
+        private GameData getGameData(byte queue)
+        {
+            if (UDPQueue[queue].Count == 0)
+                return null;
+            GameData data = UDPQueue[queue].ElementAt(0);
+            UDPQueue[queue].RemoveAt(0);
+            return data;
         }
 
         /// <summary>
