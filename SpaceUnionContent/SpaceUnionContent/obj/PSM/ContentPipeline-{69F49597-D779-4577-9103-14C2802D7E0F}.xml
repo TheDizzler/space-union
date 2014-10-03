@@ -127,6 +127,15 @@
       <Output>C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.xnb</Output>
       <Time>2014-09-29T14:11:19.8452445-07:00</Time>
     </Item>
+    <Item>
+      <Source>StellarObjects\waterplanet (256x256).png</Source>
+      <Name>StellarObjects\waterplanet (256x256)</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\waterplanet (256x256).xnb</Output>
+      <Time>2014-10-03T10:31:14.9646251-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{69F49597-D779-4577-9103-14C2802D7E0F}</ContentProjectGUID>

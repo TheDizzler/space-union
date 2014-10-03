@@ -80,3 +80,4 @@ C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\Micro
 C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\IgnoreMe.dll
 C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.xnb
 C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\SpaceUnionContent.csprojResolveAssemblyReference.cache
+C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\waterplanet (256x256).xnb

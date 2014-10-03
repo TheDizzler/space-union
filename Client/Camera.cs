@@ -25,7 +25,7 @@ namespace SpaceUnion {
 		/// Inverse of View Matrix, used to get objects screen coordinates
 		/// form its object coordinates
 		/// </summary>
-		public Matrix inverseTransform;
+		//public Matrix inverseTransform;
 		private Vector2 cameraPosition;
 		private Vector3 origin;
 		public float rotation;

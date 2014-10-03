@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using SpaceUnion.Controllers;
 using SpaceUnion.Tools;
 #endregion
 
@@ -19,15 +20,14 @@ namespace SpaceUnion {
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
-		int SCREEN_WIDTH = 800;
-		int SCREEN_HEIGHT = 600;
+		//int SCREEN_WIDTH = 800;
+		//int SCREEN_HEIGHT = 600;
 
 		public static AssetManager Assets;
 
 
 		GameplayScreen gameplayScreen;
 		MainMenuScreen mainMenuScreen;
-        TeamBattleScreen teamBattleScreen;
 
 		/// <summary>
 		/// Game State Enum to track game states
@@ -55,6 +55,8 @@ namespace SpaceUnion {
 			: base() {
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
+
+			IsFixedTimeStep = false;
 
 			Assets = new AssetManager(Content);
 		}
@@ -120,9 +122,9 @@ namespace SpaceUnion {
 				case GameState.Playing:
 					gameplayScreen.Update(gameTime);
 					break;
-                case GameState.TeamBattle:
-                    teamBattleScreen.Update(gameTime);
-                    break;
+				//case GameState.TeamBattle:
+				//	teamBattleScreen.Update(gameTime);
+				//	break;
 				default:
 					break;
 			}
@@ -147,9 +149,9 @@ namespace SpaceUnion {
 				case GameState.Playing:
 					gameplayScreen.draw();
 					break;
-                case GameState.TeamBattle:
-                    teamBattleScreen.draw();
-                    break;
+				//case GameState.TeamBattle:
+				//	teamBattleScreen.draw();
+				//	break;
 				default:
 					break;
 			}

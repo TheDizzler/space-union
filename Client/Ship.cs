@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Linq;
 using System.Text;
+using SpaceUnion.Controllers;
 using SpaceUnion.Tools;
 
 namespace SpaceUnion {
@@ -14,16 +15,32 @@ namespace SpaceUnion {
 	/// </summary>
 	class Ship : Sprite {
 
-		protected Vector2 velocity;
+		/// <summary>
+		/// A restistance to movement so all objects will enventual slow to a stop
+		/// </summary>
+		public static float dampening = .1f;
 
-		private float shipVelocityDirectionX = 0; //Amount of pixels the ship moves horizontally per frame (Calculated by sine of angle)
-		private float shipVelocityDirectionY = 0; //Amount of pixels the ship moves vertically per frame (Calculated by cosine of angle)
-		private float maxSpeed = 7;
+		/// <summary>
+		/// The current speed and direction of ship
+		/// </summary>
+		public Vector2 velocity;
+		//protected Vector2 impulse;
+		//private float shipVelocityDirectionX = 0; //Amount of pixels the ship moves horizontally per frame (Calculated by sine of angle)
+		//private float shipVelocityDirectionY = 0; //Amount of pixels the ship moves vertically per frame (Calculated by cosine of angle)
+
+		//private float shipVelocityDirectionX = 0; //Amount of pixels the ship moves horizontally per frame (Calculated by sine of angle)
+		//private float shipVelocityDirectionY = 0; //Amount of pixels the ship moves vertically per frame (Calculated by cosine of angle)
         private int health = 100;
         private float shipScale;
         internal HitBox shipHitBox;
-		private float accelSpeed = 0.5f;
-		private float currentSpeed = 0;
+		protected float maxSpeed = 7;
+
+		protected float accelSpeed = 4.5f;
+		protected float currentSpeed = 0;
+		/// <summary>
+		/// Turn speed in degrees per second
+		/// </summary>
+		protected float turnSpeed = 4.5f;
 
         //Return Ship Hitbox for collision detection
         public HitBox getShipHitBox() {
@@ -31,11 +48,11 @@ namespace SpaceUnion {
         }
 
 		public float getShipVelocityDirectionX() {
-			return shipVelocityDirectionX;
+			return velocity.X;
 		}
 
 		public float getShipVelocityDirectionY() {
-			return shipVelocityDirectionY;
+			return velocity.Y;
 		}
 
         public int getHealth()
@@ -118,42 +135,45 @@ namespace SpaceUnion {
 		/* !!Never have update code in draw function!! */
 		public override void draw(SpriteBatch sBatch) {
 
-
-			//Vector2 location = new Vector2(position.X, position.Y);
-			//Rectangle sourceRectangle = new Rectangle(0, 0, shipTexture.Width, shipTexture.Height);
-			//Vector2 origin = new Vector2(shipTexture.Width / 2, shipTexture.Height / 2);
-			//sBatch.Draw(shipTexture, location, null, Color.White, angle, origin, 0.1f, SpriteEffects.None, 0);
-
-
 			base.draw(sBatch);
+		}
+
+
+		public void update(GameTime gameTime) {
+			// Elapsed time is taken into consideration in thrust and planet.pull
+			position.X += velocity.X;
+			position.Y -= velocity.Y;
 		}
 
 		/// <summary>
 		/// Rotates the ship left
 		/// Resets the angle to 0 when completing a full rotation, which prevents integer overflow.
 		/// </summary>
-		public void rotateLeft() {
+		/// <param name="gameTime"></param>
+		public void rotateLeft(GameTime gameTime) {
 			if (rotation > 6.283185 || rotation < -6.283185) {
 				rotation = rotation % 6.283185f;
 			}
-			rotation -= 0.15f;
+			// rotates ship by an amount weighted by the amount time that has passed since last update
+			rotation -= turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
 		}
 
 		/// <summary>
 		/// Rotates the ship right
 		/// Resets the angle to 0 when completing a full rotation, which prevents integer overflow.
 		/// </summary>
-		internal void rotateRight() {
+		/// <param name="gameTime"></param>
+		internal void rotateRight(GameTime gameTime) {
 			if (rotation > 6.283185 || rotation < -6.283185) {
 				rotation = rotation % 6.283185f;
 			}
-			rotation += 0.15f;
+			rotation += turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
 		}
 
 		//Debugging Ship Brake
 		internal void stop() {
-			shipVelocityDirectionX = 0;
-			shipVelocityDirectionY = 0;
+			velocity.X = 0;
+			velocity.Y = 0;
 			currentSpeed = 0;
 		}
 
@@ -161,26 +181,29 @@ namespace SpaceUnion {
 		/// Power to main thruster
 		/// Does not exceed a max speed cap
 		/// </summary>
-		internal void thrust() {
+		/// <param name="gameTime"></param>
+		internal void thrust(GameTime gameTime) {
 
 			//Checking if speed doesnt exceed the ship's maximum speed
-			if (currentSpeed < maxSpeed) {
-				currentSpeed += accelSpeed;
-			} else { //Ships cannot exceed maximum speed
-				currentSpeed = maxSpeed;
-			}
+			//if (currentSpeed < maxSpeed) {
+			//	currentSpeed += accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+			//} else { //Ships cannot exceed maximum speed
+			//	currentSpeed = maxSpeed;
+			//}
 
 
 			//Update Ship Velocity Direction
-			shipVelocityDirectionX = (float) Math.Sin(rotation) * currentSpeed;
-			shipVelocityDirectionY = (float) Math.Cos(rotation) * currentSpeed;
-		}
+			//velocity.X = (float) Math.Sin(rotation) * currentSpeed;
+			//velocity.Y = (float) Math.Cos(rotation) * currentSpeed;
 
-        internal void update() 
-        {
-            position.X += shipVelocityDirectionX;
-            position.Y -= shipVelocityDirectionY;
-            shipHitBox.updatePosition(position.X,position.Y);
-        }
+			//position.X += velocity.X;
+			//position.Y -= velocity.Y;
+			Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) Math.Cos(rotation));
+			acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+
+
+			Vector2.Add(ref velocity, ref acceleration, out velocity);
+
+		}
 	}
 }

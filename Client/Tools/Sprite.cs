@@ -21,7 +21,7 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		public int height, width;
 		/// <summary>
-		/// Game world x,y co-ordinates
+		/// Top-left corner of sprite Game World (x, y) co-ordinates
 		/// </summary>
 		protected Vector2 position;
 		/// <summary>
@@ -98,6 +98,8 @@ namespace SpaceUnion.Tools {
 			texture = tex;
 			position = pos;
 
+			width = texture.Width;
+			height = texture.Height;
 
 			origin = new Vector2(texture.Width / 2, texture.Height / 2);
 		}
@@ -156,16 +158,6 @@ namespace SpaceUnion.Tools {
 				return true;
 			}
 			return false;
-		}
-
-
-		/// <summary>
-		/// Convenience method to retrieve topleft corner of sprite.
-		/// </summary>
-		/// <returns></returns>
-		public Vector2 getTopLeft() {
-			return new Vector2(position.X - width / 2,
-				position.Y - height / 2);
 		}
 	}
 }

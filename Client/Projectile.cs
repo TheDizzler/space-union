@@ -39,8 +39,8 @@ namespace SpaceUnion
         private float projectileVelocityDirectionX;
         private float projectileVelocityDirectionY;
         private int projectileTTL = 50;  //The projectile will disappear after these many updates
-        private int projectileDamage; // The amount of damage the projectile can inflict to an enemy
-
+        //private int projectileDamage; // The amount of damage the projectile can inflict to an enemy
+        
 
          public Projectile(Texture2D texture, Vector2 position, Ship ship)
 			: base(texture, position) {
@@ -56,7 +56,7 @@ namespace SpaceUnion
             this.viewport = viewport;
 
             Active = true;
-            projectileDamage = 2;
+            //projectileDamage = 2;
         }
 
         public void Update()

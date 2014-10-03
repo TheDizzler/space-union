@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using SpaceUnion.StellarObjects;
 using SpaceUnion.Tools;
 
 
@@ -21,10 +22,12 @@ namespace SpaceUnion {
 		Texture2D guiRectangle;
 
 		private  Ship playerShip;
+
+		Planet planet;
 		Rectangle rect;
 		Vector2 line1Pos, line2Pos, line3Pos, line4Pos, line5Pos, line6Pos;
 
-		public GUI(Game1 game, Ship ship) {
+		public GUI(Game1 game, Ship ship, Planet plnt) {
 
 			guiRectangle = Game1.Assets.guiRectangle;
 			font = Game1.Assets.font;
@@ -33,6 +36,7 @@ namespace SpaceUnion {
 			int guiWidth = game.getScreenWidth();
 
 			playerShip = ship;
+			planet = plnt;
 
 			rect = new Rectangle(0, guiY, guiWidth, guiHeight);
 
@@ -49,14 +53,14 @@ namespace SpaceUnion {
 
 			spriteBatch.Draw(guiRectangle, rect, Color.DarkSlateBlue); // the gui display
 
-			spriteBatch.DrawString(font, "Radian Angle =" + playerShip.getRotation(),
+			spriteBatch.DrawString(font, "Degree Angle with Planet: " + planet.angle * (180 / Math.PI),
 				line1Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
-			spriteBatch.DrawString(font, "Degree Angle =" + (playerShip.getRotation() * (180 / Math.PI)),
+			spriteBatch.DrawString(font, "Degree Angle: " + (playerShip.getRotation() * (180 / Math.PI)),
 				line2Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
-			spriteBatch.DrawString(font, "X =" + playerShip.getShipVelocityDirectionX()
+			spriteBatch.DrawString(font, "ship velocity X: " + playerShip.getShipVelocityDirectionX()
 				+ " y = " + playerShip.getShipVelocityDirectionY(),
 				line3Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
-			spriteBatch.DrawString(font, "X =" + playerShip.getX() + " y = " + playerShip.getY(),
+			spriteBatch.DrawString(font, "Ship position X: " + playerShip.getX() + " y = " + playerShip.getY(),
 				line4Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
             spriteBatch.DrawString(font, "Player Health: " + playerShip.getHealth(),
                 line5Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
