@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security;
 using System.Text;
@@ -118,6 +119,7 @@ namespace Server_Application
         public static byte[] objectToBytes(Object target)
         {
             BinaryFormatter bf = new BinaryFormatter();
+            bf.AssemblyFormat = FormatterAssemblyStyle.Simple;
             using (MemoryStream ms = new MemoryStream())
             {
                 try
@@ -139,6 +141,8 @@ namespace Server_Application
         public static Object bytesToObject(byte[] target)
         {
             BinaryFormatter bf = new BinaryFormatter();
+            bf.AssemblyFormat = FormatterAssemblyStyle.Simple;
+            bf.Binder = new TransmissionSerializationBinder();
             using (MemoryStream ms = new MemoryStream())
             {
                 try
