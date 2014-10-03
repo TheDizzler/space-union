@@ -19,7 +19,7 @@ namespace SpaceUnion.StellarObjects {
 		/// <summary>
 		/// Range at which gravitational effects are concidered negligable
 		/// </summary>
-		float range = 500;
+		float range = 1500;
 
 		/// <summary>
 		/// For testing
