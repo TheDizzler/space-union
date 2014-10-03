@@ -133,6 +133,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup />
+<<<<<<< HEAD
   <ItemGroup>
     <Compile Include="StellarObjects\waterplanet %28256x256%29.png">
       <Name>waterplanet %28256x256%29</Name>
@@ -140,7 +141,8 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+=======
+>>>>>>> baefdef984b20c69068368bf5a94809515818417
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--
       To modify your build process, add your task inside one of the targets below and uncomment it. 

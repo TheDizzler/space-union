@@ -46,7 +46,7 @@ namespace SpaceUnion {
 			line4Pos = new Vector2(100, guiY + 40);
 		}
 
-
+        //draw method
 		public void draw(SpriteBatch spriteBatch) {
 
 			spriteBatch.Draw(guiRectangle, rect, Color.DarkSlateBlue); // the gui display

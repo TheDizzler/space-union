@@ -25,7 +25,6 @@ namespace SpaceUnion {
 		/// </summary>
 		public Vector2 velocity;
 		//protected Vector2 impulse;
-
 		//private float shipVelocityDirectionX = 0; //Amount of pixels the ship moves horizontally per frame (Calculated by sine of angle)
 		//private float shipVelocityDirectionY = 0; //Amount of pixels the ship moves vertically per frame (Calculated by cosine of angle)
 
@@ -177,6 +176,8 @@ namespace SpaceUnion {
 
 			Vector2.Add(ref velocity, ref acceleration, out velocity);
 
-		}
+        internal void update() 
+        {
+        }
 	}
 }

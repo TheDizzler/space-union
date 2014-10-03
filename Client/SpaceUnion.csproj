@@ -36,11 +36,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Camera.cs" />
+    <Compile Include="Controllers\TeamBattleScreen.cs" />
     <Compile Include="GUI.cs" />
     <Compile Include="Controllers\GameplayScreen.cs" />
     <Compile Include="Controllers\MainMenuScreen.cs" />
     <Compile Include="PlayButton.cs" />
     <Compile Include="StellarObjects\Planet.cs" />
+    <Compile Include="Timer.cs" />
+    <Compile Include="Projectile.cs" />
     <Compile Include="Tools\AnimationClass.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />

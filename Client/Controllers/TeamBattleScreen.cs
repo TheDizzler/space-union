@@ -5,26 +5,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SpaceUnion.StellarObjects;
 
-
-namespace SpaceUnion.Controllers {
-
-    class GameplayScreen
+namespace SpaceUnion
+{
+    /// <summary>
+    /// Team battle screen is the team battle 3v3 gameplay.
+    /// Match over when one team lost all lives or time expires.
+    /// 
+    /// </summary>
+    class TeamBattleScreen
     {
-
         private KeyboardState keyState;
         private MouseState mouseState;
         private SpriteBatch spriteBatch;
         private Ship playerShip;
-		private Planet planet;
         private Game1 game;
-
-        List<Projectile> projectiles;
-
-        // The rate of fire of the player laser
-        TimeSpan fireTime;
-        TimeSpan previousFireTime;
+        private Timer timer;
 
         Camera mainCamera;
         GUI gui;
@@ -37,8 +33,9 @@ namespace SpaceUnion.Controllers {
         private int SCREEN_WIDTH;
         private int SCREEN_HEIGHT;
 
+        private float matchTime = 30f;
 
-        public GameplayScreen(Game1 game, SpriteBatch batch)
+        public TeamBattleScreen(Game1 game, SpriteBatch batch)
         {
             this.game = game;
             SCREEN_HEIGHT = game.getScreenHeight();
@@ -48,27 +45,21 @@ namespace SpaceUnion.Controllers {
 
             Assets = Game1.Assets;
             playerShip = new Ship(Assets.spaceShipTest, new Vector2(200, 200)); //Create new player ship
-			planet = new Planet(Assets.waterPlanet, new Vector2(1000, 1000));
 
-			gui = new GUI(game, playerShip, planet);
+            gui = new GUI(game, playerShip);
 
             Viewport mainViewport = new Viewport((int)playerShip.getX(), (int)playerShip.getY(),
                 game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height - GUI.guiHeight);
             mainCamera = new Camera(mainViewport, worldWidth, worldHeight, 1.0f);
 
-            projectiles = new List<Projectile>();
-
-            // Set the laser to fire every quarter second
-            fireTime = TimeSpan.FromSeconds(.15f);
+            timer = new Timer(matchTime);
         }
 
         /// <summary>
-		/// Draws the stars background.
+        /// Draws the stars background and debug information.
         /// </summary>
         protected void drawWorld()
         {
-
-            /* Parallax Scrolling BG */
             spriteBatch.Draw(Assets.starfield2,
                 new Rectangle((int)(mainCamera.Position.X * .9), (int)(mainCamera.Position.Y * .9), worldWidth / 4, worldHeight / 4),
                 null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
@@ -86,23 +77,22 @@ namespace SpaceUnion.Controllers {
                 null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
         }
 
-        private void AddProjectile(Vector2 position)
-        {
-            Projectile projectile = new Projectile(Assets.laser, playerShip.Position, playerShip);
-            projectile.Initialize(game.GraphicsDevice.Viewport, Assets.laser);
-            projectiles.Add(projectile);
-        }
-
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
         /// 
-		/// Checks player edge wrap around/edge stop.
+        /// Checks player edge wrap around.
         /// 
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public void Update(GameTime gameTime)
         {
+            timer.Update(gameTime); //Update the timer
+            if (timer.getCountdownOver() == true) //Check if the timer countdown is over
+            {
+                game.EndMatch(); //Return to main menu, will go to lobby
+            }
+
             //playerShip.checkScreenWrap(Window); //Check if ship will wrap around edges
             playerShip.checkScreenStop(game.Window);
             keyState = Keyboard.GetState(); //Get which keys are pressed or released
@@ -112,17 +102,20 @@ namespace SpaceUnion.Controllers {
 
             //Up Key toggles back thruster
             if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W))
-				playerShip.thrust(gameTime);
+            {
+                playerShip.thrust();
             }
 
             //Left Key rotates ship left
             if (keyState.IsKeyDown(Keys.Left) || keyState.IsKeyDown(Keys.A))
-				playerShip.rotateLeft(gameTime);
+            {
+                playerShip.rotateLeft();
             }
 
             //Right Key rotates ship right
-            if (keyState.IsKeyDown(Keys.Right) || keyState.IsKeyDown(Keys.D))
-				playerShip.rotateRight(gameTime);
+            else if (keyState.IsKeyDown(Keys.Right) || keyState.IsKeyDown(Keys.D))
+            {
+                playerShip.rotateRight();
             }
 
             //Space key activates debugging brake
@@ -130,12 +123,6 @@ namespace SpaceUnion.Controllers {
             {
                 playerShip.stop();
             }
-
-
-			planet.update(gameTime, playerShip);
-			playerShip.update(gameTime);
-
-			
 
             mainCamera.setZoom(mouseState.ScrollWheelValue);
             mainCamera.Position = playerShip.CenterPosition; // center the camera to player's position
@@ -147,37 +134,10 @@ namespace SpaceUnion.Controllers {
             Vector2 mousePos = Vector2.Transform(
                new Vector2(mouseState.X, mouseState.Y), inverse);
 
-            if (keyState.IsKeyDown(Keys.LeftControl))
-            {
-                // Fire only every interval we set as the fireTime
-                if (gameTime.TotalGameTime - previousFireTime > fireTime)
-                {
-                    // Reset our current time
-                    previousFireTime = gameTime.TotalGameTime;
-
-                    // Add the projectile, but add it to the front and center of the player
-                    AddProjectile(playerShip.Position + new Vector2(0, 0));
-                }
-            }
+            
 
             playerShip.update();
             gui.update(playerShip);
-            UpdateProjectiles();
-        }
-
-        //Comment
-        private void UpdateProjectiles()
-        {
-            // Update the Projectiles
-            for (int i = projectiles.Count - 1; i >= 0; i--)
-            {
-                projectiles[i].Update();
-
-                if (projectiles[i].getActive() == false)
-                {
-                    projectiles.RemoveAt(i);
-                }
-            }
         }
 
 
@@ -192,12 +152,6 @@ namespace SpaceUnion.Controllers {
             drawWorld(); //Draws background
 
             playerShip.draw(spriteBatch); //Draws player space ship
-			planet.draw(spriteBatch);
-            // Draw the Projectiles
-            for (int i = 0; i < projectiles.Count; i++)
-            {
-                projectiles[i].draw(spriteBatch);
-            }
 
 
             spriteBatch.End();
@@ -210,7 +164,7 @@ namespace SpaceUnion.Controllers {
             spriteBatch.Begin();
 
             gui.draw(spriteBatch);
-
+            timer.Draw(spriteBatch); //Draw the timer in the HUD
 
             spriteBatch.End();
         }
