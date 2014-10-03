@@ -24,7 +24,8 @@ namespace Server_Application
         {
             while (true)
             {
-                serverSetup();
+                //serverSetup();
+                Server server = new Server();
                 menuSetup();
                 string input = Console.ReadLine();
                 switch (input)

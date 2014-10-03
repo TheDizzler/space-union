@@ -33,7 +33,11 @@ namespace Server_Application
         /// <summary>
         /// The port from which the player is sending this transmission.
         /// </summary>
-        public short Port { get; set; }
+        public short PortSend { get; set; }
+        /// <summary>
+        /// The port from which the player is receiving this transmission.
+        /// </summary>
+        public short PortReceive { get; set; }
 
         /// <summary>
         /// The horizontal X position of the player's ship.

@@ -12,7 +12,7 @@ namespace Server_Application
     class Gameroom
     {
         List<GameData> list;
-        public int Gameroom { get; set; }
+        public int RoomNumber { get; set; }
 
         public Gameroom()
         {

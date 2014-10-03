@@ -28,11 +28,13 @@ namespace Server_Application
         /// </summary>
         TcpListener[] TCPListeners = new TcpListener[Constants.NumberOfTcpClients];
 
-        public DataReceiving()
+        Server owner;
+
+        public DataReceiving(Server owner)
         {
             // Initialize the UDP clients
             for (int x = 0; x < Constants.NumberOfUdpClients; x++)
-                UDPListeners[x] = new UdpClient(6964 + x);
+                UDPListeners[x] = new UdpClient(Constants.UDPInPortOne + x);
 
             // Initialize the TCP clients.
             for (int x = 0; x < Constants.NumberOfTcpClients; x++) 
@@ -41,6 +43,8 @@ namespace Server_Application
             // Begin running the UDP client listeners.
             for (int x = 0; x < Constants.NumberOfUdpClients; x++)
                 new Thread(receiveClientData).Start(UDPListeners[x]);
+
+            this.owner = owner;
 
             // Begin running the TCP login request listener.
             new Thread(receiveLoginRequests).Start();

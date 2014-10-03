@@ -52,6 +52,7 @@
     <Compile Include="GameData.cs" />
     <Compile Include="GameMessage.cs" />
     <Compile Include="Gameroom.cs" />
+    <Compile Include="GameSetupMessage.cs" />
     <Compile Include="LoginRequests.cs" />
     <Compile Include="Physics.cs" />
     <Compile Include="Player.cs" />

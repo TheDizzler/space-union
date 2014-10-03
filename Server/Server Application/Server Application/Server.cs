@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//complete game room creation system
 namespace Server_Application
 {
     /// <summary>
@@ -28,18 +29,18 @@ namespace Server_Application
         List<Player> searchingplayers;
         public Server()
         {
-            receiving = new DataReceiving();
-            transmission = new DataTransmission(this);
             gamerooms = new List<Gameroom>();
             onlineplayers = new List<Player>();
             searchingplayers = new List<Player>();
+            receiving = new DataReceiving(this);
+            transmission = new DataTransmission(this);
         }
 
         public Gameroom getGameroom(int roomnum)
         {
             foreach (Gameroom room in gamerooms)
             {
-                if (room.Gameroom == roomnum)
+                if (room.RoomNumber == roomnum)
                 {
                     return room;
                 }
