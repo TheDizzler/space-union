@@ -64,8 +64,7 @@ namespace Server_Application
                 // The received login data from a client.
                 Object loginData = DataControl.receiveTCPData(TCPListeners[0]);
 
-                // Handle the login request in a thread.
-                new Thread(LoginRequests.handleLoginRequest).Start(loginData);
+                new Thread(unused => LoginRequests.handleLoginRequest(loginData, owner)).Start();
             }
         }
 
@@ -80,6 +79,8 @@ namespace Server_Application
                 Object chatData = DataControl.receiveTCPData(TCPListeners[1]);
 
                 // do whatever for chat messages
+
+
             }
         }
 
@@ -93,6 +94,7 @@ namespace Server_Application
             while (true)
             {
                 Object clientData = DataControl.receiveUDPData((UdpClient)UDPListener);
+
 
                 // do whatever to handle client data
             }
