@@ -46,14 +46,20 @@ namespace Server_Application
         /// </summary>
         private void setup()
         {
-            new Thread(sendLoginValidationMessage).Start();
-            new Thread(sendChatMessages).Start();
-            new Thread(sendErrorMessage).Start();
-            for (byte x = 0; x < Constants.NumberOfUdpClients; x++)
+            try
             {
-                byte player = x;
-                new Thread(() => sendClientData(player));
-            }   
+                new Thread(sendLoginValidationMessage).Start();
+                new Thread(sendChatMessages).Start();
+                new Thread(sendErrorMessage).Start();
+                for (byte x = 0; x < Constants.NumberOfUdpClients; x++)
+                {
+                    byte player = x;
+                    new Thread(() => sendClientData(player));
+                }
+            }
+            catch (ThreadStateException e) { Console.WriteLine("Server has crashed." + e.ToString()); return; }
+            catch (OutOfMemoryException e) { Console.WriteLine("Server has crashed." + e.ToString()); return; }
+            catch (InvalidOperationException e) { Console.WriteLine("Server has crashed." + e.ToString()); return; }
         }
 
         /// <summary>
@@ -70,7 +76,7 @@ namespace Server_Application
                     continue;
                 }
                 Player request = (Player)removeFromQueue(Constants.LOGIN_REQUEST);
-                bool valid = true; //validate with the database, if username/pass combo wrong return false
+                bool valid = false; //validate with the database, if username/pass combo wrong return false
                 if (valid)
                 {
                     DataControl.sendTCPData(TCPClients[0], request, request.IPAddress, Constants.TCPLoginClient);
@@ -78,7 +84,7 @@ namespace Server_Application
                 else
                 {
                     ErrorMessage message = null; //Create an error message saying invalid data
-                    DataControl.sendTCPData(TCPClients[2], message, message.Player.IPAddress, Constants.TCPErrorClient);
+                    addMessageToQueue(message);
                 }
             }
         }
@@ -97,6 +103,8 @@ namespace Server_Application
                     continue;
                 }
                 Gameroom room = owner.getGameroom(message.Gameroom);
+                if (room == null)
+                    continue;
                 foreach (GameData player in room.getPlayerList())
                 {
                     if (player.Username != message.Username)
@@ -136,15 +144,6 @@ namespace Server_Application
                     Thread.Sleep(0);
                 DataControl.sendUDPData(UDPClients[player], data, data.IP, data.PortReceive);
             }
-        }
-
-        private GameData getGameData(byte player)
-        {
-            if (UDPQueue[player].Count == 0)
-                return null;
-            GameData data = UDPQueue[player].ElementAt(0);
-            UDPQueue[player].RemoveAt(0);
-            return data;
         }
 
         /// <summary>
@@ -203,14 +202,26 @@ namespace Server_Application
             {
                 case Constants.LOGIN_REQUEST:
                     return removeLoginRequestFromQueue();
-                case Constants.GAME_DATA:
-                    break;
                 case Constants.CHAT_MESSAGE:
                     return removeMessageFromQueue();
                 case Constants.ERROR_MESSAGE:
                     return removeErrorMessageFromQueue();
             }
             return null;
+        }
+
+        /// <summary>
+        /// Removes an item from the GameData queue.
+        /// </summary>
+        /// <param name="queue">The queue from which to remove.</param>
+        /// <returns></returns>
+        private GameData getGameData(byte queue)
+        {
+            if (UDPQueue[queue].Count == 0)
+                return null;
+            GameData data = UDPQueue[queue].ElementAt(0);
+            UDPQueue[queue].RemoveAt(0);
+            return data;
         }
 
         /// <summary>
