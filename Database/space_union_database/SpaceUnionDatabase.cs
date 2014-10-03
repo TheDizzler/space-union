@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace SpaceUnionDatabase
 {
-    public class SpaceUnionDatabase
+    class SpaceUnionDatabase
     {
         /// <summary>
         /// Sets up a new connection to the database

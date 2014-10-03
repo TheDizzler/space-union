@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace SpaceUnionDatabase
 {
-    protected class SpaceUnionQueryBuilder
+    class SpaceUnionQueryBuilder
     {
         /// <summary>
         /// Query to insert a new user, their password and email into the Users table
@@ -23,7 +23,6 @@ namespace SpaceUnionDatabase
                                    " VALUES ( '" + username + "', " +
                                               "'" + password + "', " +
                                               "'" + email + ")";
-
             return query;
         }
 

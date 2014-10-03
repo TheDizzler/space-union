@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace SpaceUnionDatabase
 {
-    protected class SpaceUnionDatabaseHelper
+    class SpaceUnionDatabaseHelper
     {
         /// <summary>
         /// Adds a new user to the database (for user registration)

@@ -10,7 +10,7 @@ namespace SpaceUnionDatabase
     /// Contains settings to connect to the space union database.
     /// This class is only to be used within this solution.
     /// </summary>
-    protected class SpaceUnionConnectSettings
+    class SpaceUnionConnectSettings
     {
         /// <summary>
         /// Server http address for the hosted database
