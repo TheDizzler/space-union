@@ -8,7 +8,6 @@ namespace Server_Application
 {
     class Constants
     {
-
         /// <summary>
         /// The number of total UDP outgoing or incoming connections. This number
         /// is equal to the maximum amount of players who can be in a game room.
@@ -31,10 +30,21 @@ namespace Server_Application
         /// The port used by the TCP error message client to send data to a game client.
         /// </summary>
         public static const int TCPErrorClient = 6991;
-
+        /// <summary>
+        /// Login request data = 0.
+        /// </summary>
         public static const byte LOGIN_REQUEST = 0;
+        /// <summary>
+        /// Game data = 1.
+        /// </summary>
         public static const byte GAME_DATA = 1;
+        /// <summary>
+        /// Chat message = 2.
+        /// </summary>
         public static const byte CHAT_MESSAGE = 2;
+        /// <summary>
+        /// Error message = 3.
+        /// </summary>
         public static const byte ERROR_MESSAGE = 3;
     }
 }
