@@ -54,7 +54,7 @@ namespace Server_Application
                 for (byte x = 0; x < Constants.NumberOfUdpClients; x++)
                 {
                     byte player = x;
-                    new Thread(() => sendClientData(player));
+                    new Thread(() => sendClientData(player)).Start();
                 }
             }
             catch (ThreadStateException e) { Console.WriteLine("Server has crashed." + e.ToString()); return; }
@@ -141,7 +141,10 @@ namespace Server_Application
             {
                 GameData data = getGameData(player);
                 if (data == null)
+                {
                     Thread.Sleep(0);
+                    continue;
+                }   
                 DataControl.sendUDPData(UDPClients[player], data, data.IP, data.PortReceive);
             }
         }

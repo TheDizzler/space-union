@@ -17,6 +17,6 @@ namespace Server_Application
         short incomingport;
         short outgoingport;
 
-        public GameSetupMessage(byte type) : base(type) {]
+        public GameSetupMessage(byte type) : base(type) { }
     }
 }
