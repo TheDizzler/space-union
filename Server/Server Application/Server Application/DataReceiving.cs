@@ -30,6 +30,8 @@ namespace Server_Application
 
         Server owner;
 
+        private Object ownerLock = new Object();
+
         public DataReceiving(Server owner)
         {
             // Initialize the UDP clients
@@ -78,9 +80,10 @@ namespace Server_Application
             {
                 Object chatData = DataControl.receiveTCPData(TCPListeners[1]);
 
-                // do whatever for chat messages
-
-
+                lock (ownerLock)
+                {
+                    owner.addMessageToQueue((GameMessage)chatData);
+                }
             }
         }
 
@@ -95,8 +98,10 @@ namespace Server_Application
             {
                 Object clientData = DataControl.receiveUDPData((UdpClient)UDPListener);
 
-
-                // do whatever to handle client data
+                lock (ownerLock)
+                {
+                    owner.addMessageToQueue((GameData)clientData);
+                }
             }
         }
     }

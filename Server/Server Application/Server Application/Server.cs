@@ -64,5 +64,13 @@ namespace Server_Application
                 onlineplayers.Add(player);
             }
         }
+
+        public void addMessageToQueue(Data message)
+        {
+            if (message != null)
+            {
+                transmission.addMessageToQueue(message);
+            }
+        }
     }
 }
