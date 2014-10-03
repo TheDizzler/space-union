@@ -8,7 +8,6 @@ namespace Server_Application
 {
     class Constants
     {
-
         /// <summary>
         /// The number of total UDP outgoing or incoming connections. This number
         /// is equal to the maximum amount of players who can be in a game room.
