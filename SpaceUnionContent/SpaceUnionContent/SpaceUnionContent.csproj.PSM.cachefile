@@ -1,16 +1,16 @@
 Content\Backgrounds\starfield (800x600).xnb
-Content\Buttons\playbutton.xnb
 Content\Backgrounds\background.xnb
 Content\Spaceships\circleship (128x128).xnb
 Content\Spaceships\shuttle.xnb
 Content\Spaceships\triangleship (128x128).xnb
 Content\Spaceships\wrenchship.xnb
-Content\Backgrounds\galaxy.xnb
-Content\Projectiles\laser.xnb
 Content\Backgrounds\beautifulbg.xnb
 Content\Backgrounds\doodlebg.xnb
 Content\SpriteFonts\SpriteFont1.xnb
+Content\Buttons\playbutton.xnb
 Content\StellarObjects\waterplanet (256x256).xnb
+Content\Backgrounds\galaxy.xnb
+Content\Projectiles\laser.xnb
 Content\Buttons\playbutton.png
 Content\Backgrounds\background.jpg
 Content\Spaceships\circleship (128x128).png

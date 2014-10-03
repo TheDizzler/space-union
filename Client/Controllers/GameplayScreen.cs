@@ -111,17 +111,17 @@ namespace SpaceUnion.Controllers {
 
 
             //Up Key toggles back thruster
-            if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W))
+            if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W)) {
 				playerShip.thrust(gameTime);
             }
 
             //Left Key rotates ship left
-            if (keyState.IsKeyDown(Keys.Left) || keyState.IsKeyDown(Keys.A))
+            if (keyState.IsKeyDown(Keys.Left) || keyState.IsKeyDown(Keys.A)) {
 				playerShip.rotateLeft(gameTime);
             }
 
             //Right Key rotates ship right
-            if (keyState.IsKeyDown(Keys.Right) || keyState.IsKeyDown(Keys.D))
+            if (keyState.IsKeyDown(Keys.Right) || keyState.IsKeyDown(Keys.D)){
 				playerShip.rotateRight(gameTime);
             }
 
@@ -160,7 +160,7 @@ namespace SpaceUnion.Controllers {
                 }
             }
 
-            playerShip.update();
+			playerShip.update(gameTime);
             gui.update(playerShip);
             UpdateProjectiles();
         }

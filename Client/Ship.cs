@@ -176,8 +176,6 @@ namespace SpaceUnion {
 
 			Vector2.Add(ref velocity, ref acceleration, out velocity);
 
-        internal void update() 
-        {
-        }
+		}
 	}
 }
