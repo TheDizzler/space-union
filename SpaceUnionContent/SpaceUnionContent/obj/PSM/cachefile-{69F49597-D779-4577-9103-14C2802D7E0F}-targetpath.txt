@@ -9,6 +9,7 @@ Content\Backgrounds\galaxy.xnb
 Content\Projectiles\laser.xnb
 Content\Backgrounds\beautifulbg.xnb
 Content\Backgrounds\doodlebg.xnb
+Content\WinFlags\WinFlag1.xnb
 Content\SpriteFonts\SpriteFont1.xnb
 Content\Spaceships\spaceshiptest.png
 Content\Backgrounds\starfield (800x600).png

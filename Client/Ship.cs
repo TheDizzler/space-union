@@ -19,6 +19,8 @@ namespace SpaceUnion {
 		private float shipVelocityDirectionX = 0; //Amount of pixels the ship moves horizontally per frame (Calculated by sine of angle)
 		private float shipVelocityDirectionY = 0; //Amount of pixels the ship moves vertically per frame (Calculated by cosine of angle)
 		private float maxSpeed = 7;
+        private int health = 100;
+        private float shipScale;
 
 		private float accelSpeed = 0.5f;
 		private float currentSpeed = 0;
@@ -31,6 +33,16 @@ namespace SpaceUnion {
 		public float getShipVelocityDirectionY() {
 			return shipVelocityDirectionY;
 		}
+
+        public int getHealth()
+        {
+            return health;
+        }
+
+        public void setHealth(int health)
+        {
+            this.health = health;
+        }
 
 		/*
 		public float maxHealth;
@@ -55,12 +67,19 @@ namespace SpaceUnion {
 			velocity = Vector2.Zero;
 
 			scale = .3f;
+            shipScale = scale;
 		}
 
 		/// <summary>
 		/// Collision check between ship and screen boundries.
 		/// Ships loop horizontally and vertically.
 		/// </summary>
+        /// 
+        public float getScale()
+        {
+            return shipScale;
+
+        }
 		public void checkScreenWrap(GameWindow Window) {
 			if (position.X < -5) {
 				position.X = GameplayScreen.worldWidth + 3;

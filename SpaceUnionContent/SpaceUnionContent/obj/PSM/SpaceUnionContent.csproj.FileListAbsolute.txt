@@ -78,3 +78,32 @@ C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-un
 C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.png
 C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.xnb
 C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.png
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).xnb
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.xnb
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.xnb
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\circleship (128x128).xnb
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.xnb
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\triangleship (128x128).xnb
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\wrenchship.xnb
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\galaxy.xnb
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.xnb
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\beautifulbg.xnb
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\doodlebg.xnb
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\WinFlags\WinFlag1.xnb
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.png
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.jpg
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\circleship (128x128).png
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.png
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\triangleship (128x128).png
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\wrenchship.png
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.png
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.png
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).png
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\galaxy.png
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\beautifulbg.png
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\doodlebg.png
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\IgnoreMe.dll
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\SpaceUnionContent.csprojResolveAssemblyReference.cache
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\konstabro\Documents\BCIT\Semester 4\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\IgnoreMe.dll

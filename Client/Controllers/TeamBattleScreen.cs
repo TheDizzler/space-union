@@ -21,7 +21,7 @@ namespace SpaceUnion
         private Ship playerShip;
         private Game1 game;
         private Timer timer;
-
+        private WinFlag winFlag;
         Camera mainCamera;
         GUI gui;
 
@@ -46,7 +46,7 @@ namespace SpaceUnion
             Assets = Game1.Assets;
             playerShip = new Ship(Assets.spaceShipTest, new Vector2(200, 200)); //Create new player ship
 
-            gui = new GUI(game, playerShip);
+            gui = new GUI(game, playerShip, winFlag);
 
             Viewport mainViewport = new Viewport((int)playerShip.getX(), (int)playerShip.getY(),
                 game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height - GUI.guiHeight);
