@@ -17,14 +17,5 @@ namespace SpaceUnionDatabase
         {
             return new MySqlConnection(SpaceUnionConnectSettings.CONNECTION_STRING);
         }
-
-        /// <summary>
-        /// Disconnects from the database
-        /// </summary>
-        /// <param name="conn">the connection being disconnected</param>
-        public static void dbDisconnect(MySqlConnection conn)
-        {
-            conn.Close();
-        }
     }
 }

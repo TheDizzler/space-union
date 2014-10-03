@@ -12,13 +12,14 @@ namespace SpaceUnionDatabase
         /// <summary>
         /// Adds a new user to the database (for user registration)
         /// </summary>
-        /// <param name="name">username of the new user</param>
-        /// <param name="password">password of the username</param>
+        /// <param name="username">username of the new user</param>
+        /// <param name="password">password of the user</param>
+        /// <param name="email">email address of the new user</param>
         /// <returns>True if the user was added, false otheriwse</returns>
         public bool
         addNewUser(string username, string password, string email)
         {
-            using (MySqlConnection conn = SpaceUnionConnect.dbConnect() )
+            using (MySqlConnection conn = SpaceUnionDatabase.Connect())
             {
                 try
                 {
@@ -33,7 +34,6 @@ namespace SpaceUnionDatabase
                 }
                 catch (Exception ex)
                 {
-                    conn.Close();
                     //MessageBox.Show(ex.Message);
                     return false;
                 }
@@ -58,8 +58,8 @@ namespace SpaceUnionDatabase
         public bool
         userLogin(string username, string password, ref string[] userInfo)
         {
-            
-            using (MySqlConnection conn = SpaceUnionConnect.dbConnect() )
+
+            using (MySqlConnection conn = SpaceUnionDatabase.Connect())
             {
                 try
                 {    
@@ -102,7 +102,7 @@ namespace SpaceUnionDatabase
         /// Reads user data from the db into the userData string
         /// </summary>
         /// <param name="userData">User data retrieved from the database</param>
-        /// <param name="reader">reader used to read back userdata from the database</param>
+        /// <param name="reader">Reader used to read back userdata from the database</param>
         private static void
         extractUserData(ref string[] userData, MySqlDataReader reader)
         {
