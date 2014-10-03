@@ -65,6 +65,10 @@ namespace Server_Application
             }
         }
 
+        /// <summary>
+        /// Add the given message to the transmission queue.
+        /// </summary>
+        /// <param name="message">The message to add to the transmission queue.</param>
         public void addMessageToQueue(Data message)
         {
             if (message != null)
