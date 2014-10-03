@@ -13,12 +13,12 @@ namespace Server_Application
         /// The number of total UDP outgoing or incoming connections. This number
         /// is equal to the maximum amount of players who can be in a game room.
         /// </summary>
-        public  const int NumberOfUdpClients = 6;
+        public const int NumberOfUdpClients = 6;
         /// <summary>
         /// The number of TCP clients, specifically used for login requests and 
         /// message sent through the in game chat.
         /// </summary>
-        public  const int NumberOfTcpClients = 3;
+        public const int NumberOfTcpClients = 3;
         /// <summary>
         /// The port used by the TCP login request client to send data to a game client.
         /// </summary>
@@ -30,14 +30,12 @@ namespace Server_Application
         /// <summary>
         /// The port used by the TCP error message client to send data to a game client.
         /// </summary>
-        public  const int TCPErrorClient = 6991;
-
-        public  const int UDPOutPortOne = 6944;
-        public  const int UDPInPortOne = 6964;
-
-        public  const byte LOGIN_REQUEST = 0;
-        public  const byte GAME_DATA = 1;
-        public  const byte CHAT_MESSAGE = 2;
-        public  const byte ERROR_MESSAGE = 3;
+        public const int TCPErrorClient = 6991;
+        public const int UDPOutPortOne = 6944;
+        public const int UDPInPortOne = 6964;
+        public const byte LOGIN_REQUEST = 0;
+        public const byte GAME_DATA = 1;
+        public const byte CHAT_MESSAGE = 2;
+        public const byte ERROR_MESSAGE = 3;
     }
 }
