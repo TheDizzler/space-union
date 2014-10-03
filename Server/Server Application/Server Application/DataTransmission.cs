@@ -142,10 +142,10 @@ namespace Server_Application
                 GameData data = getGameData(player);
                 if (data == null)
                 {
-                    Thread.Sleep(0);
+                    Thread.Sleep(1);
                     continue;
                 }   
-                DataControl.sendUDPData(UDPClients[player], data, data.IP, data.PortReceive);
+                DataControl.sendUDPData(UDPClients[player], data, data.IP, ((IPEndPoint)UDPClients[player].Client.LocalEndPoint).Port);
             }
         }
 

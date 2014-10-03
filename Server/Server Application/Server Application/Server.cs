@@ -32,7 +32,7 @@ namespace Server_Application
             gamerooms = new List<Gameroom>();
             onlineplayers = new List<Player>();
             searchingplayers = new List<Player>();
-            receiving = new DataReceiving(this);
+            //receiving = new DataReceiving(this);
             transmission = new DataTransmission(this);
         }
 
@@ -53,6 +53,20 @@ namespace Server_Application
             return null;
         }
 
+        public void getNumberOfRooms()
+        {
+            Console.WriteLine("Number of currently active game rooms: " + gamerooms.Count);
+        }
+
+        public void getNumberOfOnlinePlayers()
+        {
+            Console.WriteLine("Number of online players: " + onlineplayers.Count);
+        }
+
+        public void getNumberOfSearchingPlayers()
+        {
+            Console.WriteLine("Number of players searching for games: " + searchingplayers.Count);
+        }
         /// <summary>
         /// Add the given player to the list of online players.
         /// </summary>
@@ -65,10 +79,6 @@ namespace Server_Application
             }
         }
 
-        /// <summary>
-        /// Add the given message to the transmission queue.
-        /// </summary>
-        /// <param name="message">The message to add to the transmission queue.</param>
         public void addMessageToQueue(Data message)
         {
             if (message != null)

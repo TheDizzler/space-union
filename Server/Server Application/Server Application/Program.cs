@@ -22,10 +22,9 @@ namespace Server_Application
     {
         static void Main(string[] args)
         {
+            Server server = new Server();
             while (true)
             {
-                //serverSetup();
-                Server server = new Server();
                 menuSetup();
                 string input = Console.ReadLine();
                 switch (input)
@@ -43,7 +42,7 @@ namespace Server_Application
                         menuSetup();
                         break;
                     case "exit":
-                        return;
+                        break;
                     default:
                         menuSetup();
                         break;
@@ -112,10 +111,10 @@ namespace Server_Application
             {
                 host = Dns.GetHostEntry(Dns.GetHostName());
             }
-            catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return; }
-            catch (ArgumentOutOfRangeException e) { Console.WriteLine(e.ToString()); return; }
-            catch (ArgumentException e) { Console.WriteLine(e.ToString()); return; }
-            catch (SocketException e) { Console.WriteLine(e.ToString()); return; }
+            catch (ArgumentNullException e) { Console.WriteLine("Method: getLocalIPv$Address()\n" + e.ToString()); return; }
+            catch (ArgumentOutOfRangeException e) { Console.WriteLine("Method: getLocalIPv$Address()\n" + e.ToString()); return; }
+            catch (ArgumentException e) { Console.WriteLine("Method: getLocalIPv$Address()\n" + e.ToString()); return; }
+            catch (SocketException e) { Console.WriteLine("Method: getLocalIPv$Address()\n" + e.ToString()); return; }
 
             foreach (IPAddress ipv4 in host.AddressList)
             {
