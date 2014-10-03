@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace SpaceUnionDatabase
 {
-    class SpaceUnionDatabaseHelper
+    public class SpaceUnionDatabaseHelper
     {
         /// <summary>
         /// Adds a new user to the database (for user registration)
@@ -103,7 +103,7 @@ namespace SpaceUnionDatabase
         /// </summary>
         /// <param name="userData">User data retrieved from the database</param>
         /// <param name="reader">Reader used to read back userdata from the database</param>
-        private static void
+        private void
         extractUserData(ref string[] userData, MySqlDataReader reader)
         {
             //MessageBox.Show("start of extract data");       

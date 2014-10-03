@@ -15,22 +15,22 @@ namespace SpaceUnionDatabase
         /// <summary>
         /// Server http address for the hosted database
         /// </summary>
-        private const string server = "";
+        private const string server = "mysql1.000webhost.com";
 
         /// <summary>
         /// Database to connect to
         /// </summary>
-        private const string database = "";
+        private const string database = "a3188200_SpaceUn";
 
         /// <summary>
         /// UserID to allow connection to the database
         /// </summary>
-        private const string uid = "";
+        private const string uid = "a3188200_SpaceUn";
         
         /// <summary>
         /// Password to allow connection to the database
         /// </summary>
-        private const string password = "";
+        private const string password = "4lSpaceunion";
 
         /// <summary>
         /// Returns the connection string used to connect to the space union database
