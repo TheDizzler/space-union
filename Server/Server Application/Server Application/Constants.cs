@@ -32,6 +32,9 @@ namespace Server_Application
         /// </summary>
         public static const int TCPErrorClient = 6991;
 
+        public static const int UDPOutPortOne = 6944;
+        public static const int UDPInPortOne = 6964;
+
         public static const byte LOGIN_REQUEST = 0;
         public static const byte GAME_DATA = 1;
         public static const byte CHAT_MESSAGE = 2;

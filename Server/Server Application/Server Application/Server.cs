@@ -28,7 +28,7 @@ namespace Server_Application
         List<Player> searchingplayers;
         public Server()
         {
-            receiving = new DataReceiving();
+            receiving = new DataReceiving(this);
             transmission = new DataTransmission(this);
             gamerooms = new List<Gameroom>();
             onlineplayers = new List<Player>();
