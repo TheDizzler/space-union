@@ -166,6 +166,7 @@ namespace SpaceUnion
             UpdateProjectiles();
         }
 
+        //Comment
         private void UpdateProjectiles()
         {
             // Update the Projectiles
