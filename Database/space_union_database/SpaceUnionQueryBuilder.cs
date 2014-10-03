@@ -19,9 +19,9 @@ namespace SpaceUnionDatabase
         addNewUserQuery(string name, string password, string email)
         {
             string query = "INSERT INTO Users (userName, userPassword, userEmail)" +
-                                   " VALUES ( '"  + name     + "', " + 
+                                   " VALUES ( '" + name + "', " +
                                               "'" + password + "', " +
-                                              "'" + email    + ")";
+                                              "'" + email + ")";
 
             return query;
         }
