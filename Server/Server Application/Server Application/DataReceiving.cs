@@ -41,6 +41,8 @@ namespace Server_Application
             // Initialize the TCP clients.
             for (int x = 0; x < Constants.NumberOfTcpClients; x++) 
                 TCPListeners[x] = new TcpListener(IPAddress.Parse("0.0.0.0"), 6980 + x);
+            for (int x = 0; x < Constants.NumberOfTcpClients; x++)
+                TCPListeners[x].Start();
 
             // Begin running the UDP client listeners.
             for (int x = 0; x < Constants.NumberOfUdpClients; x++)
@@ -78,6 +80,8 @@ namespace Server_Application
         {
             while (true)
             {
+                Console.WriteLine("Chat incoming socket: " + ((IPEndPoint)TCPListeners[1].Server.LocalEndPoint).Port);
+                
                 Object chatData = DataControl.receiveTCPData(TCPListeners[1]);
 
                 lock (ownerLock)

@@ -20,7 +20,7 @@ namespace Server_Application
         TcpClient[] TCPClients = new TcpClient[Constants.NumberOfTcpClients];
         List<GameData>[] UDPQueue = new List<GameData>[6];
         List<GameMessage> messages;
-        List<GameData> gamedata;
+        List<GameData> gamedata;//
         List<Player> loginrequests;
         List<ErrorMessage> errormessages;
         Server owner;

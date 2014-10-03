@@ -32,7 +32,7 @@ namespace Server_Application
             gamerooms = new List<Gameroom>();
             onlineplayers = new List<Player>();
             searchingplayers = new List<Player>();
-            //receiving = new DataReceiving(this);
+            receiving = new DataReceiving(this);
             transmission = new DataTransmission(this);
         }
 
