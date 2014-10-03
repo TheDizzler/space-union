@@ -20,19 +20,6 @@ namespace Server_Application
     class DataControl
     {
         /// <summary>
-        /// The number of total UDP outgoing or incoming connections. This number
-        /// is equal to the maximum amount of players who can be in a game room.
-        /// </summary>
-        public static const int NumberOfUdpClients = 6;
-        /// <summary>
-        /// The number of TCP clients, specifically used for login requests and 
-        /// message sent through the in game chat.
-        /// </summary>
-        public static const int NumberOfTcpClients = 2;
-        public static const int TCPLoginClient = 6989;
-        public static const int TCPMessageClient = 6990;
-
-        /// <summary>
         /// Sends data to the specified IP address and port.
         /// </summary>
         /// <param name="data">The data to transmit.</param>

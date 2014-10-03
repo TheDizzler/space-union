@@ -14,9 +14,10 @@ namespace Server_Application
     /// it is cast to one. The type variable allows us to switch on it
     /// and cast the newly converted object to the right class.
     /// Here are the different possible type values:
-    /// 0 = LoginData class
+    /// 0 = Player class
     /// 1 = GameData class
-    /// 2 = GameMessage
+    /// 2 = GameMessage class
+    /// 3 = ErrorMessage class
     /// </summary>
     [Serializable]
     class Data
@@ -24,7 +25,7 @@ namespace Server_Application
         /// <summary>
         /// The type of this object.
         /// </summary>
-        byte type;
+        public byte Type { get; set; }
 
         /// <summary>
         /// Constructs a Data object.
@@ -32,16 +33,7 @@ namespace Server_Application
         /// <param name="type">A variable used to define what class this is.</param>
         public Data(byte type)
         {
-            this.type = type;
-        }
-
-        /// <summary>
-        /// The type of this object.
-        /// </summary>
-        public byte Type
-        {
-            set { type = value; }
-            get { return type; }
+            this.Type = type;
         }
     }
 }

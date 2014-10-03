@@ -18,43 +18,52 @@ namespace Server_Application
         /// <summary>
         /// The username of the player.
         /// </summary>
-        string username;
+        public string Username { get; set; }
+
         /// <summary>
         /// The game room in which the current player is located.
         /// </summary>
-        int gameroom;
+        public int GameRoom { get; set; }
+
         /// <summary>
         /// The IP address of the player sending this transmission.
         /// </summary>
-        string ipaddress;
+        public string IP { get; set; }
+
         /// <summary>
         /// The port from which the player is sending this transmission.
         /// </summary>
-        short port;
+        public short Port { get; set; }
+
         /// <summary>
         /// The horizontal X position of the player's ship.
         /// </summary>
-        short xposition;
+        public short XPosition { get; set; }
+
         /// <summary>
         /// The vertical Y position of the player's ship.
         /// </summary>
-        short yposition;
+        public short YPosition { get; set; }
+
         /// <summary>
         /// The angle at which the player's ship is turned.
         /// </summary>
-        float angle;
+        public float Angle { get; set; }
+
         /// <summary>
         /// The health of the player's ship.
         /// </summary>
-        byte health;
+        public byte Health { get; set; }
+
         /// <summary>
         /// The amount of players the current user has killed.
         /// </summary>
-        byte kills;
+        public byte Kills { get; set; }
+
         /// <summary>
         /// The amount of times the current user has died.
         /// </summary>
-        byte deaths;
+        public byte Deaths { get; set; }
 
         //projectiles fired, direction, velocity
 
@@ -63,86 +72,5 @@ namespace Server_Application
         /// </summary>
         /// <param name="type">The type of the class, used to cast an object to this class.</param>
         public GameData(byte type) : base(type) { }
-
-        /// <summary>
-        /// The username of the player.
-        /// </summary>
-        public string Username
-        {
-            set { username = value; }
-            get { return username; }
-        }
-        /// <summary>
-        /// The game room in which the current player is located.
-        /// </summary>
-        public int GameRoom
-        {
-            set { gameroom = value; }
-            get { return gameroom; }
-        }
-        /// <summary>
-        /// The IP address of the player sending this transmission.
-        /// </summary>
-        public string IP
-        {
-            set { ipaddress = value; }
-            get { return ipaddress; }
-        }
-        /// <summary>
-        /// The port from which the player is sending this transmission.
-        /// </summary>
-        public short Port
-        {
-            set { port = value; }
-            get { return port; }
-        }
-        /// <summary>
-        /// The horizontal X position of the player's ship.
-        /// </summary>
-        public short XPosition
-        {
-            set { xposition = value; }
-            get { return xposition; }
-        }
-        /// <summary>
-        /// The vertical Y position of the player's ship.
-        /// </summary>
-        public short YPosition
-        {
-            set { yposition = value; }
-            get { return yposition; }
-        }
-        /// <summary>
-        /// The angle at which the player's ship is turned.
-        /// </summary>
-        public float Angle
-        {
-            set { angle = value; }
-            get { return angle; }
-        }
-        /// <summary>
-        /// The health of the player's ship.
-        /// </summary>
-        public byte Health
-        {
-            set { health = value; }
-            get { return health; }
-        }
-        /// <summary>
-        /// The amount of players the current user has killed.
-        /// </summary>
-        public byte Kills
-        {
-            set { kills = value; }
-            get { return kills; }
-        }
-        /// <summary>
-        /// The amount of times the current user has died.
-        /// </summary>
-        public byte Deaths
-        {
-            set { deaths = value; }
-            get { return deaths; }
-        }
     }
 }

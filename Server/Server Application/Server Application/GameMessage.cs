@@ -14,50 +14,28 @@ namespace Server_Application
         /// <summary>
         /// The username of the player sending the message.
         /// </summary>
-        string username;
+        public string Username { get; set; }
+
         /// <summary>
         /// The IP address of the player sending the message.
         /// </summary>
-        string ipaddress;
+        public string IPAddress { get; set; }
+
         /// <summary>
         /// The message being sent by the player.
         /// </summary>
-        string message;
+        public string Message { get; set; }
+
         /// <summary>
         /// The gameroom in which the player is currently located in.
         /// </summary>
-        int gameroom;
+        public int Gameroom { get; set; }
+
         /// <summary>
         /// The server port to which the message should be sent.
         /// </summary>
-        short port;
+        public short Port { get; set; }
 
         public GameMessage(byte type) : base(type) {}
-
-        public string Username
-        {
-            set { username = value; }
-            get { return username; }
-        }
-        public string IPAddress
-        {
-            set { username = value; }
-            get { return username; }
-        }
-        public string Message
-        {
-            set { username = value; }
-            get { return username; }
-        }
-        public int Gameroom
-        {
-            set { gameroom = value; }
-            get { return gameroom; }
-        }
-        public short Port
-        {
-            set { port = value; }
-            get { return port; }
-        }
     }
 }

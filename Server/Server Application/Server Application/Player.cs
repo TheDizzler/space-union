@@ -14,41 +14,18 @@ namespace Server_Application
         /// <summary>
         /// The username of the current player.
         /// </summary>
-        string username;
+        public string Username { get; set; }
+
         /// <summary>
         /// The password of the current player.
         /// </summary>
-        string password;
+        public string Password { get; set; }
+
         /// <summary>
         /// The IP address of the current player.
         /// </summary>
-        string ipaddress;
+        public string IPAddress { get; set; }
 
         public Player(byte type) : base(type) {}
-
-        /// <summary>
-        /// The username of the current player.
-        /// </summary>
-        public string Username
-        {
-            set { username = value; }
-            get { return username; }
-        }
-        /// <summary>
-        /// The password of the current player.
-        /// </summary>
-        public string Password
-        {
-            set { password = value; }
-            get { return password; }
-        }
-        /// <summary>
-        /// The IP address of the current player.
-        /// </summary>
-        public string IPAddress
-        {
-            set { password = value; }
-            get { return password; }
-        }
     }
 }

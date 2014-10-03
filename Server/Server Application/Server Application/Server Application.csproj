@@ -42,11 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="DatabaseRequests.cs" />
     <Compile Include="DataControl.cs" />
     <Compile Include="DataReceiving.cs" />
     <Compile Include="DataTransmission.cs" />
+    <Compile Include="ErrorMessage.cs" />
     <Compile Include="GameData.cs" />
     <Compile Include="GameMessage.cs" />
     <Compile Include="Gameroom.cs" />
