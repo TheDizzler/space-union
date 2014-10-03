@@ -38,13 +38,29 @@ namespace Server_Application
             loginrequests = new List<Player>();
             errormessages = new List<ErrorMessage>();
             this.owner = owner;
+            setup();
+        }
+
+        /// <summary>
+        /// Sets up the server by starting all of its main components in new threads.
+        /// </summary>
+        private void setup()
+        {
+            new Thread(sendLoginValidationMessage).Start();
+            new Thread(sendChatMessages).Start();
+            new Thread(sendErrorMessage).Start();
+            for (byte x = 0; x < Constants.NumberOfUdpClients; x++)
+            {
+                byte player = x;
+                new Thread(() => sendClientData(player));
+            }   
         }
 
         /// <summary>
         /// Validates the oldest login request and replies with either permission to
         /// login to the game or a denial.
         /// </summary>
-        public void sendLoginValidationMessage()
+        private void sendLoginValidationMessage()
         {
             while (true)
             {
@@ -70,7 +86,7 @@ namespace Server_Application
         /// <summary>
         /// Sends a chat message to every player in the game room.
         /// </summary>
-        public void sendChatMessages()
+        private void sendChatMessages()
         {
             while (true)
             {
@@ -94,7 +110,7 @@ namespace Server_Application
         /// <summary>
         /// Sends an error message to a client.
         /// </summary>
-        public void sendErrorMessage()
+        private void sendErrorMessage()
         {
             while (true)
             {
@@ -111,9 +127,24 @@ namespace Server_Application
         /// <summary>
         /// Updates all currently active game clients with current positions.
         /// </summary>
-        public void sendClientData()
+        private void sendClientData(byte player)
         {
+            while (true)
+            {
+                GameData data = getGameData(player);
+                if (data == null)
+                    Thread.Sleep(0);
+                DataControl.sendUDPData(UDPClients[player], data, data.IP, data.PortReceive);
+            }
+        }
 
+        private GameData getGameData(byte player)
+        {
+            if (UDPQueue[player].Count == 0)
+                return null;
+            GameData data = UDPQueue[player].ElementAt(0);
+            UDPQueue[player].RemoveAt(0);
+            return data;
         }
 
         /// <summary>
@@ -153,7 +184,7 @@ namespace Server_Application
         {
             for (int x = 0; x < Constants.NumberOfUdpClients; x++)
             {
-                if (message.Port == Constants.UDPOutPortOne + x)
+                if (message.PortReceive == Constants.UDPOutPortOne + x)
                 {
                     UDPQueue[x].Add(message);
                     return;
