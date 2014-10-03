@@ -12,18 +12,22 @@ namespace SpaceUnion
     {
         
         public Texture2D Texture; // Image representing the Projectile
-
+        private HitBox projectileHitBox;
         private bool Active; // State of the Projectile
 
         Viewport viewport; // Represents the viewable boundary of the game
 
-        // Get the width of the projectile ship
+        public HitBox getProjectileHitBox() {
+            return projectileHitBox;
+        }
+
+        // Get the width of the projectile
         public int Width
         {
             get { return Texture.Width; }
         }
 
-        // Get the height of the projectile ship
+        // Get the height of the projectile
         public int Height
         {
             get { return Texture.Height; }
@@ -41,6 +45,7 @@ namespace SpaceUnion
          public Projectile(Texture2D texture, Vector2 position, Ship ship)
 			: base(texture, position) {
                 rotation = (float)ship.getRotation();
+                projectileHitBox = new HitBox(position.X, position.Y, texture.Width, texture.Height);
                 projectileVelocityDirectionX = (float)Math.Sin(rotation) * projectileMoveSpeed;
                 projectileVelocityDirectionY = (float)Math.Cos(rotation) * projectileMoveSpeed;
 		}
@@ -58,10 +63,11 @@ namespace SpaceUnion
         {
             if (projectileTTL > 0)
             {
-                // Projectiles always move to the right
                 position.X += projectileVelocityDirectionX;
                 position.Y -= projectileVelocityDirectionY;
+                projectileHitBox.updatePosition(position.X, position.Y); //updating hitbox
                 projectileTTL--;
+                
             }
             else 
             {

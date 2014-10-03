@@ -21,7 +21,6 @@ namespace SpaceUnion
         private Ship playerShip;
         private Game1 game;
         private Timer timer;
-
         Camera mainCamera;
         GUI gui;
 

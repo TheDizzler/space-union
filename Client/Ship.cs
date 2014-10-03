@@ -19,10 +19,16 @@ namespace SpaceUnion {
 		private float shipVelocityDirectionX = 0; //Amount of pixels the ship moves horizontally per frame (Calculated by sine of angle)
 		private float shipVelocityDirectionY = 0; //Amount of pixels the ship moves vertically per frame (Calculated by cosine of angle)
 		private float maxSpeed = 7;
-
+        private int health = 100;
+        private float shipScale;
+        internal HitBox shipHitBox;
 		private float accelSpeed = 0.5f;
 		private float currentSpeed = 0;
 
+        //Return Ship Hitbox for collision detection
+        public HitBox getShipHitBox() {
+            return shipHitBox;
+        }
 
 		public float getShipVelocityDirectionX() {
 			return shipVelocityDirectionX;
@@ -31,6 +37,16 @@ namespace SpaceUnion {
 		public float getShipVelocityDirectionY() {
 			return shipVelocityDirectionY;
 		}
+
+        public int getHealth()
+        {
+            return health;
+        }
+
+        public void setHealth(int health)
+        {
+            this.health = health;
+        }
 
 		/*
 		public float maxHealth;
@@ -53,14 +69,22 @@ namespace SpaceUnion {
 			: base(tex, pos) {
 
 			velocity = Vector2.Zero;
-
+            shipHitBox = new HitBox(position.X, position.Y, this.texture.Width,this.texture.Height);
 			scale = .3f;
+            shipScale = scale;
 		}
 
 		/// <summary>
 		/// Collision check between ship and screen boundries.
 		/// Ships loop horizontally and vertically.
 		/// </summary>
+        /// 
+        public float getScale()
+        {
+            return shipScale;
+        }
+
+
 		public void checkScreenWrap(GameWindow Window) {
 			if (position.X < -5) {
 				position.X = GameplayScreen.worldWidth + 3;
@@ -156,6 +180,7 @@ namespace SpaceUnion {
         {
             position.X += shipVelocityDirectionX;
             position.Y -= shipVelocityDirectionY;
+            shipHitBox.updatePosition(position.X,position.Y);
         }
 	}
 }

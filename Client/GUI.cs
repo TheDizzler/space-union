@@ -21,9 +21,8 @@ namespace SpaceUnion {
 		Texture2D guiRectangle;
 
 		private  Ship playerShip;
-
 		Rectangle rect;
-		Vector2 line1Pos, line2Pos, line3Pos, line4Pos;
+		Vector2 line1Pos, line2Pos, line3Pos, line4Pos, line5Pos, line6Pos;
 
 		public GUI(Game1 game, Ship ship) {
 
@@ -41,6 +40,8 @@ namespace SpaceUnion {
 			line2Pos = new Vector2(100, guiY + 20);
 			line3Pos = new Vector2(100, guiY + 30);
 			line4Pos = new Vector2(100, guiY + 40);
+            line5Pos = new Vector2(100, guiY + 50);
+            line6Pos = new Vector2(100, guiY + 60);
 		}
 
         //draw method
@@ -57,11 +58,12 @@ namespace SpaceUnion {
 				line3Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
 			spriteBatch.DrawString(font, "X =" + playerShip.getX() + " y = " + playerShip.getY(),
 				line4Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
+            spriteBatch.DrawString(font, "Player Health: " + playerShip.getHealth(),
+                line5Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
 		}
 
 
 		public void update(Ship plyr) {
-
 			playerShip = plyr;
 		}
 

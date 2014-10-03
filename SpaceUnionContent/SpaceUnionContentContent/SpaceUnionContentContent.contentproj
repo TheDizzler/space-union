@@ -113,12 +113,12 @@
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Content Include="Spaceships\spaceshiptest.png">
+    <Compile Include="Spaceships\spaceshiptest.png">
       <Name>spaceshiptest</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </Compile>
     <Compile Include="Backgrounds\beautifulbg.png">
       <Name>beautifulbg</Name>
       <Importer>TextureImporter</Importer>
@@ -130,6 +130,11 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="WinFlags\WinFlag1.png">
+      <Name>WinFlag1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup />

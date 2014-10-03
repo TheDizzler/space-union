@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Timers;
 using System.Text;
 
 namespace SpaceUnion
@@ -15,10 +16,13 @@ namespace SpaceUnion
         private KeyboardState keyState;
         private MouseState mouseState;
         private SpriteBatch spriteBatch;
-        private Ship playerShip;
+        private static Ship playerShip;
         private Game1 game;
-
+        //static private bool flashFlag = false;
+        //private static System.Timers.Timer invinsibilityTimer;
+        //private static System.Timers.Timer flashingTimer;
         List<Projectile> projectiles;
+        List<Ship> ships;
 
         // The rate of fire of the player laser
         TimeSpan fireTime;
@@ -31,7 +35,7 @@ namespace SpaceUnion
 
         static public int worldWidth = 4000;
         static public int worldHeight = 2000;
-
+        static protected bool invinsible;
         private int SCREEN_WIDTH;
         private int SCREEN_HEIGHT;
 
@@ -44,16 +48,27 @@ namespace SpaceUnion
 
             spriteBatch = batch;
 
+            /*
+            invinsibilityTimer = new System.Timers.Timer(2000);
+            invinsibilityTimer.Elapsed += OnTimedEvent;
+            invinsibilityTimer.Enabled = false;
+            flashingTimer = new System.Timers.Timer(50);
+            flashingTimer.Elapsed += onTimedEventFlashing;
+            flashingTimer.Enabled = false;
+            flashFlag = true;
+            invinsible = false;
+            */
+
             Assets = Game1.Assets;
             playerShip = new Ship(Assets.spaceShipTest, new Vector2(200, 200)); //Create new player ship
-
-            gui = new GUI(game, playerShip);
-
+            gui = new GUI(game, playerShip);    //Create GUI
+            
             Viewport mainViewport = new Viewport((int)playerShip.getX(), (int)playerShip.getY(),
                 game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height - GUI.guiHeight);
             mainCamera = new Camera(mainViewport, worldWidth, worldHeight, 1.0f);
 
             projectiles = new List<Projectile>();
+            ships = new List<Ship>();
 
             // Set the laser to fire every quarter second
             fireTime = TimeSpan.FromSeconds(.15f);
@@ -107,6 +122,7 @@ namespace SpaceUnion
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public void Update(GameTime gameTime)
         {
+            
             //playerShip.checkScreenWrap(Window); //Check if ship will wrap around edges
             playerShip.checkScreenStop(game.Window);
             keyState = Keyboard.GetState(); //Get which keys are pressed or released
@@ -162,8 +178,50 @@ namespace SpaceUnion
             }
 
             playerShip.update();
+            UpdateDamageCollision();
             gui.update(playerShip);
             UpdateProjectiles();
+            
+        }
+
+        private void UpdateDamageCollision()
+        {
+            // Use the Rectangle's built-in intersect function to 
+            // determine if two objects are overlapping
+            foreach(Projectile p in projectiles){
+                if (p.getProjectileHitBox().getArray().Intersects(playerShip.getShipHitBox().getArray())) {
+                    playerShip.setHealth(-1);
+                }
+            }
+            //Assets = Game1.Assets;
+            // Only create the rectangle once for the player
+            //rectangle1 = new Rectangle((int)(playerShip.Position.X ),
+            //(int)(playerShip.Position.Y),
+            //(int)(Assets.spaceShipTest.Width * playerShip.getScale()),
+            //(int)(Assets.spaceShipTest.Height * playerShip.getScale()));
+
+            /*
+                // Determine if the two objects collided with each
+                // other
+                if (rectangle1.Intersects(rectangle2) && invinsible == false)
+                {
+                    invinsible = true;
+                    invinsibilityTimer.Enabled = true;
+                    playerShip.setHealth(playerShip.getHealth() - 1);
+                    flashingTimer.Enabled = true;
+                }
+                if (invinsible == false)
+                {
+                    invinsibilityTimer.Enabled = false;
+                    flashingTimer.Enabled = false;
+                }
+                if (playerShip.getHealth() == 0)
+                {
+                    playerShip.setHealth(100);
+                    game.EndMatch();
+                    invinsibilityTimer.Enabled = false;
+                }
+            */
         }
 
         //Comment
@@ -193,11 +251,12 @@ namespace SpaceUnion
             drawWorld(); //Draws background
 
             playerShip.draw(spriteBatch); //Draws player space ship
-
             // Draw the Projectiles
             for (int i = 0; i < projectiles.Count; i++)
             {
+                spriteBatch.Draw(Assets.shuttle, projectiles[i].getProjectileHitBox().getArray(), Color.Red);
                 projectiles[i].draw(spriteBatch);
+                
             }
 
 
@@ -215,6 +274,24 @@ namespace SpaceUnion
 
             spriteBatch.End();
         }
-
+        /*
+        private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            invinsible = false;
+        }
+        private static void onTimedEventFlashing(Object source, ElapsedEventArgs e)
+        {
+            if (flashFlag == true)
+            {
+                playerShip.setAlpha(0);
+                flashFlag = false;
+            }
+            if (flashFlag == false)
+            {
+                playerShip.setAlpha(255);
+                flashFlag = true;
+            }
+        }
+        */
     }
 }

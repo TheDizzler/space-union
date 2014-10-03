@@ -12,6 +12,9 @@ namespace SpaceUnion.Tools {
 	/// </summary>
 	public abstract class Sprite {
 
+
+        public int alphaValue;
+
 		protected Texture2D texture;
 		/// <summary>
 		/// Sprite dimensions
@@ -68,7 +71,15 @@ namespace SpaceUnion.Tools {
 
 			return position.X - width/2;
 		}
+        public int getAlpha()
+        {
+            return alphaValue;
+        }
 
+        public void setAlpha(int alpha)
+        {
+            this.alphaValue = alpha;
+        }
 		/// <summary>
 		/// Get sprite's center Y position
 		/// </summary>
@@ -119,7 +130,7 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		/// <param name="sBatch"></param>
 		public virtual void draw(SpriteBatch sBatch) {
-			sBatch.Draw(texture, position, null, Color.White, rotation, origin, scale, SpriteEffects.None, 0);
+            sBatch.Draw(texture, position, null, new Color(255, 255, 255, (byte)MathHelper.Clamp(alphaValue, 0, 255)), rotation, origin, scale, SpriteEffects.None, 0);
 		}
 
 

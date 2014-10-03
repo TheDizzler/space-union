@@ -7,6 +7,9 @@ using System.Text;
 
 namespace SpaceUnion
 {
+    /// <summary>
+    /// Timer class implements a game timer that counts down to zero.
+    /// </summary>
     class Timer
     {
         private float countdownTime;
