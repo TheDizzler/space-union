@@ -1,26 +1,25 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using SpaceUnion.Tools;
 
-namespace SpaceUnion {
+
+namespace SpaceUnion.Controllers {
+
 	class MainMenuScreen {
-		//private Texture2D texture;
+		
 		private Game1 game;
-		PlayButton btnPlay;
+		BaseButton btnPlay;
 
 		public MainMenuScreen(Game1 game) {
 			this.game = game;
-			btnPlay = new PlayButton(Game1.Assets.playButton, game.GraphicsDevice);
+			btnPlay = new BaseButton(Game1.Assets.playButton, game.GraphicsDevice);
 			btnPlay.setPosition(new Vector2((game.getScreenWidth()  - btnPlay.width)/2, (game.getScreenHeight() - btnPlay.height)/ 2));
 		}
 
 		public void Update() {
 			MouseState mouseState = Mouse.GetState();
-			btnPlay.Update(mouseState);
+			btnPlay.update(mouseState);
 
 			if (btnPlay.isClicked == true) {
                 btnPlay.isClicked = false;

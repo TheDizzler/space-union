@@ -29,7 +29,7 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		public Vector2 origin;
 		/// <summary>
-		/// Angle in radians of ship orientation
+		/// Angle in radians of sprite orientation
 		/// </summary>
 		protected float rotation;
 
@@ -39,18 +39,23 @@ namespace SpaceUnion.Tools {
 
 		protected float scale = 1.0f;
 
-		/// <summary>
-		/// Animation related variables
-		/// </summary>
+		// Animation related variables
+
 		public Dictionary<string, AnimationClass> animations
 			= new Dictionary<string, AnimationClass>();
 		protected int frameIndex = 0;
 		public string animation;
 
-		protected float timeElapsed;
-		protected float timeToUpdate = .2f;
+		/// <summary>
+		/// Length of time (in seconds) current frame has been on screen.
+		/// </summary>
+		protected float frameTimeElapsed = 0;
+		/// <summary>
+		/// Length of time (in seconds) frame stays on screen.
+		/// </summary>
+		protected float frameLength;
 		public int FramesPerSecond {
-			set { timeToUpdate = (1f / value); }
+			set { frameLength = (1f / value); }
 		}
 		// End of animations
 

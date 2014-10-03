@@ -137,7 +137,13 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="Animations\fireballs.png">
+      <Name>fireballs</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="StellarObjects\waterplanet %28256x256%29.png">
       <Name>waterplanet %28256x256%29</Name>

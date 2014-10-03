@@ -28,6 +28,8 @@ namespace SpaceUnion.Tools {
 		public Texture2D starfield1; // stackable background layer
 		public Texture2D starfield2; // stackable background layer
 		public Texture2D starfield3; // stackable background layer
+
+		public Texture2D explosions;
         
 		// space objects
 		public Texture2D earth;
@@ -71,6 +73,8 @@ namespace SpaceUnion.Tools {
 			starfield1 = Content.Load<Texture2D>("Backgrounds/starfield (800x600)");
 			starfield2 = Content.Load<Texture2D>("Backgrounds/galaxy");
 			starfield3 = Content.Load<Texture2D>("Backgrounds/beautifulbg");
+
+			explosions = Content.Load<Texture2D>("Animations/fireballs");
 
 			waterPlanet = Content.Load<Texture2D>("StellarObjects/waterplanet (256x256)");
 

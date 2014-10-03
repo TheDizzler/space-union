@@ -26,6 +26,7 @@ namespace SpaceUnion {
 		public bool isLooping = true;
 		public int frameCount;
 
+
 		public AnimationClass copy() {
 
 			AnimationClass anima = new AnimationClass();

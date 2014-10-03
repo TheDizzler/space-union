@@ -8,8 +8,9 @@ using System.Text;
 using SpaceUnion.Tools;
 
 
-namespace SpaceUnion {
-	class GeneralButton : Sprite {
+namespace SpaceUnion.Tools {
+
+	class BaseButton : Sprite {
 
 		Rectangle buttonRectangle;
 
@@ -19,42 +20,45 @@ namespace SpaceUnion {
 		private ButtonState lastState;
 
 
-		public GeneralButton(Texture2D newTexture, GraphicsDevice graphics)
-			: base(newTexture, Vector2.Zero) {
+		public BaseButton(Texture2D texture, GraphicsDevice graphics)
+			: base(texture, Vector2.Zero) {
 
 			width = 300;
 			height = 150;
 		}
 
 
-		public void Update(MouseState mouse) {
-
-			ButtonState currentState = mouse.LeftButton;
-			Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
-
-			if (mouseRectangle.Intersects(buttonRectangle)) {
-				isHovered = true;
-			} else
-				isHovered = false;
-
-			if (isHovered && currentState == ButtonState.Pressed) {
-				isDown = true;
-			} else {
-				isDown = false;
-			}
-
-
-			if (isHovered && lastState == ButtonState.Pressed && currentState != ButtonState.Pressed)
-				isClicked = true;
-
-			lastState = currentState;
-
-		}
-
 		public void setPosition(Vector2 newPosition) {
 			position = newPosition;
 			buttonRectangle = new Rectangle((int) position.X, (int) position.Y, (int) width, (int) height);
 		}
+
+
+		public void update(MouseState mouse) {
+
+			ButtonState currentState = mouse.LeftButton;
+			Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
+
+			if (isDown && lastState == ButtonState.Pressed && currentState != ButtonState.Pressed)
+				isClicked = true;
+
+
+			if (mouseRectangle.Intersects(buttonRectangle))
+				isHovered = true;
+			else
+				isHovered = false;
+
+			if (isHovered && lastState != ButtonState.Pressed && currentState == ButtonState.Pressed)
+				isDown = true;
+
+			if (isDown && !isHovered)
+				isDown = false;
+
+			
+
+			lastState = mouse.LeftButton;
+		}
+
 
 		override public void draw(SpriteBatch spriteBatch) {
 
