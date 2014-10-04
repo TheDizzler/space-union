@@ -32,6 +32,7 @@ namespace Server_Application
         /// Validate the user login data by matching it against information in the database.
         /// </summary>
         /// <param name="loginData">The login data to validate.</param>
+        /// /// <param name="owner">The server sending the error message.</param>
         /// <returns>True if the login data was successfully validated.</returns>
         private static Boolean validateUserData(Player playerData, Server owner)
         {
