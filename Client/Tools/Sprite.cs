@@ -39,8 +39,7 @@ namespace SpaceUnion.Tools {
 
 		protected float scale = 1.0f;
 
-		// Animation related variables
-
+		/* Animation related variables */
 		public Dictionary<string, AnimationClass> animations
 			= new Dictionary<string, AnimationClass>();
 		protected int frameIndex = 0;
@@ -60,24 +59,20 @@ namespace SpaceUnion.Tools {
 		public int FramesPerSecond {
 			set { frameLength = (1f / value); }
 		}
-		// End of animations
-
-		/// <summary>
-		/// Get sprites position from top left corner
-		/// </summary>
-		public Vector2 Position { get { return this.position; } }
+		/* End of animations */
 
 		/// <summary>
 		/// Get sprites center position in game world coordinates
 		/// </summary>
-		public Vector2 CenterPosition { get { return position + origin; } }
+		public Vector2 Position { get { return position; } }
+
 		/// <summary>
 		/// Get sprite's center X position
 		/// </summary>
 		/// <returns></returns>
 		public float getX() {
 
-			return position.X + scale * width / 2;
+			return position.X;
 		}
 		/// <summary>
 		/// Get sprite's center Y position
@@ -85,7 +80,7 @@ namespace SpaceUnion.Tools {
 		/// <returns></returns>
 		public float getY() {
 
-			return position.Y + scale * height / 2;
+			return position.Y;
 		}
 
 
@@ -134,7 +129,7 @@ namespace SpaceUnion.Tools {
 
 			anima.frameCount = frameCount;
 			anima.frames = recs;
-			this.animations.Add(name, anima);
+			animations.Add(name, anima);
 		}
 
 		/// <summary>

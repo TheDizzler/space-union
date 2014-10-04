@@ -44,7 +44,8 @@ namespace SpaceUnion.StellarObjects {
 		public void update(GameTime gameTime, Ship ship) {
 
 			pull(gameTime, ship);
-			angle = Math.Atan2(this.CenterPosition.Y - ship.CenterPosition.Y, this.CenterPosition.X - ship.CenterPosition.X);
+			//angle = Math.Atan2(this.CenterPosition.Y - ship.CenterPosition.Y, this.CenterPosition.X - ship.CenterPosition.X);
+			angle = Math.Atan2(this.Position.Y - ship.Position.Y, this.Position.X - ship.Position.X);
 		}
 
 		/// <summary>
@@ -54,12 +55,13 @@ namespace SpaceUnion.StellarObjects {
 		/// <param name="ship"></param>
 		private void pull(GameTime gameTime, Ship ship) {
 
-			float distance = (ship.CenterPosition - this.CenterPosition).Length();
-
+			//float distance = (ship.CenterPosition - this.CenterPosition).Length();
+			float distance = (ship.Position - this.Position).Length();
 			if (distance < range) {
 				float pullForce = mass / (distance * distance);
 				// angle in radians 
-				double angle = Math.Atan2(this.CenterPosition.Y - ship.CenterPosition.Y, this.CenterPosition.X - ship.CenterPosition.X);
+				//double angle = Math.Atan2(this.CenterPosition.Y - ship.CenterPosition.Y, this.CenterPosition.X - ship.CenterPosition.X);
+				double angle = Math.Atan2(this.Position.Y - ship.Position.Y, this.Position.X - ship.Position.X);
 				// Find the vector to apply to the ships velocity
 				Vector2 pullVector = new Vector2(
 					(float) Math.Cos(angle) * pullForce * (float) gameTime.ElapsedGameTime.TotalSeconds,

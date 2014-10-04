@@ -70,9 +70,10 @@ namespace SpaceUnion {
 
 		//internal float attackDelay;
 		//protected float attackTimer;
+		private ExplosionEngine explosionEngine;
 
 
-		public Ship(Texture2D tex, Vector2 pos)
+		public Ship(Texture2D tex, Vector2 pos, ExplosionEngine explEngine)
 			: base(tex, pos) {
 
 			velocity = Vector2.Zero;
@@ -80,6 +81,8 @@ namespace SpaceUnion {
 			//scale = .3f;
 
 			currentHealth = maxHealth;
+
+			explosionEngine = explEngine;
 		}
 
 		/// <summary>
@@ -137,6 +140,8 @@ namespace SpaceUnion {
 		public void stop() {
 			velocity = Vector2.Zero;
 			currentSpeed = 0;
+
+			explode();
 		}
 
 		/// <summary>
@@ -154,10 +159,12 @@ namespace SpaceUnion {
 
 		}
 
+		/// <summary>
+		/// Call when destroyed
+		/// </summary>
+		protected void explode() {
 
-		public void explode() {
-
-			
+			explosionEngine.createExplosions(this);
 		}
 
 		/// <summary>
