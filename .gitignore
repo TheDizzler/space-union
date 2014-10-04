@@ -10,8 +10,6 @@
 #SpaceUnionContent/SpaceUnionContent/bin/
 #*.cache
 #*.suo
-#SpaceUnionContentContent.contentproj.FileListAbsolute.txt
-#SpaceUnionContent.csproj.FileListAbsolute.txt
 #ContentPipeline-{69F49597-D779-4577-9103-14C2802D7E0F}.xml
 
 #Visual Studio files
@@ -54,3 +52,6 @@ _ReSharper*/
 .svn
 # Office Temp Files
 ~$*
+#Monogame files
+SpaceUnionContentContent.contentproj.FileListAbsolute.txt
+SpaceUnionContent.csproj.FileListAbsolute.txt

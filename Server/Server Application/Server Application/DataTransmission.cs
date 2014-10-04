@@ -6,6 +6,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Data_Structures;
+using Data_Manipulation;
 
 namespace Server_Application
 {
@@ -16,25 +18,20 @@ namespace Server_Application
     /// </summary>
     class DataTransmission
     {
-        UdpClient[] UDPClients = new UdpClient[Constants.NumberOfUdpClients];
-        TcpClient[] TCPClients = new TcpClient[Constants.NumberOfTcpClients];
-        List<GameData>[] UDPQueue = new List<GameData>[6];
+        UdpClient[] UDPClients;
+        TcpClient[] TCPClients;
+        List<GameData>[] UDPQueue;
         List<GameMessage> messages;
-        List<GameData> gamedata;//
         List<Player> loginrequests;
         List<ErrorMessage> errormessages;
         Server owner;
 
         public DataTransmission(Server owner)
         {
-            for (int x = 0; x < Constants.NumberOfUdpClients; x++)
-                UDPClients[x] = new UdpClient(Constants.UDPOutPortOne + x);
-            for (int x = 0; x < Constants.NumberOfTcpClients; x++)
-                TCPClients[x] = new TcpClient();
-            for (int x = 0; x < Constants.NumberOfUdpClients; x++)
-                UDPQueue[x] = new List<GameData>();
+            UDPClients = new UdpClient[Constants.NumberOfUdpClients];
+            TCPClients = new TcpClient[Constants.NumberOfTcpClients];
+            UDPQueue = new List<GameData>[6];
             messages = new List<GameMessage>();
-            gamedata = new List<GameData>();
             loginrequests = new List<Player>();
             errormessages = new List<ErrorMessage>();
             this.owner = owner;
@@ -46,6 +43,12 @@ namespace Server_Application
         /// </summary>
         private void setup()
         {
+            for (int x = 0; x < Constants.NumberOfUdpClients; x++)
+                UDPClients[x] = new UdpClient(Constants.UDPOutPortOne + x);
+            for (int x = 0; x < Constants.NumberOfTcpClients; x++)
+                TCPClients[x] = new TcpClient();
+            for (int x = 0; x < Constants.NumberOfUdpClients; x++)
+                UDPQueue[x] = new List<GameData>();
             try
             {
                 new Thread(sendLoginValidationMessage).Start();
