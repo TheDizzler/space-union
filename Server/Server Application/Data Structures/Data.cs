@@ -13,11 +13,6 @@ namespace Data_Structures
     /// converted to an object, but it is uknown which object it is before
     /// it is cast to one. The type variable allows us to switch on it
     /// and cast the newly converted object to the right class.
-    /// Here are the different possible type values:
-    /// 0 = Player class
-    /// 1 = GameData class
-    /// 2 = GameMessage class
-    /// 3 = ErrorMessage class
     /// </summary>
     [Serializable]
     public class Data
