@@ -9,6 +9,7 @@ namespace Server_Application
     /// <summary>
     /// This class contains basic data about the player.
     /// </summary>
+    [Serializable]
     class Player : Data
     {
         /// <summary>
