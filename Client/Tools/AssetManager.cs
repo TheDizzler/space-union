@@ -31,7 +31,7 @@ namespace SpaceUnion.Tools {
 
 		public Texture2D explosions;
         public Texture2D explosionsBig;
-
+		public Texture2D explosionsBlur;
 		// space objects
 		public Texture2D earth;
         public Texture2D winflag1;
@@ -76,7 +76,7 @@ namespace SpaceUnion.Tools {
 			starfield3 = Content.Load<Texture2D>("Backgrounds/beautifulbg");
 
 			explosions = Content.Load<Texture2D>("Animations/fireballs");
-			explosionsBig = Content.Load<Texture2D>("Animations/big fireballs");
+			explosionsBig = Content.Load<Texture2D>("Animations/big fireballs with blur");
 
 
 			waterPlanet = Content.Load<Texture2D>("StellarObjects/waterplanet (256x256)");

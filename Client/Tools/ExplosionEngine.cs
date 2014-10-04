@@ -43,7 +43,7 @@ namespace SpaceUnion.Tools {
 				case 0:
 				case 1:
 				case 2:
-				explosion = new Explosion(assets.explosions, location, scale);
+				explosion = new ShortExplosion(assets.explosions, location, scale);
 				break;
 				case 3:
 					explosion = new BigExplosion(assets.explosionsBig, location, scale);

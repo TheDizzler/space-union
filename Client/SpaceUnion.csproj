@@ -36,8 +36,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Animations\BigExplosion.cs" />
-    <Compile Include="Camera.cs" />
     <Compile Include="Animations\Explosion.cs" />
+    <Compile Include="Camera.cs" />
+    <Compile Include="Animations\ShortExplosion.cs" />
     <Compile Include="HitBox.cs" />
     <Compile Include="GUI.cs" />
     <Compile Include="Controllers\GameplayScreen.cs" />

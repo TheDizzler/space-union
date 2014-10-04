@@ -163,6 +163,15 @@
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\big fireballs.xnb</Output>
       <Time>2014-10-03T23:46:49.3639689-07:00</Time>
     </Item>
+    <Item>
+      <Source>Animations\big fireballs with blur.png</Source>
+      <Name>Animations\big fireballs with blur</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\big fireballs with blur.xnb</Output>
+      <Time>2014-10-04T13:24:36.7034755-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{69F49597-D779-4577-9103-14C2802D7E0F}</ContentProjectGUID>
