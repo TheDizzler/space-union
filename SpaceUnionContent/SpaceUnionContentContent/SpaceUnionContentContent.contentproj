@@ -159,13 +159,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animations\big fireballs.png">
-      <Name>big fireballs</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Animations\big fireballs with blur.png">
       <Name>big fireballs with blur</Name>
       <Importer>TextureImporter</Importer>

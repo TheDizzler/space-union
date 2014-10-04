@@ -85,7 +85,9 @@ namespace SpaceUnion.Tools {
 			ufo = Content.Load<Texture2D>("Spaceships/circleship (128x128)");
 			wedge = Content.Load<Texture2D>("Spaceships/triangleship (128x128)");
 			wrench = Content.Load<Texture2D>("Spaceships/wrenchship");
+
             winflag1 = Content.Load<Texture2D>("WinFlags/WinFlag1");
+
             laser = Content.Load<Texture2D>("Projectiles/laser");
 		}
 	}

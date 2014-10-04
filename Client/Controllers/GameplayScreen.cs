@@ -23,24 +23,23 @@ namespace SpaceUnion.Controllers {
 		//static private bool flashFlag = false;
 		//private static System.Timers.Timer invinsibilityTimer;
 		//private static System.Timers.Timer flashingTimer;
-		List<Projectile> projectiles;
-		List<Ship> ships;
+		//static protected bool invinsible;
 
-		// The rate of fire of the player laser
-		TimeSpan fireTime;
-		TimeSpan previousFireTime;
+
+		List<Ship> ships;
 
 		Camera mainCamera;
 		GUI gui;
+		private ExplosionEngine explosionEngine;
 
 		private AssetManager Assets;
 
 		static public int worldWidth = 8000;
 		static public int worldHeight = 6000;
-		//static protected bool invinsible;
+
 		private int SCREEN_WIDTH;
 		private int SCREEN_HEIGHT;
-		private ExplosionEngine explosionEngine;
+
 
 
 		public GameplayScreen(Game1 game, SpriteBatch batch) {
@@ -63,7 +62,7 @@ namespace SpaceUnion.Controllers {
 
 			Assets = Game1.Assets;
 			explosionEngine = new ExplosionEngine(Assets);
-			playerShip = new Ship(Assets.ufo, new Vector2(200, 200), explosionEngine); //Create new player ship
+			playerShip = new Ship(Assets.ufo, Assets.laser, new Vector2(200, 200), explosionEngine); //Create new player ship
 			planet = new Planet(Assets.waterPlanet, new Vector2(1000, 1000));
 
 			gui = new GUI(game, playerShip, planet);
@@ -72,11 +71,10 @@ namespace SpaceUnion.Controllers {
 				game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height - GUI.guiHeight);
 			mainCamera = new Camera(mainViewport, worldWidth, worldHeight, 1.0f);
 
-			projectiles = new List<Projectile>();
-			ships = new List<Ship>();
 
-			// Set the laser to fire every quarter second
-			fireTime = TimeSpan.FromSeconds(.15f);
+			ships = new List<Ship>();
+			ships.Add(playerShip);
+
 		}
 
 		/// <summary>
@@ -102,11 +100,7 @@ namespace SpaceUnion.Controllers {
 				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
 		}
 
-		private void AddProjectile(Vector2 position) {
-			Projectile projectile = new Projectile(Assets.laser, playerShip.Position, playerShip);
-			projectile.Initialize(game.GraphicsDevice.Viewport, Assets.laser);
-			projectiles.Add(projectile);
-		}
+
 
 		/// <summary>
 		/// Allows the game to run logic such as updating the world,
@@ -143,10 +137,14 @@ namespace SpaceUnion.Controllers {
 				playerShip.stop();
 			}
 
+			if (keyState.IsKeyDown(Keys.LeftControl)) {
+				playerShip.fire(gameTime);
+
+			}
 
 			//planet.update(gameTime, playerShip);
 
-			
+
 
 			mainCamera.setZoom(mouseState.ScrollWheelValue);
 			mainCamera.Position = playerShip.Position; // center the camera to player's position
@@ -158,21 +156,11 @@ namespace SpaceUnion.Controllers {
 			Vector2 mousePos = Vector2.Transform(
 			   new Vector2(mouseState.X, mouseState.Y), inverse);
 
-			if (keyState.IsKeyDown(Keys.LeftControl)) {
-				// Fire only every interval we set as the fireTime
-				if (gameTime.TotalGameTime - previousFireTime > fireTime) {
-					// Reset our current time
-					previousFireTime = gameTime.TotalGameTime;
 
-					// Add the projectile, but add it to the front and center of the player
-					AddProjectile(playerShip.Position + new Vector2(0, 0));
-				}
-			}
 
-			UpdateDamageCollision();
+			//UpdateDamageCollision();
 			playerShip.update(gameTime, game.Window);
 			gui.update(playerShip);
-			UpdateProjectiles();
 
 			explosionEngine.update(gameTime);
 
@@ -181,11 +169,11 @@ namespace SpaceUnion.Controllers {
 		private void UpdateDamageCollision() {
 			// Use the Rectangle's built-in intersect function to 
 			// determine if two objects are overlapping
-			foreach (Projectile p in projectiles) {
-				if (p.getProjectileHitBox().getArray().Intersects(playerShip.getShipHitBox().getArray())) {
-					playerShip.setHealth(-1);
-				}
-			}
+			//foreach (Projectile p in projectiles) {
+			//	if (p.getProjectileHitBox().getArray().Intersects(playerShip.getShipHitBox().getArray())) {
+			//		playerShip.setHealth(-1);
+			//	}
+			//}
 			//Assets = Game1.Assets;
 			// Only create the rectangle once for the player
 			//rectangle1 = new Rectangle((int)(playerShip.Position.X ),
@@ -217,18 +205,7 @@ namespace SpaceUnion.Controllers {
 			*/
 		}
 
-		//Comment
-		private void UpdateProjectiles() {
-			// Update the Projectiles
-			for (int i = projectiles.Count - 1; i >= 0; i--) {
-				projectiles[i].Update();
-
-				if (projectiles[i].getActive() == false) {
-					projectiles.RemoveAt(i);
-				}
-			}
-		}
-
+		
 
 		public void draw() {
 
@@ -238,19 +215,17 @@ namespace SpaceUnion.Controllers {
 
 
 			drawWorld(); //Draws background
-			
+
 			explosionEngine.draw(spriteBatch);
 
-			playerShip.draw(spriteBatch); //Draws player space ship
+			foreach (Ship ship in ships)
+				ship.draw(spriteBatch); //Draws all space ships
+
 			planet.draw(spriteBatch);
-			// Draw the Projectiles
-			for (int i = 0; i < projectiles.Count; i++) {
-				spriteBatch.Draw(Assets.shuttle, projectiles[i].getProjectileHitBox().getArray(), Color.Red);
-				//projectiles[i].draw(spriteBatch); //This is a debug statement to view where the hitboxes are
-
-			}
-
 			
+			
+
+
 			spriteBatch.End();
 
 

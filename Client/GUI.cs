@@ -62,7 +62,7 @@ namespace SpaceUnion {
 				line3Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
 			spriteBatch.DrawString(font, "Ship position X: " + playerShip.getX() + " y = " + playerShip.getY(),
 				line4Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
-            spriteBatch.DrawString(font, "Player Health: " + playerShip.getHealth(),
+            spriteBatch.DrawString(font, "Total bullets: " + playerShip.projectiles.Count,
                 line5Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
 		}
 

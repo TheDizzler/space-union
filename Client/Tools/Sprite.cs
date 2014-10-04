@@ -21,7 +21,7 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		public int height, width;
 		/// <summary>
-		/// Top-left corner of sprite Game World (x, y) co-ordinates
+		/// Center of sprite in Game World (x, y) co-ordinates
 		/// </summary>
 		protected Vector2 position;
 		/// <summary>

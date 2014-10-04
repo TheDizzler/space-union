@@ -15,14 +15,13 @@ namespace SpaceUnion.Tools {
 		List<Explosion> explosions = new List<Explosion>();
 		private AssetManager assets;
 
-		Random gen1, gen2;
+		Random gen;
+
 
 		public ExplosionEngine(AssetManager assetMan) {
 
 			assets = assetMan;
-
-			 gen1 = new Random();
-			 gen2 = new Random();
+			gen = new Random();
 		}
 
 		/// <summary>
@@ -32,19 +31,18 @@ namespace SpaceUnion.Tools {
 		public void createExplosions(Ship ship) {
 
 			// generate an explosion in a random spot on ship
-			
-
-			Vector2 location = new Vector2(ship.getX() + gen2.Next(ship.width) - ship.width / 2, ship.getY() - gen2.Next(ship.height) + ship.height / 2);
-
-			float scale = (float) gen1.NextDouble() + .5f;
+			Vector2 location = new Vector2(ship.getX() + gen.Next(ship.width) - ship.width / 2,
+				ship.getY() - gen.Next(ship.height) + ship.height / 2);
+			// randomize the size of the explosion
+			float scale = (float) gen.NextDouble() + .5f;
 
 			Explosion explosion = null;
 			switch (new Random().Next(4)) {
 				case 0:
 				case 1:
 				case 2:
-				explosion = new ShortExplosion(assets.explosions, location, scale);
-				break;
+					explosion = new ShortExplosion(assets.explosions, location, scale);
+					break;
 				case 3:
 					explosion = new BigExplosion(assets.explosionsBig, location, scale);
 					break;

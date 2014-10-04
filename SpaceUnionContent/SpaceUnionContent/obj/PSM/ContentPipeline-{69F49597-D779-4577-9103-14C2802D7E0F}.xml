@@ -155,15 +155,6 @@
       <Time>2014-10-03T17:11:13.1183064-07:00</Time>
     </Item>
     <Item>
-      <Source>Animations\big fireballs.png</Source>
-      <Name>Animations\big fireballs</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\big fireballs.xnb</Output>
-      <Time>2014-10-03T23:46:49.3639689-07:00</Time>
-    </Item>
-    <Item>
       <Source>Animations\big fireballs with blur.png</Source>
       <Name>Animations\big fireballs with blur</Name>
       <Importer>TextureImporter</Importer>
