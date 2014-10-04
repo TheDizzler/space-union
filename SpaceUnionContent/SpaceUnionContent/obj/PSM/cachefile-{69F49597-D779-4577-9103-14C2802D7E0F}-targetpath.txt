@@ -15,6 +15,7 @@ Content\StellarObjects\waterplanet (256x256).xnb
 Content\SpriteFonts\SpriteFont1.xnb
 Content\Animations\fireballs.xnb
 Content\Animations\fireballs (test).xnb
+Content\Animations\big fireballs.xnb
 Content\Backgrounds\starfield (800x600).png
 Content\Backgrounds\galaxy.png
 Content\Spaceships\spaceshiptest.png

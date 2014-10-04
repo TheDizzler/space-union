@@ -35,8 +35,9 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Animations\BigExplosion.cs" />
     <Compile Include="Camera.cs" />
-    <Compile Include="Explosion.cs" />
+    <Compile Include="Animations\Explosion.cs" />
     <Compile Include="HitBox.cs" />
     <Compile Include="GUI.cs" />
     <Compile Include="Controllers\GameplayScreen.cs" />

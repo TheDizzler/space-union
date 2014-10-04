@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceUnion.Tools;
 
 
-namespace SpaceUnion {
+namespace SpaceUnion.Animations {
 
 	public class Explosion : Sprite {
 
@@ -38,11 +35,13 @@ namespace SpaceUnion {
 		/// Creates a random explosion.
 		/// </summary>
 		/// <param name="explosions"></param>
+		/// <param name="pos"></param>
 		/// <param name="location"></param>
+		/// <param name="scaleAnimation"></param>
 		public Explosion(Texture2D explosions, Vector2 location, float scaleAnimation = 1.0f)
 			: base(explosions, location) {
 
-			initialize(scaleAnimation);
+				initialize(scaleAnimation);
 
 			Random gen = new Random();
 			switch (gen.Next(animations.Count)) {
@@ -60,10 +59,10 @@ namespace SpaceUnion {
 		}
 
 
-		private void initialize(float scaleAnimation = 1.0f) {
+		private void initialize(float scaleAnimation = 1.0f, int size = 16) {
 
 			// the size of each tile
-			setSize(16, 16); // must be explicitly set for tile sheets
+			setSize(size, size); // must be explicitly set for tile sheets
 
 			AnimationClass anima = new AnimationClass();
 			anima.scale = scaleAnimation;
@@ -73,7 +72,7 @@ namespace SpaceUnion {
 
 
 
-			frameLength = .25f;
+			frameLength = .1f;
 		}
 
 
@@ -94,8 +93,6 @@ namespace SpaceUnion {
 						isDead = true; // should get cleaned up here
 
 			}
-
-
 		}
 
 
@@ -103,8 +100,5 @@ namespace SpaceUnion {
 
 			base.draw(batch);
 		}
-
-
-
 	}
 }
