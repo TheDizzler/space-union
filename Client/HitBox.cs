@@ -13,7 +13,7 @@ namespace SpaceUnion
     /// <summary>
     /// Hitboxes will contain an array of rectangles
     /// </summary>
-    class HitBox
+    public class HitBox
     {
         private int width;
         private int height;

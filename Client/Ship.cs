@@ -13,7 +13,7 @@ namespace SpaceUnion {
 	/// Base abstract ship class.
 	/// CURRENTLY NOT ABSTRACT FOR TESTING
 	/// </summary>
-	class Ship : Sprite {
+	public class Ship : Sprite {
 
 		/// <summary>
 		/// A restistance to movement so all objects will enventual slow to a stop
@@ -24,17 +24,7 @@ namespace SpaceUnion {
 		/// The current speed and direction of ship
 		/// </summary>
 		public Vector2 velocity;
-		//protected Vector2 impulse;
-		//private float shipVelocityDirectionX = 0; //Amount of pixels the ship moves horizontally per frame (Calculated by sine of angle)
-		//private float shipVelocityDirectionY = 0; //Amount of pixels the ship moves vertically per frame (Calculated by cosine of angle)
-
-		//private float shipVelocityDirectionX = 0; //Amount of pixels the ship moves horizontally per frame (Calculated by sine of angle)
-		//private float shipVelocityDirectionY = 0; //Amount of pixels the ship moves vertically per frame (Calculated by cosine of angle)
-        private int health = 100;
-        private float shipScale;
-        internal HitBox shipHitBox;
 		protected float maxSpeed = 7;
-
 		protected float accelSpeed = 4.5f;
 		protected float currentSpeed = 0;
 		/// <summary>
@@ -42,10 +32,12 @@ namespace SpaceUnion {
 		/// </summary>
 		protected float turnSpeed = 4.5f;
 
-        //Return Ship Hitbox for collision detection
-        public HitBox getShipHitBox() {
-            return shipHitBox;
-        }
+		protected HitBox shipHitBox;
+
+		//Return Ship Hitbox for collision detection
+		public HitBox getShipHitBox() {
+			return shipHitBox;
+		}
 
 		public float getShipVelocityDirectionX() {
 			return velocity.X;
@@ -55,19 +47,17 @@ namespace SpaceUnion {
 			return velocity.Y;
 		}
 
-        public int getHealth()
-        {
-            return health;
-        }
+		public int getHealth() {
+			return currentHealth;
+		}
 
-        public void setHealth(int health)
-        {
-            this.health = health;
-        }
+		public void setHealth(int health) {
+			this.currentHealth = health;
+		}
 
-		/*
-		public float maxHealth;
-		public float currentHealth;
+		
+		public int maxHealth = 100;
+		public int currentHealth;
         
 		/// <summary>
 		/// Get % health remaining
@@ -75,7 +65,7 @@ namespace SpaceUnion {
 		public float HealthPercentage {
 			get { return currentHealth / maxHealth; }
 		}
-        */
+        
 
 
 		//internal float attackDelay;
@@ -86,51 +76,22 @@ namespace SpaceUnion {
 			: base(tex, pos) {
 
 			velocity = Vector2.Zero;
-            shipHitBox = new HitBox(position.X, position.Y, this.texture.Width,this.texture.Height);
-			scale = .3f;
-            shipScale = scale;
+			shipHitBox = new HitBox(position.X, position.Y, this.texture.Width, this.texture.Height);
+			//scale = .3f;
+
+			currentHealth = maxHealth;
 		}
 
 		/// <summary>
 		/// Collision check between ship and screen boundries.
 		/// Ships loop horizontally and vertically.
 		/// </summary>
-        /// 
-        public float getScale()
-        {
-            return shipScale;
-        }
-
-
-		public void checkScreenWrap(GameWindow Window) {
-			if (position.X < -5) {
-				position.X = GameplayScreen.worldWidth + 3;
-			}
-			if (position.X > GameplayScreen.worldWidth + 5) {
-				position.X = -3;
-			}
-			if (position.Y < -5) {
-				position.Y = GameplayScreen.worldHeight;
-			}
-			if (position.Y > GameplayScreen.worldHeight + 5) {
-				position.Y = 0;
-			}
+		public float getScale() {
+			return scale;
 		}
 
-		public void checkScreenStop(GameWindow Window) {
-			if (position.X <= 0) {
-				position.X = 0;
-			}
-			if (position.X >= GameplayScreen.worldWidth) {
-				position.X = GameplayScreen.worldWidth;
-			}
-			if (position.Y <= 0) {
-				position.Y = 0;
-			}
-			if (position.Y >= GameplayScreen.worldHeight) {
-				position.Y = GameplayScreen.worldHeight;
-			}
-		}
+
+
 
 		/* !!Never have update code in draw function!! */
 		public override void draw(SpriteBatch sBatch) {
@@ -139,10 +100,12 @@ namespace SpaceUnion {
 		}
 
 
-		public void update(GameTime gameTime) {
+		public void update(GameTime gameTime, GameWindow window) {
 			// Elapsed time is taken into consideration in thrust and planet.pull
 			position.X += velocity.X;
 			position.Y -= velocity.Y;
+
+			checkScreenStop(window);
 		}
 
 		/// <summary>
@@ -163,7 +126,7 @@ namespace SpaceUnion {
 		/// Resets the angle to 0 when completing a full rotation, which prevents integer overflow.
 		/// </summary>
 		/// <param name="gameTime"></param>
-		internal void rotateRight(GameTime gameTime) {
+		public void rotateRight(GameTime gameTime) {
 			if (rotation > 6.283185 || rotation < -6.283185) {
 				rotation = rotation % 6.283185f;
 			}
@@ -171,9 +134,8 @@ namespace SpaceUnion {
 		}
 
 		//Debugging Ship Brake
-		internal void stop() {
-			velocity.X = 0;
-			velocity.Y = 0;
+		public void stop() {
+			velocity = Vector2.Zero;
 			currentSpeed = 0;
 		}
 
@@ -182,28 +144,54 @@ namespace SpaceUnion {
 		/// Does not exceed a max speed cap
 		/// </summary>
 		/// <param name="gameTime"></param>
-		internal void thrust(GameTime gameTime) {
+		public void thrust(GameTime gameTime) {
 
-			//Checking if speed doesnt exceed the ship's maximum speed
-			//if (currentSpeed < maxSpeed) {
-			//	currentSpeed += accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
-			//} else { //Ships cannot exceed maximum speed
-			//	currentSpeed = maxSpeed;
-			//}
-
-
-			//Update Ship Velocity Direction
-			//velocity.X = (float) Math.Sin(rotation) * currentSpeed;
-			//velocity.Y = (float) Math.Cos(rotation) * currentSpeed;
-
-			//position.X += velocity.X;
-			//position.Y -= velocity.Y;
 			Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) Math.Cos(rotation));
 			acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
 
 
 			Vector2.Add(ref velocity, ref acceleration, out velocity);
 
+		}
+
+
+		public void explode() {
+
+			
+		}
+
+		/// <summary>
+		/// Check if ship will wrap around edges
+		/// </summary>
+		/// <param name="Window"></param>
+		private void checkScreenWrap(GameWindow Window) {
+			if (position.X < -5) {
+				position.X = GameplayScreen.worldWidth + 3;
+			}
+			if (position.X > GameplayScreen.worldWidth + 5) {
+				position.X = -3;
+			}
+			if (position.Y < -5) {
+				position.Y = GameplayScreen.worldHeight;
+			}
+			if (position.Y > GameplayScreen.worldHeight + 5) {
+				position.Y = 0;
+			}
+		}
+
+		private void checkScreenStop(GameWindow Window) {
+			if (position.X <= 0) {
+				position.X = 0;
+			}
+			if (position.X >= GameplayScreen.worldWidth) {
+				position.X = GameplayScreen.worldWidth;
+			}
+			if (position.Y <= 0) {
+				position.Y = 0;
+			}
+			if (position.Y >= GameplayScreen.worldHeight) {
+				position.Y = GameplayScreen.worldHeight;
+			}
 		}
 	}
 }

@@ -143,7 +143,16 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fireballs.xnb</Output>
-      <Time>2014-10-03T13:59:55.8368418-07:00</Time>
+      <Time>2014-10-03T17:11:09.9141231-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Animations\fireballs (test).png</Source>
+      <Name>Animations\fireballs (test)</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fireballs (test).xnb</Output>
+      <Time>2014-10-03T17:11:13.1183064-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Timers;
 using System.Text;
 using SpaceUnion.StellarObjects;
+using SpaceUnion.Tools;
 
 
 namespace SpaceUnion.Controllers {
@@ -32,13 +33,15 @@ namespace SpaceUnion.Controllers {
 		Camera mainCamera;
 		GUI gui;
 
-		private Tools.AssetManager Assets;
+		private AssetManager Assets;
 
 		static public int worldWidth = 4000;
 		static public int worldHeight = 2000;
 		//static protected bool invinsible;
 		private int SCREEN_WIDTH;
 		private int SCREEN_HEIGHT;
+		private ExplosionEngine explosionEngine;
+		private Explosion explosion;
 
 
 		public GameplayScreen(Game1 game, SpriteBatch batch) {
@@ -60,7 +63,7 @@ namespace SpaceUnion.Controllers {
 			*/
 
 			Assets = Game1.Assets;
-			playerShip = new Ship(Assets.spaceShipTest, new Vector2(200, 200)); //Create new player ship
+			playerShip = new Ship(Assets.ufo, new Vector2(200, 200)); //Create new player ship
 			planet = new Planet(Assets.waterPlanet, new Vector2(1000, 1000));
 
 			gui = new GUI(game, playerShip, planet);
@@ -72,6 +75,8 @@ namespace SpaceUnion.Controllers {
 			projectiles = new List<Projectile>();
 			ships = new List<Ship>();
 
+			//explosionEngine = new ExplosionEngine(Assets);
+			explosion = new Explosion(Assets.explosions, planet.Position, "Fireball 1");
 			// Set the laser to fire every quarter second
 			fireTime = TimeSpan.FromSeconds(.15f);
 		}
@@ -115,8 +120,6 @@ namespace SpaceUnion.Controllers {
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public void Update(GameTime gameTime) {
 
-			//playerShip.checkScreenWrap(Window); //Check if ship will wrap around edges
-			playerShip.checkScreenStop(game.Window);
 			keyState = Keyboard.GetState(); //Get which keys are pressed or released
 			mouseState = Mouse.GetState();
 
@@ -143,10 +146,9 @@ namespace SpaceUnion.Controllers {
 			}
 
 
-			planet.update(gameTime, playerShip);
-			playerShip.update(gameTime);
+			//planet.update(gameTime, playerShip);
 
-
+			explosion.update(gameTime);
 
 			mainCamera.setZoom(mouseState.ScrollWheelValue);
 			mainCamera.Position = playerShip.CenterPosition; // center the camera to player's position
@@ -170,7 +172,7 @@ namespace SpaceUnion.Controllers {
 			}
 
 			UpdateDamageCollision();
-			playerShip.update(gameTime);
+			playerShip.update(gameTime, game.Window);
 			gui.update(playerShip);
 			UpdateProjectiles();
 
@@ -232,11 +234,11 @@ namespace SpaceUnion.Controllers {
 
 			/* Main camera sprite batch */
 			spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend,
-				SamplerState.LinearWrap, null, null, null, mainCamera.getTransformation());
+				null, null, null, null, mainCamera.getTransformation());
 
 
 			drawWorld(); //Draws background
-
+			explosion.draw(spriteBatch);
 			playerShip.draw(spriteBatch); //Draws player space ship
 			planet.draw(spriteBatch);
 			// Draw the Projectiles
@@ -246,7 +248,7 @@ namespace SpaceUnion.Controllers {
 
 			}
 
-
+			
 			spriteBatch.End();
 
 

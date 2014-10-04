@@ -13,7 +13,7 @@ namespace SpaceUnion.Tools {
 	public abstract class Sprite {
 
 
-        public int alphaValue;
+		public int alphaValue;
 
 		protected Texture2D texture;
 		/// <summary>
@@ -44,6 +44,9 @@ namespace SpaceUnion.Tools {
 		public Dictionary<string, AnimationClass> animations
 			= new Dictionary<string, AnimationClass>();
 		protected int frameIndex = 0;
+		/// <summary>
+		/// The animation cycle currently showing
+		/// </summary>
 		public string animation;
 
 		/// <summary>
@@ -67,32 +70,24 @@ namespace SpaceUnion.Tools {
 		/// <summary>
 		/// Get sprites center position in game world coordinates
 		/// </summary>
-		public Vector2 CenterPosition { get { return new Vector2(getX(), getY()); } }
+		public Vector2 CenterPosition { get { return position + origin; } }
 		/// <summary>
 		/// Get sprite's center X position
 		/// </summary>
 		/// <returns></returns>
 		public float getX() {
 
-			return position.X - width/2;
+			return position.X + scale * width / 2;
 		}
-        public int getAlpha()
-        {
-            return alphaValue;
-        }
-
-        public void setAlpha(int alpha)
-        {
-            this.alphaValue = alpha;
-        }
 		/// <summary>
 		/// Get sprite's center Y position
 		/// </summary>
 		/// <returns></returns>
 		public float getY() {
 
-			return position.Y - height/2;
+			return position.Y + scale * height / 2;
 		}
+
 
 		/// <summary>
 		/// Constructor. May want to remove position as a required param.
@@ -103,10 +98,21 @@ namespace SpaceUnion.Tools {
 			texture = tex;
 			position = pos;
 
-			width = texture.Width;
-			height = texture.Height;
+			setSize(texture.Width, texture.Height);
 
-			origin = new Vector2(texture.Width / 2, texture.Height / 2);
+			animation = null;
+		}
+
+		/// <summary>
+		/// Sets width, height and origin of sprite
+		/// </summary>
+		/// <param name="width"></param>
+		/// <param name="height"></param>
+		protected void setSize(int wdth, int hght) {
+			width = wdth;
+			height = hght;
+
+			origin = new Vector2(width / 2, height / 2);
 		}
 
 
@@ -116,16 +122,15 @@ namespace SpaceUnion.Tools {
 		/// <param name="name"></param>
 		/// <param name="row"></param>
 		/// <param name="frameCount"></param>
-		/// <param name="frameSize"></param>
 		/// <param name="anima"></param>
 		public virtual void addAnimation(string name, int row, int frameCount,
-			int frameSize, AnimationClass anima) {
+			AnimationClass anima) {
 
 			Rectangle[] recs = new Rectangle[frameCount];
 
 			for (int i = 0; i < frameCount; i++)
-				recs[i] = new Rectangle(i * width,
-					(row - 1) * height, width, height);
+				recs[i] = new Rectangle(i + i * width,
+					(row) * height, width, height);
 
 			anima.frameCount = frameCount;
 			anima.frames = recs;
@@ -137,16 +142,26 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		/// <param name="sBatch"></param>
 		public virtual void draw(SpriteBatch sBatch) {
-            sBatch.Draw(texture, position, null, Color.White, rotation, origin, scale, SpriteEffects.None, 0);
+
+			if (animation == null)
+				sBatch.Draw(texture, position, null, Color.White, rotation, origin, scale, SpriteEffects.None, 0);
+			else
+				animate(sBatch);
 		}
 
 
-		/// <summary>
-		/// Draw to toolbar *LEGACY CODE*
-		/// </summary>
-		/// <param name="spriteBatch"></param>
-		/// <param name="portraitPosition"></param>
-		public virtual void draw(SpriteBatch spriteBatch, Vector2 portraitPosition) { }
+		private void animate(SpriteBatch sBatch) {
+
+			sBatch.Draw(texture, position,
+				animations[animation].frames[frameIndex],
+				animations[animation].color,
+				animations[animation].rotation,
+				origin,
+				animations[animation].scale,
+				animations[animation].spriteEffect,
+				0f);
+
+		}
 
 
 		/// <summary>

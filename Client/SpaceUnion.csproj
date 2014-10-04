@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Camera.cs" />
+    <Compile Include="Explosion.cs" />
     <Compile Include="HitBox.cs" />
     <Compile Include="GUI.cs" />
     <Compile Include="Controllers\GameplayScreen.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="Ship.cs" />
     <Compile Include="Tools\AssetManager.cs" />
     <Compile Include="Tools\BaseButton.cs" />
+    <Compile Include="Tools\ExplosionEngine.cs" />
     <Compile Include="Tools\Sprite.cs" />
   </ItemGroup>
   <ItemGroup>

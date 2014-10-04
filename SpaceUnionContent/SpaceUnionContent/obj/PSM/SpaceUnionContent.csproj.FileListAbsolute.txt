@@ -113,3 +113,4 @@ C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\obj\PSM\SpaceUnionContent.cspr
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\obj\PSM\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\obj\PSM\IgnoreMe.dll
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fireballs.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fireballs (test).xnb

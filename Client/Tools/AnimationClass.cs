@@ -21,7 +21,7 @@ namespace SpaceUnion {
 		public Color color = Color.White;
 		public Vector2 center;
 		public float rotation = 0f;
-		public float scale = 1f;
+		public float scale = 1.0f;
 		public SpriteEffects spriteEffect;
 		public bool isLooping = true;
 		public int frameCount;

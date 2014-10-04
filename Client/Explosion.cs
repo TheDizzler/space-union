@@ -8,50 +8,59 @@ using SpaceUnion.Tools;
 
 
 namespace SpaceUnion {
+
 	class Explosion : Sprite {
 
-		//private double startTime;
+		
 
 
-		public Explosion(Texture2D tex, Vector2 pos)
+		public Explosion(Texture2D tex, Vector2 pos, String explosiontype)
 			: base(tex, pos) {
 
 			// the size of each tile
-			width = height = 16; // must be explicitly set for tile sheets
-
+			setSize(16, 16); // must be explicitly set for tile sheets
+			
 			AnimationClass anima = new AnimationClass();
-			addAnimation("Fireball 1", 0, 4, 16, anima.copy());
-			addAnimation("Fireball 2", 1, 4, 16, anima.copy());
-			addAnimation("Fireball 3", 2, 4, 16, anima.copy());
+			addAnimation("Fireball 1", 0, 4, anima.copy());
+			addAnimation("Fireball 2", 1, 4, anima.copy());
+			addAnimation("Fireball 3", 2, 4, anima.copy());
 
-			animation = "Fireball 1";
+			// the initial animation
+			animation = explosiontype; // !Good idea to set this! 
+
+			frameLength = .25f;
 		}
 
+		public Explosion(Texture2D explosions, Vector2 location)
+			: base(explosions, location) {
+			
 
-		//public void explode(GameTime gameTime) {
-
-		//	startTime = gameTime.TotalGameTime.TotalMilliseconds;
-		//}
+		}
 
 
 		public void update(GameTime gameTime) {
 
-			//frameTimeElapsed = (float) (gameTime.TotalGameTime.TotalMilliseconds - startTime);
 
 			frameTimeElapsed += (float) gameTime.ElapsedGameTime.TotalSeconds;
 
-			if (frameTimeElapsed >= frameLength)
-				frameIndex++;
-
-		}
-
-
-		public void draw(SpriteBatch batch) {
-
-
+			if (frameTimeElapsed >= frameLength) {
+				frameTimeElapsed = 0;
+				if (frameIndex >= animations[animation].frameCount - 1)
+					frameIndex = 0;
+				else
+					frameIndex++;
+			}
 
 
 		}
+
+
+		override public void draw(SpriteBatch batch) {
+
+			base.draw(batch);
+		}
+
+
 
 	}
 }
