@@ -79,7 +79,6 @@ namespace Server_Application
             while (true)
             {
                 Object chatData = DataControl.receiveTCPData(TCPListeners[1]);
-
                 lock (ownerLock)
                 {
                     owner.addMessageToQueue((GameMessage)chatData);
