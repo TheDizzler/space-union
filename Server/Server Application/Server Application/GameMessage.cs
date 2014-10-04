@@ -9,6 +9,7 @@ namespace Server_Application
     /// <summary>
     /// A chat message sent by a player.
     /// </summary>
+    [Serializable]
     class GameMessage : Data
     {
         /// <summary>

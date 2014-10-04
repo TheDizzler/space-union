@@ -143,28 +143,8 @@ namespace Server_Application
             BinaryFormatter bf = new BinaryFormatter();
             bf.AssemblyFormat = FormatterAssemblyStyle.Simple;
             bf.Binder = new TransmissionSerializationBinder();
-            using (MemoryStream ms = new MemoryStream())
+            using (MemoryStream ms = new MemoryStream(target))
             {
-                try
-                {
-                    ms.Write(target, 0, target.Length);
-                }
-                catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return null; }
-                catch (NotSupportedException e) { Console.WriteLine(e.ToString()); return null; }
-                catch (ArgumentOutOfRangeException e) { Console.WriteLine(e.ToString()); return null; }
-                catch (ArgumentException e) { Console.WriteLine(e.ToString()); return null; }
-                catch (IOException e) { Console.WriteLine(e.ToString()); return null; }
-                catch (ObjectDisposedException e) { Console.WriteLine(e.ToString()); return null; }
-
-                try
-                {
-                    ms.Seek(0, SeekOrigin.Begin);
-                }
-                catch (IOException e) { Console.WriteLine(e.ToString()); return null; }
-                catch (ArgumentOutOfRangeException e) { Console.WriteLine(e.ToString()); return null; }
-                catch (ArgumentException e) { Console.WriteLine(e.ToString()); return null; }
-                catch (ObjectDisposedException e) { Console.WriteLine(e.ToString()); return null; }
-
                 object data = null;
                 try
                 {
