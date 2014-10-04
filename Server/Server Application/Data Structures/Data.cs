@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server_Application
+namespace Data_Structures
 {
     /// <summary>
     /// This is a class used to encapsulate all different types
@@ -20,7 +20,7 @@ namespace Server_Application
     /// 3 = ErrorMessage class
     /// </summary>
     [Serializable]
-    class Data
+    public class Data
     {
         /// <summary>
         /// The type of this object.

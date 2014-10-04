@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server_Application
+namespace Data_Manipulation
 {
-    class Constants
+    public class Constants
     {
         /// <summary>
         /// The number of total UDP outgoing or incoming connections. This number

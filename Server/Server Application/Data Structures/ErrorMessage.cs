@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server_Application
+namespace Data_Structures
 {
     [Serializable]
-    class ErrorMessage : Data
+    public class ErrorMessage : Data
     {
         public Player Player { get; set; }
         public string MessageCode { get; set; }

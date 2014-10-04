@@ -39,21 +39,26 @@ namespace Server_Application
                     case "threads":
                         threadsRunning();
                         break;
+                    case "rooms":
+                        server.getNumberOfRooms();
+                        break;
+                    case "players":
+                        server.getNumberOfOnlinePlayers();
+                        break;
+                    case "searching":
+                        server.getNumberOfSearchingPlayers();
+                        break;
                     case "clear":
                         Console.Clear();
                         break;
                     case "exit":
                         Environment.Exit(0);
                         break;
+                    default:
+                        Console.WriteLine();
+                        break;
                 }
             }
-        }
-
-        /// <summary>
-        /// Sets up all the necessary threads for the operation of the server.
-        /// </summary>
-        private static void serverSetup()
-        {
 
         }
 
@@ -62,8 +67,7 @@ namespace Server_Application
         /// </summary>
         private static void usedMemory()
         {
-            Console.WriteLine("Bytes used by this application: " + Process.GetCurrentProcess().PrivateMemorySize64);
-            Console.WriteLine();
+            Console.WriteLine("Bytes used by this application: " + Process.GetCurrentProcess().PrivateMemorySize64 + "\n");
         }
 
         /// <summary>
@@ -71,8 +75,7 @@ namespace Server_Application
         /// </summary>
         private static void threadsRunning()
         {
-            Console.WriteLine("Number of threads running: " + Process.GetCurrentProcess().Threads.Count);
-            Console.WriteLine();
+            Console.WriteLine("Number of threads running: " + Process.GetCurrentProcess().Threads.Count + "\n");
         }
 
         /// <summary>
@@ -84,9 +87,11 @@ namespace Server_Application
             Console.WriteLine("players - Displays the number of currently active players.");
             Console.WriteLine("threads - Displays the number of currently running threads.");
             Console.WriteLine("ip - Displays the current IP address.");
+            Console.WriteLine("rooms - Displays the number of active game rooms.");
+            Console.WriteLine("players - Displays the number of players online.");
+            Console.WriteLine("searching - Displays the number of players looking for a game.");
             Console.WriteLine("clear - Clears the console screen.");
-            Console.WriteLine("exit - Shuts down the server.");
-            Console.WriteLine();
+            Console.WriteLine("exit - Shuts down the server." + "\n");
         }
 
         /// <summary>
@@ -109,8 +114,7 @@ namespace Server_Application
             {
                 if (ipv4.AddressFamily == AddressFamily.InterNetwork)
                 {
-                    Console.WriteLine("Current IP address is: " + ipv4.ToString());
-                    Console.WriteLine();
+                    Console.WriteLine("Current IP address is: " + ipv4.ToString() + "\n");
                 }
             }
         }

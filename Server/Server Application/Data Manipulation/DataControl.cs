@@ -11,14 +11,14 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server_Application
+namespace Data_Manipulation
 {
     /// <summary>
     /// This class primarily houses methods used in the
     /// transmission and reception of data from different
     /// clients.
     /// </summary>
-    class DataControl
+    public class DataControl
     {
         /// <summary>
         /// Sends data to the specified IP address and port.

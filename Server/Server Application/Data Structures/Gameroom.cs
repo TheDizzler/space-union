@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server_Application
+namespace Data_Structures
 {
     /// <summary>
     /// An actual gameroom containing a list of players and any other necessary data.
     /// </summary>
-    class Gameroom
+    public class Gameroom
     {
         List<GameData> list;
         public int RoomNumber { get; set; }

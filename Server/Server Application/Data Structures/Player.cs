@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server_Application
+namespace Data_Structures
 {
     /// <summary>
     /// This class contains basic data about the player.
     /// </summary>
     [Serializable]
-    class Player : Data
+    public class Player : Data
     {
         /// <summary>
         /// The username of the current player.

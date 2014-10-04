@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server_Application
+namespace Data_Structures
 {
     /// <summary>
     /// This is a class which contains the main data about
@@ -13,7 +13,7 @@ namespace Server_Application
     /// with it.
     /// </summary>
     [Serializable]
-    class GameData : Data
+    public class GameData : Data
     {
         /// <summary>
         /// The username of the player.

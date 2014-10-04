@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server_Application
+namespace Data_Structures
 {
     /// <summary>
     /// An initial message indicating the game has been
     /// created and provides the game client with the
     /// necessary connection information.
     /// </summary>
-    class GameSetupMessage : Data
+    public class GameSetupMessage : Data
     {
         int roomnumber;
         short incomingport;

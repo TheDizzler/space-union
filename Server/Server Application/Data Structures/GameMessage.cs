@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server_Application
+namespace Data_Structures
 {
     /// <summary>
     /// A chat message sent by a player.
     /// </summary>
     [Serializable]
-    class GameMessage : Data
+    public class GameMessage : Data
     {
         /// <summary>
         /// The username of the player sending the message.
