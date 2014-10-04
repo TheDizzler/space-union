@@ -52,6 +52,8 @@
     <Compile Include="SpaceUnionDatabase.cs" />
     <Compile Include="SpaceUnionDatabaseHelper.cs" />
     <Compile Include="SpaceUnionQueryBuilder.cs" />
+    <Compile Include="SpaceUnionUsersDatabaseHelper.cs" />
+    <Compile Include="SpaceUnionUsersQueries.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

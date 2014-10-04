@@ -7,13 +7,19 @@ using MySql.Data.MySqlClient;
 
 namespace SpaceUnionDatabase
 {
-    class SpaceUnionDatabaseHelper
+    class SpaceUnionUsersDatabaseHelper
     {
         /// <summary>
-        /// R
+        /// Allows for opening a new connection to the database
         /// </summary>
         private SpaceUnionConnectSettings dbConnect = new SpaceUnionConnectSettings();
+
+        /// <summary>
+        /// Used to call queries that will be called on the database
+        /// </summary>
+        private SpaceUnionUsersQueries userQuery = new SpaceUnionUsersQueries();
  
+
         /// <summary>
         /// Adds a new user to the database (for user registration)
         /// </summary>
@@ -28,8 +34,7 @@ namespace SpaceUnionDatabase
             {
                 try
                 {
-                    string sql;
-                    sql = SpaceUnionQueryBuilder.addNewUserQuery(username, password, email);
+                    string sql = userQuery.AddNewUser(username, password, email);
                     
                     using (MySqlCommand execSql = new MySqlCommand(sql, conn) )
                     {
@@ -68,25 +73,21 @@ namespace SpaceUnionDatabase
             {
                 try
                 {    
-                    string sql;
-                    sql = SpaceUnionQueryBuilder.attemptUserLogin(username, password);
+                    string sql = userQuery.AttemptUserLogin(username, password);
 
                     using (MySqlCommand execSql = new MySqlCommand(sql, conn) )
                     {
                         conn.Open();
                         execSql.ExecuteNonQuery();
 
-                        //MessageBox.Show("query non exe");
                         using (MySqlDataReader reader = execSql.ExecuteReader() )
                         {
-                            //MessageBox.Show("query after reader");
                             if (!reader.HasRows)
                             {
-                                //MessageBox.Show("Sorry, your username or password is incorrect");
+                                //incorrect login info
                                 return false;
                             }
                             extractUserData(ref userInfo, reader);
-                            //MessageBox.Show("after extract user data");
                         }
                     }
                 }
@@ -112,18 +113,11 @@ namespace SpaceUnionDatabase
         extractUserData(ref string[] userData, MySqlDataReader reader)
         {
             //MessageBox.Show("start of extract data");       
-            while (reader.Read())
-            {
-                for (int i = 0; i < 3; i++)
-                {
-                    if (reader.GetValue(i) != DBNull.Value)
-                    {
-                        string data = (string)reader.GetValue(i);
-                        userData[i] = data;
-                        //MessageBox.Show("inside loop num: " + num + "string is: " + working);
-                    }
-                }
-            }
+            //while (reader.Read())
+            //{
+                for (int i = 0; i < 4; i++)
+                    userData[i] = (string)reader.GetValue(i);                
+           // }
         }
     }
 }

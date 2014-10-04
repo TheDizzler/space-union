@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 
 namespace SpaceUnionDatabase
 {
@@ -33,17 +34,21 @@ namespace SpaceUnionDatabase
         private const string password = "4lSpaceunion";
 
         /// <summary>
-        /// Returns the connection string used to connect to the space union database
+        /// The connection string used to connect to the space union database
         /// </summary>
-        public static string CONNECTION_STRING
+        private const string connectionString = "SERVER="   + server   + ";" +
+                                                "DATABASE=" + database + ";" +
+                                                "UID="      + uid      + ";" +
+                                                "PASSWORD=" + password + ";";
+
+        /// <summary>
+        /// Sets up a new connection to the database
+        /// </summary>
+        /// <returns>A new database connection</returns>
+        public MySqlConnection Connect()
         {
-            get 
-            {
-                return "SERVER="   + server   + ";" +
-                       "DATABASE=" + database + ";" +
-                       "UID="      + uid      + ";" +
-                       "PASSWORD=" + password + ";";
-            }
+            return new MySqlConnection(connectionString);
         }
+    }
     }
 }
