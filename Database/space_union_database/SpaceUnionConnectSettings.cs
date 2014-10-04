@@ -8,30 +8,33 @@ using MySql.Data.MySqlClient;
 namespace SpaceUnionDatabase
 {
     /// <summary>
-    /// Contains settings to connect to the space union database.
-    /// This class is only to be used within this solution.
+    /// Contains the settings to connect to the space union database
+    /// and a single method to return a new connection to the database.
+    
+    /// Author:       Robert Purdey
+    /// Last updated: 03/10/14 (dd/mm/yy)
     /// </summary>
     class SpaceUnionConnectSettings
     {
         /// <summary>
         /// Server http address for the hosted database
         /// </summary>
-        private const string server = "mysql1.000webhost.com";
+        private const string server = "sql3.freemysqlhosting.net";
 
         /// <summary>
         /// Database to connect to
         /// </summary>
-        private const string database = "a3188200_SpaceUn";
+        private const string database = "sql353997";
 
         /// <summary>
         /// UserID to allow connection to the database
         /// </summary>
-        private const string uid = "a3188200_SpaceUn";
+        private const string uid = "sql353997";
         
         /// <summary>
         /// Password to allow connection to the database
         /// </summary>
-        private const string password = "4lSpaceunion";
+        private const string password = "aY9!iD6!";
 
         /// <summary>
         /// The connection string used to connect to the space union database
@@ -42,13 +45,12 @@ namespace SpaceUnionDatabase
                                                 "PASSWORD=" + password + ";";
 
         /// <summary>
-        /// Sets up a new connection to the database
+        /// Sets up a new connection to the database and returns it
         /// </summary>
         /// <returns>A new database connection</returns>
         public MySqlConnection Connect()
         {
             return new MySqlConnection(connectionString);
         }
-    }
     }
 }

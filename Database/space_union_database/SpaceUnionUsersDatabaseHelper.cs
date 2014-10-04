@@ -4,9 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using System.Windows.Forms;
 
 namespace SpaceUnionDatabase
 {
+    /// <summary>
+    /// Contains the functionality to write and read from the Users table
+    /// These methods are to be called within the SpaceUnionDatabaseAccess class
+    /// 
+    /// Author:       Robert Purdey
+    /// Last updated: 03/10/14 (dd/mm/yy)
+    /// </summary>
     class SpaceUnionUsersDatabaseHelper
     {
         /// <summary>
@@ -28,7 +36,7 @@ namespace SpaceUnionDatabase
         /// <param name="email">email address of the new user</param>
         /// <returns>True if the user was added, false otheriwse</returns>
         public bool
-        addNewUser(string username, string password, string email)
+        AddNewUser(string username, string password, string email)
         {
             using (MySqlConnection conn = dbConnect.Connect() )
             {
@@ -44,7 +52,7 @@ namespace SpaceUnionDatabase
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message);
                     return false;
                 }
                 finally
@@ -62,13 +70,16 @@ namespace SpaceUnionDatabase
         /// </summary>
         /// <param name="username">name of the user to login</param>
         /// <param name="password">pasword of the user</param>
-        /// <param name="userInfo"-ref> string the info will be stored to</param>
+        /// <param name="userInfo">string the info will be stored to, pass in
+        ///                        string[] of size 3</param>
         /// <returns>true if user login is successful and data was
-        ///          pulled, false otheriwse</returns>
+        ///          pulled, false otheriwse.
+        ///          
+        ///          The data stored in userInfo will be ordered;
+        ///          username, email, image path</returns>
         public bool
-        userLogin(string username, string password, ref string[] userInfo)
+        UserLogin(string username, string password, string[] userInfo)
         {
-
             using (MySqlConnection conn = dbConnect.Connect() )
             {
                 try
@@ -87,13 +98,13 @@ namespace SpaceUnionDatabase
                                 //incorrect login info
                                 return false;
                             }
-                            extractUserData(ref userInfo, reader);
+                            this.ExtractUserData(userInfo, reader);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message);
                     return false;
                 }
                 finally
@@ -105,19 +116,19 @@ namespace SpaceUnionDatabase
         }
 
         /// <summary>
-        /// Reads user data from the db into the userData string
+        /// -- Helper method for UserLogin
+        /// reads user data from the db into the userData string
         /// </summary>
-        /// <param name="userData">User data retrieved from the database</param>
+        /// <param name="userData">User data retrieved from the database, should be a
+        ///                        string[] of size 3</param>
         /// <param name="reader">Reader used to read back userdata from the database</param>
         private void
-        extractUserData(ref string[] userData, MySqlDataReader reader)
+        ExtractUserData(string[] userData, MySqlDataReader reader)
         {
-            //MessageBox.Show("start of extract data");       
-            //while (reader.Read())
-            //{
-                for (int i = 0; i < 4; i++)
-                    userData[i] = (string)reader.GetValue(i);                
-           // }
+            while (reader.Read() )
+                for (int i = 0; i < 3; i++)
+                    userData[i] = (string)reader.GetValue(i);
         }
+
     }
 }

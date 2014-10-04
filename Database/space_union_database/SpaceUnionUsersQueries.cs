@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace SpaceUnionDatabase
 {
+    /// <summary>
+    /// Contains the queries used to read/write to the Users table
+    /// These queries are to be called within SpaceUnionUsersDatabaseHelper class
+    /// 
+    /// Author:       Robert Purdey
+    /// Last updated: 03/10/14 (dd/mm/yy)
+    /// </summary>
     class SpaceUnionUsersQueries
     {
         /// <summary>
@@ -19,9 +26,9 @@ namespace SpaceUnionDatabase
         AddNewUser(string username, string password, string email)
         {
             string query = "INSERT INTO Users (userName, userPassword, userEmail)" +
-                                   " VALUES (  '" + username + "', " +
-                                              "'" + password + "', " +
-                                              "'" + email    + "')";
+                                " VALUES (  '" + username + "', " +
+                                           "'" + password + "', " +
+                                           "'" + email    + "')";
             return query;
         }
 
@@ -34,10 +41,10 @@ namespace SpaceUnionDatabase
         public string
         AttemptUserLogin(string username, string password)
         {
-            string mySql = "SELECT userName FROM Users" +
-                             " WHERE Username = '" + username + "' AND" +
-                                   " Password = '" + password + "'";
-            return mySql;
+            string query = "SELECT userName, userEmail, userImage FROM Users"  +
+                                " WHERE userName     = '" + username + "' AND" +
+                                      " userPassword = '" + password + "'";
+            return query;
         }
     }
 }

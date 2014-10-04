@@ -49,9 +49,7 @@
   <ItemGroup>
     <Compile Include="SpaceUnionConnectSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpaceUnionDatabase.cs" />
-    <Compile Include="SpaceUnionDatabaseHelper.cs" />
-    <Compile Include="SpaceUnionQueryBuilder.cs" />
+    <Compile Include="SpaceUnionDatabaseAccess.cs" />
     <Compile Include="SpaceUnionUsersDatabaseHelper.cs" />
     <Compile Include="SpaceUnionUsersQueries.cs" />
   </ItemGroup>
