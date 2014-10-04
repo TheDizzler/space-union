@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+
+namespace SpaceUnionDatabase
+{
+    /// <summary>
+    /// Used to access read/write methods for all tables
+    /// </summary>
+    class SpaceUnionDatabaseAccess
+    {
+        /// <summary>
+        /// Allows access to reading/writing methods for the Users table
+        /// </summary>
+        SpaceUnionUsersDatabaseHelper usersTableAccess = new SpaceUnionUsersDatabaseHelper();
+
+        /// <summary>
+        /// Adds a new user to the Users table (for user registration)
+        /// </summary>
+        /// <param name="username">username of the new user</param>
+        /// <param name="password">password of the user</param>
+        /// <param name="email">email address of the new user</param>
+        /// <returns>True if the user was added, false otheriwse</returns>
+        public bool
+        AddNewUser(string username, string password, string email)
+        {
+            return usersTableAccess.AddNewUser(username, password, email);
+        }
+
+        /// <summary>
+        /// Validates that a users login information for that user is correct,
+        /// if so logs the user in. Also gets user information if the user has
+        /// logged in correctly.
+        /// </summary>
+        /// <param name="username">name of the user to login</param>
+        /// <param name="password">pasword of the user</param>
+        /// <param name="userInfo">string the info will be stored to, pass in
+        ///                        string[] of size 3</param>
+        /// <returns>true if user login is successful and data was
+        ///          pulled, false otheriwse.
+        ///          
+        ///          The data stored in userInfo will be ordered;
+        ///          username, email, image path</returns>
+        public bool
+        UserLogin(string username, string password, string[] userInfo)
+        {
+            return usersTableAccess.UserLogin(username, password, userInfo);
+        }
+    }
+}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Data_Structures;
 
 //complete game room creation system
 namespace Server_Application
@@ -55,17 +56,17 @@ namespace Server_Application
 
         public void getNumberOfRooms()
         {
-            Console.WriteLine("Number of currently active game rooms: " + gamerooms.Count);
+            Console.WriteLine("Number of currently active game rooms: " + gamerooms.Count + "\n");
         }
 
         public void getNumberOfOnlinePlayers()
         {
-            Console.WriteLine("Number of online players: " + onlineplayers.Count);
+            Console.WriteLine("Number of online players: " + onlineplayers.Count + "\n");
         }
 
         public void getNumberOfSearchingPlayers()
         {
-            Console.WriteLine("Number of players searching for games: " + searchingplayers.Count);
+            Console.WriteLine("Number of players searching for games: " + searchingplayers.Count + "\n");
         }
         /// <summary>
         /// Add the given player to the list of online players.
