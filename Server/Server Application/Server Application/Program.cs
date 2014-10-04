@@ -59,7 +59,6 @@ namespace Server_Application
                         break;
                 }
             }
-
         }
 
         /// <summary>
@@ -109,7 +108,6 @@ namespace Server_Application
             catch (ArgumentOutOfRangeException e) { Console.WriteLine("Method: getLocalIPv$Address()\n" + e.ToString()); return; }
             catch (ArgumentException e) { Console.WriteLine("Method: getLocalIPv$Address()\n" + e.ToString()); return; }
             catch (SocketException e) { Console.WriteLine("Method: getLocalIPv$Address()\n" + e.ToString()); return; }
-
             foreach (IPAddress ipv4 in host.AddressList)
             {
                 if (ipv4.AddressFamily == AddressFamily.InterNetwork)

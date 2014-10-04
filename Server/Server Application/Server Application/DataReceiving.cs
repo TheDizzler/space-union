@@ -35,17 +35,23 @@ namespace Server_Application
 
         public DataReceiving(Server owner)
         {
+            this.owner = owner;
+            setup();
+        }
+
+        /// <summary>
+        /// Sets up the server by starting all of its main components in new threads.
+        /// </summary>
+        private void setup()
+        {
             for (int x = 0; x < Constants.NumberOfUdpClients; x++)
                 UDPListeners[x] = new UdpClient(Constants.UDPInPortOne + x);
-            for (int x = 0; x < Constants.NumberOfTcpClients; x++) 
+            for (int x = 0; x < Constants.NumberOfTcpClients; x++)
                 TCPListeners[x] = new TcpListener(IPAddress.Parse("0.0.0.0"), 6980 + x);
             for (int x = 0; x < Constants.NumberOfTcpClients; x++)
                 TCPListeners[x].Start();
             for (int x = 0; x < Constants.NumberOfUdpClients; x++)
                 new Thread(receiveClientData).Start(UDPListeners[x]);
-
-            this.owner = owner;
-
             new Thread(receiveLoginRequests).Start();
             new Thread(receiveChatMessages).Start();
         }
