@@ -73,5 +73,18 @@ namespace SpaceUnionDatabase
         {
             return usersTableAccess.EditUserBlockStatus(username, blockStatus);
         }
+
+        /// <summary>
+        /// Query to change a users password
+        /// </summary>
+        /// <param name="username">User to edit password for</param>
+        /// <param name="oldPassword">The users old password (verifies correct user)</param>
+        /// <param name="newPassword">The users new password</param>
+        /// <returns>Query string to update user's password</returns>
+        public bool
+        EditUserPassword(string username, string oldPassword, string newPassword)
+        {
+            return usersTableAccess.EditUserPassword(username, oldPassword, newPassword);
+        }
     }
 }

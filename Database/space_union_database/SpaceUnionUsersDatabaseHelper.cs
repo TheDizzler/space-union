@@ -198,5 +198,40 @@ namespace SpaceUnionDatabase
             return true;
         }
 
+        /// <summary>
+        /// Query to change a users password
+        /// </summary>
+        /// <param name="username">User to edit password for</param>
+        /// <param name="oldPassword">The users old password (verifies correct user)</param>
+        /// <param name="newPassword">The users new password</param>
+        /// <returns>Query string to update user's password</returns>
+        public bool
+        EditUserPassword(string username, string oldPassword, string newPassword)
+        {
+            using (MySqlConnection conn = dbConnect.Connect() )
+            {
+                try
+                {
+                    string sql = userQuery.EditUserPassword(username, oldPassword, newPassword);
+
+                    using (MySqlCommand execSql = new MySqlCommand(sql, conn) )
+                    {
+                        conn.Open();
+                        execSql.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return false;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }      
+            return true;
+        }
+
     }
 }

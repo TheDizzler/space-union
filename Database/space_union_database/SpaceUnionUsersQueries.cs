@@ -67,13 +67,30 @@ namespace SpaceUnionDatabase
         /// </summary>
         /// <param name="username">User to edit blocked status for</param>
         /// <param name="blockStatus">What to change the blockStatus to</param>
-        /// <returns>Query string to update user's avatar</returns>
+        /// <returns>Query string to update user's blocked status</returns>
         public string
         EditUserBlockStatus(string username, string blockStatus)
         {
             string mySql = "UPDATE Users" +
                              " SET isBlocked  = '" + blockStatus + "'" +
                              " WHERE Username = '" + username    + "'";
+            return mySql;
+        }
+
+        /// <summary>
+        /// Query to change a users password
+        /// </summary>
+        /// <param name="username">User to edit password for</param>
+        /// <param name="oldPassword">The users old password (verifies correct user)</param>
+        /// <param name="newPassword">The users new password</param>
+        /// <returns>Query string to update user's password</returns>
+        public string
+        EditUserPassword(string username, string oldPassword, string newPassword)
+        {
+            string mySql = "UPDATE Users" +
+                             " SET userPassword   = '" + newPassword + "'" +
+                             " WHERE userName     = '" + username    + "' AND " +
+                             "       userPassword = '" + oldPassword + "'";
             return mySql;
         }
     }
