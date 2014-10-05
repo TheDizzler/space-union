@@ -49,5 +49,29 @@ namespace SpaceUnionDatabase
         {
             return usersTableAccess.UserLogin(username, password, userInfo);
         }
+
+        /// <summary>
+        /// Edits a user's avatar
+        /// </summary>
+        /// <param name="username">user to change avatar for</param>
+        /// <param name="userImage">image path for users avatar</param>
+        /// <returns>True if the users image path was edited, false otheriwse</returns>
+        public bool
+        EditUserImage(string username, string imagePath)
+        {
+            return usersTableAccess.EditUserImage(username, imagePath);
+        }
+
+        /// <summary>
+        /// Edits a user's blocked status
+        /// </summary>
+        /// <param name="username">user to change block status for</param>
+        /// <param name="blockStatus">block status to change to</param>
+        /// <returns>True if the users block status was changed, false otheriwse</returns>
+        public bool
+        EditUserBlockStatus(string username, string blockStatus)
+        {
+            return usersTableAccess.EditUserBlockStatus(username, blockStatus);
+        }
     }
 }

@@ -41,10 +41,40 @@ namespace SpaceUnionDatabase
         public string
         AttemptUserLogin(string username, string password)
         {
-            string query = "SELECT userName, userEmail, userImage FROM Users"  +
+            string query = "SELECT userName, userEmail, userImage, isBlocked, isAdmin FROM Users"  +
                                 " WHERE userName     = '" + username + "' AND" +
                                       " userPassword = '" + password + "'";
             return query;
+        }
+
+        /// <summary>
+        /// Query to update a users avatar
+        /// </summary>
+        /// <param name="username">User to edit profile info for</param>
+        /// <param name="imagePath">path to users image for their avatar</param>
+        /// <returns>Query string to update user's avatar</returns>
+        public string
+        EditUserImage(string username, string imagePath)
+        {
+            string mySql = "UPDATE Users" +
+                             " SET userImage  = '" + imagePath + "'" +
+                             " WHERE Username = '" + username  + "'";
+            return mySql;
+        }
+
+        /// <summary>
+        /// Query to update a users blocked status
+        /// </summary>
+        /// <param name="username">User to edit profile info for</param>
+        /// <param name="imagePath">path to users image for their avatar</param>
+        /// <returns>Query string to update user's avatar</returns>
+        public string
+        EditUserBlockStatus(string username, string blockStatus)
+        {
+            string mySql = "UPDATE Users" +
+                             " SET isBlocked  = '" + blockStatus + "'" +
+                             " WHERE Username = '" + username    + "'";
+            return mySql;
         }
     }
 }

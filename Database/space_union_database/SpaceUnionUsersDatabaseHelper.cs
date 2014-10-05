@@ -130,5 +130,73 @@ namespace SpaceUnionDatabase
                     userData[i] = (string)reader.GetValue(i);
         }
 
+                /// <summary>
+        /// Edits a user's avatar
+        /// </summary>
+        /// <param name="username">user to change avatar for</param>
+        /// <param name="userImage">image path for users avatar</param>
+        /// <returns>True if the users image path was edited, false otheriwse</returns>
+        public bool
+        EditUserImage(string username, string imagePath)
+        {
+            using (MySqlConnection conn = dbConnect.Connect() )
+            {
+                try
+                {
+                    string sql = userQuery.EditUserImage(username, imagePath);
+
+                    using (MySqlCommand execSql = new MySqlCommand(sql, conn) )
+                    {
+                        conn.Open();
+                        execSql.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return false;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }      
+            return true;
+        }
+
+        /// <summary>
+        /// Edits a user's blocked status
+        /// </summary>
+        /// <param name="username">user to change block status for</param>
+        /// <param name="blockStatus">block status to change to</param>
+        /// <returns>True if the users block status was changed, false otheriwse</returns>
+        public bool
+        EditUserBlockStatus(string username, string blockStatus)
+        {
+            using (MySqlConnection conn = dbConnect.Connect() )
+            {
+                try
+                {
+                    string sql = userQuery.EditUserBlockStatus(username, blockStatus);
+
+                    using (MySqlCommand execSql = new MySqlCommand(sql, conn) )
+                    {
+                        conn.Open();
+                        execSql.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return false;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }      
+            return true;
+        }
+
     }
 }
