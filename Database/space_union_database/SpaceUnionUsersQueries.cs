@@ -50,7 +50,7 @@ namespace SpaceUnionDatabase
         /// <summary>
         /// Query to update a users avatar
         /// </summary>
-        /// <param name="username">User to edit profile info for</param>
+        /// <param name="username">User to edit profile avatar for</param>
         /// <param name="imagePath">path to users image for their avatar</param>
         /// <returns>Query string to update user's avatar</returns>
         public string
@@ -65,8 +65,8 @@ namespace SpaceUnionDatabase
         /// <summary>
         /// Query to update a users blocked status
         /// </summary>
-        /// <param name="username">User to edit profile info for</param>
-        /// <param name="imagePath">path to users image for their avatar</param>
+        /// <param name="username">User to edit blocked status for</param>
+        /// <param name="blockStatus">What to change the blockStatus to</param>
         /// <returns>Query string to update user's avatar</returns>
         public string
         EditUserBlockStatus(string username, string blockStatus)
