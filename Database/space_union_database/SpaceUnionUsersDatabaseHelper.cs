@@ -5,15 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
+using System.Data;
 
 namespace SpaceUnionDatabase
 {
     /// <summary>
-    /// Contains the functionality to write and read from the Users table
-    /// These methods are to be called within the SpaceUnionDatabaseAccess class
-    /// 
-    /// Author:       Robert Purdey
-    /// Last updated: 03/10/14 (dd/mm/yy)
+    /// Containts functionality to read and write to the Users table
     /// </summary>
     class SpaceUnionUsersDatabaseHelper
     {
@@ -42,17 +39,21 @@ namespace SpaceUnionDatabase
             {
                 try
                 {
-                    string sql = userQuery.AddNewUser(username, password, email);
+                    string sql = userQuery.AddNewUser();
                     
                     using (MySqlCommand execSql = new MySqlCommand(sql, conn) )
                     {
+                        execSql.Parameters.AddWithValue("@userName"    , username); 
+                        execSql.Parameters.AddWithValue("@userPassword", password);
+                        execSql.Parameters.AddWithValue("@userEmail"   , email);
+                        
                         conn.Open();
                         execSql.ExecuteNonQuery();
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    //MessageBox.Show(ex.Message);
                     return false;
                 }
                 finally
@@ -71,12 +72,13 @@ namespace SpaceUnionDatabase
         /// <param name="username">name of the user to login</param>
         /// <param name="password">pasword of the user</param>
         /// <param name="userInfo">string the info will be stored to, pass in
-        ///                        string[] of size 3</param>
+        ///                        string[] of size 5</param>
         /// <returns>true if user login is successful and data was
         ///          pulled, false otheriwse.
         ///          
         ///          The data stored in userInfo will be ordered;
-        ///          username, email, image path</returns>
+        ///          username, email, image path, if they are blocked and if they
+        ///          are an admin user</returns>
         public bool
         UserLogin(string username, string password, string[] userInfo)
         {
@@ -84,10 +86,13 @@ namespace SpaceUnionDatabase
             {
                 try
                 {    
-                    string sql = userQuery.AttemptUserLogin(username, password);
+                    string sql = userQuery.AttemptUserLogin();
 
                     using (MySqlCommand execSql = new MySqlCommand(sql, conn) )
                     {
+                        execSql.Parameters.AddWithValue("@userName"    , username); 
+                        execSql.Parameters.AddWithValue("@userPassword", password);
+
                         conn.Open();
                         execSql.ExecuteNonQuery();
 
@@ -104,7 +109,7 @@ namespace SpaceUnionDatabase
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    //MessageBox.Show(ex.Message);
                     return false;
                 }
                 finally
@@ -116,17 +121,15 @@ namespace SpaceUnionDatabase
         }
 
         /// <summary>
-        /// -- Helper method for UserLogin
-        /// reads user data from the db into the userData string
+        /// Reads user data from the db into the userData string
         /// </summary>
-        /// <param name="userData">User data retrieved from the database, should be a
-        ///                        string[] of size 3</param>
+        /// <param name="userData">User data retrieved from the database</param>
         /// <param name="reader">Reader used to read back userdata from the database</param>
         private void
         ExtractUserData(string[] userData, MySqlDataReader reader)
         {
             while (reader.Read() )
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 5; i++)
                     userData[i] = (string)reader.GetValue(i);
         }
 
@@ -144,10 +147,14 @@ namespace SpaceUnionDatabase
             {
                 try
                 {
-                    string sql = userQuery.EditUserImage(username, password, imagePath);
+                    string sql = userQuery.EditUserImage();
 
                     using (MySqlCommand execSql = new MySqlCommand(sql, conn) )
                     {
+                        execSql.Parameters.AddWithValue("@userName"    , username); 
+                        execSql.Parameters.AddWithValue("@userPassword", password);
+                        execSql.Parameters.AddWithValue("@userImage"   , imagePath);
+
                         conn.Open();
                         execSql.ExecuteNonQuery();
                     }
@@ -178,10 +185,13 @@ namespace SpaceUnionDatabase
             {
                 try
                 {
-                    string sql = userQuery.EditUserBlockStatus(username, blockStatus);
+                    string sql = userQuery.EditUserBlockStatus();
 
                     using (MySqlCommand execSql = new MySqlCommand(sql, conn) )
                     {
+                        execSql.Parameters.AddWithValue("@userName"   , username); 
+                        execSql.Parameters.AddWithValue("@blockStatus", blockStatus);
+
                         conn.Open();
                         execSql.ExecuteNonQuery();
                     }
@@ -203,7 +213,7 @@ namespace SpaceUnionDatabase
         /// Query to change a users password
         /// </summary>
         /// <param name="username">User to edit password for</param>
-        /// <param name="oldPassword">The users old password (verifies correct user)</param>
+        /// <param name="oldPassword">The users old password</param>
         /// <param name="newPassword">The users new password</param>
         /// <returns>Query string to update user's password</returns>
         public bool
@@ -213,10 +223,14 @@ namespace SpaceUnionDatabase
             {
                 try
                 {
-                    string sql = userQuery.EditUserPassword(username, oldPassword, newPassword);
+                    string sql = userQuery.EditUserPassword();
 
                     using (MySqlCommand execSql = new MySqlCommand(sql, conn) )
                     {
+                        execSql.Parameters.AddWithValue("@userName"   , username); 
+                        execSql.Parameters.AddWithValue("@oldPassword", oldPassword);
+                        execSql.Parameters.AddWithValue("@newPassword", newPassword);
+
                         conn.Open();
                         execSql.ExecuteNonQuery();
                     }
@@ -233,6 +247,5 @@ namespace SpaceUnionDatabase
             }      
             return true;
         }
-
     }
 }

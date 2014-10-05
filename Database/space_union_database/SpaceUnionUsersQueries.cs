@@ -7,92 +7,73 @@ using System.Threading.Tasks;
 namespace SpaceUnionDatabase
 {
     /// <summary>
-    /// Contains the queries used to read/write to the Users table
-    /// These queries are to be called within SpaceUnionUsersDatabaseHelper class
-    /// 
-    /// Author:       Robert Purdey
-    /// Last updated: 03/10/14 (dd/mm/yy)
+    /// Containts query strings to read and write to the Users table
     /// </summary>
     class SpaceUnionUsersQueries
     {
         /// <summary>
         /// Query to insert a new user, their password and email into the Users table
         /// </summary>
-        /// <param name="username">username of the new user</param>
-        /// <param name="password">password of the username</param>
-        /// <param name="email">email of the new user</param>
         /// <returns>Query string to insert user into the UserProfile table</returns>
         public string
-        AddNewUser(string username, string password, string email)
+        AddNewUser()
         {
             string query = "INSERT INTO Users (userName, userPassword, userEmail)" +
-                                " VALUES (  '" + username + "', " +
-                                           "'" + password + "', " +
-                                           "'" + email    + "')";
+                                " VALUES (@userName, @userPassword, @userEmail)";
             return query;
         }
 
         /// <summary>
         /// Query to retrieve all user's profile information
         /// </summary>
-        /// <param name="username">user to retrieve profile information for</param>
-        /// <param name="password">users password to validate its the actual user</param>
         /// <returns>Query string to retrieve all users profile info</returns>
         public string
-        AttemptUserLogin(string username, string password)
+        AttemptUserLogin()
         {
-            string query = "SELECT userName, userEmail, userImage, isBlocked, isAdmin FROM Users"  +
-                                " WHERE userName     = '" + username + "' AND" +
-                                      " userPassword = '" + password + "'";
+            string query = "SELECT userName, userEmail, userImage, isBlocked, isAdmin FROM Users" +
+                                " WHERE userName     = @userName AND" +
+                                      " userPassword = @userPassword";
             return query;
         }
 
         /// <summary>
         /// Query to update a users avatar
         /// </summary>
-        /// <param name="username">User to edit profile info for</param>
-        /// <param name="password">User password to verify correct user</param>
-        /// <param name="imagePath">path to users image for their avatar</param>
         /// <returns>Query string to update user's avatar</returns>
         public string
-        EditUserImage(string username, string password, string imagePath)
+        EditUserImage()
         {
             string mySql = "UPDATE Users" +
-                             " SET userImage      = '" + imagePath + "'" +
-                             " WHERE userName     = '" + username  + "' AND" +
-                                   " userPassword = '" + password  + "'";
+                             " SET   userImage    = @userImage" +
+                             " WHERE userName     = @userName AND" +
+                                   " userPassword = @userPassword";
             return mySql;
         }
 
         /// <summary>
         /// Query to update a users blocked status (ADMIN USE ONLY FUNCTION)
         /// </summary>
-        /// <param name="username">User to edit blocked status for</param>
-        /// <param name="blockStatus">What to change the blockStatus to</param>
         /// <returns>Query string to update user's blocked status</returns>
         public string
-        EditUserBlockStatus(string username, string blockStatus)
+        EditUserBlockStatus()
         {
             string mySql = "UPDATE Users" +
-                             " SET isBlocked  = '" + blockStatus + "'" +
-                             " WHERE Username = '" + username    + "'";
+                             " SET isBlocked  = @blockStatus" +
+                             " WHERE userName = @userName";
             return mySql;
         }
 
         /// <summary>
         /// Query to change a users password
         /// </summary>
-        /// <param name="username">User to edit password for</param>
-        /// <param name="oldPassword">The users old password (verifies correct user)</param>
-        /// <param name="newPassword">The users new password</param>
         /// <returns>Query string to update user's password</returns>
         public string
-        EditUserPassword(string username, string oldPassword, string newPassword)
+        EditUserPassword()
         {
             string mySql = "UPDATE Users" +
-                             " SET userPassword   = '" + newPassword + "'" +
-                             " WHERE userName     = '" + username    + "' AND " +
-                             "       userPassword = '" + oldPassword + "'";
+                             " SET   userPassword = @newPassword"  +
+                             " WHERE userName     = @userName AND" +
+                                   " userPassword = @oldPassword";
             return mySql;
         }
     }
