@@ -50,20 +50,22 @@ namespace SpaceUnionDatabase
         /// <summary>
         /// Query to update a users avatar
         /// </summary>
-        /// <param name="username">User to edit profile avatar for</param>
+        /// <param name="username">User to edit profile info for</param>
+        /// <param name="password">User password to verify correct user</param>
         /// <param name="imagePath">path to users image for their avatar</param>
         /// <returns>Query string to update user's avatar</returns>
         public string
-        EditUserImage(string username, string imagePath)
+        EditUserImage(string username, string password, string imagePath)
         {
             string mySql = "UPDATE Users" +
-                             " SET userImage  = '" + imagePath + "'" +
-                             " WHERE Username = '" + username  + "'";
+                             " SET userImage      = '" + imagePath + "'" +
+                             " WHERE userName     = '" + username  + "' AND" +
+                                   " userPassword = '" + password  + "'";
             return mySql;
         }
 
         /// <summary>
-        /// Query to update a users blocked status
+        /// Query to update a users blocked status (ADMIN USE ONLY FUNCTION)
         /// </summary>
         /// <param name="username">User to edit blocked status for</param>
         /// <param name="blockStatus">What to change the blockStatus to</param>

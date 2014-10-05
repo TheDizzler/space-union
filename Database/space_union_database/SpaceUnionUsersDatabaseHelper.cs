@@ -130,20 +130,21 @@ namespace SpaceUnionDatabase
                     userData[i] = (string)reader.GetValue(i);
         }
 
-                /// <summary>
+        /// <summary>
         /// Edits a user's avatar
         /// </summary>
         /// <param name="username">user to change avatar for</param>
+        /// <param name="password">User password to verify correct user</param>
         /// <param name="userImage">image path for users avatar</param>
         /// <returns>True if the users image path was edited, false otheriwse</returns>
         public bool
-        EditUserImage(string username, string imagePath)
+        EditUserImage(string username,  string password, string imagePath)
         {
             using (MySqlConnection conn = dbConnect.Connect() )
             {
                 try
                 {
-                    string sql = userQuery.EditUserImage(username, imagePath);
+                    string sql = userQuery.EditUserImage(username, password, imagePath);
 
                     using (MySqlCommand execSql = new MySqlCommand(sql, conn) )
                     {
@@ -165,7 +166,7 @@ namespace SpaceUnionDatabase
         }
 
         /// <summary>
-        /// Edits a user's blocked status
+        /// Edits a user's blocked status (ADMIN USE ONLY FUNCTION)
         /// </summary>
         /// <param name="username">user to change block status for</param>
         /// <param name="blockStatus">block status to change to</param>

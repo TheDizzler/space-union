@@ -54,16 +54,17 @@ namespace SpaceUnionDatabase
         /// Edits a user's avatar
         /// </summary>
         /// <param name="username">user to change avatar for</param>
+        /// <param name="password">User password to verify correct user</param>
         /// <param name="userImage">image path for users avatar</param>
         /// <returns>True if the users image path was edited, false otheriwse</returns>
         public bool
-        EditUserImage(string username, string imagePath)
+        EditUserImage(string username, string password, string imagePath)
         {
-            return usersTableAccess.EditUserImage(username, imagePath);
+            return usersTableAccess.EditUserImage(username, password, imagePath);
         }
 
         /// <summary>
-        /// Edits a user's blocked status
+        /// Edits a user's blocked status (ADMIN USE ONLY FUNCTION)
         /// </summary>
         /// <param name="username">user to change block status for</param>
         /// <param name="blockStatus">block status to change to</param>
