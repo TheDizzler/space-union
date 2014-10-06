@@ -48,6 +48,18 @@ namespace Server_Application
                     case "searching":
                         server.getNumberOfSearchingPlayers();
                         break;
+                    case "error":
+                        server.checkErrorQueueSize();
+                        break;
+                    case "chat":
+                        server.checkChatMessageQueueSize();
+                        break;
+                    case "login":
+                        server.checkLoginRequestQueueSize();
+                        break;
+                    case "data":
+                        server.checkGameDataQueueSize();
+                        break;
                     case "clear":
                         Console.Clear();
                         break;
@@ -59,7 +71,6 @@ namespace Server_Application
                         break;
                 }
             }
-
         }
 
         /// <summary>
@@ -90,6 +101,10 @@ namespace Server_Application
             Console.WriteLine("rooms - Displays the number of active game rooms.");
             Console.WriteLine("players - Displays the number of players online.");
             Console.WriteLine("searching - Displays the number of players looking for a game.");
+            Console.WriteLine("error - Displays the size of the error queue.");
+            Console.WriteLine("chat - Displays the size of the chat message queue.");
+            Console.WriteLine("login - Displays the size of the login queue.");
+            Console.WriteLine("data - Displays the size of the game data queue.");
             Console.WriteLine("clear - Clears the console screen.");
             Console.WriteLine("exit - Shuts down the server." + "\n");
         }
@@ -105,11 +120,10 @@ namespace Server_Application
             {
                 host = Dns.GetHostEntry(Dns.GetHostName());
             }
-            catch (ArgumentNullException e) { Console.WriteLine("Method: getLocalIPv$Address()\n" + e.ToString()); return; }
-            catch (ArgumentOutOfRangeException e) { Console.WriteLine("Method: getLocalIPv$Address()\n" + e.ToString()); return; }
-            catch (ArgumentException e) { Console.WriteLine("Method: getLocalIPv$Address()\n" + e.ToString()); return; }
-            catch (SocketException e) { Console.WriteLine("Method: getLocalIPv$Address()\n" + e.ToString()); return; }
-
+            catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return; }
+            catch (ArgumentOutOfRangeException e) { Console.WriteLine(e.ToString()); return; }
+            catch (ArgumentException e) { Console.WriteLine(e.ToString()); return; }
+            catch (SocketException e) { Console.WriteLine(e.ToString()); return; }
             foreach (IPAddress ipv4 in host.AddressList)
             {
                 if (ipv4.AddressFamily == AddressFamily.InterNetwork)
