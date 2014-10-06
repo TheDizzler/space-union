@@ -30,7 +30,16 @@ namespace SpaceUnion.StellarObjects
 
         public HitBox hitbox;
 
+        private int damage = -20;
+
         public bool Active { get; set; }
+
+        public int Health { get; set; }
+
+        public int Damage
+        {
+            get { return damage; }
+        }
 
 
         public Asteroid(Texture2D tex, Vector2 pos)
@@ -38,11 +47,16 @@ namespace SpaceUnion.StellarObjects
         {
             hitbox = new HitBox(pos.X, pos.Y, tex.Width, tex.Height);
             Active = true;
+            Health = 10;
+        }
+
+        public override void draw(SpriteBatch sBatch)
+        {
+            sBatch.Draw(texture, position, null, Color.White, 0, origin, scale, SpriteEffects.None, 0);
         }
 
         public void update(GameTime gameTime, Ship ship)
         {
-
             pull(gameTime, ship);
             angle = Math.Atan2(this.CenterPosition.Y - ship.CenterPosition.Y, this.CenterPosition.X - ship.CenterPosition.X);
         }

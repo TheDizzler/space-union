@@ -14,6 +14,7 @@ namespace SpaceUnion
         public Texture2D Texture; // Image representing the Projectile
         private HitBox projectileHitBox;
         private bool Active; // State of the Projectile
+        private int damage = 2;
 
         Viewport viewport; // Represents the viewable boundary of the game
 
@@ -40,6 +41,10 @@ namespace SpaceUnion
         private float projectileVelocityDirectionY;
         private int projectileTTL = 50;  //The projectile will disappear after these many updates
         //private int projectileDamage; // The amount of damage the projectile can inflict to an enemy
+        public int Damage 
+        {
+            get { return damage; } 
+        }
         
 
          public Projectile(Texture2D texture, Vector2 position, Ship ship)
@@ -82,6 +87,10 @@ namespace SpaceUnion
         public bool getActive()
         {
             return Active;
+        }
+        public void setActive(bool b)
+        {
+            this.Active = b;
         }
     }
 }

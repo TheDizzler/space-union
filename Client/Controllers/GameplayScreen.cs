@@ -31,6 +31,10 @@ namespace SpaceUnion.Controllers {
         TimeSpan fireTime;
         TimeSpan previousFireTime;
 
+        // gives the player temporary invincibility on collision with asteroids 
+        TimeSpan damageTime;
+        TimeSpan previousDamageTime;
+
         Camera mainCamera;
         GUI gui;
 
@@ -80,6 +84,7 @@ namespace SpaceUnion.Controllers {
 
             // Set the laser to fire every quarter second
             fireTime = TimeSpan.FromSeconds(.15f);
+            damageTime = TimeSpan.FromSeconds(3);
 
 
             for (int i = 0; i < 10; i++)
@@ -196,7 +201,7 @@ namespace SpaceUnion.Controllers {
             if (asteroids.Count < 50)
                 AddAsteroid(new Vector2(r.Next(100, 4000), r.Next(100, 2000)));
 
-            UpdateDamageCollision();
+            UpdateDamageCollision(gameTime);
 			playerShip.update(gameTime);
             gui.update(playerShip);
             UpdateProjectiles();
@@ -204,18 +209,33 @@ namespace SpaceUnion.Controllers {
             
         }
 
-        private void UpdateDamageCollision()
+        private void UpdateDamageCollision(GameTime gameTime)
         {
+            foreach (Asteroid a in asteroids)
+            {
+                if (playerShip.getShipHitBox().getArray().Intersects(a.hitbox.getArray()) 
+                    && (gameTime.TotalGameTime - previousDamageTime > damageTime))
+                {
+                    // Reset our current time
+                    previousDamageTime = gameTime.TotalGameTime;
+                    playerShip.setHealth(a.Damage);
+                }
+            }
             // Use the Rectangle's built-in intersect function to 
             // determine if two objects are overlapping
             foreach(Projectile p in projectiles){
                 if (p.getProjectileHitBox().getArray().Intersects(playerShip.getShipHitBox().getArray())) {
-                    playerShip.setHealth(-1);
+                   // playerShip.setHealth(-1);
                 }
                 foreach (Asteroid a in asteroids) {
                     if (p.getProjectileHitBox().getArray().Intersects(a.hitbox.getArray()))
                     {
-                        a.Active = false;
+                        a.Health -= p.Damage;
+                        if (a.Health <= 0)
+                        {
+                            a.Active = false;
+                        }
+                        p.setActive(false);
                     }
                 }
             }
@@ -302,7 +322,7 @@ namespace SpaceUnion.Controllers {
             // Draw the Asteroids
             for (int i = 0; i < asteroids.Count; i++)
             {
-                spriteBatch.Draw(Assets.asteroid, asteroids[i].hitbox.getArray(), Color.Brown);
+                asteroids[i].draw(spriteBatch);     
             }
 
 

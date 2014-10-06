@@ -31,6 +31,7 @@ namespace SpaceUnion {
 		//private float shipVelocityDirectionX = 0; //Amount of pixels the ship moves horizontally per frame (Calculated by sine of angle)
 		//private float shipVelocityDirectionY = 0; //Amount of pixels the ship moves vertically per frame (Calculated by cosine of angle)
         private int health = 100;
+        private bool active;
         private float shipScale;
         internal HitBox shipHitBox;
 		protected float maxSpeed = 7;
@@ -62,7 +63,15 @@ namespace SpaceUnion {
 
         public void setHealth(int health)
         {
-            this.health = health;
+            this.health += health;
+            if (this.health <= 0)
+            {
+                this.health = 0;
+            }
+        }
+        public bool Active
+        {
+            get { return active; }
         }
 
 		/*
@@ -86,9 +95,11 @@ namespace SpaceUnion {
 			: base(tex, pos) {
 
 			velocity = Vector2.Zero;
-            shipHitBox = new HitBox(position.X, position.Y, this.texture.Width,this.texture.Height);
 			scale = .3f;
             shipScale = scale;
+            shipHitBox = new HitBox(position.X, position.Y,
+             (int)(this.texture.Width * shipScale), (int)(this.texture.Height * shipScale));
+            active = true;
 		}
 
 		/// <summary>
@@ -143,6 +154,11 @@ namespace SpaceUnion {
 			// Elapsed time is taken into consideration in thrust and planet.pull
 			position.X += velocity.X;
 			position.Y -= velocity.Y;
+            shipHitBox.updatePosition(position.X, position.Y);
+            if (health <= 0)
+            {
+                active = false;
+            }
 		}
 
 		/// <summary>
