@@ -104,6 +104,7 @@ namespace Server_Application
                     Thread.Sleep(5);
                     continue;
                 }
+                //DataControl.sendTCPData(TCPClients[1], message, message.IPAddress, Constants.TCPMessageClient);
                 Gameroom room = owner.getGameroom(message.Gameroom);
                 if (room == null)
                     continue;
