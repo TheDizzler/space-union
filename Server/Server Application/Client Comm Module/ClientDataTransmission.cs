@@ -4,10 +4,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
-using Data_Structures;
 using System.Threading;
 using System.Threading.Tasks;
+using Data_Structures;
 using Data_Manipulation;
 
 namespace Client_Comm_Module
@@ -20,16 +19,29 @@ namespace Client_Comm_Module
         private UdpClient UDPClient;
         private TcpClient TCPClient;
 
-        private int assignedUDPPort;
+        private int assignedUDPPort_Send;
 
         public ClientDataTransmission()
         {
             setup();
         }
 
+        /// <summary>
+        /// Send a login request to the server.
+        /// </summary>
+        /// <param name="playerData">Player data containing player information.</param>
+        public void sendLoginRequest(Player playerData)
+        {
+            DataControl.sendTCPData(TCPClient, playerData, ClientConstants.SERVER_IPADDRESS, Constants.TCPMessageClient);
+        }
+
+        /// <summary>
+        /// Assign a UDP port to send the data to.
+        /// </summary>
+        /// <param name="UDPPort">The UDP port to assign.</param>
         public void assignUDPPort(int UDPPort)
         {
-            assignedUDPPort = UDPPort;
+            assignedUDPPort_Send = UDPPort;
         }
 
         /// <summary>
@@ -58,7 +70,7 @@ namespace Client_Comm_Module
 
         private void setup()
         {
-            UDPClient = new UdpClient(ClientConstants.UDP_PORT_SEND);
+            UDPClient = new UdpClient(assignedUDPPort_Send);
 
             TCPClient = new TcpClient();
 
@@ -86,7 +98,7 @@ namespace Client_Comm_Module
                 GameMessage message = (GameMessage)removeFromQueue(Constants.CHAT_MESSAGE);
                 if (message == null)
                 {
-                    Thread.Sleep(5);
+                    Thread.Sleep(100);
                     continue;
                 }
                 DataControl.sendTCPData(TCPClient, message, ClientConstants.SERVER_IPADDRESS, Constants.TCPMessageClient);
@@ -103,10 +115,10 @@ namespace Client_Comm_Module
                 GameData data = (GameData)removeFromQueue(Constants.GAME_DATA);
                 if (data == null)
                 {
-                    Thread.Sleep(5);
+                    Thread.Sleep(100);
                     continue;
                 }
-                DataControl.sendUDPData(UDPClient, data, ClientConstants.SERVER_IPADDRESS, assignedUDPPort);
+                DataControl.sendUDPData(UDPClient, data, ClientConstants.SERVER_IPADDRESS, assignedUDPPort_Send);
             }
         }
 

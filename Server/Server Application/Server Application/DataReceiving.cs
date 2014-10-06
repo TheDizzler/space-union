@@ -30,7 +30,9 @@ namespace Server_Application
         /// </summary>
         TcpListener[] TCPListeners = new TcpListener[Constants.NumberOfTcpClients];
 
+        // Temporary.
         Object ownerLock = new Object();
+
         Server owner;
 
         public DataReceiving(Server owner)
