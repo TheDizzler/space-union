@@ -85,6 +85,10 @@ namespace SpaceUnion {
 
 		private ExplosionEngine explosionEngine;
 		private Texture2D weaponTexture;
+		/// <summary>
+		/// Location on sprite where weapon appears from
+		/// </summary>
+		protected Vector2 weaponOrigin;
 
 		/// <summary>
 		/// Ship constructor
@@ -107,6 +111,8 @@ namespace SpaceUnion {
 
 			currentHealth = maxHealth;
 			explosionEngine = explEngine;
+
+			weaponOrigin = new Vector2(0, height/2); // start position of weapon
 		}
 
 
@@ -153,6 +159,8 @@ namespace SpaceUnion {
 			}
 			// rotates ship by an amount weighted by the amount time that has passed since last update
 			rotation -= turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+			weaponOrigin.X = (float) (weaponOrigin.X * Math.Sin(rotation));
+			weaponOrigin.Y = (float) (weaponOrigin.Y * Math.Cos(rotation));
 		}
 
 		/// <summary>
@@ -165,6 +173,8 @@ namespace SpaceUnion {
 				rotation = rotation % 6.283185f;
 			}
 			rotation += turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+			weaponOrigin.X = (float) (weaponOrigin.X *Math.Sin(rotation));
+			weaponOrigin.Y = (float) (weaponOrigin.Y * Math.Cos(rotation));
 		}
 
 		//Debugging Ship Brake
@@ -197,7 +207,7 @@ namespace SpaceUnion {
 				previousFireTime = gameTime.TotalGameTime;
 
 				// Add the projectile, but add it to the front and center of the player
-				projectiles.Add(new Laser(weaponTexture, position + new Vector2(0, 0), this));
+				projectiles.Add(new Laser(weaponTexture, Vector2.Add(position, weaponOrigin), this));
 			}
 		}
 

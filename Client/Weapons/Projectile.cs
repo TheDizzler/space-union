@@ -58,8 +58,8 @@ namespace SpaceUnion.Weapons {
 			rotation = (float) ship.getRotation();
 			projectileHitBox = new HitBox(position.X, position.Y, texture.Width, texture.Height);
 
-			//
-			//velocity = ship.velocity*projectileMoveSpeed;
+			//velocity = new Vector2((float) Math.Sin(rotation) * projectileMoveSpeed,
+			//	(float) -Math.Cos(rotation) * projectileMoveSpeed);
 
 
 			active = true;

@@ -24,7 +24,7 @@ namespace SpaceUnion.Weapons {
 			velocity = new Vector2((float) Math.Sin(rotation) * projectileMoveSpeed,
 				(float) -Math.Cos(rotation) * projectileMoveSpeed);
 
-			Vector2.Add(ref velocity, ref ship.velocity, out velocity);
+			velocity += ship.velocity;
 		}
 
 	}
