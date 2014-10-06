@@ -29,12 +29,12 @@ namespace Client_Comm_Module
         }
 
         /// <summary>
-        /// Send registration information to the server.
+        /// Send a registration request to the server.
         /// </summary>
-        /// <param name="d"></param>
-        public void sendRegistrationInfo(Data d)
+        /// <param name="d">Registration data containing player information.</param>
+        public void sendRegistrationInfo(RegistrationData data)
         {
-            // Place holder.
+            sender.sendRegistrationInfo(data);
         }
 
         /// <summary>

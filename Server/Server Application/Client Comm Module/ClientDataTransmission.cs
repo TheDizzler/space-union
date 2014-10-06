@@ -36,6 +36,15 @@ namespace Client_Comm_Module
         }
 
         /// <summary>
+        /// Send a registration request to the server.
+        /// </summary>
+        /// <param name="data">Registration data containing player information.</param>
+        public void sendRegistrationInfo(RegistrationData data)
+        {
+            DataControl.sendTCPData(TCPClient, data, ClientConstants.SERVER_IPADDRESS, Constants.TCPMessageClient);
+        }
+
+        /// <summary>
         /// Assign a UDP port to send the data to.
         /// </summary>
         /// <param name="UDPPort">The UDP port to assign.</param>
