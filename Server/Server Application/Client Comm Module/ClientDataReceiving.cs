@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client_Comm_Module
 {
-
-
-    public class TCPTransmitter
+    class ClientDataReceiving
     {
-
     }
 }

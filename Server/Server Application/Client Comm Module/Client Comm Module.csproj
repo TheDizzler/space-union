@@ -39,8 +39,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TCPTransmitter.cs" />
+    <Compile Include="ClientCommHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data Manipulation\Data Manipulation.csproj">
+      <Project>{93ea3317-84d9-4b61-9c03-020646b3eb05}</Project>
+      <Name>Data Manipulation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data Structures\Data Structures.csproj">
+      <Project>{b5c87f97-793c-436f-be66-bda78f9a7046}</Project>
+      <Name>Data Structures</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
