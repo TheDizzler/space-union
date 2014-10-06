@@ -22,7 +22,7 @@ namespace Server_Application
         {
             Player playerData = (Player)loginData;
 
-            if (validateUserData(playerData))
+            if (validateUserData(playerData, owner))
             {
                 owner.addOnlinePlayer(playerData);   
             }
@@ -32,8 +32,9 @@ namespace Server_Application
         /// Validate the user login data by matching it against information in the database.
         /// </summary>
         /// <param name="loginData">The login data to validate.</param>
+        /// /// <param name="owner">The server sending the error message.</param>
         /// <returns>True if the login data was successfully validated.</returns>
-        private static Boolean validateUserData(Player playerData)
+        private static Boolean validateUserData(Player playerData, Server owner)
         {
             string username = playerData.Username;
             string password = playerData.Password;
@@ -41,13 +42,15 @@ namespace Server_Application
             // User name validation failed
             if (!checkUsername(username))
             {
-                // Send error message "username does not exist" to the client.
+                ErrorMessage message = new ErrorMessage(3, playerData, "0");
+                owner.addMessageToQueue(message);
                 return false;
             }
 
             if (!checkUserPW(username, password))
             {
-                // Send error message "incorrect password" to the client.
+                ErrorMessage message = new ErrorMessage(3, playerData, "1");
+                owner.addMessageToQueue(message);
                 return false;
             }
 

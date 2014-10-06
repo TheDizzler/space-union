@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace Data_Structures
 {
+    /// <summary>
+    /// Message containing the error code.
+    /// 0 - non-existent user
+    /// 1 - incorrect password
+    /// </summary>
     [Serializable]
     public class ErrorMessage : Data
     {
@@ -17,5 +22,11 @@ namespace Data_Structures
         /// </summary>
         /// <param name="type">The type of the class, used to cast an object to this class.</param>
         public ErrorMessage(byte type) : base(type) { }
+
+        public ErrorMessage(byte type, Player player, string messageCode) : base(type)
+        {
+            Player = player;
+            MessageCode = messageCode;
+        }
     }
 }

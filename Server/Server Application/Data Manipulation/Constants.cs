@@ -32,9 +32,30 @@ namespace Data_Manipulation
         public const int TCPErrorClient = 6991;
         public const int UDPOutPortOne = 6944;
         public const int UDPInPortOne = 6964;
+        /// <summary>
+        /// Login request data = 0.
+        /// </summary>
         public const byte LOGIN_REQUEST = 0;
+        /// <summary>
+        /// Game data = 1.
+        /// </summary>
         public const byte GAME_DATA = 1;
+        /// <summary>
+        /// Chat message = 2.
+        /// </summary>
         public const byte CHAT_MESSAGE = 2;
+        /// <summary>
+        /// Error message = 3.
+        /// </summary>
         public const byte ERROR_MESSAGE = 3;
+        /// <summary>
+        /// Game setup message = 4;
+        /// </summary>
+        public const byte GAME_SETUP_MESSAGE = 4;
+        /// <summary>
+        /// Registration message = 5;
+        /// </summary>
+        public const byte REGISTRATION_MESSAGE = 5;
+
     }
 }
