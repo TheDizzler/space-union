@@ -38,6 +38,15 @@ namespace Client_Comm_Module
         }
 
         /// <summary>
+        /// Send a game message to the server.
+        /// </summary>
+        /// <param name="message">The message to send to the server.</param>
+        public void sendGameMessage(GameMessage message)
+        {
+            sender.addMessageToQueue(message);
+        }
+
+        /// <summary>
         /// Fetch a game data received from the server.
         /// </summary>
         /// <returns>Game data received from the server.</returns>
