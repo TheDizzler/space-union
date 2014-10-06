@@ -48,6 +48,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ship.cs" />
     <Compile Include="Tools\AssetManager.cs" />
+    <Compile Include="Tools\BaseButton.cs" />
     <Compile Include="Tools\GeneralButton.cs" />
     <Compile Include="Tools\Sprite.cs" />
   </ItemGroup>

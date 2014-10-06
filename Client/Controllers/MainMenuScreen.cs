@@ -20,7 +20,7 @@ namespace SpaceUnion {
 			this.game = game;
 			btnPlay = new PlayButton(Game1.Assets.playButton, game.GraphicsDevice);
 			btnPlay.setPosition(new Vector2((game.getScreenWidth()  - btnPlay.width)/2, (game.getScreenHeight() - btnPlay.height)/ 2));
-            shipSelect = new GeneralButton(Game1.Assets.confirm, game.GraphicsDevice);
+            shipSelect = new GeneralButton(Game1.Assets.shipselection, game.GraphicsDevice);
             shipSelect.height = 100;
             shipSelect.width = 300;
             shipSelect.setPosition(new Vector2((game.getScreenWidth() - shipSelect.width)/2, (game.getScreenHeight() - shipSelect.height)));
