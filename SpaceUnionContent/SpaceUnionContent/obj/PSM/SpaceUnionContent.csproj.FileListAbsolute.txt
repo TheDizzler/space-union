@@ -81,3 +81,7 @@ C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\Ignor
 C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.xnb
 C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\SpaceUnionContent.csprojResolveAssemblyReference.cache
 C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\waterplanet (256x256).xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\WinFlags\WinFlag1.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\waterplanet (256x256).xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\asteroid(56x56).xnb

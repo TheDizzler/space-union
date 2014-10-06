@@ -25,6 +25,7 @@ namespace SpaceUnion.Controllers {
         //private static System.Timers.Timer flashingTimer;
         List<Projectile> projectiles;
         List<Ship> ships;
+        List<Asteroid> asteroids;
 
         // The rate of fire of the player laser
         TimeSpan fireTime;
@@ -60,10 +61,12 @@ namespace SpaceUnion.Controllers {
             flashFlag = true;
             invinsible = false;
             */
-
+            Random r = new Random();
             Assets = Game1.Assets;
             playerShip = new Ship(Assets.spaceShipTest, new Vector2(200, 200)); //Create new player ship
 			planet = new Planet(Assets.waterPlanet, new Vector2(1000, 1000));
+
+
 
 			gui = new GUI(game, playerShip, planet);
 
@@ -72,14 +75,21 @@ namespace SpaceUnion.Controllers {
             mainCamera = new Camera(mainViewport, worldWidth, worldHeight, 1.0f);
 
             projectiles = new List<Projectile>();
+            asteroids = new List<Asteroid>();
             ships = new List<Ship>();
 
             // Set the laser to fire every quarter second
             fireTime = TimeSpan.FromSeconds(.15f);
+
+
+            for (int i = 0; i < 10; i++)
+            {
+                AddAsteroid(new Vector2(r.Next(100, 4000), r.Next(100, 2000)));
+            }
         }
 
         /// <summary>
-		/// Draws the stars background.
+        /// Draws the stars background.
         /// </summary>
         protected void drawWorld()
         {
@@ -102,6 +112,13 @@ namespace SpaceUnion.Controllers {
                 null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
         }
 
+        private void AddAsteroid(Vector2 position)
+        {
+           Random r = new Random();
+           Asteroid asteroid = new Asteroid(Assets.asteroid, position);
+           asteroids.Add(asteroid);
+        }
+
         private void AddProjectile(Vector2 position)
         {
             Projectile projectile = new Projectile(Assets.laser, playerShip.Position, playerShip);
@@ -119,7 +136,7 @@ namespace SpaceUnion.Controllers {
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public void Update(GameTime gameTime)
         {
-            
+            Random r = new Random();
             //playerShip.checkScreenWrap(Window); //Check if ship will wrap around edges
             playerShip.checkScreenStop(game.Window);
             keyState = Keyboard.GetState(); //Get which keys are pressed or released
@@ -176,11 +193,14 @@ namespace SpaceUnion.Controllers {
                     AddProjectile(playerShip.Position + new Vector2(0, 0));
                 }
             }
+            if (asteroids.Count < 50)
+                AddAsteroid(new Vector2(r.Next(100, 4000), r.Next(100, 2000)));
 
             UpdateDamageCollision();
 			playerShip.update(gameTime);
             gui.update(playerShip);
             UpdateProjectiles();
+            UpdateAsteroids();
             
         }
 
@@ -192,7 +212,14 @@ namespace SpaceUnion.Controllers {
                 if (p.getProjectileHitBox().getArray().Intersects(playerShip.getShipHitBox().getArray())) {
                     playerShip.setHealth(-1);
                 }
+                foreach (Asteroid a in asteroids) {
+                    if (p.getProjectileHitBox().getArray().Intersects(a.hitbox.getArray()))
+                    {
+                        a.Active = false;
+                    }
+                }
             }
+
             //Assets = Game1.Assets;
             // Only create the rectangle once for the player
             //rectangle1 = new Rectangle((int)(playerShip.Position.X ),
@@ -222,6 +249,8 @@ namespace SpaceUnion.Controllers {
                     invinsibilityTimer.Enabled = false;
                 }
             */
+
+
         }
 
         //Comment
@@ -239,6 +268,17 @@ namespace SpaceUnion.Controllers {
             }
         }
 
+        private void UpdateAsteroids()
+        {
+            // Update the Projectiles
+            for (int i = asteroids.Count - 1; i >= 0; i--)
+            {
+                if (asteroids[i].Active == false)
+                {
+                    asteroids.RemoveAt(i);
+                }
+            }
+        }
 
         public void draw()
         {
@@ -258,6 +298,11 @@ namespace SpaceUnion.Controllers {
                 spriteBatch.Draw(Assets.shuttle, projectiles[i].getProjectileHitBox().getArray(), Color.Red);
                 //projectiles[i].draw(spriteBatch); //This is a debug statement to view where the hitboxes are
                 
+            }
+            // Draw the Asteroids
+            for (int i = 0; i < asteroids.Count; i++)
+            {
+                spriteBatch.Draw(Assets.asteroid, asteroids[i].hitbox.getArray(), Color.Brown);
             }
 
 

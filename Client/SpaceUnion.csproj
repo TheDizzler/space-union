@@ -41,6 +41,7 @@
     <Compile Include="Controllers\GameplayScreen.cs" />
     <Compile Include="Controllers\MainMenuScreen.cs" />
     <Compile Include="PlayButton.cs" />
+    <Compile Include="StellarObjects\Asteroid.cs" />
     <Compile Include="StellarObjects\Planet.cs" />
     <Compile Include="Timer.cs" />
     <Compile Include="Projectile.cs" />

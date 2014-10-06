@@ -56,7 +56,6 @@ namespace SpaceUnion
             this.viewport = viewport;
 
             Active = true;
-            //projectileDamage = 2;
         }
 
         public void Update()
