@@ -17,9 +17,7 @@ namespace SpaceUnion.Controllers {
 		private KeyboardState keyState;
 		private MouseState mouseState;
 		private SpriteBatch spriteBatch;
-		private Ship playerShip;
-		private Planet planet;
-		private Game1 game;
+
 		//static private bool flashFlag = false;
 		//private static System.Timers.Timer invinsibilityTimer;
 		//private static System.Timers.Timer flashingTimer;
@@ -28,6 +26,9 @@ namespace SpaceUnion.Controllers {
 
 		List<Ship> ships;
 
+		private Ship playerShip;
+		private Planet planet;
+		private Game1 game;
 		Camera mainCamera;
 		GUI gui;
 		private ExplosionEngine explosionEngine;
@@ -142,7 +143,7 @@ namespace SpaceUnion.Controllers {
 
 			}
 
-			//planet.update(gameTime, playerShip);
+			planet.update(gameTime, ships);
 
 
 
@@ -160,7 +161,7 @@ namespace SpaceUnion.Controllers {
 
 			//UpdateDamageCollision();
 			playerShip.update(gameTime, game.Window);
-			gui.update(playerShip);
+			//gui.update();
 
 			explosionEngine.update(gameTime);
 

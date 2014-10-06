@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using SpaceUnion.Controllers;
 using SpaceUnion.Tools;
+using SpaceUnion.Weapons;
+
 
 namespace SpaceUnion {
 
@@ -110,8 +112,7 @@ namespace SpaceUnion {
 
 		public void update(GameTime gameTime, GameWindow window) {
 			// Elapsed time is taken into consideration in thrust and planet.pull
-			position.X += velocity.X;
-			position.Y -= velocity.Y;
+			position += velocity;
 
 			checkScreenStop(window);
 
@@ -176,12 +177,12 @@ namespace SpaceUnion {
 
 		/// <summary>
 		/// Power to main thruster
-		/// Does not exceed a max speed cap
+		/// No max speed cap
 		/// </summary>
 		/// <param name="gameTime"></param>
 		public void thrust(GameTime gameTime) {
 
-			Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) Math.Cos(rotation));
+			Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
 			acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
 
 			Vector2.Add(ref velocity, ref acceleration, out velocity);
@@ -196,18 +197,8 @@ namespace SpaceUnion {
 				previousFireTime = gameTime.TotalGameTime;
 
 				// Add the projectile, but add it to the front and center of the player
-				//AddProjectile(position + new Vector2(0, 0));
-				Projectile projectile = new Projectile(weaponTexture, position, this);
-				//projectile.Initialize(game.GraphicsDevice.Viewport);
-				projectiles.Add(projectile);
+				projectiles.Add(new Laser(weaponTexture, position + new Vector2(0, 0), this));
 			}
-		}
-
-		private void AddProjectile(Vector2 position) {
-
-			Projectile projectile = new Projectile(weaponTexture, Position, this);
-			//projectile.Initialize(game.GraphicsDevice.Viewport);
-			projectiles.Add(projectile);
 		}
 
 

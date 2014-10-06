@@ -53,22 +53,18 @@ namespace SpaceUnion {
 
 			spriteBatch.Draw(guiRectangle, rect, Color.DarkSlateBlue); // the gui display
 
-			spriteBatch.DrawString(font, "Degree Angle with Planet: " + planet.angle * (180 / Math.PI),
-				line1Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
-			spriteBatch.DrawString(font, "Degree Angle: " + (playerShip.getRotation() * (180 / Math.PI)),
-				line2Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
-			spriteBatch.DrawString(font, "ship velocity X: " + playerShip.getShipVelocityDirectionX()
-				+ " y = " + playerShip.getShipVelocityDirectionY(),
-				line3Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
+			spriteBatch.DrawString(font, "ship velocity X: " + playerShip.velocity.X
+				+ " y = " + playerShip.velocity.Y,
+				line1Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 			spriteBatch.DrawString(font, "Ship position X: " + playerShip.getX() + " y = " + playerShip.getY(),
-				line4Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
+				line3Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
             spriteBatch.DrawString(font, "Total bullets: " + playerShip.projectiles.Count,
-                line5Pos, Color.Red, 0.0f, Vector2.Zero, .5f, SpriteEffects.None, 0.5f);
+                line5Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 		}
 
 
-		public void update(Ship plyr) {
-			playerShip = plyr;
+		public void update() {
+			
 		}
 
 	}

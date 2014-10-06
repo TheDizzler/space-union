@@ -21,11 +21,6 @@ namespace SpaceUnion.StellarObjects {
 		/// </summary>
 		float range = 1000;
 
-		/// <summary>
-		/// For testing
-		/// </summary>
-		public double angle;
-
 
 		public Planet(Texture2D tex, Vector2 pos)
 			: base(tex, pos) {
@@ -41,32 +36,32 @@ namespace SpaceUnion.StellarObjects {
 			this.range = range;
 		}
 
-		public void update(GameTime gameTime, Ship ship) {
+		public void update(GameTime gameTime, List<Ship> ships) {
 
-			pull(gameTime, ship);
-			//angle = Math.Atan2(this.CenterPosition.Y - ship.CenterPosition.Y, this.CenterPosition.X - ship.CenterPosition.X);
-			angle = Math.Atan2(this.Position.Y - ship.Position.Y, this.Position.X - ship.Position.X);
+			pull(gameTime, ships);
 		}
 
 		/// <summary>
+		/// Apply gravitational force to objects within range.
 		/// Call from update.
 		/// </summary>
 		/// <param name="gameTime"></param>
 		/// <param name="ship"></param>
-		private void pull(GameTime gameTime, Ship ship) {
+		private void pull(GameTime gameTime, List<Ship> ships) {
 
-			//float distance = (ship.CenterPosition - this.CenterPosition).Length();
-			float distance = (ship.Position - this.Position).Length();
-			if (distance < range) {
-				float pullForce = mass / (distance * distance);
-				// angle in radians 
-				//double angle = Math.Atan2(this.CenterPosition.Y - ship.CenterPosition.Y, this.CenterPosition.X - ship.CenterPosition.X);
-				double angle = Math.Atan2(this.Position.Y - ship.Position.Y, this.Position.X - ship.Position.X);
-				// Find the vector to apply to the ships velocity
-				Vector2 pullVector = new Vector2(
-					(float) Math.Cos(angle) * pullForce * (float) gameTime.ElapsedGameTime.TotalSeconds,
-					(float) -Math.Sin(angle) * pullForce * (float) gameTime.ElapsedGameTime.TotalSeconds);
-				Vector2.Add(ref ship.velocity, ref pullVector, out ship.velocity);
+			foreach (Ship ship in ships) {
+				float distance = (ship.Position - this.Position).Length();
+				if (distance < range) {
+					float pullForce = mass / (distance * distance);
+					// angle in radians 
+					//double angle = Math.Atan2(this.CenterPosition.Y - ship.CenterPosition.Y, this.CenterPosition.X - ship.CenterPosition.X);
+					double angle = Math.Atan2(this.Position.Y - ship.Position.Y, this.Position.X - ship.Position.X);
+					// Find the vector to apply to the ships velocity
+					Vector2 pullVector = new Vector2(
+						(float) Math.Cos(angle) * pullForce * (float) gameTime.ElapsedGameTime.TotalSeconds,
+						(float) -Math.Sin(angle) * pullForce * (float) gameTime.ElapsedGameTime.TotalSeconds);
+					Vector2.Add(ref ship.velocity, ref pullVector, out ship.velocity);
+				}
 			}
 
 		}
