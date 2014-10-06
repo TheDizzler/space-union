@@ -41,6 +41,7 @@ namespace SpaceUnion.Tools {
 		public Texture2D wedge;
 		public Texture2D wrench;
         public Texture2D confirm;
+        public Texture2D shipselection;
 
 
 
@@ -61,6 +62,7 @@ namespace SpaceUnion.Tools {
 
 			playButton = Content.Load<Texture2D>("Buttons/playbutton");
             confirm = Content.Load<Texture2D>("Buttons/confirm");
+            shipselection = Content.Load<Texture2D>("Buttons/shipselection");
 
 			guiRectangle = new Texture2D(graphicsDevice, 1, 1);
 			guiRectangle.SetData(new[] { Color.White });

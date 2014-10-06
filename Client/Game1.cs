@@ -172,7 +172,7 @@ namespace SpaceUnion {
             IsMouseVisible = true;
         }
 		public void StartGame() {
-			gameplayScreen = new GameplayScreen(this, spriteBatch);
+			gameplayScreen = new GameplayScreen(this, spriteBatch, shipselectionScreen.getship());
 			Viewport v = GraphicsDevice.Viewport;
 			currentGameState = GameState.Playing;
 			IsMouseVisible = false;

@@ -31,7 +31,7 @@ namespace SpaceUnion.Controllers {
 		private int SCREEN_HEIGHT;
 
 
-		public GameplayScreen(Game1 game, SpriteBatch batch) {
+		public GameplayScreen(Game1 game, SpriteBatch batch,Ship selectedship) {
 			this.game = game;
 			SCREEN_HEIGHT = game.getScreenHeight();
 			SCREEN_WIDTH = game.getScreenWidth();
@@ -39,7 +39,8 @@ namespace SpaceUnion.Controllers {
 			spriteBatch = batch;
 
 			Assets = Game1.Assets;
-			playerShip = new Ship(Assets.ufo, new Vector2(200, 200)); //Create new player ship
+            playerShip = selectedship;
+			//playerShip = new Ship(Assets.wrench, new Vector2(200, 200)); //Create new player ship
 			planet = new Planet(Assets.waterPlanet, new Vector2(1000, 1000));
 
 			gui = new GUI(game, playerShip, planet);
