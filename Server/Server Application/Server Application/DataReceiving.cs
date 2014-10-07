@@ -80,6 +80,7 @@ namespace Server_Application
             while (true)
             {   
                 Object chatData = DataControl.receiveTCPData(TCPListeners[1]);
+                Console.WriteLine(((GameMessage)chatData).Username);
                 lock (ownerLock)
                 {
                     owner.addMessageToQueue((GameMessage)chatData);
