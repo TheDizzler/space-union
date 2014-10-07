@@ -20,16 +20,15 @@ namespace SpaceUnion {
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
-		//int SCREEN_WIDTH = 800;
-		//int SCREEN_HEIGHT = 600;
-
 		public static AssetManager Assets;
 
 
 		GameplayScreen gameplayScreen;
 		MainMenuScreen mainMenuScreen;
 		ShipSelectionScreen shipselectionScreen;
-
+		/// <summary>
+		/// An engine to create and manage all explosions, big and small
+		/// </summary>
 		public ExplosionEngine explosionEngine;
 		/// <summary>
 		/// Game State Enum to track game states
@@ -46,12 +45,10 @@ namespace SpaceUnion {
 
 		public int getScreenWidth() {
 			return Window.ClientBounds.Width;
-			//return SCREEN_WIDTH;
 		}
 
 		public int getScreenHeight() {
 			return Window.ClientBounds.Height;
-			//return SCREEN_HEIGHT;
 		}
 
 		public Game1()

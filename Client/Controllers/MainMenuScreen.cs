@@ -11,7 +11,7 @@ using SpaceUnion.Tools;
 		
 		private Game1 game;
 		BaseButton btnPlay;
-        ShipButton shipSelect;
+		BaseButton shipSelect;
         
 
 
@@ -19,10 +19,8 @@ using SpaceUnion.Tools;
 			this.game = game;
 			btnPlay = new BaseButton(Game1.Assets.playButton);
 			btnPlay.setPosition(new Vector2((game.getScreenWidth()  - btnPlay.width)/2, (game.getScreenHeight() - btnPlay.height)/ 2));
-            shipSelect = new ShipButton(Game1.Assets.shipselection, game.GraphicsDevice);
-            shipSelect.height = 100;
-            shipSelect.width = 300;
-            shipSelect.setPosition(new Vector2((game.getScreenWidth() - shipSelect.width)/2, (game.getScreenHeight() - shipSelect.height)));
+            shipSelect = new BaseButton(Game1.Assets.shipselection) {height = 100, width = 300};
+			shipSelect.setPosition(new Vector2((game.getScreenWidth() - shipSelect.width)/2, (game.getScreenHeight() - shipSelect.height)));
             
 		}
 

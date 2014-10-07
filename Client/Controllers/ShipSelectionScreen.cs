@@ -12,13 +12,14 @@ namespace SpaceUnion.Controllers {
 	class ShipSelectionScreen {
 		//private Texture2D texture;
 		Game1 game;
-		public ShipButton selectShip1;
+		ShipButton selectShip1;
 		ShipButton selectShip2;
 		ShipButton selectShip3;
 		ShipButton selectShip4;
-		ShipButton confirmButton;
-		Ship selectedship;
+		BaseButton confirmButton;
 		ShipButton lastbutton;
+		Ship selectedship;
+		
 
 		public ShipSelectionScreen(Game1 game) {
 			this.game = game;
@@ -26,17 +27,8 @@ namespace SpaceUnion.Controllers {
 			selectShip2 = new ShipButton(Game1.Assets.wedge);
 			selectShip3 = new ShipButton(Game1.Assets.wrench);
 			selectShip4 = new ShipButton(Game1.Assets.shuttle);
-			confirmButton = new ShipButton(Game1.Assets.confirm);
-			confirmButton.height = 100;
-			confirmButton.width = 300;
-			selectShip1.height = 128;
-			selectShip1.width = 128;
-			selectShip2.height = 128;
-			selectShip2.width = 128;
-			selectShip3.height = 128;
-			selectShip3.width = 128;
-			selectShip4.height = 128;
-			selectShip4.width = 128;
+			confirmButton = new BaseButton(Game1.Assets.confirm) { height = 100, width = 300 };
+			
 			confirmButton.setPosition(new Vector2((game.getScreenWidth() - confirmButton.width) / 2, (game.getScreenHeight() - confirmButton.height)));
 			selectShip1.setPosition(new Vector2((game.getScreenWidth() - (selectShip1.width * 4)) / 2, (selectShip1.height)));
 			selectShip2.setPosition(new Vector2((game.getScreenWidth() - (selectShip2.width * 2)) / 2, (selectShip2.height)));

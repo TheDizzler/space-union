@@ -59,7 +59,7 @@
     <Compile Include="Tools\AssetManager.cs" />
     <Compile Include="Tools\BaseButton.cs" />
     <Compile Include="Tools\ExplosionEngine.cs" />
-    <Compile Include="Tools\GeneralButton.cs" />
+    <Compile Include="Tools\ShipButton.cs" />
     <Compile Include="Tools\Sprite.cs" />
   </ItemGroup>
   <ItemGroup>
