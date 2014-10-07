@@ -11,15 +11,15 @@ using SpaceUnion.Tools;
 		
 		private Game1 game;
 		BaseButton btnPlay;
-        GeneralButton shipSelect;
+        ShipButton shipSelect;
         
 
 
 		public MainMenuScreen(Game1 game) {
 			this.game = game;
-			btnPlay = new BaseButton(Game1.Assets.playButton, game.GraphicsDevice);
+			btnPlay = new BaseButton(Game1.Assets.playButton);
 			btnPlay.setPosition(new Vector2((game.getScreenWidth()  - btnPlay.width)/2, (game.getScreenHeight() - btnPlay.height)/ 2));
-            shipSelect = new GeneralButton(Game1.Assets.shipselection, game.GraphicsDevice);
+            shipSelect = new ShipButton(Game1.Assets.shipselection, game.GraphicsDevice);
             shipSelect.height = 100;
             shipSelect.width = 300;
             shipSelect.setPosition(new Vector2((game.getScreenWidth() - shipSelect.width)/2, (game.getScreenHeight() - shipSelect.height)));
@@ -29,7 +29,7 @@ using SpaceUnion.Tools;
 		public void Update() {
 			MouseState mouseState = Mouse.GetState();
 			btnPlay.update(mouseState);
-            shipSelect.Update(mouseState);
+            shipSelect.update(mouseState);
 			if (btnPlay.isClicked == true) {
                 btnPlay.isClicked = false;
                 game.StartGame();

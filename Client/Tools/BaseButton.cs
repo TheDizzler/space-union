@@ -10,17 +10,17 @@ using SpaceUnion.Tools;
 
 namespace SpaceUnion.Tools {
 
-	class BaseButton : Sprite {
+	public class BaseButton : Sprite {
 
-		Rectangle buttonRectangle;
+		protected Rectangle buttonRectangle;
 
 		public bool isClicked = false;
-		private bool isDown = false;
-		private bool isHovered = false;
-		private ButtonState lastState;
+		protected bool isDown = false;
+		protected bool isHovered = false;
+		protected ButtonState lastState;
 
 
-		public BaseButton(Texture2D texture, GraphicsDevice graphics)
+		public BaseButton(Texture2D texture)
 			: base(texture, Vector2.Zero) {
 
 			width = 300;

@@ -12,21 +12,21 @@ namespace SpaceUnion.Controllers {
 	class ShipSelectionScreen {
 		//private Texture2D texture;
 		Game1 game;
-		public GeneralButton selectShip1;
-		GeneralButton selectShip2;
-		GeneralButton selectShip3;
-		GeneralButton selectShip4;
-		GeneralButton confirmButton;
+		public ShipButton selectShip1;
+		ShipButton selectShip2;
+		ShipButton selectShip3;
+		ShipButton selectShip4;
+		ShipButton confirmButton;
 		Ship selectedship;
-		GeneralButton lastbutton;
+		ShipButton lastbutton;
 
 		public ShipSelectionScreen(Game1 game) {
 			this.game = game;
-			selectShip1 = new GeneralButton(Game1.Assets.ufo, game.GraphicsDevice);
-			selectShip2 = new GeneralButton(Game1.Assets.wedge, game.GraphicsDevice);
-			selectShip3 = new GeneralButton(Game1.Assets.wrench, game.GraphicsDevice);
-			selectShip4 = new GeneralButton(Game1.Assets.shuttle, game.GraphicsDevice);
-			confirmButton = new GeneralButton(Game1.Assets.confirm, game.GraphicsDevice);
+			selectShip1 = new ShipButton(Game1.Assets.ufo);
+			selectShip2 = new ShipButton(Game1.Assets.wedge);
+			selectShip3 = new ShipButton(Game1.Assets.wrench);
+			selectShip4 = new ShipButton(Game1.Assets.shuttle);
+			confirmButton = new ShipButton(Game1.Assets.confirm);
 			confirmButton.height = 100;
 			confirmButton.width = 300;
 			selectShip1.height = 128;
@@ -58,11 +58,11 @@ namespace SpaceUnion.Controllers {
 
 
 			MouseState mouseState = Mouse.GetState();
-			confirmButton.Update(mouseState);
-			selectShip1.Update(mouseState);
-			selectShip2.Update(mouseState);
-			selectShip3.Update(mouseState);
-			selectShip4.Update(mouseState);
+			confirmButton.update(mouseState);
+			selectShip1.update(mouseState);
+			selectShip2.update(mouseState);
+			selectShip3.update(mouseState);
+			selectShip4.update(mouseState);
 
 
 			if (selectShip1.selected && selectShip2.selected) {

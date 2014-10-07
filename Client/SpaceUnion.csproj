@@ -46,7 +46,6 @@
     <Compile Include="Controllers\MainMenuScreen.cs" />
     <Compile Include="Tactile.cs" />
     <Compile Include="Tangible.cs" />
-    <Compile Include="Tools\PlayButton.cs" />
     <Compile Include="StellarObjects\Asteroid.cs" />
     <Compile Include="StellarObjects\Planet.cs" />
     <Compile Include="Timer.cs" />

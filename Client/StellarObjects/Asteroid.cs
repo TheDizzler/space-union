@@ -24,10 +24,11 @@ namespace SpaceUnion.StellarObjects {
 		public Asteroid(Texture2D tex, Vector2 pos)
 			: base(tex, pos) {
 
-			hitBoxes = new List<HitBox> {createHitBox(pos.X, pos.Y, width, height)};
+			//hitBoxes = new List<HitBox> {createHitBox(pos.X, pos.Y, width, height)};
+
 			Random r = new Random();
 			double direction = r.NextDouble() * 2 * Math.PI; // angle of velocity
-			int speed = r.Next(20);
+			int speed = r.Next(20); // speed
 			velocity = new Vector2((float) (Math.Sin(direction)* speed), (float) (-Math.Cos(direction)*speed));
 		}
 
