@@ -71,6 +71,11 @@ namespace Data_Structures
 
         //projectiles fired, direction, velocity
 
+        public GameData()
+        {
+            Type = 1;
+        }
+
         /// <summary>
         /// A constructor for this class, does not initiate any data.
         /// </summary>

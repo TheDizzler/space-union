@@ -17,6 +17,11 @@ namespace Data_Structures
         public Player Player { get; set; }
         public string MessageCode { get; set; }
 
+        public ErrorMessage()
+        {
+            Type = 3;
+        }
+
         /// <summary>
         /// A constructor for this class, does not initiate any data.
         /// </summary>

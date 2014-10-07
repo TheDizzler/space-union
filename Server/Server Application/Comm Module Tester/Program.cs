@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Client_Comm_Module;
+using Data_Structures;
 
 namespace Comm_Module_Tester
 {
@@ -16,10 +17,14 @@ namespace Comm_Module_Tester
         static void Main(string[] args)
         {
             ClientCommHandler cch = new ClientCommHandler();
-            Console.ReadLine();
+            
+            cch.sendGameMessage(new GameMessage());
+            cch.sendGameData(new GameData());
 
-            cch.sendGameMessage(null);
-            cch.
+            cch.getGameData();
+            cch.getGameMessage();
+
+            Console.ReadLine();
         }
     }
 }

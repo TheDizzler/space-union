@@ -25,7 +25,8 @@ namespace Client_Comm_Module
         /// <param name="playerData">Player data containing player information.</param>
         public void sendLoginRequest(Player playerData)
         {
-            sender.sendLoginRequest(playerData);
+            if(playerData != null)
+                sender.sendLoginRequest(playerData);
         }
 
         /// <summary>
@@ -34,7 +35,8 @@ namespace Client_Comm_Module
         /// <param name="d">Registration data containing player information.</param>
         public void sendRegistrationInfo(RegistrationData data)
         {
-            sender.sendRegistrationInfo(data);
+            if(data != null)
+                sender.sendRegistrationInfo(data);
         }
 
         /// <summary>
@@ -43,7 +45,8 @@ namespace Client_Comm_Module
         /// <param name="message">The message to send to the server.</param>
         public void sendGameMessage(GameMessage message)
         {
-            sender.addMessageToQueue(message);
+            if(message != null)
+                sender.addMessageToQueue(message);
         }
 
         /// <summary>
@@ -52,7 +55,8 @@ namespace Client_Comm_Module
         /// <param name="data">The data to send to the server.</param>
         public void sendGameData(GameData data)
         {
-            sender.addMessageToQueue(data);
+            if(data != null)
+                sender.addMessageToQueue(data);
         }
 
         /// <summary>

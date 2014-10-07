@@ -52,6 +52,10 @@
       <Project>{b0d9e654-2f4c-4891-9dac-86af01c74ee8}</Project>
       <Name>Client Comm Module</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Data Structures\Data Structures.csproj">
+      <Project>{b5c87f97-793c-436f-be66-bda78f9a7046}</Project>
+      <Name>Data Structures</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -22,6 +22,11 @@ namespace Data_Structures
         /// </summary>
         public byte Type { get; set; }
 
+        public Data()
+        {
+
+        }
+
         /// <summary>
         /// Constructs a Data object.
         /// </summary>

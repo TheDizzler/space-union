@@ -37,6 +37,11 @@ namespace Data_Structures
         /// </summary>
         public short Port { get; set; }
 
+        public GameMessage()
+        {
+            Type = 2;
+        }
+
         public GameMessage(byte type) : base(type) {}
     }
 }
