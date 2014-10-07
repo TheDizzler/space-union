@@ -23,20 +23,23 @@ namespace SpaceUnion {
 		/// <summary>
 		/// If false, the object will be destroyed and removed from the game.
 		/// </summary>
-		new bool isActive { get; set; }
+		bool isActive { get; set; }
 
 
-		new protected HitBox createHitBox(float x, float y, int w, int h);
+		int health { get; set; }
+
+
+		HitBox createHitBox(float x, float y, int w, int h);
 
 		/// <summary>
 		/// Call from update after position has been calculated
 		/// </summary>
 		/// <param name="amountMoved"></param>
-		new void updateHitBox(Vector2 amountMoved);
+		void updateHitBox(Vector2 amountMoved);
 
 		/// <summary>
-		/// Called when 
+		/// Called when an tactile object is destroyed
 		/// </summary>
-		new void destroy();
+		void destroy();
 	}
 }

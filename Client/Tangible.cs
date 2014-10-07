@@ -10,12 +10,13 @@ using SpaceUnion.Tools;
 namespace SpaceUnion {
 
 	/// <summary>
-	/// An object that has hitboxes must inherit from this class
+	/// If in an object can be hit or interated with physically it must implement
+	/// this interface. Provides a hitbox, hitpoints and an alive state.
 	/// </summary>
 	public abstract class Tangible : Sprite {
 
 		/// <summary>
-		/// If false, the object will be removed from the game.
+		/// If false, the object will be destroyed and removed from the game.
 		/// </summary>
 		public bool isActive { get; set; }
 
