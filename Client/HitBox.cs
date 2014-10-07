@@ -8,35 +8,37 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
 using SpaceUnion.Tools;
 
-namespace SpaceUnion
-{
-    /// <summary>
-    /// Hitboxes will contain an array of rectangles
-    /// </summary>
-    public class HitBox
-    {
-        private int width;
-        private int height;
-        private float xPos; //X coordinate of hitbox
-        private float yPos; //Y coordinate of hitbox
-        private Rectangle rectHitBox;
+namespace SpaceUnion {
+	/// <summary>
+	/// Hitboxes will contain an array of rectangles
+	/// </summary>
+	public class HitBox {
 
-        public HitBox(float x, float y, int w, int h) 
-        {
-            xPos = x;
-            yPos = y;
-            width = w;
-            height = h;
-        }
+		private int width;
+		private int height;
+		private Rectangle rectHitBox;
+		/// <summary>
+		/// Hit box coordinates
+		/// </summary>
+		private Vector2 position;
 
-        public Rectangle getArray(){
-            return rectHitBox = new Rectangle((int)xPos, (int)yPos, width, height);
-        }
 
-        public void updatePosition(float newX,float newY){
-            xPos = newX;
-            yPos = newY;
-        }
 
-    }
+		public HitBox(float x, float y, int w, int h) {
+			position.X = x;
+			position.Y = y;
+			width = w;
+			height = h;
+
+		}
+
+		public Rectangle getArray() {
+			return rectHitBox = new Rectangle((int) position.X, (int) position.Y, width, height);
+		}
+
+		public void updatePosition(Vector2 newPosition) {
+			position = newPosition;
+		}
+
+	}
 }

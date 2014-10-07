@@ -31,11 +31,12 @@ namespace SpaceUnion.Tools {
 
 		public Texture2D explosions;
         public Texture2D explosionsBig;
-		public Texture2D explosionsBlur;
+
 		// space objects
 		public Texture2D earth;
         public Texture2D winflag1;
 		public Texture2D waterPlanet;
+        public Texture2D asteroid;
 
 		// ships and platforms
 		public Texture2D shuttle;
@@ -89,6 +90,7 @@ namespace SpaceUnion.Tools {
             winflag1 = Content.Load<Texture2D>("WinFlags/WinFlag1");
 
             laser = Content.Load<Texture2D>("Projectiles/laser");
+            asteroid = Content.Load<Texture2D>("StellarObjects/asteroid(56x56)");
 		}
 	}
 }

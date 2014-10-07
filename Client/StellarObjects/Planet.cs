@@ -9,7 +9,7 @@ using SpaceUnion.Tools;
 
 namespace SpaceUnion.StellarObjects {
 
-	class Planet : Sprite {
+	class Planet : Tangible {
 
 		/// <summary>
 		/// How much gravitational 'power' the planet has

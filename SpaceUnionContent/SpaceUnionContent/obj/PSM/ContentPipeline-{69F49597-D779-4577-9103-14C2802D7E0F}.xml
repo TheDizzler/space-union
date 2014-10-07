@@ -119,6 +119,15 @@
       <Time>2014-10-03T12:51:23.7836386-07:00</Time>
     </Item>
     <Item>
+      <Source>StellarObjects\asteroid(56x56).png</Source>
+      <Name>StellarObjects\asteroid(56x56)</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\asteroid(56x56).xnb</Output>
+      <Time>2014-10-06T13:44:41.3370435-07:00</Time>
+    </Item>
+    <Item>
       <Source>StellarObjects\waterplanet (256x256).png</Source>
       <Name>StellarObjects\waterplanet (256x256)</Name>
       <Importer>TextureImporter</Importer>
@@ -126,15 +135,6 @@
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\waterplanet (256x256).xnb</Output>
       <Time>2014-10-03T12:51:23.7826386-07:00</Time>
-    </Item>
-    <Item>
-      <Source>SpriteFonts\SpriteFont1.spritefont</Source>
-      <Name>SpriteFonts\SpriteFont1</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb</Output>
-      <Time>2014-10-03T12:51:23.7456365-07:00</Time>
     </Item>
     <Item>
       <Source>Animations\fireballs.png</Source>
@@ -162,6 +162,15 @@
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\big fireballs with blur.xnb</Output>
       <Time>2014-10-04T13:24:36.7034755-07:00</Time>
+    </Item>
+    <Item>
+      <Source>SpriteFonts\SpriteFont1.spritefont</Source>
+      <Name>SpriteFonts\SpriteFont1</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb</Output>
+      <Time>2014-10-03T12:51:23.7456365-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

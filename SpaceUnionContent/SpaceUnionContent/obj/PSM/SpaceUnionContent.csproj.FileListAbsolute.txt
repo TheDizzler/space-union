@@ -94,7 +94,11 @@ C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spa
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\beautifulbg.xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\doodlebg.xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\WinFlags\WinFlag1.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\asteroid(56x56).xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\waterplanet (256x256).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fireballs.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fireballs (test).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\big fireballs with blur.xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.png
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.jpg
@@ -108,10 +112,8 @@ C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\ga
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.png
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\beautifulbg.png
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\doodlebg.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\asteroid(56x56).png
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\IgnoreMe.dll
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\obj\PSM\SpaceUnionContent.csprojResolveAssemblyReference.cache
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\obj\PSM\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\obj\PSM\IgnoreMe.dll
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fireballs.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fireballs (test).xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\big fireballs with blur.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\obj\PSM\SpaceUnionContent.csprojResolveAssemblyReference.cache

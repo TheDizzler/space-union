@@ -113,12 +113,12 @@
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Content Include="Spaceships\spaceshiptest.png">
+    <Compile Include="Spaceships\spaceshiptest.png">
       <Name>spaceshiptest</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </Compile>
     <Compile Include="Backgrounds\beautifulbg.png">
       <Name>beautifulbg</Name>
       <Importer>TextureImporter</Importer>
@@ -131,9 +131,22 @@
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="WinFlags\WinFlag1.png">
+      <Name>WinFlag1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
   </ItemGroup>
-  <ItemGroup />
 <<<<<<< HEAD
+=======
+  <ItemGroup>
+    <Compile Include="StellarObjects\asteroid%2856x56%29.png">
+      <Name>asteroid%2856x56%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+>>>>>>> 381e608116c830d810a52e45dd0121928b10339d
   <ItemGroup>
     <Compile Include="StellarObjects\waterplanet %28256x256%29.png">
       <Name>waterplanet %28256x256%29</Name>
@@ -141,8 +154,27 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
-=======
->>>>>>> baefdef984b20c69068368bf5a94809515818417
+  <ItemGroup>
+    <Compile Include="Animations\fireballs.png">
+      <Name>fireballs</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Animations\fireballs %28test%29.png">
+      <Name>fireballs %28test%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Animations\big fireballs with blur.png">
+      <Name>big fireballs with blur</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--
       To modify your build process, add your task inside one of the targets below and uncomment it. 

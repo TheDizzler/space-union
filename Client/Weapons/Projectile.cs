@@ -1,30 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceUnion.StellarObjects;
 using SpaceUnion.Tools;
 
 
 namespace SpaceUnion.Weapons {
 
-	public abstract class Projectile : Sprite {
+	public abstract class Projectile : Tangible {
 
 		/// <summary>
 		/// The firerer of the projectile
 		/// </summary>
 		protected Ship owner;
-
-		/// <summary>
-		/// If false, the projectile will be removed from the game.
-		/// </summary>
-		protected bool active;
-		public bool getActive() {
-			return active;
-		}
-
-		protected HitBox projectileHitBox;
-		public HitBox getProjectileHitBox() {
-			return projectileHitBox;
-		}
 
 		// Determines how fast the projectile moves
 		protected float projectileMoveSpeed;
@@ -56,13 +45,13 @@ namespace SpaceUnion.Weapons {
 
 			owner = ship;
 			rotation = (float) ship.getRotation();
-			projectileHitBox = new HitBox(position.X, position.Y, texture.Width, texture.Height);
+			//projectileHitBox = new HitBox(position.X, position.Y, texture.Width, texture.Height);
 
 			//velocity = new Vector2((float) Math.Sin(rotation) * projectileMoveSpeed,
 			//	(float) -Math.Cos(rotation) * projectileMoveSpeed);
 
 
-			active = true;
+			//active = true;
 			timeActive = 0;
 
 			initialize(ship); // runs before parent class constructor -- may need to move this
@@ -75,7 +64,7 @@ namespace SpaceUnion.Weapons {
 		protected abstract void initialize(Ship ship);
 
 
-		public void update(GameTime gameTime) {
+		public void update(GameTime gameTime, List<Tangible> targets) {
 
 			timeActive += (float) gameTime.ElapsedGameTime.TotalSeconds;
 			if (projectileTTL > timeActive) {
@@ -83,11 +72,37 @@ namespace SpaceUnion.Weapons {
 				position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
 
 
-				projectileHitBox.updatePosition(position.X, position.Y); //updating hitbox
+				hitBox.updatePosition(position); // do projectiles need hitboxes?
 
+				updateDamageCollision(targets);
 			} else {
-				active = false;
+				isActive = false;
 			}
 		}
+
+		private void updateDamageCollision(List<Tangible> targets) {
+
+			foreach (Tangible target in targets)
+				if (getHitBox().getArray().Intersects(target.getHitBox().getArray())) {
+					target.isActive = false;
+				}
+
+		}
+
+
+		//private void UpdateDamageCollisions() {
+		//	// Use the Rectangle's built-in intersect function to 
+		//	// determine if two objects are overlapping
+		//	foreach (Projectile p in projectiles) {
+		//		if (p.getProjectileHitBox().getArray().Intersects(playerShip.getShipHitBox().getArray())) {
+		//			playerShip.setHealth(-1);
+		//		}
+		//		foreach (Asteroid a in asteroids) {
+		//			if (p.getProjectileHitBox().getArray().Intersects(a.hitbox.getArray())) {
+		//				a.Active = false;
+		//			}
+		//		}
+		//	}
+		//}
 	}
 }

@@ -43,7 +43,10 @@
     <Compile Include="GUI.cs" />
     <Compile Include="Controllers\GameplayScreen.cs" />
     <Compile Include="Controllers\MainMenuScreen.cs" />
+    <Compile Include="Tactile.cs" />
+    <Compile Include="Tangible.cs" />
     <Compile Include="PlayButton.cs" />
+    <Compile Include="StellarObjects\Asteroid.cs" />
     <Compile Include="StellarObjects\Planet.cs" />
     <Compile Include="Timer.cs" />
     <Compile Include="Weapons\Laser.cs" />

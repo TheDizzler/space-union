@@ -15,7 +15,7 @@ namespace SpaceUnion {
 	/// Base abstract ship class.
 	/// CURRENTLY NOT ABSTRACT FOR TESTING
 	/// </summary>
-	public class Ship : Sprite {
+	public class Ship : Tangible {
 
 		/// <summary>
 		/// A restistance to movement so all objects will enventual slow to a stop
@@ -41,12 +41,12 @@ namespace SpaceUnion {
 
 		public List<Projectile> projectiles;
 
-		protected HitBox shipHitBox;
+		//protected HitBox shipHitBox;
 
-		//Return Ship Hitbox for collision detection
-		public HitBox getShipHitBox() {
-			return shipHitBox;
-		}
+		////Return Ship Hitbox for collision detection
+		//public HitBox getShipHitBox() {
+		//	return shipHitBox;
+		//}
 
 		public float getShipVelocityDirectionX() {
 			return velocity.X;
@@ -56,9 +56,7 @@ namespace SpaceUnion {
 			return velocity.Y;
 		}
 
-		public int getHealth() {
-			return currentHealth;
-		}
+		
 		/// <summary>
 		/// Collision check between ship and screen boundries.
 		/// Ships loop horizontally and vertically.
@@ -67,20 +65,8 @@ namespace SpaceUnion {
 			return scale;
 		}
 
-		public void setHealth(int health) {
-			this.currentHealth = health;
-		}
-
 		
-		public int maxHealth = 100;
-		public int currentHealth;
-        
-		/// <summary>
-		/// Get % health remaining
-		/// </summary>
-		public float HealthPercentage {
-			get { return currentHealth / maxHealth; }
-		}
+	
         
 
 		private ExplosionEngine explosionEngine;
@@ -102,7 +88,6 @@ namespace SpaceUnion {
 
 			weaponTexture = wpnTex;
 			velocity = Vector2.Zero;
-			shipHitBox = new HitBox(position.X, position.Y, this.texture.Width, this.texture.Height);
 			//scale = .3f;
 
 			projectiles = new List<Projectile>();
@@ -116,17 +101,17 @@ namespace SpaceUnion {
 		}
 
 
-		public void update(GameTime gameTime, GameWindow window) {
+		public void update(GameTime gameTime, GameWindow window, List<Tangible> targets) {
 			// Elapsed time is taken into consideration in thrust and planet.pull
 			position += velocity;
-
+			base.update(position);
 			checkScreenStop(window);
 
 			// Update the Projectiles
 			for (int i = projectiles.Count - 1; i >= 0; i--) {
-				projectiles[i].update(gameTime);
+				projectiles[i].update(gameTime, targets);
 
-				if (projectiles[i].getActive() == false) {
+				if (projectiles[i].isActive == false) {
 					projectiles.RemoveAt(i);
 				}
 			}

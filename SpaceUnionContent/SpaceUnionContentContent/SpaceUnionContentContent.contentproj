@@ -138,6 +138,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="StellarObjects\asteroid%2856x56%29.png">
+      <Name>asteroid%2856x56%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="StellarObjects\waterplanet %28256x256%29.png">
       <Name>waterplanet %28256x256%29</Name>
       <Importer>TextureImporter</Importer>

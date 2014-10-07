@@ -4,10 +4,11 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Timers;
 using System.Text;
 using SpaceUnion.StellarObjects;
+using SpaceUnion.Tools;
 
-<<<<<<< HEAD
 
 namespace SpaceUnion.Controllers {
 
@@ -16,20 +17,31 @@ namespace SpaceUnion.Controllers {
 		private KeyboardState keyState;
 		private MouseState mouseState;
 		private SpriteBatch spriteBatch;
+
+		//static private bool flashFlag = false;
+		//private static System.Timers.Timer invinsibilityTimer;
+		//private static System.Timers.Timer flashingTimer;
+		//static protected bool invinsible;
+
+
+		List<Ship> ships;
+
 		private Ship playerShip;
 		private Planet planet;
+<<<<<<< HEAD
 		private Game1 game;
-
 		Camera mainCamera;
 		GUI gui;
+		private ExplosionEngine explosionEngine;
 
-		private Tools.AssetManager Assets;
+		private AssetManager Assets;
 
-		static public int worldWidth = 4000;
-		static public int worldHeight = 2000;
+		static public int worldWidth = 8000;
+		static public int worldHeight = 6000;
 
 		private int SCREEN_WIDTH;
 		private int SCREEN_HEIGHT;
+
 
 
 		public GameplayScreen(Game1 game, SpriteBatch batch) {
@@ -39,25 +51,28 @@ namespace SpaceUnion.Controllers {
 
 			spriteBatch = batch;
 
+			/*
+			invinsibilityTimer = new System.Timers.Timer(2000);
+			invinsibilityTimer.Elapsed += OnTimedEvent;
+			invinsibilityTimer.Enabled = false;
+			flashingTimer = new System.Timers.Timer(50);
+			flashingTimer.Elapsed += onTimedEventFlashing;
+			flashingTimer.Enabled = false;
+			flashFlag = true;
+			invinsible = false;
+			*/
+
 			Assets = Game1.Assets;
-			playerShip = new Ship(Assets.ufo, new Vector2(200, 200)); //Create new player ship
-			planet = new Planet(Assets.waterPlanet, new Vector2(1000, 1000));
-
-			gui = new GUI(game, playerShip, planet);
+			explosionEngine = new ExplosionEngine(Assets);
+			playerShip = new Ship(Assets.ufo, Assets.laser, new Vector2(200, 200), explosionEngine); //Create new player ship
 =======
-namespace SpaceUnion
-{
-
-    class GameplayScreen
-    {
-
-        private KeyboardState keyState;
-        private MouseState mouseState;
-        private SpriteBatch spriteBatch;
-        private Ship playerShip;
         private Game1 game;
-
+        //static private bool flashFlag = false;
+        //private static System.Timers.Timer invinsibilityTimer;
+        //private static System.Timers.Timer flashingTimer;
         List<Projectile> projectiles;
+        List<Ship> ships;
+        List<Asteroid> asteroids;
 
         // The rate of fire of the player laser
         TimeSpan fireTime;
@@ -70,7 +85,7 @@ namespace SpaceUnion
 
         static public int worldWidth = 4000;
         static public int worldHeight = 2000;
-
+        //static protected bool invinsible;
         private int SCREEN_WIDTH;
         private int SCREEN_HEIGHT;
 
@@ -83,33 +98,94 @@ namespace SpaceUnion
 
             spriteBatch = batch;
 
+            /*
+            invinsibilityTimer = new System.Timers.Timer(2000);
+            invinsibilityTimer.Elapsed += OnTimedEvent;
+            invinsibilityTimer.Enabled = false;
+            flashingTimer = new System.Timers.Timer(50);
+            flashingTimer.Elapsed += onTimedEventFlashing;
+            flashingTimer.Enabled = false;
+            flashFlag = true;
+            invinsible = false;
+            */
+            Random r = new Random();
             Assets = Game1.Assets;
             playerShip = new Ship(Assets.spaceShipTest, new Vector2(200, 200)); //Create new player ship
+>>>>>>> 381e608116c830d810a52e45dd0121928b10339d
+			planet = new Planet(Assets.waterPlanet, new Vector2(1000, 1000));
 
-            gui = new GUI(game, playerShip);
 
-            Viewport mainViewport = new Viewport((int)playerShip.getX(), (int)playerShip.getY(),
-                game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height - GUI.guiHeight);
-            mainCamera = new Camera(mainViewport, worldWidth, worldHeight, 1.0f);
 
+			gui = new GUI(game, playerShip, planet);
+
+			Viewport mainViewport = new Viewport((int) playerShip.getX(), (int) playerShip.getY(),
+				game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height - GUI.guiHeight);
+			mainCamera = new Camera(mainViewport, worldWidth, worldHeight, 1.0f);
+
+
+<<<<<<< HEAD
+			ships = new List<Ship>();
+			ships.Add(playerShip);
+
+		}
+
+		/// <summary>
+		/// Draws the stars background.
+		/// </summary>
+		protected void drawWorld() {
+
+			/* Parallax Scrolling BG */
+			spriteBatch.Draw(Assets.starfield2,
+				new Rectangle((int) (mainCamera.Position.X * .9), (int) (mainCamera.Position.Y * .9), worldWidth / 4, worldHeight / 4),
+				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+			spriteBatch.Draw(Assets.starfield1,
+				new Rectangle((int) (mainCamera.Position.X * 0.7), (int) (mainCamera.Position.Y * 0.7), 1600, 1200),
+				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+			spriteBatch.Draw(Assets.starfield1,
+				new Rectangle((int) (mainCamera.Position.X * 0.6), (int) (mainCamera.Position.Y * 0.6), 2400, 1800),
+				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+			spriteBatch.Draw(Assets.starfield1,
+				new Rectangle((int) (mainCamera.Position.X * 0.4), (int) (mainCamera.Position.Y * 0.4), 800, 600),
+				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+			spriteBatch.Draw(Assets.starfield3,
+				new Rectangle((int) (mainCamera.Position.X * .5), (int) (mainCamera.Position.Y * .5f), worldWidth / 10, worldHeight / 10),
+				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+		}
+
+
+
+		/// <summary>
+		/// Allows the game to run logic such as updating the world,
+		/// checking for collisions, gathering input, and playing audio.
+		/// 
+		/// Checks player edge wrap around/edge stop.
+		/// 
+		/// </summary>
+		/// <param name="gameTime">Provides a snapshot of timing values.</param>
+		public void Update(GameTime gameTime) {
+
+			keyState = Keyboard.GetState(); //Get which keys are pressed or released
+			mouseState = Mouse.GetState();
+=======
             projectiles = new List<Projectile>();
+            asteroids = new List<Asteroid>();
+            ships = new List<Ship>();
 
             // Set the laser to fire every quarter second
             fireTime = TimeSpan.FromSeconds(.15f);
+
+
+            for (int i = 0; i < 10; i++)
+            {
+                AddAsteroid(new Vector2(r.Next(100, 4000), r.Next(100, 2000)));
+            }
         }
 
         /// <summary>
-        /// Draws the stars background and debug information.
+        /// Draws the stars background.
         /// </summary>
         protected void drawWorld()
         {
-            //spriteBatch.Draw(background, new Rectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), Color.White);
-            //spriteBatch.DrawString(font, "Radian Angle =" + playerShip.getAngle(), new Vector2(100, 20), Color.Red);
-            //spriteBatch.DrawString(font, "Degree Angle =" + (playerShip.getAngle() * (180 / Math.PI)), new Vector2(100, 50), Color.Red);
-            //spriteBatch.DrawString(font, "X =" + playerShip.getShipVelocityDirectionX()
-            //	+ " y = " + playerShip.getShipVelocityDirectionY(), new Vector2(100, 80), Color.Red);
-            //spriteBatch.DrawString(font, "X =" + playerShip.getSpaceshipX()
-            //	+ " y = " + playerShip.getSpaceshipY(), new Vector2(100, 110), Color.Red);
 
             /* Parallax Scrolling BG */
             spriteBatch.Draw(Assets.starfield2,
@@ -129,6 +205,13 @@ namespace SpaceUnion
                 null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
         }
 
+        private void AddAsteroid(Vector2 position)
+        {
+           Random r = new Random();
+           Asteroid asteroid = new Asteroid(Assets.asteroid, position);
+           asteroids.Add(asteroid);
+        }
+
         private void AddProjectile(Vector2 position)
         {
             Projectile projectile = new Projectile(Assets.laser, playerShip.Position, playerShip);
@@ -140,43 +223,166 @@ namespace SpaceUnion
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
         /// 
-        /// Checks player edge wrap around.
+		/// Checks player edge wrap around/edge stop.
         /// 
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public void Update(GameTime gameTime)
         {
+            Random r = new Random();
             //playerShip.checkScreenWrap(Window); //Check if ship will wrap around edges
             playerShip.checkScreenStop(game.Window);
             keyState = Keyboard.GetState(); //Get which keys are pressed or released
             mouseState = Mouse.GetState();
+>>>>>>> 381e608116c830d810a52e45dd0121928b10339d
 
 
 
-            //Up Key toggles back thruster
-            if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W))
-            {
-                playerShip.thrust();
-            }
+			//Up Key toggles back thruster
+			if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W)) {
+				playerShip.thrust(gameTime);
+			}
 
-            //Left Key rotates ship left
-            if (keyState.IsKeyDown(Keys.Left) || keyState.IsKeyDown(Keys.A))
-            {
-                playerShip.rotateLeft();
-            }
+			//Left Key rotates ship left
+			if (keyState.IsKeyDown(Keys.Left) || keyState.IsKeyDown(Keys.A)) {
+				playerShip.rotateLeft(gameTime);
+			}
 
-            //Right Key rotates ship right
-            if (keyState.IsKeyDown(Keys.Right) || keyState.IsKeyDown(Keys.D))
-            {
-                playerShip.rotateRight();
-            }
+			//Right Key rotates ship right
+			if (keyState.IsKeyDown(Keys.Right) || keyState.IsKeyDown(Keys.D)) {
+				playerShip.rotateRight(gameTime);
+			}
 
-            //Space key activates debugging brake
-            if (keyState.IsKeyDown(Keys.Space))
-            {
-                playerShip.stop();
-            }
+			//Space key activates debugging brake
+			if (keyState.IsKeyDown(Keys.Space)) {
+				playerShip.stop();
+			}
 
+			if (keyState.IsKeyDown(Keys.LeftControl)) {
+				playerShip.fire(gameTime);
+
+			}
+
+			planet.update(gameTime, ships);
+
+
+
+			mainCamera.setZoom(mouseState.ScrollWheelValue);
+			mainCamera.Position = playerShip.Position; // center the camera to player's position
+			mainCamera.update(gameTime);
+
+			/* Transform mouse input from view to world position
+			 * NOT currently used but may be useful in the future*/
+			Matrix inverse = Matrix.Invert(mainCamera.getTransformation());
+			Vector2 mousePos = Vector2.Transform(
+			   new Vector2(mouseState.X, mouseState.Y), inverse);
+
+
+
+			//UpdateDamageCollision();
+			playerShip.update(gameTime, game.Window);
+			//gui.update();
+
+			explosionEngine.update(gameTime);
+
+		}
+
+		private void UpdateDamageCollision() {
+			// Use the Rectangle's built-in intersect function to 
+			// determine if two objects are overlapping
+			//foreach (Projectile p in projectiles) {
+			//	if (p.getProjectileHitBox().getArray().Intersects(playerShip.getShipHitBox().getArray())) {
+			//		playerShip.setHealth(-1);
+			//	}
+			//}
+			//Assets = Game1.Assets;
+			// Only create the rectangle once for the player
+			//rectangle1 = new Rectangle((int)(playerShip.Position.X ),
+			//(int)(playerShip.Position.Y),
+			//(int)(Assets.spaceShipTest.Width * playerShip.getScale()),
+			//(int)(Assets.spaceShipTest.Height * playerShip.getScale()));
+
+			/*
+				// Determine if the two objects collided with each
+				// other
+				if (rectangle1.Intersects(rectangle2) && invinsible == false)
+				{
+					invinsible = true;
+					invinsibilityTimer.Enabled = true;
+					playerShip.setHealth(playerShip.getHealth() - 1);
+					flashingTimer.Enabled = true;
+				}
+				if (invinsible == false)
+				{
+					invinsibilityTimer.Enabled = false;
+					flashingTimer.Enabled = false;
+				}
+				if (playerShip.getHealth() == 0)
+				{
+					playerShip.setHealth(100);
+					game.EndMatch();
+					invinsibilityTimer.Enabled = false;
+				}
+			*/
+		}
+
+		
+
+		public void draw() {
+
+			/* Main camera sprite batch */
+			spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend,
+				null, null, null, null, mainCamera.getTransformation());
+
+
+			drawWorld(); //Draws background
+
+			explosionEngine.draw(spriteBatch);
+
+			foreach (Ship ship in ships)
+				ship.draw(spriteBatch); //Draws all space ships
+
+<<<<<<< HEAD
+			planet.draw(spriteBatch);
+			
+			
+
+
+			spriteBatch.End();
+
+
+
+
+			/* GUI spritebatch. Anything drawn here will remain
+			 * static and not be affected by cameras. */
+			spriteBatch.Begin();
+
+			gui.draw(spriteBatch);
+
+
+			spriteBatch.End();
+		}
+		/*
+		private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+		{
+			invinsible = false;
+		}
+		private static void onTimedEventFlashing(Object source, ElapsedEventArgs e)
+		{
+			if (flashFlag == true)
+			{
+				playerShip.setAlpha(0);
+				flashFlag = false;
+			}
+			if (flashFlag == false)
+			{
+				playerShip.setAlpha(255);
+				flashFlag = true;
+			}
+		}
+		*/
+	}
+=======
             mainCamera.setZoom(mouseState.ScrollWheelValue);
             mainCamera.Position = playerShip.CenterPosition; // center the camera to player's position
             mainCamera.update(gameTime);
@@ -199,10 +405,64 @@ namespace SpaceUnion
                     AddProjectile(playerShip.Position + new Vector2(0, 0));
                 }
             }
+            if (asteroids.Count < 50)
+                AddAsteroid(new Vector2(r.Next(100, 4000), r.Next(100, 2000)));
 
-            playerShip.update();
+            UpdateDamageCollision();
+			playerShip.update(gameTime);
             gui.update(playerShip);
             UpdateProjectiles();
+            UpdateAsteroids();
+            
+        }
+
+        private void UpdateDamageCollision()
+        {
+            // Use the Rectangle's built-in intersect function to 
+            // determine if two objects are overlapping
+            foreach(Projectile p in projectiles){
+                if (p.getProjectileHitBox().getArray().Intersects(playerShip.getShipHitBox().getArray())) {
+                    playerShip.setHealth(-1);
+                }
+                foreach (Asteroid a in asteroids) {
+                    if (p.getProjectileHitBox().getArray().Intersects(a.hitbox.getArray()))
+                    {
+                        a.Active = false;
+                    }
+                }
+            }
+
+            //Assets = Game1.Assets;
+            // Only create the rectangle once for the player
+            //rectangle1 = new Rectangle((int)(playerShip.Position.X ),
+            //(int)(playerShip.Position.Y),
+            //(int)(Assets.spaceShipTest.Width * playerShip.getScale()),
+            //(int)(Assets.spaceShipTest.Height * playerShip.getScale()));
+
+            /*
+                // Determine if the two objects collided with each
+                // other
+                if (rectangle1.Intersects(rectangle2) && invinsible == false)
+                {
+                    invinsible = true;
+                    invinsibilityTimer.Enabled = true;
+                    playerShip.setHealth(playerShip.getHealth() - 1);
+                    flashingTimer.Enabled = true;
+                }
+                if (invinsible == false)
+                {
+                    invinsibilityTimer.Enabled = false;
+                    flashingTimer.Enabled = false;
+                }
+                if (playerShip.getHealth() == 0)
+                {
+                    playerShip.setHealth(100);
+                    game.EndMatch();
+                    invinsibilityTimer.Enabled = false;
+                }
+            */
+
+
         }
 
         //Comment
@@ -220,6 +480,17 @@ namespace SpaceUnion
             }
         }
 
+        private void UpdateAsteroids()
+        {
+            // Update the Projectiles
+            for (int i = asteroids.Count - 1; i >= 0; i--)
+            {
+                if (asteroids[i].Active == false)
+                {
+                    asteroids.RemoveAt(i);
+                }
+            }
+        }
 
         public void draw()
         {
@@ -227,118 +498,59 @@ namespace SpaceUnion
             /* Main camera sprite batch */
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend,
                 SamplerState.LinearWrap, null, null, null, mainCamera.getTransformation());
->>>>>>> baefdef984b20c69068368bf5a94809515818417
 
 
-<<<<<<< HEAD
-		/// <summary>
-		/// Draws the stars background.
-		/// </summary>
-		protected void drawWorld() {
-=======
             drawWorld(); //Draws background
->>>>>>> baefdef984b20c69068368bf5a94809515818417
 
             playerShip.draw(spriteBatch); //Draws player space ship
-
-<<<<<<< HEAD
-		/// <summary>
-		/// Allows the game to run logic such as updating the world,
-		/// checking for collisions, gathering input, and playing audio.
-		/// 
-		/// Checks player edge wrap around/edge stop.
-		/// 
-		/// </summary>
-		/// <param name="gameTime">Provides a snapshot of timing values.</param>
-		public void Update(GameTime gameTime) {
-			//playerShip.checkScreenWrap(Window); //Check if ship will wrap around edges
-			playerShip.checkScreenStop(game.Window);
-			keyState = Keyboard.GetState(); //Get which keys are pressed or released
-			mouseState = Mouse.GetState();
-=======
+			planet.draw(spriteBatch);
             // Draw the Projectiles
             for (int i = 0; i < projectiles.Count; i++)
             {
-                projectiles[i].draw(spriteBatch);
+                spriteBatch.Draw(Assets.shuttle, projectiles[i].getProjectileHitBox().getArray(), Color.Red);
+                //projectiles[i].draw(spriteBatch); //This is a debug statement to view where the hitboxes are
+                
             }
->>>>>>> baefdef984b20c69068368bf5a94809515818417
+            // Draw the Asteroids
+            for (int i = 0; i < asteroids.Count; i++)
+            {
+                spriteBatch.Draw(Assets.asteroid, asteroids[i].hitbox.getArray(), Color.Brown);
+            }
 
 
             spriteBatch.End();
 
-<<<<<<< HEAD
-			//Up Key toggles back thruster
-			if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W)) {
-				playerShip.thrust(gameTime);
-			}
-
-			//Left Key rotates ship left
-			if (keyState.IsKeyDown(Keys.Left) || keyState.IsKeyDown(Keys.A)) {
-				playerShip.rotateLeft(gameTime);
-			}
-
-			//Right Key rotates ship right
-			else if (keyState.IsKeyDown(Keys.Right) || keyState.IsKeyDown(Keys.D)) {
-				playerShip.rotateRight(gameTime);
-			}
-=======
 
 
->>>>>>> baefdef984b20c69068368bf5a94809515818417
 
             /* GUI spritebatch. Anything drawn here will remain
              * static and not be affected by cameras. */
             spriteBatch.Begin();
 
-<<<<<<< HEAD
-
-			planet.update(gameTime, playerShip);
-			playerShip.update(gameTime);
-
-			
-
-			mainCamera.setZoom(mouseState.ScrollWheelValue);
-			mainCamera.Position = playerShip.CenterPosition; // center the camera to player's position
-			mainCamera.update(gameTime);
-=======
             gui.draw(spriteBatch);
->>>>>>> baefdef984b20c69068368bf5a94809515818417
 
 
             spriteBatch.End();
         }
-
-<<<<<<< HEAD
-
-		public void draw() {
-
-			/* Main camera sprite batch */
-			spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend,
-				SamplerState.LinearWrap, null, null, null, mainCamera.getTransformation());
-
-
-			drawWorld(); //Draws background
-
-			playerShip.draw(spriteBatch); //Draws player space ship
-			planet.draw(spriteBatch);
-
-			spriteBatch.End();
-
-
-
-
-			/* GUI spritebatch. Anything drawn here will remain
-			 * static and not be affected by cameras. */
-			spriteBatch.Begin();
-
-			gui.draw(spriteBatch);
-
-
-			spriteBatch.End();
-		}
-
-	}
-=======
+        /*
+        private static void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            invinsible = false;
+        }
+        private static void onTimedEventFlashing(Object source, ElapsedEventArgs e)
+        {
+            if (flashFlag == true)
+            {
+                playerShip.setAlpha(0);
+                flashFlag = false;
+            }
+            if (flashFlag == false)
+            {
+                playerShip.setAlpha(255);
+                flashFlag = true;
+            }
+        }
+        */
     }
->>>>>>> baefdef984b20c69068368bf5a94809515818417
+>>>>>>> 381e608116c830d810a52e45dd0121928b10339d
 }

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
-namespace SpaceUnion {
 
-	class Camera {
+namespace SpaceUnion.Tools {
+
+	public class Camera {
 
 		private const float zoomUpperLimit = 2.5f;
 		private const float zoomLowerLimit = .5f;

@@ -8,6 +8,7 @@ using System.Timers;
 using System.Text;
 using SpaceUnion.StellarObjects;
 using SpaceUnion.Tools;
+using SpaceUnion.Weapons;
 
 
 namespace SpaceUnion.Controllers {
@@ -22,9 +23,9 @@ namespace SpaceUnion.Controllers {
 		//private static System.Timers.Timer invinsibilityTimer;
 		//private static System.Timers.Timer flashingTimer;
 		//static protected bool invinsible;
-
-
+		List<Asteroid> asteroids;
 		List<Ship> ships;
+		List<Tangible> targets;
 
 		private Ship playerShip;
 		private Planet planet;
@@ -60,11 +61,13 @@ namespace SpaceUnion.Controllers {
 			flashFlag = true;
 			invinsible = false;
 			*/
-
+			Random r = new Random();
 			Assets = Game1.Assets;
 			explosionEngine = new ExplosionEngine(Assets);
 			playerShip = new Ship(Assets.ufo, Assets.laser, new Vector2(200, 200), explosionEngine); //Create new player ship
 			planet = new Planet(Assets.waterPlanet, new Vector2(1000, 1000));
+
+
 
 			gui = new GUI(game, playerShip, planet);
 
@@ -73,9 +76,18 @@ namespace SpaceUnion.Controllers {
 			mainCamera = new Camera(mainViewport, worldWidth, worldHeight, 1.0f);
 
 
+			asteroids = new List<Asteroid>();
 			ships = new List<Ship>();
-			ships.Add(playerShip);
+			targets = new List<Tangible>();
 
+			ships.Add(playerShip);
+			foreach (Ship ship in ships)
+				targets.Add(ship);
+
+
+
+			for (int i = 0; i < 10; i++)
+				AddAsteroid(new Vector2(r.Next(100, 4000), r.Next(100, 2000)));
 		}
 
 		/// <summary>
@@ -101,6 +113,11 @@ namespace SpaceUnion.Controllers {
 				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
 		}
 
+		private void AddAsteroid(Vector2 position) {
+			Asteroid asteroid = new Asteroid(Assets.asteroid, position);
+			asteroids.Add(asteroid);
+			targets.Add(asteroid);
+		}
 
 
 		/// <summary>
@@ -112,7 +129,7 @@ namespace SpaceUnion.Controllers {
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public void Update(GameTime gameTime) {
-
+			Random r = new Random();
 			keyState = Keyboard.GetState(); //Get which keys are pressed or released
 			mouseState = Mouse.GetState();
 
@@ -152,20 +169,30 @@ namespace SpaceUnion.Controllers {
 			mainCamera.update(gameTime);
 
 			/* Transform mouse input from view to world position
-			 * NOT currently used but may be useful in the future*/
+			 * NOT currently used but may be useful in the future
 			Matrix inverse = Matrix.Invert(mainCamera.getTransformation());
 			Vector2 mousePos = Vector2.Transform(
 			   new Vector2(mouseState.X, mouseState.Y), inverse);
+			*/
 
+			if (asteroids.Count < 50)
+				AddAsteroid(new Vector2(r.Next(100, 4000), r.Next(100, 2000)));
 
-
-			//UpdateDamageCollision();
-			playerShip.update(gameTime, game.Window);
+			//UpdateDamageCollision(); // moved to Projectile class
+			foreach (Ship ship in ships)
+				ship.update(gameTime, game.Window, targets);
 			//gui.update();
 
+			for (int i = asteroids.Count - 1; i >= 0; i--) {
+				asteroids[i].update(gameTime, targets);
+				if (!asteroids[i].isActive)
+					asteroids.RemoveAt(i);
+			}
+			//UpdateAsteroids();
 			explosionEngine.update(gameTime);
 
 		}
+
 
 		private void UpdateDamageCollision() {
 			// Use the Rectangle's built-in intersect function to 
@@ -174,45 +201,29 @@ namespace SpaceUnion.Controllers {
 			//	if (p.getProjectileHitBox().getArray().Intersects(playerShip.getShipHitBox().getArray())) {
 			//		playerShip.setHealth(-1);
 			//	}
+			//	foreach (Asteroid a in asteroids) {
+			//		if (p.getProjectileHitBox().getArray().Intersects(a.hitbox.getArray())) {
+			//			a.Active = false;
+			//		}
+			//	}
 			//}
-			//Assets = Game1.Assets;
-			// Only create the rectangle once for the player
-			//rectangle1 = new Rectangle((int)(playerShip.Position.X ),
-			//(int)(playerShip.Position.Y),
-			//(int)(Assets.spaceShipTest.Width * playerShip.getScale()),
-			//(int)(Assets.spaceShipTest.Height * playerShip.getScale()));
-
-			/*
-				// Determine if the two objects collided with each
-				// other
-				if (rectangle1.Intersects(rectangle2) && invinsible == false)
-				{
-					invinsible = true;
-					invinsibilityTimer.Enabled = true;
-					playerShip.setHealth(playerShip.getHealth() - 1);
-					flashingTimer.Enabled = true;
-				}
-				if (invinsible == false)
-				{
-					invinsibilityTimer.Enabled = false;
-					flashingTimer.Enabled = false;
-				}
-				if (playerShip.getHealth() == 0)
-				{
-					playerShip.setHealth(100);
-					game.EndMatch();
-					invinsibilityTimer.Enabled = false;
-				}
-			*/
 		}
 
-		
+		// moved to Asteroid class
+		private void UpdateAsteroids() {
+			// Update the Projectiles
+			for (int i = asteroids.Count - 1; i >= 0; i--) {
+				if (asteroids[i].isActive == false) {
+					asteroids.RemoveAt(i);
+				}
+			}
+		}
 
 		public void draw() {
 
 			/* Main camera sprite batch */
 			spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend,
-				null, null, null, null, mainCamera.getTransformation());
+				SamplerState.LinearWrap, null, null, null, mainCamera.getTransformation());
 
 
 			drawWorld(); //Draws background
@@ -223,8 +234,12 @@ namespace SpaceUnion.Controllers {
 				ship.draw(spriteBatch); //Draws all space ships
 
 			planet.draw(spriteBatch);
-			
-			
+
+
+			// Draw the Asteroids
+			for (int i = 0; i < asteroids.Count; i++) {
+				asteroids[i].draw(spriteBatch);
+			}
 
 
 			spriteBatch.End();

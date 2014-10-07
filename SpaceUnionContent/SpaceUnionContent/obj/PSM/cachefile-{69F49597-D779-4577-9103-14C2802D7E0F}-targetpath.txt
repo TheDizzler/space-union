@@ -11,16 +11,18 @@ Content\Spaceships\spaceshiptest.xnb
 Content\Backgrounds\beautifulbg.xnb
 Content\Backgrounds\doodlebg.xnb
 Content\WinFlags\WinFlag1.xnb
+Content\StellarObjects\asteroid(56x56).xnb
 Content\StellarObjects\waterplanet (256x256).xnb
-Content\SpriteFonts\SpriteFont1.xnb
 Content\Animations\fireballs.xnb
 Content\Animations\fireballs (test).xnb
 Content\Animations\big fireballs with blur.xnb
+Content\SpriteFonts\SpriteFont1.xnb
 Content\Backgrounds\starfield (800x600).png
 Content\Backgrounds\galaxy.png
 Content\Spaceships\spaceshiptest.png
 Content\Backgrounds\beautifulbg.png
 Content\Backgrounds\doodlebg.png
+Content\StellarObjects\asteroid(56x56).png
 Content\Buttons\playbutton.png
 Content\Backgrounds\background.jpg
 Content\Spaceships\circleship (128x128).png
