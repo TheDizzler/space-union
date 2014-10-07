@@ -35,6 +35,8 @@ namespace SpaceUnion.StellarObjects {
 
 			// move in a straight line
 			position += velocity;
+
+			base.update(position);
 		}
 
 
