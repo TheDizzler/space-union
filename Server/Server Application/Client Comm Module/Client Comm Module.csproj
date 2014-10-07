@@ -40,6 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientCommHandler.cs" />
+    <Compile Include="ClientConstants.cs" />
+    <Compile Include="ClientDataReceiving.cs" />
+    <Compile Include="ClientDataTransmission.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
