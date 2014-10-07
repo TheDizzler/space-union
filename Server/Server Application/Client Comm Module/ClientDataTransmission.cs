@@ -66,7 +66,6 @@ namespace Client_Comm_Module
                 switch (message.Type)
                 {
                     case Constants.GAME_DATA:
-
                         dataQueue.Add((GameData)message);
                         break;
                     case Constants.CHAT_MESSAGE:
@@ -110,7 +109,7 @@ namespace Client_Comm_Module
                     Thread.Sleep(100);
                     continue;
                 }
-                DataControl.sendTCPData(TCPClient, message, ClientConstants.SERVER_IPADDRESS, Constants.TCPMessageClient);
+                DataControl.sendTCPData(TCPClient, message, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCPMessageClient);
             }
         }
 
@@ -124,7 +123,7 @@ namespace Client_Comm_Module
                 GameData data = (GameData)removeFromQueue(Constants.GAME_DATA);
                 if (data == null)
                 {
-                    Thread.Sleep(100);
+                    Thread.Sleep(1);
                     continue;
                 }
                 DataControl.sendUDPData(UDPClient, data, ClientConstants.SERVER_IPADDRESS, assignedUDPPort_Send);
