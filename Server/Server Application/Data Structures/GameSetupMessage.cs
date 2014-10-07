@@ -11,6 +11,7 @@ namespace Data_Structures
     /// created and provides the game client with the
     /// necessary connection information.
     /// </summary>
+    [Serializable]
     public class GameSetupMessage : Data
     {
         int roomnumber;

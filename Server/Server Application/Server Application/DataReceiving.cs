@@ -30,7 +30,9 @@ namespace Server_Application
         /// </summary>
         TcpListener[] TCPListeners = new TcpListener[Constants.NumberOfTcpClients];
 
+        // Temporary.
         Object ownerLock = new Object();
+
         Server owner;
 
         public DataReceiving(Server owner)
@@ -78,6 +80,7 @@ namespace Server_Application
             while (true)
             {   
                 Object chatData = DataControl.receiveTCPData(TCPListeners[1]);
+                Console.WriteLine(((GameMessage)chatData).Username);
                 lock (ownerLock)
                 {
                     owner.addMessageToQueue((GameMessage)chatData);
