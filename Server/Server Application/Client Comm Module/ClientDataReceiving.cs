@@ -24,21 +24,21 @@ namespace Client_Comm_Module
 
         public ClientDataReceiving()
         {
-            
-            UDPListener = new UdpClient(assignedUDPPort_Listen);
             messageQueue = new List<GameMessage>();
+            dataQueue = new List<GameData>();
+
+            UDPListener = new UdpClient(assignedUDPPort_Listen);
 
             // NOTE: fix required to only listen to the server.
             TCPListener = new TcpListener(IPAddress.Parse("0.0.0.0"), Constants.TCPMessageClient);
             TCPListener.Start();
 
             new Thread(receiveChatMessages).Start();
-            //new Thread(receiveData).Start();
+            new Thread(receiveData).Start();
         }
 
         /// <summary>
-        /// Begin receiving chat messages from clients and 
-        /// handle each received message in a separate thread.
+        /// Begin receiving chat messages from the server.
         /// </summary>
         public void receiveChatMessages()
         {
@@ -50,18 +50,25 @@ namespace Client_Comm_Module
         }
 
         /// <summary>
-        /// Begin receiving game data from clients and
-        /// handle each received game data in a separate thread.
+        /// Assign a UDP port to receive data from.
         /// </summary>
-        /// <param name="UDPListener"></param>
-        /*public void receiveData(Object UDPListener)
+        /// <param name="UDPPort">The UDP port to assign.</param>
+        public void assignUDPPort_Listen(int UDPPort)
+        {
+            assignedUDPPort_Listen = UDPPort;
+        }
+
+        /// <summary>
+        /// Begin receiving game data from the server.
+        /// </summary>
+        public void receiveData()
         {
             while (true)
             {
-                Object clientData = DataControl.receiveUDPData((UdpClient)UDPListener);
+                Object clientData = DataControl.receiveUDPData(UDPListener);
                 dataQueue.Add((GameData)clientData);
             }
-        }*/
+        }
 
         /// <summary>
         /// Gets the oldest message from the message queue.

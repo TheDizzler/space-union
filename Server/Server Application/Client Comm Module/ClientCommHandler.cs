@@ -46,13 +46,13 @@ namespace Client_Comm_Module
             sender.addMessageToQueue(message);
         }
 
-        /// TESTING SERVER CONNECTION
-        /// SENDS GAME MESSAGE TO SERVER
+        /// <summary>
+        /// Send a game data to the server.
         /// </summary>
-        /// <param name="gameMessage"></param>
-        public void sendGameMessage(GameMessage gameMessage)
+        /// <param name="data">The data to send to the server.</param>
+        public void sendGameData(GameData data)
         {
-            sender.addMessageToQueue(gameMessage);
+            sender.addMessageToQueue(data);
         }
 
         /// <summary>

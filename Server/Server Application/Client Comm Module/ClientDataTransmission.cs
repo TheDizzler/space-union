@@ -32,7 +32,7 @@ namespace Client_Comm_Module
         /// <param name="playerData">Player data containing player information.</param>
         public void sendLoginRequest(Player playerData)
         {
-            DataControl.sendTCPData(TCPClient, playerData, ClientConstants.SERVER_IPADDRESS, Constants.TCPMessageClient);
+            DataControl.sendTCPData(TCPClient, playerData, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCP_PORT_SEND);
         }
 
         /// <summary>
@@ -41,14 +41,14 @@ namespace Client_Comm_Module
         /// <param name="data">Registration data containing player information.</param>
         public void sendRegistrationInfo(RegistrationData data)
         {
-            DataControl.sendTCPData(TCPClient, data, ClientConstants.SERVER_IPADDRESS, Constants.TCPMessageClient);
+            DataControl.sendTCPData(TCPClient, data, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCP_PORT_SEND);
         }
 
         /// <summary>
         /// Assign a UDP port to send the data to.
         /// </summary>
         /// <param name="UDPPort">The UDP port to assign.</param>
-        public void assignUDPPort(int UDPPort)
+        public void assignUDPPort_Send(int UDPPort)
         {
             assignedUDPPort_Send = UDPPort;
         }
@@ -76,6 +76,9 @@ namespace Client_Comm_Module
             catch (InvalidCastException e) { Console.WriteLine(e.ToString()); return; }
         }
 
+        /// <summary>
+        /// Set up the server by initializing the clients and message queues.
+        /// </summary>
         private void setup()
         {
             UDPClient = new UdpClient(assignedUDPPort_Send);
@@ -106,10 +109,10 @@ namespace Client_Comm_Module
                 GameMessage message = (GameMessage)removeFromQueue(Constants.CHAT_MESSAGE);
                 if (message == null)
                 {
-                    Thread.Sleep(100);
+                    Thread.Sleep(ClientConstants.CHAT_SEND_INTERVAL);
                     continue;
                 }
-                DataControl.sendTCPData(TCPClient, message, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCPMessageClient);
+                DataControl.sendTCPData(TCPClient, message, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCP_PORT_SEND);
             }
         }
 
@@ -123,7 +126,7 @@ namespace Client_Comm_Module
                 GameData data = (GameData)removeFromQueue(Constants.GAME_DATA);
                 if (data == null)
                 {
-                    Thread.Sleep(1);
+                    Thread.Sleep(ClientConstants.DATA_SEND_INTERVAL);
                     continue;
                 }
                 DataControl.sendUDPData(UDPClient, data, ClientConstants.SERVER_IPADDRESS, assignedUDPPort_Send);
