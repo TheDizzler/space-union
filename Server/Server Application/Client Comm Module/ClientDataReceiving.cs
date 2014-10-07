@@ -24,14 +24,16 @@ namespace Client_Comm_Module
 
         public ClientDataReceiving()
         {
+            
             UDPListener = new UdpClient(assignedUDPPort_Listen);
+            messageQueue = new List<GameMessage>();
 
             // NOTE: fix required to only listen to the server.
             TCPListener = new TcpListener(IPAddress.Parse("0.0.0.0"), Constants.TCPMessageClient);
             TCPListener.Start();
 
             new Thread(receiveChatMessages).Start();
-            new Thread(receiveData).Start();
+            //new Thread(receiveData).Start();
         }
 
         /// <summary>
@@ -52,14 +54,14 @@ namespace Client_Comm_Module
         /// handle each received game data in a separate thread.
         /// </summary>
         /// <param name="UDPListener"></param>
-        public void receiveData(Object UDPListener)
+        /*public void receiveData(Object UDPListener)
         {
             while (true)
             {
                 Object clientData = DataControl.receiveUDPData((UdpClient)UDPListener);
                 dataQueue.Add((GameData)clientData);
             }
-        }
+        }*/
 
         /// <summary>
         /// Gets the oldest message from the message queue.

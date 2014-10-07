@@ -109,7 +109,7 @@ namespace Client_Comm_Module
                     Thread.Sleep(100);
                     continue;
                 }
-                DataControl.sendTCPData(TCPClient, message, ClientConstants.SERVER_IPADDRESS, Constants.TCPMessageClient);
+                DataControl.sendTCPData(TCPClient, message, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCPMessageClient);
             }
         }
 

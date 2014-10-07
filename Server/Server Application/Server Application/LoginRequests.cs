@@ -21,15 +21,11 @@ namespace Server_Application
         public static void handleLoginRequest(Object loginData, Server owner)
         {
             Player playerData = (Player)loginData;
-            /*
+
             if (validateUserData(playerData, owner))
             {
-                owner.addOnlinePlayer(playerData);
+                owner.addOnlinePlayer(playerData);   
             }
-            */
-            owner.addOnlinePlayer(playerData);
-            Gameroom room = owner.getOpenGameroom();
-            room.addPlayer(playerData);
         }
 
         /// <summary>

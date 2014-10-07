@@ -63,31 +63,6 @@ namespace Server_Application
             }
             return null;
         }
-
-        public Gameroom getOpenGameroom()
-        {
-            foreach (Gameroom room in gamerooms)
-            {
-                if (room.getNumberOfPlayers() < 6)
-                {
-                    return room;
-                }
-            }
-            Gameroom rooms = new Gameroom();
-            rooms.RoomNumber = gamerooms.Count;
-            gamerooms.Add(rooms);
-            return rooms;
-        }
-
-        /// <summary>
-        /// Returns the amount of gamerooms currently open.
-        /// </summary>
-        /// <returns>Number of gamerooms currently open.</returns>
-        public int numberOfGamerooms()
-        {
-            return gamerooms.Count;
-        }
-
         /// <summary>
         /// Add the given player to the list of online players.
         /// </summary>

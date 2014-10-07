@@ -10,13 +10,13 @@ namespace Client_Comm_Module
 {
     public class ClientCommHandler
     {
-        private ClientDataTransmission sender;
         private ClientDataReceiving receiver;
+        private ClientDataTransmission sender;
 
         public ClientCommHandler()
         {
-            sender = new ClientDataTransmission();
             receiver = new ClientDataReceiving();
+            sender = new ClientDataTransmission();
         }
 
         /// <summary>
@@ -35,6 +35,16 @@ namespace Client_Comm_Module
         public void sendRegistrationInfo(RegistrationData data)
         {
             sender.sendRegistrationInfo(data);
+        }
+
+        /// <summary>
+        /// TESTING SERVER CONNECTION
+        /// SENDS GAME MESSAGE TO SERVER
+        /// </summary>
+        /// <param name="gameMessage"></param>
+        public void sendGameMessage(GameMessage gameMessage)
+        {
+            sender.addMessageToQueue(gameMessage);
         }
 
         /// <summary>

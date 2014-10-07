@@ -33,11 +33,11 @@ namespace Data_Structures
         /// <summary>
         /// The port from which the player is sending this transmission.
         /// </summary>
-        public int PortSend { get; set; }
+        public short PortSend { get; set; }
         /// <summary>
         /// The port from which the player is receiving this transmission.
         /// </summary>
-        public int PortReceive { get; set; }
+        public short PortReceive { get; set; }
 
         /// <summary>
         /// The horizontal X position of the player's ship.
