@@ -28,7 +28,9 @@ namespace SpaceUnion {
 
 		GameplayScreen gameplayScreen;
 		MainMenuScreen mainMenuScreen;
+		ShipSelectionScreen shipselectionScreen;
 
+		public ExplosionEngine explosionEngine;
 		/// <summary>
 		/// Game State Enum to track game states
 		/// </summary>
@@ -36,7 +38,8 @@ namespace SpaceUnion {
 			MainMenu,
 			Playing,
 			Options,
-            TeamBattle,
+			TeamBattle,
+			Select,
 		}
 
 		GameState currentGameState = GameState.MainMenu;
@@ -83,11 +86,14 @@ namespace SpaceUnion {
 			Assets.loadContent(GraphicsDevice);
 			//Load Main Menu
 			mainMenuScreen = new MainMenuScreen(this);
+			shipselectionScreen = new ShipSelectionScreen(this);
 			IsMouseVisible = true;
 			//graphics.PreferredBackBufferWidth = SCREEN_WIDTH;
 			//graphics.PreferredBackBufferHeight = SCREEN_HEIGHT;
 
 			graphics.ApplyChanges();
+
+			explosionEngine = new ExplosionEngine(Assets);
 		}
 
 		/// <summary>
@@ -122,9 +128,9 @@ namespace SpaceUnion {
 				case GameState.Playing:
 					gameplayScreen.Update(gameTime);
 					break;
-				//case GameState.TeamBattle:
-				//	teamBattleScreen.Update(gameTime);
-				//	break;
+				case GameState.Select:
+					shipselectionScreen.Update();
+					break;
 				default:
 					break;
 			}
@@ -149,10 +155,8 @@ namespace SpaceUnion {
 				case GameState.Playing:
 					gameplayScreen.draw();
 					break;
-				//case GameState.TeamBattle:
-				//	teamBattleScreen.draw();
-				//	break;
-				default:
+				case GameState.Select:
+					shipselectionScreen.draw(spriteBatch);
 					break;
 			}
 
@@ -160,18 +164,31 @@ namespace SpaceUnion {
 		}
 
 
+		public void GoToMain() {
+
+			currentGameState = GameState.MainMenu;
+			IsMouseVisible = true;
+		}
+
+
+		public void GoToSelect() {
+			shipselectionScreen = new ShipSelectionScreen(this);
+			currentGameState = GameState.Select;
+			IsMouseVisible = true;
+		}
+
+
 		public void StartGame() {
-			gameplayScreen = new GameplayScreen(this, spriteBatch);
+			gameplayScreen = new GameplayScreen(this, spriteBatch, shipselectionScreen.getship());
 			Viewport v = GraphicsDevice.Viewport;
 			currentGameState = GameState.Playing;
 			IsMouseVisible = false;
 		}
 
-        
-        public void EndMatch() 
-        {
-            currentGameState = GameState.MainMenu;
-            IsMouseVisible = true;
-        }
+
+		public void EndMatch() {
+			currentGameState = GameState.MainMenu;
+			IsMouseVisible = true;
+		}
 	}
 }

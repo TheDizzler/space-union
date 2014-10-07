@@ -146,6 +146,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Buttons\confirm.png">
+      <Name>confirm</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="StellarObjects\waterplanet %28256x256%29.png">
       <Name>waterplanet %28256x256%29</Name>
       <Importer>TextureImporter</Importer>
@@ -153,6 +161,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Buttons\shipselection.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>shipselection</Name>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="Animations\fireballs.png">
       <Name>fireballs</Name>
       <Importer>TextureImporter</Importer>

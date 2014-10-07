@@ -19,10 +19,7 @@ namespace SpaceUnion.Controllers {
 		private MouseState mouseState;
 		private SpriteBatch spriteBatch;
 
-		//static private bool flashFlag = false;
-		//private static System.Timers.Timer invinsibilityTimer;
-		//private static System.Timers.Timer flashingTimer;
-		//static protected bool invinsible;
+
 		List<Asteroid> asteroids;
 		List<Ship> ships;
 		List<Tangible> targets;
@@ -32,7 +29,8 @@ namespace SpaceUnion.Controllers {
 		private Game1 game;
 		Camera mainCamera;
 		GUI gui;
-		private ExplosionEngine explosionEngine;
+
+		Random gen;
 
 		private AssetManager Assets;
 
@@ -43,28 +41,19 @@ namespace SpaceUnion.Controllers {
 		private int SCREEN_HEIGHT;
 
 
+		public GameplayScreen(Game1 game, SpriteBatch batch, Ship selectedship) {
 
-		public GameplayScreen(Game1 game, SpriteBatch batch) {
 			this.game = game;
 			SCREEN_HEIGHT = game.getScreenHeight();
 			SCREEN_WIDTH = game.getScreenWidth();
 
 			spriteBatch = batch;
 
-			/*
-			invinsibilityTimer = new System.Timers.Timer(2000);
-			invinsibilityTimer.Elapsed += OnTimedEvent;
-			invinsibilityTimer.Enabled = false;
-			flashingTimer = new System.Timers.Timer(50);
-			flashingTimer.Elapsed += onTimedEventFlashing;
-			flashingTimer.Enabled = false;
-			flashFlag = true;
-			invinsible = false;
-			*/
-			Random r = new Random();
+			gen = new Random();
 			Assets = Game1.Assets;
-			explosionEngine = new ExplosionEngine(Assets);
-			playerShip = new Ship(Assets.ufo, Assets.laser, new Vector2(200, 200), explosionEngine); //Create new player ship
+
+			playerShip = selectedship;
+
 			planet = new Planet(Assets.waterPlanet, new Vector2(1000, 1000));
 
 
@@ -87,7 +76,7 @@ namespace SpaceUnion.Controllers {
 
 
 			for (int i = 0; i < 10; i++)
-				AddAsteroid(new Vector2(r.Next(100, 4000), r.Next(100, 2000)));
+				AddAsteroid(new Vector2(gen.Next(100, 4000), gen.Next(100, 2000)));
 		}
 
 		/// <summary>
@@ -129,7 +118,7 @@ namespace SpaceUnion.Controllers {
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public void Update(GameTime gameTime) {
-			Random r = new Random();
+
 			keyState = Keyboard.GetState(); //Get which keys are pressed or released
 			mouseState = Mouse.GetState();
 
@@ -176,7 +165,7 @@ namespace SpaceUnion.Controllers {
 			*/
 
 			if (asteroids.Count < 50)
-				AddAsteroid(new Vector2(r.Next(100, 4000), r.Next(100, 2000)));
+				AddAsteroid(new Vector2(gen.Next(100, 4000), gen.Next(100, 2000)));
 
 			//UpdateDamageCollision(); // moved to Projectile class
 			foreach (Ship ship in ships)
@@ -189,7 +178,7 @@ namespace SpaceUnion.Controllers {
 					asteroids.RemoveAt(i);
 			}
 			//UpdateAsteroids();
-			explosionEngine.update(gameTime);
+			game.explosionEngine.update(gameTime);
 
 		}
 
@@ -228,7 +217,7 @@ namespace SpaceUnion.Controllers {
 
 			drawWorld(); //Draws background
 
-			explosionEngine.draw(spriteBatch);
+			game.explosionEngine.draw(spriteBatch);
 
 			foreach (Ship ship in ships)
 				ship.draw(spriteBatch); //Draws all space ships
@@ -256,24 +245,5 @@ namespace SpaceUnion.Controllers {
 
 			spriteBatch.End();
 		}
-		/*
-		private static void OnTimedEvent(Object source, ElapsedEventArgs e)
-		{
-			invinsible = false;
-		}
-		private static void onTimedEventFlashing(Object source, ElapsedEventArgs e)
-		{
-			if (flashFlag == true)
-			{
-				playerShip.setAlpha(0);
-				flashFlag = false;
-			}
-			if (flashFlag == false)
-			{
-				playerShip.setAlpha(255);
-				flashFlag = true;
-			}
-		}
-		*/
 	}
 }

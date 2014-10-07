@@ -17,6 +17,8 @@ Content\Animations\fireballs.xnb
 Content\Animations\fireballs (test).xnb
 Content\Animations\big fireballs with blur.xnb
 Content\SpriteFonts\SpriteFont1.xnb
+Content\Buttons\confirm.xnb
+Content\Buttons\shipselection.xnb
 Content\Backgrounds\starfield (800x600).png
 Content\Backgrounds\galaxy.png
 Content\Spaceships\spaceshiptest.png
@@ -30,3 +32,5 @@ Content\Spaceships\shuttle.png
 Content\Spaceships\triangleship (128x128).png
 Content\Spaceships\wrenchship.png
 Content\Projectiles\laser.png
+Content\Buttons\confirm.png
+Content\Buttons\shipselection.png

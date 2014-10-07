@@ -62,7 +62,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\wrenchship.xnb</Output>
-      <Time>2014-10-03T12:51:23.7326357-07:00</Time>
+      <Time>2014-10-06T21:47:32.5024163-07:00</Time>
     </Item>
     <Item>
       <Source>Backgrounds\galaxy.png</Source>
@@ -171,6 +171,24 @@
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb</Output>
       <Time>2014-10-03T12:51:23.7456365-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Buttons\confirm.png</Source>
+      <Name>Buttons\confirm</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\confirm.xnb</Output>
+      <Time>2014-10-06T21:47:32.4924162-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Buttons\shipselection.png</Source>
+      <Name>Buttons\shipselection</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.xnb</Output>
+      <Time>2014-10-06T21:47:32.5024163-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

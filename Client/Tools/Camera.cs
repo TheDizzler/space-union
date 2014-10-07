@@ -7,8 +7,8 @@ namespace SpaceUnion.Tools {
 	public class Camera {
 
 		private const float zoomUpperLimit = 1.5f;
-		private const float zoomLowerLimit = .05f;
-		private const float zoomIncrement = .1f;
+		private const float zoomLowerLimit = .1f;
+		private const float zoomIncrement = .05f;
 		private float previousScroll = 0f;
 
 		private float zoomRatio;
