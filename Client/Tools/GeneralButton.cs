@@ -20,14 +20,19 @@ namespace SpaceUnion.Tools
 		private bool isHovered = false;
         public bool selected = false;
 		private ButtonState lastState;
+        private Texture2D shipTexture;
 
 
 		public GeneralButton(Texture2D newTexture, GraphicsDevice graphics)
 			: base(newTexture, Vector2.Zero) {
-
+                shipTexture = newTexture;
 			
 		}
 
+        public Texture2D getTexture()
+        {
+            return shipTexture;
+        }
 
         public void Update(MouseState mouse)
         {
@@ -65,28 +70,25 @@ namespace SpaceUnion.Tools
         }
         public void update(MouseState mouse) {
 
-   ButtonState currentState = mouse.LeftButton;
-   Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
+            ButtonState currentState = mouse.LeftButton;
+            Rectangle mouseRectangle = new Rectangle(mouse.X, mouse.Y, 1, 1);
 
-   if (isDown && lastState == ButtonState.Pressed && currentState != ButtonState.Pressed)
-    isClicked = true;
+            if (isDown && lastState == ButtonState.Pressed && currentState != ButtonState.Pressed)
+                isClicked = true;
 
+            if (mouseRectangle.Intersects(buttonRectangle))
+                isHovered = true;
+            else
+                isHovered = false;
 
-   if (mouseRectangle.Intersects(buttonRectangle))
-    isHovered = true;
-   else
-    isHovered = false;
+            if (isHovered && lastState != ButtonState.Pressed && currentState == ButtonState.Pressed)
+                isDown = true;
 
-   if (isHovered && lastState != ButtonState.Pressed && currentState == ButtonState.Pressed)
-    isDown = true;
+            if (isDown && !isHovered)
+                isDown = false;
 
-   if (isDown && !isHovered)
-    isDown = false;
-
-   
-
-   lastState = mouse.LeftButton;
-  }
+            lastState = mouse.LeftButton;
+         }
 
 		public void setPosition(Vector2 newPosition) {
 			position = newPosition;

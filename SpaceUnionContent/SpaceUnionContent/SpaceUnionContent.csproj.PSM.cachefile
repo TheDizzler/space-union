@@ -7,10 +7,10 @@ Content\Spaceships\triangleship (128x128).xnb
 Content\Spaceships\wrenchship.xnb
 Content\Backgrounds\beautifulbg.xnb
 Content\Backgrounds\doodlebg.xnb
-Content\StellarObjects\waterplanet (256x256).xnb
-Content\SpriteFonts\SpriteFont1.xnb
 Content\Buttons\confirm.xnb
+Content\StellarObjects\waterplanet (256x256).xnb
 Content\Buttons\shipselection.xnb
+Content\SpriteFonts\SpriteFont1.xnb
 Content\Buttons\playbutton.png
 Content\Backgrounds\background.jpg
 Content\Spaceships\circleship (128x128).png

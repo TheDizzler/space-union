@@ -12,183 +12,107 @@ namespace SpaceUnion.Controllers
 {
     class ShipSelectionScreen
     {
-        //private Texture2D texture;
         Game1 game;
-        public GeneralButton selectShip1;
-        GeneralButton selectShip2;
-        GeneralButton selectShip3;
-        GeneralButton selectShip4;
+        GeneralButton[] shipSelectionArray;
         GeneralButton confirmButton;
-        Ship selectedship;
-        GeneralButton lastbutton;
+        Ship selectedShip;
+        GeneralButton lastButton;
+        /* Default size of the ships */
+        const int WIDTH       = 128;
+        const int HEIGHT      = 128;
+        const float SHIPCOUNT = 1;   // Change value according to how many different ships are available
+        int shipsPerRow = 0;
 
         public ShipSelectionScreen(Game1 game)
         {
+            shipsPerRow = (game.getScreenWidth() - (WIDTH * 2)) / WIDTH;
+            float currentShipsPerRow = shipsPerRow;
+            int shipsPerLastRow = (int)(SHIPCOUNT % shipsPerRow);
+            float shipsPerColumn = (float)Math.Ceiling(SHIPCOUNT / shipsPerRow);
             this.game = game;
-            selectShip1 = new GeneralButton(Game1.Assets.ufo, game.GraphicsDevice);
-            selectShip2 = new GeneralButton(Game1.Assets.wedge, game.GraphicsDevice);
-            selectShip3 = new GeneralButton(Game1.Assets.wrench, game.GraphicsDevice);
-            selectShip4 = new GeneralButton(Game1.Assets.shuttle, game.GraphicsDevice);
+            shipSelectionArray = new GeneralButton[(int)SHIPCOUNT];
+            /* Actual ships used; commented out to test other functions */
+            //shipSelectionArray[0] = new GeneralButton(Game1.Assets.ufo, game.GraphicsDevice);
+            //shipSelectionArray[1] = new GeneralButton(Game1.Assets.wedge, game.GraphicsDevice);
+            //shipSelectionArray[2] = new GeneralButton(Game1.Assets.wrench, game.GraphicsDevice);
+            //shipSelectionArray[3] = new GeneralButton(Game1.Assets.shuttle, game.GraphicsDevice);
+            
+            /* For Testing X amount of ships; Remove */
+            for (int i = 0; i < SHIPCOUNT; i++)
+            {
+                shipSelectionArray[i] = new GeneralButton(Game1.Assets.ufo, game.GraphicsDevice);
+            }
+
             confirmButton = new GeneralButton(Game1.Assets.confirm, game.GraphicsDevice);
             confirmButton.height = 100;
             confirmButton.width = 300;
-            selectShip1.height = 128;
-            selectShip1.width = 128;
-            selectShip2.height = 128;
-            selectShip2.width = 128;
-            selectShip3.height = 128;
-            selectShip3.width = 128;
-            selectShip4.height = 128;
-            selectShip4.width = 128;
-            confirmButton.setPosition(new Vector2((game.getScreenWidth()  - confirmButton.width)/2, (game.getScreenHeight() - confirmButton.height)));
-            selectShip1.setPosition(new Vector2((game.getScreenWidth() - (selectShip1.width*4))/2,(selectShip1.height)));
-            selectShip2.setPosition(new Vector2((game.getScreenWidth() - (selectShip2.width*2)) / 2, (selectShip2.height)));
-            selectShip3.setPosition(new Vector2((game.getScreenWidth() + (selectShip3.width/2)) / 2, (selectShip3.height)));
-            selectShip4.setPosition(new Vector2((game.getScreenWidth() + (selectShip4.width *3)) / 2, (selectShip4.height)));
-            selectedship = new Ship(Game1.Assets.ufo, new Vector2(200, 200));
-            selectShip1.selected = true;
-            lastbutton = selectShip1;
+
+            /* Sets the ship's icon size and then its position on the screen based on how many ships there are */
+            for (int i = 0; i < SHIPCOUNT; i++)
+            {
+                if (i == SHIPCOUNT - shipsPerLastRow)
+                {
+                    currentShipsPerRow = shipsPerLastRow;
+                }
+                shipSelectionArray[i].height = HEIGHT;
+                shipSelectionArray[i].width = WIDTH;
+                shipSelectionArray[i].setPosition(
+                    new Vector2(/* X Coordinate */
+                               ((i % shipsPerRow * WIDTH)            // Sets each ship side by side from left to right starting from 0
+                              + (game.getScreenWidth() / 2)          // Moves all ships towards the center
+                              - (WIDTH * (currentShipsPerRow / 2))), // Moves all ships back by half the ships total width
+                                /* Y Coordinate */
+                                (i / shipsPerRow * HEIGHT)           // Sets each row from top to bottem starting from 0
+                              + ((game.getScreenHeight() / 2) - 50)  // Moves the rows towards the center
+                              - (HEIGHT * (shipsPerColumn / 2))));   // Moves the rows back half the rows total height
+            }
+            
+            confirmButton.setPosition(new Vector2((game.getScreenWidth() - confirmButton.width) / 2, 
+                                                  (game.getScreenHeight() - confirmButton.height)));
+            
+            /* Sets the default selected ship */
+            selectedShip = new Ship(Game1.Assets.ufo, new Vector2(200, 200));
+            shipSelectionArray[0].selected = true;
+            lastButton = shipSelectionArray[0];
             
         }
         public Ship getship()
         {
-            return selectedship;
+            return selectedShip;
         }
         public void Update()
         {
-            
-
             MouseState mouseState = Mouse.GetState();
             confirmButton.Update(mouseState);
-            selectShip1.Update(mouseState);
-            selectShip2.Update(mouseState);
-            selectShip3.Update(mouseState);
-            selectShip4.Update(mouseState);
-            
-            
-            if (selectShip1.selected && selectShip2.selected)
+
+            for (int i = 0; i < shipSelectionArray.Length; i++)
             {
-                if (lastbutton == selectShip2)
-                {
-
-                    selectedship = new Ship(Game1.Assets.ufo, new Vector2(200, 200));
-                    selectShip2.selected = false;
-                    selectShip3.selected = false;
-                    selectShip4.selected = false;
-                    lastbutton = selectShip1;
-                }
-                else
-                {
-                    selectedship = new Ship(Game1.Assets.wedge, new Vector2(200, 200));
-                    selectShip1.selected = false;
-                    selectShip3.selected = false;
-                    selectShip4.selected = false;
-                    lastbutton = selectShip2;
-                }
-                
-
-            }
-            if (selectShip1.selected && selectShip3.selected)
-            {
-                if (lastbutton == selectShip3)
-                {
-
-                    selectedship = new Ship(Game1.Assets.ufo, new Vector2(200, 200));
-                    selectShip2.selected = false;
-                    selectShip3.selected = false;
-                    selectShip4.selected = false;
-                    lastbutton = selectShip1;
-                }
-                else
-                {
-                    selectedship = new Ship(Game1.Assets.wrench, new Vector2(200, 200));
-                    selectShip1.selected = false;
-                    selectShip2.selected = false;
-                    selectShip4.selected = false;
-                    lastbutton = selectShip3;
-                }
-
-
-            }
-            if (selectShip1.selected && selectShip4.selected)
-            {
-                if (lastbutton == selectShip4)
-                {
-
-                    selectedship = new Ship(Game1.Assets.ufo, new Vector2(200, 200));
-                    selectShip2.selected = false;
-                    selectShip3.selected = false;
-                    selectShip4.selected = false;
-                    lastbutton = selectShip1;
-                }
-                else
-                {
-                    selectedship = new Ship(Game1.Assets.shuttle, new Vector2(200, 200));
-                    selectShip1.selected = false;
-                    selectShip3.selected = false;
-                    selectShip2.selected = false;
-                    lastbutton = selectShip4;
-                }
-
-
-            }
-            if (selectShip2.selected && selectShip3.selected)
-            {
-                if (lastbutton == selectShip3)
-                {
-                    selectedship = new Ship(Game1.Assets.wedge, new Vector2(200, 200));
-                    selectShip1.selected = false;
-                    selectShip3.selected = false;
-                    selectShip4.selected = false;
-                    lastbutton = selectShip2;
-                }
-                else
-                {
-                    selectedship = new Ship(Game1.Assets.wrench, new Vector2(200, 200));
-                    selectShip1.selected = false;
-                    selectShip2.selected = false;
-                    selectShip4.selected = false;
-                    lastbutton = selectShip3;
-                }
-            }
-            if (selectShip2.selected && selectShip4.selected)
-            {
-                if (lastbutton == selectShip4)
-                {
-                    selectedship = new Ship(Game1.Assets.wedge, new Vector2(200, 200));
-                    selectShip1.selected = false;
-                    selectShip3.selected = false;
-                    selectShip4.selected = false;
-                    lastbutton = selectShip2;
-                }
-                else
-                {
-                    selectedship = new Ship(Game1.Assets.shuttle, new Vector2(200, 200));
-                    selectShip1.selected = false;
-                    selectShip2.selected = false;
-                    selectShip3.selected = false;
-                    lastbutton = selectShip4;
-                }
+                shipSelectionArray[i].Update(mouseState);
             }
 
-            if (selectShip3.selected && selectShip4.selected)
+            /* Allows for feedback of selecting a ship and sets the selected ship */
+            for (int i = 0; i < SHIPCOUNT; i++)
             {
-                if (lastbutton == selectShip4)
+                for (int j = 0; j < SHIPCOUNT; j++)
                 {
-                    selectedship = new Ship(Game1.Assets.wrench, new Vector2(200, 200));
-                    selectShip1.selected = false;
-                    selectShip2.selected = false;
-                    selectShip4.selected = false;
-                    lastbutton = selectShip3;
-                }
-                else
-                {
-                    selectedship = new Ship(Game1.Assets.shuttle, new Vector2(200, 200));
-
-                    selectShip1.selected = false;
-                    selectShip3.selected = false;
-                    selectShip2.selected = false;
-                    lastbutton = selectShip4;
+                    /* Due to how GeneralButton works, at most 2 ships will be selected
+                     * which results in this logic to compensate for that fact 
+                     */
+                    if (shipSelectionArray[i].selected && shipSelectionArray[j].selected && i != j)
+                    {
+                        if (lastButton == shipSelectionArray[j])
+                        {
+                            selectedShip = new Ship(shipSelectionArray[i].getTexture(), new Vector2(200,200));
+                            shipSelectionArray[j].selected = false;
+                            lastButton = shipSelectionArray[i];
+                        }
+                        else
+                        {
+                            selectedShip = new Ship(shipSelectionArray[j].getTexture(), new Vector2(200, 200));
+                            shipSelectionArray[i].selected = false;
+                            lastButton = shipSelectionArray[j];
+                        }
+                    }
                 }
             }
             
@@ -201,14 +125,14 @@ namespace SpaceUnion.Controllers
         }
         public void draw(SpriteBatch spriteBatch)
         {
-
             spriteBatch.Begin();
 
             confirmButton.draw(spriteBatch);
-            selectShip1.draw(spriteBatch);
-            selectShip2.draw(spriteBatch);
-            selectShip3.draw(spriteBatch);
-            selectShip4.draw(spriteBatch);
+
+            for (int i = 0; i < SHIPCOUNT; i++)
+            {
+                shipSelectionArray[i].draw(spriteBatch);
+            }
 
             spriteBatch.End();
         }
