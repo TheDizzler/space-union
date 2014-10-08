@@ -37,6 +37,11 @@
   <ItemGroup>
     <Compile Include="Animations\BigExplosion.cs" />
     <Compile Include="Animations\Explosion.cs" />
+    <Compile Include="Ships\Copy of Ship.cs" />
+    <Compile Include="Ships\Stunt.cs" />
+    <Compile Include="Ships\TestShip.cs" />
+    <Compile Include="Ships\UFO.cs" />
+    <Compile Include="Ships\Zoid.cs" />
     <Compile Include="Tools\Camera.cs" />
     <Compile Include="Animations\ShortExplosion.cs" />
     <Compile Include="HitBox.cs" />
@@ -61,6 +66,7 @@
     <Compile Include="Tools\ExplosionEngine.cs" />
     <Compile Include="Tools\ShipButton.cs" />
     <Compile Include="Tools\Sprite.cs" />
+    <Compile Include="Weapons\Shield.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

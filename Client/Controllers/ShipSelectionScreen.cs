@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SpaceUnion.Ships;
 using SpaceUnion.Tools;
 
 
@@ -24,8 +25,8 @@ namespace SpaceUnion.Controllers {
 		public ShipSelectionScreen(Game1 game) {
 			this.game = game;
 			selectShip1 = new ShipButton(Game1.Assets.ufo);
-			selectShip2 = new ShipButton(Game1.Assets.wedge);
-			selectShip3 = new ShipButton(Game1.Assets.wrench);
+			selectShip2 = new ShipButton(Game1.Assets.stunt);
+			selectShip3 = new ShipButton(Game1.Assets.zoid);
 			selectShip4 = new ShipButton(Game1.Assets.shuttle);
 			confirmButton = new BaseButton(Game1.Assets.confirm) { height = 100, width = 300 };
 			
@@ -34,7 +35,7 @@ namespace SpaceUnion.Controllers {
 			selectShip2.setPosition(new Vector2((game.getScreenWidth() - (selectShip2.width * 2)) / 2, (selectShip2.height)));
 			selectShip3.setPosition(new Vector2((game.getScreenWidth() + (selectShip3.width / 2)) / 2, (selectShip3.height)));
 			selectShip4.setPosition(new Vector2((game.getScreenWidth() + (selectShip4.width * 3)) / 2, (selectShip4.height)));
-			selectedship = new Ship(Game1.Assets.ufo, Game1.Assets.laser, new Vector2(200, 200), game.explosionEngine);
+			selectedship = new UFO(new Vector2(200, 200), game);
 			selectShip1.selected = true;
 			lastbutton = selectShip1;
 
@@ -60,13 +61,13 @@ namespace SpaceUnion.Controllers {
 			if (selectShip1.selected && selectShip2.selected) {
 				if (lastbutton == selectShip2) {
 
-					selectedship = new Ship(Game1.Assets.ufo, Game1.Assets.laser, new Vector2(200, 200), game.explosionEngine);
+					selectedship = new UFO(new Vector2(200, 200), game);
 					selectShip2.selected = false;
 					selectShip3.selected = false;
 					selectShip4.selected = false;
 					lastbutton = selectShip1;
 				} else {
-					selectedship = new Ship(Game1.Assets.wedge, Game1.Assets.laser, new Vector2(200, 200), game.explosionEngine);
+					selectedship = new Stunt(new Vector2(200, 200), game);
 					selectShip1.selected = false;
 					selectShip3.selected = false;
 					selectShip4.selected = false;
@@ -78,13 +79,13 @@ namespace SpaceUnion.Controllers {
 			if (selectShip1.selected && selectShip3.selected) {
 				if (lastbutton == selectShip3) {
 
-					selectedship = new Ship(Game1.Assets.ufo, Game1.Assets.laser, new Vector2(200, 200), game.explosionEngine);
+					selectedship = new UFO(new Vector2(200, 200), game);
 					selectShip2.selected = false;
 					selectShip3.selected = false;
 					selectShip4.selected = false;
 					lastbutton = selectShip1;
 				} else {
-					selectedship = new Ship(Game1.Assets.wrench, Game1.Assets.laser, new Vector2(200, 200), game.explosionEngine);
+					selectedship = new Zoid(new Vector2(200, 200), game);
 					selectShip1.selected = false;
 					selectShip2.selected = false;
 					selectShip4.selected = false;
@@ -96,12 +97,12 @@ namespace SpaceUnion.Controllers {
 			if (selectShip1.selected && selectShip4.selected) {
 				if (lastbutton == selectShip4) {
 
-					selectedship = new Ship(Game1.Assets.ufo, Game1.Assets.laser, new Vector2(200, 200), game.explosionEngine);
+					selectedship = new UFO(new Vector2(200, 200), game);
 					selectShip3.selected = false;
 					selectShip4.selected = false;
 					lastbutton = selectShip1;
 				} else {
-					selectedship = new Ship(Game1.Assets.shuttle, Game1.Assets.laser, new Vector2(200, 200), game.explosionEngine);
+					selectedship = new TestShip(new Vector2(200, 200), game);
 					selectShip1.selected = false;
 					selectShip3.selected = false;
 					selectShip2.selected = false;
@@ -112,13 +113,13 @@ namespace SpaceUnion.Controllers {
 			}
 			if (selectShip2.selected && selectShip3.selected) {
 				if (lastbutton == selectShip3) {
-					selectedship = new Ship(Game1.Assets.wedge, Game1.Assets.laser, new Vector2(200, 200), game.explosionEngine);
+					selectedship = new Stunt(new Vector2(200, 200), game);
 					selectShip1.selected = false;
 					selectShip3.selected = false;
 					selectShip4.selected = false;
 					lastbutton = selectShip2;
 				} else {
-					selectedship = new Ship(Game1.Assets.wrench, Game1.Assets.laser, new Vector2(200, 200), game.explosionEngine);
+					selectedship = new Zoid(new Vector2(200, 200), game);
 					selectShip1.selected = false;
 					selectShip2.selected = false;
 					selectShip4.selected = false;
@@ -127,13 +128,13 @@ namespace SpaceUnion.Controllers {
 			}
 			if (selectShip2.selected && selectShip4.selected) {
 				if (lastbutton == selectShip4) {
-					selectedship = new Ship(Game1.Assets.wedge, Game1.Assets.laser, new Vector2(200, 200), game.explosionEngine);
+					selectedship = new Stunt(new Vector2(200, 200), game);
 					selectShip1.selected = false;
 					selectShip3.selected = false;
 					selectShip4.selected = false;
 					lastbutton = selectShip2;
 				} else {
-					selectedship = new Ship(Game1.Assets.shuttle, Game1.Assets.laser, new Vector2(200, 200), game.explosionEngine);
+					selectedship = new TestShip(new Vector2(200, 200), game);
 					selectShip1.selected = false;
 					selectShip2.selected = false;
 					selectShip3.selected = false;
@@ -143,13 +144,13 @@ namespace SpaceUnion.Controllers {
 
 			if (selectShip3.selected && selectShip4.selected) {
 				if (lastbutton == selectShip4) {
-					selectedship = new Ship(Game1.Assets.wrench, Game1.Assets.laser, new Vector2(200, 200), game.explosionEngine);
+					selectedship = new Zoid(new Vector2(200, 200), game);
 					selectShip1.selected = false;
 					selectShip2.selected = false;
 					selectShip4.selected = false;
 					lastbutton = selectShip3;
 				} else {
-					selectedship = new Ship(Game1.Assets.shuttle, Game1.Assets.laser, new Vector2(200, 200), game.explosionEngine);
+					selectedship = new TestShip(new Vector2(200, 200), game);
 
 					selectShip1.selected = false;
 					selectShip3.selected = false;

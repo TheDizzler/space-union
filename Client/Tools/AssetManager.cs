@@ -43,15 +43,15 @@ namespace SpaceUnion.Tools {
         public Texture2D spaceShipTest;
 
 		public Texture2D ufo;
-		public Texture2D wedge;
-		public Texture2D wrench;
+		public Texture2D stunt;
+		public Texture2D zoid;
         public Texture2D confirm;
         public Texture2D shipselection;
 
         // projectiles
         public Texture2D laser;
-
-
+		public Texture2D missile;
+		public Texture2D shield;
 
 		public AssetManager(ContentManager cntnt) {
 
@@ -85,16 +85,18 @@ namespace SpaceUnion.Tools {
 
 
 			waterPlanet = Content.Load<Texture2D>("StellarObjects/waterplanet (256x256)");
+			asteroid = Content.Load<Texture2D>("StellarObjects/asteroid(56x56)");
 
             spaceShipTest = Content.Load<Texture2D>("Spaceships/spaceshiptest");
-			ufo = Content.Load<Texture2D>("Spaceships/circleship (128x128)");
-			wedge = Content.Load<Texture2D>("Spaceships/triangleship (128x128)");
-			wrench = Content.Load<Texture2D>("Spaceships/wrenchship");
+			ufo = Content.Load<Texture2D>("Spaceships/ufoship (128x128)");
+			stunt = Content.Load<Texture2D>("Spaceships/stuntship (128x128)");
+			zoid = Content.Load<Texture2D>("Spaceships/zoidship");
 
             winflag1 = Content.Load<Texture2D>("WinFlags/WinFlag1");
 
             laser = Content.Load<Texture2D>("Projectiles/laser");
-            asteroid = Content.Load<Texture2D>("StellarObjects/asteroid(56x56)");
+            missile = Content.Load<Texture2D>("Projectiles/short missile (16x16)");
+			shield = Content.Load<Texture2D>("Animations/bubble shield sheet");
 		}
 	}
 }

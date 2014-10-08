@@ -12,7 +12,6 @@ namespace SpaceUnion.Tools {
 	/// </summary>
 	public abstract class Sprite {
 
-
 		public int alphaValue;
 
 		protected Texture2D texture;
@@ -101,8 +100,6 @@ namespace SpaceUnion.Tools {
 		/// <summary>
 		/// Sets width, height and origin of sprite
 		/// </summary>
-		/// <param name="width"></param>
-		/// <param name="height"></param>
 		protected void setSize(int wdth, int hght) {
 			width = wdth;
 			height = hght;
@@ -125,7 +122,7 @@ namespace SpaceUnion.Tools {
 
 			for (int i = 0; i < frameCount; i++)
 				recs[i] = new Rectangle(i + i * width,
-					(row) * height, width, height);
+					row + (row) * height, width, height);
 
 			anima.frameCount = frameCount;
 			anima.frames = recs;

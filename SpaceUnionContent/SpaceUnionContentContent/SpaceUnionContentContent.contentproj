@@ -68,8 +68,8 @@
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Spaceships\circleship %28128x128%29.png">
-      <Name>circleship %28128x128%29</Name>
+    <Compile Include="Spaceships\ufoship %28128x128%29.png">
+      <Name>ufoship %28128x128%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -80,14 +80,14 @@
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Spaceships\triangleship %28128x128%29.png">
-      <Name>triangleship %28128x128%29</Name>
+    <Compile Include="Spaceships\stuntship %28128x128%29.png">
+      <Name>stuntship %28128x128%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Spaceships\wrenchship.png">
-      <Name>wrenchship</Name>
+    <Compile Include="Spaceships\zoidship.png">
+      <Name>zoidship</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -182,6 +182,21 @@
   <ItemGroup>
     <Compile Include="Animations\big fireballs with blur.png">
       <Name>big fireballs with blur</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Projectiles\short missile %2816x16%29.png">
+      <Name>short missile %2816x16%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Animations\bubble shield sheet.png">
+      <Name>bubble shield sheet</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

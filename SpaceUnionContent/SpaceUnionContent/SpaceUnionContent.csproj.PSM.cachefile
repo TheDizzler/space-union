@@ -1,10 +1,7 @@
 Content\Backgrounds\starfield (800x600).xnb
 Content\Buttons\playbutton.xnb
 Content\Backgrounds\background.xnb
-Content\Spaceships\circleship (128x128).xnb
 Content\Spaceships\shuttle.xnb
-Content\Spaceships\triangleship (128x128).xnb
-Content\Spaceships\wrenchship.xnb
 Content\Backgrounds\galaxy.xnb
 Content\Projectiles\laser.xnb
 Content\Spaceships\spaceshiptest.xnb
@@ -12,19 +9,24 @@ Content\Backgrounds\beautifulbg.xnb
 Content\Backgrounds\doodlebg.xnb
 Content\WinFlags\WinFlag1.xnb
 Content\StellarObjects\asteroid(56x56).xnb
+Content\Buttons\confirm.xnb
 Content\StellarObjects\waterplanet (256x256).xnb
 Content\Animations\fireballs.xnb
 Content\Animations\fireballs (test).xnb
 Content\Animations\big fireballs with blur.xnb
+Content\Projectiles\short missile (16x16).xnb
 Content\SpriteFonts\SpriteFont1.xnb
-Content\Buttons\confirm.xnb
 Content\Buttons\shipselection.xnb
+Content\Animations\bubble shield sheet.xnb
+Content\Spaceships\ufoship (128x128).xnb
+Content\Spaceships\stuntship (128x128).xnb
+Content\Spaceships\zoidship.xnb
 Content\Buttons\playbutton.png
 Content\Backgrounds\background.jpg
-Content\Spaceships\circleship (128x128).png
+Content\Spaceships\ufoship (128x128).png
 Content\Spaceships\shuttle.png
-Content\Spaceships\triangleship (128x128).png
-Content\Spaceships\wrenchship.png
+Content\Spaceships\stuntship (128x128).png
+Content\Spaceships\zoidship.png
 Content\Projectiles\laser.png
 Content\Buttons\confirm.png
 Content\Buttons\shipselection.png
@@ -34,3 +36,4 @@ Content\Spaceships\spaceshiptest.png
 Content\Backgrounds\beautifulbg.png
 Content\Backgrounds\doodlebg.png
 Content\StellarObjects\asteroid(56x56).png
+Content\Projectiles\short missile (16x16).png

@@ -29,7 +29,7 @@ namespace SpaceUnion {
 		/// <summary>
 		/// An engine to create and manage all explosions, big and small
 		/// </summary>
-		public ExplosionEngine explosionEngine;
+		public static ExplosionEngine explosionEngine;
 		/// <summary>
 		/// Game State Enum to track game states
 		/// </summary>
@@ -81,6 +81,7 @@ namespace SpaceUnion {
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 			// All sprites get loaded in to here
 			Assets.loadContent(GraphicsDevice);
+			explosionEngine = new ExplosionEngine(Assets);
 			//Load Main Menu
 			mainMenuScreen = new MainMenuScreen(this);
 			shipselectionScreen = new ShipSelectionScreen(this);
@@ -90,7 +91,7 @@ namespace SpaceUnion {
 
 			graphics.ApplyChanges();
 
-			explosionEngine = new ExplosionEngine(Assets);
+			
 		}
 
 		/// <summary>

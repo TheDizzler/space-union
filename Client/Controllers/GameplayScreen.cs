@@ -169,7 +169,7 @@ namespace SpaceUnion.Controllers {
 
 			//UpdateDamageCollision(); // moved to Projectile class
 			foreach (Ship ship in ships)
-				ship.update(gameTime, game.Window, targets);
+				ship.update(gameTime, targets);
 			//gui.update();
 
 			for (int i = asteroids.Count - 1; i >= 0; i--) {
@@ -178,7 +178,7 @@ namespace SpaceUnion.Controllers {
 					asteroids.RemoveAt(i);
 			}
 			//UpdateAsteroids();
-			game.explosionEngine.update(gameTime);
+			Game1.explosionEngine.update(gameTime);
 
 		}
 
@@ -211,13 +211,13 @@ namespace SpaceUnion.Controllers {
 		public void draw() {
 
 			/* Main camera sprite batch */
-			spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend,
+			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
 				SamplerState.LinearWrap, null, null, null, mainCamera.getTransformation());
 
 
 			drawWorld(); //Draws background
 
-			game.explosionEngine.draw(spriteBatch);
+			
 
 			foreach (Ship ship in ships)
 				ship.draw(spriteBatch); //Draws all space ships
@@ -230,10 +230,9 @@ namespace SpaceUnion.Controllers {
 				asteroids[i].draw(spriteBatch);
 			}
 
+			Game1.explosionEngine.draw(spriteBatch);
 
 			spriteBatch.End();
-
-
 
 
 			/* GUI spritebatch. Anything drawn here will remain

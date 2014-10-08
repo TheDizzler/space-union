@@ -15,8 +15,14 @@ namespace SpaceUnion {
 	/// Base abstract ship class.
 	/// CURRENTLY NOT ABSTRACT FOR TESTING
 	/// </summary>
-	public class Ship : Tangible {
+	public abstract class Ship : Tangible {
 
+		protected static AssetManager assets = Game1.Assets;
+		protected ExplosionEngine explosionEngine = Game1.explosionEngine;
+		/// <summary>
+		/// Reference to Game1
+		/// </summary>
+		protected Game1 game;
 		/// <summary>
 		/// A restistance to movement so all objects will enventual slow to a stop
 		/// </summary>
@@ -56,7 +62,7 @@ namespace SpaceUnion {
 			return velocity.Y;
 		}
 
-		
+
 		/// <summary>
 		/// Collision check between ship and screen boundries.
 		/// Ships loop horizontally and vertically.
@@ -65,11 +71,11 @@ namespace SpaceUnion {
 			return scale;
 		}
 
-		
-	
-        
 
-		private ExplosionEngine explosionEngine;
+
+
+
+		//private ExplosionEngine explosionEngine;
 		private Texture2D weaponTexture;
 		/// <summary>
 		/// Location on sprite where weapon appears from
@@ -82,10 +88,10 @@ namespace SpaceUnion {
 		/// <param name="tex">Ship texture</param>
 		/// <param name="wpnTex">Weapon texture</param>
 		/// <param name="pos">Spawn location</param>
-		/// <param name="explEngine">Explosion Engine reference</param>
-		public Ship(Texture2D tex, Texture2D wpnTex, Vector2 pos, ExplosionEngine explEngine)
+		protected Ship(Texture2D tex, Texture2D wpnTex, Vector2 pos, Game1 game1)
 			: base(tex, pos) {
 
+			this.game = game1;
 			weaponTexture = wpnTex;
 			velocity = Vector2.Zero;
 			//scale = .3f;
@@ -95,17 +101,17 @@ namespace SpaceUnion {
 			fireTime = TimeSpan.FromSeconds(.15f);
 
 			currentHealth = maxHealth;
-			explosionEngine = explEngine;
-
-			weaponOrigin = new Vector2(0, height/2); // start position of weapon
+			weaponOrigin = new Vector2(0, height / 2); // start position of weapon
 		}
 
+		//public abstract void setup();
 
-		public void update(GameTime gameTime, GameWindow window, List<Tangible> targets) {
+
+		public virtual void update(GameTime gameTime, List<Tangible> targets) {
 			// Elapsed time is taken into consideration in thrust and planet.pull
 			position += velocity;
 			base.update(position);
-			checkScreenStop(window);
+			checkScreenStop();
 
 			// Update the Projectiles
 			for (int i = projectiles.Count - 1; i >= 0; i--) {
@@ -158,7 +164,7 @@ namespace SpaceUnion {
 				rotation = rotation % 6.283185f;
 			}
 			rotation += turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
-			weaponOrigin.X = (float) (weaponOrigin.X *Math.Sin(rotation));
+			weaponOrigin.X = (float) (weaponOrigin.X * Math.Sin(rotation));
 			weaponOrigin.Y = (float) (weaponOrigin.Y * Math.Cos(rotation));
 		}
 
@@ -202,14 +208,14 @@ namespace SpaceUnion {
 		/// </summary>
 		protected void explode() {
 
-			explosionEngine.createExplosions(this);
+				explosionEngine.createExplosions(this);
 		}
 
 		/// <summary>
 		/// Check if ship will wrap around edges
 		/// </summary>
 		/// <param name="Window"></param>
-		private void checkScreenWrap(GameWindow Window) {
+		private void checkScreenWrap() {
 			if (position.X < -5) {
 				position.X = GameplayScreen.worldWidth + 3;
 			}
@@ -224,7 +230,7 @@ namespace SpaceUnion {
 			}
 		}
 
-		private void checkScreenStop(GameWindow Window) {
+		private void checkScreenStop() {
 			if (position.X <= 0) {
 				position.X = 0;
 			}
@@ -238,8 +244,5 @@ namespace SpaceUnion {
 				position.Y = GameplayScreen.worldHeight;
 			}
 		}
-
-		
-
 	}
 }
