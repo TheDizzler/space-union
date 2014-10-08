@@ -27,6 +27,11 @@ namespace Data_Structures
         /// </summary>
         public string IPAddress { get; set; }
 
+        public Player()
+        {
+            Type = 0;
+        }
+
         public Player(byte type) : base(type) {}
     }
 }

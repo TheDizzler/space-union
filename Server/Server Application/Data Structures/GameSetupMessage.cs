@@ -18,6 +18,11 @@ namespace Data_Structures
         short incomingport;
         short outgoingport;
 
+        public GameSetupMessage()
+        {
+            Type = 4;
+        }
+
         public GameSetupMessage(byte type) : base(type) { }
     }
 }

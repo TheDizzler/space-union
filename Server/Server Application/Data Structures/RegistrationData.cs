@@ -24,6 +24,11 @@ namespace Data_Structures
         /// </summary>
         public string IPAddress { get; set; }
 
+        public RegistrationData()
+        {
+            Type = 5;
+        }
+
         public RegistrationData(byte type) : base(type) {}
     }
 }

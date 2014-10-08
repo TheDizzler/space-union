@@ -19,6 +19,8 @@ namespace Client_Comm_Module
             sender = new ClientDataTransmission();
         }
 
+        // SEND FUNCTIONS --------------------------------------------------
+
         /// <summary>
         /// Send a login request to the server.
         /// </summary>
@@ -58,6 +60,8 @@ namespace Client_Comm_Module
             if(data != null)
                 sender.addMessageToQueue(data);
         }
+
+        // GET FUNCTIONS ----------------------------------------------------
 
         /// <summary>
         /// Fetch a game data received from the server.

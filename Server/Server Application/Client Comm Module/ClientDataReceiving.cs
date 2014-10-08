@@ -38,6 +38,15 @@ namespace Client_Comm_Module
         }
 
         /// <summary>
+        /// Assign a UDP port to receive data from.
+        /// </summary>
+        /// <param name="UDPPort">The UDP port to assign.</param>
+        public void assignUDPPort_Listen(int UDPPort)
+        {
+            assignedUDPPort_Listen = UDPPort;
+        }
+
+        /// <summary>
         /// Begin receiving chat messages from the server.
         /// </summary>
         public void receiveChatMessages()
@@ -45,17 +54,9 @@ namespace Client_Comm_Module
             while (true)
             {
                 Object chatData = DataControl.receiveTCPData(TCPListener);
-                messageQueue.Add((GameMessage)chatData);
+                if (chatData != null)
+                    messageQueue.Add((GameMessage)chatData);
             }
-        }
-
-        /// <summary>
-        /// Assign a UDP port to receive data from.
-        /// </summary>
-        /// <param name="UDPPort">The UDP port to assign.</param>
-        public void assignUDPPort_Listen(int UDPPort)
-        {
-            assignedUDPPort_Listen = UDPPort;
         }
 
         /// <summary>
@@ -66,7 +67,8 @@ namespace Client_Comm_Module
             while (true)
             {
                 Object clientData = DataControl.receiveUDPData(UDPListener);
-                dataQueue.Add((GameData)clientData);
+                if(clientData != null)
+                    dataQueue.Add((GameData)clientData);
             }
         }
 
