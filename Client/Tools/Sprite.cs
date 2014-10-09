@@ -14,7 +14,7 @@ namespace SpaceUnion.Tools {
 
 		public int alphaValue;
 
-		protected Texture2D texture;
+		protected internal Texture2D texture;
 		/// <summary>
 		/// Sprite dimensions
 		/// </summary>

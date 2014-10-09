@@ -9,8 +9,8 @@ using Microsoft.Xna.Framework.Graphics;
 namespace SpaceUnion.Ships {
 	class Zoid : Ship {
 
-		public Zoid(Vector2 pos, Game1 game1)
-			: base(assets.zoid, assets.missile, pos, game1) {
+		public Zoid(Game1 game1)
+			: base(assets.zoid, assets.missile, game1) {
 
 
 		}

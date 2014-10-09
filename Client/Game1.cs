@@ -129,7 +129,7 @@ namespace SpaceUnion {
 					gameplayScreen.Update(gameTime);
 					break;
 				case GameState.Select:
-					shipselectionScreen.Update();
+					shipselectionScreen.update();
 					break;
 				default:
 					break;

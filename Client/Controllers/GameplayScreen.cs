@@ -86,20 +86,20 @@ namespace SpaceUnion.Controllers {
 
 			/* Parallax Scrolling BG */
 			spriteBatch.Draw(Assets.starfield2,
-				new Rectangle((int) (mainCamera.Position.X * .9), (int) (mainCamera.Position.Y * .9), worldWidth / 4, worldHeight / 4),
+				new Rectangle((int) (mainCamera.Position.X * .9), (int) (mainCamera.Position.Y * .9), worldWidth / 2, worldHeight / 2),
 				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
 			spriteBatch.Draw(Assets.starfield1,
-				new Rectangle((int) (mainCamera.Position.X * 0.7), (int) (mainCamera.Position.Y * 0.7), 1600, 1200),
+				new Rectangle((int) (mainCamera.Position.X * 0.7), (int) (mainCamera.Position.Y * 0.7), worldWidth / 4, worldHeight / 4),
 				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
 			spriteBatch.Draw(Assets.starfield1,
-				new Rectangle((int) (mainCamera.Position.X * 0.6), (int) (mainCamera.Position.Y * 0.6), 2400, 1800),
+				new Rectangle((int) (mainCamera.Position.X * 0.6), (int) (mainCamera.Position.Y * 0.6), worldWidth / 5, worldHeight / 5),
 				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
 			spriteBatch.Draw(Assets.starfield1,
-				new Rectangle((int) (mainCamera.Position.X * 0.4), (int) (mainCamera.Position.Y * 0.4), 800, 600),
+				new Rectangle((int) (mainCamera.Position.X * 0.4), (int) (mainCamera.Position.Y * 0.4), worldWidth / 6, worldHeight / 6),
 				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
-			spriteBatch.Draw(Assets.starfield3,
-				new Rectangle((int) (mainCamera.Position.X * .5), (int) (mainCamera.Position.Y * .5f), worldWidth / 10, worldHeight / 10),
-				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+			//spriteBatch.Draw(Assets.starfield3,
+			//	new Rectangle((int) (mainCamera.Position.X * .5), (int) (mainCamera.Position.Y * .5f), worldWidth / 10, worldHeight / 10),
+			//	null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
 		}
 
 		private void AddAsteroid(Vector2 position) {
@@ -220,7 +220,7 @@ namespace SpaceUnion.Controllers {
 
 			drawWorld(); //Draws background
 
-			
+
 
 			foreach (Ship ship in ships)
 				ship.draw(spriteBatch); //Draws all space ships

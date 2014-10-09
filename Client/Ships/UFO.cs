@@ -14,13 +14,13 @@ namespace SpaceUnion.Ships {
 		Shield shield;
 
 
-		public UFO(Vector2 pos, Game1 game)
-			: base(assets.ufo, assets.laser, pos, game) {
+		public UFO(Game1 game)
+			: base(assets.ufo, assets.laser, game) {
 
 			// Set the laser to fire every quarter second
 			mainFireDelay = TimeSpan.FromSeconds(.5f);
 			altFireDelay = TimeSpan.FromSeconds(1f);
-			shield = new Shield(assets.shield, pos);
+			shield = new Shield(assets.shield, position);
 
 
 		}

@@ -1,10 +1,7 @@
 Content\Backgrounds\starfield (800x600).xnb
 Content\Buttons\playbutton.xnb
 Content\Backgrounds\background.xnb
-Content\Spaceships\circleship (128x128).xnb
 Content\Spaceships\shuttle.xnb
-Content\Spaceships\triangleship (128x128).xnb
-Content\Spaceships\wrenchship.xnb
 Content\Backgrounds\galaxy.xnb
 Content\Projectiles\laser.xnb
 Content\Spaceships\spaceshiptest.xnb
@@ -13,32 +10,37 @@ Content\Backgrounds\doodlebg.xnb
 <<<<<<< HEAD
 Content\WinFlags\WinFlag1.xnb
 Content\StellarObjects\asteroid(56x56).xnb
+Content\Buttons\confirm.xnb
 Content\StellarObjects\waterplanet (256x256).xnb
 Content\Animations\fireballs.xnb
 Content\Animations\fireballs (test).xnb
 Content\Animations\big fireballs with blur.xnb
+Content\Projectiles\short missile (16x16).xnb
 Content\SpriteFonts\SpriteFont1.xnb
-=======
-Content\StellarObjects\waterplanet (256x256).xnb
-Content\SpriteFonts\SpriteFont1.xnb
-Content\Buttons\confirm.xnb
 Content\Buttons\shipselection.xnb
->>>>>>> 294d153e1361d717baa9cca72b6996ad92b36f19
+Content\Animations\bubble shield sheet.xnb
+Content\Spaceships\ufoship (128x128).xnb
+Content\Spaceships\stuntship (128x128).xnb
+Content\Spaceships\zoidship.xnb
+=======
+Content\Buttons\confirm.xnb
+Content\StellarObjects\waterplanet (256x256).xnb
+Content\Buttons\shipselection.xnb
+Content\SpriteFonts\SpriteFont1.xnb
+>>>>>>> e30ecf87e5988f3d73c2138ac82c7f073306beeb
 Content\Buttons\playbutton.png
 Content\Backgrounds\background.jpg
-Content\Spaceships\circleship (128x128).png
+Content\Spaceships\ufoship (128x128).png
 Content\Spaceships\shuttle.png
-Content\Spaceships\triangleship (128x128).png
-Content\Spaceships\wrenchship.png
-<<<<<<< HEAD
+Content\Spaceships\stuntship (128x128).png
+Content\Spaceships\zoidship.png
 Content\Projectiles\laser.png
-=======
 Content\Buttons\confirm.png
 Content\Buttons\shipselection.png
->>>>>>> 294d153e1361d717baa9cca72b6996ad92b36f19
 Content\Backgrounds\starfield (800x600).png
 Content\Backgrounds\galaxy.png
 Content\Spaceships\spaceshiptest.png
 Content\Backgrounds\beautifulbg.png
 Content\Backgrounds\doodlebg.png
 Content\StellarObjects\asteroid(56x56).png
+Content\Projectiles\short missile (16x16).png

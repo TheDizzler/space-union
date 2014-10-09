@@ -13,11 +13,12 @@ namespace SpaceUnion.Tools {
 	class ShipButton : BaseButton {
 		
 		public bool selected = false;
+		private Ship ship;
 
+		public ShipButton(Ship shp)
+			: base(shp.texture) {
 
-		public ShipButton(Texture2D newTexture)
-			: base(newTexture) {
-
+			ship = shp;
 			height = 128;
 			width = 128;
 		}
@@ -60,5 +61,10 @@ namespace SpaceUnion.Tools {
 			} else
 				spriteBatch.Draw(texture, buttonRectangle, Color.Blue);
 		}
+
+		public Ship getShip() {
+			return ship;
+		}
+
 	}
 }

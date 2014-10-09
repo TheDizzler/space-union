@@ -9,8 +9,8 @@ using Microsoft.Xna.Framework.Graphics;
 namespace SpaceUnion.Ships {
 	class TestShip : Ship {
 
-		public TestShip(Vector2 pos, Game1 game1)
-			: base(assets.shuttle, assets.missile, pos, game1) {
+		public TestShip(Game1 game1)
+			: base(assets.shuttle, assets.missile, game1) {
 
 		}
 

@@ -101,8 +101,8 @@ namespace SpaceUnion {
 		/// <param name="tex">Ship texture</param>
 		/// <param name="wpnTex">Weapon texture</param>
 		/// <param name="pos">Spawn location</param>
-		protected Ship(Texture2D tex, Texture2D wpnTex, Vector2 pos, Game1 game1)
-			: base(tex, pos) {
+		protected Ship(Texture2D tex, Texture2D wpnTex, Game1 game1)
+			: base(tex, Vector2.Zero) {
 
 			this.game = game1;
 			weaponTexture = wpnTex;
