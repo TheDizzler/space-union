@@ -23,7 +23,7 @@ namespace Data_Structures
         {
             GameData data = new GameData();
             data.Player = player;
-            data.GameRoom = RoomNumber;
+            data.Player.GameRoom = RoomNumber;
             data.XPosition = 500;
             data.YPosition = 500;
             data.Angle = 0;

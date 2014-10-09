@@ -44,7 +44,6 @@ namespace SpaceUnion.Controllers {
         private int SCREEN_HEIGHT;
 
         //NETWORKING
-        ClientCommHandler clientCommHandler;
 
 
         public GameplayScreen(Game1 game, SpriteBatch batch)
@@ -66,17 +65,7 @@ namespace SpaceUnion.Controllers {
             invinsible = false;
             */
 
-            //NETWORKING
-            clientCommHandler = new ClientCommHandler(); //New client communication handler to receive server info
-
-
-            Player player = new Player(0);
-            player.Username = MainMenuScreen.username;
-            player.Password = MainMenuScreen.password;
-            player.IPAddress = ClientCommHandler.getLocalIPv4Address();
-            clientCommHandler.sendLoginRequest(player);
-
-
+            
             Assets = Game1.Assets;
             playerShip = new Ship(Assets.spaceShipTest, new Vector2(200, 200)); //Create new player ship
 			planet = new Planet(Assets.waterPlanet, new Vector2(1000, 1000));
@@ -213,19 +202,18 @@ namespace SpaceUnion.Controllers {
             UpdateProjectiles();
 
             //NETWORKING
-            GameData data = new GameData(1);
-            data.Username = MainMenuScreen.username;
-            data.IP = ClientCommHandler.getLocalIPv4Address();
+            GameData data = new GameData();
+            data.Player.Username = MainMenuScreen.username;
+            data.Player.IPAddress = ClientCommHandler.getLocalIPv4Address();
             data.Health = (byte)playerShip.getHealth();
-            data.Kills = 0;
-            data.GameRoom = 0;
-            data.Angle = (float)playerShip.getRotation(); //
-            data.Deaths = 0;
+            data.Player.GameRoom = MainMenuScreen.player.GameRoom;
+            data.Player.PortReceive = MainMenuScreen.player.PortReceive;
+            data.Player.PortSend = MainMenuScreen.player.PortSend;
+            data.Time = DateTime.Now;
+            data.Angle = (float)playerShip.getRotation();
             data.XPosition = playerShip.getX();
             data.YPosition = playerShip.getY();
-
-            clientCommHandler.sendGameData(data);
-            
+            MainMenuScreen.clientCommHandler.sendGameData(data);
         }
 
         private void UpdateDamageCollision()
@@ -296,7 +284,7 @@ namespace SpaceUnion.Controllers {
 
             playerShip.draw(spriteBatch); //Draws player space ship
 
-            GameData[] players = clientCommHandler.getPlayersData();
+            GameData[] players = MainMenuScreen.clientCommHandler.getPlayersData();
             for (int x = 0; x < players.Length; x++)
             {
                 if (players[x] != null)

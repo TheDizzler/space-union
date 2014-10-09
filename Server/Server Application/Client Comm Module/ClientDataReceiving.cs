@@ -14,25 +14,19 @@ namespace Client_Comm_Module
     class ClientDataReceiving
     {
         private UdpClient UDPListener;
-
         private TcpListener TCPListener;
-
         private List<GameMessage> messageQueue;
         private List<GameData> dataQueue;
-
         private int assignedUDPPort_Listen = 6944;
 
         public ClientDataReceiving()
         {
             messageQueue = new List<GameMessage>();
             dataQueue = new List<GameData>();
-
             UDPListener = new UdpClient(assignedUDPPort_Listen);
-
             // NOTE: fix required to only listen to the server.
-            TCPListener = new TcpListener(IPAddress.Parse("0.0.0.0"), Constants.TCPMessageClient);
+            TCPListener = new TcpListener(IPAddress.Any, Constants.TCPMessageClient);
             TCPListener.Start();
-
             new Thread(receiveChatMessages).Start();
             new Thread(receiveData).Start();
         }
@@ -47,15 +41,25 @@ namespace Client_Comm_Module
         }
 
         /// <summary>
+        /// Waits for the server to send a login confirmation with
+        /// the port assignments for this client.
+        /// </summary>
+        public Player receiveLoginConfirmation()
+        {
+            TcpListener listener = new TcpListener(IPAddress.Any, Constants.TCPLoginClient);
+            return (Player)DataControl.receiveTCPData(listener);
+        }
+
+        /// <summary>
         /// Begin receiving chat messages from the server.
         /// </summary>
         public void receiveChatMessages()
         {
             while (true)
             {
-                Object chatData = DataControl.receiveTCPData(TCPListener);
+                GameMessage chatData = (GameMessage)DataControl.receiveTCPData(TCPListener);
                 if (chatData != null)
-                    messageQueue.Add((GameMessage)chatData);
+                    messageQueue.Add(chatData);
             }
         }
 
@@ -66,10 +70,9 @@ namespace Client_Comm_Module
         {
             while (true)
             {
-                Object clientData = DataControl.receiveUDPData(UDPListener);
-                Console.WriteLine("Data Received!");
+                GameData clientData = (GameData)DataControl.receiveUDPData(UDPListener);
                 if(clientData != null)
-                    dataQueue.Add((GameData)clientData);
+                    dataQueue.Add(clientData);
             }
         }
 
@@ -97,6 +100,15 @@ namespace Client_Comm_Module
             GameData data = dataQueue.ElementAt(0);
             dataQueue.RemoveAt(0);
             return data;
+        }
+
+        /// <summary>
+        /// Gets the size of the GameData queue.
+        /// </summary>
+        /// <returns>Size of the GameData queue.</returns>
+        public int getGameDataQueueSize()
+        {
+            return dataQueue.Count;
         }
     }
 }

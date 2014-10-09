@@ -25,6 +25,8 @@ namespace Client_Comm_Module
         /// </summary>
         public const int TCPErrorListener = 6982;
 
+        public const int NumberOfPlayers = 5;
+
         /// <summary>
         /// The interval between each chat message transmission.
         /// </summary>

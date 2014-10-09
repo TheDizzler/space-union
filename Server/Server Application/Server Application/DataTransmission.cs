@@ -178,7 +178,7 @@ namespace Server_Application
         /// <param name="message">The message to add to the queue.</param>
         private void addGameDataToQueue(GameData message)
         {
-            Gameroom room = owner.getGameroom(message.GameRoom);
+            Gameroom room = owner.getGameroom(message.Player.GameRoom);
             if (room == null)
                 return;
             foreach(GameData player in room.getPlayerList())

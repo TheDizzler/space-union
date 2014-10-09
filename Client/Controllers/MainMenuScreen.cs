@@ -15,11 +15,21 @@ namespace SpaceUnion {
 		PlayButton btnPlay;
         public static string username = "troy";
         public static string password = "loltroy";
+        public static ClientCommHandler clientCommHandler = new ClientCommHandler();
+        public static Player player;
 
 		public MainMenuScreen(Game1 game) {
 			this.game = game;
 			btnPlay = new PlayButton(Game1.Assets.playButton, game.GraphicsDevice);
 			btnPlay.setPosition(new Vector2((game.getScreenWidth()  - btnPlay.width)/2, (game.getScreenHeight() - btnPlay.height)/ 2));
+            
+            //NETWORKING
+            Player player = new Player();
+            player.Username = MainMenuScreen.username;
+            player.Password = MainMenuScreen.password;
+            player.IPAddress = ClientCommHandler.getLocalIPv4Address();
+            clientCommHandler.sendLoginRequest(player);
+            player = clientCommHandler.getLoginConfirmation();
 		}
 
 		public void Update() {
@@ -28,7 +38,7 @@ namespace SpaceUnion {
 
 			if (btnPlay.isClicked == true) {
                 btnPlay.isClicked = false;
-                //NETWORKING TODO: Login request
+                
 
                 game.StartGame();
 			}

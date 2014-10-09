@@ -15,15 +15,41 @@ namespace Client_Comm_Module
     {
         private List<GameData> dataQueue;
         private List<GameMessage> messageQueue;
-
         private UdpClient UDPClient;
         private TcpClient TCPClient;
-
         private int assignedUDPPort_Send = 6964;
 
         public ClientDataTransmission()
         {
             setup();
+        }
+
+        /// <summary>
+        /// Set up the server by initializing the clients and message queues.
+        /// </summary>
+        private void setup()
+        {
+            UDPClient = new UdpClient(assignedUDPPort_Send);
+            TCPClient = new TcpClient();
+            dataQueue = new List<GameData>();
+            messageQueue = new List<GameMessage>();
+            try
+            {
+                new Thread(sendChatMessages).Start();
+                new Thread(sendGameData).Start();
+            }
+            catch (ThreadStateException e) { Console.WriteLine("Client has crashed." + e.ToString()); return; }
+            catch (OutOfMemoryException e) { Console.WriteLine("Client has crashed." + e.ToString()); return; }
+            catch (InvalidOperationException e) { Console.WriteLine("Client has crashed." + e.ToString()); return; }
+        }
+
+        /// <summary>
+        /// Assign a UDP port to send the data to.
+        /// </summary>
+        /// <param name="UDPPort">The UDP port to assign.</param>
+        public void assignUDPPort_Send(int UDPPort)
+        {
+            assignedUDPPort_Send = UDPPort;
         }
 
         /// <summary>
@@ -42,15 +68,6 @@ namespace Client_Comm_Module
         public void sendRegistrationInfo(RegistrationData data)
         {
             DataControl.sendTCPData(TCPClient, data, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCPLoginListener);
-        }
-
-        /// <summary>
-        /// Assign a UDP port to send the data to.
-        /// </summary>
-        /// <param name="UDPPort">The UDP port to assign.</param>
-        public void assignUDPPort_Send(int UDPPort)
-        {
-            assignedUDPPort_Send = UDPPort;
         }
 
         /// <summary>
@@ -74,29 +91,6 @@ namespace Client_Comm_Module
                 }
             }
             catch (InvalidCastException e) { Console.WriteLine(e.ToString()); return; }
-        }
-
-        /// <summary>
-        /// Set up the server by initializing the clients and message queues.
-        /// </summary>
-        private void setup()
-        {
-            UDPClient = new UdpClient(assignedUDPPort_Send);
-
-            TCPClient = new TcpClient();
-
-            // Initialize the lists.
-            dataQueue = new List<GameData>();
-            messageQueue = new List<GameMessage>();
-
-            try
-            {
-                new Thread(sendChatMessages).Start();
-                new Thread(sendGameData).Start();
-            }
-            catch (ThreadStateException e) { Console.WriteLine("Client has crashed." + e.ToString()); return; }
-            catch (OutOfMemoryException e) { Console.WriteLine("Client has crashed." + e.ToString()); return; }
-            catch (InvalidOperationException e) { Console.WriteLine("Client has crashed." + e.ToString()); return; }
         }
 
         /// <summary>

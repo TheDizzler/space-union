@@ -19,11 +19,6 @@ namespace Data_Structures
         public Player Player { get; set; }
 
         /// <summary>
-        /// The game room in which the current player is located.
-        /// </summary>
-        public int GameRoom { get; set; }
-
-        /// <summary>
         /// The horizontal X position of the player's ship.
         /// </summary>
         public float XPosition { get; set; }
@@ -52,6 +47,11 @@ namespace Data_Structures
         /// The amount of times the current user has died.
         /// </summary>
         public byte Deaths { get; set; }
+
+        /// <summary>
+        /// The time this packet was received. Used to time out players from the server.
+        /// </summary>
+        public DateTime Time { get; set; }
 
         //projectiles fired, direction, velocity
 

@@ -15,24 +15,39 @@ namespace Client_Comm_Module
     {
         private ClientDataReceiving receiver;
         private ClientDataTransmission sender;
-        private GameData[] gameDataPlayers = new GameData[5];
+        private GameData[] gameDataPlayers = new GameData[ClientConstants.NumberOfPlayers];
 
         public ClientCommHandler()
         {
-            for (int x = 0; x < 5; x++)
-            {
-                gameDataPlayers[x] = null;
-            }
             receiver = new ClientDataReceiving();
             sender = new ClientDataTransmission();
+            for (int x = 0; x < ClientConstants.NumberOfPlayers; x++)
+                gameDataPlayers[x] = null;
             new Thread(updatePlayerList).Start();
         }
 
+        /// <summary>
+        /// Returns the login confirmation data to the client with
+        /// port assignment data.
+        /// </summary>
+        /// <returns>The login confirmation data.</returns>
+        public Player getLoginConfirmation()
+        {
+            return receiver.receiveLoginConfirmation();
+        }
+
+        /// <summary>
+        /// Gets the other players in the gameroom as an array.
+        /// </summary>
+        /// <returns>Gets an array of data about the positions of the other players.</returns>
         public GameData[] getPlayersData()
         {
             return gameDataPlayers;
         }
 
+        /// <summary>
+        /// Updates the array of players with the most current data.
+        /// </summary>
         private void updatePlayerList()
         {
             while (true)
@@ -43,14 +58,19 @@ namespace Client_Comm_Module
                     Thread.Sleep(1);
                     continue;
                 }
-                for (int x = 0; x < gameDataPlayers.Length; x++)
+                Console.WriteLine(receiver.getGameDataQueueSize());
+                for (int x = 0; x < ClientConstants.NumberOfPlayers; x++)
                 {
                     if (gameDataPlayers[x] == null)
                     {
-                        gameDataPlayers[x] = player;
-                        Console.WriteLine(gameDataPlayers[x].Player.Username);
-                        Console.WriteLine(player.Player.Username);
-                        break;
+                        for (int y = 0; y < ClientConstants.NumberOfPlayers; y++)
+                        {
+                            if (gameDataPlayers[y] != null && gameDataPlayers[y].Player.Username == player.Player.Username)
+                            {
+                                gameDataPlayers[y] = player;
+                                break;
+                            }
+                        }
                     }
                     if (player.Player.Username == gameDataPlayers[x].Player.Username)
                     {
