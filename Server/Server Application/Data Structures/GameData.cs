@@ -42,12 +42,12 @@ namespace Data_Structures
         /// <summary>
         /// The horizontal X position of the player's ship.
         /// </summary>
-        public short XPosition { get; set; }
+        public float XPosition { get; set; }
 
         /// <summary>
         /// The vertical Y position of the player's ship.
         /// </summary>
-        public short YPosition { get; set; }
+        public float YPosition { get; set; }
 
         /// <summary>
         /// The angle at which the player's ship is turned.

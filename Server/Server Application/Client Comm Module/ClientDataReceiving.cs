@@ -20,7 +20,7 @@ namespace Client_Comm_Module
         private List<GameMessage> messageQueue;
         private List<GameData> dataQueue;
 
-        private int assignedUDPPort_Listen;
+        private int assignedUDPPort_Listen = 6944;
 
         public ClientDataReceiving()
         {
@@ -67,6 +67,7 @@ namespace Client_Comm_Module
             while (true)
             {
                 Object clientData = DataControl.receiveUDPData(UDPListener);
+                Console.WriteLine("Data Received!");
                 if(clientData != null)
                     dataQueue.Add((GameData)clientData);
             }

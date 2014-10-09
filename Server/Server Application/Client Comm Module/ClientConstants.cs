@@ -11,8 +11,8 @@ namespace Client_Comm_Module
         /// <summary>
         /// The IP address of the server.
         /// </summary>
-        public const string SERVER_IPADDRESS = "174.7.119.32";
-        public const int TCP_PORT_SEND = 6981;
+        public const string SERVER_IPADDRESS = "142.232.18.98";
+        public const int TCP_PORT_SEND = 6980;
 
         /// <summary>
         /// The interval between each chat message transmission.
