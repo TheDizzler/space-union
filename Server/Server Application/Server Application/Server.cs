@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Data_Structures;
+using Data_Manipulation;
 
 //complete game room creation system
 namespace Server_Application
@@ -71,9 +72,30 @@ namespace Server_Application
         {
             if (player != null)
             {
+                player.PortSend = Constants.UDPClientToServerPort + (onlineplayers.Count % 6);
+                player.PortReceive = Constants.UDPServerToClientPort + (onlineplayers.Count % 6);
                 onlineplayers.Add(player);
+                transmission.addMessageToQueue(player);
+                //the following line is only used for the prototype
+                addPlayerToFreeRoom(player);
             }
         }
+
+        private void addPlayerToFreeRoom(Player player)
+        {
+            foreach (Gameroom room in gamerooms)
+            {
+                if (room.getPlayerList().Count < 6)
+                {
+                    room.addPlayer(player);
+                    return;
+                }
+            }
+            Gameroom temproom = new Gameroom();
+            temproom.RoomNumber = gamerooms.Count;
+            temproom.addPlayer(player);
+        }
+
         /// <summary>
         /// Adds a message to the DataTransmission queue.
         /// </summary>

@@ -41,7 +41,5 @@ namespace Data_Structures
         {
             Type = 2;
         }
-
-        public GameMessage(byte type) : base(type) {}
     }
 }

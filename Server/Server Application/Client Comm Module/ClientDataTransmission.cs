@@ -32,7 +32,7 @@ namespace Client_Comm_Module
         /// <param name="playerData">Player data containing player information.</param>
         public void sendLoginRequest(Player playerData)
         {
-            DataControl.sendTCPData(TCPClient, playerData, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCP_PORT_SEND);
+            DataControl.sendTCPData(TCPClient, playerData, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCPLoginListener);
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Client_Comm_Module
         /// <param name="data">Registration data containing player information.</param>
         public void sendRegistrationInfo(RegistrationData data)
         {
-            DataControl.sendTCPData(TCPClient, data, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCP_PORT_SEND);
+            DataControl.sendTCPData(TCPClient, data, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCPLoginListener);
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Client_Comm_Module
                     Thread.Sleep(ClientConstants.CHAT_SEND_INTERVAL);
                     continue;
                 }
-                DataControl.sendTCPData(TCPClient, message, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCP_PORT_SEND);
+                DataControl.sendTCPData(TCPClient, message, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCPMessageListener);
             }
         }
 

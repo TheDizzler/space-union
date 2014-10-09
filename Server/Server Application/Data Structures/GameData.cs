@@ -15,29 +15,13 @@ namespace Data_Structures
     [Serializable]
     public class GameData : Data
     {
-        /// <summary>
-        /// The username of the player.
-        /// </summary>
-        public string Username { get; set; }
+
+        public Player Player { get; set; }
 
         /// <summary>
         /// The game room in which the current player is located.
         /// </summary>
         public int GameRoom { get; set; }
-
-        /// <summary>
-        /// The IP address of the player sending this transmission.
-        /// </summary>
-        public string IP { get; set; }
-
-        /// <summary>
-        /// The port from which the player is sending this transmission.
-        /// </summary>
-        public short PortSend { get; set; }
-        /// <summary>
-        /// The port from which the player is receiving this transmission.
-        /// </summary>
-        public short PortReceive { get; set; }
 
         /// <summary>
         /// The horizontal X position of the player's ship.
@@ -75,11 +59,5 @@ namespace Data_Structures
         {
             Type = 1;
         }
-
-        /// <summary>
-        /// A constructor for this class, does not initiate any data.
-        /// </summary>
-        /// <param name="type">The type of the class, used to cast an object to this class.</param>
-        public GameData(byte type) : base(type) { }
     }
 }

@@ -48,14 +48,13 @@ namespace Client_Comm_Module
                     if (gameDataPlayers[x] == null)
                     {
                         gameDataPlayers[x] = player;
-                        Console.WriteLine(gameDataPlayers[x].Username);
-                        Console.WriteLine(player.Username);
+                        Console.WriteLine(gameDataPlayers[x].Player.Username);
+                        Console.WriteLine(player.Player.Username);
                         break;
                     }
-                    if (player.Username == gameDataPlayers[x].Username)
+                    if (player.Player.Username == gameDataPlayers[x].Player.Username)
                     {
                         gameDataPlayers[x] = player;
-                        
                         break;
                     }
                 }

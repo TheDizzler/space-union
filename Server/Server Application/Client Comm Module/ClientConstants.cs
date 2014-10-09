@@ -12,7 +12,18 @@ namespace Client_Comm_Module
         /// The IP address of the server.
         /// </summary>
         public const string SERVER_IPADDRESS = "142.232.18.98";
-        public const int TCP_PORT_SEND = 6980;
+        /// <summary>
+        /// The port used by the TCP login request client to send data to a game client.
+        /// </summary>
+        public const int TCPLoginListener = 6980;
+        /// <summary>
+        /// The port used by the TCP chat message client to send data to a game client.
+        /// </summary>
+        public const int TCPMessageListener = 6981;
+        /// <summary>
+        /// The port used by the TCP error message client to send data to a game client.
+        /// </summary>
+        public const int TCPErrorListener = 6982;
 
         /// <summary>
         /// The interval between each chat message transmission.

@@ -19,6 +19,19 @@ namespace Data_Structures
             list = new List<GameData>();
         }
 
+        public void addPlayer(Player player)
+        {
+            GameData data = new GameData();
+            data.Player = player;
+            data.GameRoom = RoomNumber;
+            data.XPosition = 500;
+            data.YPosition = 500;
+            data.Angle = 0;
+            data.Health = 100;
+            data.Kills = 0;
+            data.Deaths = 0;
+        }
+
         public List<GameData> getPlayerList()
         {
             return list;
@@ -28,7 +41,7 @@ namespace Data_Structures
         {
             foreach (GameData player in list)
             {
-                if (player.Username == user.Username)
+                if (player.Player.Username == user.Player.Username)
                 {
                     list.Remove(player);
                     return;

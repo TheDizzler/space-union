@@ -18,13 +18,11 @@ namespace Server_Application
         /// </summary>
         /// <param name="loginData">Login request data to process.</param>
         /// <param name="owner">The </param>
-        public static void handleLoginRequest(Object loginData, Server owner)
+        public static void handleLoginRequest(Player loginData, Server owner)
         {
-            Player playerData = (Player)loginData;
-
-            if (validateUserData(playerData, owner))
+            if (validateUserData(loginData, owner))
             {
-                owner.addOnlinePlayer(playerData);   
+                owner.addOnlinePlayer(loginData);
             }
         }
 
@@ -39,17 +37,15 @@ namespace Server_Application
             string username = playerData.Username;
             string password = playerData.Password;
 
-            // User name validation failed
             if (!checkUsername(username))
             {
-                ErrorMessage message = new ErrorMessage(3, playerData, "0");
+                ErrorMessage message = new ErrorMessage(playerData, "0");
                 owner.addMessageToQueue(message);
                 return false;
             }
-
             if (!checkUserPW(username, password))
             {
-                ErrorMessage message = new ErrorMessage(3, playerData, "1");
+                ErrorMessage message = new ErrorMessage(playerData, "1");
                 owner.addMessageToQueue(message);
                 return false;
             }
