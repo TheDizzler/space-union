@@ -41,9 +41,22 @@ namespace SpaceUnion {
 		protected float turnSpeed = 4.5f;
 
 
-		// The rate of fire of the player laser
-		TimeSpan fireTime;
-		TimeSpan previousFireTime;
+		/// <summary>
+		/// Amount of time in seconds between main weaponfire
+		/// </summary>
+		protected TimeSpan mainFireDelay;
+		/// <summary>
+		/// Amount of time in seconds between alt weaponfire
+		/// </summary>
+		protected TimeSpan altFireDelay;
+		/// <summary>
+		/// When main weapon was fired in GameTime.
+		/// </summary>
+		protected TimeSpan previousMainFireTime;
+		/// <summary>
+		/// When alt weapon was fired in GameTime
+		/// </summary>
+		protected TimeSpan previousAltFireTime;
 
 		public List<Projectile> projectiles;
 
@@ -97,8 +110,7 @@ namespace SpaceUnion {
 			//scale = .3f;
 
 			projectiles = new List<Projectile>();
-			// Set the laser to fire every quarter second
-			fireTime = TimeSpan.FromSeconds(.15f);
+			
 
 			currentHealth = maxHealth;
 			weaponOrigin = new Vector2(0, height / 2); // start position of weapon
@@ -129,13 +141,44 @@ namespace SpaceUnion {
 
 			base.draw(sBatch);
 
-			// Draw the Projectiles
-			//for (int i = 0; i < projectiles.Count; i++) {
-			//	sBatch.Draw(Assets.shuttle, projectiles[i].getProjectileHitBox().getArray(), Color.Red);
-			//	//projectiles[i].draw(spriteBatch); //This is a debug statement to view where the hitboxes are
-			//}
 			foreach (Projectile projectile in projectiles)
 				projectile.draw(sBatch);
+		}
+
+		/// <summary>
+		/// Power to main thruster
+		/// No max speed cap
+		/// </summary>
+		/// <param name="gameTime"></param>
+		public virtual void thrust(GameTime gameTime) {
+
+			Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
+			acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+
+			Vector2.Add(ref velocity, ref acceleration, out velocity);
+
+		}
+
+		public virtual void fire(GameTime gameTime) {
+
+			// Fire only every interval we set as the fireTime
+			if (gameTime.TotalGameTime - previousMainFireTime > mainFireDelay) {
+				// Reset our current time
+				previousMainFireTime = gameTime.TotalGameTime;
+
+				// Add the projectile, but add it to the front and center of the player
+				projectiles.Add(new Laser(weaponTexture, Vector2.Add(position, weaponOrigin), this));
+			}
+		}
+
+		public abstract void altFire(GameTime gameTime);
+
+		/// <summary>
+		/// Call when destroyed
+		/// </summary>
+		protected void explode() {
+
+				explosionEngine.createExplosions(this);
 		}
 
 
@@ -144,7 +187,7 @@ namespace SpaceUnion {
 		/// Resets the angle to 0 when completing a full rotation, which prevents integer overflow.
 		/// </summary>
 		/// <param name="gameTime"></param>
-		public void rotateLeft(GameTime gameTime) {
+		public virtual void rotateLeft(GameTime gameTime) {
 			if (rotation > 6.283185 || rotation < -6.283185) {
 				rotation = rotation % 6.283185f;
 			}
@@ -159,7 +202,7 @@ namespace SpaceUnion {
 		/// Resets the angle to 0 when completing a full rotation, which prevents integer overflow.
 		/// </summary>
 		/// <param name="gameTime"></param>
-		public void rotateRight(GameTime gameTime) {
+		public virtual void rotateRight(GameTime gameTime) {
 			if (rotation > 6.283185 || rotation < -6.283185) {
 				rotation = rotation % 6.283185f;
 			}
@@ -176,45 +219,10 @@ namespace SpaceUnion {
 			explode();
 		}
 
-		/// <summary>
-		/// Power to main thruster
-		/// No max speed cap
-		/// </summary>
-		/// <param name="gameTime"></param>
-		public void thrust(GameTime gameTime) {
-
-			Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
-			acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
-
-			Vector2.Add(ref velocity, ref acceleration, out velocity);
-
-		}
-
-		public void fire(GameTime gameTime) {
-
-			// Fire only every interval we set as the fireTime
-			if (gameTime.TotalGameTime - previousFireTime > fireTime) {
-				// Reset our current time
-				previousFireTime = gameTime.TotalGameTime;
-
-				// Add the projectile, but add it to the front and center of the player
-				projectiles.Add(new Laser(weaponTexture, Vector2.Add(position, weaponOrigin), this));
-			}
-		}
-
-
-		/// <summary>
-		/// Call when destroyed
-		/// </summary>
-		protected void explode() {
-
-				explosionEngine.createExplosions(this);
-		}
 
 		/// <summary>
 		/// Check if ship will wrap around edges
 		/// </summary>
-		/// <param name="Window"></param>
 		private void checkScreenWrap() {
 			if (position.X < -5) {
 				position.X = GameplayScreen.worldWidth + 3;

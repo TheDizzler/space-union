@@ -15,5 +15,9 @@ namespace SpaceUnion.Ships {
 
 		}
 
+		public override void altFire(GameTime gameTime) {
+			
+		}
+
 	}
 }

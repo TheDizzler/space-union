@@ -149,6 +149,9 @@ namespace SpaceUnion.Controllers {
 
 			}
 
+			if (keyState.IsKeyDown(Keys.LeftShift))
+				playerShip.altFire(gameTime);
+
 			planet.update(gameTime, ships);
 
 

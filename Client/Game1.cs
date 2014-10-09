@@ -20,16 +20,18 @@ namespace SpaceUnion {
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
+		/// <summary>
+		/// Contains all game assets (gfx, audio, etc.)
+		/// </summary>
 		public static AssetManager Assets;
-
-
-		GameplayScreen gameplayScreen;
-		MainMenuScreen mainMenuScreen;
-		ShipSelectionScreen shipselectionScreen;
 		/// <summary>
 		/// An engine to create and manage all explosions, big and small
 		/// </summary>
 		public static ExplosionEngine explosionEngine;
+
+		GameplayScreen gameplayScreen;
+		MainMenuScreen mainMenuScreen;
+		ShipSelectionScreen shipselectionScreen;
 		/// <summary>
 		/// Game State Enum to track game states
 		/// </summary>

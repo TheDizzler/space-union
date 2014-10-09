@@ -21,6 +21,8 @@ namespace SpaceUnion.Weapons {
 
 		AnimationRow row = AnimationRow.row0;
 
+		public bool on = false;
+
 		public Shield(Texture2D tex, Vector2 pos)
 			: base(tex, pos) {
 
