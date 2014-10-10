@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Data_Structures;
 using Data_Manipulation;
+using System.Threading;
 
 //complete game room creation system
 namespace Server_Application
@@ -46,6 +47,33 @@ namespace Server_Application
             searchingplayers = new List<Player>();
             receiving = new DataReceiving(this);
             transmission = new DataTransmission(this);
+        }
+
+        private void cleanRooms()
+        {
+            while (true)
+            {
+                foreach (Gameroom room in gamerooms)
+                {
+                    foreach (GameData list in room.getPlayerList())
+                    {
+                        if (compareTime(list.Time))
+                        {
+
+                        }
+                    }
+                }
+                Thread.Sleep(10000);
+            }
+        }
+
+        private bool compareTime(DateTime time)
+        {
+            if (time.Second > 0 && DateTime.Now.Second < 50)
+            {
+
+            }
+            return false;
         }
 
         /// <summary>

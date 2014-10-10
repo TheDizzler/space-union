@@ -64,6 +64,11 @@ namespace Data_Manipulation
         /// <param name="port">The port to which to send data.</param>
         public static void sendTCPData(TcpClient client, object input, string ipaddress, int port)
         {
+            if(client.Connected)
+            {
+                client.Close();
+                client = new TcpClient();
+            }
             try
             {
                 client.Connect(ipaddress, port);

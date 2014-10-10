@@ -46,6 +46,14 @@ namespace Client_Comm_Module
             new Thread(receiveData).Start();
         }
 
+
+        public Player receiveLoginConfirmation()
+        {
+            TcpListener listener = new TcpListener(IPAddress.Any, Constants.TCPLoginClient);
+            listener.Start();
+            return (Player)DataControl.receiveTCPData(listener);
+        }
+
         /// <summary>
         /// Begin receiving game data from the server.
         /// </summary>

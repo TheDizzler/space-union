@@ -27,7 +27,7 @@ namespace SpaceUnion {
             Player player = new Player();
             player.Username = MainMenuScreen.username;
             player.Password = MainMenuScreen.password;
-            player.IPAddress = ClientCommHandler.getLocalIPv4Address();
+            player.IPAddress = ClientHandlerHelper.getLocalIPv4Address();
             clientCommHandler.sendLoginRequest(player);
             player = clientCommHandler.getLoginConfirmation();
 		}

@@ -203,12 +203,8 @@ namespace SpaceUnion.Controllers {
 
             //NETWORKING
             GameData data = new GameData();
-            data.Player.Username = MainMenuScreen.username;
-            data.Player.IPAddress = ClientCommHandler.getLocalIPv4Address();
+            data.Player = MainMenuScreen.player;
             data.Health = (byte)playerShip.getHealth();
-            data.Player.GameRoom = MainMenuScreen.player.GameRoom;
-            data.Player.PortReceive = MainMenuScreen.player.PortReceive;
-            data.Player.PortSend = MainMenuScreen.player.PortSend;
             data.Time = DateTime.Now;
             data.Angle = (float)playerShip.getRotation();
             data.XPosition = playerShip.getX();
@@ -289,6 +285,7 @@ namespace SpaceUnion.Controllers {
             {
                 if (players[x] != null)
                 {
+                    Console.WriteLine(players[x].Player.Username);
                     Ship otherPlayer = new Ship(Assets.spaceShipTest, new Vector2(200, 200)); //Create new player ship
                     otherPlayer.updateX(players[x].XPosition);
                     otherPlayer.updateY(players[x].YPosition);

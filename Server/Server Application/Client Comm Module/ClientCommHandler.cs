@@ -124,7 +124,7 @@ namespace Client_Comm_Module
         /// <returns>Returns the current IP address.</returns>
         public string getLocalIPv4Address()
         {
-            return helper.getLocalIPv4Address();
+            return ClientHandlerHelper.getLocalIPv4Address();
         }
     }
 }

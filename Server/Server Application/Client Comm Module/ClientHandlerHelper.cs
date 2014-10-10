@@ -77,7 +77,7 @@ namespace Client_Comm_Module
         /// Gets the current IP address.
         /// </summary>
         /// <returns>Returns the current IP address.</returns>
-        public string getLocalIPv4Address()
+        public static string getLocalIPv4Address()
         {
             IPHostEntry host = null;
             try
