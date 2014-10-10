@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Data_Structures;
 
 //complete game room creation system
 namespace Server_Application
@@ -16,8 +17,17 @@ namespace Server_Application
     /// </summary>
     class Server
     {
+        /// <summary>
+        /// The class responsible for listening to data from clients.
+        /// </summary>
         DataReceiving receiving;
+        /// <summary>
+        /// The class responsible for transmitting data to clients.
+        /// </summary>
         DataTransmission transmission;
+        /// <summary>
+        /// List of all available game rooms.
+        /// </summary>
         List<Gameroom> gamerooms;
         /// <summary>
         /// Total list of online players.
@@ -27,12 +37,13 @@ namespace Server_Application
         /// Only players who are currently looking for a game match.
         /// </summary>
         List<Player> searchingplayers;
+
         public Server()
         {
             gamerooms = new List<Gameroom>();
             onlineplayers = new List<Player>();
             searchingplayers = new List<Player>();
-            //receiving = new DataReceiving(this);
+            receiving = new DataReceiving(this);
             transmission = new DataTransmission(this);
         }
 
@@ -52,21 +63,6 @@ namespace Server_Application
             }
             return null;
         }
-
-        public void getNumberOfRooms()
-        {
-            Console.WriteLine("Number of currently active game rooms: " + gamerooms.Count);
-        }
-
-        public void getNumberOfOnlinePlayers()
-        {
-            Console.WriteLine("Number of online players: " + onlineplayers.Count);
-        }
-
-        public void getNumberOfSearchingPlayers()
-        {
-            Console.WriteLine("Number of players searching for games: " + searchingplayers.Count);
-        }
         /// <summary>
         /// Add the given player to the list of online players.
         /// </summary>
@@ -78,13 +74,72 @@ namespace Server_Application
                 onlineplayers.Add(player);
             }
         }
-
+        /// <summary>
+        /// Adds a message to the DataTransmission queue.
+        /// </summary>
+        /// <param name="message">The message to add to the queue.</param>
         public void addMessageToQueue(Data message)
         {
             if (message != null)
             {
                 transmission.addMessageToQueue(message);
             }
+        }
+
+        /// <summary>
+        /// Checks the number of currently active game rooms.
+        /// </summary>
+        public void getNumberOfRooms()
+        {
+            Console.WriteLine("Number of currently active game rooms: " + gamerooms.Count + "\n");
+        }
+
+        /// <summary>
+        /// Checks the number of online players.
+        /// </summary>
+        public void getNumberOfOnlinePlayers()
+        {
+            Console.WriteLine("Number of online players: " + onlineplayers.Count + "\n");
+        }
+
+        /// <summary>
+        /// Checks the number of players searching for games.
+        /// </summary>
+        public void getNumberOfSearchingPlayers()
+        {
+            Console.WriteLine("Number of players searching for games: " + searchingplayers.Count + "\n");
+        }
+        
+        /// <summary>
+        /// Checks the size of the Error Message queue.
+        /// </summary>
+        public void checkErrorQueueSize()
+        {
+            transmission.checkErrorQueueSize();
+        }
+
+        /// <summary>
+        /// Checks the size of the Chat Message queue.
+        /// </summary>
+        public void checkChatMessageQueueSize()
+        {
+            transmission.checkChatMessageQueueSize();
+        }
+
+        /// <summary>
+        /// Checks the size of the Login Request queue.
+        /// </summary>
+        public void checkLoginRequestQueueSize()
+        {
+            transmission.checkLoginRequestQueueSize();
+        }
+
+        /// <summary>
+        /// Checks the size of the Game Data queues.
+        /// </summary>
+        public void checkGameDataQueueSize()
+        {
+            transmission.checkGameDataQueueSize();
         }
     }
 }

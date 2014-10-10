@@ -5,12 +5,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Data_Structures;
+using Client_Comm_Module;
 
 namespace SpaceUnion {
 	class MainMenuScreen {
 		//private Texture2D texture;
 		private Game1 game;
 		PlayButton btnPlay;
+        public static string username = "andrew";
+        public static string password = "lolandrew";
+        
 
 		public MainMenuScreen(Game1 game) {
 			this.game = game;
@@ -24,6 +29,8 @@ namespace SpaceUnion {
 
 			if (btnPlay.isClicked == true) {
                 btnPlay.isClicked = false;
+                //NETWORKING TODO: Login request
+
                 game.StartGame();
 			}
 		}

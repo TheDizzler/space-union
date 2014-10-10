@@ -7,6 +7,8 @@ using System.Linq;
 using System.Timers;
 using System.Text;
 using SpaceUnion.StellarObjects;
+using Client_Comm_Module;
+using Data_Structures;
 
 
 namespace SpaceUnion.Controllers {
@@ -41,6 +43,9 @@ namespace SpaceUnion.Controllers {
         private int SCREEN_WIDTH;
         private int SCREEN_HEIGHT;
 
+        //NETWORKING
+        ClientCommHandler clientCommHandler;
+
 
         public GameplayScreen(Game1 game, SpriteBatch batch)
         {
@@ -61,6 +66,17 @@ namespace SpaceUnion.Controllers {
             invinsible = false;
             */
 
+            //NETWORKING
+            clientCommHandler = new ClientCommHandler(); //New client communication handler to receive server info
+
+
+            Player player = new Player(0);
+            player.Username = MainMenuScreen.username;
+            player.Password = MainMenuScreen.password;
+            player.IPAddress = ClientCommHandler.getLocalIPv4Address();
+            clientCommHandler.sendLoginRequest(player);
+
+
             Assets = Game1.Assets;
             playerShip = new Ship(Assets.spaceShipTest, new Vector2(200, 200)); //Create new player ship
 			planet = new Planet(Assets.waterPlanet, new Vector2(1000, 1000));
@@ -76,6 +92,9 @@ namespace SpaceUnion.Controllers {
 
             // Set the laser to fire every quarter second
             fireTime = TimeSpan.FromSeconds(.15f);
+            ships.Add(playerShip);
+
+
         }
 
         /// <summary>
@@ -119,7 +138,18 @@ namespace SpaceUnion.Controllers {
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public void Update(GameTime gameTime)
         {
-            
+            /*
+            GameMessage testString = clientCommHandler.getGameMessage(); //Receive server string
+            if (testString != null)
+            {
+                Console.WriteLine("Game Message: " + testString.Message);
+            }
+            else {
+                //Console.WriteLine("No Message Received from Server");
+            }
+            */
+
+
             //playerShip.checkScreenWrap(Window); //Check if ship will wrap around edges
             playerShip.checkScreenStop(game.Window);
             keyState = Keyboard.GetState(); //Get which keys are pressed or released
@@ -181,6 +211,20 @@ namespace SpaceUnion.Controllers {
 			playerShip.update(gameTime);
             gui.update(playerShip);
             UpdateProjectiles();
+
+            //NETWORKING
+            GameData data = new GameData(1);
+            data.Username = MainMenuScreen.username;
+            data.IP = ClientCommHandler.getLocalIPv4Address();
+            data.Health = (byte)playerShip.getHealth();
+            data.Kills = 0;
+            data.GameRoom = 0;
+            data.Angle = (float)playerShip.getRotation(); //
+            data.Deaths = 0;
+            data.XPosition = playerShip.getX();
+            data.YPosition = playerShip.getY();
+
+            clientCommHandler.sendGameData(data);
             
         }
 
@@ -251,7 +295,24 @@ namespace SpaceUnion.Controllers {
             drawWorld(); //Draws background
 
             playerShip.draw(spriteBatch); //Draws player space ship
+
+            GameData[] players = clientCommHandler.getPlayersData();
+            for (int x = 0; x < players.Length; x++)
+            {
+                if (players[x] != null)
+                {
+                    Ship otherPlayer = new Ship(Assets.spaceShipTest, new Vector2(200, 200)); //Create new player ship
+                    otherPlayer.updateX(players[x].XPosition);
+                    otherPlayer.updateY(players[x].YPosition);
+                    otherPlayer.updateRotation(players[x].Angle); 
+                    otherPlayer.draw(spriteBatch); //Draws other player
+                }
+            }
+
+            //loop everty ship and draw 
 			planet.draw(spriteBatch);
+            
+            
             // Draw the Projectiles
             for (int i = 0; i < projectiles.Count; i++)
             {
