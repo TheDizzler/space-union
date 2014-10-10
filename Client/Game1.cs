@@ -62,8 +62,8 @@ namespace SpaceUnion {
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
 
-			graphics.PreferredBackBufferWidth = 1024;
-			graphics.PreferredBackBufferHeight = 768;
+			graphics.PreferredBackBufferWidth = 933;
+			graphics.PreferredBackBufferHeight = 700;
 			
 			IsFixedTimeStep = false;
 			

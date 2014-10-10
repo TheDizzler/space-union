@@ -34,6 +34,9 @@ namespace SpaceUnion.StellarObjects {
 			: base(tex, pos) {
 			this.mass = mass * 1000;
 			this.range = range;
+
+			maxHealth = 10000;
+			currentHealth = maxHealth;
 		}
 
 
