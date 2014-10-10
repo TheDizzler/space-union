@@ -151,21 +151,34 @@ namespace Server_Application
         {
             if (message == null)
                 return;
+            Object threadlocker = new Object();
             try
             {
                 switch (message.Type)
                 {
                     case Constants.LOGIN_REQUEST:
-                        loginrequests.Add((Player)message);
+                        lock (threadlocker)
+                        {
+                            loginrequests.Add((Player)message);
+                        }
                         break;
                     case Constants.GAME_DATA:
-                        addGameDataToQueue((GameData)message);
+                        lock (threadlocker)
+                        {
+                            addGameDataToQueue((GameData)message);
+                        }
                         break;
                     case Constants.CHAT_MESSAGE:
-                        chatmessages.Add((GameMessage)message);
+                        lock (threadlocker)
+                        {
+                            chatmessages.Add((GameMessage)message);
+                        }
                         break;
                     case Constants.ERROR_MESSAGE:
-                        errormessages.Add((ErrorMessage)message);
+                        lock (threadlocker)
+                        {
+                            errormessages.Add((ErrorMessage)message);
+                        }
                         break;
                 }
             }
@@ -218,8 +231,13 @@ namespace Server_Application
         {
             if (UDPQueue[queue].Count == 0)
                 return null;
-            GameData data = UDPQueue[queue].ElementAt(0);
-            UDPQueue[queue].RemoveAt(0);
+            Object threadlocker = new Object();
+            GameData data = null;
+            lock(threadlocker)
+            {
+                data = UDPQueue[queue].ElementAt(0);
+                UDPQueue[queue].RemoveAt(0);
+            }
             return data;
         }
 
@@ -231,8 +249,13 @@ namespace Server_Application
         {
             if (errormessages.Count == 0)
                 return null;
-            ErrorMessage message = errormessages.ElementAt(0);
-            errormessages.RemoveAt(0);
+            Object threadlocker = new Object();
+            ErrorMessage message = null;
+            lock (threadlocker)
+            {
+                message = errormessages.ElementAt(0);
+                errormessages.RemoveAt(0);
+            }
             return message;
         }
 
@@ -244,8 +267,13 @@ namespace Server_Application
         {
             if (chatmessages.Count == 0)
                 return null;
-            GameMessage message = chatmessages.ElementAt(0);
-            chatmessages.RemoveAt(0);
+            Object threadlocker = new Object();
+            GameMessage message = null;
+            lock (threadlocker)
+            {
+                message = chatmessages.ElementAt(0);
+                chatmessages.RemoveAt(0);
+            }
             return message;
         }
 
@@ -257,8 +285,13 @@ namespace Server_Application
         {
             if (loginrequests.Count == 0)
                 return null;
-            Player message = loginrequests.ElementAt(0);
-            chatmessages.RemoveAt(0);
+            Object threadlocker = new Object();
+            Player message = null;
+            lock (threadlocker)
+            {
+                message = loginrequests.ElementAt(0);
+                loginrequests.RemoveAt(0);
+            }
             return message;
         }
 

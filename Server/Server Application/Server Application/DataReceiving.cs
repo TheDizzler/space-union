@@ -67,6 +67,7 @@ namespace Server_Application
             while (true)
             {
                 Player loginData = (Player)DataControl.receiveTCPData(TCPListeners[0]);
+                Console.WriteLine(loginData.Username);
                 new Thread(unused => LoginRequests.handleLoginRequest(loginData, owner)).Start();
             }
         }
@@ -94,6 +95,7 @@ namespace Server_Application
             while (true)
             {
                 GameData clientData = (GameData)DataControl.receiveUDPData((UdpClient)UDPListener);
+                Console.WriteLine(clientData.Player.Username + " " + clientData.Player.GameRoom + " " + clientData.XPosition + " " + clientData.YPosition);
                 owner.addMessageToQueue(clientData);
             }
         }

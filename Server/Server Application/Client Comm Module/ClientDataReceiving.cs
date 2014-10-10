@@ -47,6 +47,7 @@ namespace Client_Comm_Module
         public Player receiveLoginConfirmation()
         {
             TcpListener listener = new TcpListener(IPAddress.Any, Constants.TCPLoginClient);
+            listener.Start();
             return (Player)DataControl.receiveTCPData(listener);
         }
 
