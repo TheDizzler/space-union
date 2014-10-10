@@ -27,12 +27,9 @@ namespace Client_Comm_Module
             // NOTE: fix required to only listen to the server.
             TCPListener = new TcpListener(IPAddress.Any, Constants.TCPMessageClient);
             TCPListener.Start();
-<<<<<<< HEAD
 
             new Thread(receiveMessages).Start();
-=======
-            new Thread(receiveChatMessages).Start();
->>>>>>> c97c36691afa2561947508443dc0f218a9411c96
+            //new Thread(receiveChatMessages).Start();
             new Thread(receiveData).Start();
         }
 
