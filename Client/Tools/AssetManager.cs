@@ -36,6 +36,7 @@ namespace SpaceUnion.Tools {
 		public Texture2D earth;
         public Texture2D winflag1;
 		public Texture2D waterPlanet;
+		public Texture2D moon;
         public Texture2D asteroid;
 
 		// ships and platforms
@@ -85,6 +86,7 @@ namespace SpaceUnion.Tools {
 
 
 			waterPlanet = Content.Load<Texture2D>("StellarObjects/waterplanet (256x256)");
+			moon = Content.Load<Texture2D>("StellarObjects/moon (115x117)");
 			asteroid = Content.Load<Texture2D>("StellarObjects/asteroid(56x56)");
 
             spaceShipTest = Content.Load<Texture2D>("Spaceships/spaceshiptest");

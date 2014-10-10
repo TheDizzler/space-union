@@ -124,3 +124,4 @@ C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\zoi
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\ufoship (128x128).png
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\stuntship (128x128).png
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\zoidship.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\moon (115x117).xnb

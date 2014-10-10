@@ -42,6 +42,7 @@
     <Compile Include="Ships\TestShip.cs" />
     <Compile Include="Ships\UFO.cs" />
     <Compile Include="Ships\Zoid.cs" />
+    <Compile Include="StellarObjects\LargeMassObject.cs" />
     <Compile Include="Tools\Camera.cs" />
     <Compile Include="Animations\ShortExplosion.cs" />
     <Compile Include="HitBox.cs" />

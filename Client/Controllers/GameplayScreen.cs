@@ -23,9 +23,9 @@ namespace SpaceUnion.Controllers {
 		List<Asteroid> asteroids;
 		List<Ship> ships;
 		List<Tangible> targets;
+		List<Planet> planets;
 
 		private Ship playerShip;
-		private Planet planet;
 		private Game1 game;
 		Camera mainCamera;
 		GUI gui;
@@ -54,11 +54,12 @@ namespace SpaceUnion.Controllers {
 
 			playerShip = selectedship;
 			playerShip.Position = new Vector2(200, 200);
-			planet = new Planet(Assets.waterPlanet, new Vector2(1000, 1000), 500f, 1000);
+			planets = new List<Planet>();
+			planets.Add(new Planet(Assets.waterPlanet, new Vector2(4000, 3000), 1000f, 1000));
+			planets.Add(new Planet(Assets.moon, new Vector2(1000, 1000), 500f, 800));
 
 
-
-			gui = new GUI(game, playerShip, planet);
+			gui = new GUI(game, playerShip, planets[0]);
 
 			Viewport mainViewport = new Viewport((int) playerShip.getX(), (int) playerShip.getY(),
 				game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height - GUI.guiHeight);
@@ -152,7 +153,8 @@ namespace SpaceUnion.Controllers {
 			if (keyState.IsKeyDown(Keys.LeftShift))
 				playerShip.altFire(gameTime);
 
-			planet.update(gameTime, targets);
+			foreach (Planet planet in planets)
+				planet.update(gameTime, targets);
 
 
 
@@ -170,7 +172,7 @@ namespace SpaceUnion.Controllers {
 			if (asteroids.Count < 10)
 				AddAsteroid(new Vector2(gen.Next(100, 4000), gen.Next(100, 2000)));
 
-			
+
 			foreach (Ship ship in ships)
 				ship.update(gameTime, targets);
 			//gui.update();
@@ -180,7 +182,7 @@ namespace SpaceUnion.Controllers {
 				if (!asteroids[i].isActive)
 					asteroids.RemoveAt(i);
 			}
-			
+
 			Game1.explosionEngine.update(gameTime);
 		}
 
@@ -199,7 +201,8 @@ namespace SpaceUnion.Controllers {
 			foreach (Ship ship in ships)
 				ship.draw(spriteBatch);
 
-			planet.draw(spriteBatch);
+			foreach (Planet planet in planets)
+				planet.draw(spriteBatch);
 
 
 			// Draw the Asteroids

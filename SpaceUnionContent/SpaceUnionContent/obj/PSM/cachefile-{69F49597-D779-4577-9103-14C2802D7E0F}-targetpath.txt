@@ -21,6 +21,7 @@ Content\Animations\bubble shield sheet.xnb
 Content\Spaceships\ufoship (128x128).xnb
 Content\Spaceships\stuntship (128x128).xnb
 Content\Spaceships\zoidship.xnb
+Content\StellarObjects\moon (115x117).xnb
 Content\Backgrounds\starfield (800x600).png
 Content\Backgrounds\galaxy.png
 Content\Spaceships\spaceshiptest.png

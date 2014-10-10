@@ -208,6 +208,15 @@
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\zoidship.xnb</Output>
       <Time>2014-10-06T22:17:49.8041601-07:00</Time>
     </Item>
+    <Item>
+      <Source>StellarObjects\moon (115x117).png</Source>
+      <Name>StellarObjects\moon (115x117)</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\moon (115x117).xnb</Output>
+      <Time>2014-10-10T09:22:07.4532034-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{69F49597-D779-4577-9103-14C2802D7E0F}</ContentProjectGUID>
