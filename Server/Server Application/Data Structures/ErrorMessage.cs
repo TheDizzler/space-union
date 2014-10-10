@@ -22,17 +22,11 @@ namespace Data_Structures
             Type = 3;
         }
 
-<<<<<<< HEAD
         /// <summary>
         /// A constructor for this class, does not initiate any data.
         /// </summary>
         /// <param name="type">The type of the class, used to cast an object to this class.</param>
-        public ErrorMessage(byte type) : base(type) { }
-
-        public ErrorMessage(byte type, Player player, int messageCode) : base(type)
-=======
-        public ErrorMessage(Player player, string messageCode)
->>>>>>> c97c36691afa2561947508443dc0f218a9411c96
+        public ErrorMessage(Player player, int messageCode)
         {
             Player = player;
             MessageCode = messageCode;
