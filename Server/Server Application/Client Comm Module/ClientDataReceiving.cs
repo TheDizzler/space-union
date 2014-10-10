@@ -33,7 +33,7 @@ namespace Client_Comm_Module
             TCPListener = new TcpListener(IPAddress.Parse("0.0.0.0"), Constants.TCPMessageClient);
             TCPListener.Start();
 
-            new Thread(receiveChatMessages).Start();
+            new Thread(receiveMessages).Start();
             new Thread(receiveData).Start();
         }
 
@@ -49,13 +49,34 @@ namespace Client_Comm_Module
         /// <summary>
         /// Begin receiving chat messages from the server.
         /// </summary>
-        public void receiveChatMessages()
+        /*public void receiveChatMessages()
         {
             while (true)
             {
                 Object chatData = DataControl.receiveTCPData(TCPListener);
                 if (chatData != null)
                     messageQueue.Add((GameMessage)chatData);
+            }
+        }*/
+
+        /// <summary>
+        /// Begin receiving chat and setup messages from the server.
+        /// </summary>
+        public void receiveMessages()
+        {
+            while (true)
+            {
+                Data data = (Data)DataControl.receiveTCPData(TCPListener);
+                if (data != null)
+                    switch(data.Type) {
+                        case Constants.CHAT_MESSAGE:
+                            messageQueue.Add((GameMessage)data);
+                            break;
+
+                        case Constants.GAME_SETUP_MESSAGE:
+
+                            break;
+                    }
             }
         }
 

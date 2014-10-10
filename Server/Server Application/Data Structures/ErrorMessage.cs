@@ -8,14 +8,14 @@ namespace Data_Structures
 {
     /// <summary>
     /// Message containing the error code.
-    /// 0 - non-existent user
-    /// 1 - incorrect password
+    /// 0 - non-existent user / incorrect password
+    /// 1- user blocked
     /// </summary>
     [Serializable]
     public class ErrorMessage : Data
     {
         public Player Player { get; set; }
-        public string MessageCode { get; set; }
+        public int MessageCode { get; set; }
 
         public ErrorMessage()
         {
@@ -28,7 +28,7 @@ namespace Data_Structures
         /// <param name="type">The type of the class, used to cast an object to this class.</param>
         public ErrorMessage(byte type) : base(type) { }
 
-        public ErrorMessage(byte type, Player player, string messageCode) : base(type)
+        public ErrorMessage(byte type, Player player, int messageCode) : base(type)
         {
             Player = player;
             MessageCode = messageCode;

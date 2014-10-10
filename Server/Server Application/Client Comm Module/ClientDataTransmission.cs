@@ -144,7 +144,7 @@ namespace Client_Comm_Module
             {
                 case Constants.CHAT_MESSAGE:
                     return removeMessageFromQueue();
-                case Constants.ERROR_MESSAGE:
+                case Constants.GAME_DATA:
                     return removeDataFromQueue();
             }
             return null;
