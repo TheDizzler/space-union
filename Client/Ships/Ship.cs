@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Linq;
 using System.Text;
 using SpaceUnion.Controllers;
+using SpaceUnion.StellarObjects;
 using SpaceUnion.Tools;
 using SpaceUnion.Weapons;
 
@@ -18,7 +19,7 @@ namespace SpaceUnion {
 	public abstract class Ship : Tangible {
 
 		protected static AssetManager assets = Game1.Assets;
-		protected ExplosionEngine explosionEngine = Game1.explosionEngine;
+
 		/// <summary>
 		/// Reference to Game1
 		/// </summary>
@@ -28,10 +29,8 @@ namespace SpaceUnion {
 		/// </summary>
 		public static float dampening = .1f;
 
-		/// <summary>
-		/// The current speed and direction of ship
-		/// </summary>
-		public Vector2 velocity;
+
+
 		protected float maxSpeed = 7;
 		protected float accelSpeed = 4.5f;
 		protected float currentSpeed = 0;
@@ -60,34 +59,6 @@ namespace SpaceUnion {
 
 		public List<Projectile> projectiles;
 
-		//protected HitBox shipHitBox;
-
-		////Return Ship Hitbox for collision detection
-		//public HitBox getShipHitBox() {
-		//	return shipHitBox;
-		//}
-
-		public float getShipVelocityDirectionX() {
-			return velocity.X;
-		}
-
-		public float getShipVelocityDirectionY() {
-			return velocity.Y;
-		}
-
-
-		/// <summary>
-		/// Collision check between ship and screen boundries.
-		/// Ships loop horizontally and vertically.
-		/// </summary>
-		public float getScale() {
-			return scale;
-		}
-
-
-
-
-
 		//private ExplosionEngine explosionEngine;
 		private Texture2D weaponTexture;
 		/// <summary>
@@ -110,10 +81,8 @@ namespace SpaceUnion {
 			//scale = .3f;
 
 			projectiles = new List<Projectile>();
-			
 
-			currentHealth = maxHealth;
-			weaponOrigin = new Vector2(0, height / 2); // start position of weapon
+			weaponOrigin = new Vector2(position.X + width / 2, position.Y + height / 2); // start position of weapon
 		}
 
 		//public abstract void setup();
@@ -123,7 +92,7 @@ namespace SpaceUnion {
 			// Elapsed time is taken into consideration in thrust and planet.pull
 			position += velocity;
 			base.update(position);
-			checkScreenStop();
+			checkWorldEdge();
 
 			// Update the Projectiles
 			for (int i = projectiles.Count - 1; i >= 0; i--) {
@@ -133,6 +102,8 @@ namespace SpaceUnion {
 					projectiles.RemoveAt(i);
 				}
 			}
+
+			checkForCollision(targets);
 		}
 
 
@@ -143,6 +114,25 @@ namespace SpaceUnion {
 
 			foreach (Projectile projectile in projectiles)
 				projectile.draw(sBatch);
+		}
+
+		/// <summary>
+		/// Determine what kind of collision is occuring.
+		/// </summary>
+		/// <param name="target"></param>
+		/// <exception cref="NotImplementedException">A new kind of object that needs handleing</exception>
+		public override void collide(Tangible target) {
+
+			if (target is Projectile)
+				target.collide(this); // the projectile can handle it from here
+			else if (target is Ship)
+				collisionHandler.shipOnShip(this, (Ship) target);
+			else if (target is Asteroid)
+				collisionHandler.shipOnAsteroid(this, (Asteroid) target);
+			else if (target is Planet)
+				collisionHandler.shipOnPlanet(this, (Planet) target);
+			else
+				throw new NotImplementedException();
 		}
 
 		/// <summary>
@@ -173,12 +163,16 @@ namespace SpaceUnion {
 
 		public abstract void altFire(GameTime gameTime);
 
+		public override void destroy() {
+			explode();
+		}
+
 		/// <summary>
 		/// Call when destroyed
 		/// </summary>
 		protected void explode() {
 
-				explosionEngine.createExplosions(this);
+			explosionEngine.explodeShip(this);
 		}
 
 
@@ -193,8 +187,6 @@ namespace SpaceUnion {
 			}
 			// rotates ship by an amount weighted by the amount time that has passed since last update
 			rotation -= turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
-			weaponOrigin.X = (float) (weaponOrigin.X * Math.Sin(rotation));
-			weaponOrigin.Y = (float) (weaponOrigin.Y * Math.Cos(rotation));
 		}
 
 		/// <summary>
@@ -207,8 +199,6 @@ namespace SpaceUnion {
 				rotation = rotation % 6.283185f;
 			}
 			rotation += turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
-			weaponOrigin.X = (float) (weaponOrigin.X * Math.Sin(rotation));
-			weaponOrigin.Y = (float) (weaponOrigin.Y * Math.Cos(rotation));
 		}
 
 		//Debugging Ship Brake
@@ -217,40 +207,6 @@ namespace SpaceUnion {
 			currentSpeed = 0;
 
 			explode();
-		}
-
-
-		/// <summary>
-		/// Check if ship will wrap around edges
-		/// </summary>
-		private void checkScreenWrap() {
-			if (position.X < -5) {
-				position.X = GameplayScreen.worldWidth + 3;
-			}
-			if (position.X > GameplayScreen.worldWidth + 5) {
-				position.X = -3;
-			}
-			if (position.Y < -5) {
-				position.Y = GameplayScreen.worldHeight;
-			}
-			if (position.Y > GameplayScreen.worldHeight + 5) {
-				position.Y = 0;
-			}
-		}
-
-		private void checkScreenStop() {
-			if (position.X <= 0) {
-				position.X = 0;
-			}
-			if (position.X >= GameplayScreen.worldWidth) {
-				position.X = GameplayScreen.worldWidth;
-			}
-			if (position.Y <= 0) {
-				position.Y = 0;
-			}
-			if (position.Y >= GameplayScreen.worldHeight) {
-				position.Y = GameplayScreen.worldHeight;
-			}
 		}
 	}
 }

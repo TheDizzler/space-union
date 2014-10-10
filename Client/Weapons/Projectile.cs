@@ -70,23 +70,12 @@ namespace SpaceUnion.Weapons {
 			if (projectileTTL > timeActive) {
 
 				position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
-
-
 				hitBox.updatePosition(position); // do projectiles need hitboxes?
 
-				updateDamageCollision(targets);
+				checkForCollision(targets);
 			} else {
 				isActive = false;
 			}
-		}
-
-		private void updateDamageCollision(List<Tangible> targets) {
-
-			foreach (Tangible target in targets)
-				if (getHitBox().getArray().Intersects(target.getHitBox().getArray())) {
-					target.isActive = false;
-				}
-
 		}
 
 
@@ -104,5 +93,8 @@ namespace SpaceUnion.Weapons {
 		//		}
 		//	}
 		//}
+
+		public abstract void doDamage(Tangible target);
+
 	}
 }

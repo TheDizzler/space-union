@@ -12,7 +12,6 @@ namespace SpaceUnion.Tools {
 	/// </summary>
 	public abstract class Sprite {
 
-		public int alphaValue;
 
 		protected internal Texture2D texture;
 		/// <summary>
@@ -63,7 +62,12 @@ namespace SpaceUnion.Tools {
 		/// <summary>
 		/// Get sprites center position in game world coordinates
 		/// </summary>
-		public Vector2 Position { get { return position; } }
+		public Vector2 Position {
+			get { return position; }
+			set {
+				position = value;
+			}
+		}
 
 		/// <summary>
 		/// Get sprite's center X position

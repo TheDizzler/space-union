@@ -87,7 +87,7 @@ namespace SpaceUnion.Animations {
 						isReverse = true;
 				} else
 					if (--frameIndex < 0)
-						isDead = true; // should get cleaned up here
+						isExhausted = true; // should get cleaned up here
 
 			}
 		}

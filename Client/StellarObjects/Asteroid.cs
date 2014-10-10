@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceUnion.Tools;
+using SpaceUnion.Weapons;
 
 
 namespace SpaceUnion.StellarObjects {
@@ -12,14 +13,14 @@ namespace SpaceUnion.StellarObjects {
 	/// <summary>
 	/// 
 	/// </summary>
-	class Asteroid : Tangible, Tactile { // Tactile isn't fully implemented. It is just being used as a test case and example.
+	public class Asteroid : Tangible {
 
 		//private List<HitBox> boxList = new List<HitBox>();
 
 		public List<HitBox> hitBoxes { get; set; }
 		public int health { get; set; }
 
-		public Vector2 velocity;
+		
 
 		public Asteroid(Texture2D tex, Vector2 pos)
 			: base(tex, pos) {
@@ -32,33 +33,40 @@ namespace SpaceUnion.StellarObjects {
 			velocity = new Vector2((float) (Math.Sin(direction)* speed), (float) (-Math.Cos(direction)*speed));
 		}
 
-		public void update(GameTime gameTime, List<Tangible> targets) {
+		public void update(GameTime gameTime, List<Tangible> tangibles) {
 
 			// move in a straight line
 			position += velocity;
 
 			base.update(position);
+			checkWorldEdge();
+
+			checkForCollision(tangibles);
 		}
 
 
 		
-
-		public HitBox createHitBox(float x, float y, int w, int h) {
-
-			return new HitBox(x, y, width, height);
+		public override void destroy() {
+			isActive = false;
+			explosionEngine.createExplosion(position);
 		}
 
-		public void updateHitBox(Vector2 amountMoved) {
-			foreach (HitBox hitBox in hitBoxes) {
 
+		public override void collide(Tangible target) {
 
-			}
+			if (target is Projectile)
+				target.collide(this);
+			else if (target is Ship)
+				collisionHandler.shipOnAsteroid((Ship) target, this);
+			else if (target is Asteroid)
+				collisionHandler.asteroidOnAsteroid(this, (Asteroid) target);
+			else if (target is Planet)
+				collisionHandler.asteroidOnPlanet(this, (Planet) target);
+			else
+				throw new NotImplementedException();
 		}
 
-		public void destroy() {
-			
-
-		}
+		
 
 	}
 }

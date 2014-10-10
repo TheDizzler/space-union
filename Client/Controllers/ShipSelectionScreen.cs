@@ -95,7 +95,7 @@ namespace SpaceUnion.Controllers {
 			/* Allows for feedback of selecting a ship and sets the selected ship */
 			for (int i = 0; i < SHIPCOUNT; i++) {
 				for (int j = 0; j < SHIPCOUNT; j++) {
-					/* Due to how GeneralButton works, at most 2 ships will be selected
+					/* Due to how BaseButton works, at most 2 ships will be selected
 					 * which results in this logic to compensate for that fact 
 					 */
 					if (shipSelectionArray[i].selected && shipSelectionArray[j].selected && i != j) {

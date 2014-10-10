@@ -28,7 +28,7 @@ namespace SpaceUnion.Tools {
 		/// Cover a ship in little explosions.
 		/// </summary>
 		/// <param name="ship"></param>
-		public void createExplosions(Ship ship) {
+		public void explodeShip(Ship ship) {
 
 			// generate an explosion in a random spot on ship
 			Vector2 location = new Vector2(ship.getX() + gen.Next(ship.width) - ship.width / 2,
@@ -55,7 +55,7 @@ namespace SpaceUnion.Tools {
 
 			for (int i = 0; i < explosions.Count; ++i) {
 				explosions[i].update(gameTime);
-				if (explosions[i].isDead)
+				if (explosions[i].isExhausted)
 					explosions.RemoveAt(i);
 			}
 		}
@@ -64,6 +64,14 @@ namespace SpaceUnion.Tools {
 
 			foreach (Explosion explosion in explosions)
 				explosion.draw(spriteBatch);
+		}
+
+		/// <summary>
+		/// A simple big explosion. Suitable for larger missile weapons and asteroids.
+		/// </summary>
+		/// <param name="location"></param>
+		public void createExplosion(Vector2 location) {
+			explosions.Add(new BigExplosion(assets.explosionsBig, location));
 		}
 
 	}

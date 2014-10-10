@@ -11,7 +11,7 @@ namespace SpaceUnion.Animations {
 
 	public abstract class Explosion : Sprite {
 
-		public bool isDead = false;
+		public bool isExhausted = false;
 
 		public static String Fireball1 = "Fireball 1";
 		public static String Fireball2 = "Fireball 2";

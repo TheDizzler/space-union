@@ -11,13 +11,6 @@ namespace SpaceUnion.Animations {
 	class BigExplosion : Explosion {
 
 
-		public BigExplosion(Texture2D explosions, Vector2 location)
-			: base(explosions, location) {
-
-			initialize();
-
-		}
-
 		public BigExplosion(Texture2D explosions, Vector2 location, float scaleAnimation = 1)
 			: base(explosions, location) {
 
@@ -67,7 +60,7 @@ namespace SpaceUnion.Animations {
 						animation = BigFireball2;
 						frameIndex = 0;
 					} else
-						isDead = true;
+						isExhausted = true;
 
 				}
 			}

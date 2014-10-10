@@ -53,8 +53,8 @@ namespace SpaceUnion.Controllers {
 			Assets = Game1.Assets;
 
 			playerShip = selectedship;
-
-			planet = new Planet(Assets.waterPlanet, new Vector2(1000, 1000));
+			playerShip.Position = new Vector2(200, 200);
+			planet = new Planet(Assets.waterPlanet, new Vector2(1000, 1000), 500f, 1000);
 
 
 
@@ -152,7 +152,7 @@ namespace SpaceUnion.Controllers {
 			if (keyState.IsKeyDown(Keys.LeftShift))
 				playerShip.altFire(gameTime);
 
-			planet.update(gameTime, ships);
+			planet.update(gameTime, targets);
 
 
 
@@ -167,10 +167,10 @@ namespace SpaceUnion.Controllers {
 			   new Vector2(mouseState.X, mouseState.Y), inverse);
 			*/
 
-			if (asteroids.Count < 50)
+			if (asteroids.Count < 10)
 				AddAsteroid(new Vector2(gen.Next(100, 4000), gen.Next(100, 2000)));
 
-			//UpdateDamageCollision(); // moved to Projectile class
+			
 			foreach (Ship ship in ships)
 				ship.update(gameTime, targets);
 			//gui.update();
@@ -180,36 +180,10 @@ namespace SpaceUnion.Controllers {
 				if (!asteroids[i].isActive)
 					asteroids.RemoveAt(i);
 			}
-			//UpdateAsteroids();
+			
 			Game1.explosionEngine.update(gameTime);
-
 		}
 
-
-		private void UpdateDamageCollision() {
-			// Use the Rectangle's built-in intersect function to 
-			// determine if two objects are overlapping
-			//foreach (Projectile p in projectiles) {
-			//	if (p.getProjectileHitBox().getArray().Intersects(playerShip.getShipHitBox().getArray())) {
-			//		playerShip.setHealth(-1);
-			//	}
-			//	foreach (Asteroid a in asteroids) {
-			//		if (p.getProjectileHitBox().getArray().Intersects(a.hitbox.getArray())) {
-			//			a.Active = false;
-			//		}
-			//	}
-			//}
-		}
-
-		// moved to Asteroid class
-		private void UpdateAsteroids() {
-			// Update the Projectiles
-			for (int i = asteroids.Count - 1; i >= 0; i--) {
-				if (asteroids[i].isActive == false) {
-					asteroids.RemoveAt(i);
-				}
-			}
-		}
 
 		public void draw() {
 
@@ -221,9 +195,9 @@ namespace SpaceUnion.Controllers {
 			drawWorld(); //Draws background
 
 
-
+			//Draws all space ships
 			foreach (Ship ship in ships)
-				ship.draw(spriteBatch); //Draws all space ships
+				ship.draw(spriteBatch);
 
 			planet.draw(spriteBatch);
 

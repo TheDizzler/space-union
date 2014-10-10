@@ -25,7 +25,25 @@ namespace SpaceUnion.Weapons {
 				(float) -Math.Cos(rotation) * projectileMoveSpeed);
 
 			velocity += ship.velocity;
+
+			projectileDamage = 5;
 		}
+
+		public override void collide(Tangible target) {
+
+			doDamage(target);
+		}
+
+		public override void destroy() {
+			throw new NotImplementedException();
+		}
+
+		public override void doDamage(Tangible target) {
+			
+			target.takeDamage(projectileDamage);
+		}
+
+		
 
 	}
 }

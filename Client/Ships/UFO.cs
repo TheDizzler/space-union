@@ -29,9 +29,7 @@ namespace SpaceUnion.Ships {
 		public override void update(GameTime gameTime, List<Tangible> targets) {
 
 			base.update(gameTime, targets);
-
 			shield.update(gameTime, position);
-			base.update(gameTime, targets);
 		}
 
 		public override void draw(SpriteBatch batch) {
@@ -50,6 +48,8 @@ namespace SpaceUnion.Ships {
 				shield.on = !shield.on;
 			}
 		}
+
+		
 
 	}
 }

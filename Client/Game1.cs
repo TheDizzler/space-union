@@ -28,6 +28,10 @@ namespace SpaceUnion {
 		/// An engine to create and manage all explosions, big and small
 		/// </summary>
 		public static ExplosionEngine explosionEngine;
+		/// <summary>
+		/// An engine to handle all collisions.
+		/// </summary>
+		public static CollisionHandler collisionHandler;
 
 		GameplayScreen gameplayScreen;
 		MainMenuScreen mainMenuScreen;
@@ -58,8 +62,11 @@ namespace SpaceUnion {
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
 
+			graphics.PreferredBackBufferWidth = 1024;
+			graphics.PreferredBackBufferHeight = 768;
+			
 			IsFixedTimeStep = false;
-
+			
 			Assets = new AssetManager(Content);
 		}
 
@@ -72,6 +79,8 @@ namespace SpaceUnion {
 		/// </summary>
 		protected override void Initialize() {
 			base.Initialize();
+			graphics.IsFullScreen = true;
+			graphics.ApplyChanges();
 		}
 
 		/// <summary>
@@ -84,14 +93,12 @@ namespace SpaceUnion {
 			// All sprites get loaded in to here
 			Assets.loadContent(GraphicsDevice);
 			explosionEngine = new ExplosionEngine(Assets);
+			collisionHandler = new CollisionHandler();
 			//Load Main Menu
 			mainMenuScreen = new MainMenuScreen(this);
 			shipselectionScreen = new ShipSelectionScreen(this);
 			IsMouseVisible = true;
-			//graphics.PreferredBackBufferWidth = SCREEN_WIDTH;
-			//graphics.PreferredBackBufferHeight = SCREEN_HEIGHT;
-
-			graphics.ApplyChanges();
+			
 
 			
 		}
