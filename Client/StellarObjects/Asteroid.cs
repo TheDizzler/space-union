@@ -39,6 +39,7 @@ namespace SpaceUnion.StellarObjects {
 			position += velocity;
 
 			base.update(position);
+
 			checkWorldEdge();
 
 			checkForCollision(tangibles);

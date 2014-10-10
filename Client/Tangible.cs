@@ -25,7 +25,7 @@ namespace SpaceUnion {
 		/// </summary>
 		public bool isActive { get; set; }
 
-		protected HitBox hitBox;
+		private HitBox hitBox;
 		//Return Hitbox for collision detection
 		public HitBox getHitBox() {
 			return hitBox;
@@ -83,7 +83,6 @@ namespace SpaceUnion {
 			foreach (Tangible target in targets)
 				if (target != this && target.isActive)
 					if (getHitBox().getArray().Intersects(target.getHitBox().getArray()))
-						//collisionHandler.addCollision(this, target);
 						collide(target);
 
 		}

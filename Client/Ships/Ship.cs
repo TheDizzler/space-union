@@ -14,7 +14,6 @@ namespace SpaceUnion {
 
 	/// <summary>
 	/// Base abstract ship class.
-	/// CURRENTLY NOT ABSTRACT FOR TESTING
 	/// </summary>
 	public abstract class Ship : Tangible {
 
@@ -64,7 +63,7 @@ namespace SpaceUnion {
 		/// <summary>
 		/// Location on sprite where weapon appears from
 		/// </summary>
-		protected Vector2 weaponOrigin;
+		protected Vector2 weaponOrigin = Vector2.Zero;
 
 		/// <summary>
 		/// Ship constructor
@@ -82,7 +81,7 @@ namespace SpaceUnion {
 
 			projectiles = new List<Projectile>();
 
-			weaponOrigin = new Vector2(position.X + width / 2, position.Y + height / 2); // start position of weapon
+
 		}
 
 		//public abstract void setup();
@@ -98,7 +97,7 @@ namespace SpaceUnion {
 			for (int i = projectiles.Count - 1; i >= 0; i--) {
 				projectiles[i].update(gameTime, targets);
 
-				if (projectiles[i].isActive == false) {
+				if (!projectiles[i].isActive) {
 					projectiles.RemoveAt(i);
 				}
 			}

@@ -45,23 +45,15 @@ namespace SpaceUnion.Weapons {
 
 			owner = ship;
 			rotation = (float) ship.getRotation();
-			//projectileHitBox = new HitBox(position.X, position.Y, texture.Width, texture.Height);
 
-			//velocity = new Vector2((float) Math.Sin(rotation) * projectileMoveSpeed,
-			//	(float) -Math.Cos(rotation) * projectileMoveSpeed);
-
-
-			//active = true;
 			timeActive = 0;
-
-			initialize(ship); // runs before parent class constructor -- may need to move this
 		}
 
 		/// <summary>
 		/// Set up unique attributes of projectile here
 		/// (example: projectileTTL, projectileMoveSpeed, projectileDamage, velocity)
 		/// </summary>
-		protected abstract void initialize(Ship ship);
+		//protected abstract void initialize(Ship ship);
 
 
 		public void update(GameTime gameTime, List<Tangible> targets) {
@@ -69,8 +61,8 @@ namespace SpaceUnion.Weapons {
 			timeActive += (float) gameTime.ElapsedGameTime.TotalSeconds;
 			if (projectileTTL > timeActive) {
 
-				position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
-				hitBox.updatePosition(position); // do projectiles need hitboxes?
+				position += velocity * (float) gameTime.ElapsedGameTime.TotalMilliseconds;
+				base.update(position);
 
 				checkForCollision(targets);
 			} else {
