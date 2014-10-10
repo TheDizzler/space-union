@@ -42,10 +42,11 @@
   <ItemGroup>
     <Compile Include="ClientCommHandler.cs" />
     <Compile Include="ClientConstants.cs" />
+    <Compile Include="ClientHandlerHelper.cs" />
+    <Compile Include="ClientMessageReceiving.cs" />
+    <Compile Include="ClientMessageTransmission.cs" />
     <Compile Include="ClientDataReceiving.cs" />
     <Compile Include="ClientDataTransmission.cs" />
-    <Compile Include="ClientGameDataReceiving.cs" />
-    <Compile Include="ClientGameDataTransmission.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

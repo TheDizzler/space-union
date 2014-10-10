@@ -5,25 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using Data_Structures;
 using Data_Manipulation;
-using System.Net;
-using System.Net.Sockets;
-using System.Threading;
 
 namespace Client_Comm_Module
 {
     public class ClientCommHandler
     {
-        private ClientDataReceiving receiver;
-        private ClientDataTransmission sender;
-        private GameData[] gameDataPlayers = new GameData[ClientConstants.NumberOfPlayers];
+        private ClientMessageReceiving receiver;
+        private ClientMessageTransmission sender;
+        
+        private ClientDataReceiving dataReceiver;
+        private ClientDataTransmission dataSender;
+
+        private ClientHandlerHelper helper;
 
         public ClientCommHandler()
         {
-            receiver = new ClientDataReceiving();
-            sender = new ClientDataTransmission();
-            for (int x = 0; x < ClientConstants.NumberOfPlayers; x++)
-                gameDataPlayers[x] = null;
-            new Thread(updatePlayerList).Start();
+            receiver = new ClientMessageReceiving();
+            sender = new ClientMessageTransmission();
+            helper = new ClientHandlerHelper(getGameData);
+
+            receiver.gameStart += new ClientMessageReceiving.GameStartEventHandler(initializeDataTransmission);
         }
 
         /// <summary>
@@ -42,43 +43,17 @@ namespace Client_Comm_Module
         /// <returns>Gets an array of data about the positions of the other players.</returns>
         public GameData[] getPlayersData()
         {
-            return gameDataPlayers;
+            return helper.getPlayersData();
         }
 
         /// <summary>
-        /// Updates the array of players with the most current data.
+        /// Called when a GameSetupMessage is received.
         /// </summary>
-        private void updatePlayerList()
+        /// <param name="setupMessage">The received setup message.</param>
+        private void initializeDataTransmission(GameSetupMessage setupMessage)
         {
-            while (true)
-            {
-                GameData player = receiver.getGameData();
-                if (player == null)
-                {
-                    Thread.Sleep(1);
-                    continue;
-                }
-                Console.WriteLine(receiver.getGameDataQueueSize());
-                for (int x = 0; x < ClientConstants.NumberOfPlayers; x++)
-                {
-                    if (gameDataPlayers[x] == null)
-                    {
-                        for (int y = 0; y < ClientConstants.NumberOfPlayers; y++)
-                        {
-                            if (gameDataPlayers[y] != null && gameDataPlayers[y].Player.Username == player.Player.Username)
-                            {
-                                gameDataPlayers[y] = player;
-                                break;
-                            }
-                        }
-                    }
-                    if (player.Player.Username == gameDataPlayers[x].Player.Username)
-                    {
-                        gameDataPlayers[x] = player;
-                        break;
-                    }
-                }
-            }
+            dataReceiver = new ClientDataReceiving(setupMessage.IncomingPort);
+            dataSender = new ClientDataTransmission(setupMessage.OutgoingPort);
         }
 
         // SEND FUNCTIONS --------------------------------------------------
@@ -120,7 +95,7 @@ namespace Client_Comm_Module
         public void sendGameData(GameData data)
         {
             if (data != null)
-                sender.addMessageToQueue(data);
+                dataSender.addDataToQueue(data);
         }
 
         // GET FUNCTIONS ----------------------------------------------------
@@ -129,9 +104,9 @@ namespace Client_Comm_Module
         /// Fetch a game data received from the server.
         /// </summary>
         /// <returns>Game data received from the server.</returns>
-        public GameData getGameData()
+        private GameData getGameData()
         {
-            return receiver.getGameData();
+            return dataReceiver.getGameData();
         }
 
         /// <summary>
@@ -147,25 +122,9 @@ namespace Client_Comm_Module
         /// Gets the current IP address.
         /// </summary>
         /// <returns>Returns the current IP address.</returns>
-        public static string getLocalIPv4Address()
+        public string getLocalIPv4Address()
         {
-            IPHostEntry host = null;
-            try
-            {
-                host = Dns.GetHostEntry(Dns.GetHostName());
-            }
-            catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return null; }
-            catch (ArgumentOutOfRangeException e) { Console.WriteLine(e.ToString()); return null; }
-            catch (ArgumentException e) { Console.WriteLine(e.ToString()); return null; }
-            catch (SocketException e) { Console.WriteLine(e.ToString()); return null; }
-            foreach (IPAddress ipv4 in host.AddressList)
-            {
-                if (ipv4.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    return ipv4.ToString();
-                }
-            }
-            return null;
+            return helper.getLocalIPv4Address();
         }
     }
 }

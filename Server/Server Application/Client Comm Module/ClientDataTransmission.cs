@@ -11,31 +11,24 @@ using Data_Manipulation;
 
 namespace Client_Comm_Module
 {
-    class ClientDataTransmission
+    class ClientDataTransmission : IDisposable
     {
+        private bool disposed = false;
+
         private List<GameData> dataQueue;
-        private List<GameMessage> messageQueue;
+
         private UdpClient UDPClient;
-        private TcpClient TCPClient;
-        private int assignedUDPPort_Send = 6964;
 
-        public ClientDataTransmission()
-        {
-            setup();
-        }
+        private int assignedUDPPort_Send;
 
-        /// <summary>
-        /// Set up the server by initializing the clients and message queues.
-        /// </summary>
-        private void setup()
+        public ClientDataTransmission(int assignedPort)
         {
             UDPClient = new UdpClient(assignedUDPPort_Send);
-            TCPClient = new TcpClient();
+            assignedUDPPort_Send = assignedPort;
             dataQueue = new List<GameData>();
-            messageQueue = new List<GameMessage>();
+
             try
             {
-                new Thread(sendChatMessages).Start();
                 new Thread(sendGameData).Start();
             }
             catch (ThreadStateException e) { Console.WriteLine("Client has crashed." + e.ToString()); return; }
@@ -53,61 +46,18 @@ namespace Client_Comm_Module
         }
 
         /// <summary>
-        /// Send a login request to the server.
-        /// </summary>
-        /// <param name="playerData">Player data containing player information.</param>
-        public void sendLoginRequest(Player playerData)
-        {
-            DataControl.sendTCPData(TCPClient, playerData, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCPLoginListener);
-        }
-
-        /// <summary>
-        /// Send a registration request to the server.
-        /// </summary>
-        /// <param name="data">Registration data containing player information.</param>
-        public void sendRegistrationInfo(RegistrationData data)
-        {
-            DataControl.sendTCPData(TCPClient, data, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCPLoginListener);
-        }
-
-        /// <summary>
         /// Add the given message to the appropriate queue.
         /// </summary>
         /// <param name="message">The message to add to a queue.</param>
-        public void addMessageToQueue(Data message)
+        public void addDataToQueue(Data message)
         {
             if (message == null)
                 return;
             try
             {
-                switch (message.Type)
-                {
-                    case Constants.GAME_DATA:
-                        dataQueue.Add((GameData)message);
-                        break;
-                    case Constants.CHAT_MESSAGE:
-                        messageQueue.Add((GameMessage)message);
-                        break;
-                }
+                dataQueue.Add((GameData)message);
             }
             catch (InvalidCastException e) { Console.WriteLine(e.ToString()); return; }
-        }
-
-        /// <summary>
-        /// Sends a chat message to the server.
-        /// </summary>
-        private void sendChatMessages()
-        {
-            while (true)
-            {
-                GameMessage message = (GameMessage)removeFromQueue(Constants.CHAT_MESSAGE);
-                if (message == null)
-                {
-                    Thread.Sleep(ClientConstants.CHAT_SEND_INTERVAL);
-                    continue;
-                }
-                DataControl.sendTCPData(TCPClient, message, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCPMessageListener);
-            }
         }
 
         /// <summary>
@@ -117,7 +67,7 @@ namespace Client_Comm_Module
         {
             while (true)
             {
-                GameData data = (GameData)removeFromQueue(Constants.GAME_DATA);
+                GameData data = removeDataFromQueue();
                 if (data == null)
                 {
                     Thread.Sleep(ClientConstants.DATA_SEND_INTERVAL);
@@ -125,36 +75,6 @@ namespace Client_Comm_Module
                 }
                 DataControl.sendUDPData(UDPClient, data, ClientConstants.SERVER_IPADDRESS, assignedUDPPort_Send);
             }
-        }
-
-        /// <summary>
-        /// Gets the oldest message from a queue based on the type of message.
-        /// </summary>
-        /// <param name="type">The type of message to get.</param>
-        /// <returns>The oldest message in the queue.</returns>
-        private Data removeFromQueue(byte type)
-        {
-            switch (type)
-            {
-                case Constants.CHAT_MESSAGE:
-                    return removeMessageFromQueue();
-                case Constants.GAME_DATA:
-                    return removeDataFromQueue();
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// Returns the oldest chat message in the queue.
-        /// </summary>
-        /// <returns>The oldest message awaiting transfer.</returns>
-        private GameMessage removeMessageFromQueue()
-        {
-            if (messageQueue.Count == 0)
-                return null;
-            GameMessage message = messageQueue.ElementAt(0);
-            messageQueue.RemoveAt(0);
-            return message;
         }
 
         /// <summary>
@@ -168,6 +88,25 @@ namespace Client_Comm_Module
             GameData data = dataQueue.ElementAt(0);
             dataQueue.RemoveAt(0);
             return data;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                // clean up here
+            }
+
+            disposed = true;
         }
     }
 }
