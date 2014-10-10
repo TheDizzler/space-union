@@ -12,7 +12,13 @@ namespace SpaceUnion.StellarObjects {
 
 	public class Planet : LargeMassObject {
 
-
+		/// <summary>
+		/// Damage given from collision
+		/// </summary>
+		private int damage = 20;
+		public int collisionDamage {
+			get { return damage; }
+		}
 
 		/// <summary>
 		/// 
@@ -33,11 +39,11 @@ namespace SpaceUnion.StellarObjects {
 			if (target is Projectile)
 				target.collide(this, gameTime);
 			else if (target is Ship)
-				collisionHandler.shipOnPlanet((Ship) target, this);
+				collisionHandler.shipOnPlanet((Ship) target, this, gameTime);
 			else if (target is Asteroid)
-				collisionHandler.asteroidOnPlanet((Asteroid) target, this);
+				collisionHandler.asteroidOnPlanet((Asteroid) target, this, gameTime);
 			else if (target is Planet)
-				collisionHandler.planetOnPlanet(this, (Planet) target);
+				collisionHandler.planetOnPlanet(this, (Planet) target, gameTime);
 			else
 				throw new NotImplementedException();
 		}

@@ -18,8 +18,8 @@ namespace SpaceUnion.StellarObjects {
 		/// <summary>
 		/// Damage given from collision
 		/// </summary>
-		private int damage = -20;
-		public int Damage {
+		private int damage = 5;
+		public int collisionDamage {
 			get { return damage; }
 		}
 
@@ -31,7 +31,7 @@ namespace SpaceUnion.StellarObjects {
 			int speed = r.Next(20); // speed
 			velocity = new Vector2((float) (Math.Sin(direction) * speed), (float) (-Math.Cos(direction) * speed));
 
-			currentHealth = maxHealth = 10;
+			currentHealth = maxHealth = 1;
 		}
 
 		public void update(GameTime gameTime, List<Tangible> tangibles) {
@@ -59,11 +59,11 @@ namespace SpaceUnion.StellarObjects {
 			if (target is Projectile)
 				target.collide(this, gameTime);
 			else if (target is Ship)
-				collisionHandler.shipOnAsteroid((Ship) target, this);
+				collisionHandler.shipOnAsteroid((Ship) target, this, gameTime);
 			else if (target is Asteroid)
-				collisionHandler.asteroidOnAsteroid(this, (Asteroid) target);
+				collisionHandler.asteroidOnAsteroid(this, (Asteroid) target, gameTime);
 			else if (target is Planet)
-				collisionHandler.asteroidOnPlanet(this, (Planet) target);
+				collisionHandler.asteroidOnPlanet(this, (Planet) target, gameTime);
 			else
 				throw new NotImplementedException();
 		}

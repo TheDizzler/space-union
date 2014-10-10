@@ -8,7 +8,7 @@ namespace SpaceUnion.Tools {
 
 		private const float zoomUpperLimit = 1.5f;
 		private const float zoomLowerLimit = .1f;
-		private const float zoomIncrement = .05f;
+		private const float zoomIncrement = .025f;
 		private float previousScroll = 0f;
 
 		private float zoomRatio;

@@ -23,6 +23,31 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		protected Vector2 position;
 		/// <summary>
+		/// Get sprites center position in game world coordinates
+		/// </summary>
+		public Vector2 Position {
+			get { return position; }
+			set {
+				position = value;
+			}
+		}
+		/// <summary>
+		/// Get sprite's center X position
+		/// </summary>
+		/// <returns></returns>
+		public float getX() {
+
+			return position.X;
+		}
+		/// <summary>
+		/// Get sprite's center Y position
+		/// </summary>
+		/// <returns></returns>
+		public float getY() {
+
+			return position.Y;
+		}
+		/// <summary>
 		/// The center point of the sprite
 		/// </summary>
 		public Vector2 origin;
@@ -58,33 +83,6 @@ namespace SpaceUnion.Tools {
 			set { frameLength = (1f / value); }
 		}
 		/* End of animations */
-
-		/// <summary>
-		/// Get sprites center position in game world coordinates
-		/// </summary>
-		public Vector2 Position {
-			get { return position; }
-			set {
-				position = value;
-			}
-		}
-
-		/// <summary>
-		/// Get sprite's center X position
-		/// </summary>
-		/// <returns></returns>
-		public float getX() {
-
-			return position.X;
-		}
-		/// <summary>
-		/// Get sprite's center Y position
-		/// </summary>
-		/// <returns></returns>
-		public float getY() {
-
-			return position.Y;
-		}
 
 
 		/// <summary>

@@ -22,7 +22,7 @@ namespace SpaceUnion.Ships {
 			altFireDelay = TimeSpan.FromSeconds(1f);
 			shield = new Shield(assets.shield, position);
 
-			//weaponOrigin = new Vector2(position.X, position.Y - height / 2); // start position of weapon
+			weaponOrigin = new Vector2(position.X, position.Y - height / 2); // start position of weapon
 
 		}
 

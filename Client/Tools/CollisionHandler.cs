@@ -20,7 +20,7 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		/// <param name="ship1"></param>
 		/// <param name="ship2"></param>
-		public void shipOnShip(Ship ship1, Ship ship2) {
+		public void shipOnShip(Ship ship1, Ship ship2, GameTime gameTime) {
 
 			throw new NotImplementedException();
 		}
@@ -30,8 +30,10 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		/// <param name="ship"></param>
 		/// <param name="planet"></param>
-		public void shipOnPlanet(Ship ship, Planet planet) {
-			throw new NotImplementedException();
+		public void shipOnPlanet(Ship ship, Planet planet, GameTime gameTime) {
+			
+			ship.takeDamage(planet.collisionDamage,gameTime);
+			ship.bounce(planet.Position);
 		}
 
 		/// <summary>
@@ -39,8 +41,9 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		/// <param name="ship"></param>
 		/// <param name="asteroid"></param>
-		public void shipOnAsteroid(Ship ship, Asteroid asteroid) {
-			//throw new NotImplementedException();
+		public void shipOnAsteroid(Ship ship, Asteroid asteroid, GameTime gameTime) {
+			ship.takeDamage(asteroid.collisionDamage, gameTime);
+			asteroid.takeDamage(asteroid.collisionDamage, gameTime);
 		}
 
 		/// <summary>
@@ -48,7 +51,7 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		/// <param name="asteroid1"></param>
 		/// <param name="asteroid2"></param>
-		public void asteroidOnAsteroid(Asteroid asteroid1, Asteroid asteroid2) {
+		public void asteroidOnAsteroid(Asteroid asteroid1, Asteroid asteroid2, GameTime gameTime) {
 			//throw new NotImplementedException();
 		}
 
@@ -57,7 +60,7 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		/// <param name="asteroid"></param>
 		/// <param name="planet"></param>
-		public void asteroidOnPlanet(Asteroid asteroid, Planet planet) {
+		public void asteroidOnPlanet(Asteroid asteroid, Planet planet, GameTime gameTime) {
 			
 			asteroid.destroy();
 		}
@@ -67,7 +70,7 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		/// <param name="planet1"></param>
 		/// <param name="planet2"></param>
-		public void planetOnPlanet(Planet planet1, Planet planet2) {
+		public void planetOnPlanet(Planet planet1, Planet planet2, GameTime gameTime) {
 			throw new NotImplementedException();
 		}
 

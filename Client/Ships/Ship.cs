@@ -94,6 +94,8 @@ namespace SpaceUnion {
 			base.update(position);
 			checkWorldEdge();
 
+			
+			
 			// Update the Projectiles
 			for (int i = projectiles.Count - 1; i >= 0; i--) {
 				projectiles[i].update(gameTime, targets);
@@ -126,11 +128,11 @@ namespace SpaceUnion {
 			if (target is Projectile)
 				target.collide(this, gameTime); // the projectile can handle it from here
 			else if (target is Ship)
-				collisionHandler.shipOnShip(this, (Ship) target);
+				collisionHandler.shipOnShip(this, (Ship) target, gameTime);
 			else if (target is Asteroid)
-				collisionHandler.shipOnAsteroid(this, (Asteroid) target);
+				collisionHandler.shipOnAsteroid(this, (Asteroid) target, gameTime);
 			else if (target is Planet)
-				collisionHandler.shipOnPlanet(this, (Planet) target);
+				collisionHandler.shipOnPlanet(this, (Planet) target, gameTime);
 			else
 				throw new NotImplementedException();
 		}
@@ -149,7 +151,14 @@ namespace SpaceUnion {
 
 		}
 
+		/// <summary>
+		/// Main weapon
+		/// </summary>
+		/// <param name="gameTime"></param>
 		public virtual void fire(GameTime gameTime) {
+
+			
+			
 
 			// Fire only every interval we set as the fireTime
 			if (gameTime.TotalGameTime - previousMainFireTime > mainFireDelay) {
@@ -161,6 +170,10 @@ namespace SpaceUnion {
 			}
 		}
 
+		/// <summary>
+		/// Alternate Weapon
+		/// </summary>
+		/// <param name="gameTime"></param>
 		public abstract void altFire(GameTime gameTime);
 
 		public override void destroy() {
@@ -182,11 +195,19 @@ namespace SpaceUnion {
 		/// </summary>
 		/// <param name="gameTime"></param>
 		public virtual void rotateLeft(GameTime gameTime) {
+
+			float oldRotatation = rotation;
 			if (rotation > 6.283185 || rotation < -6.283185) {
 				rotation = rotation % 6.283185f;
 			}
 			// rotates ship by an amount weighted by the amount time that has passed since last update
 			rotation -= turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+
+
+			Matrix transform = Matrix.CreateTranslation(-origin.X, -origin.Y, 0)
+				* Matrix.CreateRotationZ(rotation - oldRotatation)
+				* Matrix.CreateTranslation(origin.X, origin.Y, 0);
+			Vector2.TransformNormal(ref weaponOrigin, ref transform, out weaponOrigin);
 		}
 
 		/// <summary>
@@ -195,10 +216,18 @@ namespace SpaceUnion {
 		/// </summary>
 		/// <param name="gameTime"></param>
 		public virtual void rotateRight(GameTime gameTime) {
+
+			float oldRotatation = rotation;
 			if (rotation > 6.283185 || rotation < -6.283185) {
 				rotation = rotation % 6.283185f;
 			}
 			rotation += turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+
+
+			Matrix transform = Matrix.CreateTranslation(-origin.X, -origin.Y, 0)
+				* Matrix.CreateRotationZ(rotation - oldRotatation)
+				* Matrix.CreateTranslation(origin.X, origin.Y, 0);
+			Vector2.TransformNormal(ref weaponOrigin, ref transform, out weaponOrigin);
 		}
 
 		//Debugging Ship Brake
@@ -208,5 +237,17 @@ namespace SpaceUnion {
 
 			explode();
 		}
+
+		/// <summary>
+		/// Sudden momentum change, probbly after a collision with a bigger object.
+		/// 
+		/// </summary>
+		public void bounce(Vector2 actorPos) {
+			//Vector2.Reflect(ref velocity, ref actorPos, out velocity);
+		}
+
+
+
+
 	}
 }
