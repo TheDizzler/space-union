@@ -22,7 +22,5 @@ namespace Data_Structures
         {
             Type = 4;
         }
-
-        public GameSetupMessage(byte type) : base(type) { }
     }
 }

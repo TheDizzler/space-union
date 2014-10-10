@@ -20,6 +20,10 @@ namespace Server_Application
     class DataReceiving
     {
         /// <summary>
+        /// The Server class which initiates this class.
+        /// </summary>
+        Server owner;
+        /// <summary>
         /// Listens to data from clients (1 for each client)
         /// </summary>
         UdpClient[] UDPListeners = new UdpClient[Constants.NumberOfUdpClients];
@@ -29,11 +33,6 @@ namespace Server_Application
         /// listeners[1] for chat messages. 
         /// </summary>
         TcpListener[] TCPListeners = new TcpListener[Constants.NumberOfTcpClients];
-
-        // Temporary.
-        Object ownerLock = new Object();
-
-        Server owner;
 
         public DataReceiving(Server owner)
         {
@@ -47,10 +46,11 @@ namespace Server_Application
         private void setup()
         {
             for (int x = 0; x < Constants.NumberOfUdpClients; x++)
-                UDPListeners[x] = new UdpClient(Constants.UDPInPortOne + x);
-            for (int x = 0; x < Constants.NumberOfTcpClients; x++)
-                TCPListeners[x] = new TcpListener(IPAddress.Parse("0.0.0.0"), 6980 + x);
-            for (int x = 0; x < Constants.NumberOfTcpClients; x++)
+                UDPListeners[x] = new UdpClient(Constants.UDPClientToServerPort + x);
+            //Number of TCP clients - 1 because it created an error listener which wasn't being used.
+            for (int x = 0; x < Constants.NumberOfTcpClients - 1; x++)
+                TCPListeners[x] = new TcpListener(IPAddress.Parse("0.0.0.0"), Constants.TCPLoginListener + x);
+            for (int x = 0; x < Constants.NumberOfTcpClients - 1; x++)
                 TCPListeners[x].Start();
             for (int x = 0; x < Constants.NumberOfUdpClients; x++)
                 new Thread(receiveClientData).Start(UDPListeners[x]);
@@ -66,7 +66,7 @@ namespace Server_Application
         {
             while (true)
             {
-                Object loginData = DataControl.receiveTCPData(TCPListeners[0]);
+                Player loginData = (Player)DataControl.receiveTCPData(TCPListeners[0]);
                 new Thread(unused => LoginRequests.handleLoginRequest(loginData, owner)).Start();
             }
         }
@@ -79,12 +79,8 @@ namespace Server_Application
         {
             while (true)
             {   
-                Object chatData = DataControl.receiveTCPData(TCPListeners[1]);
-                Console.WriteLine("Message = " + ((GameMessage)chatData).Username);
-                lock (ownerLock)
-                {
-                    owner.addMessageToQueue((GameMessage)chatData);
-                }
+                GameMessage chatData = (GameMessage)DataControl.receiveTCPData(TCPListeners[1]);
+                owner.addMessageToQueue(chatData);
             }
         }
 
@@ -97,11 +93,8 @@ namespace Server_Application
         {
             while (true)
             {
-                Object clientData = DataControl.receiveUDPData((UdpClient)UDPListener);
-                lock (ownerLock)
-                {
-                    owner.addMessageToQueue((GameData)clientData);
-                }
+                GameData clientData = (GameData)DataControl.receiveUDPData((UdpClient)UDPListener);
+                owner.addMessageToQueue(clientData);
             }
         }
     }

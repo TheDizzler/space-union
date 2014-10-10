@@ -19,19 +19,37 @@ namespace Data_Manipulation
         /// </summary>
         public const int NumberOfTcpClients = 3;
         /// <summary>
+        /// The first UDP port which listens to incoming data.
+        /// </summary>
+        public const int UDPClientToServerPort = 6940;
+        /// <summary>
+        /// The first UDP port which sends data.
+        /// </summary>
+        public const int UDPServerToClientPort = 6960;
+        /// <summary>
         /// The port used by the TCP login request client to send data to a game client.
         /// </summary>
-        public const int TCPLoginClient = 6989;
+        public const int TCPLoginListener = 6980;
         /// <summary>
         /// The port used by the TCP chat message client to send data to a game client.
         /// </summary>
-        public const int TCPMessageClient = 6990;
+        public const int TCPMessageListener = 6981;
         /// <summary>
         /// The port used by the TCP error message client to send data to a game client.
         /// </summary>
-        public const int TCPErrorClient = 6991;
-        public const int UDPOutPortOne = 6944;
-        public const int UDPInPortOne = 6964;
+        public const int TCPErrorListener = 6982;
+        /// <summary>
+        /// The port used by the TCP login request client to send data to a game client.
+        /// </summary>
+        public const int TCPLoginClient = 6983;
+        /// <summary>
+        /// The port used by the TCP chat message client to send data to a game client.
+        /// </summary>
+        public const int TCPMessageClient = 6984;
+        /// <summary>
+        /// The port used by the TCP error message client to send data to a game client.
+        /// </summary>
+        public const int TCPErrorClient = 6985;
         /// <summary>
         /// Login request data = 0.
         /// </summary>

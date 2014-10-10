@@ -15,39 +15,18 @@ namespace Data_Structures
     [Serializable]
     public class GameData : Data
     {
-        /// <summary>
-        /// The username of the player.
-        /// </summary>
-        public string Username { get; set; }
 
-        /// <summary>
-        /// The game room in which the current player is located.
-        /// </summary>
-        public int GameRoom { get; set; }
-
-        /// <summary>
-        /// The IP address of the player sending this transmission.
-        /// </summary>
-        public string IP { get; set; }
-
-        /// <summary>
-        /// The port from which the player is sending this transmission.
-        /// </summary>
-        public short PortSend { get; set; }
-        /// <summary>
-        /// The port from which the player is receiving this transmission.
-        /// </summary>
-        public short PortReceive { get; set; }
+        public Player Player { get; set; }
 
         /// <summary>
         /// The horizontal X position of the player's ship.
         /// </summary>
-        public short XPosition { get; set; }
+        public float XPosition { get; set; }
 
         /// <summary>
         /// The vertical Y position of the player's ship.
         /// </summary>
-        public short YPosition { get; set; }
+        public float YPosition { get; set; }
 
         /// <summary>
         /// The angle at which the player's ship is turned.
@@ -69,17 +48,16 @@ namespace Data_Structures
         /// </summary>
         public byte Deaths { get; set; }
 
+        /// <summary>
+        /// The time this packet was received. Used to time out players from the server.
+        /// </summary>
+        public DateTime Time { get; set; }
+
         //projectiles fired, direction, velocity
 
         public GameData()
         {
             Type = 1;
         }
-
-        /// <summary>
-        /// A constructor for this class, does not initiate any data.
-        /// </summary>
-        /// <param name="type">The type of the class, used to cast an object to this class.</param>
-        public GameData(byte type) : base(type) { }
     }
 }

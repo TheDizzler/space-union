@@ -23,15 +23,26 @@ namespace Data_Structures
         public string Password { get; set; }
 
         /// <summary>
+        /// The game room in which the current player is located.
+        /// </summary>
+        public int GameRoom { get; set; }
+
+        /// <summary>
         /// The IP address of the current player.
         /// </summary>
         public string IPAddress { get; set; }
+        /// <summary>
+        /// The port to which the client sends data.
+        /// </summary>
+        public int PortSend { get; set; }
+        /// <summary>
+        /// The port through which the client receives data.
+        /// </summary>
+        public int PortReceive { get; set; }
 
         public Player()
         {
             Type = 0;
         }
-
-        public Player(byte type) : base(type) {}
     }
 }

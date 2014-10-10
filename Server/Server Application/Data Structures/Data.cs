@@ -22,18 +22,6 @@ namespace Data_Structures
         /// </summary>
         public byte Type { get; set; }
 
-        public Data()
-        {
-
-        }
-
-        /// <summary>
-        /// Constructs a Data object.
-        /// </summary>
-        /// <param name="type">A variable used to define what class this is.</param>
-        public Data(byte type)
-        {
-            this.Type = type;
-        }
+        public Data() { }
     }
 }

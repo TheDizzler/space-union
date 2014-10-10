@@ -46,7 +46,7 @@ namespace Data_Manipulation
         /// <returns>Returns the data received from the specified port.</returns>
         public static object receiveUDPData(UdpClient client)
         {
-            IPEndPoint ip = new IPEndPoint(IPAddress.Parse("142.232.18.112"), 0);
+            IPEndPoint ip = new IPEndPoint(IPAddress.Any, 0);
             try            {
                 byte[] data = client.Receive(ref ip);
                 return bytesToObject(data);

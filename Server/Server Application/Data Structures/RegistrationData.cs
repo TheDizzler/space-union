@@ -28,7 +28,5 @@ namespace Data_Structures
         {
             Type = 5;
         }
-
-        public RegistrationData(byte type) : base(type) {}
     }
 }

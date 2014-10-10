@@ -22,6 +22,7 @@ namespace Data_Structures
             Type = 3;
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// A constructor for this class, does not initiate any data.
         /// </summary>
@@ -29,9 +30,13 @@ namespace Data_Structures
         public ErrorMessage(byte type) : base(type) { }
 
         public ErrorMessage(byte type, Player player, int messageCode) : base(type)
+=======
+        public ErrorMessage(Player player, string messageCode)
+>>>>>>> c97c36691afa2561947508443dc0f218a9411c96
         {
             Player = player;
             MessageCode = messageCode;
+            Type = 3;
         }
     }
 }

@@ -18,13 +18,11 @@ namespace Server_Application
         /// </summary>
         /// <param name="loginData">Login request data to process.</param>
         /// <param name="owner">The </param>
-        public static void handleLoginRequest(Object loginData, Server owner)
+        public static void handleLoginRequest(Player loginData, Server owner)
         {
-            Player playerData = (Player)loginData;
-
-            if (validateUserData(playerData, owner))
+            if (validateUserData(loginData, owner))
             {
-                owner.addOnlinePlayer(playerData);   
+                owner.addOnlinePlayer(loginData);
             }
         }
 
@@ -46,9 +44,6 @@ namespace Server_Application
                 ErrorMessage message = new ErrorMessage();
                 message.Player = playerData;
                 message.MessageCode = returnedErrorCode;
-                
-                owner.addMessageToQueue(message);
-                return false;
             }
 
             // call function that updates the user's online status in the database (for friend list).

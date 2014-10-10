@@ -65,6 +65,21 @@ namespace SpaceUnion {
             this.health = health;
         }
 
+        public void updateX(float xPos) 
+        {
+            position.X = xPos;
+        }
+
+        public void updateY(float yPos)
+        {
+            position.Y = yPos;
+        }
+
+        public void updateRotation(float angle)
+        {
+            rotation = angle;
+        }
+
 		/*
 		public float maxHealth;
 		public float currentHealth;

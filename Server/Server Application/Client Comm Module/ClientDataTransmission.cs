@@ -15,11 +15,9 @@ namespace Client_Comm_Module
     {
         private List<GameData> dataQueue;
         private List<GameMessage> messageQueue;
-
         private UdpClient UDPClient;
         private TcpClient TCPClient;
-
-        private int assignedUDPPort_Send;
+        private int assignedUDPPort_Send = 6964;
 
         public ClientDataTransmission()
         {
@@ -27,21 +25,22 @@ namespace Client_Comm_Module
         }
 
         /// <summary>
-        /// Send a login request to the server.
+        /// Set up the server by initializing the clients and message queues.
         /// </summary>
-        /// <param name="playerData">Player data containing player information.</param>
-        public void sendLoginRequest(Player playerData)
+        private void setup()
         {
-            DataControl.sendTCPData(TCPClient, playerData, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCP_PORT_SEND);
-        }
-
-        /// <summary>
-        /// Send a registration request to the server.
-        /// </summary>
-        /// <param name="data">Registration data containing player information.</param>
-        public void sendRegistrationInfo(RegistrationData data)
-        {
-            DataControl.sendTCPData(TCPClient, data, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCP_PORT_SEND);
+            UDPClient = new UdpClient(assignedUDPPort_Send);
+            TCPClient = new TcpClient();
+            dataQueue = new List<GameData>();
+            messageQueue = new List<GameMessage>();
+            try
+            {
+                new Thread(sendChatMessages).Start();
+                new Thread(sendGameData).Start();
+            }
+            catch (ThreadStateException e) { Console.WriteLine("Client has crashed." + e.ToString()); return; }
+            catch (OutOfMemoryException e) { Console.WriteLine("Client has crashed." + e.ToString()); return; }
+            catch (InvalidOperationException e) { Console.WriteLine("Client has crashed." + e.ToString()); return; }
         }
 
         /// <summary>
@@ -51,6 +50,24 @@ namespace Client_Comm_Module
         public void assignUDPPort_Send(int UDPPort)
         {
             assignedUDPPort_Send = UDPPort;
+        }
+
+        /// <summary>
+        /// Send a login request to the server.
+        /// </summary>
+        /// <param name="playerData">Player data containing player information.</param>
+        public void sendLoginRequest(Player playerData)
+        {
+            DataControl.sendTCPData(TCPClient, playerData, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCPLoginListener);
+        }
+
+        /// <summary>
+        /// Send a registration request to the server.
+        /// </summary>
+        /// <param name="data">Registration data containing player information.</param>
+        public void sendRegistrationInfo(RegistrationData data)
+        {
+            DataControl.sendTCPData(TCPClient, data, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCPLoginListener);
         }
 
         /// <summary>
@@ -77,29 +94,6 @@ namespace Client_Comm_Module
         }
 
         /// <summary>
-        /// Set up the server by initializing the clients and message queues.
-        /// </summary>
-        private void setup()
-        {
-            UDPClient = new UdpClient(assignedUDPPort_Send);
-
-            TCPClient = new TcpClient();
-
-            // Initialize the lists.
-            dataQueue = new List<GameData>();
-            messageQueue = new List<GameMessage>();
-
-            try
-            {
-                new Thread(sendChatMessages).Start();
-                new Thread(sendGameData).Start();
-            }
-            catch (ThreadStateException e) { Console.WriteLine("Client has crashed." + e.ToString()); return; }
-            catch (OutOfMemoryException e) { Console.WriteLine("Client has crashed." + e.ToString()); return; }
-            catch (InvalidOperationException e) { Console.WriteLine("Client has crashed." + e.ToString()); return; }
-        }
-
-        /// <summary>
         /// Sends a chat message to the server.
         /// </summary>
         private void sendChatMessages()
@@ -112,7 +106,7 @@ namespace Client_Comm_Module
                     Thread.Sleep(ClientConstants.CHAT_SEND_INTERVAL);
                     continue;
                 }
-                DataControl.sendTCPData(TCPClient, message, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCP_PORT_SEND);
+                DataControl.sendTCPData(TCPClient, message, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCPMessageListener);
             }
         }
 
