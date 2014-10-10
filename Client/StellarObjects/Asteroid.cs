@@ -15,22 +15,23 @@ namespace SpaceUnion.StellarObjects {
 	/// </summary>
 	public class Asteroid : Tangible {
 
-		//private List<HitBox> boxList = new List<HitBox>();
-
-		public List<HitBox> hitBoxes { get; set; }
-		public int health { get; set; }
-
-		
+		/// <summary>
+		/// Damage given from collision
+		/// </summary>
+		private int damage = -20;
+		public int Damage {
+			get { return damage; }
+		}
 
 		public Asteroid(Texture2D tex, Vector2 pos)
 			: base(tex, pos) {
 
-			//hitBoxes = new List<HitBox> {createHitBox(pos.X, pos.Y, width, height)};
-
 			Random r = new Random();
 			double direction = r.NextDouble() * 2 * Math.PI; // angle of velocity
 			int speed = r.Next(20); // speed
-			velocity = new Vector2((float) (Math.Sin(direction)* speed), (float) (-Math.Cos(direction)*speed));
+			velocity = new Vector2((float) (Math.Sin(direction) * speed), (float) (-Math.Cos(direction) * speed));
+
+			currentHealth = maxHealth = 10;
 		}
 
 		public void update(GameTime gameTime, List<Tangible> tangibles) {
@@ -42,21 +43,21 @@ namespace SpaceUnion.StellarObjects {
 
 			checkWorldEdge();
 
-			checkForCollision(tangibles);
+			checkForCollision(tangibles, gameTime);
 		}
 
 
-		
+
 		public override void destroy() {
 			isActive = false;
 			explosionEngine.createExplosion(position);
 		}
 
 
-		public override void collide(Tangible target) {
+		public override void collide(Tangible target, GameTime gameTime) {
 
 			if (target is Projectile)
-				target.collide(this);
+				target.collide(this, gameTime);
 			else if (target is Ship)
 				collisionHandler.shipOnAsteroid((Ship) target, this);
 			else if (target is Asteroid)
@@ -67,7 +68,7 @@ namespace SpaceUnion.StellarObjects {
 				throw new NotImplementedException();
 		}
 
-		
+
 
 	}
 }

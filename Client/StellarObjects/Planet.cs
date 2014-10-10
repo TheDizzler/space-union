@@ -12,7 +12,7 @@ namespace SpaceUnion.StellarObjects {
 
 	public class Planet : LargeMassObject {
 
-		
+
 
 		/// <summary>
 		/// 
@@ -24,14 +24,14 @@ namespace SpaceUnion.StellarObjects {
 		public Planet(Texture2D tex, Vector2 pos, float mass, float range)
 			: base(tex, pos, mass, range) {
 
-			
+
 		}
 
 
-		public override void collide(Tangible target) {
+		public override void collide(Tangible target, GameTime gameTime) {
 
 			if (target is Projectile)
-				target.collide(this);
+				target.collide(this, gameTime);
 			else if (target is Ship)
 				collisionHandler.shipOnPlanet((Ship) target, this);
 			else if (target is Asteroid)

@@ -64,7 +64,7 @@ namespace SpaceUnion.Weapons {
 				position += velocity * (float) gameTime.ElapsedGameTime.TotalMilliseconds;
 				base.update(position);
 
-				checkForCollision(targets);
+				checkForCollision(targets, gameTime);
 			} else {
 				isActive = false;
 			}
@@ -86,7 +86,10 @@ namespace SpaceUnion.Weapons {
 		//	}
 		//}
 
-		public abstract void doDamage(Tangible target);
+		public virtual void doDamage(Tangible target, GameTime gameTime) {
+
+			target.takeDamage(projectileDamage, gameTime);
+		}
 
 	}
 }

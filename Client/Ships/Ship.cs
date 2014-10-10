@@ -23,6 +23,7 @@ namespace SpaceUnion {
 		/// Reference to Game1
 		/// </summary>
 		protected Game1 game;
+
 		/// <summary>
 		/// A restistance to movement so all objects will enventual slow to a stop
 		/// </summary>
@@ -102,7 +103,7 @@ namespace SpaceUnion {
 				}
 			}
 
-			checkForCollision(targets);
+			checkForCollision(targets, gameTime);
 		}
 
 
@@ -120,10 +121,10 @@ namespace SpaceUnion {
 		/// </summary>
 		/// <param name="target"></param>
 		/// <exception cref="NotImplementedException">A new kind of object that needs handleing</exception>
-		public override void collide(Tangible target) {
+		public override void collide(Tangible target, GameTime gameTime) {
 
 			if (target is Projectile)
-				target.collide(this); // the projectile can handle it from here
+				target.collide(this, gameTime); // the projectile can handle it from here
 			else if (target is Ship)
 				collisionHandler.shipOnShip(this, (Ship) target);
 			else if (target is Asteroid)

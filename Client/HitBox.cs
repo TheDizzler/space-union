@@ -30,6 +30,8 @@ namespace SpaceUnion {
 			width = w;
 			height = h;
 
+			rectHitBox = new Rectangle((int) position.X, (int) position.Y, width, height);
+
 		}
 
 		public Rectangle getArray() {
@@ -38,6 +40,7 @@ namespace SpaceUnion {
 
 		public void updatePosition(Vector2 newPosition) {
 			position = newPosition;
+			//rectHitBox = new Rectangle((int) position.X, (int) position.Y, width, height);
 		}
 
 	}

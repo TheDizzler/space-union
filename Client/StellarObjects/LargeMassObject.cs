@@ -44,7 +44,7 @@ namespace SpaceUnion.StellarObjects {
 
 			pull(gameTime, tangibles);
 
-			checkForCollision(tangibles);
+			checkForCollision(tangibles, gameTime);
 		}
 
 		/// <summary>

@@ -20,6 +20,7 @@ namespace SpaceUnion {
 		protected CollisionHandler collisionHandler = Game1.collisionHandler;
 		protected ExplosionEngine explosionEngine = Game1.explosionEngine;
 
+
 		/// <summary>
 		/// If false, the object will be destroyed and removed from the game.
 		/// </summary>
@@ -32,21 +33,33 @@ namespace SpaceUnion {
 		}
 
 		protected int maxHealth = 100;
-		public int currentHealth;
-
-		public void takeDamage(int amount) {
-
-			currentHealth -= amount;
-			if (currentHealth <= 0)
-				destroy();
-		}
-
+		protected int currentHealth;
 		/// <summary>
 		/// Get % health remaining
 		/// </summary>
 		float HealthPercentage {
 			get { return currentHealth / maxHealth; }
 		}
+
+		public void takeDamage(int amount, GameTime gameTime) {
+
+			// check last time taken damage
+			if (gameTime.TotalGameTime - previousDamageTime > damageTime) {
+				// Reset our current time
+				previousDamageTime = gameTime.TotalGameTime;
+				currentHealth -= amount;
+			}
+			
+			if (currentHealth <= 0)
+				destroy();
+		}
+
+		/// <summary>
+		///  gives the player temporary invincibility on collision with asteroids
+		/// </summary>
+		TimeSpan damageTime;
+		TimeSpan previousDamageTime;
+
 
 		/// <summary>
 		/// The current speed and direction of space object
@@ -62,9 +75,12 @@ namespace SpaceUnion {
 		protected Tangible(Texture2D tex, Vector2 pos)
 			: base(tex, pos) {
 
+
 			hitBox = new HitBox(pos.X, pos.Y, width, height);
 			isActive = true;
 			currentHealth = maxHealth;
+
+			damageTime = TimeSpan.FromSeconds(3);
 		}
 
 		/// <summary>
@@ -78,12 +94,12 @@ namespace SpaceUnion {
 		}
 
 
-		protected virtual void checkForCollision(List<Tangible> targets) {
+		protected virtual void checkForCollision(List<Tangible> targets, GameTime gameTime) {
 
 			foreach (Tangible target in targets)
 				if (target != this && target.isActive)
 					if (getHitBox().getArray().Intersects(target.getHitBox().getArray()))
-						collide(target);
+						collide(target, gameTime);
 
 		}
 
@@ -91,7 +107,7 @@ namespace SpaceUnion {
 		/// The actions to take when a collision occurs.
 		/// </summary>
 		/// <param name="target"></param>
-		public abstract void collide(Tangible target);
+		public abstract void collide(Tangible target, GameTime gameTime);
 
 		/// <summary>
 		/// Call when object is destroyed.

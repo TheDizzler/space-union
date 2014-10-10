@@ -13,7 +13,7 @@ namespace SpaceUnion.Weapons {
 			: base(texture, position, ship) {
 
 			projectileTTL = 5;
-			projectileMoveSpeed = .2f;
+			projectileMoveSpeed = 1.2f;
 
 			velocity = new Vector2((float) Math.Sin(rotation) * projectileMoveSpeed,
 				(float) -Math.Cos(rotation) * projectileMoveSpeed);
@@ -24,16 +24,16 @@ namespace SpaceUnion.Weapons {
 
 		}
 
-		public override void collide(Tangible target) {
+		public override void collide(Tangible target, GameTime gameTime) {
 
-			doDamage(target);
+			doDamage(target, gameTime);
 			destroy();
 		}
 
 
-		public override void doDamage(Tangible target) {
+		public override void doDamage(Tangible target, GameTime gameTime) {
 			
-			target.takeDamage(projectileDamage);
+			base.doDamage(target, gameTime);
 		}
 
 

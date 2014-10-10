@@ -41,6 +41,9 @@ namespace SpaceUnion.Controllers {
 		private int SCREEN_HEIGHT;
 
 
+		
+
+
 		public GameplayScreen(Game1 game, SpriteBatch batch, Ship selectedship) {
 
 			this.game = game;
@@ -74,10 +77,11 @@ namespace SpaceUnion.Controllers {
 			foreach (Ship ship in ships)
 				targets.Add(ship);
 
+			
 
 
 			for (int i = 0; i < 10; i++)
-				AddAsteroid(new Vector2(gen.Next(100, 4000), gen.Next(100, 2000)));
+				AddAsteroid(new Vector2(gen.Next(100, worldWidth), gen.Next(100, worldHeight)));
 		}
 
 		/// <summary>
@@ -113,9 +117,6 @@ namespace SpaceUnion.Controllers {
 		/// <summary>
 		/// Allows the game to run logic such as updating the world,
 		/// checking for collisions, gathering input, and playing audio.
-		/// 
-		/// Checks player edge wrap around/edge stop.
-		/// 
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public void Update(GameTime gameTime) {
@@ -169,7 +170,7 @@ namespace SpaceUnion.Controllers {
 			   new Vector2(mouseState.X, mouseState.Y), inverse);
 			*/
 
-			if (asteroids.Count < 10)
+			if (asteroids.Count < 50)
 				AddAsteroid(new Vector2(gen.Next(100, 4000), gen.Next(100, 2000)));
 
 
@@ -186,7 +187,10 @@ namespace SpaceUnion.Controllers {
 			Game1.explosionEngine.update(gameTime);
 		}
 
-
+		/// <summary>
+		/// This is called when the game should draw itself.
+		/// </summary>
+		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public void draw() {
 
 			/* Main camera sprite batch */
