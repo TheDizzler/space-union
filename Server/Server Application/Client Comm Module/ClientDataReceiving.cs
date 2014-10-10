@@ -11,57 +11,47 @@ using Data_Manipulation;
 
 namespace Client_Comm_Module
 {
-    class ClientDataReceiving
+    class ClientDataReceiving : IDisposable
     {
-        private UdpClient UDPListener;
-        private TcpListener TCPListener;
-        private List<GameMessage> messageQueue;
-        private List<GameData> dataQueue;
-        private int assignedUDPPort_Listen = 6944;
+        /// <summary>
+        /// True if this class has been disposed.
+        /// </summary>
+        private bool disposed = false;
 
-        public ClientDataReceiving()
+        /// <summary>
+        ///  UDP client used to listen to the server.
+        /// </summary>
+        private UdpClient UDPListener;
+
+        /// <summary>
+        /// List used to store received data.
+        /// </summary>
+        private List<GameData> dataQueue;
+
+        /// <summary>
+        /// UDP port to listen to; assigned by the server.
+        /// </summary>
+        private int assignedUDPPort_Listen;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="assignedPort">UDP port to listen to; assigned by the server.</param>
+        public ClientDataReceiving(int assignedPort)
         {
-            messageQueue = new List<GameMessage>();
             dataQueue = new List<GameData>();
-            UDPListener = new UdpClient(assignedUDPPort_Listen);
-            // NOTE: fix required to only listen to the server.
-            TCPListener = new TcpListener(IPAddress.Any, Constants.TCPMessageClient);
-            TCPListener.Start();
-            new Thread(receiveChatMessages).Start();
+            UDPListener = new UdpClient(assignedPort);
+            assignedUDPPort_Listen = assignedPort;
+
             new Thread(receiveData).Start();
         }
 
-        /// <summary>
-        /// Assign a UDP port to receive data from.
-        /// </summary>
-        /// <param name="UDPPort">The UDP port to assign.</param>
-        public void assignUDPPort_Listen(int UDPPort)
-        {
-            assignedUDPPort_Listen = UDPPort;
-        }
 
-        /// <summary>
-        /// Waits for the server to send a login confirmation with
-        /// the port assignments for this client.
-        /// </summary>
         public Player receiveLoginConfirmation()
         {
             TcpListener listener = new TcpListener(IPAddress.Any, Constants.TCPLoginClient);
             listener.Start();
             return (Player)DataControl.receiveTCPData(listener);
-        }
-
-        /// <summary>
-        /// Begin receiving chat messages from the server.
-        /// </summary>
-        public void receiveChatMessages()
-        {
-            while (true)
-            {
-                GameMessage chatData = (GameMessage)DataControl.receiveTCPData(TCPListener);
-                if (chatData != null)
-                    messageQueue.Add(chatData);
-            }
         }
 
         /// <summary>
@@ -72,22 +62,9 @@ namespace Client_Comm_Module
             while (true)
             {
                 GameData clientData = (GameData)DataControl.receiveUDPData(UDPListener);
-                if(clientData != null)
+                if (clientData != null)
                     dataQueue.Add(clientData);
             }
-        }
-
-        /// <summary>
-        /// Gets the oldest message from the message queue.
-        /// </summary>
-        /// <returns>The oldest message in the queue.</returns>
-        public GameMessage getGameMessage()
-        {
-            if (messageQueue.Count == 0)
-                return null;
-            GameMessage message = messageQueue.ElementAt(0);
-            messageQueue.RemoveAt(0);
-            return message;
         }
 
         /// <summary>
@@ -110,6 +87,25 @@ namespace Client_Comm_Module
         public int getGameDataQueueSize()
         {
             return dataQueue.Count;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                // clean up here
+            }
+
+            disposed = true;
         }
     }
 }

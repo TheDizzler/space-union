@@ -14,9 +14,9 @@ namespace Data_Structures
     [Serializable]
     public class GameSetupMessage : Data
     {
-        int roomnumber;
-        short incomingport;
-        short outgoingport;
+        public int RoomNumber { get; set; }
+        public short IncomingPort { get; set; }
+        public int OutgoingPort { get; set; }
 
         public GameSetupMessage()
         {

@@ -48,14 +48,13 @@ namespace Server_Application
             for (int x = 0; x < Constants.NumberOfUdpClients; x++)
                 UDPListeners[x] = new UdpClient(Constants.UDPClientToServerPort + x);
             //Number of TCP clients - 1 because it created an error listener which wasn't being used.
-            for (int x = 0; x < Constants.NumberOfTcpClients - 1; x++)
+            for (int x = 0; x < Constants.NumberOfTcpClients - 2; x++)
                 TCPListeners[x] = new TcpListener(IPAddress.Parse("0.0.0.0"), Constants.TCPLoginListener + x);
             for (int x = 0; x < Constants.NumberOfTcpClients - 1; x++)
                 TCPListeners[x].Start();
             for (int x = 0; x < Constants.NumberOfUdpClients; x++)
                 new Thread(receiveClientData).Start(UDPListeners[x]);
             new Thread(receiveLoginRequests).Start();
-            new Thread(receiveChatMessages).Start();
         }
 
         /// <summary>
@@ -66,22 +65,16 @@ namespace Server_Application
         {
             while (true)
             {
-                Player loginData = (Player)DataControl.receiveTCPData(TCPListeners[0]);
-                Console.WriteLine(loginData.Username);
-                new Thread(unused => LoginRequests.handleLoginRequest(loginData, owner)).Start();
-            }
-        }
-
-        /// <summary>
-        /// Begin receiving chat messages from clients and 
-        /// handle each received message in a separate thread.
-        /// </summary>
-        public void receiveChatMessages()
-        {
-            while (true)
-            {   
-                GameMessage chatData = (GameMessage)DataControl.receiveTCPData(TCPListeners[1]);
-                owner.addMessageToQueue(chatData);
+                Data message = (Player)DataControl.receiveTCPData(TCPListeners[0]);
+                if (message.Type == Constants.LOGIN_REQUEST)
+                {
+                    Console.WriteLine(((Player)message).Username);
+                    new Thread(unused => LoginRequests.handleLoginRequest((Player)message, owner)).Start();
+                }
+                else
+                {
+                    owner.addMessageToQueue((GameMessage)message);
+                }
             }
         }
 

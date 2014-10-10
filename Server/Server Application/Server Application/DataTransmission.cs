@@ -103,7 +103,7 @@ namespace Server_Application
                 {
                     if (player.Player.Username != message.Username)
                     {
-                        DataControl.sendTCPData(TCPClients[1], message, player.Player.IPAddress, Constants.TCPMessageClient);
+                        DataControl.sendTCPData(TCPClients[0], message, player.Player.IPAddress, Constants.TCPLoginClient);
                     }
                 }
             }

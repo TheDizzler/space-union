@@ -36,20 +36,17 @@ namespace Server_Application
         {
             string username = playerData.Username;
             string password = playerData.Password;
+            int returnedErrorCode = 0;
 
-            if (!checkUsername(username))
+            // User name validation failed
+            if (!selectUser(username, password, ref returnedErrorCode))
             {
-                ErrorMessage message = new ErrorMessage(playerData, "0");
-                owner.addMessageToQueue(message);
-                return false;
-            }
-            if (!checkUserPW(username, password))
-            {
-                ErrorMessage message = new ErrorMessage(playerData, "1");
-                owner.addMessageToQueue(message);
-                return false;
+                ErrorMessage message = new ErrorMessage();
+                message.Player = playerData;
+                message.MessageCode = returnedErrorCode;
             }
 
+            // call function that updates the user's online status in the database (for friend list).
             return true;
         }
 
@@ -58,7 +55,7 @@ namespace Server_Application
         /// </summary>
         /// <param name="userID">The user ID to search for in the database.</param>
         /// <returns>True if the username exists in the database.</returns>
-        private static Boolean checkUsername(string username)
+        private static Boolean selectUser(string username, string password, ref int errCode)
         {
             // (Placeholder) Call a function from the DatabaseRequests class.
 
@@ -69,11 +66,11 @@ namespace Server_Application
         /// Check the user password by matching it against the user name's associated password.
         /// </summary>
         /// <returns></returns>
-        private static Boolean checkUserPW(string username, string password)
+        /*private static Boolean checkUserPW(string username, string password)
         {
             // (Placeholder) Call a function from the DatabaseRequests class.
 
             return true;
-        }
+        }*/
     }
 }
