@@ -13,7 +13,7 @@ namespace Client_Comm_Module
 {
     class ClientMessageReceiving
     {
-        public delegate void GameStartEventHandler(GameSetupMessage setupMessage);
+        public delegate void GameStartEventHandler(Player setupMessage);
         public event GameStartEventHandler gameStart;
         
         private TcpListener TCPListener;
@@ -25,7 +25,7 @@ namespace Client_Comm_Module
             messageQueue = new List<GameMessage>();
 
             // NOTE: fix required to only listen to the server.
-            TCPListener = new TcpListener(IPAddress.Any, Constants.TCPMessageClient);
+            TCPListener = new TcpListener(IPAddress.Any, Constants.TCPLoginClient);
             TCPListener.Start();
 
             new Thread(receiveMessages).Start();
@@ -69,8 +69,8 @@ namespace Client_Comm_Module
                             messageQueue.Add((GameMessage)data);
                             break;
 
-                        case Constants.GAME_SETUP_MESSAGE:
-                            gameStart((GameSetupMessage)data);
+                        case Constants.LOGIN_REQUEST:
+                            gameStart((Player)data);
                             break;
                     }
             }

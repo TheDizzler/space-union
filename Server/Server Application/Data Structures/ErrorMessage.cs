@@ -21,6 +21,10 @@ namespace Data_Structures
         {
             Type = 3;
         }
+        /// <summary>
+        /// A constructor for this class, does not initiate any data.
+        /// </summary>
+        /// <param name="type">The type of the class, used to cast an object to this class.</param>
         public ErrorMessage(Player player, int messageCode)
         {
             Player = player;

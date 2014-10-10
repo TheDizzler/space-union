@@ -50,10 +50,10 @@ namespace Client_Comm_Module
         /// Called when a GameSetupMessage is received.
         /// </summary>
         /// <param name="setupMessage">The received setup message.</param>
-        private void initializeDataTransmission(GameSetupMessage setupMessage)
+        private void initializeDataTransmission(Player setupMessage)
         {
-            dataReceiver = new ClientDataReceiving(setupMessage.IncomingPort);
-            dataSender = new ClientDataTransmission(setupMessage.OutgoingPort);
+            dataReceiver = new ClientDataReceiving(setupMessage.PortReceive);
+            dataSender = new ClientDataTransmission(setupMessage.PortSend);
         }
 
         // SEND FUNCTIONS --------------------------------------------------
@@ -89,6 +89,15 @@ namespace Client_Comm_Module
         }
 
         /// <summary>
+        /// Fetch a game message received from the server.
+        /// </summary>
+        /// <returns>Game message received from the server.</returns>
+        public GameMessage getGameMessage()
+        {
+            return receiver.getGameMessage();
+        }
+
+        /// <summary>
         /// Send a game data to the server.
         /// </summary>
         /// <param name="data">The data to send to the server.</param>
@@ -107,15 +116,6 @@ namespace Client_Comm_Module
         private GameData getGameData()
         {
             return dataReceiver.getGameData();
-        }
-
-        /// <summary>
-        /// Fetch a game message received from the server.
-        /// </summary>
-        /// <returns>Game message received from the server.</returns>
-        public GameMessage getGameMessage()
-        {
-            return receiver.getGameMessage();
         }
 
         /// <summary>
