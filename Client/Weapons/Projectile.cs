@@ -15,14 +15,14 @@ namespace SpaceUnion.Weapons {
 		/// </summary>
 		protected Ship owner;
 
-		// Determines how fast the projectile moves
+		/// <summary>
+		/// Determines how fast the projectile moves
+		/// </summary>
 		protected float projectileMoveSpeed;
-
-		protected Vector2 velocity;
 		/// <summary>
 		/// Lenght of time (in seconds) the projectile will stay active.
 		/// </summary>
-		protected int projectileTTL;
+		protected float projectileTTL;
 		/// <summary>
 		/// length of time in seconds projectile has been active.
 		/// </summary>
@@ -49,11 +49,6 @@ namespace SpaceUnion.Weapons {
 			timeActive = 0;
 		}
 
-		/// <summary>
-		/// Set up unique attributes of projectile here
-		/// (example: projectileTTL, projectileMoveSpeed, projectileDamage, velocity)
-		/// </summary>
-		//protected abstract void initialize(Ship ship);
 
 
 		public void update(GameTime gameTime, List<Tangible> targets) {
@@ -71,20 +66,10 @@ namespace SpaceUnion.Weapons {
 		}
 
 
-		//private void UpdateDamageCollisions() {
-		//	// Use the Rectangle's built-in intersect function to 
-		//	// determine if two objects are overlapping
-		//	foreach (Projectile p in projectiles) {
-		//		if (p.getProjectileHitBox().getArray().Intersects(playerShip.getShipHitBox().getArray())) {
-		//			playerShip.setHealth(-1);
-		//		}
-		//		foreach (Asteroid a in asteroids) {
-		//			if (p.getProjectileHitBox().getArray().Intersects(a.hitbox.getArray())) {
-		//				a.Active = false;
-		//			}
-		//		}
-		//	}
-		//}
+		public override void collide(Tangible target, GameTime gameTime) {
+			doDamage(target, gameTime);
+			destroy();
+		}
 
 		public virtual void doDamage(Tangible target, GameTime gameTime) {
 

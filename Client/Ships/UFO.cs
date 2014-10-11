@@ -17,7 +17,11 @@ namespace SpaceUnion.Ships {
 		public UFO(Game1 game)
 			: base(assets.ufo, assets.laser, game) {
 
-			// Set the laser to fire every quarter second
+
+			maxSpeed = 7;
+			accelSpeed = 4.5f;
+			turnSpeed = 4.5f;
+
 			mainFireDelay = TimeSpan.FromSeconds(.5f);
 			altFireDelay = TimeSpan.FromSeconds(1f);
 			shield = new Shield(assets.shield, position);
@@ -50,7 +54,7 @@ namespace SpaceUnion.Ships {
 			}
 		}
 
-		
+
 
 	}
 }

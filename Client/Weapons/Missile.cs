@@ -3,23 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using SpaceUnion.Ships;
 
 
 namespace SpaceUnion.Weapons {
-	class Laser : Projectile {
+	public class Missle : Projectile {
 
-		public Laser(Vector2 startPoint, Ship ship)
-			: base(assets.laser, startPoint, ship) {
+		public Missle(Vector2 startPoint, Ship ship)
+			: base(assets.missile, startPoint, ship) {
 
-			projectileTTL = 5;
-			projectileMoveSpeed = 1.2f;
+
+			projectileTTL = 1.5f;
+			projectileMoveSpeed = 2.2f;
 
 			velocity = new Vector2((float) Math.Sin(rotation) * projectileMoveSpeed,
 				(float) -Math.Cos(rotation) * projectileMoveSpeed);
 
+			//velocity += ship.velocity / 1000;
 
-			projectileDamage = 5;
+			projectileDamage = 3;
 
 		}
 
@@ -39,13 +41,14 @@ namespace SpaceUnion.Weapons {
 		/// <param name="target"></param>
 		/// <param name="gameTime"></param>
 		public override void doDamage(Tangible target, GameTime gameTime) {
-			
+
 			base.doDamage(target, gameTime);
 		}
 
 
 		public override void destroy() {
-			//isActive = false; //Still haveing a self player collision issue
+			//isActive = false;
+			explosionEngine.createExplosion(position);
 		}
 
 	}

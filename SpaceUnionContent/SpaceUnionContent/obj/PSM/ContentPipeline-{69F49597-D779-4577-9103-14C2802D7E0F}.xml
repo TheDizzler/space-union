@@ -217,6 +217,24 @@
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\moon (115x117).xnb</Output>
       <Time>2014-10-10T09:22:07.4532034-07:00</Time>
     </Item>
+    <Item>
+      <Source>Projectiles\molten bullet (6x8).png</Source>
+      <Name>Projectiles\molten bullet (6x8)</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\molten bullet (6x8).xnb</Output>
+      <Time>2014-10-10T16:25:58.9998696-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Projectiles\plasmaball (32x36).png</Source>
+      <Name>Projectiles\plasmaball (32x36)</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\plasmaball (32x36).xnb</Output>
+      <Time>2014-10-10T16:26:27.6165064-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{69F49597-D779-4577-9103-14C2802D7E0F}</ContentProjectGUID>

@@ -17,8 +17,6 @@ namespace SpaceUnion {
 	/// </summary>
 	public abstract class Ship : Tangible {
 
-		protected static AssetManager assets = Game1.Assets;
-
 		/// <summary>
 		/// Reference to Game1
 		/// </summary>
@@ -59,8 +57,8 @@ namespace SpaceUnion {
 
 		public List<Projectile> projectiles;
 
-		//private ExplosionEngine explosionEngine;
-		private Texture2D weaponTexture;
+		
+		private Projectile mainWeapon;
 		/// <summary>
 		/// Location on sprite where weapon appears from
 		/// </summary>
@@ -76,10 +74,9 @@ namespace SpaceUnion {
 			: base(tex, Vector2.Zero) {
 
 			this.game = game1;
-			weaponTexture = wpnTex;
 			velocity = Vector2.Zero;
 			//scale = .3f;
-
+			
 			projectiles = new List<Projectile>();
 
 
@@ -152,13 +149,10 @@ namespace SpaceUnion {
 		}
 
 		/// <summary>
-		/// Main weapon
+		/// Main weapon fire method
 		/// </summary>
 		/// <param name="gameTime"></param>
 		public virtual void fire(GameTime gameTime) {
-
-			
-			
 
 			// Fire only every interval we set as the fireTime
 			if (gameTime.TotalGameTime - previousMainFireTime > mainFireDelay) {
@@ -166,7 +160,7 @@ namespace SpaceUnion {
 				previousMainFireTime = gameTime.TotalGameTime;
 
 				// Add the projectile, but add it to the front and center of the player
-				projectiles.Add(new Laser(weaponTexture, Vector2.Add(position, weaponOrigin), this));
+				projectiles.Add(new Laser(Vector2.Add(position, weaponOrigin), this));
 			}
 		}
 
@@ -196,19 +190,17 @@ namespace SpaceUnion {
 		/// <param name="gameTime"></param>
 		public virtual void rotateLeft(GameTime gameTime) {
 
-			float oldRotatation = rotation;
+			float oldRotation = rotation;
 			if (rotation > 6.283185 || rotation < -6.283185) {
 				rotation = rotation % 6.283185f;
 			}
 			// rotates ship by an amount weighted by the amount time that has passed since last update
 			rotation -= turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
 
-
-			Matrix transform = Matrix.CreateTranslation(-origin.X, -origin.Y, 0)
-				* Matrix.CreateRotationZ(rotation - oldRotatation)
-				* Matrix.CreateTranslation(origin.X, origin.Y, 0);
-			Vector2.TransformNormal(ref weaponOrigin, ref transform, out weaponOrigin);
+			rotateWeaponOrigin(rotation - oldRotation);
+			
 		}
+
 
 		/// <summary>
 		/// Rotates the ship right
@@ -217,17 +209,34 @@ namespace SpaceUnion {
 		/// <param name="gameTime"></param>
 		public virtual void rotateRight(GameTime gameTime) {
 
-			float oldRotatation = rotation;
+			float oldRotation = rotation;
 			if (rotation > 6.283185 || rotation < -6.283185) {
 				rotation = rotation % 6.283185f;
 			}
 			rotation += turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
 
+			rotateWeaponOrigin(rotation - oldRotation);
+		}
 
-			Matrix transform = Matrix.CreateTranslation(-origin.X, -origin.Y, 0)
-				* Matrix.CreateRotationZ(rotation - oldRotatation)
-				* Matrix.CreateTranslation(origin.X, origin.Y, 0);
+		/// <summary>
+		/// Rotate where the weapon projectile originates from.
+		/// </summary>
+		/// <param name="rotateAmount"></param>
+		protected virtual void rotateWeaponOrigin(float rotateAmount) {
+			Matrix transform = getWeaponOriginTransform(rotateAmount);
 			Vector2.TransformNormal(ref weaponOrigin, ref transform, out weaponOrigin);
+		}
+
+		/// <summary>
+		/// Calculates the rotation needed for the weaponOrigin to stay grapically consistent.
+		/// </summary>
+		/// <param name="rotateAmount"></param>
+		/// <returns></returns>
+		protected Matrix getWeaponOriginTransform(float rotateAmount) {
+
+			return Matrix.CreateTranslation(-origin.X, -origin.Y, 0)
+				* Matrix.CreateRotationZ(rotateAmount)
+				* Matrix.CreateTranslation(origin.X, origin.Y, 0);
 		}
 
 		//Debugging Ship Brake

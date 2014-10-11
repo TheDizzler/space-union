@@ -16,7 +16,7 @@ namespace SpaceUnion {
 	/// </summary>
 	public abstract class Tangible : Sprite {
 
-
+		protected static AssetManager assets = Game1.Assets;
 		protected CollisionHandler collisionHandler = Game1.collisionHandler;
 		protected ExplosionEngine explosionEngine = Game1.explosionEngine;
 
@@ -75,7 +75,7 @@ namespace SpaceUnion {
 		protected Tangible(Texture2D tex, Vector2 pos)
 			: base(tex, pos) {
 
-
+			
 			hitBox = new HitBox(pos.X, pos.Y, width, height);
 			isActive = true;
 			currentHealth = maxHealth;
@@ -131,5 +131,6 @@ namespace SpaceUnion {
 				position.Y = GameplayScreen.worldHeight;
 			}
 		}
+
 	}
 }

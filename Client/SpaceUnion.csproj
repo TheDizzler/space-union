@@ -57,6 +57,7 @@
     <Compile Include="Timer.cs" />
     <Compile Include="Tools\CollisionHandler.cs" />
     <Compile Include="Weapons\Laser.cs" />
+    <Compile Include="Weapons\Missile.cs" />
     <Compile Include="Weapons\Projectile.cs" />
     <Compile Include="Tools\AnimationClass.cs" />
     <Compile Include="Game1.cs" />
