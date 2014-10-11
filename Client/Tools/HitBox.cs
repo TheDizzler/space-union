@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Storage;
-using Microsoft.Xna.Framework.GamerServices;
-using SpaceUnion.Tools;
+﻿using Microsoft.Xna.Framework;
 
-namespace SpaceUnion {
+
+namespace SpaceUnion.Tools {
 	/// <summary>
 	/// Hitboxes will contain an array of rectangles
 	/// </summary>
@@ -25,8 +18,8 @@ namespace SpaceUnion {
 
 
 		public HitBox(float x, float y, int w, int h) {
-			position.X = x - w / 2;
-			position.Y = y - h / 2;
+			position.X = x;
+			position.Y = y;
 			width = w;
 			height = h;
 
@@ -38,7 +31,7 @@ namespace SpaceUnion {
 			return rectHitBox = new Rectangle((int) position.X - width / 2, (int) position.Y - height / 2, width, height);
 		}
 
-		public void updatePosition(Vector2 newPosition) {
+		public void updatePosition(Vector2 newPosition, float rotation) {
 			position = newPosition;
 			//rectHitBox = new Rectangle((int) position.X, (int) position.Y, width, height);
 		}

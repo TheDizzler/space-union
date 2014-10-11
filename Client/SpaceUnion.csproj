@@ -45,7 +45,7 @@
     <Compile Include="StellarObjects\LargeMassObject.cs" />
     <Compile Include="Tools\Camera.cs" />
     <Compile Include="Animations\ShortExplosion.cs" />
-    <Compile Include="HitBox.cs" />
+    <Compile Include="Tools\HitBox.cs" />
     <Compile Include="Controllers\ShipSelectionScreen.cs" />
     <Compile Include="GUI.cs" />
     <Compile Include="Controllers\GameplayScreen.cs" />

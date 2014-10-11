@@ -13,7 +13,7 @@ namespace SpaceUnion.Weapons {
 			: base(assets.missile, startPoint, ship) {
 
 
-			projectileTTL = 1.5f;
+			projectileTTL = .5f;
 			projectileMoveSpeed = 2.2f;
 
 			velocity = new Vector2((float) Math.Sin(rotation) * projectileMoveSpeed,
@@ -48,7 +48,7 @@ namespace SpaceUnion.Weapons {
 
 		public override void destroy() {
 			//isActive = false;
-			explosionEngine.createExplosion(position);
+			explosionEngine.createSmallExplosion(position);
 		}
 
 	}

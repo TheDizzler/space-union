@@ -50,7 +50,7 @@ namespace SpaceUnion.StellarObjects {
 
 		public override void destroy() {
 			isActive = false;
-			explosionEngine.createExplosion(position);
+			explosionEngine.createBigExplosion(position);
 		}
 
 

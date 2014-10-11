@@ -14,7 +14,7 @@ namespace SpaceUnion.Tools {
 	/// </summary>
 	public class CollisionHandler {
 
-		
+
 		/// <summary>
 		/// The outcome of a Ship on Ship collision
 		/// </summary>
@@ -31,9 +31,9 @@ namespace SpaceUnion.Tools {
 		/// <param name="ship"></param>
 		/// <param name="planet"></param>
 		public void shipOnPlanet(Ship ship, Planet planet, GameTime gameTime) {
-			
-			ship.takeDamage(planet.collisionDamage,gameTime);
-			ship.bounce(planet.Position);
+
+			ship.takeDamage(planet.collisionDamage, gameTime);
+			reflect(ship, planet);
 		}
 
 		/// <summary>
@@ -44,6 +44,7 @@ namespace SpaceUnion.Tools {
 		public void shipOnAsteroid(Ship ship, Asteroid asteroid, GameTime gameTime) {
 			ship.takeDamage(asteroid.collisionDamage, gameTime);
 			asteroid.takeDamage(asteroid.collisionDamage, gameTime);
+			reflect(ship, asteroid);
 		}
 
 		/// <summary>
@@ -52,7 +53,8 @@ namespace SpaceUnion.Tools {
 		/// <param name="asteroid1"></param>
 		/// <param name="asteroid2"></param>
 		public void asteroidOnAsteroid(Asteroid asteroid1, Asteroid asteroid2, GameTime gameTime) {
-			//throw new NotImplementedException();
+
+			reflect(asteroid1, asteroid2);
 		}
 
 		/// <summary>
@@ -61,7 +63,7 @@ namespace SpaceUnion.Tools {
 		/// <param name="asteroid"></param>
 		/// <param name="planet"></param>
 		public void asteroidOnPlanet(Asteroid asteroid, Planet planet, GameTime gameTime) {
-			
+
 			asteroid.destroy();
 		}
 
@@ -74,7 +76,30 @@ namespace SpaceUnion.Tools {
 			throw new NotImplementedException();
 		}
 
-		
+
+
+		/// <summary>
+		/// "Bounce" an object off of another
+		/// </summary>
+		public void reflect(Tangible tangible1, Tangible tangible2) {
+
+			Vector2 combinedMassVel = // if both masses stick together (inelastic collision) than the resulting velocity is combinedMassVel
+				(tangible1.velocity + tangible2.velocity) / (tangible1.mass + tangible2.mass);
+			
+			Vector2 normal1 = tangible2.position - tangible1.position;
+			normal1.Normalize();
+			Vector2 normal2 = tangible1.position - tangible2.position;
+			normal2.Normalize();
+
+			tangible1.velocity -= combinedMassVel;
+			tangible1.velocity = Vector2.Reflect(tangible1.velocity, normal1);
+			tangible1.velocity += combinedMassVel;
+
+			tangible2.velocity -= combinedMassVel;
+			tangible2.velocity = Vector2.Reflect(tangible2.velocity, normal1);
+			tangible2.velocity += combinedMassVel;
+
+		}
 
 	}
 }

@@ -65,7 +65,11 @@ namespace SpaceUnion.Weapons {
 			}
 		}
 
-
+		/// <summary>
+		/// Deal damage and destroy the projectile.
+		/// </summary>
+		/// <param name="target"></param>
+		/// <param name="gameTime"></param>
 		public override void collide(Tangible target, GameTime gameTime) {
 			doDamage(target, gameTime);
 			destroy();

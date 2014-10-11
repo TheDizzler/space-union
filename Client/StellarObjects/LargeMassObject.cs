@@ -13,10 +13,7 @@ namespace SpaceUnion.StellarObjects {
 	/// </summary>
 	public abstract class LargeMassObject : Tangible {
 
-		/// <summary>
-		/// How much gravitational 'power' the planet has
-		/// </summary>
-		float mass;
+		
 
 		/// <summary>
 		/// Range (in pixels) after which gravitational effects are concidered negligable
@@ -32,6 +29,7 @@ namespace SpaceUnion.StellarObjects {
 		/// <param name="range">Range (in pixels) that gravitational effects span</param>
 		protected LargeMassObject(Texture2D tex, Vector2 pos, float mass, float range)
 			: base(tex, pos) {
+
 			this.mass = mass * 1000;
 			this.range = range;
 
@@ -59,7 +57,7 @@ namespace SpaceUnion.StellarObjects {
 				float distance = (tangible.Position - this.Position).Length();
 				if (distance < range) {
 					float pullForce = mass / (distance * distance);
-					// angle in radians that object is off 
+					// angle in radians that object is off x-axis
 					double angle = Math.Atan2(this.Position.Y - tangible.Position.Y, this.Position.X - tangible.Position.X);
 					// Find the vector to apply to the ships velocity
 					Vector2 pullVector = new Vector2(

@@ -41,10 +41,10 @@ namespace SpaceUnion.Tools {
 				case 0:
 				case 1:
 				case 2:
-					explosion = new ShortExplosion(assets.explosions, location, scale);
+					explosion = new ShortExplosion(location, scale);
 					break;
 				case 3:
-					explosion = new BigExplosion(assets.explosionsBig, location, scale);
+					explosion = new BigExplosion(location, scale);
 					break;
 			}
 			explosions.Add(explosion);
@@ -70,8 +70,13 @@ namespace SpaceUnion.Tools {
 		/// A simple big explosion. Suitable for larger missile weapons and asteroids.
 		/// </summary>
 		/// <param name="location"></param>
-		public void createExplosion(Vector2 location) {
-			explosions.Add(new BigExplosion(assets.explosionsBig, location));
+		public void createBigExplosion(Vector2 location) {
+			explosions.Add(new BigExplosion(location));
+		}
+
+
+		public void createSmallExplosion(Vector2 location) {
+			explosions.Add(new ShortExplosion(location));
 		}
 
 	}

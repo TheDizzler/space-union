@@ -32,11 +32,10 @@ namespace SpaceUnion.Animations {
 		/// <summary>
 		/// Creates a random explosion.
 		/// </summary>
-		/// <param name="explosions"></param>
 		/// <param name="location"></param>
 		/// <param name="scaleAnimation"></param>
-		public ShortExplosion(Texture2D explosions, Vector2 location, float scaleAnimation = 1.0f)
-			: base(explosions, location) {
+		public ShortExplosion(Vector2 location, float scaleAnimation = 1.0f)
+			: base(assets.explosions, location) {
 
 				initialize(scaleAnimation);
 

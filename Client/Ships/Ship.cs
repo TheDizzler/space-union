@@ -57,7 +57,7 @@ namespace SpaceUnion {
 
 		public List<Projectile> projectiles;
 
-		
+
 		private Projectile mainWeapon;
 		/// <summary>
 		/// Location on sprite where weapon appears from
@@ -76,7 +76,7 @@ namespace SpaceUnion {
 			this.game = game1;
 			velocity = Vector2.Zero;
 			//scale = .3f;
-			
+
 			projectiles = new List<Projectile>();
 
 
@@ -91,8 +91,8 @@ namespace SpaceUnion {
 			base.update(position);
 			checkWorldEdge();
 
-			
-			
+
+
 			// Update the Projectiles
 			for (int i = projectiles.Count - 1; i >= 0; i--) {
 				projectiles[i].update(gameTime, targets);
@@ -198,7 +198,7 @@ namespace SpaceUnion {
 			rotation -= turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
 
 			rotateWeaponOrigin(rotation - oldRotation);
-			
+
 		}
 
 
@@ -247,13 +247,7 @@ namespace SpaceUnion {
 			explode();
 		}
 
-		/// <summary>
-		/// Sudden momentum change, probbly after a collision with a bigger object.
-		/// 
-		/// </summary>
-		public void bounce(Vector2 actorPos) {
-			//Vector2.Reflect(ref velocity, ref actorPos, out velocity);
-		}
+		
 
 
 

@@ -12,6 +12,7 @@ namespace SpaceUnion.Tools {
 	/// </summary>
 	public abstract class Sprite {
 
+		protected static AssetManager assets = Game1.Assets;
 
 		protected internal Texture2D texture;
 		/// <summary>
@@ -21,7 +22,7 @@ namespace SpaceUnion.Tools {
 		/// <summary>
 		/// Center of sprite in Game World (x, y) co-ordinates
 		/// </summary>
-		protected Vector2 position;
+		public Vector2 position;
 		/// <summary>
 		/// Get sprites center position in game world coordinates
 		/// </summary>
@@ -173,5 +174,6 @@ namespace SpaceUnion.Tools {
 			}
 			return false;
 		}
+
 	}
 }

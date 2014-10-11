@@ -16,7 +16,7 @@ namespace SpaceUnion {
 	/// </summary>
 	public abstract class Tangible : Sprite {
 
-		protected static AssetManager assets = Game1.Assets;
+
 		protected CollisionHandler collisionHandler = Game1.collisionHandler;
 		protected ExplosionEngine explosionEngine = Game1.explosionEngine;
 
@@ -25,6 +25,11 @@ namespace SpaceUnion {
 		/// If false, the object will be destroyed and removed from the game.
 		/// </summary>
 		public bool isActive { get; set; }
+
+		/// <summary>
+		/// How much gravitational 'power' this object has. Most should be 1.
+		/// </summary>
+		public float mass = 1;
 
 		private HitBox hitBox;
 		//Return Hitbox for collision detection
@@ -49,13 +54,13 @@ namespace SpaceUnion {
 				previousDamageTime = gameTime.TotalGameTime;
 				currentHealth -= amount;
 			}
-			
+
 			if (currentHealth <= 0)
 				destroy();
 		}
 
 		/// <summary>
-		///  gives the player temporary invincibility on collision with asteroids
+		///  gives the player temporary invincibility on collision
 		/// </summary>
 		TimeSpan damageTime;
 		TimeSpan previousDamageTime;
@@ -65,6 +70,7 @@ namespace SpaceUnion {
 		/// The current speed and direction of space object
 		/// </summary>
 		public Vector2 velocity = Vector2.Zero;
+
 		public float getVelocityX() {
 			return velocity.X;
 		}
@@ -75,7 +81,7 @@ namespace SpaceUnion {
 		protected Tangible(Texture2D tex, Vector2 pos)
 			: base(tex, pos) {
 
-			
+
 			hitBox = new HitBox(pos.X, pos.Y, width, height);
 			isActive = true;
 			currentHealth = maxHealth;
@@ -89,9 +95,20 @@ namespace SpaceUnion {
 		/// <param name="newPosition"></param>
 		protected void update(Vector2 newPosition) {
 
-			hitBox.updatePosition(newPosition);
+			hitBox.updatePosition(newPosition, rotation);
 
 		}
+
+		/// <summary>
+		/// Can draw hitboxes here for debugging.
+		/// </summary>
+		/// <param name="batch"></param>
+		public override void draw(SpriteBatch batch) {
+			base.draw(batch);
+
+			batch.Draw(assets.guiRectangle, hitBox.getArray(), Color.Pink);
+		}
+
 
 
 		protected virtual void checkForCollision(List<Tangible> targets, GameTime gameTime) {

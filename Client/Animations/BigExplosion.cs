@@ -11,8 +11,8 @@ namespace SpaceUnion.Animations {
 	class BigExplosion : Explosion {
 
 
-		public BigExplosion(Texture2D explosions, Vector2 location, float scaleAnimation = 1)
-			: base(explosions, location) {
+		public BigExplosion(Vector2 location, float scaleAnimation = 1)
+			: base(assets.explosionsBig, location) {
 
 			initialize(scaleAnimation, 32);
 
