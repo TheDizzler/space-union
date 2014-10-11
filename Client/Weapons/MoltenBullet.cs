@@ -3,24 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using SpaceUnion.Ships;
+using Microsoft.Xna.Framework.Graphics;
 
 
 namespace SpaceUnion.Weapons {
-	public class Missle : Projectile {
+	class MoltenBullet : Projectile {
 
-		public Missle(Vector2 startPoint, Ship ship)
-			: base(assets.missile, startPoint, ship) {
+		public MoltenBullet(Vector2 startPoint, Ship ship)
+			: base(assets.moltenBullet, startPoint, ship) {
 
 
 			projectileTTL = .5f;
-			projectileMoveSpeed = 2.2f;
+			projectileMoveSpeed = .2f;
 
-			velocity += new Vector2((float) Math.Sin(rotation) * projectileMoveSpeed,
+			//Vector2 projVel = new Vector2((float) Math.Sin(rotation) * projectileMoveSpeed,
+			//	(float) -Math.Cos(rotation) * projectileMoveSpeed);
+			//Vector2.Add(ref velocity, ref projVel, out velocity);
+			//velocity += new Vector2((float) Math.Sin(rotation) * projectileMoveSpeed,
+			//	(float) -Math.Cos(rotation) * projectileMoveSpeed);
+
+
+			velocity = new Vector2((float) Math.Sin(rotation) * projectileMoveSpeed,
 				(float) -Math.Cos(rotation) * projectileMoveSpeed);
 
-			projectileDamage = 3;
-
+			projectileDamage = 5;
 		}
 
 		/// <summary>
@@ -48,6 +54,5 @@ namespace SpaceUnion.Weapons {
 			//isActive = false;
 			explosionEngine.createSmallExplosion(position);
 		}
-
 	}
 }

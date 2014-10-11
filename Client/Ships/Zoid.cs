@@ -31,16 +31,9 @@ namespace SpaceUnion.Ships {
 		}
 
 
-		public override void fire(GameTime gameTime) {
-
-			// Fire only every interval we set as the fireTime
-			if (gameTime.TotalGameTime - previousMainFireTime > mainFireDelay) {
-				// Reset our current time
-				previousMainFireTime = gameTime.TotalGameTime;
-
-				projectiles.Add(new Missle(Vector2.Add(position, weaponOrigin), this));
-				projectiles.Add(new Missle(Vector2.Add(position, weaponOrigin2), this));
-			}
+		protected override Projectile getProjectile() {
+			projectiles.Add(new Missle(Vector2.Add(position, weaponOrigin2), this));
+			return new Missle(Vector2.Add(position, weaponOrigin), this);
 		}
 
 

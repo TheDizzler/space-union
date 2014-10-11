@@ -13,8 +13,6 @@ namespace SpaceUnion.StellarObjects {
 	/// </summary>
 	public abstract class LargeMassObject : Tangible {
 
-		
-
 		/// <summary>
 		/// Range (in pixels) after which gravitational effects are concidered negligable
 		/// </summary>

@@ -28,7 +28,7 @@ namespace SpaceUnion.StellarObjects {
 
 			Random r = new Random();
 			double direction = r.NextDouble() * 2 * Math.PI; // angle of velocity
-			int speed = r.Next(20); // speed
+			int speed = r.Next(500); // speed in pixels per second
 			velocity = new Vector2((float) (Math.Sin(direction) * speed), (float) (-Math.Cos(direction) * speed));
 
 			currentHealth = maxHealth = 1;
@@ -37,7 +37,7 @@ namespace SpaceUnion.StellarObjects {
 		public void update(GameTime gameTime, List<Tangible> tangibles) {
 
 			// move in a straight line
-			position += velocity;
+			position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
 
 			base.update(position);
 
@@ -46,7 +46,9 @@ namespace SpaceUnion.StellarObjects {
 			checkForCollision(tangibles, gameTime);
 		}
 
-
+		public void movement(GameTime gameTime, List<Tangible> targets) {
+			//throw new NotImplementedException();
+		}
 
 		public override void destroy() {
 			isActive = false;
@@ -69,6 +71,7 @@ namespace SpaceUnion.StellarObjects {
 		}
 
 
+		
 
 	}
 }

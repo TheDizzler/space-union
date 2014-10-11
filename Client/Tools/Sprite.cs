@@ -55,7 +55,7 @@ namespace SpaceUnion.Tools {
 		/// <summary>
 		/// Angle in radians of sprite orientation
 		/// </summary>
-		protected float rotation;
+		public float rotation;
 
 		public double getRotation() {
 			return rotation;

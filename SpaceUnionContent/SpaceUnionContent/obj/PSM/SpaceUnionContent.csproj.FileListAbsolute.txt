@@ -84,7 +84,10 @@ C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Conte
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\ufoship (128x128).xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\stuntship (128x128).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\zoidship.xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\galaxy.xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.xnb
@@ -98,11 +101,19 @@ C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fir
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fireballs (test).xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\big fireballs with blur.xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\short missile (16x16).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\bubble shield sheet.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\moon (115x117).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\molten bullet (6x8).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\plasmaball (32x36).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\bug (16x16).xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.png
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.jpg
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\ufoship (128x128).png
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\stuntship (128x128).png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\zoidship.png
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.png
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\confirm.png
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.png
@@ -116,14 +127,3 @@ C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\sh
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\IgnoreMe.dll
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\obj\PSM\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\obj\PSM\IgnoreMe.dll
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\bubble shield sheet.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\obj\PSM\SpaceUnionContent.csprojResolveAssemblyReference.cache
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\ufoship (128x128).xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\stuntship (128x128).xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\zoidship.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\ufoship (128x128).png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\stuntship (128x128).png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\zoidship.png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\moon (115x117).xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\molten bullet (6x8).xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\plasmaball (32x36).xnb

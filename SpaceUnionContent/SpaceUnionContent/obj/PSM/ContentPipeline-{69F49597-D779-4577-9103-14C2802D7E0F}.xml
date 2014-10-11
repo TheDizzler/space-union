@@ -29,6 +29,15 @@
       <Time>2014-10-06T22:17:49.6141598-07:00</Time>
     </Item>
     <Item>
+      <Source>Spaceships\ufoship (128x128).png</Source>
+      <Name>Spaceships\ufoship (128x128)</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\ufoship (128x128).xnb</Output>
+      <Time>2014-10-06T22:17:49.7141599-07:00</Time>
+    </Item>
+    <Item>
       <Source>Spaceships\shuttle.png</Source>
       <Name>Spaceships\shuttle</Name>
       <Importer>TextureImporter</Importer>
@@ -36,6 +45,24 @@
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.xnb</Output>
       <Time>2014-10-06T22:17:49.77416-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Spaceships\stuntship (128x128).png</Source>
+      <Name>Spaceships\stuntship (128x128)</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\stuntship (128x128).xnb</Output>
+      <Time>2014-10-06T22:17:49.77416-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Spaceships\zoidship.png</Source>
+      <Name>Spaceships\zoidship</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\zoidship.xnb</Output>
+      <Time>2014-10-06T22:17:49.8041601-07:00</Time>
     </Item>
     <Item>
       <Source>Backgrounds\galaxy.png</Source>
@@ -155,24 +182,6 @@
       <Time>2014-10-06T23:04:17.2724182-07:00</Time>
     </Item>
     <Item>
-      <Source>SpriteFonts\SpriteFont1.spritefont</Source>
-      <Name>SpriteFonts\SpriteFont1</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb</Output>
-      <Time>2014-10-06T22:17:49.8341601-07:00</Time>
-    </Item>
-    <Item>
-      <Source>Buttons\shipselection.png</Source>
-      <Name>Buttons\shipselection</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.xnb</Output>
-      <Time>2014-10-06T22:17:49.7041599-07:00</Time>
-    </Item>
-    <Item>
       <Source>Animations\bubble shield sheet.png</Source>
       <Name>Animations\bubble shield sheet</Name>
       <Importer>TextureImporter</Importer>
@@ -180,33 +189,6 @@
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\bubble shield sheet.xnb</Output>
       <Time>2014-10-07T21:32:33.7785855-07:00</Time>
-    </Item>
-    <Item>
-      <Source>Spaceships\ufoship (128x128).png</Source>
-      <Name>Spaceships\ufoship (128x128)</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\ufoship (128x128).xnb</Output>
-      <Time>2014-10-06T22:17:49.7141599-07:00</Time>
-    </Item>
-    <Item>
-      <Source>Spaceships\stuntship (128x128).png</Source>
-      <Name>Spaceships\stuntship (128x128)</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\stuntship (128x128).xnb</Output>
-      <Time>2014-10-06T22:17:49.77416-07:00</Time>
-    </Item>
-    <Item>
-      <Source>Spaceships\zoidship.png</Source>
-      <Name>Spaceships\zoidship</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\zoidship.xnb</Output>
-      <Time>2014-10-06T22:17:49.8041601-07:00</Time>
     </Item>
     <Item>
       <Source>StellarObjects\moon (115x117).png</Source>
@@ -234,6 +216,33 @@
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\plasmaball (32x36).xnb</Output>
       <Time>2014-10-10T16:26:27.6165064-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Spaceships\bug (16x16).png</Source>
+      <Name>Spaceships\bug (16x16)</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\bug (16x16).xnb</Output>
+      <Time>2014-10-10T22:06:51.3206754-07:00</Time>
+    </Item>
+    <Item>
+      <Source>SpriteFonts\SpriteFont1.spritefont</Source>
+      <Name>SpriteFonts\SpriteFont1</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb</Output>
+      <Time>2014-10-06T22:17:49.8341601-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Buttons\shipselection.png</Source>
+      <Name>Buttons\shipselection</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.xnb</Output>
+      <Time>2014-10-06T22:17:49.7041599-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

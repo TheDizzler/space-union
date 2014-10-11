@@ -56,7 +56,8 @@ namespace SpaceUnion.Controllers {
 			Assets = Game1.Assets;
 
 			playerShip = selectedship;
-			playerShip.Position = new Vector2(200, 200);
+			playerShip.Position = new Vector2(250, 250);
+			//playerShip.rotation = (float) (Math.PI/2);
 			planets = new List<Planet>();
 			planets.Add(new Planet(Assets.waterPlanet, new Vector2(4000, 3000), 1000f, 1000));
 			planets.Add(new Planet(Assets.moon, new Vector2(1000, 1000), 500f, 800));
@@ -157,7 +158,8 @@ namespace SpaceUnion.Controllers {
 			foreach (Planet planet in planets)
 				planet.update(gameTime, targets);
 
-
+			for (int j = asteroids.Count - 1; j >= 0; j--)
+				asteroids[j].movement(gameTime, targets);
 
 			mainCamera.setZoom(mouseState.ScrollWheelValue);
 			mainCamera.Position = playerShip.Position; // center the camera to player's position
@@ -176,14 +178,14 @@ namespace SpaceUnion.Controllers {
 
 			foreach (Ship ship in ships)
 				ship.update(gameTime, targets);
-			//gui.update();
+			
 
 			for (int i = asteroids.Count - 1; i >= 0; i--) {
 				asteroids[i].update(gameTime, targets);
 				if (!asteroids[i].isActive)
 					asteroids.RemoveAt(i);
 			}
-
+			gui.update(gameTime);
 			Game1.explosionEngine.update(gameTime);
 		}
 

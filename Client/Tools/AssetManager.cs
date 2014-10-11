@@ -23,6 +23,9 @@ namespace SpaceUnion.Tools {
 
 		public Texture2D guiRectangle;
 		public Texture2D playButton;
+		public Texture2D shipselection;
+		public Texture2D confirm;
+
 		// bgs and doodads
 		public Texture2D background;
 		public Texture2D starfield1; // stackable background layer
@@ -46,13 +49,15 @@ namespace SpaceUnion.Tools {
 		public Texture2D ufo;
 		public Texture2D stunt;
 		public Texture2D zoid;
-        public Texture2D confirm;
-        public Texture2D shipselection;
+        public Texture2D bug;
+        
 
         // projectiles
         public Texture2D laser;
 		public Texture2D missile;
 		public Texture2D shield;
+		public Texture2D moltenBullet;
+
 
 		public AssetManager(ContentManager cntnt) {
 
@@ -93,11 +98,14 @@ namespace SpaceUnion.Tools {
 			ufo = Content.Load<Texture2D>("Spaceships/ufoship (128x128)");
 			stunt = Content.Load<Texture2D>("Spaceships/stuntship (128x128)");
 			zoid = Content.Load<Texture2D>("Spaceships/zoidship");
+			bug = Content.Load<Texture2D>("Spaceships/bug (16x16)");
+
 
             winflag1 = Content.Load<Texture2D>("WinFlags/WinFlag1");
 
             laser = Content.Load<Texture2D>("Projectiles/laser");
             missile = Content.Load<Texture2D>("Projectiles/short missile (16x16)");
+			moltenBullet = Content.Load<Texture2D>("Projectiles/molten bullet (6x8)");
 			shield = Content.Load<Texture2D>("Animations/bubble shield sheet");
 		}
 	}

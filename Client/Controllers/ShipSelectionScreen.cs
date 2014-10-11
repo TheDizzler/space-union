@@ -72,7 +72,7 @@ namespace SpaceUnion.Controllers {
 												  (game.getScreenHeight() - confirmButton.height)));
 
 			/* Sets the default selected ship */
-			selectedShip = new UFO(game);
+			selectedShip = new Bug(game);
 			shipSelectionArray[0].selected = true;
 			lastButton = shipSelectionArray[0];
 

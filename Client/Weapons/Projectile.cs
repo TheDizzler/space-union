@@ -46,6 +46,7 @@ namespace SpaceUnion.Weapons {
 			owner = ship;
 			rotation = (float) ship.getRotation();
 
+			velocity = ship.velocity;
 			timeActive = 0;
 		}
 

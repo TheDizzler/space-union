@@ -27,7 +27,8 @@ namespace SpaceUnion {
 		public bool isActive { get; set; }
 
 		/// <summary>
-		/// How much gravitational 'power' this object has. Most should be 1.
+		/// How "big" an object is.
+		/// Influences gravitational 'power' of large masses.
 		/// </summary>
 		public float mass = 1;
 
@@ -106,7 +107,7 @@ namespace SpaceUnion {
 		public override void draw(SpriteBatch batch) {
 			base.draw(batch);
 
-			batch.Draw(assets.guiRectangle, hitBox.getArray(), Color.Pink);
+			//batch.Draw(assets.guiRectangle, hitBox.getArray(), Color.Pink);
 		}
 
 

@@ -30,10 +30,16 @@ namespace SpaceUnion {
 
 
 		protected float maxSpeed = 7;
+		/// <summary>
+		/// How many units(pixels) per second a ship will travel more per second of thrust
+		/// </summary>
 		protected float accelSpeed = 4.5f;
+		/// <summary>
+		/// The non-directional speed of ship in pixels/second
+		/// </summary>
 		protected float currentSpeed = 0;
 		/// <summary>
-		/// Turn speed in degrees per second
+		/// Turn speed in radians per second
 		/// </summary>
 		protected float turnSpeed = 4.5f;
 
@@ -76,7 +82,7 @@ namespace SpaceUnion {
 			this.game = game1;
 			velocity = Vector2.Zero;
 			//scale = .3f;
-
+			mass = 10000;
 			projectiles = new List<Projectile>();
 
 
@@ -86,9 +92,11 @@ namespace SpaceUnion {
 
 
 		public virtual void update(GameTime gameTime, List<Tangible> targets) {
-			// Elapsed time is taken into consideration in thrust and planet.pull
-			position += velocity;
+			
+			position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
 			base.update(position);
+
+
 			checkWorldEdge();
 
 
@@ -143,7 +151,6 @@ namespace SpaceUnion {
 
 			Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
 			acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
-
 			Vector2.Add(ref velocity, ref acceleration, out velocity);
 
 		}
@@ -160,9 +167,11 @@ namespace SpaceUnion {
 				previousMainFireTime = gameTime.TotalGameTime;
 
 				// Add the projectile, but add it to the front and center of the player
-				projectiles.Add(new Laser(Vector2.Add(position, weaponOrigin), this));
+				projectiles.Add(getProjectile());
 			}
 		}
+
+		protected abstract Projectile getProjectile();
 
 		/// <summary>
 		/// Alternate Weapon

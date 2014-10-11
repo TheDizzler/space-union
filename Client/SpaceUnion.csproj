@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="Animations\BigExplosion.cs" />
     <Compile Include="Animations\Explosion.cs" />
+    <Compile Include="Ships\Bug.cs" />
     <Compile Include="Ships\Copy of Ship.cs" />
     <Compile Include="Ships\Stunt.cs" />
     <Compile Include="Ships\TestShip.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Tools\CollisionHandler.cs" />
     <Compile Include="Weapons\Laser.cs" />
     <Compile Include="Weapons\Missile.cs" />
+    <Compile Include="Weapons\MoltenBullet.cs" />
     <Compile Include="Weapons\Projectile.cs" />
     <Compile Include="Tools\AnimationClass.cs" />
     <Compile Include="Game1.cs" />
