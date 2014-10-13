@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using SpaceUnion.Weapons;
 
 
-namespace SpaceUnion.Ships {
+namespace SpaceUnion.Weapons {
 	class Bug : Ship {
 
 		public Bug(Game1 game1)

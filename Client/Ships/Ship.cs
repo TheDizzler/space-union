@@ -114,7 +114,7 @@ namespace SpaceUnion {
 		}
 
 
-		/* !!Never have update code in draw function!! */
+		
 		public override void draw(SpriteBatch sBatch) {
 
 			base.draw(sBatch);

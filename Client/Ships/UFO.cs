@@ -8,7 +8,7 @@ using SpaceUnion.Tools;
 using SpaceUnion.Weapons;
 
 
-namespace SpaceUnion.Ships {
+namespace SpaceUnion.Weapons {
 	class UFO : Ship {
 
 		Shield shield;

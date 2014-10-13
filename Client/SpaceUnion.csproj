@@ -39,7 +39,8 @@
     <Compile Include="Animations\Explosion.cs" />
     <Compile Include="Ships\Bug.cs" />
     <Compile Include="Ships\Copy of Ship.cs" />
-    <Compile Include="Ships\Stunt.cs" />
+    <Compile Include="Weapons\LaserBeam.cs" />
+    <Compile Include="Ships\Scout.cs" />
     <Compile Include="Ships\TestShip.cs" />
     <Compile Include="Ships\UFO.cs" />
     <Compile Include="Ships\Zoid.cs" />
@@ -80,6 +81,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>

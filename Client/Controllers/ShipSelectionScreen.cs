@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SpaceUnion.Ships;
+using SpaceUnion.Weapons;
 using SpaceUnion.Tools;
 
 namespace SpaceUnion.Controllers {
@@ -38,7 +39,7 @@ namespace SpaceUnion.Controllers {
 			shipSelectionArray = new ShipButton[SHIPCOUNT];
 			/* Actual ships used; commented out to test other functions */
 			shipSelectionArray[0] = new ShipButton(new UFO(game));
-			shipSelectionArray[1] = new ShipButton(new Stunt(game));
+			shipSelectionArray[1] = new ShipButton(new Scout(game));
 			shipSelectionArray[2] = new ShipButton(new Zoid(game));
 			shipSelectionArray[3] = new ShipButton(new TestShip(game));
 
