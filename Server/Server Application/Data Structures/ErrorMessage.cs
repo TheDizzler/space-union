@@ -21,7 +21,6 @@ namespace Data_Structures
         {
             Type = 3;
         }
-
         /// <summary>
         /// A constructor for this class, does not initiate any data.
         /// </summary>

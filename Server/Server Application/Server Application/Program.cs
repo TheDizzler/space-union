@@ -59,6 +59,9 @@ namespace Server_Application
                     case "data":
                         server.checkGameDataQueueSize();
                         break;
+                    case "ports":
+                        server.ports();
+                        break;
                     case "clear":
                         Console.Clear();
                         break;

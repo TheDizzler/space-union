@@ -115,13 +115,18 @@ namespace Server_Application
             {
                 if (room.getPlayerList().Count < 6)
                 {
+                    player.GameRoom = room.RoomNumber;
                     room.addPlayer(player);
+                    Console.WriteLine("Games in room " + gamerooms.Count + " Players in room: " + room.getPlayerList().Count + "  player " + player.Username);
                     return;
                 }
             }
             Gameroom temproom = new Gameroom();
             temproom.RoomNumber = gamerooms.Count;
+            player.GameRoom = temproom.RoomNumber;
             temproom.addPlayer(player);
+            gamerooms.Add(temproom);
+            Console.WriteLine("Games in room " + gamerooms.Count + " Players in room: " + temproom.getPlayerList().Count + "  player " + player.Username);
         }
 
         /// <summary>
@@ -133,6 +138,14 @@ namespace Server_Application
             if (message != null)
             {
                 transmission.addMessageToQueue(message);
+            }
+        }
+
+        public void ports()
+        {
+            foreach (Player player in onlineplayers)
+            {
+                Console.WriteLine("Player - " + player.Username + " Receiving port: " + player.PortReceive);
             }
         }
 

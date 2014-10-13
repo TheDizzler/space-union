@@ -23,10 +23,10 @@ namespace Client_Comm_Module
 
         public ClientDataTransmission(int assignedPort)
         {
-            UDPClient = new UdpClient(assignedUDPPort_Send);
             assignedUDPPort_Send = assignedPort;
+            UDPClient = new UdpClient(assignedUDPPort_Send);
             dataQueue = new List<GameData>();
-
+            
             try
             {
                 new Thread(sendGameData).Start();
@@ -73,6 +73,7 @@ namespace Client_Comm_Module
                     Thread.Sleep(ClientConstants.DATA_SEND_INTERVAL);
                     continue;
                 }
+                //Console.WriteLine("Port: " + ((IPEndPoint)UDPClient.Client.LocalEndPoint).Port);
                 DataControl.sendUDPData(UDPClient, data, ClientConstants.SERVER_IPADDRESS, assignedUDPPort_Send);
             }
         }

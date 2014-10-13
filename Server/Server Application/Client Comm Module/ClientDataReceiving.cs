@@ -39,10 +39,10 @@ namespace Client_Comm_Module
         /// <param name="assignedPort">UDP port to listen to; assigned by the server.</param>
         public ClientDataReceiving(int assignedPort)
         {
+            Console.WriteLine("------------RECEIVER IS INITIALIZED--------" + assignedPort);
             dataQueue = new List<GameData>();
             UDPListener = new UdpClient(assignedPort);
             assignedUDPPort_Listen = assignedPort;
-
             new Thread(receiveData).Start();
         }
 
@@ -61,9 +61,15 @@ namespace Client_Comm_Module
         {
             while (true)
             {
+                Console.WriteLine("Waiting for data from the server");
                 GameData clientData = (GameData)DataControl.receiveUDPData(UDPListener);
+                //Console.WriteLine("null Message Received: ");
                 if (clientData != null)
+                {
+                    Console.WriteLine("Message Received: " + clientData.XPosition + ", " + clientData.YPosition + ", " + clientData.Player.Username);
+                    Console.WriteLine(getGameDataQueueSize());
                     dataQueue.Add(clientData);
+                }
             }
         }
 

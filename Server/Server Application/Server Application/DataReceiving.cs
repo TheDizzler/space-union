@@ -50,7 +50,7 @@ namespace Server_Application
             //Number of TCP clients - 1 because it created an error listener which wasn't being used.
             for (int x = 0; x < Constants.NumberOfTcpClients - 2; x++)
                 TCPListeners[x] = new TcpListener(IPAddress.Parse("0.0.0.0"), Constants.TCPLoginListener + x);
-            for (int x = 0; x < Constants.NumberOfTcpClients - 1; x++)
+            for (int x = 0; x < Constants.NumberOfTcpClients - 2; x++)
                 TCPListeners[x].Start();
             for (int x = 0; x < Constants.NumberOfUdpClients; x++)
                 new Thread(receiveClientData).Start(UDPListeners[x]);
@@ -66,6 +66,8 @@ namespace Server_Application
             while (true)
             {
                 Data message = (Player)DataControl.receiveTCPData(TCPListeners[0]);
+                if (message == null)
+                    return;
                 if (message.Type == Constants.LOGIN_REQUEST)
                 {
                     Console.WriteLine(((Player)message).Username);
@@ -88,7 +90,6 @@ namespace Server_Application
             while (true)
             {
                 GameData clientData = (GameData)DataControl.receiveUDPData((UdpClient)UDPListener);
-                Console.WriteLine(clientData.Player.Username + " " + clientData.Player.GameRoom + " " + clientData.XPosition + " " + clientData.YPosition);
                 owner.addMessageToQueue(clientData);
             }
         }
