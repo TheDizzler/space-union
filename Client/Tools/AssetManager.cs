@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
-
+///Edited by Matthew Baldock
 namespace SpaceUnion.Tools {
 
 	/// <summary>
@@ -23,8 +23,48 @@ namespace SpaceUnion.Tools {
 
 		public Texture2D guiRectangle;
 		public Texture2D playButton;
+        /// <summary>
+        /// Ship selection button texture
+        /// 
+        /// Created by Matthew Baldock
+        /// </summary>
 		public Texture2D shipselection;
+        /// <summary>
+        /// Confirm button texture
+        /// 
+        /// Created by Matthew Baldock
+        /// </summary>
 		public Texture2D confirm;
+        /// <summary>
+        /// Lobby Options button texture
+        /// 
+        /// Created by Matthew Baldock
+        /// </summary>
+        public Texture2D lobbyoptions;
+        /// <summary>
+        /// Lobby Browser button texture
+        /// 
+        /// Created by Matthew Baldock
+        /// </summary>
+        public Texture2D lobbybrowser;
+        /// <summary>
+        /// Create Lobby button texture
+        /// 
+        /// Created by Matthew Baldock
+        /// </summary>
+        public Texture2D createlobby;
+        /// <summary>
+        /// Game Lobby button texture
+        /// 
+        /// Created by Matthew Baldock
+        /// </summary>
+        public Texture2D gamelobby;
+        /// <summary>
+        /// Game Room button texture
+        /// 
+        /// Created by Matthew Baldock
+        /// </summary>
+        public Texture2D gameroom;
 
 		// bgs and doodads
 		public Texture2D background;
@@ -48,6 +88,11 @@ namespace SpaceUnion.Tools {
 
 		public Texture2D ufo;
 		public Texture2D stunt;
+        /// <summary>
+        /// Zoid ship texture
+        /// 
+        /// Created by Matthew Baldock
+        /// </summary>
 		public Texture2D zoid;
         public Texture2D bug;
         
@@ -66,7 +111,11 @@ namespace SpaceUnion.Tools {
 
 
 
-
+        /// <summary>
+        /// Loading Graphics for all texture assets from
+        /// the folders they reside in.
+        /// </summary>
+        /// <param name="graphicsDevice"></param>
 		internal void loadContent(GraphicsDevice graphicsDevice) {
 
 
@@ -77,6 +126,11 @@ namespace SpaceUnion.Tools {
 			playButton = Content.Load<Texture2D>("Buttons/playbutton");
             confirm = Content.Load<Texture2D>("Buttons/confirm");
             shipselection = Content.Load<Texture2D>("Buttons/shipselection");
+            lobbyoptions = Content.Load<Texture2D>("Buttons/lobbyoptions");
+            lobbybrowser = Content.Load<Texture2D>("Buttons/lobbybrowser");
+            createlobby = Content.Load<Texture2D>("Buttons/createlobby");
+            gamelobby = Content.Load<Texture2D>("Buttons/gamelobby");
+            gameroom = Content.Load<Texture2D>("Buttons/gameroom");
 
 			guiRectangle = new Texture2D(graphicsDevice, 1, 1);
 			guiRectangle.SetData(new[] { Color.White });

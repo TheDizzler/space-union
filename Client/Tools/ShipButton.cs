@@ -59,7 +59,7 @@ namespace SpaceUnion.Tools {
 			else if (selected) {
 				spriteBatch.Draw(texture, buttonRectangle, Color.Yellow);
 			} else
-				spriteBatch.Draw(texture, buttonRectangle, Color.Blue);
+				spriteBatch.Draw(texture, buttonRectangle, Color.White);
 		}
 
 		public Ship getShip() {

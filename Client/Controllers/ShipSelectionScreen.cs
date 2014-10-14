@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using SpaceUnion.Ships;
 using SpaceUnion.Tools;
-
+///Created by Matthew Baldock
+///Edited by Steven Chen
 namespace SpaceUnion.Controllers {
 	class ShipSelectionScreen {
 

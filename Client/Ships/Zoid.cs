@@ -20,7 +20,7 @@ namespace SpaceUnion.Ships {
 			: base(assets.zoid, assets.missile, game1) {
 
 			maxSpeed = 7;
-			accelSpeed = 4.5f;
+			accelSpeed = 10.5f;
 			turnSpeed = 4.5f;
 
 			mainFireDelay = TimeSpan.FromSeconds(.2f);

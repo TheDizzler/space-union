@@ -19,7 +19,7 @@ namespace SpaceUnion.Ships {
 
 
 			maxSpeed = 7;
-			accelSpeed = 4.5f;
+			accelSpeed = 50.5f;
 			turnSpeed = 4.5f;
 
 			mainFireDelay = TimeSpan.FromSeconds(.5f);
