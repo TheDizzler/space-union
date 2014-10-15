@@ -65,10 +65,8 @@ namespace Data_Manipulation
         public static void sendTCPData(TcpClient client, object input, string ipaddress, int port)
         {
             if(client.Connected)
-            {
                 client.Close();
-                client = new TcpClient();
-            }
+            client = new TcpClient();
             try
             {
                 client.Connect(ipaddress, port);

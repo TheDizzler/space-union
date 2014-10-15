@@ -22,6 +22,7 @@ namespace Data_Structures
         public void addPlayer(Player player)
         {
             GameData data = new GameData();
+            GameData temp = null;
             data.Player = player;
             data.Player.GameRoom = RoomNumber;
             data.XPosition = 500;
@@ -30,6 +31,15 @@ namespace Data_Structures
             data.Health = 100;
             data.Kills = 0;
             data.Deaths = 0;
+            foreach (GameData item in list)
+            {
+                if (item.Player.Username == data.Player.Username)
+                {
+                    temp = item;
+                }
+            }
+            list.Remove(temp);
+            list.Add(data);
         }
 
         public List<GameData> getPlayerList()
