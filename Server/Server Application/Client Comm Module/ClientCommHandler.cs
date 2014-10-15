@@ -18,11 +18,13 @@ namespace Client_Comm_Module
 
         private ClientHandlerHelper helper;
 
+        private bool gameStarted = false;
+
         public ClientCommHandler()
         {
             receiver = new ClientMessageReceiving();
             sender = new ClientMessageTransmission();
-            helper = new ClientHandlerHelper(getGameData);
+            
 
             receiver.gameStart += new ClientMessageReceiving.GameStartEventHandler(initializeDataTransmission);
         }
@@ -32,16 +34,21 @@ namespace Client_Comm_Module
         /// port assignment data.
         /// </summary>
         /// <returns>The login confirmation data.</returns>
-        public Player getLoginConfirmation()
+        /*public Player getLoginConfirmation()
         {
             return receiver.receiveLoginConfirmation();
+        }*/
+
+        public Player getPlayer()
+        {
+            return receiver.getPlayer();
         }
 
         /// <summary>
         /// Gets the other players in the gameroom as an array.
         /// </summary>
         /// <returns>Gets an array of data about the positions of the other players.</returns>
-        public GameData[] getPlayersData()
+        public Dictionary<string, GameData> getPlayersData()
         {
             return helper.getPlayersData();
         }
@@ -52,8 +59,13 @@ namespace Client_Comm_Module
         /// <param name="setupMessage">The received setup message.</param>
         private void initializeDataTransmission(Player setupMessage)
         {
-            dataReceiver = new ClientDataReceiving(setupMessage.PortReceive);
-            dataSender = new ClientDataTransmission(setupMessage.PortSend);
+            if (!gameStarted)
+            {
+                gameStarted = true;
+                dataReceiver = new ClientDataReceiving(setupMessage.PortReceive);
+                dataSender = new ClientDataTransmission(setupMessage.PortSend);
+                helper = new ClientHandlerHelper(getGameData);
+            }
         }
 
         // SEND FUNCTIONS --------------------------------------------------
@@ -103,7 +115,7 @@ namespace Client_Comm_Module
         /// <param name="data">The data to send to the server.</param>
         public void sendGameData(GameData data)
         {
-            if (data != null)
+            if (data != null && dataSender != null)
                 dataSender.addDataToQueue(data);
         }
 
@@ -115,7 +127,11 @@ namespace Client_Comm_Module
         /// <returns>Game data received from the server.</returns>
         private GameData getGameData()
         {
-            return dataReceiver.getGameData();
+            if (dataReceiver != null)
+            {
+                return dataReceiver.getGameData();
+            }
+            return null;
         }
 
         /// <summary>

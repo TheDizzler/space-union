@@ -136,9 +136,10 @@ namespace Server_Application
                 GameData data = getGameData(client);
                 if (data == null)
                 {
-                    Thread.Sleep(1);
+                    Thread.Sleep(30);
                     continue;
-                }   
+                }
+                //Console.WriteLine("Player - " + data.Player.Username + " Port sent to - " + ((IPEndPoint)UDPClients[client].Client.LocalEndPoint).Port + " IP - " + data.Player.IPAddress);
                 DataControl.sendUDPData(UDPClients[client], data, data.Player.IPAddress, ((IPEndPoint)UDPClients[client].Client.LocalEndPoint).Port);
             }
         }
@@ -198,7 +199,10 @@ namespace Server_Application
             {
                 if (player.Player.Username != message.Player.Username)
                 {
-                    UDPQueue[player.Player.PortReceive - Constants.UDPServerToClientPort].Add(message);
+                    GameData temp = (GameData)DataControl.bytesToObject(DataControl.objectToBytes(message));
+                    temp.Player.IPAddress = player.Player.IPAddress;
+                    Console.WriteLine("Temp - " + temp.Player.IPAddress + " Message - " + message.Player.IPAddress);
+                    UDPQueue[player.Player.PortReceive - Constants.UDPServerToClientPort].Add(temp);
                 }
             }
         }

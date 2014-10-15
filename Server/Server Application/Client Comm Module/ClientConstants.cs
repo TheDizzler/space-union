@@ -35,6 +35,6 @@ namespace Client_Comm_Module
         /// <summary>
         /// THe interval between each data transmission.
         /// </summary>
-        public const int DATA_SEND_INTERVAL = 1;
+        public const int DATA_SEND_INTERVAL = 30;
     }
 }

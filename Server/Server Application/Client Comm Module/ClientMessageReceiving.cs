@@ -18,7 +18,8 @@ namespace Client_Comm_Module
         
         private TcpListener TCPListener;
         private List<GameMessage> messageQueue;
-        
+
+        private Player player = null;
 
         public ClientMessageReceiving()
         {
@@ -36,11 +37,12 @@ namespace Client_Comm_Module
         /// Waits for the server to send a login confirmation with
         /// the port assignments for this client.
         /// </summary>
-        public Player receiveLoginConfirmation()
+        /*public Player receiveLoginConfirmation()
         {
-            TcpListener listener = new TcpListener(IPAddress.Any, Constants.TCPLoginClient);
-            return (Player)DataControl.receiveTCPData(listener);
-        }
+            //TcpListener listener = new TcpListener(IPAddress.Any, Constants.TCPLoginClient);
+            //listener.Start();
+            return (Player)DataControl.receiveTCPData(TCPListener);
+        }*/
 
         /// <summary>
         /// Begin receiving chat messages from the server.
@@ -62,18 +64,36 @@ namespace Client_Comm_Module
         {
             while (true)
             {
+                Console.WriteLine("-----------------A message was received-----------------");
                 Data data = (Data)DataControl.receiveTCPData(TCPListener);
                 if (data != null)
                     switch(data.Type) {
                         case Constants.CHAT_MESSAGE:
+                            Console.WriteLine("-----------------A chat message was received-----------------");
+                            Console.WriteLine(((GameMessage)data).Message);
                             messageQueue.Add((GameMessage)data);
                             break;
-
+                            
                         case Constants.LOGIN_REQUEST:
+                            Console.WriteLine("-----------------A login request was received-----------------");
+                            Console.WriteLine(((Player)data).PortReceive + "AND" + ((Player)data).PortSend);
+                            player = (Player)data;
                             gameStart((Player)data);
                             break;
+                             
                     }
             }
+        }
+
+        public Player getPlayer()
+        {
+            if (player == null)
+            {
+                Console.WriteLine("-------player is null--------");
+                return null;
+            }
+            Console.WriteLine(player.PortReceive + "AAAAAAAAAAAAA");
+            return player;
         }
 
         /// <summary>

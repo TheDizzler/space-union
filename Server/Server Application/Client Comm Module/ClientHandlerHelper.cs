@@ -11,18 +11,21 @@ using Data_Manipulation;
 
 namespace Client_Comm_Module
 {
-    class ClientHandlerHelper
+    public class ClientHandlerHelper
     {
         public delegate GameData GameDataDelegate();
 
-        private GameData[] gameDataPlayers = new GameData[ClientConstants.NumberOfPlayers];
+        //private GameData[] gameDataPlayers = new GameData[ClientConstants.NumberOfPlayers];
+        private volatile Dictionary<string, GameData> gameDataPlayers = new Dictionary<string, GameData>();
+
+        private Object listLock = new Object();
 
         public ClientHandlerHelper(GameDataDelegate getGameData)
         {
-            for (int x = 0; x < ClientConstants.NumberOfPlayers; x++)
+            /*for (int x = 0; x < ClientConstants.NumberOfPlayers; x++)
             {
-                gameDataPlayers[x] = null;
-            }
+                gameDataPlayers. = null;
+            }*/
                 
             ThreadStart ts = new ThreadStart(() => updatePlayerList(getGameData));
             new Thread(ts).Start();
@@ -32,7 +35,7 @@ namespace Client_Comm_Module
         /// Gets the other players in the gameroom as an array.
         /// </summary>
         /// <returns>Gets an array of data about the positions of the other players.</returns>
-        public GameData[] getPlayersData()
+        public Dictionary<string, GameData> getPlayersData()
         {
             return gameDataPlayers;
         }
@@ -47,29 +50,46 @@ namespace Client_Comm_Module
                 GameData player = getGameData();
                 if (player == null)
                 {
-                    Thread.Sleep(1);
+                    Thread.Sleep(ClientConstants.DATA_SEND_INTERVAL);
                     continue;
                 }
 
-                for (int x = 0; x < ClientConstants.NumberOfPlayers; x++)
+                if (gameDataPlayers.ContainsKey(player.Player.Username))
                 {
-                    if (gameDataPlayers[x] == null)
+                    lock (listLock)
                     {
-                        for (int y = 0; y < ClientConstants.NumberOfPlayers; y++)
-                        {
-                            if (gameDataPlayers[y] != null && gameDataPlayers[y].Player.Username == player.Player.Username)
-                            {
-                                gameDataPlayers[y] = player;
-                                break;
-                            }
-                        }
-                    }
-                    if (player.Player.Username == gameDataPlayers[x].Player.Username)
-                    {
-                        gameDataPlayers[x] = player;
-                        break;
+                        gameDataPlayers[player.Player.Username] = player;
                     }
                 }
+                else
+                {
+                    lock (listLock)
+                    {
+                        gameDataPlayers.Add(player.Player.Username, player);
+                    }
+                }
+                
+                /*
+
+
+
+                if (gameDataPlayers[x] == null)
+                {
+                    for (int y = 0; y < ClientConstants.NumberOfPlayers; y++)
+                    {
+                        if (gameDataPlayers[y] != null && gameDataPlayers[y].Player.Username == player.Player.Username)
+                        {
+                            gameDataPlayers[y] = player;
+                            break;
+                        }
+                    }
+                }
+                if (player.Player.Username == gameDataPlayers[x].Player.Username)
+                {
+                    gameDataPlayers.get = player;
+                    break;
+                }
+                 * */
             }
         }
 
