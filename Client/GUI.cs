@@ -33,6 +33,7 @@ namespace SpaceUnion {
 		private Vector2 accel;
 		private double totalTime = 0;
 		private Vector2 currentVelocity;
+		private List<Tangible> nearBy;
 
 
 		public GUI(Game1 game, Ship ship, Planet plnt) {
@@ -55,10 +56,13 @@ namespace SpaceUnion {
 			line5Pos = new Vector2(100, guiY + 40);
 			line6Pos = new Vector2(100, guiY + 50);
 			line7Pos = new Vector2(100, guiY + 60);
+
+
+			nearBy = new List<Tangible>();
 		}
 
 
-		public void update(GameTime gameTime) {
+		public void update(GameTime gameTime, QuadTree quadTree) {
 			if (playerShip.position.X <= 7999){
 			currentVelocity = playerShip.velocity;
 
@@ -66,6 +70,8 @@ namespace SpaceUnion {
 			
 				totalTime += gameTime.ElapsedGameTime.TotalSeconds;
 			}
+
+			nearBy = quadTree.retrieve(playerShip);
 
 		}
 
@@ -86,7 +92,10 @@ namespace SpaceUnion {
 			spriteBatch.DrawString(font, "accel: " + accel,
 				line5Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 
-			spriteBatch.DrawString(font, "totalTime: " + totalTime,
+			//spriteBatch.DrawString(font, "totalTime: " + totalTime,
+			//	line7Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
+
+			spriteBatch.DrawString(font, "nearBy: " + nearBy.Count,
 				line7Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 
 			lastVelocity = playerShip.velocity;

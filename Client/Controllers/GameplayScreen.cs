@@ -19,7 +19,7 @@ namespace SpaceUnion.Controllers {
 		private MouseState mouseState;
 		private SpriteBatch spriteBatch;
 
-
+		QuadTree quadTree;
 		List<Asteroid> asteroids;
 		List<Ship> ships;
 		List<Tangible> targets;
@@ -41,7 +41,7 @@ namespace SpaceUnion.Controllers {
 		private int SCREEN_HEIGHT;
 
 
-		
+
 
 
 		public GameplayScreen(Game1 game, SpriteBatch batch, Ship selectedship) {
@@ -49,6 +49,8 @@ namespace SpaceUnion.Controllers {
 			this.game = game;
 			SCREEN_HEIGHT = game.getScreenHeight();
 			SCREEN_WIDTH = game.getScreenWidth();
+
+			quadTree = new QuadTree(0, new Rectangle(0, 0, worldWidth, worldHeight));
 
 			spriteBatch = batch;
 
@@ -75,14 +77,14 @@ namespace SpaceUnion.Controllers {
 			targets = new List<Tangible>();
 
 			ships.Add(playerShip);
+
 			foreach (Ship ship in ships)
 				targets.Add(ship);
-
-			
-
-
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < 50; i++)
 				AddAsteroid(new Vector2(gen.Next(100, worldWidth), gen.Next(100, worldHeight)));
+
+
+
 		}
 
 		/// <summary>
@@ -118,9 +120,18 @@ namespace SpaceUnion.Controllers {
 		/// <summary>
 		/// Allows the game to run logic such as updating the world,
 		/// checking for collisions, gathering input, and playing audio.
+		/// Basic flow of "turn":
+		/// create QuadTree, get player input, apply gravity,
+		/// movement (ships, asteroids?), camera update, collision detection(?),
+		/// explosion handling, gui update.
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public void Update(GameTime gameTime) {
+
+			quadTree.clear();
+			foreach (Tangible target in targets)
+				quadTree.insert(target);
+
 
 			keyState = Keyboard.GetState(); //Get which keys are pressed or released
 			mouseState = Mouse.GetState();
@@ -156,14 +167,12 @@ namespace SpaceUnion.Controllers {
 				playerShip.altFire(gameTime);
 
 			foreach (Planet planet in planets)
-				planet.update(gameTime, targets);
+				planet.update(gameTime, quadTree, targets);
 
-			for (int j = asteroids.Count - 1; j >= 0; j--)
-				asteroids[j].movement(gameTime, targets);
+			//for (int j = asteroids.Count - 1; j >= 0; j--)
+			//	asteroids[j].movement(gameTime, targets);
 
-			mainCamera.setZoom(mouseState.ScrollWheelValue);
-			mainCamera.Position = playerShip.Position; // center the camera to player's position
-			mainCamera.update(gameTime);
+
 
 			/* Transform mouse input from view to world position
 			 * NOT currently used but may be useful in the future
@@ -172,21 +181,39 @@ namespace SpaceUnion.Controllers {
 			   new Vector2(mouseState.X, mouseState.Y), inverse);
 			*/
 
-			if (asteroids.Count < 50)
-				AddAsteroid(new Vector2(gen.Next(100, 4000), gen.Next(100, 2000)));
+			//if (asteroids.Count < 50)
+			//	AddAsteroid(new Vector2(gen.Next(100, 4000), gen.Next(100, 2000)));
 
 
 			foreach (Ship ship in ships)
-				ship.update(gameTime, targets);
-			
+				ship.update(gameTime, quadTree);
+
 
 			for (int i = asteroids.Count - 1; i >= 0; i--) {
-				asteroids[i].update(gameTime, targets);
+				asteroids[i].update(gameTime, quadTree);
 				if (!asteroids[i].isActive)
 					asteroids.RemoveAt(i);
 			}
-			gui.update(gameTime);
+
+			/* Use this if we do all collisions at end together */
+			//List<Tangible> possibleCollisions = new List<Tangible>();
+			//foreach (Tangible actor in targets) {
+			//	possibleCollisions.Clear();
+			//	quadTree.retrieve(possibleCollisions, actor);
+
+			//	foreach (Tangible target in possibleCollisions) {
+			//		// check collision here
+			//	}
+			//}
+
+
+			mainCamera.setZoom(mouseState.ScrollWheelValue);
+			mainCamera.Position = playerShip.Position; // center the camera to player's position
+			mainCamera.update(gameTime);
+
 			Game1.explosionEngine.update(gameTime);
+
+			gui.update(gameTime, quadTree);
 		}
 
 		/// <summary>

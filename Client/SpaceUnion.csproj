@@ -39,6 +39,8 @@
     <Compile Include="Animations\Explosion.cs" />
     <Compile Include="Ships\Bug.cs" />
     <Compile Include="Ships\Copy of Ship.cs" />
+    <Compile Include="Tools\CollisionAlgorithm.cs" />
+    <Compile Include="Tools\QuadTree.cs" />
     <Compile Include="Weapons\LaserBeam.cs" />
     <Compile Include="Ships\Scout.cs" />
     <Compile Include="Ships\TestShip.cs" />
@@ -52,7 +54,6 @@
     <Compile Include="GUI.cs" />
     <Compile Include="Controllers\GameplayScreen.cs" />
     <Compile Include="Controllers\MainMenuScreen.cs" />
-    <Compile Include="Tactile.cs" />
     <Compile Include="Tangible.cs" />
     <Compile Include="StellarObjects\Asteroid.cs" />
     <Compile Include="StellarObjects\Planet.cs" />

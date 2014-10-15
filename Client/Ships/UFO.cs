@@ -31,9 +31,9 @@ namespace SpaceUnion.Weapons {
 		}
 
 
-		public override void update(GameTime gameTime, List<Tangible> targets) {
+		public override void update(GameTime gameTime, QuadTree quadTree) {
 
-			base.update(gameTime, targets);
+			base.update(gameTime, quadTree);
 			shield.update(gameTime, position);
 		}
 

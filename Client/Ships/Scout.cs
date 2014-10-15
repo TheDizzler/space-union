@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceUnion.Tools;
 using SpaceUnion.Weapons;
 
 
@@ -40,7 +41,7 @@ namespace SpaceUnion.Ships {
 		}
 
 
-		public override void update(GameTime gameTime, List<Tangible> targets) {
+		public override void update(GameTime gameTime, QuadTree quadTree) {
 
 			position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
 			base.update(position);
@@ -50,9 +51,9 @@ namespace SpaceUnion.Ships {
 
 
 
-			beam.update(gameTime, targets);
+			beam.update(gameTime, quadTree);
 
-			checkForCollision(targets, gameTime);
+			checkForCollision(quadTree, gameTime);
 		}
 
 		public override void draw(SpriteBatch sBatch) {

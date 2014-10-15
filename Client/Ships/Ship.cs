@@ -91,7 +91,7 @@ namespace SpaceUnion {
 		//public abstract void setup();
 
 
-		public virtual void update(GameTime gameTime, List<Tangible> targets) {
+		public virtual void update(GameTime gameTime, QuadTree quadTree) {
 			
 			position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
 			base.update(position);
@@ -103,14 +103,14 @@ namespace SpaceUnion {
 
 			// Update the Projectiles
 			for (int i = projectiles.Count - 1; i >= 0; i--) {
-				projectiles[i].update(gameTime, targets);
+				projectiles[i].update(gameTime, quadTree);
 
 				if (!projectiles[i].isActive) {
 					projectiles.RemoveAt(i);
 				}
 			}
 
-			checkForCollision(targets, gameTime);
+			checkForCollision(quadTree, gameTime);
 		}
 
 

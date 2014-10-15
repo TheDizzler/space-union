@@ -34,7 +34,7 @@ namespace SpaceUnion.StellarObjects {
 			currentHealth = maxHealth = 1;
 		}
 
-		public void update(GameTime gameTime, List<Tangible> tangibles) {
+		public void update(GameTime gameTime, QuadTree quadTree) {
 
 			// move in a straight line
 			position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
@@ -43,7 +43,7 @@ namespace SpaceUnion.StellarObjects {
 
 			checkWorldEdge();
 
-			checkForCollision(tangibles, gameTime);
+			checkForCollision(quadTree, gameTime);
 		}
 
 		public void movement(GameTime gameTime, List<Tangible> targets) {

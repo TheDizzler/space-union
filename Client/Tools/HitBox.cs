@@ -13,8 +13,9 @@ namespace SpaceUnion.Tools {
 		/// <summary>
 		/// Hit box coordinates
 		/// </summary>
-		private Vector2 position;
+		public Vector2 position;
 
+		public float rotation;
 
 
 		public HitBox(float x, float y, int w, int h) {
@@ -31,8 +32,9 @@ namespace SpaceUnion.Tools {
 			return rectHitBox = new Rectangle((int) position.X - width / 2, (int) position.Y - height / 2, width, height);
 		}
 
-		public void updatePosition(Vector2 newPosition, float rotation) {
+		public void updatePosition(Vector2 newPosition, float rot) {
 			position = newPosition;
+			rotation = rot;
 			//rectHitBox = new Rectangle((int) position.X, (int) position.Y, width, height);
 		}
 

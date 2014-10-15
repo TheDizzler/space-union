@@ -14,7 +14,7 @@ namespace SpaceUnion.Tools {
 	/// </summary>
 	public class CollisionHandler {
 
-
+		 
 		/// <summary>
 		/// The outcome of a Ship on Ship collision
 		/// </summary>

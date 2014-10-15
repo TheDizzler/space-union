@@ -52,7 +52,7 @@ namespace SpaceUnion.Weapons {
 
 
 
-		public void update(GameTime gameTime, List<Tangible> targets) {
+		public void update(GameTime gameTime, QuadTree quadTree) {
 
 			timeActive += (float) gameTime.ElapsedGameTime.TotalSeconds;
 			if (projectileTTL > timeActive) {
@@ -60,7 +60,7 @@ namespace SpaceUnion.Weapons {
 				position += velocity * (float) gameTime.ElapsedGameTime.TotalMilliseconds;
 				base.update(position);
 
-				checkForCollision(targets, gameTime);
+				checkForCollision(quadTree, gameTime);
 			} else {
 				isActive = false;
 			}

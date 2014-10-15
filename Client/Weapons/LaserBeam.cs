@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+//using Microsoft.Xna.Framework.Ray;
+using SpaceUnion.Tools;
 
 
 namespace SpaceUnion.Weapons {
@@ -33,9 +35,9 @@ namespace SpaceUnion.Weapons {
 
 		}
 
-		public new void update(GameTime gameTime, List<Tangible> targets) {
+		public new void update(GameTime gameTime, QuadTree quadTree) {
 
-
+			Ray ray = new Ray(new Vector3(0,0,0), new Vector3(0,0,0));
 			lineDirection = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
 			//lineDirection.Normalize();
 			dots.Clear();
