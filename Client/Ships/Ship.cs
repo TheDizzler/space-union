@@ -27,13 +27,11 @@ namespace SpaceUnion {
 		/// </summary>
 		public static float dampening = .1f;
 
-
-
-		protected float maxSpeed = 7;
+		protected float maxSpeed = 100;
 		/// <summary>
 		/// How many units(pixels) per second a ship will travel more per second of thrust
 		/// </summary>
-		protected float accelSpeed = 4.5f;
+		protected float accelSpeed = 20.0f;
 		/// <summary>
 		/// The non-directional speed of ship in pixels/second
 		/// </summary>
@@ -70,6 +68,8 @@ namespace SpaceUnion {
 		/// </summary>
 		protected Vector2 weaponOrigin = Vector2.Zero;
 
+        private Texture2D shipTexture;
+
 		/// <summary>
 		/// Ship constructor
 		/// </summary>
@@ -84,7 +84,7 @@ namespace SpaceUnion {
 			//scale = .3f;
 			mass = 10000;
 			projectiles = new List<Projectile>();
-
+            shipTexture = tex;
 
 		}
 
@@ -113,6 +113,10 @@ namespace SpaceUnion {
 			checkForCollision(targets, gameTime);
 		}
 
+        public Texture2D getTexture()
+        {
+            return shipTexture;
+        }
 
 		/* !!Never have update code in draw function!! */
 		public override void draw(SpriteBatch sBatch) {
@@ -148,12 +152,24 @@ namespace SpaceUnion {
 		/// </summary>
 		/// <param name="gameTime"></param>
 		public virtual void thrust(GameTime gameTime) {
-
+            Vector2 tempVelocity = velocity;
 			Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
 			acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
-			Vector2.Add(ref velocity, ref acceleration, out velocity);
-
+            
+            if (Math.Abs(tempVelocity.Length()) > maxSpeed)
+            {
+                Vector2 tempVelocity2 = tempVelocity;
+                Vector2.Add(ref tempVelocity2, ref acceleration, out tempVelocity2);
+                if (Math.Abs(tempVelocity2.Length()) < tempVelocity.Length())
+                {
+                    Vector2.Add(ref velocity, ref acceleration, out velocity);
+                }
+            } else if (Math.Abs(tempVelocity.Length()) < maxSpeed)
+            {
+                Vector2.Add(ref velocity, ref acceleration, out velocity);
+            }
 		}
+
 
 		/// <summary>
 		/// Main weapon fire method
@@ -255,11 +271,6 @@ namespace SpaceUnion {
 
 			explode();
 		}
-
-		
-
-
-
 
 	}
 }

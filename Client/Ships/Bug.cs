@@ -13,7 +13,7 @@ namespace SpaceUnion.Ships {
 		public Bug(Game1 game1)
 			: base(assets.bug, assets.moltenBullet, game1) {
 
-			maxSpeed = 7;
+			maxSpeed = 100;
 			accelSpeed = 50.0f;
 			turnSpeed = 4.5f;
 
