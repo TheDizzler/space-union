@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using SpaceUnion.Animations;
 using SpaceUnion.Controllers;
+using SpaceUnion.Ships;
 using SpaceUnion.Tools;
 
 namespace SpaceUnion.Tools {

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Timers;
 using System.Text;
+using SpaceUnion.Ships;
 using SpaceUnion.StellarObjects;
 using SpaceUnion.Tools;
 using SpaceUnion.Weapons;
@@ -67,14 +68,15 @@ namespace SpaceUnion.Controllers {
 
 			gui = new GUI(game, playerShip, planets[0]);
 
-			Viewport mainViewport = new Viewport(0, 0,
-				game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height - GUI.guiHeight);
+			Viewport mainViewport = new Viewport {
+				X = 0, Y = 0,
+				Width = game.GraphicsDevice.Viewport.Width, Height = game.GraphicsDevice.Viewport.Height - GUI.guiHeight
+			};
 
-			Viewport radarViewport = new Viewport();
-			radarViewport.X = gui.radarBox.X;
-			radarViewport.Y = gui.radarBox.Y;
-			radarViewport.Width = gui.radarBox.Width;
-			radarViewport.Height = gui.radarBox.Height;
+			Viewport radarViewport = new Viewport {
+				X = gui.radarBox.X, Y = gui.radarBox.Y,
+				Width = gui.radarBox.Width, Height = gui.radarBox.Height
+			};
 
 			mainCamera = new Camera(mainViewport, worldWidth, worldHeight, 1.0f);
 			radarCamera = new Camera(radarViewport, worldWidth, worldHeight, 0.1f);
@@ -178,17 +180,6 @@ namespace SpaceUnion.Controllers {
 					asteroids.RemoveAt(i);
 			}
 
-			/* Use this if we do all collisions at end together */
-			//List<Tangible> possibleCollisions = new List<Tangible>();
-			//foreach (Tangible actor in targets) {
-			//	possibleCollisions.Clear();
-			//	quadTree.retrieve(possibleCollisions, actor);
-
-			//	foreach (Tangible target in possibleCollisions) {
-			//		// check collision here
-			//	}
-			//}
-
 
 			mainCamera.setZoom(mouseState.ScrollWheelValue);
 			mainCamera.Position = playerShip.Position; // center the camera to player's position
@@ -216,7 +207,7 @@ namespace SpaceUnion.Controllers {
 			drawWorld(radarCamera); //Draws background
 
 			drawScreen(mainCamera);
-			
+
 
 			spriteBatch.End();
 
@@ -244,14 +235,14 @@ namespace SpaceUnion.Controllers {
 			spriteBatch.End();
 
 
-			
 
 
-			
+
+
 		}
 
 		private void drawScreen(Camera camera) {
-			
+
 
 
 			//Draws all space ships

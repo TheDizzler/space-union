@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using SpaceUnion.Tools;
 
-
+///Edited by Matthew Baldock
+///Edited by Triston Gillon
 namespace SpaceUnion.Tools {
 
 	public class BaseButton : Sprite {
@@ -19,7 +20,15 @@ namespace SpaceUnion.Tools {
 		protected bool isHovered = false;
 		protected ButtonState lastState;
 
+        public bool hover()
+        {
+            return isHovered;
+        }
 
+        /// <summary>
+        /// Constructor for BaseButton, uses Texture in AssetsManager and a Vector2 value
+        /// </summary>
+        /// <param name="texture"></param>
 		public BaseButton(Texture2D texture)
 			: base(texture, Vector2.Zero) {
 
@@ -27,13 +36,19 @@ namespace SpaceUnion.Tools {
 			height = 150;
 		}
 
-
+        /// <summary>
+        /// Sets position in viewport of button
+        /// </summary>
+        /// <param name="newPosition"></param>
 		public void setPosition(Vector2 newPosition) {
 			position = newPosition;
 			buttonRectangle = new Rectangle((int) position.X, (int) position.Y, (int) width, (int) height);
 		}
 
-
+        /// <summary>
+        /// Updates the button based on mouse interactions
+        /// </summary>
+        /// <param name="mouse"></param>
 		public void update(MouseState mouse) {
 
 			ButtonState currentState = mouse.LeftButton;
@@ -59,7 +74,10 @@ namespace SpaceUnion.Tools {
 			lastState = mouse.LeftButton;
 		}
 
-
+        /// <summary>
+        /// Draws button base on its current state
+        /// </summary>
+        /// <param name="spriteBatch"></param>
 		override public void draw(SpriteBatch spriteBatch) {
 
 			if (isDown)

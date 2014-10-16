@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceUnion.Ships;
 using SpaceUnion.Weapons;
 
 
@@ -20,7 +21,7 @@ namespace SpaceUnion.Weapons {
 			: base(assets.zoid, assets.missile, game1) {
 
 			maxSpeed = 7;
-			accelSpeed = 4.5f;
+			accelSpeed = 10.5f;
 			turnSpeed = 4.5f;
 
 			mainFireDelay = TimeSpan.FromSeconds(.2f);

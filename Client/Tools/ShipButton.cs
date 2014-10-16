@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SpaceUnion.Ships;
 using SpaceUnion.Tools;
 
 
@@ -59,7 +60,7 @@ namespace SpaceUnion.Tools {
 			else if (selected) {
 				spriteBatch.Draw(texture, buttonRectangle, Color.Yellow);
 			} else
-				spriteBatch.Draw(texture, buttonRectangle, Color.Blue);
+				spriteBatch.Draw(texture, buttonRectangle, Color.White);
 		}
 
 		public Ship getShip() {

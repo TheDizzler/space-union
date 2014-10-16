@@ -227,6 +227,51 @@
       <Time>2014-10-10T22:06:51.3206754-07:00</Time>
     </Item>
     <Item>
+      <Source>Buttons\lobbyoptions.png</Source>
+      <Name>Buttons\lobbyoptions</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbyoptions.xnb</Output>
+      <Time>2014-10-16T12:44:58.0010854-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Buttons\gameroom.png</Source>
+      <Name>Buttons\gameroom</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gameroom.xnb</Output>
+      <Time>2014-10-16T12:44:58.0010854-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Buttons\gamelobby.png</Source>
+      <Name>Buttons\gamelobby</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gamelobby.xnb</Output>
+      <Time>2014-10-16T12:44:58.0010854-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Buttons\createlobby.png</Source>
+      <Name>Buttons\createlobby</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\createlobby.xnb</Output>
+      <Time>2014-10-16T12:44:58.0010854-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Buttons\lobbybrowser.png</Source>
+      <Name>Buttons\lobbybrowser</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbybrowser.xnb</Output>
+      <Time>2014-10-16T12:44:58.0010854-07:00</Time>
+    </Item>
+    <Item>
       <Source>SpriteFonts\SpriteFont1.spritefont</Source>
       <Name>SpriteFonts\SpriteFont1</Name>
       <Importer>FontDescriptionImporter</Importer>

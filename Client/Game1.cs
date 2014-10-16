@@ -11,7 +11,7 @@ using SpaceUnion.Controllers;
 using SpaceUnion.Tools;
 #endregion
 
-
+///Edited by Matthew Baldock
 namespace SpaceUnion {
 	/// <summary>
 	/// This is the main type for your game
@@ -33,6 +33,12 @@ namespace SpaceUnion {
 		GameplayScreen gameplayScreen;
 		MainMenuScreen mainMenuScreen;
 		ShipSelectionScreen shipselectionScreen;
+        LobbyOptions lobbyoptions;
+        LobbyBrowser lobbybrowser;
+        CreateLobby createlobby;
+        GameLobby gamelobby;
+        GameRoom gameroom;
+        
 		/// <summary>
 		/// Game State Enum to track game states
 		/// </summary>
@@ -42,6 +48,11 @@ namespace SpaceUnion {
 			Options,
 			TeamBattle,
 			Select,
+            Layer1,
+            Layer2,
+            Layer3,
+            Layer4,
+            Layer5
 		}
 
 		GameState currentGameState = GameState.MainMenu;
@@ -132,6 +143,21 @@ namespace SpaceUnion {
 				case GameState.Select:
 					shipselectionScreen.update();
 					break;
+                case GameState.Layer1:
+                    lobbyoptions.update();
+                    break;
+                case GameState.Layer2:
+                    lobbybrowser.update();
+                    break;
+                case GameState.Layer3:
+                    createlobby.update();
+                    break;
+                case GameState.Layer4:
+                    gamelobby.update();
+                    break;
+                case GameState.Layer5:
+                    gameroom.update();
+                    break;
 				default:
 					break;
 			}
@@ -159,6 +185,24 @@ namespace SpaceUnion {
 				case GameState.Select:
 					shipselectionScreen.draw(spriteBatch);
 					break;
+                case GameState.Layer1:
+                    lobbyoptions.draw(spriteBatch);
+                    break;
+                case GameState.Layer2:
+                    lobbybrowser.draw(spriteBatch);
+                    break;
+                case GameState.Layer3:
+                    createlobby.draw(spriteBatch);
+                    break;
+                case GameState.Layer4:
+                    gamelobby.draw(spriteBatch);
+                    break;
+                case GameState.Layer5:
+                    gameroom.draw(spriteBatch);
+                    break;
+
+
+
 			}
 
 			base.Draw(gameTime);
@@ -170,8 +214,37 @@ namespace SpaceUnion {
 			currentGameState = GameState.MainMenu;
 			IsMouseVisible = true;
 		}
-
-
+        public void GoToLayer1()
+        {
+            lobbyoptions = new LobbyOptions(this);
+            currentGameState = GameState.Layer1;
+            IsMouseVisible = true;
+        }
+        public void GoToLayer2()
+        {
+            lobbybrowser = new LobbyBrowser(this);
+            currentGameState = GameState.Layer2;
+            IsMouseVisible = true;
+        }
+        public void GoToLayer3()
+        {
+            createlobby = new CreateLobby(this);
+            currentGameState = GameState.Layer3;
+            IsMouseVisible = true;
+        }
+        public void GoToLayer4()
+        {
+            gamelobby = new GameLobby(this);
+            currentGameState = GameState.Layer4;
+            IsMouseVisible = true;
+        }
+        public void GoToLayer5()
+        {
+            gameroom = new GameRoom(this);
+            currentGameState = GameState.Layer5;
+            IsMouseVisible = true;
+        }
+        
 		public void GoToSelect() {
 			shipselectionScreen = new ShipSelectionScreen(this);
 			currentGameState = GameState.Select;
