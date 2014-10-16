@@ -19,7 +19,7 @@ namespace SpaceUnion.Weapons {
 			velocity += new Vector2((float) Math.Sin(rotation) * projectileMoveSpeed,
 				(float) -Math.Cos(rotation) * projectileMoveSpeed);
 
-			projectileDamage = 3;
+			weaponDamage = 3;
 
 		}
 

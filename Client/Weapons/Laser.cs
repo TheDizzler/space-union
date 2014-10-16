@@ -19,7 +19,7 @@ namespace SpaceUnion.Weapons {
 				(float) -Math.Cos(rotation) * projectileMoveSpeed);
 			
 
-			projectileDamage = 5;
+			weaponDamage = 5;
 
 		}
 

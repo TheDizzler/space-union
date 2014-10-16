@@ -4,48 +4,49 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-//using Microsoft.Xna.Framework.Ray;
 using SpaceUnion.Tools;
 
 
 namespace SpaceUnion.Weapons {
-	class LaserBeam : Projectile {
+	class LaserBeam : Sprite, WeaponSystem {
 
 
 		int beamLength = 250;
 
+		public Ship owner { get; set; }
+		public int weaponDamage { get; set; }
 
 		private Rectangle rect;
-		private Vector2 lineDirection;
-		private List<Texture2D> dots = new List<Texture2D>();
+		private Vector2 beamDirection;
+		private List<Texture2D> pixels = new List<Texture2D>();
 
 		public LaserBeam(Vector2 startPoint, Ship ship)
-			: base(assets.guiRectangle, startPoint, ship) {
+			: base(assets.guiRectangle, startPoint) {
 
-			projectileTTL = .5f;
-			projectileMoveSpeed = 2.2f;
+			owner = ship;
 
-			//velocity += new Vector2((float) Math.Sin(rotation) * projectileMoveSpeed,
-			//	(float) -Math.Cos(rotation) * projectileMoveSpeed);
-
-			projectileDamage = 3;
+			weaponDamage = 1;
 		}
 
-		public override void destroy() {
-
-		}
 
 		public new void update(GameTime gameTime, QuadTree quadTree) {
 
-			Ray ray = new Ray(new Vector3(0,0,0), new Vector3(0,0,0));
-			lineDirection = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
-			//lineDirection.Normalize();
-			dots.Clear();
-
+			Ray ray = new Ray(new Vector3(0, 0, 0), new Vector3(0, 0, 0));
+			beamDirection = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
+			pixels.Clear();
 			rect = new Rectangle((int) position.X, (int) position.Y, 1, 3);
-			for (int i = 0; i < beamLength; ++i) {
-				Texture2D dot = assets.Content.Load<Texture2D>("Projectiles/molten bullet (6x8)");
-				dots.Add(dot);
+
+			float t = 1;
+			// find targets within line of fire
+
+			// if collision
+				// find closest edge of target
+				// and find how long beam will be
+				// t = CollisionHandler.findT();
+				// apply damage, etc
+			for (int i = 0; i < beamLength*t; ++i) {
+				
+				pixels.Add(assets.Content.Load<Texture2D>("Projectiles/molten bullet (6x8)"));// test texture
 
 			}
 
@@ -53,10 +54,10 @@ namespace SpaceUnion.Weapons {
 
 
 		public override void draw(SpriteBatch spriteBatch) {
-			foreach (Texture2D dot in dots) {
+			foreach (Texture2D dot in pixels) {
 
-				position.X += lineDirection.X;
-				position.Y += lineDirection.Y;
+				position.X += beamDirection.X;
+				position.Y += beamDirection.Y;
 				rect.X = (int) position.X;
 				rect.Y = (int) position.Y;
 				spriteBatch.Draw(dot, rect, Color.White);
@@ -67,6 +68,11 @@ namespace SpaceUnion.Weapons {
 		public void updatePosition(Vector2 startPoint, float rot) {
 			position = startPoint;
 			rotation = rot;
+		}
+
+		
+		public void doDamage(Tangible target, GameTime gameTime) {
+			throw new NotImplementedException();
 		}
 
 	}

@@ -39,7 +39,6 @@
     <Compile Include="Animations\Explosion.cs" />
     <Compile Include="Ships\Bug.cs" />
     <Compile Include="Ships\Copy of Ship.cs" />
-    <Compile Include="Tools\CollisionAlgorithm.cs" />
     <Compile Include="Tools\QuadTree.cs" />
     <Compile Include="Weapons\LaserBeam.cs" />
     <Compile Include="Ships\Scout.cs" />
@@ -74,6 +73,7 @@
     <Compile Include="Tools\ShipButton.cs" />
     <Compile Include="Tools\Sprite.cs" />
     <Compile Include="Weapons\Shield.cs" />
+    <Compile Include="Weapons\WeaponSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

@@ -8,12 +8,7 @@ using SpaceUnion.Tools;
 
 namespace SpaceUnion.Weapons {
 
-	public abstract class Projectile : Tangible {
-
-		/// <summary>
-		/// The firerer of the projectile
-		/// </summary>
-		protected Ship owner;
+	public abstract class Projectile : Tangible, WeaponSystem {
 
 		/// <summary>
 		/// Determines how fast the projectile moves
@@ -28,11 +23,8 @@ namespace SpaceUnion.Weapons {
 		/// </summary>
 		protected float timeActive;
 
-		/// <summary>
-		/// The amount of damage the projectile can inflict
-		/// </summary>
-		protected int projectileDamage;
-
+		public Ship owner { get; set; }
+		public int weaponDamage { get; set; }
 
 		/// <summary>
 		/// 
@@ -76,10 +68,12 @@ namespace SpaceUnion.Weapons {
 			destroy();
 		}
 
+
 		public virtual void doDamage(Tangible target, GameTime gameTime) {
 
-			target.takeDamage(projectileDamage, gameTime);
+			target.takeDamage(weaponDamage, gameTime);
 		}
+
 
 	}
 }

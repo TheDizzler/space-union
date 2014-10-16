@@ -31,7 +31,7 @@ namespace SpaceUnion {
 		/// <summary>
 		/// An engine to handle all collisions.
 		/// </summary>
-		public static CollisionHandler collisionHandler;
+		
 
 		GameplayScreen gameplayScreen;
 		MainMenuScreen mainMenuScreen;
@@ -93,7 +93,7 @@ namespace SpaceUnion {
 			// All sprites get loaded in to here
 			Assets.loadContent(GraphicsDevice);
 			explosionEngine = new ExplosionEngine(Assets);
-			collisionHandler = new CollisionHandler();
+			
 			//Load Main Menu
 			mainMenuScreen = new MainMenuScreen(this);
 			shipselectionScreen = new ShipSelectionScreen(this);

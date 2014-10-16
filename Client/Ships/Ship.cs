@@ -64,7 +64,7 @@ namespace SpaceUnion {
 		public List<Projectile> projectiles;
 
 
-		private Projectile mainWeapon;
+		private WeaponSystem mainWeapon;
 		/// <summary>
 		/// Location on sprite where weapon appears from
 		/// </summary>
@@ -75,7 +75,7 @@ namespace SpaceUnion {
 		/// </summary>
 		/// <param name="tex">Ship texture</param>
 		/// <param name="wpnTex">Weapon texture</param>
-		/// <param name="pos">Spawn location</param>
+		/// <param name="game1"></param>
 		protected Ship(Texture2D tex, Texture2D wpnTex, Game1 game1)
 			: base(tex, Vector2.Zero) {
 
@@ -127,17 +127,18 @@ namespace SpaceUnion {
 		/// Determine what kind of collision is occuring.
 		/// </summary>
 		/// <param name="target"></param>
-		/// <exception cref="NotImplementedException">A new kind of object that needs handleing</exception>
+		/// <param name="gameTime"></param>
+		/// <exception cref="NotImplementedException">A new kind of object that needs handling</exception>
 		public override void collide(Tangible target, GameTime gameTime) {
 
 			if (target is Projectile)
 				target.collide(this, gameTime); // the projectile can handle it from here
 			else if (target is Ship)
-				collisionHandler.shipOnShip(this, (Ship) target, gameTime);
+				CollisionHandler.shipOnShip(this, (Ship) target, gameTime);
 			else if (target is Asteroid)
-				collisionHandler.shipOnAsteroid(this, (Asteroid) target, gameTime);
+				CollisionHandler.shipOnAsteroid(this, (Asteroid) target, gameTime);
 			else if (target is Planet)
-				collisionHandler.shipOnPlanet(this, (Planet) target, gameTime);
+				CollisionHandler.shipOnPlanet(this, (Planet) target, gameTime);
 			else
 				throw new NotImplementedException();
 		}

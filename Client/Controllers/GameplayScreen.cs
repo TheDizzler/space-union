@@ -87,6 +87,14 @@ namespace SpaceUnion.Controllers {
 
 		}
 
+
+		private void AddAsteroid(Vector2 position) {
+			Asteroid asteroid = new Asteroid(Assets.asteroid, position);
+			asteroids.Add(asteroid);
+			targets.Add(asteroid);
+		}
+
+		
 		/// <summary>
 		/// Draws the stars background.
 		/// </summary>
@@ -110,11 +118,7 @@ namespace SpaceUnion.Controllers {
 			//	null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
 		}
 
-		private void AddAsteroid(Vector2 position) {
-			Asteroid asteroid = new Asteroid(Assets.asteroid, position);
-			asteroids.Add(asteroid);
-			targets.Add(asteroid);
-		}
+		
 
 
 		/// <summary>
@@ -168,9 +172,6 @@ namespace SpaceUnion.Controllers {
 
 			foreach (Planet planet in planets)
 				planet.update(gameTime, quadTree, targets);
-
-			//for (int j = asteroids.Count - 1; j >= 0; j--)
-			//	asteroids[j].movement(gameTime, targets);
 
 
 

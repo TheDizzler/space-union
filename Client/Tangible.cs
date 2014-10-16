@@ -17,7 +17,7 @@ namespace SpaceUnion {
 	public abstract class Tangible : Sprite {
 
 
-		protected CollisionHandler collisionHandler = Game1.collisionHandler;
+		//protected CollisionHandler collisionHandler = Game1.collisionHandler;
 		protected ExplosionEngine explosionEngine = Game1.explosionEngine;
 
 
