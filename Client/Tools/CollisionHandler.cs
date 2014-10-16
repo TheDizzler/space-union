@@ -11,6 +11,7 @@ namespace SpaceUnion.Tools {
 	/// <summary>
 	/// A class to handle collisions between tangible objects.
 	/// Does not handle weapon collisions as those are probably weapon specific.
+	/// Will liekly expand to include ray casting.
 	/// @Written by Tristan
 	/// </summary>
 	public static class CollisionHandler {

@@ -27,7 +27,8 @@ namespace SpaceUnion.Controllers {
 
 		private Ship playerShip;
 		private Game1 game;
-		Camera mainCamera;
+		private Camera mainCamera;
+		private Camera radarCamera;
 		GUI gui;
 
 		Random gen;
@@ -39,9 +40,7 @@ namespace SpaceUnion.Controllers {
 
 		private int SCREEN_WIDTH;
 		private int SCREEN_HEIGHT;
-
-
-
+		private Viewport basicViewport;
 
 
 		public GameplayScreen(Game1 game, SpriteBatch batch, Ship selectedship) {
@@ -64,13 +63,21 @@ namespace SpaceUnion.Controllers {
 			planets.Add(new Planet(Assets.waterPlanet, new Vector2(4000, 3000), 1000f, 1000));
 			planets.Add(new Planet(Assets.moon, new Vector2(1000, 1000), 500f, 800));
 
+			basicViewport = game.GraphicsDevice.Viewport;
 
 			gui = new GUI(game, playerShip, planets[0]);
 
-			Viewport mainViewport = new Viewport((int) playerShip.getX(), (int) playerShip.getY(),
+			Viewport mainViewport = new Viewport(0, 0,
 				game.GraphicsDevice.Viewport.Width, game.GraphicsDevice.Viewport.Height - GUI.guiHeight);
-			mainCamera = new Camera(mainViewport, worldWidth, worldHeight, 1.0f);
 
+			Viewport radarViewport = new Viewport();
+			radarViewport.X = gui.radarBox.X;
+			radarViewport.Y = gui.radarBox.Y;
+			radarViewport.Width = gui.radarBox.Width;
+			radarViewport.Height = gui.radarBox.Height;
+
+			mainCamera = new Camera(mainViewport, worldWidth, worldHeight, 1.0f);
+			radarCamera = new Camera(radarViewport, worldWidth, worldHeight, 0.1f);
 
 			asteroids = new List<Asteroid>();
 			ships = new List<Ship>();
@@ -94,31 +101,6 @@ namespace SpaceUnion.Controllers {
 			targets.Add(asteroid);
 		}
 
-		
-		/// <summary>
-		/// Draws the stars background.
-		/// </summary>
-		protected void drawWorld() {
-
-			/* Parallax Scrolling BG */
-			spriteBatch.Draw(Assets.starfield2,
-				new Rectangle((int) (mainCamera.Position.X * .9), (int) (mainCamera.Position.Y * .9), worldWidth / 2, worldHeight / 2),
-				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
-			spriteBatch.Draw(Assets.starfield1,
-				new Rectangle((int) (mainCamera.Position.X * 0.7), (int) (mainCamera.Position.Y * 0.7), worldWidth / 4, worldHeight / 4),
-				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
-			spriteBatch.Draw(Assets.starfield1,
-				new Rectangle((int) (mainCamera.Position.X * 0.6), (int) (mainCamera.Position.Y * 0.6), worldWidth / 5, worldHeight / 5),
-				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
-			spriteBatch.Draw(Assets.starfield1,
-				new Rectangle((int) (mainCamera.Position.X * 0.4), (int) (mainCamera.Position.Y * 0.4), worldWidth / 6, worldHeight / 6),
-				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
-			//spriteBatch.Draw(Assets.starfield3,
-			//	new Rectangle((int) (mainCamera.Position.X * .5), (int) (mainCamera.Position.Y * .5f), worldWidth / 10, worldHeight / 10),
-			//	null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
-		}
-
-		
 
 
 		/// <summary>
@@ -212,6 +194,9 @@ namespace SpaceUnion.Controllers {
 			mainCamera.Position = playerShip.Position; // center the camera to player's position
 			mainCamera.update(gameTime);
 
+			radarCamera.Position = playerShip.Position; // center the camera to player's position
+			radarCamera.update(gameTime);
+
 			Game1.explosionEngine.update(gameTime);
 
 			gui.update(gameTime, quadTree);
@@ -221,14 +206,52 @@ namespace SpaceUnion.Controllers {
 		/// This is called when the game should draw itself.
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
-		public void draw() {
+		public void draw(GameTime gameTime) {
 
+			game.graphics.GraphicsDevice.Viewport = mainCamera.viewport;
 			/* Main camera sprite batch */
 			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
 				SamplerState.LinearWrap, null, null, null, mainCamera.getTransformation());
 
+			drawWorld(radarCamera); //Draws background
 
-			drawWorld(); //Draws background
+			drawScreen(mainCamera);
+			
+
+			spriteBatch.End();
+
+
+
+			/* GUI spritebatch. Anything drawn here will remain
+			 * static and not be affected by cameras. */
+			game.graphics.GraphicsDevice.Viewport = basicViewport;
+			spriteBatch.Begin();
+
+			gui.draw(spriteBatch);
+
+
+			spriteBatch.End();
+
+
+			/** Radar camera spritebatch */
+			game.graphics.GraphicsDevice.Viewport = radarCamera.viewport;
+			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
+				SamplerState.LinearWrap, null, null, null, radarCamera.getTransformation());
+
+			drawScreen(radarCamera);
+
+
+			spriteBatch.End();
+
+
+			
+
+
+			
+		}
+
+		private void drawScreen(Camera camera) {
+			
 
 
 			//Draws all space ships
@@ -245,18 +268,33 @@ namespace SpaceUnion.Controllers {
 			}
 
 			Game1.explosionEngine.draw(spriteBatch);
-
-			spriteBatch.End();
-
-
-			/* GUI spritebatch. Anything drawn here will remain
-			 * static and not be affected by cameras. */
-			spriteBatch.Begin();
-
-			gui.draw(spriteBatch);
-
-
-			spriteBatch.End();
 		}
+
+
+
+		/// <summary>
+		/// Draws the stars background.
+		/// </summary>
+		/// <param name="camera"></param>
+		protected void drawWorld(Camera camera) {
+
+			/* Parallax Scrolling BG */
+			spriteBatch.Draw(Assets.starfield2,
+				new Rectangle((int) (camera.Position.X * .9), (int) (camera.Position.Y * .9), worldWidth / 2, worldHeight / 2),
+				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+			spriteBatch.Draw(Assets.starfield1,
+				new Rectangle((int) (camera.Position.X * 0.7), (int) (camera.Position.Y * 0.7), worldWidth / 4, worldHeight / 4),
+				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+			spriteBatch.Draw(Assets.starfield1,
+				new Rectangle((int) (camera.Position.X * 0.6), (int) (camera.Position.Y * 0.6), worldWidth / 5, worldHeight / 5),
+				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+			spriteBatch.Draw(Assets.starfield1,
+				new Rectangle((int) (camera.Position.X * 0.4), (int) (camera.Position.Y * 0.4), worldWidth / 6, worldHeight / 6),
+				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+			//spriteBatch.Draw(Assets.starfield3,
+			//	new Rectangle((int) (mainCamera.Position.X * .5), (int) (mainCamera.Position.Y * .5f), worldWidth / 10, worldHeight / 10),
+			//	null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
+		}
+
 	}
 }

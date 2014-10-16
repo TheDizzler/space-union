@@ -154,15 +154,19 @@ namespace SpaceUnion {
 		protected void checkWorldEdge() {
 			if (position.X <= 0) {
 				position.X = 0;
+				velocity.X = 0;
 			}
 			if (position.X >= GameplayScreen.worldWidth) {
 				position.X = GameplayScreen.worldWidth;
+				velocity.X = 0;
 			}
 			if (position.Y <= 0) {
 				position.Y = 0;
+				velocity.Y = 0;
 			}
 			if (position.Y >= GameplayScreen.worldHeight) {
 				position.Y = GameplayScreen.worldHeight;
+				velocity.Y = 0;
 			}
 		}
 

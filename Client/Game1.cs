@@ -17,7 +17,8 @@ namespace SpaceUnion {
 	/// This is the main type for your game
 	/// </summary>
 	public class Game1 : Game {
-		GraphicsDeviceManager graphics;
+
+		public GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
 		/// <summary>
@@ -28,10 +29,6 @@ namespace SpaceUnion {
 		/// An engine to create and manage all explosions, big and small
 		/// </summary>
 		public static ExplosionEngine explosionEngine;
-		/// <summary>
-		/// An engine to handle all collisions.
-		/// </summary>
-		
 
 		GameplayScreen gameplayScreen;
 		MainMenuScreen mainMenuScreen;
@@ -61,7 +58,7 @@ namespace SpaceUnion {
 			: base() {
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
-
+			
 			graphics.PreferredBackBufferWidth = 933;
 			graphics.PreferredBackBufferHeight = 700;
 			
@@ -79,7 +76,7 @@ namespace SpaceUnion {
 		/// </summary>
 		protected override void Initialize() {
 			base.Initialize();
-			graphics.IsFullScreen = true;
+			//graphics.IsFullScreen = true;
 			graphics.ApplyChanges();
 		}
 
@@ -149,7 +146,7 @@ namespace SpaceUnion {
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime) {
 			GraphicsDevice.Clear(Color.Black);
-
+			
 
 
 			switch (currentGameState) {
@@ -157,7 +154,7 @@ namespace SpaceUnion {
 					mainMenuScreen.draw(spriteBatch);
 					break;
 				case GameState.Playing:
-					gameplayScreen.draw();
+					gameplayScreen.draw(gameTime);
 					break;
 				case GameState.Select:
 					shipselectionScreen.draw(spriteBatch);

@@ -44,6 +44,8 @@ namespace SpaceUnion.Tools {
 			cameraPosition = Vector2.Zero;
 			origin = new Vector3(viewport.Width / 2, viewport.Height / 2, 0);
 
+			transform = Matrix.Identity;
+
 		}
 
 
