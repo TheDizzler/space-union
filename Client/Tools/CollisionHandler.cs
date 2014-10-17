@@ -111,15 +111,15 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		/// <param name="lineStart"></param>
 		/// <param name="lineEnd"></param>
-		/// <param name="rayStart"></param>
-		/// <param name="rayEnd"></param>
-		/// <returns></returns>
+		/// <param name="rayStart">the point the ray (or segment) originates from</param>
+		/// <param name="rayEnd">either the end point of segment for the direction of the ray</param>
+		/// <returns>for a segment 0 to 1 means a hit, for a ray any positive number is a hit </returns>
 		public static float findT(Vector2 lineStart, Vector2 lineEnd, Vector2 rayStart, Vector2 rayEnd) {
 
 			float dividend = rayStart.X * (lineEnd.Y - lineStart.Y) + lineStart.X * (rayStart.Y - lineEnd.Y) + lineEnd.X * (lineStart.Y - rayStart.Y);
 			float divisor = lineEnd.X * (rayEnd.Y - rayStart.Y) - lineStart.X * (rayEnd.Y - rayStart.Y) - lineEnd.Y * (rayEnd.X - rayStart.X) + lineStart.Y * (rayEnd.X - rayStart.X);
 
-			if (divisor == 0) // someone goofed
+			if (divisor == 0.0f) // someone goofed
 				return -1;
 
 			return dividend / divisor;

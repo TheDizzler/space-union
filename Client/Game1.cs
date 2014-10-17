@@ -11,7 +11,7 @@ using SpaceUnion.Controllers;
 using SpaceUnion.Tools;
 #endregion
 
-///Edited by Matthew Baldock
+
 namespace SpaceUnion {
 	/// <summary>
 	/// This is the main type for your game
