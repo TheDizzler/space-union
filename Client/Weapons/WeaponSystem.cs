@@ -7,6 +7,10 @@ using SpaceUnion.Ships;
 
 
 namespace SpaceUnion.Weapons {
+	/// <summary>
+	/// An interface that all weapons should implement.
+	/// @Written by Tristan
+	/// </summary>
 	interface WeaponSystem {
 
 		/// <summary>

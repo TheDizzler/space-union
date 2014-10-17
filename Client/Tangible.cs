@@ -13,6 +13,7 @@ namespace SpaceUnion {
 	/// <summary>
 	/// If in an object can move, be hit or interated with physically it must implement
 	/// this interface. Provides a velocity, a hitbox, hitpoints and an alive state.
+	/// @Written by Konstantin and Kyle. Compiled and edited by Tristan.
 	/// </summary>
 	public abstract class Tangible : Sprite {
 

@@ -9,6 +9,11 @@ using SpaceUnion.Tools;
 
 
 namespace SpaceUnion.Weapons {
+	/// <summary>
+	/// A special type of weapon that fires a single beam of energy in
+	/// a continuous stream.
+	/// @Written by Tristan
+	/// </summary>
 	class LaserBeam : Sprite, WeaponSystem {
 
 
@@ -39,11 +44,17 @@ namespace SpaceUnion.Weapons {
 
 			float t = 1;
 			// find targets within line of fire
+			List<Tangible> possibleCollisions = quadTree.retrieve(this);
 
+			foreach (Tangible target in possibleCollisions) {
+				if (target.isActive)
+					if (getHitBox().getArray().Intersects(target.getHitBox().getArray()))
+						collide(target, gameTime);
+			}
 			// if collision
 				// find closest edge of target
 				// and find how long beam will be
-				// t = CollisionHandler.findT();
+				t = CollisionHandler.findT();
 				// apply damage, etc
 			for (int i = 0; i < beamLength*t; ++i) {
 				
