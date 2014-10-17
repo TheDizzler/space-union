@@ -15,7 +15,11 @@ namespace SpaceUnion.Tools {
 		
 		public bool selected = false;
 		private Ship ship;
-
+        /// <summary>
+        /// Constructor for Ship Button
+        /// </summary>
+        /// edited by Matthew Baldock
+        /// <param name="shp"></param>
 		public ShipButton(Ship shp)
 			: base(shp.texture) {
 
@@ -50,7 +54,11 @@ namespace SpaceUnion.Tools {
 
 			lastState = mouse.LeftButton;
 		}
-
+        /// <summary>
+        /// Draw the ship button
+        /// </summary>
+        /// Edited by Matthew Baldock
+        /// <param name="spriteBatch"></param>
 		override public void draw(SpriteBatch spriteBatch) {
 
 			if (isDown)

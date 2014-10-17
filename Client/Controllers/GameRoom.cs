@@ -17,8 +17,11 @@ namespace SpaceUnion.Controllers
         BaseButton lastlayerButton;
         Game1 game;
         /// <summary>
+        /// Constructor for Game Room
         /// Creates Buttons to other GameStates
         /// </summary>
+        /// 
+        /// Entire file created by Matthew Baldock
         /// <param name="game"></param>
         public GameRoom(Game1 game)
         {

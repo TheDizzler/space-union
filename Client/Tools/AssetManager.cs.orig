@@ -129,14 +129,16 @@ namespace SpaceUnion.Tools {
 			confirm = Content.Load<Texture2D>("Buttons/confirm");
 			shipselection = Content.Load<Texture2D>("Buttons/shipselection");
 =======
+            ///Added by Matthew Baldock
             confirm = Content.Load<Texture2D>("Buttons/confirm");
             shipselection = Content.Load<Texture2D>("Buttons/shipselection");
+>>>>>>> 27d8bdea19bea6a8962d91a82c70275d63ef4049
             lobbyoptions = Content.Load<Texture2D>("Buttons/lobbyoptions");
             lobbybrowser = Content.Load<Texture2D>("Buttons/lobbybrowser");
             createlobby = Content.Load<Texture2D>("Buttons/createlobby");
             gamelobby = Content.Load<Texture2D>("Buttons/gamelobby");
             gameroom = Content.Load<Texture2D>("Buttons/gameroom");
->>>>>>> 14cae3f8c8a43887ca95688a7265c05e60504393
+            ///end added by Matthew Baldock
 
 			guiRectangle = new Texture2D(graphicsDevice, 1, 1);
 			guiRectangle.SetData(new[] { Color.White });

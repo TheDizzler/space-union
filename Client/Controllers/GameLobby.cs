@@ -18,8 +18,11 @@ namespace SpaceUnion.Controllers
         CustomGUI banner;
         Game1 game;
         /// <summary>
+        /// Constructor for Game Lobby
         /// Creates Buttons to other GameStates
         /// </summary>
+        ///  
+        /// Entire file created by Matthew Baldock
         /// <param name="game"></param>
         public GameLobby(Game1 game)
         {

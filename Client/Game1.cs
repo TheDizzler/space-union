@@ -32,13 +32,15 @@ namespace SpaceUnion {
 
 		GameplayScreen gameplayScreen;
 		MainMenuScreen mainMenuScreen;
+        // Created by Matthew Baldock
 		ShipSelectionScreen shipselectionScreen;
         LobbyOptions lobbyoptions;
         LobbyBrowser lobbybrowser;
         CreateLobby createlobby;
         GameLobby gamelobby;
         GameRoom gameroom;
-        
+        //end created by Matthew
+
 		/// <summary>
 		/// Game State Enum to track game states
 		/// </summary>
@@ -95,6 +97,7 @@ namespace SpaceUnion {
 		/// LoadContent will be called once per game and is the place to load
 		/// all of your content.
 		/// </summary>
+        /// shipselectionscreen added by Matthew Baldock
 		protected override void LoadContent() {
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -126,6 +129,8 @@ namespace SpaceUnion {
 		/// Allows the game to run logic such as updating the world,
 		/// checking for collisions, gathering input, and playing audio.
 		/// </summary>
+        /// 
+        /// Select - Layer5 added by Matthew Baldock
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update(GameTime gameTime) {
 			//Allows Game to Exit
@@ -169,6 +174,8 @@ namespace SpaceUnion {
 		/// <summary>
 		/// This is called when the game should draw itself.
 		/// </summary>
+        /// 
+        /// select - layer5 added by Matthew Baldock
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime) {
 			GraphicsDevice.Clear(Color.Black);
@@ -208,7 +215,7 @@ namespace SpaceUnion {
 			base.Draw(gameTime);
 		}
 
-
+        //Gotolayer1 - gotoselect added by Matthew Baldock
 		public void GoToMain() {
 
 			currentGameState = GameState.MainMenu;
