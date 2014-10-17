@@ -23,7 +23,7 @@ namespace Client_Comm_Module
         }
 
         /// <summary>
-        /// Set up the server by initializing the clients and message queues.
+        /// Initiate the message transmission client.
         /// </summary>
         private void setup()
         {

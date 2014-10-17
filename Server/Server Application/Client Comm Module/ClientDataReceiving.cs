@@ -34,7 +34,7 @@ namespace Client_Comm_Module
         private int assignedUDPPort_Listen;
 
         /// <summary>
-        /// 
+        /// Initia the data receiver client.
         /// </summary>
         /// <param name="assignedPort">UDP port to listen to; assigned by the server.</param>
         public ClientDataReceiving(int assignedPort)
@@ -46,13 +46,16 @@ namespace Client_Comm_Module
             new Thread(receiveData).Start();
         }
 
-
-        public Player receiveLoginConfirmation()
+        /// <summary>
+        /// Receive login information from the server. 
+        /// </summary>
+        /// <returns></returns>
+        /*public Player receiveLoginConfirmation()
         {
             TcpListener listener = new TcpListener(IPAddress.Any, Constants.TCPLoginClient);
             listener.Start();
             return (Player)DataControl.receiveTCPData(listener);
-        }
+        }*/
 
         /// <summary>
         /// Begin receiving game data from the server.
@@ -95,12 +98,20 @@ namespace Client_Comm_Module
             return dataQueue.Count;
         }
 
+        /// <summary>
+        /// Dispose the receiver client.
+        /// External use.
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// Dispose the receiver client.
+        /// </summary>
+        /// <param name="disposing">True if the client is to be disposed.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposed)

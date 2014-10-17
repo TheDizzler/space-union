@@ -13,14 +13,30 @@ namespace Client_Comm_Module
 {
     class ClientDataTransmission : IDisposable
     {
+        /// <summary>
+        /// Whether this transmission client is disposed.
+        /// </summary>
         private bool disposed = false;
 
+        /// <summary>
+        /// Used to store data to send.
+        /// </summary>
         private List<GameData> dataQueue;
 
+        /// <summary>
+        /// UDP client used to send data.
+        /// </summary>
         private UdpClient UDPClient;
 
+        /// <summary>
+        /// The UDP port to use when sending; assigned by the server.
+        /// </summary>
         private int assignedUDPPort_Send;
 
+        /// <summary>
+        /// Initiate the data transmission client.
+        /// </summary>
+        /// <param name="assignedPort">The port assigned by the server.</param>
         public ClientDataTransmission(int assignedPort)
         {
             assignedUDPPort_Send = assignedPort;
@@ -91,12 +107,20 @@ namespace Client_Comm_Module
             return data;
         }
 
+        /// <summary>
+        /// Dispose the transmission client.
+        /// For external use.
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// Dispose the transmission client.
+        /// </summary>
+        /// <param name="disposing">True if the client is to be disposed.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposed)

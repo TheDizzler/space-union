@@ -21,6 +21,9 @@ namespace Client_Comm_Module
 
         private Player player = null;
 
+        /// <summary>
+        /// Initiate the message receiver client.
+        /// </summary>
         public ClientMessageReceiving()
         {
             messageQueue = new List<GameMessage>();
@@ -85,6 +88,10 @@ namespace Client_Comm_Module
             }
         }
 
+        /// <summary>
+        /// Return the current player using the client.
+        /// </summary>
+        /// <returns>The current player.</returns>
         public Player getPlayer()
         {
             if (player == null)
@@ -92,7 +99,7 @@ namespace Client_Comm_Module
                 Console.WriteLine("-------player is null--------");
                 return null;
             }
-            Console.WriteLine(player.PortReceive + "AAAAAAAAAAAAA");
+            Console.WriteLine(player.PortReceive);
             return player;
         }
 
