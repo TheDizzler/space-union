@@ -24,7 +24,11 @@ namespace SpaceUnion.Controllers {
 		const int HEIGHT      = 128;
 		const int SHIPCOUNT = 4;   // Change value according to how many different ships are available
 		int shipsPerRow;
-
+        /// <summary>
+        /// Constructor for Ship Selection Screen
+        /// </summary>
+        /// Created by Matthew Baldock
+        /// <param name="game"></param>
 		public ShipSelectionScreen(Game1 game) {
 			this.game = game;
 
@@ -79,12 +83,21 @@ namespace SpaceUnion.Controllers {
 
 		}
 
-
+        /// <summary>
+        /// Get ship for gameplay screen
+        /// </summary>
+        /// 
+        /// Created by Matthew Baldock
+        /// <returns></returns>
 		public Ship getship() {
 			return selectedShip;
 		}
 
-
+        /// <summary>
+        /// Update the screen
+        /// </summary>
+        /// Created by Matthew Baldock
+        /// Edited by Steven Chen
 		public void update() {
 			MouseState mouseState = Mouse.GetState();
 			confirmButton.update(mouseState);
@@ -120,7 +133,12 @@ namespace SpaceUnion.Controllers {
 
 		}
 
-
+        /// <summary>
+        /// Draw buttons on to the view
+        /// </summary>
+        /// 
+        /// Created by Matthew Baldock
+        /// <param name="spriteBatch"></param>
 		public void draw(SpriteBatch spriteBatch) {
 			spriteBatch.Begin();
 
