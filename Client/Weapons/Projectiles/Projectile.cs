@@ -1,15 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceUnion.Ships;
-using SpaceUnion.StellarObjects;
 using SpaceUnion.Tools;
 
 
-namespace SpaceUnion.Weapons {
-
-	public abstract class Projectile : Tangible, WeaponSystem {
+namespace SpaceUnion.Weapons.Projectiles {
+	/// <summary>
+	/// A type of abstract weapon 
+	/// @Written by Kyle. Compiled and edited by Tristan.
+	/// </summary>
+	public abstract class Projectile : Tangible {
 
 		/// <summary>
 		/// Determines how fast the projectile moves
@@ -37,12 +38,11 @@ namespace SpaceUnion.Weapons {
 			: base(texture, position) {
 
 			owner = ship;
-			rotation = (float) ship.getRotation();
+			//rotation = (float) ship.getRotation();
 
-			velocity = ship.velocity;
+			//velocity = ship.velocity;
 			timeActive = 0;
 		}
-
 
 
 		public void update(GameTime gameTime, QuadTree quadTree) {
@@ -69,12 +69,25 @@ namespace SpaceUnion.Weapons {
 			destroy();
 		}
 
-
+		/// <summary>
+		/// Inflict damage on the target.
+		/// </summary>
+		/// <param name="target"></param>
+		/// <param name="gameTime"></param>
 		public virtual void doDamage(Tangible target, GameTime gameTime) {
 
 			target.takeDamage(weaponDamage, gameTime);
 		}
 
 
+		public void launch(Vector2 startPoint, float direction) {
+
+			rotation = direction;
+			position = startPoint;
+			velocity = new Vector2((float) Math.Sin(rotation) * projectileMoveSpeed,
+				(float) -Math.Cos(rotation) * projectileMoveSpeed);
+			timeActive = 0;
+			isActive = true;
+		}
 	}
 }

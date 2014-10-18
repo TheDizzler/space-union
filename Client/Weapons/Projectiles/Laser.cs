@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using SpaceUnion.Ships;
 
 
-namespace SpaceUnion.Weapons {
+namespace SpaceUnion.Weapons.Projectiles {
 	class Laser : Projectile {
 
 		public Laser(Vector2 startPoint, Ship ship)
@@ -15,9 +11,6 @@ namespace SpaceUnion.Weapons {
 
 			projectileTTL = 5;
 			projectileMoveSpeed = 1.2f;
-
-			velocity = new Vector2((float) Math.Sin(rotation) * projectileMoveSpeed,
-				(float) -Math.Cos(rotation) * projectileMoveSpeed);
 			
 
 			weaponDamage = 5;

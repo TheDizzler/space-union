@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using SpaceUnion.Ships;
 using SpaceUnion.Tools;
 using SpaceUnion.Weapons;
+using SpaceUnion.Weapons.Projectiles;
 
 
 namespace SpaceUnion.StellarObjects {

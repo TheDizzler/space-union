@@ -1,28 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SpaceUnion.Ships;
+using SpaceUnion.Tools;
 using SpaceUnion.Weapons;
+using SpaceUnion.Weapons.Projectiles;
 
 
-namespace SpaceUnion.Weapons {
+namespace SpaceUnion.Ships {
 	class TestShip : Ship {
 
 		public TestShip(Game1 game1)
 			: base(assets.shuttle, assets.missile, game1) {
 
+
+
 		}
 
-		protected override Projectile getProjectile() {
-			return new Missle(Vector2.Add(position, weaponOrigin), this);
-		}
 
 		public override void altFire(GameTime gameTime) {
 			
 		}
 
+
+
+		protected override void additionalUpdate(GameTime gameTime, QuadTree quadTree) {
+
+		}
+
+		protected override void additionalDraw(SpriteBatch sBatch) {
+
+		}
+
+		protected override void additionalFire(GameTime gameTime) {
+
+		}
 	}
 }

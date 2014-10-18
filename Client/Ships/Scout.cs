@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceUnion.Tools;
 using SpaceUnion.Weapons;
+using SpaceUnion.Weapons.Projectiles;
 
 
 namespace SpaceUnion.Ships {
@@ -15,7 +16,11 @@ namespace SpaceUnion.Ships {
 		public Scout(Game1 game1)
 			: base(assets.stunt, assets.laser, game1) {
 
-			accelSpeed = 50;
+			maxSpeed = 7;
+			accelSpeed = 250.5f;
+			turnSpeed = 4.5f;
+			maxSpeed = 500;
+
 			weaponOrigin = new Vector2(position.X, position.Y - height / 2);
 
 			beam = new LaserBeam(Vector2.Add(position, weaponOrigin), this);
@@ -31,14 +36,12 @@ namespace SpaceUnion.Ships {
 			//if (!beamOn) {
 
 			//}
+
 			beam.updatePosition(Vector2.Add(position, weaponOrigin), rotation);
 			beamOn = true;
-			
+
 		}
 
-		protected override Projectile getProjectile() {
-			throw new System.NotImplementedException();
-		}
 
 
 		public override void update(GameTime gameTime, QuadTree quadTree) {
@@ -50,8 +53,8 @@ namespace SpaceUnion.Ships {
 			checkWorldEdge();
 
 
-
-			beam.update(gameTime, quadTree);
+			if (beamOn)
+				beam.update(gameTime, quadTree);
 
 			checkForCollision(quadTree, gameTime);
 		}
@@ -66,6 +69,19 @@ namespace SpaceUnion.Ships {
 
 
 		public override void altFire(GameTime gameTime) {
+
+		}
+
+
+		protected override void additionalUpdate(GameTime gameTime, QuadTree quadTree) {
+
+		}
+
+		protected override void additionalDraw(SpriteBatch sBatch) {
+
+		}
+
+		protected override void additionalFire(GameTime gameTime) {
 
 		}
 

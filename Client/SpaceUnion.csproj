@@ -43,9 +43,9 @@
     <Compile Include="Controllers\CreateLobby.cs" />
     <Compile Include="Controllers\LobbyOptions.cs" />
     <Compile Include="Ships\Bug.cs" />
-    <Compile Include="Ships\Copy of Ship.cs" />
     <Compile Include="Tools\QuadTree.cs" />
-    <Compile Include="Weapons\LaserBeam.cs" />
+    <Compile Include="Tools\Ray2.cs" />
+    <Compile Include="Weapons\Systems\LaserBeam.cs" />
     <Compile Include="Ships\Scout.cs" />
     <Compile Include="Ships\TestShip.cs" />
     <Compile Include="Ships\UFO.cs" />
@@ -64,10 +64,11 @@
     <Compile Include="StellarObjects\Planet.cs" />
     <Compile Include="Timer.cs" />
     <Compile Include="Tools\CollisionHandler.cs" />
-    <Compile Include="Weapons\Laser.cs" />
-    <Compile Include="Weapons\Missile.cs" />
-    <Compile Include="Weapons\MoltenBullet.cs" />
-    <Compile Include="Weapons\Projectile.cs" />
+    <Compile Include="Weapons\Projectiles\Laser.cs" />
+    <Compile Include="Weapons\Projectiles\Missile.cs" />
+    <Compile Include="Weapons\Systems\Launcher.cs" />
+    <Compile Include="Weapons\Projectiles\MoltenBullet.cs" />
+    <Compile Include="Weapons\Projectiles\Projectile.cs" />
     <Compile Include="Tools\AnimationClass.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
@@ -79,7 +80,7 @@
     <Compile Include="Tools\ShipButton.cs" />
     <Compile Include="Tools\Sprite.cs" />
     <Compile Include="Weapons\Shield.cs" />
-    <Compile Include="Weapons\WeaponSystem.cs" />
+    <Compile Include="Weapons\Systems\WeaponSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

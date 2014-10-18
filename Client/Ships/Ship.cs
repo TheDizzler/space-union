@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework.Graphics;
 using SpaceUnion.StellarObjects;
 using SpaceUnion.Tools;
 using SpaceUnion.Weapons;
+using SpaceUnion.Weapons.Projectiles;
+using SpaceUnion.Weapons.Systems;
 
 
 namespace SpaceUnion.Ships {
@@ -56,10 +58,13 @@ namespace SpaceUnion.Ships {
 		/// </summary>
 		protected TimeSpan previousAltFireTime;
 
-		public List<Projectile> projectiles;
-
-
-		private WeaponSystem mainWeapon;
+		/// <summary>
+		/// The main weapon of the ship. Created by calling:
+		/// mainWeapon = Launcher &lt; T &gt; .CreateLauncher(this, (x, y) => new T(x, y), 8);
+		/// where T is a Projectile type.
+		/// Ya, it's ugly, I know...sorry....
+		/// </summary>
+		public WeaponSystem mainWeapon;
 		/// <summary>
 		/// Location on sprite where weapon appears from
 		/// </summary>
@@ -78,46 +83,56 @@ namespace SpaceUnion.Ships {
 			velocity = Vector2.Zero;
 			//scale = .3f;
 			mass = 10000;
-			projectiles = new List<Projectile>();
 
 		}
 
-		//public abstract void setup();
-
-
+		/// <summary>
+		/// @Written by Troy and Kyle with additions by Tristan.
+		/// </summary>
+		/// <param name="gameTime"></param>
+		/// <param name="quadTree"></param>
 		public virtual void update(GameTime gameTime, QuadTree quadTree) {
-			
+
 			position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
 			base.update(position);
 
 
 			checkWorldEdge();
 
-
-
-			// Update the Projectiles
-			for (int i = projectiles.Count - 1; i >= 0; i--) {
-				projectiles[i].update(gameTime, quadTree);
-
-				if (!projectiles[i].isActive) {
-					projectiles.RemoveAt(i);
-				}
-			}
+			mainWeapon.update(gameTime, quadTree);
+			additionalUpdate(gameTime, quadTree);
 
 			checkForCollision(quadTree, gameTime);
 		}
 
-		
+		/// <summary>
+		/// If a ship has more than one main weapon, place the update code for it here.
+		/// </summary>
+		/// <param name="gameTime"></param>
+		/// <param name="quadTree"></param>
+		protected abstract void additionalUpdate(GameTime gameTime, QuadTree quadTree);
+
+		/// <summary>
+		/// @Written by Troy and Kyle.
+		/// </summary>
+		/// <param name="sBatch"></param>
 		public override void draw(SpriteBatch sBatch) {
 
 			base.draw(sBatch);
 
-			foreach (Projectile projectile in projectiles)
-				projectile.draw(sBatch);
+			mainWeapon.draw(sBatch);
+			additionalDraw(sBatch);
 		}
 
 		/// <summary>
+		/// If a ship has more than one main weapon, place the draw code for it here.
+		/// </summary>
+		/// <param name="sBatch"></param>
+		protected abstract void additionalDraw(SpriteBatch sBatch);
+
+		/// <summary>
 		/// Determine what kind of collision is occuring.
+		/// @Written by Tristan.
 		/// </summary>
 		/// <param name="target"></param>
 		/// <param name="gameTime"></param>
@@ -138,31 +153,29 @@ namespace SpaceUnion.Ships {
 
 		/// <summary>
 		/// Power to main thruster
-		/// No max speed cap
+		/// @Written by Troy. Edited by Tristan
 		/// </summary>
 		/// <param name="gameTime"></param>
 		public virtual void thrust(GameTime gameTime) {
-            Vector2 tempVelocity = velocity;
+			Vector2 tempVelocity = velocity;
 			Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
 			acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
-            
-            if (Math.Abs(tempVelocity.Length()) > maxSpeed)
-            {
-                Vector2 tempVelocity2 = tempVelocity;
-                Vector2.Add(ref tempVelocity2, ref acceleration, out tempVelocity2);
-                if (Math.Abs(tempVelocity2.Length()) < tempVelocity.Length())
-                {
-                    Vector2.Add(ref velocity, ref acceleration, out velocity);
-                }
-            } else if (Math.Abs(tempVelocity.Length()) < maxSpeed)
-            {
-                Vector2.Add(ref velocity, ref acceleration, out velocity);
-            }
+
+			if (Math.Abs(tempVelocity.Length()) > maxSpeed) {
+				Vector2 tempVelocity2 = tempVelocity;
+				Vector2.Add(ref tempVelocity2, ref acceleration, out tempVelocity2);
+				if (Math.Abs(tempVelocity2.Length()) < tempVelocity.Length()) {
+					Vector2.Add(ref velocity, ref acceleration, out velocity);
+				}
+			} else if (Math.Abs(tempVelocity.Length()) < maxSpeed) {
+				Vector2.Add(ref velocity, ref acceleration, out velocity);
+			}
 		}
 
 
 		/// <summary>
-		/// Main weapon fire method
+		/// Main weapon fire method.
+		/// @Written by Kyle. Edited by Tristan.
 		/// </summary>
 		/// <param name="gameTime"></param>
 		public virtual void fire(GameTime gameTime) {
@@ -172,12 +185,17 @@ namespace SpaceUnion.Ships {
 				// Reset our current time
 				previousMainFireTime = gameTime.TotalGameTime;
 
-				// Add the projectile, but add it to the front and center of the player
-				projectiles.Add(getProjectile());
+				// Call mainWeapon to fire, but add it to the weaponOrigin
+				mainWeapon.fire(Vector2.Add(position, weaponOrigin));
+				additionalFire(gameTime);
 			}
 		}
 
-		protected abstract Projectile getProjectile();
+		/// <summary>
+		/// If a ship has more than one main weapon, place the fire code here.
+		/// </summary>
+		/// <param name="gameTime"></param>
+		protected abstract void additionalFire(GameTime gameTime);
 
 		/// <summary>
 		/// Alternate Weapon
@@ -201,6 +219,7 @@ namespace SpaceUnion.Ships {
 		/// <summary>
 		/// Rotates the ship left
 		/// Resets the angle to 0 when completing a full rotation, which prevents integer overflow.
+		/// @Written by Troy. Edited by Tristan
 		/// </summary>
 		/// <param name="gameTime"></param>
 		public virtual void rotateLeft(GameTime gameTime) {
@@ -220,6 +239,7 @@ namespace SpaceUnion.Ships {
 		/// <summary>
 		/// Rotates the ship right
 		/// Resets the angle to 0 when completing a full rotation, which prevents integer overflow.
+		/// @Written by Troy. Edited by Tristan
 		/// </summary>
 		/// <param name="gameTime"></param>
 		public virtual void rotateRight(GameTime gameTime) {
@@ -235,6 +255,7 @@ namespace SpaceUnion.Ships {
 
 		/// <summary>
 		/// Rotate where the weapon projectile originates from.
+		/// @Written by Tristan
 		/// </summary>
 		/// <param name="rotateAmount"></param>
 		protected virtual void rotateWeaponOrigin(float rotateAmount) {
@@ -244,6 +265,7 @@ namespace SpaceUnion.Ships {
 
 		/// <summary>
 		/// Calculates the rotation needed for the weaponOrigin to stay grapically consistent.
+		/// @Written by Tristan
 		/// </summary>
 		/// <param name="rotateAmount"></param>
 		/// <returns></returns>

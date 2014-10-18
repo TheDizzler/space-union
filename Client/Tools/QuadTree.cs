@@ -161,7 +161,7 @@ namespace SpaceUnion.Tools {
 		}
 
 		/// <summary>
-		/// Return all objects close enough that could collide with this actor.
+		/// Return all objects close enough that could potentially collide with this actor.
 		/// </summary>
 		/// <param name="actor"></param>
 		/// <returns></returns>

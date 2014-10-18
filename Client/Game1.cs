@@ -14,7 +14,7 @@ using SpaceUnion.Tools;
 
 namespace SpaceUnion {
 	/// <summary>
-	/// This is the main type for your game
+	/// This is the main game class
 	/// </summary>
 	public class Game1 : Game {
 
@@ -32,14 +32,14 @@ namespace SpaceUnion {
 
 		GameplayScreen gameplayScreen;
 		MainMenuScreen mainMenuScreen;
-        // Created by Matthew Baldock
+		// Created by Matthew Baldock
 		ShipSelectionScreen shipselectionScreen;
-        LobbyOptions lobbyoptions;
-        LobbyBrowser lobbybrowser;
-        CreateLobby createlobby;
-        GameLobby gamelobby;
-        GameRoom gameroom;
-        //end created by Matthew
+		LobbyOptions lobbyoptions;
+		LobbyBrowser lobbybrowser;
+		CreateLobby createlobby;
+		GameLobby gamelobby;
+		GameRoom gameroom;
+		//end created by Matthew
 
 		/// <summary>
 		/// Game State Enum to track game states
@@ -50,11 +50,11 @@ namespace SpaceUnion {
 			Options,
 			TeamBattle,
 			Select,
-            Layer1,
-            Layer2,
-            Layer3,
-            Layer4,
-            Layer5
+			Layer1,
+			Layer2,
+			Layer3,
+			Layer4,
+			Layer5
 		}
 
 		GameState currentGameState = GameState.MainMenu;
@@ -71,12 +71,12 @@ namespace SpaceUnion {
 			: base() {
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
-			
+
 			graphics.PreferredBackBufferWidth = 933;
 			graphics.PreferredBackBufferHeight = 700;
-			
+
 			IsFixedTimeStep = false;
-			
+
 			Assets = new AssetManager(Content);
 		}
 
@@ -97,21 +97,21 @@ namespace SpaceUnion {
 		/// LoadContent will be called once per game and is the place to load
 		/// all of your content.
 		/// </summary>
-        /// shipselectionscreen added by Matthew Baldock
+		/// shipselectionscreen added by Matthew Baldock
 		protected override void LoadContent() {
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
 			// All sprites get loaded in to here
 			Assets.loadContent(GraphicsDevice);
 			explosionEngine = new ExplosionEngine(Assets);
-			
+
 			//Load Main Menu
 			mainMenuScreen = new MainMenuScreen(this);
 			shipselectionScreen = new ShipSelectionScreen(this);
 			IsMouseVisible = true;
-			
 
-			
+
+
 		}
 
 		/// <summary>
@@ -129,8 +129,8 @@ namespace SpaceUnion {
 		/// Allows the game to run logic such as updating the world,
 		/// checking for collisions, gathering input, and playing audio.
 		/// </summary>
-        /// 
-        /// Select - Layer5 added by Matthew Baldock
+		/// 
+		/// Select - Layer5 added by Matthew Baldock
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update(GameTime gameTime) {
 			//Allows Game to Exit
@@ -148,21 +148,21 @@ namespace SpaceUnion {
 				case GameState.Select:
 					shipselectionScreen.update();
 					break;
-                case GameState.Layer1:
-                    lobbyoptions.update();
-                    break;
-                case GameState.Layer2:
-                    lobbybrowser.update();
-                    break;
-                case GameState.Layer3:
-                    createlobby.update();
-                    break;
-                case GameState.Layer4:
-                    gamelobby.update();
-                    break;
-                case GameState.Layer5:
-                    gameroom.update();
-                    break;
+				case GameState.Layer1:
+					lobbyoptions.update();
+					break;
+				case GameState.Layer2:
+					lobbybrowser.update();
+					break;
+				case GameState.Layer3:
+					createlobby.update();
+					break;
+				case GameState.Layer4:
+					gamelobby.update();
+					break;
+				case GameState.Layer5:
+					gameroom.update();
+					break;
 				default:
 					break;
 			}
@@ -174,12 +174,12 @@ namespace SpaceUnion {
 		/// <summary>
 		/// This is called when the game should draw itself.
 		/// </summary>
-        /// 
-        /// select - layer5 added by Matthew Baldock
+		/// 
+		/// select - layer5 added by Matthew Baldock
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime) {
 			GraphicsDevice.Clear(Color.Black);
-			
+
 
 
 			switch (currentGameState) {
@@ -192,21 +192,21 @@ namespace SpaceUnion {
 				case GameState.Select:
 					shipselectionScreen.draw(spriteBatch);
 					break;
-                case GameState.Layer1:
-                    lobbyoptions.draw(spriteBatch);
-                    break;
-                case GameState.Layer2:
-                    lobbybrowser.draw(spriteBatch);
-                    break;
-                case GameState.Layer3:
-                    createlobby.draw(spriteBatch);
-                    break;
-                case GameState.Layer4:
-                    gamelobby.draw(spriteBatch);
-                    break;
-                case GameState.Layer5:
-                    gameroom.draw(spriteBatch);
-                    break;
+				case GameState.Layer1:
+					lobbyoptions.draw(spriteBatch);
+					break;
+				case GameState.Layer2:
+					lobbybrowser.draw(spriteBatch);
+					break;
+				case GameState.Layer3:
+					createlobby.draw(spriteBatch);
+					break;
+				case GameState.Layer4:
+					gamelobby.draw(spriteBatch);
+					break;
+				case GameState.Layer5:
+					gameroom.draw(spriteBatch);
+					break;
 
 
 
@@ -215,43 +215,38 @@ namespace SpaceUnion {
 			base.Draw(gameTime);
 		}
 
-        //Gotolayer1 - gotoselect added by Matthew Baldock
+		//Gotolayer1 - gotoselect added by Matthew Baldock
 		public void GoToMain() {
 
 			currentGameState = GameState.MainMenu;
 			IsMouseVisible = true;
 		}
-        public void GoToLayer1()
-        {
-            lobbyoptions = new LobbyOptions(this);
-            currentGameState = GameState.Layer1;
-            IsMouseVisible = true;
-        }
-        public void GoToLayer2()
-        {
-            lobbybrowser = new LobbyBrowser(this);
-            currentGameState = GameState.Layer2;
-            IsMouseVisible = true;
-        }
-        public void GoToLayer3()
-        {
-            createlobby = new CreateLobby(this);
-            currentGameState = GameState.Layer3;
-            IsMouseVisible = true;
-        }
-        public void GoToLayer4()
-        {
-            gamelobby = new GameLobby(this);
-            currentGameState = GameState.Layer4;
-            IsMouseVisible = true;
-        }
-        public void GoToLayer5()
-        {
-            gameroom = new GameRoom(this);
-            currentGameState = GameState.Layer5;
-            IsMouseVisible = true;
-        }
-        
+		public void GoToLayer1() {
+			lobbyoptions = new LobbyOptions(this);
+			currentGameState = GameState.Layer1;
+			IsMouseVisible = true;
+		}
+		public void GoToLayer2() {
+			lobbybrowser = new LobbyBrowser(this);
+			currentGameState = GameState.Layer2;
+			IsMouseVisible = true;
+		}
+		public void GoToLayer3() {
+			createlobby = new CreateLobby(this);
+			currentGameState = GameState.Layer3;
+			IsMouseVisible = true;
+		}
+		public void GoToLayer4() {
+			gamelobby = new GameLobby(this);
+			currentGameState = GameState.Layer4;
+			IsMouseVisible = true;
+		}
+		public void GoToLayer5() {
+			gameroom = new GameRoom(this);
+			currentGameState = GameState.Layer5;
+			IsMouseVisible = true;
+		}
+
 		public void GoToSelect() {
 			shipselectionScreen = new ShipSelectionScreen(this);
 			currentGameState = GameState.Select;

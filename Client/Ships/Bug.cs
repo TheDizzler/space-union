@@ -1,33 +1,52 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using SpaceUnion.Tools;
 using SpaceUnion.Weapons;
+using SpaceUnion.Weapons.Projectiles;
+using SpaceUnion.Weapons.Systems;
 
 
 namespace SpaceUnion.Ships {
+	/// <summary>
+	/// A tiny ship.
+	/// @Written by Tristan.
+	/// </summary>
 	class Bug : Ship {
 
 		public Bug(Game1 game1)
 			: base(assets.bug, assets.moltenBullet, game1) {
 
-			maxSpeed = 100;
+			maxSpeed = 300;
 			accelSpeed = 100.0f;
-			turnSpeed = 4.5f;
+			turnSpeed = 9.5f;
 
 			mass = 500;
 
 			mainFireDelay = TimeSpan.FromSeconds(.5f);
 			altFireDelay = TimeSpan.FromSeconds(1f);
 
-			//mainWeapon = new MoltenBullet();
+			//mainWeapon = new Launcher<MoltenBullet>(10);
+			mainWeapon = Launcher<MoltenBullet>.CreateLauncher(this, (x, y) => new MoltenBullet(x, y), 8);
 			weaponOrigin = new Vector2(position.X, position.Y - height / 2); // start position of weapon
 		}
 
 
-		protected override Projectile getProjectile() {
-			return new MoltenBullet(Vector2.Add(position, weaponOrigin), this);
+		public override void altFire(GameTime gameTime) {
+
 		}
 
-		public override void altFire(GameTime gameTime) {
+
+
+		protected override void additionalUpdate(GameTime gameTime, QuadTree quadTree) {
+
+		}
+
+		protected override void additionalDraw(SpriteBatch sBatch) {
+
+		}
+
+		protected override void additionalFire(GameTime gameTime) {
 
 		}
 

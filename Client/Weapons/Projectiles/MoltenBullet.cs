@@ -1,27 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
 using SpaceUnion.Ships;
-using SpaceUnion.Weapons;
 
 
-namespace SpaceUnion.Weapons {
-	public class Missle : Projectile {
+namespace SpaceUnion.Weapons.Projectiles {
+	class MoltenBullet : Projectile {
 
-		public Missle(Vector2 startPoint, Ship ship)
-			: base(assets.missile, startPoint, ship) {
+		public MoltenBullet(Vector2 startPoint, Ship ship)
+			: base(assets.moltenBullet, startPoint, ship) {
 
 
-			projectileTTL = .5f;
-			projectileMoveSpeed = 2.2f;
+			projectileTTL = 1.5f;
+			projectileMoveSpeed = .2f;
 
-			velocity += new Vector2((float) Math.Sin(rotation) * projectileMoveSpeed,
-				(float) -Math.Cos(rotation) * projectileMoveSpeed);
-
-			weaponDamage = 3;
-
+			weaponDamage = 5;
 		}
 
 		/// <summary>
@@ -41,7 +33,7 @@ namespace SpaceUnion.Weapons {
 		/// <param name="gameTime"></param>
 		public override void doDamage(Tangible target, GameTime gameTime) {
 
-			base.doDamage(target, gameTime);
+			base.doDamage(target, gameTime); // base calls destroy be default
 		}
 
 
@@ -49,6 +41,5 @@ namespace SpaceUnion.Weapons {
 			//isActive = false;
 			explosionEngine.createSmallExplosion(position);
 		}
-
 	}
 }

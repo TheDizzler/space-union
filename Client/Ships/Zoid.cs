@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SpaceUnion.Ships;
+using SpaceUnion.Tools;
 using SpaceUnion.Weapons;
+using SpaceUnion.Weapons.Projectiles;
+using SpaceUnion.Weapons.Systems;
 
 
-namespace SpaceUnion.Weapons {
+namespace SpaceUnion.Ships {
 	class Zoid : Ship {
 
-		Vector2 weaponOrigin2;
+		private Vector2 weaponOrigin2;
+		private WeaponSystem mainWeapon2;
 
 		/// <summary>
 		/// Set up the ships unique attributes here.
@@ -21,22 +21,19 @@ namespace SpaceUnion.Weapons {
 			: base(assets.zoid, assets.missile, game1) {
 
 			maxSpeed = 7;
-			accelSpeed = 10.5f;
+			accelSpeed = 70.5f;
 			turnSpeed = 4.5f;
-
+			maxSpeed = 400;
 			mainFireDelay = TimeSpan.FromSeconds(.2f);
 			altFireDelay = TimeSpan.FromSeconds(1f);
+
+			
+			mainWeapon = Launcher<Missile>.CreateLauncher(this, (x, y) => new Missile(x, y), 4);
+			mainWeapon2 = Launcher<Missile>.CreateLauncher(this, (x, y) => new Missile(x, y), 4);
 
 			weaponOrigin = new Vector2(position.X - width / 3, position.Y - height / 2);
 			weaponOrigin2 = new Vector2(position.X + width / 3, position.Y - height / 2);
 		}
-
-
-		protected override Projectile getProjectile() {
-			projectiles.Add(new Missle(Vector2.Add(position, weaponOrigin2), this));
-			return new Missle(Vector2.Add(position, weaponOrigin), this);
-		}
-
 
 		public override void altFire(GameTime gameTime) {
 
@@ -55,8 +52,20 @@ namespace SpaceUnion.Weapons {
 		}
 
 
+
+		protected override void additionalUpdate(GameTime gameTime, QuadTree quadTree) {
+			mainWeapon2.update(gameTime, quadTree);
+		}
+
+		protected override void additionalDraw(SpriteBatch sBatch) {
+			mainWeapon2.draw(sBatch);
+		}
+
+		protected override void additionalFire(GameTime gameTime) {
+
+			mainWeapon2.fire(Vector2.Add(position, weaponOrigin2));
+		}
+
 	}
-
-
 
 }
