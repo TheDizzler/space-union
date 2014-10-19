@@ -135,6 +135,11 @@ namespace SpaceUnion.Ships {
 		/// <param name="sBatch"></param>
 		protected abstract void additionalDraw(SpriteBatch sBatch);
 
+
+		public override void drawMiniMap(SpriteBatch batch) {
+			throw new NotImplementedException();
+		}
+
 		/// <summary>
 		/// Determine what kind of collision is occuring.
 		/// @Written by Tristan.

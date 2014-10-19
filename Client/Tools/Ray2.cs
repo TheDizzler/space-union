@@ -119,8 +119,8 @@ namespace SpaceUnion.Tools {
 		}
 
 		/// <summary>
-		/// As as intersects(HitBox box) but checks if hit is within
-		/// direction.Length()
+		/// Same as intersects(HitBox box) but checks if hit is within
+		/// direction.Length().
 		/// </summary>
 		/// <param name="box"></param>
 		/// <returns></returns>
@@ -204,7 +204,7 @@ namespace SpaceUnion.Tools {
 		}
 
 		/// <summary>
-		/// Get the distance to the last checked hitbox.
+		/// Get the distance (in pixels) to the last checked hitbox.
 		/// Note that this value doesn't mean much if intersects() returned false and will probably
 		/// cause strange behaviour.
 		/// </summary>

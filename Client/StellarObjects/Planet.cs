@@ -36,6 +36,10 @@ namespace SpaceUnion.StellarObjects {
 		}
 
 
+		public override void drawMiniMap(SpriteBatch batch) {
+			throw new NotImplementedException();
+		}
+
 		public override void collide(Tangible target, GameTime gameTime) {
 
 			if (target is Projectile)

@@ -5,7 +5,8 @@ using Microsoft.Xna.Framework;
 
 namespace SpaceUnion.Tools {
 	/// <summary>
-	/// Hitboxes will contain an array of rectangles
+	/// This contains the main "rough" hitbox and the smaller, precise hitcircles.
+	/// @Written by Konstantin. Editted by Tristan.
 	/// </summary>
 	public class HitBox {
 
@@ -19,14 +20,22 @@ namespace SpaceUnion.Tools {
 
 		/// <summary>
 		/// Dictionary of edges for raycasting.
+		/// DEPRECATED
 		/// </summary>
 		public Dictionary<String, Vector2[]> edges = new Dictionary<String, Vector2[]>();
 
 		public float rotation;
-		public Vector2 topLeft;
-		public Vector2 bottomLeft;
-		public Vector2 topRight;
-		public Vector2 bottomRight;
+
+		/// <summary>
+		/// Location of corners of rectangle for convenience.
+		/// </summary>
+		public Vector2 topLeft, bottomLeft, topRight, bottomRight;
+
+		/// <summary>
+		/// List of smaller, more precise hitboxes.
+		/// These must be set up on a ship-per-ship basis.
+		/// </summary>
+		public List<HitCircle> circles = new List<HitCircle>();
 
 
 		public HitBox(float x, float y, int w, int h) {
@@ -41,18 +50,18 @@ namespace SpaceUnion.Tools {
 			bottomRight = new Vector2(x + width, y + height);
 
 
-			edges.Add("left", new Vector2[2] { topLeft, bottomLeft });
-			edges.Add("bottom", new Vector2[2] { bottomLeft, bottomRight });
-			edges.Add("right", new Vector2[2] { bottomRight, topRight });
-			edges.Add("top", new Vector2[2] { topRight, topLeft });
+			//edges.Add("left", new Vector2[2] { topLeft, bottomLeft });
+			//edges.Add("bottom", new Vector2[2] { bottomLeft, bottomRight });
+			//edges.Add("right", new Vector2[2] { bottomRight, topRight });
+			//edges.Add("top", new Vector2[2] { topRight, topLeft });
 
 
 			//rectHitBox = new Rectangle((int) position.X, (int) position.Y, width, height);
-
 		}
 
 		public Rectangle getArray() {
 			return rectHitBox = new Rectangle((int) position.X - width / 2, (int) position.Y - height / 2, width, height);
+			//return rectHitBox = new Rectangle((int) position.X , (int) position.Y, width, height);
 		}
 
 		public void updatePosition(Vector2 newPosition, float rot) {
@@ -62,4 +71,6 @@ namespace SpaceUnion.Tools {
 		}
 
 	}
+
+
 }

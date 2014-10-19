@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceUnion.Tools;
@@ -68,6 +69,9 @@ namespace SpaceUnion.Ships {
 				mainWeapon.draw(sBatch);
 		}
 
+		public override void drawMiniMap(SpriteBatch batch) {
+			throw new NotImplementedException();
+		}
 
 		public override void altFire(GameTime gameTime) {
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceUnion.Tools;
 using SpaceUnion.Weapons;
@@ -28,6 +29,10 @@ namespace SpaceUnion.Ships {
 
 		protected override void additionalDraw(SpriteBatch sBatch) {
 
+		}
+
+		public override void drawMiniMap(SpriteBatch batch) {
+			throw new NotImplementedException();
 		}
 
 		protected override void additionalFire(GameTime gameTime) {

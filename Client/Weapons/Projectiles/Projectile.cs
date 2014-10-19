@@ -59,6 +59,10 @@ namespace SpaceUnion.Weapons.Projectiles {
 			}
 		}
 
+		public override void drawMiniMap(SpriteBatch batch) {
+			throw new NotImplementedException();
+		}
+
 		/// <summary>
 		/// Deal damage and destroy the projectile.
 		/// </summary>

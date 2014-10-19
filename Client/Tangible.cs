@@ -127,6 +127,11 @@ namespace SpaceUnion {
 			//batch.Draw(assets.guiRectangle, hitBox.position, hitBox.getArray(), Color.Pink, hitBox.rotation, hitBox.position, scale, SpriteEffects.None, 0);
 		}
 
+		/// <summary>
+		/// What to draw on the minimap for this object.
+		/// </summary>
+		/// <param name="batch"></param>
+		public abstract void drawMiniMap(SpriteBatch batch);
 
 		/// <summary>
 		/// Check if hitboxes overlap.

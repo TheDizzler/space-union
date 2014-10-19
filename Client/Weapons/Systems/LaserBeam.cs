@@ -29,10 +29,6 @@ namespace SpaceUnion.Weapons.Systems {
 		/// </summary>
 		private List<Texture2D> beamQuanta = new List<Texture2D>();
 		private Vector2 beamDirection;
-		/// <summary>
-		/// enemy edge hit location if !(0 <= s <= 1) then miss
-		/// </summary>
-		private float t;
 
 
 		public LaserBeam(Vector2 startPoint, Ship ship)
@@ -55,7 +51,7 @@ namespace SpaceUnion.Weapons.Systems {
 			beamQuantum = new Rectangle((int) position.X, (int) position.Y, 1, 3);
 
 			beamDirection = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
-			Ray2 ray = new Ray2(position, beamDirection);
+			Ray2 ray = new Ray2(position, beamDirection * beamLength);
 
 
 			float distToTarget = beamLength;
@@ -64,23 +60,24 @@ namespace SpaceUnion.Weapons.Systems {
 			List<Tangible> possibleCollisions = quadTree.retrieve(owner); /* This method and may result in missed ships.
 																		   * A different retriever using a raycast
 																		   will likely be necessary. -Tristan-*/
-
+			Tangible currentTarget = null;
 
 			foreach (Tangible target in possibleCollisions) {
-				if (target.isActive && target != owner) {
+				if (target != owner) {
 
 
-					if (ray.intersects(target.getHitBox())) {
-						distToTarget = ray.getDistance();
-						if (distToTarget <= beamLength) {
-							target.takeDamage(weaponDamage, gameTime);
-							break;
+					if (ray.intersectsToRange(target.getHitBox())) {
+						float temp = ray.getDistance();
+						if (temp < distToTarget) {
+							distToTarget = temp;
+							currentTarget = target;
 						}
-
 					}
-					distToTarget = beamLength;
-
 				}
+			}
+
+			if (currentTarget != null) {
+				currentTarget.takeDamage(weaponDamage, gameTime);
 			}
 
 			for (int i = 0; i < distToTarget; ++i) {
@@ -91,6 +88,20 @@ namespace SpaceUnion.Weapons.Systems {
 
 		}
 
+
+		public override void draw(SpriteBatch spriteBatch) {
+			foreach (Texture2D dot in beamQuanta) {
+
+				position.X += beamDirection.X;
+				position.Y += beamDirection.Y;
+				beamQuantum.X = (int) position.X;
+				beamQuantum.Y = (int) position.Y;
+				spriteBatch.Draw(dot, beamQuantum, Color.White);
+			}
+
+		}
+
+
 		/// <summary> *DEPRECATED?*
 		/// Find t (in the parametric equation) along the laser beam.
 		/// This could be probably be cleaned up with a loop.
@@ -100,7 +111,7 @@ namespace SpaceUnion.Weapons.Systems {
 		private String getLengthClosestHitEdge(HitBox target) {
 
 			String edge = null;
-
+			float t = 0;
 			Vector2[] edgePoints = target.edges["left"];
 			float temp = CollisionHandler.findT(edgePoints[0], edgePoints[1], position, beamDirection); // test left edge
 			if (temp >= 0 && temp <= t) {
@@ -132,17 +143,7 @@ namespace SpaceUnion.Weapons.Systems {
 		}
 
 
-		public override void draw(SpriteBatch spriteBatch) {
-			foreach (Texture2D dot in beamQuanta) {
 
-				position.X += beamDirection.X;
-				position.Y += beamDirection.Y;
-				beamQuantum.X = (int) position.X;
-				beamQuantum.Y = (int) position.Y;
-				spriteBatch.Draw(dot, beamQuantum, Color.White);
-			}
-
-		}
 
 		public void updatePosition(Vector2 startPoint, float rot) {
 			position = startPoint;

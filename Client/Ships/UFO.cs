@@ -43,9 +43,6 @@ namespace SpaceUnion.Ships {
 				shield.draw(batch);
 		}
 
-		//protected override Projectile getProjectile() {
-		//	return new Laser(Vector2.Add(position, weaponOrigin), this);
-		//}
 
 		public override void altFire(GameTime gameTime) {
 

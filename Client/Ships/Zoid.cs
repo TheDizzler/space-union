@@ -57,6 +57,7 @@ namespace SpaceUnion.Ships {
 			mainWeapon2.update(gameTime, quadTree);
 		}
 
+
 		protected override void additionalDraw(SpriteBatch sBatch) {
 			mainWeapon2.draw(sBatch);
 		}

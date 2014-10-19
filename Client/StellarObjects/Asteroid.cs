@@ -64,6 +64,9 @@ namespace SpaceUnion.StellarObjects {
 			base.destroy();
 		}
 
+		public override void drawMiniMap(SpriteBatch batch) {
+			throw new NotImplementedException();
+		}
 
 		public override void collide(Tangible target, GameTime gameTime) {
 
