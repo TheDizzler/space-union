@@ -9,8 +9,8 @@ namespace SpaceUnion.Tools {
 	/// </summary>
 	public class HitBox {
 
-		private int width;
-		private int height;
+		public int width;
+		public int height;
 		private Rectangle rectHitBox;
 		/// <summary>
 		/// Hit box coordinates

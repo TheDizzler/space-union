@@ -54,39 +54,38 @@ namespace SpaceUnion.Weapons {
 		public new void update(GameTime gameTime, QuadTree quadTree) {
 
 			beamQuanta.Clear();
-			//Ray2 ray = new Ray2(new Vector2(0, 0), new Vector2(0, 0));
-			beamDirection = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
-
 			beamQuantum = new Rectangle((int) position.X, (int) position.Y, 1, 3);
 
-			t = 1; // beamLength multiplier ( 0 <= t <= 1 )
-			//s = 1;
+			beamDirection = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
+			Ray2 ray = new Ray2(position, beamDirection);
+
+
+			float distToTarget = beamLength;
+
 			// find targets within line of fire
 			List<Tangible> possibleCollisions = quadTree.retrieve(owner); /* This method and may result in missed ships.
 																		   * A different retriever using a raycast
 																		   will likely be necessary. -Tristan-*/
-			
+
 
 			foreach (Tangible target in possibleCollisions) {
 				if (target.isActive && target != owner) {
 
-					
-					// Check all for edges for a hit
-					string edgeHit = getLengthClosestHitEdge(target.getHitBox());
-					if (edgeHit != null) { // we have a bounding box hit
 
-						// and find how long beam will be
-						Vector2[] edgePoints = target.getHitBox().edges[edgeHit];
-						//t = CollisionHandler.findT(edgePoints[0], edgePoints[1], position, beamDirection);
-						// apply damage, etc
-						target.destroy();
-						break;
+					if (ray.intersects(target.getHitBox())) {
+						distToTarget = ray.getDistance();
+						if (distToTarget >= 0 && distToTarget <= beamLength) {
+							target.destroy();
+							break;
+						}
+
 					}
+					distToTarget = beamLength;
 
 				}
 			}
 
-			for (int i = 0; i < beamLength * t; ++i) {
+			for (int i = 0; i < distToTarget; ++i) {
 
 				beamQuanta.Add(assets.Content.Load<Texture2D>("Projectiles/molten bullet (6x8)"));// test texture
 
@@ -94,7 +93,7 @@ namespace SpaceUnion.Weapons {
 
 		}
 
-		/// <summary> *NOT WORKING PROPERLY*
+		/// <summary> *DEPRECATED?*
 		/// Find t (in the parametric equation) along the laser beam.
 		/// This could be probably be cleaned up with a loop.
 		/// </summary>
@@ -103,7 +102,7 @@ namespace SpaceUnion.Weapons {
 		private String getLengthClosestHitEdge(HitBox target) {
 
 			String edge = null;
-			
+
 			Vector2[] edgePoints = target.edges["left"];
 			float temp = CollisionHandler.findT(edgePoints[0], edgePoints[1], position, beamDirection); // test left edge
 			if (temp >= 0 && temp <= t) {

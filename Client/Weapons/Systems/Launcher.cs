@@ -46,10 +46,8 @@ namespace SpaceUnion.Weapons.Systems {
 		/// <returns>the created launcher</returns>
 		public static WeaponSystem CreateLauncher(Ship ship, Func<Vector2, Ship, ProjectileType> projectileClass, short maxCapacity = 8) {
 
-			Launcher<ProjectileType> launcher = new Launcher<ProjectileType>();
+			Launcher<ProjectileType> launcher = new Launcher<ProjectileType>(ship, maxCapacity);
 			launcher.projectileStore = fillStore(ship, maxCapacity, projectileClass);
-			launcher.owner = ship;
-			launcher.maxCapacity = maxCapacity;
 
 			return launcher;
 		}
@@ -66,9 +64,14 @@ namespace SpaceUnion.Weapons.Systems {
 		/// <summary>
 		/// 
 		/// </summary>
-		private Launcher() {
+		/// <param name="ship"></param>
+		/// <param name="capacity"></param>
+		private Launcher(Ship ship, short capacity) {
 
+			owner = ship;
+			maxCapacity = capacity;
 			projectiles = new List<ProjectileType>();
+
 		}
 
 

@@ -105,7 +105,7 @@ namespace SpaceUnion.Tools {
 
 		}
 
-		/// <summary>
+		/// <summary> *DEPRECATED*
 		/// Helper function for ray casting.
 		/// Finds how far along the ray that the collision occurs (t in the parametric equation)
 		/// </summary>
@@ -125,6 +125,7 @@ namespace SpaceUnion.Tools {
 			return dividend / divisor;
 
 		}
+
 
 	}
 }

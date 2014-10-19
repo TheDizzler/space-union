@@ -11,7 +11,7 @@ namespace SpaceUnion.Ships {
 
 
 		bool beamOn = false;
-		private LaserBeam beam;
+		//private LaserBeam beam;
 
 		public Scout(Game1 game1)
 			: base(assets.stunt, assets.laser, game1) {
@@ -23,7 +23,11 @@ namespace SpaceUnion.Ships {
 
 			weaponOrigin = new Vector2(position.X, position.Y - height / 2);
 
-			beam = new LaserBeam(Vector2.Add(position, weaponOrigin), this);
+			/** A-hem clean this up */
+			//beam = new LaserBeam(Vector2.Add(position, weaponOrigin), this);
+			mainWeapon = new LaserBeam(Vector2.Add(position, weaponOrigin), this);
+
+			/**clean clean clean */
 		}
 
 		/// <summary>
@@ -37,7 +41,7 @@ namespace SpaceUnion.Ships {
 
 			//}
 
-			beam.updatePosition(Vector2.Add(position, weaponOrigin), rotation);
+			((LaserBeam)mainWeapon).updatePosition(Vector2.Add(position, weaponOrigin), rotation);
 			beamOn = true;
 
 		}
@@ -48,13 +52,13 @@ namespace SpaceUnion.Ships {
 
 			position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
 			base.update(position);
-			beam.updatePosition(Vector2.Add(position, weaponOrigin), rotation);
+			((LaserBeam) mainWeapon).updatePosition(Vector2.Add(position, weaponOrigin), rotation);
 
 			checkWorldEdge();
 
 
 			if (beamOn)
-				beam.update(gameTime, quadTree);
+				mainWeapon.update(gameTime, quadTree);
 
 			checkForCollision(quadTree, gameTime);
 		}
@@ -64,7 +68,7 @@ namespace SpaceUnion.Ships {
 			base.draw(sBatch);
 
 			if (beamOn)
-				beam.draw(sBatch);
+				mainWeapon.draw(sBatch);
 		}
 
 
