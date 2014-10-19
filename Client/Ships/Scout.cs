@@ -23,11 +23,7 @@ namespace SpaceUnion.Ships {
 
 			weaponOrigin = new Vector2(position.X, position.Y - height / 2);
 
-			/** A-hem clean this up */
-			//beam = new LaserBeam(Vector2.Add(position, weaponOrigin), this);
 			mainWeapon = new LaserBeam(Vector2.Add(position, weaponOrigin), this);
-
-			/**clean clean clean */
 		}
 
 		/// <summary>
