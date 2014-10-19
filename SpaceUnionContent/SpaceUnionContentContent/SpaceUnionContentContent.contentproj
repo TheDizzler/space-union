@@ -80,8 +80,8 @@
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Spaceships\stuntship %28128x128%29.png">
-      <Name>stuntship %28128x128%29</Name>
+    <Compile Include="Spaceships\scoutship %28128x128%29.png">
+      <Name>scoutship %28128x128%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -13,7 +13,7 @@ namespace SpaceUnion.Weapons.Projectiles {
 	public abstract class Projectile : Tangible {
 
 		/// <summary>
-		/// Determines how fast the projectile moves
+		/// Determines how fast the projectile moves in pixels per second
 		/// </summary>
 		protected float projectileMoveSpeed;
 		/// <summary>
@@ -38,9 +38,6 @@ namespace SpaceUnion.Weapons.Projectiles {
 			: base(texture, position) {
 
 			owner = ship;
-			//rotation = (float) ship.getRotation();
-
-			//velocity = ship.velocity;
 			timeActive = 0;
 		}
 
@@ -50,12 +47,15 @@ namespace SpaceUnion.Weapons.Projectiles {
 			timeActive += (float) gameTime.ElapsedGameTime.TotalSeconds;
 			if (projectileTTL > timeActive) {
 
-				position += velocity * (float) gameTime.ElapsedGameTime.TotalMilliseconds;
+				moveThisUpdate = velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
+				checkForCollision2(quadTree, gameTime);
+
+				position += moveThisUpdate;
 				base.update(position);
 
-				checkForCollision(quadTree, gameTime);
+				//checkForCollision(quadTree, gameTime);
 			} else {
-				isActive = false;
+				destroy();
 			}
 		}
 

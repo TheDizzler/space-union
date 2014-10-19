@@ -23,7 +23,10 @@ namespace SpaceUnion.Controllers {
 		QuadTree quadTree;
 		List<Asteroid> asteroids;
 		List<Ship> ships;
-		List<Tangible> targets;
+		/// <summary>
+		/// All objects in this list get added to the quadtree every update.
+		/// </summary>
+		public static List<Tangible> targets;
 		List<Planet> planets;
 
 		private Ship playerShip;
@@ -91,7 +94,8 @@ namespace SpaceUnion.Controllers {
 				targets.Add(ship);
 			for (int i = 0; i < 50; i++)
 				AddAsteroid(new Vector2(gen.Next(100, worldWidth), gen.Next(100, worldHeight)));
-
+			foreach (Planet planet in planets)
+				targets.Add(planet);
 
 
 		}
@@ -176,8 +180,9 @@ namespace SpaceUnion.Controllers {
 
 			for (int i = asteroids.Count - 1; i >= 0; i--) {
 				asteroids[i].update(gameTime, quadTree);
-				if (!asteroids[i].isActive)
+				if (!asteroids[i].isActive) {
 					asteroids.RemoveAt(i);
+				}
 			}
 
 
@@ -233,12 +238,6 @@ namespace SpaceUnion.Controllers {
 
 
 			spriteBatch.End();
-
-
-
-
-
-
 		}
 
 		private void drawScreen(Camera camera) {

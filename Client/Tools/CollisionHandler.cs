@@ -23,6 +23,7 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		/// <param name="ship1"></param>
 		/// <param name="ship2"></param>
+		/// <param name="gameTime"></param>
 		public static void shipOnShip(Ship ship1, Ship ship2, GameTime gameTime) {
 
 			reflect(ship1, ship2);
@@ -33,6 +34,7 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		/// <param name="ship"></param>
 		/// <param name="planet"></param>
+		/// <param name="gameTime"></param>
 		public static void shipOnPlanet(Ship ship, Planet planet, GameTime gameTime) {
 
 			ship.takeDamage(planet.collisionDamage, gameTime);
@@ -44,6 +46,7 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		/// <param name="ship"></param>
 		/// <param name="asteroid"></param>
+		/// <param name="gameTime"></param>
 		public static void shipOnAsteroid(Ship ship, Asteroid asteroid, GameTime gameTime) {
 			ship.takeDamage(asteroid.collisionDamage, gameTime);
 			//asteroid.takeDamage(asteroid.collisionDamage, gameTime);
@@ -55,6 +58,7 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		/// <param name="asteroid1"></param>
 		/// <param name="asteroid2"></param>
+		/// <param name="gameTime"></param>
 		public static void asteroidOnAsteroid(Asteroid asteroid1, Asteroid asteroid2, GameTime gameTime) {
 
 			reflect(asteroid1, asteroid2);
@@ -65,6 +69,7 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		/// <param name="asteroid"></param>
 		/// <param name="planet"></param>
+		/// <param name="gameTime"></param>
 		public static void asteroidOnPlanet(Asteroid asteroid, Planet planet, GameTime gameTime) {
 
 			asteroid.destroy();
@@ -75,6 +80,7 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		/// <param name="planet1"></param>
 		/// <param name="planet2"></param>
+		/// <param name="gameTime"></param>
 		public static void planetOnPlanet(Planet planet1, Planet planet2, GameTime gameTime) {
 			throw new NotImplementedException();
 		}
@@ -82,7 +88,7 @@ namespace SpaceUnion.Tools {
 
 
 		/// <summary>
-		/// "Bounce" an object off of another
+		/// "Bounce" an object off of another. Not great....
 		/// @Written by Tristan with help fromXNA 4.0 Game Development by Example -Jaegers Packt(2010)
 		/// </summary>
 		public static void reflect(Tangible tangible1, Tangible tangible2) {
@@ -105,7 +111,7 @@ namespace SpaceUnion.Tools {
 
 		}
 
-		/// <summary> *DEPRECATED*
+		/// <summary> *DEPRECATED?*
 		/// Helper function for ray casting.
 		/// Finds how far along the ray that the collision occurs (t in the parametric equation)
 		/// </summary>
@@ -119,7 +125,7 @@ namespace SpaceUnion.Tools {
 			float dividend = rayStart.X * (lineEnd.Y - lineStart.Y) + lineStart.X * (rayStart.Y - lineEnd.Y) + lineEnd.X * (lineStart.Y - rayStart.Y);
 			float divisor = lineEnd.X * (rayEnd.Y - rayStart.Y) - lineStart.X * (rayEnd.Y - rayStart.Y) - lineEnd.Y * (rayEnd.X - rayStart.X) + lineStart.Y * (rayEnd.X - rayStart.X);
 
-			if (divisor == 0.0f) // someone goofed
+			if (Math.Abs(divisor) < Ray2.EPSILON) // someone goofed
 				return -1;
 
 			return dividend / divisor;

@@ -23,6 +23,10 @@ namespace SpaceUnion.Tools {
 		public Dictionary<String, Vector2[]> edges = new Dictionary<String, Vector2[]>();
 
 		public float rotation;
+		public Vector2 topLeft;
+		public Vector2 bottomLeft;
+		public Vector2 topRight;
+		public Vector2 bottomRight;
 
 
 		public HitBox(float x, float y, int w, int h) {
@@ -31,13 +35,13 @@ namespace SpaceUnion.Tools {
 			width = w;
 			height = h;
 
-			Vector2 topLeft = new Vector2(x, y);
-			Vector2 bottomLeft = new Vector2(x, y + height);
-			Vector2 topRight = new Vector2(x + width, y);
-			Vector2 bottomRight = new Vector2(x + width, y + height);
+			topLeft = new Vector2(x, y);
+			bottomLeft = new Vector2(x, y + height);
+			topRight = new Vector2(x + width, y);
+			bottomRight = new Vector2(x + width, y + height);
 
 
-			edges.Add("left", new Vector2[2] { topLeft, bottomLeft});
+			edges.Add("left", new Vector2[2] { topLeft, bottomLeft });
 			edges.Add("bottom", new Vector2[2] { bottomLeft, bottomRight });
 			edges.Add("right", new Vector2[2] { bottomRight, topRight });
 			edges.Add("top", new Vector2[2] { topRight, topLeft });

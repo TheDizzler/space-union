@@ -153,7 +153,7 @@ namespace SpaceUnion.Tools {
 
 			spaceShipTest = Content.Load<Texture2D>("Spaceships/spaceshiptest");
 			ufo = Content.Load<Texture2D>("Spaceships/ufoship (128x128)");
-			stunt = Content.Load<Texture2D>("Spaceships/stuntship (128x128)");
+			stunt = Content.Load<Texture2D>("Spaceships/scoutship (128x128)");
 			zoid = Content.Load<Texture2D>("Spaceships/zoidship");
 			bug = Content.Load<Texture2D>("Spaceships/bug (16x16)");
 

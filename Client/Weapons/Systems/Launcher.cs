@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceUnion.Controllers;
 using SpaceUnion.Ships;
 using SpaceUnion.Tools;
 using SpaceUnion.Weapons.Projectiles;
@@ -89,6 +90,7 @@ namespace SpaceUnion.Weapons.Systems {
 				projectileStore.Remove(proj);
 				proj.launch(startPoint, (float) owner.getRotation());
 				projectiles.Add(proj);
+				GameplayScreen.targets.Add(proj);
 			}
 		}
 
@@ -103,10 +105,9 @@ namespace SpaceUnion.Weapons.Systems {
 				projectiles[i].update(gameTime, quadTree);
 
 				if (!projectiles[i].isActive) {
-					putInStore(projectiles[i]);
-
-
-					projectiles.RemoveAt(i);
+					putInStore(projectiles[i]);		// place projectile back in the store
+					projectiles.RemoveAt(i);		// and remove from active projectiles
+					
 				}
 			}
 		}
@@ -118,7 +119,7 @@ namespace SpaceUnion.Weapons.Systems {
 		/// <param name="projectile"></param>
 		private void putInStore(ProjectileType projectile) {
 			projectileStore.Add(projectile);
-			projectile.position = new Vector2(25, 25);
+			//projectile.position = new Vector2(-25, -25);
 		}
 
 		/// <summary>

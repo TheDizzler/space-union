@@ -12,7 +12,7 @@ namespace SpaceUnion.Weapons.Projectiles {
 
 
 			projectileTTL = .5f;
-			projectileMoveSpeed = 2.2f;
+			projectileMoveSpeed = 2000.2f;
 
 			weaponDamage = 3;
 
@@ -41,8 +41,9 @@ namespace SpaceUnion.Weapons.Projectiles {
 
 
 		public override void destroy() {
-			//isActive = false;
+			
 			explosionEngine.createSmallExplosion(position);
+			base.destroy();
 		}
 
 	}

@@ -32,7 +32,7 @@ namespace SpaceUnion.StellarObjects {
 		public Planet(Texture2D tex, Vector2 pos, float mass, float range)
 			: base(tex, pos, mass, range) {
 
-
+				
 		}
 
 

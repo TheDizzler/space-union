@@ -10,8 +10,8 @@ namespace SpaceUnion.Weapons.Projectiles {
 			: base(assets.laser, startPoint, ship) {
 
 			projectileTTL = 5;
-			projectileMoveSpeed = 1.2f;
-			
+			projectileMoveSpeed = 1000.2f;
+
 
 			weaponDamage = 5;
 
@@ -33,13 +33,13 @@ namespace SpaceUnion.Weapons.Projectiles {
 		/// <param name="target"></param>
 		/// <param name="gameTime"></param>
 		public override void doDamage(Tangible target, GameTime gameTime) {
-			
+
 			base.doDamage(target, gameTime);
 		}
 
 
 		public override void destroy() {
-			//isActive = false; //Still haveing a self player collision issue
+			base.destroy();
 		}
 
 	}

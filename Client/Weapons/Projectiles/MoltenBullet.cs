@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using SpaceUnion.Controllers;
 using SpaceUnion.Ships;
 
 
@@ -11,7 +12,7 @@ namespace SpaceUnion.Weapons.Projectiles {
 
 
 			projectileTTL = 1.5f;
-			projectileMoveSpeed = .2f;
+			projectileMoveSpeed = 500f;
 
 			weaponDamage = 5;
 		}
@@ -33,13 +34,14 @@ namespace SpaceUnion.Weapons.Projectiles {
 		/// <param name="gameTime"></param>
 		public override void doDamage(Tangible target, GameTime gameTime) {
 
-			base.doDamage(target, gameTime); // base calls destroy be default
+			base.doDamage(target, gameTime); // base calls destroy by default
 		}
 
 
 		public override void destroy() {
-			//isActive = false;
+
 			explosionEngine.createSmallExplosion(position);
+			base.destroy();
 		}
 	}
 }

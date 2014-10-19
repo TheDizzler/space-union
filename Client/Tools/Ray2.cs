@@ -29,6 +29,7 @@ namespace SpaceUnion.Tools {
 		private bool vertical = false;
 
 		private bool lastCheckHit;
+		private float closest;
 
 		/// <summary>
 		/// Tolerance for division, i.e. so close to zero we probably shouldn't divide with
@@ -54,7 +55,8 @@ namespace SpaceUnion.Tools {
 
 		/// <summary>
 		/// Checks if the ray intersects the bounding box.
-		/// Note: This will return positive even if t is negative!
+		/// Records distance to target which can be received by calling
+		/// getDistance();
 		/// </summary>
 		/// <param name="box"></param>
 		/// <returns></returns>
@@ -65,19 +67,17 @@ namespace SpaceUnion.Tools {
 			float bx1 = box.position.X + box.width;
 			float by1 = box.position.Y + box.height;
 
-
-			float tmin, tmax;
-
-
 			if (vertical) {
 				t0x = Int32.MinValue;
 				t1x = Int32.MinValue;
 				t0y = (by0 - position.Y) / direction.Y;
 				t1y = (by1 - position.Y) / direction.Y;
 				// if ray originated between the x bounds of the box
-				if (bx0 < position.X && position.X < bx1)
+				if (bx0 < position.X && position.X < bx1
+					&& 0 <= t0y && 0 <= t1y) {
+					getDist();
 					return (lastCheckHit = true); // hit!
-				else
+				} else
 					return (lastCheckHit = false); // miss!
 			}
 
@@ -87,9 +87,11 @@ namespace SpaceUnion.Tools {
 				t0x = (bx0 - position.X) / direction.X;
 				t1x = (bx1 - position.X) / direction.X;
 				// if ray originated between the y bounds of the box
-				if (by0 < position.Y && position.Y < by1)
+				if (by0 < position.Y && position.Y < by1
+					&& 0 <= t0x && 0 <= t1x) {
+					getDist();
 					return (lastCheckHit = true);
-				else
+				} else
 					return (lastCheckHit = false);
 			}
 
@@ -108,25 +110,92 @@ namespace SpaceUnion.Tools {
 			if (t0x > t1y || t0y > t1x)
 				return (lastCheckHit = false);
 
-			return (lastCheckHit = true);
+
+			if (getDist() >= 0) // check if hit is not a negitive direction hit
+				return (lastCheckHit = true);
+
+			return (lastCheckHit = false);
 
 		}
 
 		/// <summary>
-		/// Retrieves the smallest, non-negative distance to the closest edge of the last checked hitbox.
-		/// Note that this value doesn't mean much if intersects() returned false and could potentially
-		/// crash the game.
+		/// As as intersects(HitBox box) but checks if hit is within
+		/// direction.Length()
 		/// </summary>
-		/// <returns>The closest t larger than 0. If directionIsRange is true, t must be below or equal to one or it will return -1.</returns>
-		public float getDistance() {
+		/// <param name="box"></param>
+		/// <returns></returns>
+		public bool intersectsToRange(HitBox box) {
+
+			float bx0 = box.position.X;
+			float by0 = box.position.Y;
+			float bx1 = box.position.X + box.width;
+			float by1 = box.position.Y + box.height;
+
+			if (vertical) {
+				t0x = Int32.MinValue;
+				t1x = Int32.MinValue;
+				t0y = (by0 - position.Y) / direction.Y;
+				t1y = (by1 - position.Y) / direction.Y;
+				// if ray originated between the x bounds of the box
+				if (bx0 < position.X && position.X < bx1
+					&& 0 <= t0y && 0 <= t1y && getDist() <= direction.Length()) {
+					return (lastCheckHit = true); // hit!
+				} else
+					return (lastCheckHit = false); // miss!
+			}
+
+			if (horizontal) {
+				t0y = Int32.MinValue;
+				t1y = Int32.MinValue;
+				t0x = (bx0 - position.X) / direction.X;
+				t1x = (bx1 - position.X) / direction.X;
+				// if ray originated between the y bounds of the box
+				if (by0 < position.Y && position.Y < by1
+					&& 0 <= t0x && 0 <= t1x && getDist() <= direction.Length()) {
+					return (lastCheckHit = true);
+				} else
+					return (lastCheckHit = false);
+			}
 
 
-			float closest = t1x;
-			if (t1y > 0)
+			t0x = (bx0 - position.X) / direction.X;
+			t0y = (by0 - position.Y) / direction.Y;
+			t1x = (bx1 - position.X) / direction.X;
+			t1y = (by1 - position.Y) / direction.Y;
+
+
+			if (t0x > t1x)
+				swap(ref t0x, ref t1x);
+			if (t0y > t1y)
+				swap(ref t0y, ref t1y);
+
+			if (t0x > t1y || t0y > t1x)
+				return (lastCheckHit = false);
+
+			float dist = getDist();
+			if (dist >= 0 && dist <= direction.Length()) // check if hit is not a negitive direction hit
+				return (lastCheckHit = true);
+
+			return (lastCheckHit = false);
+
+		}
+
+
+		/// <summary>
+		/// Retrieves the smallest, non-negative distance to the closest edge of the last checked hitbox.
+		/// Note that this value doesn't mean much if intersects() returned false and will probably
+		/// cause strange behaviour.
+		/// </summary>
+		/// <returns>The closest distance equal to or larger than 0</returns>
+		private float getDist() {
+
+
+			closest = t1x;
+			if (t1y >= 0)
 				closest = Math.Min(closest, t1y);
-			if (t0x > 0)
+			if (t0x >= 0)
 				closest = Math.Min(closest, t0x);
-			if (t0y > 0)
+			if (t0y >= 0)
 				closest = Math.Min(closest, t0y);
 
 
@@ -134,6 +203,16 @@ namespace SpaceUnion.Tools {
 
 		}
 
+		/// <summary>
+		/// Get the distance to the last checked hitbox.
+		/// Note that this value doesn't mean much if intersects() returned false and will probably
+		/// cause strange behaviour.
+		/// </summary>
+		/// <returns></returns>
+		public float getDistance() {
+
+			return closest;
+		}
 
 		private static void swap(ref float x, ref float y) {
 			float temp = x;
@@ -141,6 +220,8 @@ namespace SpaceUnion.Tools {
 			y = temp;
 		}
 
+
+		
 
 	}
 }

@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceUnion.Ships;
 using SpaceUnion.Tools;
-using SpaceUnion.Weapons.Systems;
 
 
-namespace SpaceUnion.Weapons {
+namespace SpaceUnion.Weapons.Systems {
 	/// <summary>
 	/// A special type of weapon that fires a single beam of energy in
 	/// a continuous stream.
@@ -44,6 +41,7 @@ namespace SpaceUnion.Weapons {
 			owner = ship;
 
 			weaponDamage = 1;
+			beamLength = 250;
 		}
 
 
@@ -51,7 +49,7 @@ namespace SpaceUnion.Weapons {
 			throw new NotImplementedException();
 		}
 
-		public new void update(GameTime gameTime, QuadTree quadTree) {
+		public void update(GameTime gameTime, QuadTree quadTree) {
 
 			beamQuanta.Clear();
 			beamQuantum = new Rectangle((int) position.X, (int) position.Y, 1, 3);
@@ -74,8 +72,8 @@ namespace SpaceUnion.Weapons {
 
 					if (ray.intersects(target.getHitBox())) {
 						distToTarget = ray.getDistance();
-						if (distToTarget >= 0 && distToTarget <= beamLength) {
-							target.destroy();
+						if (distToTarget <= beamLength) {
+							target.takeDamage(weaponDamage, gameTime);
 							break;
 						}
 

@@ -40,6 +40,8 @@ namespace SpaceUnion {
 		/// </summary>
 		public Rectangle radarBox;
 
+		private Tangible target;
+
 
 		public GUI(Game1 game, Ship ship, Planet plnt) {
 
@@ -82,6 +84,8 @@ namespace SpaceUnion {
 
 			nearBy = quadTree.retrieve(playerShip);
 
+			if (playerShip.collideTarget != null)
+				target = playerShip.collideTarget;
 		}
 
 		public void draw(SpriteBatch spriteBatch) {
@@ -106,7 +110,7 @@ namespace SpaceUnion {
 			//spriteBatch.DrawString(font, "totalTime: " + totalTime,
 			//	line7Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 
-			spriteBatch.DrawString(font, "nearBy: " + nearBy.Count,
+			spriteBatch.DrawString(font, "target: " + target,
 				line7Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 
 			lastVelocity = playerShip.velocity;

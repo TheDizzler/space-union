@@ -13,7 +13,7 @@ using SpaceUnion.Weapons.Projectiles;
 namespace SpaceUnion.StellarObjects {
 
 	/// <summary>
-	/// 
+	/// Written by Kyle. Edits by Tristan.
 	/// </summary>
 	public class Asteroid : Tangible {
 
@@ -31,6 +31,7 @@ namespace SpaceUnion.StellarObjects {
 			Random r = new Random();
 			double direction = r.NextDouble() * 2 * Math.PI; // angle of velocity
 			int speed = r.Next(500); // speed in pixels per second
+			// move in a straight line
 			velocity = new Vector2((float) (Math.Sin(direction) * speed), (float) (-Math.Cos(direction) * speed));
 
 			mass = 1000;
@@ -39,20 +40,28 @@ namespace SpaceUnion.StellarObjects {
 
 		public void update(GameTime gameTime, QuadTree quadTree) {
 
-			// move in a straight line
-			position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
+
+			moveThisUpdate = velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
+			checkForCollision2(quadTree, gameTime);
+
+			position += moveThisUpdate;
+			base.update(position);
 
 			base.update(position);
 
-			checkWorldEdge();
+			if (outOfBounds())
+				destroy();
+
+			//checkWorldEdge();
 
 			checkForCollision(quadTree, gameTime);
 		}
 
 
+
 		public override void destroy() {
-			isActive = false;
 			explosionEngine.createBigExplosion(position);
+			base.destroy();
 		}
 
 

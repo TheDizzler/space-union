@@ -60,7 +60,7 @@ namespace SpaceUnion.Ships {
 
 		/// <summary>
 		/// The main weapon of the ship. Created by calling:
-		/// mainWeapon = Launcher &lt; T &gt; .CreateLauncher(this, (x, y) => new T(x, y), 8);
+		/// mainWeapon = Launcher &lt; T &gt; .CreateLauncher(this, (x, y) => new T(x, y), numBullets);
 		/// where T is a Projectile type.
 		/// Ya, it's ugly, I know...sorry....
 		/// </summary>
@@ -93,16 +93,21 @@ namespace SpaceUnion.Ships {
 		/// <param name="quadTree"></param>
 		public virtual void update(GameTime gameTime, QuadTree quadTree) {
 
-			position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
+			moveThisUpdate = velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
+			checkForCollision2(quadTree, gameTime);
+
+			position += moveThisUpdate;
 			base.update(position);
 
+			if (willCollide)
+				collide(collideTarget, gameTime);
 
 			checkWorldEdge();
 
 			mainWeapon.update(gameTime, quadTree);
 			additionalUpdate(gameTime, quadTree);
 
-			checkForCollision(quadTree, gameTime);
+			//checkForCollision(quadTree, gameTime);
 		}
 
 		/// <summary>
@@ -205,6 +210,7 @@ namespace SpaceUnion.Ships {
 
 		public override void destroy() {
 			explode();
+			//base.destroy();
 		}
 
 		/// <summary>
