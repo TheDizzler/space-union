@@ -68,8 +68,8 @@
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Spaceships\ufoship %28128x128%29.png">
-      <Name>ufoship %28128x128%29</Name>
+    <Compile Include="Spaceships\circleship %28128x128%29.png">
+      <Name>circleship %28128x128%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -80,14 +80,14 @@
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Spaceships\stuntship %28128x128%29.png">
-      <Name>stuntship %28128x128%29</Name>
+    <Compile Include="Spaceships\triangleship %28128x128%29.png">
+      <Name>triangleship %28128x128%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Spaceships\zoidship.png">
-      <Name>zoidship</Name>
+    <Compile Include="Spaceships\wrenchship.png">
+      <Name>wrenchship</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -145,6 +145,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
   </ItemGroup>
+<<<<<<< HEAD
+=======
   <ItemGroup>
     <Compile Include="Buttons\confirm.png">
       <Name>confirm</Name>
@@ -153,6 +155,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
   </ItemGroup>
+>>>>>>> 294d153e1361d717baa9cca72b6996ad92b36f19
   <ItemGroup>
     <Compile Include="StellarObjects\waterplanet %28256x256%29.png">
       <Name>waterplanet %28256x256%29</Name>
@@ -161,11 +164,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Buttons\shipselection.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Name>shipselection</Name>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
+<<<<<<< HEAD
     <Compile Include="Animations\fireballs.png">
       <Name>fireballs</Name>
       <Importer>TextureImporter</Importer>
@@ -182,89 +181,11 @@
   <ItemGroup>
     <Compile Include="Animations\big fireballs with blur.png">
       <Name>big fireballs with blur</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Projectiles\short missile %2816x16%29.png">
-      <Name>short missile %2816x16%29</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Animations\bubble shield sheet.png">
-      <Name>bubble shield sheet</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="StellarObjects\moon %28115x117%29.png">
-      <Name>moon %28115x117%29</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Projectiles\molten bullet %286x8%29.png">
-      <Name>molten bullet %286x8%29</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Projectiles\plasmaball %2832x36%29.png">
-      <Name>plasmaball %2832x36%29</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Spaceships\bug %2816x16%29.png">
-      <Name>bug %2816x16%29</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Buttons\lobbyoptions.png">
+=======
+    <Compile Include="Buttons\shipselection.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Name>lobbyoptions</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Buttons\gameroom.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Name>gameroom</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Buttons\gamelobby.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Name>gamelobby</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Buttons\createlobby.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Name>createlobby</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Buttons\lobbybrowser.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Name>lobbybrowser</Name>
+      <Name>shipselection</Name>
+>>>>>>> 294d153e1361d717baa9cca72b6996ad92b36f19
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
