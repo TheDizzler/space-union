@@ -73,12 +73,12 @@ namespace Server_Application
         {
             while (true)
             {
-                if (loginrequests.Count == 0)
+                Player request = (Player)removeFromQueue(Constants.LOGIN_REQUEST);
+                if (request == null)
                 {
                     Thread.Sleep(5);
                     continue;
                 }
-                Player request = (Player)removeFromQueue(Constants.LOGIN_REQUEST);
                 DataControl.sendTCPData(TCPClients[0], request, request.IPAddress, Constants.TCPLoginClient);
             }
         }
@@ -99,7 +99,7 @@ namespace Server_Application
                 Gameroom room = owner.getGameroom(message.Gameroom);
                 if (room == null)
                     continue;
-                foreach (GameData player in room.getPlayerList())
+                foreach (GameData player in room.getPlayerList().ToArray())
                 {
                     if (player.Player.Username != message.Username)
                     {
@@ -152,34 +152,21 @@ namespace Server_Application
         {
             if (message == null)
                 return;
-            Object threadlocker = new Object();
             try
             {
                 switch (message.Type)
                 {
                     case Constants.LOGIN_REQUEST:
-                        lock (threadlocker)
-                        {
-                            loginrequests.Add((Player)message);
-                        }
+                        loginrequests.Add((Player)message);
                         break;
                     case Constants.GAME_DATA:
-                        lock (threadlocker)
-                        {
-                            addGameDataToQueue((GameData)message);
-                        }
+                        addGameDataToQueue((GameData)message);
                         break;
                     case Constants.CHAT_MESSAGE:
-                        lock (threadlocker)
-                        {
-                            chatmessages.Add((GameMessage)message);
-                        }
+                        chatmessages.Add((GameMessage)message);
                         break;
                     case Constants.ERROR_MESSAGE:
-                        lock (threadlocker)
-                        {
-                            errormessages.Add((ErrorMessage)message);
-                        }
+                        errormessages.Add((ErrorMessage)message);
                         break;
                 }
             }
@@ -195,13 +182,13 @@ namespace Server_Application
             Gameroom room = owner.getGameroom(message.Player.GameRoom);
             if (room == null)
                 return;
-            foreach(GameData player in room.getPlayerList())
+            room.replacePlayer(message);
+            foreach(GameData player in room.getPlayerList().ToArray())
             {
                 if (player.Player.Username != message.Player.Username)
                 {
                     GameData temp = (GameData)DataControl.bytesToObject(DataControl.objectToBytes(message));
                     temp.Player.IPAddress = player.Player.IPAddress;
-                    Console.WriteLine("Temp - " + temp.Player.IPAddress + " Message - " + message.Player.IPAddress);
                     UDPQueue[player.Player.PortReceive - Constants.UDPServerToClientPort].Add(temp);
                 }
             }
@@ -235,13 +222,9 @@ namespace Server_Application
         {
             if (UDPQueue[queue].Count == 0)
                 return null;
-            Object threadlocker = new Object();
             GameData data = null;
-            lock(threadlocker)
-            {
-                data = UDPQueue[queue].ElementAt(0);
-                UDPQueue[queue].RemoveAt(0);
-            }
+            data = UDPQueue[queue].ElementAt(0);
+            UDPQueue[queue].RemoveAt(0);
             return data;
         }
 
@@ -253,13 +236,9 @@ namespace Server_Application
         {
             if (errormessages.Count == 0)
                 return null;
-            Object threadlocker = new Object();
             ErrorMessage message = null;
-            lock (threadlocker)
-            {
-                message = errormessages.ElementAt(0);
-                errormessages.RemoveAt(0);
-            }
+            message = errormessages.ElementAt(0);
+            errormessages.RemoveAt(0);
             return message;
         }
 
@@ -271,13 +250,9 @@ namespace Server_Application
         {
             if (chatmessages.Count == 0)
                 return null;
-            Object threadlocker = new Object();
             GameMessage message = null;
-            lock (threadlocker)
-            {
-                message = chatmessages.ElementAt(0);
-                chatmessages.RemoveAt(0);
-            }
+            message = chatmessages.ElementAt(0);
+            chatmessages.RemoveAt(0);
             return message;
         }
 
@@ -289,13 +264,9 @@ namespace Server_Application
         {
             if (loginrequests.Count == 0)
                 return null;
-            Object threadlocker = new Object();
             Player message = null;
-            lock (threadlocker)
-            {
-                message = loginrequests.ElementAt(0);
-                loginrequests.RemoveAt(0);
-            }
+            message = loginrequests.ElementAt(0);
+            loginrequests.RemoveAt(0);
             return message;
         }
 
