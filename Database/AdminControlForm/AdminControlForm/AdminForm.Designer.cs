@@ -48,12 +48,9 @@
             this.txtbUsername = new System.Windows.Forms.TextBox();
             this.lablUsername = new System.Windows.Forms.Label();
             this.editUserTab = new System.Windows.Forms.TabPage();
+            this.chkbBlockUnblockUser = new System.Windows.Forms.CheckBox();
             this.bttnBlockUnblock = new System.Windows.Forms.Button();
-            this.lablBlockStatusErrMsg = new System.Windows.Forms.Label();
             this.lablUserEditErrMsg = new System.Windows.Forms.Label();
-            this.lablBlockedSpec = new System.Windows.Forms.Label();
-            this.txtbBlockedStatus = new System.Windows.Forms.TextBox();
-            this.lablBlockedStatus = new System.Windows.Forms.Label();
             this.txtbUserEditing = new System.Windows.Forms.TextBox();
             this.lablUsernameToEdit = new System.Windows.Forms.Label();
             this.bttnGetUserInfo = new System.Windows.Forms.Button();
@@ -61,9 +58,11 @@
             this.txtbUserToEdit = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.logintext = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.logintext = new System.Windows.Forms.TextBox();
+            this.txtbCurrentBlockStatus = new System.Windows.Forms.TextBox();
+            this.lablCurrentBlockStatus = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.createUserTab.SuspendLayout();
             this.editUserTab.SuspendLayout();
@@ -288,12 +287,11 @@
             // 
             this.editUserTab.BackColor = System.Drawing.Color.Transparent;
             this.editUserTab.BackgroundImage = global::AdminControlForm.Properties.Resources.dark_space;
+            this.editUserTab.Controls.Add(this.lablCurrentBlockStatus);
+            this.editUserTab.Controls.Add(this.txtbCurrentBlockStatus);
+            this.editUserTab.Controls.Add(this.chkbBlockUnblockUser);
             this.editUserTab.Controls.Add(this.bttnBlockUnblock);
-            this.editUserTab.Controls.Add(this.lablBlockStatusErrMsg);
             this.editUserTab.Controls.Add(this.lablUserEditErrMsg);
-            this.editUserTab.Controls.Add(this.lablBlockedSpec);
-            this.editUserTab.Controls.Add(this.txtbBlockedStatus);
-            this.editUserTab.Controls.Add(this.lablBlockedStatus);
             this.editUserTab.Controls.Add(this.txtbUserEditing);
             this.editUserTab.Controls.Add(this.lablUsernameToEdit);
             this.editUserTab.Controls.Add(this.bttnGetUserInfo);
@@ -307,26 +305,26 @@
             this.editUserTab.TabIndex = 1;
             this.editUserTab.Text = "User block/unblock";
             // 
+            // chkbBlockUnblockUser
+            // 
+            this.chkbBlockUnblockUser.AutoSize = true;
+            this.chkbBlockUnblockUser.ForeColor = System.Drawing.Color.White;
+            this.chkbBlockUnblockUser.Location = new System.Drawing.Point(20, 339);
+            this.chkbBlockUnblockUser.Name = "chkbBlockUnblockUser";
+            this.chkbBlockUnblockUser.Size = new System.Drawing.Size(168, 17);
+            this.chkbBlockUnblockUser.TabIndex = 12;
+            this.chkbBlockUnblockUser.Text = "Do you want to block the user";
+            this.chkbBlockUnblockUser.UseVisualStyleBackColor = true;
+            // 
             // bttnBlockUnblock
             // 
-            this.bttnBlockUnblock.Location = new System.Drawing.Point(82, 335);
+            this.bttnBlockUnblock.Location = new System.Drawing.Point(82, 387);
             this.bttnBlockUnblock.Name = "bttnBlockUnblock";
             this.bttnBlockUnblock.Size = new System.Drawing.Size(99, 37);
             this.bttnBlockUnblock.TabIndex = 11;
             this.bttnBlockUnblock.Text = "Block/Unblock User";
             this.bttnBlockUnblock.UseVisualStyleBackColor = true;
             this.bttnBlockUnblock.Click += new System.EventHandler(this.bttnBlockUnblock_Click);
-            // 
-            // lablBlockStatusErrMsg
-            // 
-            this.lablBlockStatusErrMsg.AutoSize = true;
-            this.lablBlockStatusErrMsg.ForeColor = System.Drawing.Color.Red;
-            this.lablBlockStatusErrMsg.Location = new System.Drawing.Point(122, 269);
-            this.lablBlockStatusErrMsg.Name = "lablBlockStatusErrMsg";
-            this.lablBlockStatusErrMsg.Size = new System.Drawing.Size(133, 13);
-            this.lablBlockStatusErrMsg.TabIndex = 10;
-            this.lablBlockStatusErrMsg.Text = "Error entering Block Status";
-            this.lablBlockStatusErrMsg.Visible = false;
             // 
             // lablUserEditErrMsg
             // 
@@ -338,35 +336,6 @@
             this.lablUserEditErrMsg.TabIndex = 9;
             this.lablUserEditErrMsg.Text = "Error entering in Username";
             this.lablUserEditErrMsg.Visible = false;
-            // 
-            // lablBlockedSpec
-            // 
-            this.lablBlockedSpec.AutoSize = true;
-            this.lablBlockedSpec.ForeColor = System.Drawing.Color.White;
-            this.lablBlockedSpec.Location = new System.Drawing.Point(17, 308);
-            this.lablBlockedSpec.Name = "lablBlockedSpec";
-            this.lablBlockedSpec.Size = new System.Drawing.Size(300, 13);
-            this.lablBlockedSpec.TabIndex = 8;
-            this.lablBlockedSpec.Text = "Enter \"BLOCK\" to block the user and \"UNBLOCK\" to unblock";
-            // 
-            // txtbBlockedStatus
-            // 
-            this.txtbBlockedStatus.Location = new System.Drawing.Point(20, 285);
-            this.txtbBlockedStatus.Name = "txtbBlockedStatus";
-            this.txtbBlockedStatus.Size = new System.Drawing.Size(161, 20);
-            this.txtbBlockedStatus.TabIndex = 7;
-            this.txtbBlockedStatus.TextChanged += new System.EventHandler(this.validBlockInput);
-            // 
-            // lablBlockedStatus
-            // 
-            this.lablBlockedStatus.AutoSize = true;
-            this.lablBlockedStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablBlockedStatus.ForeColor = System.Drawing.Color.White;
-            this.lablBlockedStatus.Location = new System.Drawing.Point(17, 267);
-            this.lablBlockedStatus.Name = "lablBlockedStatus";
-            this.lablBlockedStatus.Size = new System.Drawing.Size(102, 15);
-            this.lablBlockedStatus.TabIndex = 6;
-            this.lablBlockedStatus.Text = "Blocked Status";
             // 
             // txtbUserEditing
             // 
@@ -441,12 +410,14 @@
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // logintext
+            // label3
             // 
-            this.logintext.Location = new System.Drawing.Point(77, 49);
-            this.logintext.Name = "logintext";
-            this.logintext.Size = new System.Drawing.Size(161, 20);
-            this.logintext.TabIndex = 0;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(77, 30);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Username";
             // 
             // button1
             // 
@@ -458,14 +429,31 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label3
+            // logintext
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(77, 30);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Username";
+            this.logintext.Location = new System.Drawing.Point(77, 49);
+            this.logintext.Name = "logintext";
+            this.logintext.Size = new System.Drawing.Size(161, 20);
+            this.logintext.TabIndex = 0;
+            // 
+            // txtbCurrentBlockStatus
+            // 
+            this.txtbCurrentBlockStatus.Location = new System.Drawing.Point(20, 286);
+            this.txtbCurrentBlockStatus.Name = "txtbCurrentBlockStatus";
+            this.txtbCurrentBlockStatus.ReadOnly = true;
+            this.txtbCurrentBlockStatus.Size = new System.Drawing.Size(161, 20);
+            this.txtbCurrentBlockStatus.TabIndex = 13;
+            // 
+            // lablCurrentBlockStatus
+            // 
+            this.lablCurrentBlockStatus.AutoSize = true;
+            this.lablCurrentBlockStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablCurrentBlockStatus.ForeColor = System.Drawing.Color.White;
+            this.lablCurrentBlockStatus.Location = new System.Drawing.Point(17, 268);
+            this.lablCurrentBlockStatus.Name = "lablCurrentBlockStatus";
+            this.lablCurrentBlockStatus.Size = new System.Drawing.Size(137, 15);
+            this.lablCurrentBlockStatus.TabIndex = 14;
+            this.lablCurrentBlockStatus.Text = "Current Block Status";
             // 
             // AdminForm
             // 
@@ -513,11 +501,7 @@
         private System.Windows.Forms.Label lablUserToEdit;
         private System.Windows.Forms.TextBox txtbUserToEdit;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lablBlockStatusErrMsg;
         private System.Windows.Forms.Label lablUserEditErrMsg;
-        private System.Windows.Forms.Label lablBlockedSpec;
-        private System.Windows.Forms.TextBox txtbBlockedStatus;
-        private System.Windows.Forms.Label lablBlockedStatus;
         private System.Windows.Forms.TextBox txtbUserEditing;
         private System.Windows.Forms.Label lablUsernameToEdit;
         private System.Windows.Forms.Label lablConfPasswordErrMsg;
@@ -526,6 +510,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox logintext;
+        private System.Windows.Forms.CheckBox chkbBlockUnblockUser;
+        private System.Windows.Forms.Label lablCurrentBlockStatus;
+        private System.Windows.Forms.TextBox txtbCurrentBlockStatus;
     }
 }
 

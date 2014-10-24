@@ -211,10 +211,14 @@ namespace AdminControlForm
             if (userTable.AdminGetUserInfo(txtbUserToEdit.Text, ref errCode, userInfo) ) {
                 txtbUserEditing.Text = userInfo[0];
 
-                if (userInfo[1].Equals(BLOCKED) )
-                    txtbBlockedStatus.Text = "BLOCKED";
-                else
-                    txtbBlockedStatus.Text = "NOT BLOCKED";
+                if (userInfo[1].Equals(BLOCKED) ) {
+                    txtbCurrentBlockStatus.Text = "BLOCKED";
+                    chkbBlockUnblockUser.Text   = "Do you want to UNBLOCK " + txtbUserEditing.Text;
+                }
+                else {
+                    txtbCurrentBlockStatus.Text = "NOT BLOCKED";
+                    chkbBlockUnblockUser.Text   = "Do you want to BLOCK " + txtbUserEditing.Text;
+                }            
             }
             else {
                 MessageBox.Show("Username may not exist");
@@ -235,28 +239,28 @@ namespace AdminControlForm
         {
             const int BLOCK   = 1;
             const int UNBLOCK = 0;
-
-            string blockStatus = txtbBlockedStatus.Text;
-            int    errCode     = 0;
+            int    errCode    = 0;
 
             AcceptCancelBlockActionForm acceptBlock =
                     new AcceptCancelBlockActionForm();
-            acceptBlock.TxtMsg = "Are you sure you want to block " + txtbUserToEdit.Text;
+            acceptBlock.TxtMsg = "Are you sure you want to block " + txtbUserEditing.Text;
 
             AcceptCancelBlockActionForm acceptUnblock =
                     new AcceptCancelBlockActionForm();
-            acceptUnblock.TxtMsg = "Are you sure you want to unblock " + txtbUserToEdit.Text;
+            acceptUnblock.TxtMsg = "Are you sure you want to unblock " + txtbUserEditing.Text;
 
-            validBlockInput(sender, e);
-
-            if (isUserBlockActionValid) {
-                if (blockStatus.Equals("BLOCK") ) {
-                    if (acceptBlock.ShowDialog() == DialogResult.OK) {
+            if (chkbBlockUnblockUser.Checked)
+            {
+                if (txtbCurrentBlockStatus.Text.Equals("NOT BLOCKED") )
+                {   // User blocking dialog
+                    if (acceptBlock.ShowDialog() == DialogResult.OK)
+                    {
                         userTable.UpdateUserIsBlocked(txtbUserEditing.Text, BLOCK, ref errCode);
                         MessageBox.Show("User was blocked.");
                     }
-                }
-                else if (acceptUnblock.ShowDialog() == DialogResult.OK){
+                }// User unblocking dialog
+                else if (acceptUnblock.ShowDialog() == DialogResult.OK)
+                {
                     userTable.UpdateUserIsBlocked(txtbUserEditing.Text, UNBLOCK, ref errCode);
                     MessageBox.Show("User was unblocked");
                 }
@@ -278,22 +282,19 @@ namespace AdminControlForm
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void validBlockInput(object sender, EventArgs e)
+       /* private void validBlockInput(object sender, EventArgs e)
         {
             string blockErrMsg = null;
-            string blockStatus = txtbBlockedStatus.Text;
+            bool   isBlocked = txtbBlockedStatus.Text;
 
-            if (!blockValidation.ValidateBlockUnblockUser(txtbBlockedStatus.Text,
+            if (!blockValidation.ValidateBlockUnblockUser2(chkbBlockUnblockUser.Checked,
                                                           ref blockErrMsg) ) {
-                lablBlockStatusErrMsg.Text    = blockErrMsg;
-                lablBlockStatusErrMsg.Visible = true;
-                isUserBlockActionValid        = false;
+                isUserBlockActionValid = false;
             }
             else {
-                isUserBlockActionValid        = true;
-                lablBlockStatusErrMsg.Visible = false;
+                isUserBlockActionValid = true;
             }
-        }
+        }*/
 
         private void button1_Click(object sender, EventArgs e)
         {

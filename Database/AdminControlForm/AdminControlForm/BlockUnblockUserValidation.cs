@@ -9,6 +9,17 @@ namespace AdminControlForm
     class BlockUnblockUserValidation
     {
         public bool
+        ValidateBlockUnblockUser2(bool checkedBlock, ref string errMsg)
+        {
+            bool validInput = false;
+            
+            if (checkedBlock)      
+                validInput = true;
+
+            return validInput;
+        }
+
+        public bool
         ValidateBlockUnblockUser(string blockStatus, ref string errMsg)
         {
             const string BLOCK   = "BLOCK";

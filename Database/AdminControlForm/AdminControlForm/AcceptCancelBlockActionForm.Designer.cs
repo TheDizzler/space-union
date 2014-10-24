@@ -45,6 +45,7 @@
             // 
             // bttnYes
             // 
+            this.bttnYes.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.bttnYes.Location = new System.Drawing.Point(103, 89);
             this.bttnYes.Name = "bttnYes";
             this.bttnYes.Size = new System.Drawing.Size(75, 23);
