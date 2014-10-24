@@ -289,6 +289,15 @@
       <Output>C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbybrowser.xnb</Output>
       <Time>2014-10-13T20:30:20.9285662-07:00</Time>
     </Item>
+    <Item>
+      <Source>Spaceships\galactuship.png</Source>
+      <Name>Spaceships\galactuship</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\galactuship.xnb</Output>
+      <Time>2014-10-16T20:07:05.8186216-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{69F49597-D779-4577-9103-14C2802D7E0F}</ContentProjectGUID>

@@ -94,6 +94,12 @@ namespace SpaceUnion.Tools {
         /// Created by Matthew Baldock
         /// </summary>
 		public Texture2D zoid;
+        /// <summary>
+        /// Galactus Ship Texture
+        /// 
+        /// Created by Matthew Baldock
+        /// </summary>
+        public Texture2D galactusship;
         public Texture2D bug;
         
 
@@ -153,8 +159,11 @@ namespace SpaceUnion.Tools {
             spaceShipTest = Content.Load<Texture2D>("Spaceships/spaceshiptest");
 			ufo = Content.Load<Texture2D>("Spaceships/ufoship (128x128)");
 			stunt = Content.Load<Texture2D>("Spaceships/stuntship (128x128)");
+            ///Added by Matthew Baldock
 			zoid = Content.Load<Texture2D>("Spaceships/zoidship");
 			bug = Content.Load<Texture2D>("Spaceships/bug (16x16)");
+            ///Added by Matthew Baldock
+           // galactusship = Content.Load<Texture2D>("Spaceships/galactuship.png");
 
 
             winflag1 = Content.Load<Texture2D>("WinFlags/WinFlag1");

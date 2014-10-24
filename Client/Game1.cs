@@ -53,11 +53,11 @@ namespace SpaceUnion {
 			Options,
 			TeamBattle,
 			Select,
-            Layer1,
-            Layer2,
-            Layer3,
-            Layer4,
-            Layer5
+            LobbyOptions,
+            LobbyBrowser,
+            CreateLobby,
+            GameLobby,
+            GameRoom
 		}
 
 		GameState currentGameState = GameState.MainMenu;
@@ -151,19 +151,19 @@ namespace SpaceUnion {
 				case GameState.Select:
 					shipselectionScreen.update();
 					break;
-                case GameState.Layer1:
+                case GameState.LobbyOptions:
                     lobbyoptions.update();
                     break;
-                case GameState.Layer2:
+                case GameState.LobbyBrowser:
                     lobbybrowser.update();
                     break;
-                case GameState.Layer3:
+                case GameState.CreateLobby:
                     createlobby.update();
                     break;
-                case GameState.Layer4:
+                case GameState.GameLobby:
                     gamelobby.update();
                     break;
-                case GameState.Layer5:
+                case GameState.GameRoom:
                     gameroom.update();
                     break;
 				default:
@@ -195,19 +195,19 @@ namespace SpaceUnion {
 				case GameState.Select:
 					shipselectionScreen.draw(spriteBatch);
 					break;
-                case GameState.Layer1:
+                case GameState.LobbyOptions:
                     lobbyoptions.draw(spriteBatch);
                     break;
-                case GameState.Layer2:
+                case GameState.LobbyBrowser:
                     lobbybrowser.draw(spriteBatch);
                     break;
-                case GameState.Layer3:
+                case GameState.CreateLobby:
                     createlobby.draw(spriteBatch);
                     break;
-                case GameState.Layer4:
+                case GameState.GameLobby:
                     gamelobby.draw(spriteBatch);
                     break;
-                case GameState.Layer5:
+                case GameState.GameRoom:
                     gameroom.draw(spriteBatch);
                     break;
 
@@ -227,31 +227,31 @@ namespace SpaceUnion {
         public void GoToLayer1()
         {
             lobbyoptions = new LobbyOptions(this);
-            currentGameState = GameState.Layer1;
+            currentGameState = GameState.LobbyOptions;
             IsMouseVisible = true;
         }
         public void GoToLayer2()
         {
             lobbybrowser = new LobbyBrowser(this);
-            currentGameState = GameState.Layer2;
+            currentGameState = GameState.LobbyBrowser;
             IsMouseVisible = true;
         }
         public void GoToLayer3()
         {
             createlobby = new CreateLobby(this);
-            currentGameState = GameState.Layer3;
+            currentGameState = GameState.CreateLobby;
             IsMouseVisible = true;
         }
         public void GoToLayer4()
         {
             gamelobby = new GameLobby(this);
-            currentGameState = GameState.Layer4;
+            currentGameState = GameState.GameLobby;
             IsMouseVisible = true;
         }
         public void GoToLayer5()
         {
             gameroom = new GameRoom(this);
-            currentGameState = GameState.Layer5;
+            currentGameState = GameState.GameRoom;
             IsMouseVisible = true;
         }
         

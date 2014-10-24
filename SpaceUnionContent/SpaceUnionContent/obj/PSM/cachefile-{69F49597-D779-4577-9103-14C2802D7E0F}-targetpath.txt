@@ -30,6 +30,7 @@ Content\Buttons\gameroom.xnb
 Content\Buttons\gamelobby.xnb
 Content\Buttons\createlobby.xnb
 Content\Buttons\lobbybrowser.xnb
+Content\Spaceships\galactuship.xnb
 Content\Backgrounds\starfield (800x600).png
 Content\Backgrounds\galaxy.png
 Content\Spaceships\spaceshiptest.png
