@@ -113,12 +113,12 @@
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Spaceships\spaceshiptest.png">
+    <Content Include="Spaceships\spaceshiptest.png">
       <Name>spaceshiptest</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
+    </Content>
     <Compile Include="Backgrounds\beautifulbg.png">
       <Name>beautifulbg</Name>
       <Importer>TextureImporter</Importer>
@@ -131,13 +131,9 @@
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="WinFlags\WinFlag1.png">
-      <Name>WinFlag1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
   </ItemGroup>
   <ItemGroup />
+<<<<<<< HEAD
   <ItemGroup>
     <Compile Include="StellarObjects\waterplanet %28256x256%29.png">
       <Name>waterplanet %28256x256%29</Name>
@@ -145,7 +141,8 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+=======
+>>>>>>> baefdef984b20c69068368bf5a94809515818417
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--
       To modify your build process, add your task inside one of the targets below and uncomment it. 
