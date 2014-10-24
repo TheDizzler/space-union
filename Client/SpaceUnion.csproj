@@ -42,6 +42,7 @@
     <Compile Include="Controllers\LobbyBrowser.cs" />
     <Compile Include="Controllers\CreateLobby.cs" />
     <Compile Include="Controllers\LobbyOptions.cs" />
+    <Compile Include="Controllers\Table.cs" />
     <Compile Include="Ships\Bug.cs" />
     <Compile Include="Ships\Copy of Ship.cs" />
     <Compile Include="Tools\QuadTree.cs" />
