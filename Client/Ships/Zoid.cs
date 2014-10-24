@@ -35,7 +35,7 @@ namespace SpaceUnion.Ships {
 			weaponOrigin2 = new Vector2(position.X + width / 3, position.Y - height / 2);
 		}
 
-		public override void altFire(GameTime gameTime) {
+		protected override void altFire(GameTime gameTime) {
 
 		}
 

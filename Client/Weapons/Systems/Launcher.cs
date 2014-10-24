@@ -43,7 +43,7 @@ namespace SpaceUnion.Weapons.Systems {
 		/// </summary>
 		/// <param name="ship"></param>
 		/// <param name="projectileClass"></param>
-		/// <param name="maxCapacity"></param>
+		/// <param name="maxCapacity">Amount of projectiles launcher can have active at once</param>
 		/// <returns>the created launcher</returns>
 		public static WeaponSystem CreateLauncher(Ship ship, Func<Vector2, Ship, ProjectileType> projectileClass, short maxCapacity = 8) {
 
@@ -88,7 +88,7 @@ namespace SpaceUnion.Weapons.Systems {
 			if (projectileStore.Count - 1 >= 0) {
 				ProjectileType proj = projectileStore[projectileStore.Count - 1];
 				projectileStore.Remove(proj);
-				proj.launch(startPoint, (float) owner.getRotation());
+				proj.launch(startPoint, (float) owner.getRotation(), owner.velocity);
 				projectiles.Add(proj);
 				GameplayScreen.targets.Add(proj);
 			}
@@ -124,7 +124,7 @@ namespace SpaceUnion.Weapons.Systems {
 
 		/// <summary>
 		/// Passes the spritebatch on to the projectiles. The launcher
-		/// itself shouldn't draw itself.
+		/// itself (probably?) shouldn't draw itself.
 		/// </summary>
 		/// <param name="sBatch"></param>
 		public void draw(SpriteBatch sBatch) {

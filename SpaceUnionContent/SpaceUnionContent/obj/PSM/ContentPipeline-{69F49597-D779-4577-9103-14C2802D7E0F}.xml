@@ -289,6 +289,42 @@
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\scoutship (128x128).xnb</Output>
       <Time>2014-10-16T18:02:01.241087-07:00</Time>
     </Item>
+    <Item>
+      <Source>MapIcons\base (14x14).png</Source>
+      <Name>MapIcons\base (14x14)</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\MapIcons\base (14x14).xnb</Output>
+      <Time>2014-10-24T12:29:03.3180398-07:00</Time>
+    </Item>
+    <Item>
+      <Source>MapIcons\base2 (16x16).png</Source>
+      <Name>MapIcons\base2 (16x16)</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\MapIcons\base2 (16x16).xnb</Output>
+      <Time>2014-10-24T12:29:10.0944274-07:00</Time>
+    </Item>
+    <Item>
+      <Source>MapIcons\reddot 2 frame (16x16).png</Source>
+      <Name>MapIcons\reddot 2 frame (16x16)</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\MapIcons\reddot 2 frame (16x16).xnb</Output>
+      <Time>2014-10-24T12:29:13.2926104-07:00</Time>
+    </Item>
+    <Item>
+      <Source>MapIcons\reticle (16x16).png</Source>
+      <Name>MapIcons\reticle (16x16)</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\MapIcons\reticle (16x16).xnb</Output>
+      <Time>2014-10-24T12:29:16.7558084-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{69F49597-D779-4577-9103-14C2802D7E0F}</ContentProjectGUID>

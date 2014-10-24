@@ -47,14 +47,14 @@ namespace SpaceUnion.StellarObjects {
 			position += moveThisUpdate;
 			base.update(position);
 
-			base.update(position);
-
 			if (outOfBounds())
 				destroy();
 
+			if (willCollide)
+				collide(collideTarget, gameTime);
 			//checkWorldEdge();
 
-			checkForCollision(quadTree, gameTime);
+			//checkForCollision(quadTree, gameTime);
 		}
 
 

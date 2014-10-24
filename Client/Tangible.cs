@@ -21,6 +21,7 @@ namespace SpaceUnion {
 		//protected CollisionHandler collisionHandler = Game1.collisionHandler;
 		protected ExplosionEngine explosionEngine = Game1.explosionEngine;
 
+		protected Texture2D miniMapIcon;
 
 		/// <summary>
 		/// If false, the object will be destroyed and removed from the game.
@@ -169,8 +170,9 @@ namespace SpaceUnion {
 			Ray2 ray1 = new Ray2(hitBox.bottomLeft, this.moveThisUpdate);
 			Ray2 ray2 = new Ray2(hitBox.bottomRight, this.moveThisUpdate);
 			Ray2 ray3 = new Ray2(hitBox.topRight, this.moveThisUpdate);
+			Ray2 ray4 = new Ray2(hitBox.position, this.moveThisUpdate);
 
-			float dist0, dist1, dist2, dist3;
+			float dist0, dist1, dist2, dist3, dist4;
 			float velLength = moveThisUpdate.Length();
 			float shortestDist = velLength;
 
@@ -179,15 +181,16 @@ namespace SpaceUnion {
 				if (target == this)
 					continue;
 
-				bool r0, r1, r2, r3;
+				bool r0, r1, r2, r3, r4;
 
 				//note: it is necessary that each of these functions run
 				r0 = ray0.intersectsToRange(target.getHitBox());
 				r1 = ray1.intersectsToRange(target.getHitBox());
 				r2 = ray2.intersectsToRange(target.getHitBox());
 				r3 = ray3.intersectsToRange(target.getHitBox());
+				r4 = ray4.intersectsToRange(target.getHitBox());
 
-				if (!r0 && !r1 && !r2 && !r3) // If no rays intersect
+				if (!r0 && !r1 && !r2 && !r3 && !r4) // If no rays intersect
 					continue;
 
 
@@ -196,17 +199,20 @@ namespace SpaceUnion {
 				dist1 = ray1.getDistance();
 				dist2 = ray2.getDistance();
 				dist3 = ray3.getDistance();
+				dist4 = ray4.getDistance();
 
 				possible.Clear();
 
 				if (0 <= dist0 && dist0 <= velLength)
 					possible.Add(dist0);
 				if (0 <= dist1 && dist1 <= velLength)
-					possible.Add(dist0);
+					possible.Add(dist1);
 				if (0 <= dist2 && dist2 <= velLength)
-					possible.Add(dist0);
+					possible.Add(dist2);
 				if (0 <= dist3 && dist3 <= velLength)
-					possible.Add(dist0);
+					possible.Add(dist3);
+				if (0 <= dist4 && dist4 <= velLength)
+					possible.Add(dist4);
 
 				float temp = possible.Min();
 				if (temp < shortestDist) {

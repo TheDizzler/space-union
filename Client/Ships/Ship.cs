@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using SpaceUnion.StellarObjects;
 using SpaceUnion.Tools;
 using SpaceUnion.Weapons;
@@ -23,8 +24,9 @@ namespace SpaceUnion.Ships {
 
 		/// <summary>
 		/// A restistance to movement so all objects will enventual slow to a stop
+		/// (not realistic in space but may play better)
 		/// </summary>
-		public static float dampening = .1f;
+		public static float dampening = .999f;
 
 		protected float maxSpeed = 100;
 		/// <summary>
@@ -70,6 +72,10 @@ namespace SpaceUnion.Ships {
 		/// </summary>
 		protected Vector2 weaponOrigin = Vector2.Zero;
 
+		private KeyboardState lastState;
+		protected bool firing;
+		protected bool altFiring;
+
 		/// <summary>
 		/// Ship constructor
 		/// </summary>
@@ -84,6 +90,16 @@ namespace SpaceUnion.Ships {
 			//scale = .3f;
 			mass = 10000;
 
+			miniMapIcon = assets.shipMapIcon;
+
+		}
+
+		/* TEST */
+		public LaserBeam getBeam() {
+
+			if (this is Scout)
+				return ((LaserBeam) mainWeapon);
+			return null;
 		}
 
 		/// <summary>
@@ -92,6 +108,12 @@ namespace SpaceUnion.Ships {
 		/// <param name="gameTime"></param>
 		/// <param name="quadTree"></param>
 		public virtual void update(GameTime gameTime, QuadTree quadTree) {
+
+			if (firing)
+				fire(gameTime);
+
+			if (altFiring)
+				altFire(gameTime);
 
 			moveThisUpdate = velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
 			checkForCollision2(quadTree, gameTime);
@@ -107,6 +129,7 @@ namespace SpaceUnion.Ships {
 			mainWeapon.update(gameTime, quadTree);
 			additionalUpdate(gameTime, quadTree);
 
+			velocity *= dampening; // apply a little resistance. Any thrust should over power this.
 			//checkForCollision(quadTree, gameTime);
 		}
 
@@ -137,7 +160,7 @@ namespace SpaceUnion.Ships {
 
 
 		public override void drawMiniMap(SpriteBatch batch) {
-			throw new NotImplementedException();
+			batch.Draw(miniMapIcon, position, null, Color.White, rotation, origin, scale, SpriteEffects.None, 0);
 		}
 
 		/// <summary>
@@ -161,13 +184,55 @@ namespace SpaceUnion.Ships {
 				throw new NotImplementedException();
 		}
 
+
+		public virtual void control(KeyboardState keyState, GameTime gameTime) {
+
+
+			//Up Key toggles back thruster
+			if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W)) {
+				thrust(gameTime);
+			}
+
+			//Left Key rotates ship left
+			if (keyState.IsKeyDown(Keys.Left) || keyState.IsKeyDown(Keys.A)) {
+				rotateLeft(gameTime);
+			}
+
+			//Right Key rotates ship right
+			if (keyState.IsKeyDown(Keys.Right) || keyState.IsKeyDown(Keys.D)) {
+				rotateRight(gameTime);
+			}
+
+			//Space key activates debugging brake
+			if (keyState.IsKeyDown(Keys.Space)) {
+				stop();
+			}
+
+			if (keyState.IsKeyDown(Keys.LeftControl)) {
+				//fire(gameTime);
+				firing = true;
+			} else {
+				firing = false;
+			}
+
+			if (keyState.IsKeyDown(Keys.LeftShift)) {
+				//altFire(gameTime);
+				altFiring = true;
+			} else {
+				altFiring = false;
+			}
+
+			lastState = keyState;
+
+		}
 		/// <summary>
 		/// Power to main thruster
 		/// @Written by Troy. Edited by Tristan
 		/// </summary>
 		/// <param name="gameTime"></param>
-		public virtual void thrust(GameTime gameTime) {
+		protected virtual void thrust(GameTime gameTime) {
 			Vector2 tempVelocity = velocity;
+			// Vectorize the unit acceleration
 			Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
 			acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -188,7 +253,7 @@ namespace SpaceUnion.Ships {
 		/// @Written by Kyle. Edited by Tristan.
 		/// </summary>
 		/// <param name="gameTime"></param>
-		public virtual void fire(GameTime gameTime) {
+		protected virtual void fire(GameTime gameTime) {
 
 			// Fire only every interval we set as the fireTime
 			if (gameTime.TotalGameTime - previousMainFireTime > mainFireDelay) {
@@ -211,7 +276,7 @@ namespace SpaceUnion.Ships {
 		/// Alternate Weapon
 		/// </summary>
 		/// <param name="gameTime"></param>
-		public abstract void altFire(GameTime gameTime);
+		protected abstract void altFire(GameTime gameTime);
 
 		public override void destroy() {
 			explode();
@@ -233,7 +298,7 @@ namespace SpaceUnion.Ships {
 		/// @Written by Troy. Edited by Tristan
 		/// </summary>
 		/// <param name="gameTime"></param>
-		public virtual void rotateLeft(GameTime gameTime) {
+		protected virtual void rotateLeft(GameTime gameTime) {
 
 			float oldRotation = rotation;
 			if (rotation > 6.283185 || rotation < -6.283185) {
@@ -253,7 +318,7 @@ namespace SpaceUnion.Ships {
 		/// @Written by Troy. Edited by Tristan
 		/// </summary>
 		/// <param name="gameTime"></param>
-		public virtual void rotateRight(GameTime gameTime) {
+		protected virtual void rotateRight(GameTime gameTime) {
 
 			float oldRotation = rotation;
 			if (rotation > 6.283185 || rotation < -6.283185) {

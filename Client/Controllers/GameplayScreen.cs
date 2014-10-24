@@ -20,15 +20,15 @@ namespace SpaceUnion.Controllers {
 		private MouseState mouseState;
 		private SpriteBatch spriteBatch;
 
-		QuadTree quadTree;
-		List<Asteroid> asteroids;
-		List<Ship> ships;
+		private QuadTree quadTree;
+		private List<Asteroid> asteroids;
+		private List<Ship> ships;
 		/// <summary>
 		/// All objects in this list get added to the quadtree every update.
 		/// </summary>
 		public static List<Tangible> targets;
-		List<Planet> planets;
-
+		private List<LargeMassObject> planets;
+		private Background background;
 		private Ship playerShip;
 		private Game1 game;
 		private Camera mainCamera;
@@ -45,6 +45,7 @@ namespace SpaceUnion.Controllers {
 		private int SCREEN_WIDTH;
 		private int SCREEN_HEIGHT;
 		private Viewport basicViewport;
+		
 
 
 		public GameplayScreen(Game1 game, SpriteBatch batch, Ship selectedship) {
@@ -53,6 +54,7 @@ namespace SpaceUnion.Controllers {
 			SCREEN_HEIGHT = game.getScreenHeight();
 			SCREEN_WIDTH = game.getScreenWidth();
 
+
 			quadTree = new QuadTree(0, new Rectangle(0, 0, worldWidth, worldHeight));
 
 			spriteBatch = batch;
@@ -60,10 +62,14 @@ namespace SpaceUnion.Controllers {
 			gen = new Random();
 			Assets = Game1.Assets;
 
+
+			background = new Background(worldWidth, worldHeight, Assets.starfield2, Assets.starfield1, Assets.starfield1, Assets.starfield1);
+
+
 			playerShip = selectedship;
 			playerShip.Position = new Vector2(250, 250);
 			//playerShip.rotation = (float) (Math.PI/2);
-			planets = new List<Planet>();
+			planets = new List<LargeMassObject>();
 			planets.Add(new Planet(Assets.waterPlanet, new Vector2(4000, 3000), 1000f, 1000));
 			planets.Add(new Planet(Assets.moon, new Vector2(1000, 1000), 500f, 800));
 
@@ -129,34 +135,8 @@ namespace SpaceUnion.Controllers {
 			mouseState = Mouse.GetState();
 
 
-
-			//Up Key toggles back thruster
-			if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W)) {
-				playerShip.thrust(gameTime);
-			}
-
-			//Left Key rotates ship left
-			if (keyState.IsKeyDown(Keys.Left) || keyState.IsKeyDown(Keys.A)) {
-				playerShip.rotateLeft(gameTime);
-			}
-
-			//Right Key rotates ship right
-			if (keyState.IsKeyDown(Keys.Right) || keyState.IsKeyDown(Keys.D)) {
-				playerShip.rotateRight(gameTime);
-			}
-
-			//Space key activates debugging brake
-			if (keyState.IsKeyDown(Keys.Space)) {
-				playerShip.stop();
-			}
-
-			if (keyState.IsKeyDown(Keys.LeftControl)) {
-				playerShip.fire(gameTime);
-
-			}
-
-			if (keyState.IsKeyDown(Keys.LeftShift))
-				playerShip.altFire(gameTime);
+			playerShip.control(keyState, gameTime);
+			
 
 			foreach (Planet planet in planets)
 				planet.update(gameTime, quadTree, targets);
@@ -164,11 +144,11 @@ namespace SpaceUnion.Controllers {
 
 
 			/* Transform mouse input from view to world position
-			 * NOT currently used but may be useful in the future
+			 * NOT currently used but may be useful in the future*/
 			Matrix inverse = Matrix.Invert(mainCamera.getTransformation());
 			Vector2 mousePos = Vector2.Transform(
 			   new Vector2(mouseState.X, mouseState.Y), inverse);
-			*/
+			
 
 			//if (asteroids.Count < 50)
 			//	AddAsteroid(new Vector2(gen.Next(100, 4000), gen.Next(100, 2000)));
@@ -185,7 +165,10 @@ namespace SpaceUnion.Controllers {
 				}
 			}
 
-
+			if (keyState.IsKeyDown(Keys.P))
+				mainCamera.zoom += Camera.zoomIncrement;
+			if (keyState.IsKeyDown(Keys.O))
+				mainCamera.zoom -= Camera.zoomIncrement;
 			mainCamera.setZoom(mouseState.ScrollWheelValue);
 			mainCamera.Position = playerShip.Position; // center the camera to player's position
 			mainCamera.update(gameTime);
@@ -195,7 +178,7 @@ namespace SpaceUnion.Controllers {
 
 			Game1.explosionEngine.update(gameTime);
 
-			gui.update(gameTime, quadTree);
+			gui.update(gameTime, mouseState, mousePos, quadTree);
 		}
 
 		/// <summary>
@@ -209,9 +192,10 @@ namespace SpaceUnion.Controllers {
 			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
 				SamplerState.LinearWrap, null, null, null, mainCamera.getTransformation());
 
-			drawWorld(radarCamera); //Draws background
 
-			drawScreen(mainCamera);
+			background.draw(spriteBatch, mainCamera);
+
+			drawScreen();
 
 
 			spriteBatch.End();
@@ -234,21 +218,30 @@ namespace SpaceUnion.Controllers {
 			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
 				SamplerState.LinearWrap, null, null, null, radarCamera.getTransformation());
 
-			drawScreen(radarCamera);
+			foreach (Ship ship in ships)
+				ship.drawMiniMap(spriteBatch);
+
+			foreach (LargeMassObject planet in planets)
+				planet.draw(spriteBatch);
+
+
+			// Draw the Asteroids
+			for (int i = 0; i < asteroids.Count; i++) {
+				asteroids[i].draw(spriteBatch);
+			}
 
 
 			spriteBatch.End();
 		}
 
-		private void drawScreen(Camera camera) {
 
-
+		private void drawScreen() {
 
 			//Draws all space ships
 			foreach (Ship ship in ships)
 				ship.draw(spriteBatch);
 
-			foreach (Planet planet in planets)
+			foreach (LargeMassObject planet in planets)
 				planet.draw(spriteBatch);
 
 
@@ -259,32 +252,7 @@ namespace SpaceUnion.Controllers {
 
 			Game1.explosionEngine.draw(spriteBatch);
 		}
-
-
-
-		/// <summary>
-		/// Draws the stars background.
-		/// </summary>
-		/// <param name="camera"></param>
-		protected void drawWorld(Camera camera) {
-
-			/* Parallax Scrolling BG */
-			spriteBatch.Draw(Assets.starfield2,
-				new Rectangle((int) (camera.Position.X * .9), (int) (camera.Position.Y * .9), worldWidth / 2, worldHeight / 2),
-				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
-			spriteBatch.Draw(Assets.starfield1,
-				new Rectangle((int) (camera.Position.X * 0.7), (int) (camera.Position.Y * 0.7), worldWidth / 4, worldHeight / 4),
-				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
-			spriteBatch.Draw(Assets.starfield1,
-				new Rectangle((int) (camera.Position.X * 0.6), (int) (camera.Position.Y * 0.6), worldWidth / 5, worldHeight / 5),
-				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
-			spriteBatch.Draw(Assets.starfield1,
-				new Rectangle((int) (camera.Position.X * 0.4), (int) (camera.Position.Y * 0.4), worldWidth / 6, worldHeight / 6),
-				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
-			//spriteBatch.Draw(Assets.starfield3,
-			//	new Rectangle((int) (mainCamera.Position.X * .5), (int) (mainCamera.Position.Y * .5f), worldWidth / 10, worldHeight / 10),
-			//	null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
-		}
+			
 
 	}
 }

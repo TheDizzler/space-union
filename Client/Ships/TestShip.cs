@@ -17,7 +17,7 @@ namespace SpaceUnion.Ships {
 		}
 
 
-		public override void altFire(GameTime gameTime) {
+		protected override void altFire(GameTime gameTime) {
 			
 		}
 

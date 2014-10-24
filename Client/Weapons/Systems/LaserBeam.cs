@@ -12,10 +12,10 @@ namespace SpaceUnion.Weapons.Systems {
 	/// a continuous stream.
 	/// @Written by Tristan
 	/// </summary>
-	class LaserBeam : Sprite, WeaponSystem {
+	public class LaserBeam : Sprite, WeaponSystem {
 
 
-		int beamLength = 250;
+		public int beamLength = 250;
 
 		public Ship owner { get; set; }
 		public int weaponDamage { get; set; }
@@ -29,6 +29,7 @@ namespace SpaceUnion.Weapons.Systems {
 		/// </summary>
 		private List<Texture2D> beamQuanta = new List<Texture2D>();
 		private Vector2 beamDirection;
+		public float distToTarget;
 
 
 		public LaserBeam(Vector2 startPoint, Ship ship)
@@ -54,7 +55,7 @@ namespace SpaceUnion.Weapons.Systems {
 			Ray2 ray = new Ray2(position, beamDirection * beamLength);
 
 
-			float distToTarget = beamLength;
+			distToTarget = 1;
 
 			// find targets within line of fire
 			List<Tangible> possibleCollisions = quadTree.retrieve(owner); /* This method and may result in missed ships.
@@ -77,10 +78,10 @@ namespace SpaceUnion.Weapons.Systems {
 			}
 
 			if (currentTarget != null) {
-				currentTarget.takeDamage(weaponDamage, gameTime);
+				doDamage(currentTarget, gameTime);
 			}
-
-			for (int i = 0; i < distToTarget; ++i) {
+			// not quite right. distToTarget should be t in parametric form.
+			for (int i = 0; i < beamLength*distToTarget; ++i) {
 
 				beamQuanta.Add(assets.Content.Load<Texture2D>("Projectiles/molten bullet (6x8)"));// test texture
 
@@ -152,7 +153,7 @@ namespace SpaceUnion.Weapons.Systems {
 
 
 		public void doDamage(Tangible target, GameTime gameTime) {
-			throw new NotImplementedException();
+			target.takeDamage(weaponDamage, gameTime);
 		}
 
 	}

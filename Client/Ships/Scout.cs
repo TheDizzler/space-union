@@ -13,7 +13,6 @@ namespace SpaceUnion.Ships {
 
 
 		bool beamOn = false;
-		//private LaserBeam beam;
 
 		public Scout(Game1 game1)
 			: base(assets.stunt, assets.laser, game1) {
@@ -32,34 +31,30 @@ namespace SpaceUnion.Ships {
 		/// Main weapon fire method
 		/// </summary>
 		/// <param name="gameTime"></param>
-		public override void fire(GameTime gameTime) {
+		protected override void fire(GameTime gameTime) {
 
-			// Fire only every interval we set as the fireTime
-			//if (!beamOn) {
 
-			//}
-
-			((LaserBeam)mainWeapon).updatePosition(Vector2.Add(position, weaponOrigin), rotation);
+			((LaserBeam) mainWeapon).updatePosition(Vector2.Add(position, weaponOrigin), rotation);
 			beamOn = true;
 
 		}
 
 
 
-		public override void update(GameTime gameTime, QuadTree quadTree) {
+		//public override void update(GameTime gameTime, QuadTree quadTree) {
 
-			position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
-			base.update(position);
-			((LaserBeam) mainWeapon).updatePosition(Vector2.Add(position, weaponOrigin), rotation);
+		//	position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
+		//	base.update(position);
+		//	((LaserBeam) mainWeapon).updatePosition(Vector2.Add(position, weaponOrigin), rotation);
 
-			checkWorldEdge();
+		//	checkWorldEdge();
 
 
-			if (beamOn)
-				mainWeapon.update(gameTime, quadTree);
+		//	if (beamOn)
+		//		mainWeapon.update(gameTime, quadTree);
 
-			checkForCollision(quadTree, gameTime);
-		}
+		//	checkForCollision(quadTree, gameTime);
+		//}
 
 		public override void draw(SpriteBatch sBatch) {
 
@@ -69,11 +64,8 @@ namespace SpaceUnion.Ships {
 				mainWeapon.draw(sBatch);
 		}
 
-		public override void drawMiniMap(SpriteBatch batch) {
-			throw new NotImplementedException();
-		}
 
-		public override void altFire(GameTime gameTime) {
+		protected override void altFire(GameTime gameTime) {
 
 		}
 

@@ -13,7 +13,7 @@ using SpaceUnion.Tools;
 
 namespace SpaceUnion {
 
-	class GUI {
+	public class GUI {
 
 
 		public const int guiHeight = 80;
@@ -24,7 +24,7 @@ namespace SpaceUnion {
 
 		private  Ship playerShip;
 
-		Planet planet;
+		LargeMassObject planet;
 		Rectangle rect;
 		Vector2 line1Pos, line2Pos, line3Pos, line4Pos, line5Pos, line6Pos, line7Pos;
 
@@ -41,9 +41,11 @@ namespace SpaceUnion {
 		public Rectangle radarBox;
 
 		private Tangible target;
+		private MouseState mouseScreen;
+		private Vector2 mouseWorld;
 
 
-		public GUI(Game1 game, Ship ship, Planet plnt) {
+		public GUI(Game1 game, Ship ship, LargeMassObject plnt) {
 
 			guiRectangle = Game1.Assets.guiRectangle;
 			font = Game1.Assets.font;
@@ -73,7 +75,12 @@ namespace SpaceUnion {
 		}
 
 
-		public void update(GameTime gameTime, QuadTree quadTree) {
+		public void update(GameTime gameTime, MouseState mouseState, Vector2 mousePos, QuadTree quadTree) {
+
+			/* Debugging */
+			mouseScreen = mouseState;
+			mouseWorld = mousePos;
+
 			if (playerShip.position.X <= 7999) {
 				currentVelocity = playerShip.velocity;
 
@@ -86,35 +93,48 @@ namespace SpaceUnion {
 
 			if (playerShip.collideTarget != null)
 				target = playerShip.collideTarget;
+
+			/* Debugging */
 		}
 
+
 		public void draw(SpriteBatch spriteBatch) {
-
-
 
 
 			spriteBatch.Draw(guiRectangle, rect, Color.DarkSlateBlue); // the gui display
 			spriteBatch.Draw(guiRectangle, radarBox, Color.Black);		// bg for radar display
 
 
-			spriteBatch.DrawString(font, "ship velocity: " + currentVelocity,
-				line1Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
+			/* Debugging */
+			//spriteBatch.DrawString(font, "ship velocity: " + currentVelocity,
+			//	line1Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 
-
-			spriteBatch.DrawString(font, "Ship position: " + playerShip.position,
+			spriteBatch.DrawString(font, "Screen coords: " + mouseScreen.Position,
 				line3Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 
-			spriteBatch.DrawString(font, "accel: " + accel,
+			spriteBatch.DrawString(font, "mouseWorld: " + mouseWorld,
 				line5Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
+
+			//spriteBatch.DrawString(font, "Ship position: " + playerShip.position,
+			//	line3Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
+
+			spriteBatch.DrawString(font, "accel: " + accel,
+				line1Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 
 			//spriteBatch.DrawString(font, "totalTime: " + totalTime,
 			//	line7Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 
-			spriteBatch.DrawString(font, "target: " + target,
-				line7Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
+			//spriteBatch.DrawString(font, "collidetarget: " + target,
+			//	line7Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
+
+			//spriteBatch.DrawString(font, "BeamLength: " + playerShip.getBeam().beamLength
+			//	+ "distToTarget: " + playerShip.getBeam().distToTarget,
+			//	line7Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 
 			lastVelocity = playerShip.velocity;
 			lastPosition = playerShip.position;
+
+			/* Debugging */
 		}
 
 	}

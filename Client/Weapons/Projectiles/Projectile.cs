@@ -83,13 +83,19 @@ namespace SpaceUnion.Weapons.Projectiles {
 			target.takeDamage(weaponDamage, gameTime);
 		}
 
-
-		public void launch(Vector2 startPoint, float direction) {
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="startPoint">Location being fired from</param>
+		/// <param name="direction"></param>
+		/// <param name="shipVelocity"></param>
+		public void launch(Vector2 startPoint, float direction, Vector2 shipVelocity) {
 
 			rotation = direction;
 			position = startPoint;
 			velocity = new Vector2((float) Math.Sin(rotation) * projectileMoveSpeed,
 				(float) -Math.Cos(rotation) * projectileMoveSpeed);
+			velocity += shipVelocity;
 			timeActive = 0;
 			isActive = true;
 		}

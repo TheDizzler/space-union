@@ -32,7 +32,7 @@ namespace SpaceUnion.Ships {
 		}
 
 
-		public override void altFire(GameTime gameTime) {
+		protected override void altFire(GameTime gameTime) {
 
 		}
 
@@ -44,10 +44,6 @@ namespace SpaceUnion.Ships {
 
 		protected override void additionalDraw(SpriteBatch sBatch) {
 
-		}
-
-		public override void drawMiniMap(SpriteBatch batch) {
-			throw new NotImplementedException();
 		}
 
 		protected override void additionalFire(GameTime gameTime) {

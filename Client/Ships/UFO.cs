@@ -38,13 +38,13 @@ namespace SpaceUnion.Ships {
 		public override void draw(SpriteBatch batch) {
 
 			base.draw(batch);
-
 			if (shield.on)
+			//if (altFiring)
 				shield.draw(batch);
 		}
 
 
-		public override void altFire(GameTime gameTime) {
+		protected override void altFire(GameTime gameTime) {
 
 			if (gameTime.TotalGameTime - previousAltFireTime > altFireDelay) {
 

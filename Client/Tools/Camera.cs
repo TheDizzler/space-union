@@ -6,9 +6,16 @@ namespace SpaceUnion.Tools {
 
 	public class Camera {
 
+		/// <summary>
+		/// How far can zoom in
+		/// </summary>
 		private const float zoomUpperLimit = 1.5f;
-		private const float zoomLowerLimit = .1f;
-		private const float zoomIncrement = .025f;
+		/// <summary>
+		/// How far can zoom out
+		/// </summary>
+		private const float zoomLowerLimit = .5f;
+
+		public const float zoomIncrement = .025f;
 		private float previousScroll = 0f;
 
 		private float zoomRatio;
@@ -64,18 +71,19 @@ namespace SpaceUnion.Tools {
 		public Vector2 Position {
 			get { return cameraPosition; }
 			set {
-				//float leftBarrier = (float) viewport.Width * .5f / zoom;
-				//float rightBarrier = worldWidth - (float) viewport.Width * .5f / zoom;
-				//float topBarrier = worldHeight - (float) viewport.Height * .5f / zoom;
-				//float bottomBarrier = (float) viewport.Height * .5f / zoom;
 
 				float leftBarrier = 0;
 				float rightBarrier = worldWidth - viewport.Width;
 				float topBarrier = 0;
 				float bottomBarrier = worldHeight - viewport.Height;
 
+				
+
 				cameraPosition.X = value.X - viewport.Width / 2;
 				cameraPosition.Y = value.Y - viewport.Height / 2;
+
+				//Matrix inverse = Matrix.Invert(Matrix.CreateTranslation(new Vector3(cameraPosition, 0)) * Matrix.CreateScale(new Vector3(zoom, zoom, 1)));
+				//Vector2 cmove = Vector2.Transform(new Vector2(leftBarrier, topBarrier), inverse);
 
 				if (cameraPosition.X < leftBarrier)
 					cameraPosition.X = leftBarrier;
@@ -85,6 +93,8 @@ namespace SpaceUnion.Tools {
 					cameraPosition.Y = topBarrier;
 				if (cameraPosition.Y > bottomBarrier)
 					cameraPosition.Y = bottomBarrier;
+
+				
 			}
 		}
 
@@ -99,7 +109,7 @@ namespace SpaceUnion.Tools {
 				Matrix.CreateTranslation(-origin) *
 				//Matrix.CreateRotationZ(rotation) * // Might be fun to play with this...
 				Matrix.CreateScale(new Vector3(zoom, zoom, 1)) *
-			Matrix.CreateTranslation(origin);
+				Matrix.CreateTranslation(origin);
 		}
 
 

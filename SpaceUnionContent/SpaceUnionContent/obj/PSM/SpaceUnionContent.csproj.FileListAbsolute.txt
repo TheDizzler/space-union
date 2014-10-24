@@ -55,3 +55,7 @@ C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\create
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbybrowser.png
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\scoutship (128x128).xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\scoutship (128x128).png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\MapIcons\base (14x14).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\MapIcons\base2 (16x16).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\MapIcons\reddot 2 frame (16x16).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\MapIcons\reticle (16x16).xnb

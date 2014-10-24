@@ -104,6 +104,9 @@ namespace SpaceUnion.Tools {
 		public Texture2D moltenBullet;
 		public GraphicsDevice graphicsDevice;
 
+		// radar icons
+		public Texture2D shipMapIcon;
+
 
 		public AssetManager(ContentManager cntnt) {
 
@@ -164,6 +167,9 @@ namespace SpaceUnion.Tools {
 			missile = Content.Load<Texture2D>("Projectiles/short missile (16x16)");
 			moltenBullet = Content.Load<Texture2D>("Projectiles/molten bullet (6x8)");
 			shield = Content.Load<Texture2D>("Animations/bubble shield sheet");
+
+
+			shipMapIcon = Content.Load<Texture2D>("MapIcons/reticle (16x16)");
 		}
 	}
 }
