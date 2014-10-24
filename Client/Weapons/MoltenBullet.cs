@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceUnion.Ships;
 
 
 namespace SpaceUnion.Weapons {
@@ -26,7 +27,7 @@ namespace SpaceUnion.Weapons {
 			velocity = new Vector2((float) Math.Sin(rotation) * projectileMoveSpeed,
 				(float) -Math.Cos(rotation) * projectileMoveSpeed);
 
-			projectileDamage = 5;
+			weaponDamage = 5;
 		}
 
 		/// <summary>
@@ -46,7 +47,7 @@ namespace SpaceUnion.Weapons {
 		/// <param name="gameTime"></param>
 		public override void doDamage(Tangible target, GameTime gameTime) {
 
-			base.doDamage(target, gameTime);
+			base.doDamage(target, gameTime); // base calls destroy be default
 		}
 
 

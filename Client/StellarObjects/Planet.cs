@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceUnion.Ships;
 using SpaceUnion.Tools;
 using SpaceUnion.Weapons;
 
@@ -39,11 +40,11 @@ namespace SpaceUnion.StellarObjects {
 			if (target is Projectile)
 				target.collide(this, gameTime);
 			else if (target is Ship)
-				collisionHandler.shipOnPlanet((Ship) target, this, gameTime);
+				CollisionHandler.shipOnPlanet((Ship) target, this, gameTime);
 			else if (target is Asteroid)
-				collisionHandler.asteroidOnPlanet((Asteroid) target, this, gameTime);
+				CollisionHandler.asteroidOnPlanet((Asteroid) target, this, gameTime);
 			else if (target is Planet)
-				collisionHandler.planetOnPlanet(this, (Planet) target, gameTime);
+				CollisionHandler.planetOnPlanet(this, (Planet) target, gameTime);
 			else
 				throw new NotImplementedException();
 		}

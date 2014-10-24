@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Linq;
-using System.Text;
-using SpaceUnion.Controllers;
 using SpaceUnion.StellarObjects;
 using SpaceUnion.Tools;
 using SpaceUnion.Weapons;
 
 
-namespace SpaceUnion {
+namespace SpaceUnion.Ships {
 
 	/// <summary>
 	/// Base abstract ship class.
@@ -27,13 +24,11 @@ namespace SpaceUnion {
 		/// </summary>
 		public static float dampening = .1f;
 
-
-
-		protected float maxSpeed = 7;
+		protected float maxSpeed = 100;
 		/// <summary>
 		/// How many units(pixels) per second a ship will travel more per second of thrust
 		/// </summary>
-		protected float accelSpeed = 4.5f;
+		protected float accelSpeed = 20.0f;
 		/// <summary>
 		/// The non-directional speed of ship in pixels/second
 		/// </summary>
@@ -64,7 +59,7 @@ namespace SpaceUnion {
 		public List<Projectile> projectiles;
 
 
-		private Projectile mainWeapon;
+		//private WeaponSystem mainWeapon;
 		/// <summary>
 		/// Location on sprite where weapon appears from
 		/// </summary>
@@ -75,7 +70,7 @@ namespace SpaceUnion {
 		/// </summary>
 		/// <param name="tex">Ship texture</param>
 		/// <param name="wpnTex">Weapon texture</param>
-		/// <param name="pos">Spawn location</param>
+		/// <param name="game1"></param>
 		protected Ship(Texture2D tex, Texture2D wpnTex, Game1 game1)
 			: base(tex, Vector2.Zero) {
 
@@ -85,13 +80,12 @@ namespace SpaceUnion {
 			mass = 10000;
 			projectiles = new List<Projectile>();
 
-
 		}
 
 		//public abstract void setup();
 
 
-		public virtual void update(GameTime gameTime, List<Tangible> targets) {
+		public virtual void update(GameTime gameTime, QuadTree quadTree) {
 			
 			position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
 			base.update(position);
@@ -103,18 +97,17 @@ namespace SpaceUnion {
 
 			// Update the Projectiles
 			for (int i = projectiles.Count - 1; i >= 0; i--) {
-				projectiles[i].update(gameTime, targets);
+				projectiles[i].update(gameTime, quadTree);
 
 				if (!projectiles[i].isActive) {
 					projectiles.RemoveAt(i);
 				}
 			}
 
-			checkForCollision(targets, gameTime);
+			checkForCollision(quadTree, gameTime);
 		}
 
-
-		/* !!Never have update code in draw function!! */
+		
 		public override void draw(SpriteBatch sBatch) {
 
 			base.draw(sBatch);
@@ -127,17 +120,18 @@ namespace SpaceUnion {
 		/// Determine what kind of collision is occuring.
 		/// </summary>
 		/// <param name="target"></param>
-		/// <exception cref="NotImplementedException">A new kind of object that needs handleing</exception>
+		/// <param name="gameTime"></param>
+		/// <exception cref="NotImplementedException">A new kind of object that needs handling</exception>
 		public override void collide(Tangible target, GameTime gameTime) {
 
 			if (target is Projectile)
 				target.collide(this, gameTime); // the projectile can handle it from here
 			else if (target is Ship)
-				collisionHandler.shipOnShip(this, (Ship) target, gameTime);
+				CollisionHandler.shipOnShip(this, (Ship) target, gameTime);
 			else if (target is Asteroid)
-				collisionHandler.shipOnAsteroid(this, (Asteroid) target, gameTime);
+				CollisionHandler.shipOnAsteroid(this, (Asteroid) target, gameTime);
 			else if (target is Planet)
-				collisionHandler.shipOnPlanet(this, (Planet) target, gameTime);
+				CollisionHandler.shipOnPlanet(this, (Planet) target, gameTime);
 			else
 				throw new NotImplementedException();
 		}
@@ -148,12 +142,24 @@ namespace SpaceUnion {
 		/// </summary>
 		/// <param name="gameTime"></param>
 		public virtual void thrust(GameTime gameTime) {
-
+            Vector2 tempVelocity = velocity;
 			Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
 			acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
-			Vector2.Add(ref velocity, ref acceleration, out velocity);
-
+            
+            if (Math.Abs(tempVelocity.Length()) > maxSpeed)
+            {
+                Vector2 tempVelocity2 = tempVelocity;
+                Vector2.Add(ref tempVelocity2, ref acceleration, out tempVelocity2);
+                if (Math.Abs(tempVelocity2.Length()) < tempVelocity.Length())
+                {
+                    Vector2.Add(ref velocity, ref acceleration, out velocity);
+                }
+            } else if (Math.Abs(tempVelocity.Length()) < maxSpeed)
+            {
+                Vector2.Add(ref velocity, ref acceleration, out velocity);
+            }
 		}
+
 
 		/// <summary>
 		/// Main weapon fire method
@@ -255,11 +261,6 @@ namespace SpaceUnion {
 
 			explode();
 		}
-
-		
-
-
-
 
 	}
 }

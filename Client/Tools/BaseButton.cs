@@ -20,6 +20,11 @@ namespace SpaceUnion.Tools {
 		protected bool isHovered = false;
 		protected ButtonState lastState;
 
+        public bool hover()
+        {
+            return isHovered;
+        }
+
         /// <summary>
         /// Constructor for BaseButton, uses Texture in AssetsManager and a Vector2 value
         /// </summary>

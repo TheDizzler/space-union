@@ -16,7 +16,7 @@ namespace SpaceUnion.Tools {
 	/// </summary>
 	public class AssetManager {
 
-		private   ContentManager Content;
+		public   ContentManager Content;
 
 		// misc graphics
 		public SpriteFont font;
@@ -73,18 +73,18 @@ namespace SpaceUnion.Tools {
 		public Texture2D starfield3; // stackable background layer
 
 		public Texture2D explosions;
-        public Texture2D explosionsBig;
+		public Texture2D explosionsBig;
 
 		// space objects
 		public Texture2D earth;
-        public Texture2D winflag1;
+		public Texture2D winflag1;
 		public Texture2D waterPlanet;
 		public Texture2D moon;
-        public Texture2D asteroid;
+		public Texture2D asteroid;
 
 		// ships and platforms
 		public Texture2D shuttle;
-        public Texture2D spaceShipTest;
+		public Texture2D spaceShipTest;
 
 		public Texture2D ufo;
 		public Texture2D stunt;
@@ -94,6 +94,7 @@ namespace SpaceUnion.Tools {
         /// Created by Matthew Baldock
         /// </summary>
 		public Texture2D zoid;
+
         /// <summary>
         /// Galactus Ship Texture
         /// 
@@ -101,13 +102,15 @@ namespace SpaceUnion.Tools {
         /// </summary>
         public Texture2D galactusship;
         public Texture2D bug;
-        
 
-        // projectiles
-        public Texture2D laser;
+
+
+		// projectiles
+		public Texture2D laser;
 		public Texture2D missile;
 		public Texture2D shield;
 		public Texture2D moltenBullet;
+		public GraphicsDevice graphicsDevice;
 
 
 		public AssetManager(ContentManager cntnt) {
@@ -124,15 +127,17 @@ namespace SpaceUnion.Tools {
         /// <param name="graphicsDevice"></param>
 		internal void loadContent(GraphicsDevice graphicsDevice) {
 
-
+			this.graphicsDevice = graphicsDevice;
 			background = Content.Load<Texture2D>("Backgrounds/background");
 			font = Content.Load<SpriteFont>("SpriteFonts/SpriteFont1");
 			shuttle = Content.Load<Texture2D>("Spaceships/shuttle");
 
 			playButton = Content.Load<Texture2D>("Buttons/playbutton");
+
             ///Added by Matthew Baldock
             confirm = Content.Load<Texture2D>("Buttons/confirm");
             shipselection = Content.Load<Texture2D>("Buttons/shipselection");
+
             lobbyoptions = Content.Load<Texture2D>("Buttons/lobbyoptions");
             lobbybrowser = Content.Load<Texture2D>("Buttons/lobbybrowser");
             createlobby = Content.Load<Texture2D>("Buttons/createlobby");
@@ -156,20 +161,20 @@ namespace SpaceUnion.Tools {
 			moon = Content.Load<Texture2D>("StellarObjects/moon (115x117)");
 			asteroid = Content.Load<Texture2D>("StellarObjects/asteroid(56x56)");
 
-            spaceShipTest = Content.Load<Texture2D>("Spaceships/spaceshiptest");
+			spaceShipTest = Content.Load<Texture2D>("Spaceships/spaceshiptest");
 			ufo = Content.Load<Texture2D>("Spaceships/ufoship (128x128)");
 			stunt = Content.Load<Texture2D>("Spaceships/stuntship (128x128)");
             ///Added by Matthew Baldock
 			zoid = Content.Load<Texture2D>("Spaceships/zoidship");
 			bug = Content.Load<Texture2D>("Spaceships/bug (16x16)");
             ///Added by Matthew Baldock
-           // galactusship = Content.Load<Texture2D>("Spaceships/galactuship.png");
+            //galactusship = Content.Load<Texture2D>("Spaceships/galactuship.png");
 
 
-            winflag1 = Content.Load<Texture2D>("WinFlags/WinFlag1");
+			winflag1 = Content.Load<Texture2D>("WinFlags/WinFlag1");
 
-            laser = Content.Load<Texture2D>("Projectiles/laser");
-            missile = Content.Load<Texture2D>("Projectiles/short missile (16x16)");
+			laser = Content.Load<Texture2D>("Projectiles/laser");
+			missile = Content.Load<Texture2D>("Projectiles/short missile (16x16)");
 			moltenBullet = Content.Load<Texture2D>("Projectiles/molten bullet (6x8)");
 			shield = Content.Load<Texture2D>("Animations/bubble shield sheet");
 		}

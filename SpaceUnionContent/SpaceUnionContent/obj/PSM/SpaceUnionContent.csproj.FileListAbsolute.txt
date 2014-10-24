@@ -1,87 +1,3 @@
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).xnb
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.xnb
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.xnb
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\circleship (128x128).xnb
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.xnb
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\triangleship (128x128).xnb
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\wrenchship.xnb
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\beautifulbg.xnb
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\doodlebg.xnb
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.png
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.jpg
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\circleship (128x128).png
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.png
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\triangleship (128x128).png
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\wrenchship.png
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.png
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).png
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\beautifulbg.png
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\doodlebg.png
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\IgnoreMe.dll
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\SpaceUnionContent.csprojResolveAssemblyReference.cache
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\Microsoft.Xna.Framework.RuntimeProfile.txt
-C:\Users\Troy\Downloads\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\IgnoreMe.dll
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).xnb
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.xnb
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.xnb
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\circleship (128x128).xnb
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.xnb
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\triangleship (128x128).xnb
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\wrenchship.xnb
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\galaxy.xnb
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\beautifulbg.xnb
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\doodlebg.xnb
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.png
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.jpg
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\circleship (128x128).png
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.png
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\triangleship (128x128).png
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\wrenchship.png
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.png
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).png
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\galaxy.png
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\beautifulbg.png
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\doodlebg.png
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\IgnoreMe.dll
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\SpaceUnionContent.csprojResolveAssemblyReference.cache
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\Microsoft.Xna.Framework.RuntimeProfile.txt
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\IgnoreMe.dll
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.xnb
-C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.png
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).xnb
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.xnb
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.xnb
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\circleship (128x128).xnb
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.xnb
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\triangleship (128x128).xnb
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\wrenchship.xnb
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\galaxy.xnb
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.xnb
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\beautifulbg.xnb
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\doodlebg.xnb
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\WinFlags\WinFlag1.xnb
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.png
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.jpg
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\circleship (128x128).png
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.png
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\triangleship (128x128).png
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\wrenchship.png
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.png
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.png
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).png
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\galaxy.png
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\beautifulbg.png
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\doodlebg.png
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\IgnoreMe.dll
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\Microsoft.Xna.Framework.RuntimeProfile.txt
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\IgnoreMe.dll
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.xnb
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\SpaceUnionContent.csprojResolveAssemblyReference.cache
-C:\Users\Troy\BCIT\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\waterplanet (256x256).xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\ufoship (128x128).xnb
@@ -185,3 +101,17 @@ C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group pro
 C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\createlobby.png
 C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbybrowser.png
 C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\galactuship.xnb
+
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\obj\PSM\SpaceUnionContent.csprojResolveAssemblyReference.cache
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbyoptions.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gameroom.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gamelobby.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\createlobby.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbybrowser.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbyoptions.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gameroom.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gamelobby.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\createlobby.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbybrowser.png
+

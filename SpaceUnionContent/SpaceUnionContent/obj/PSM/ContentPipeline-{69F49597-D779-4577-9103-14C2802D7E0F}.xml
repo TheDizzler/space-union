@@ -227,24 +227,6 @@
       <Time>2014-10-11T20:44:52.7241403-07:00</Time>
     </Item>
     <Item>
-      <Source>SpriteFonts\SpriteFont1.spritefont</Source>
-      <Name>SpriteFonts\SpriteFont1</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb</Output>
-      <Time>2014-10-01T14:59:57.0132518-07:00</Time>
-    </Item>
-    <Item>
-      <Source>Buttons\shipselection.png</Source>
-      <Name>Buttons\shipselection</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.xnb</Output>
-      <Time>2014-10-03T11:01:21.1437313-07:00</Time>
-    </Item>
-    <Item>
       <Source>Buttons\lobbyoptions.png</Source>
       <Name>Buttons\lobbyoptions</Name>
       <Importer>TextureImporter</Importer>
@@ -297,6 +279,24 @@
       <Options>None</Options>
       <Output>C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\galactuship.xnb</Output>
       <Time>2014-10-16T20:07:05.8186216-07:00</Time>
+    </Item>
+    <Item>
+      <Source>SpriteFonts\SpriteFont1.spritefont</Source>
+      <Name>SpriteFonts\SpriteFont1</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb</Output>
+      <Time>2014-10-01T14:59:57.0132518-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Buttons\shipselection.png</Source>
+      <Name>Buttons\shipselection</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.xnb</Output>
+      <Time>2014-10-03T11:01:21.1437313-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

@@ -17,7 +17,7 @@ namespace SpaceUnion {
 	public abstract class Tangible : Sprite {
 
 
-		protected CollisionHandler collisionHandler = Game1.collisionHandler;
+		//protected CollisionHandler collisionHandler = Game1.collisionHandler;
 		protected ExplosionEngine explosionEngine = Game1.explosionEngine;
 
 
@@ -108,16 +108,32 @@ namespace SpaceUnion {
 			base.draw(batch);
 
 			//batch.Draw(assets.guiRectangle, hitBox.getArray(), Color.Pink);
+			//batch.Draw(assets.guiRectangle, hitBox.position, hitBox.getArray(), Color.Pink, hitBox.rotation, hitBox.position, scale, SpriteEffects.None, 0);
 		}
 
 
+		/// <summary>
+		/// Check if hitboxes overlap.
+		/// </summary>
+		/// <param></param>
+		/// <param name="quadTree"></param>
+		/// <param name="gameTime"></param>
+		protected virtual void checkForCollision(QuadTree quadTree, GameTime gameTime) {
 
-		protected virtual void checkForCollision(List<Tangible> targets, GameTime gameTime) {
+			//foreach (Tangible target in targets)
+			//	if (target != this && target.isActive)
+			//		if (getHitBox().getArray().Intersects(target.getHitBox().getArray()))
+			//			collide(target, gameTime);
 
-			foreach (Tangible target in targets)
-				if (target != this && target.isActive)
+
+			List<Tangible> possibleCollisions = quadTree.retrieve(this);
+
+			foreach (Tangible target in possibleCollisions) {
+				if (target.isActive && target != this)
 					if (getHitBox().getArray().Intersects(target.getHitBox().getArray()))
 						collide(target, gameTime);
+			}
+
 
 		}
 
@@ -138,15 +154,19 @@ namespace SpaceUnion {
 		protected void checkWorldEdge() {
 			if (position.X <= 0) {
 				position.X = 0;
+				velocity.X = 0;
 			}
 			if (position.X >= GameplayScreen.worldWidth) {
 				position.X = GameplayScreen.worldWidth;
+				velocity.X = 0;
 			}
 			if (position.Y <= 0) {
 				position.Y = 0;
+				velocity.Y = 0;
 			}
 			if (position.Y >= GameplayScreen.worldHeight) {
 				position.Y = GameplayScreen.worldHeight;
+				velocity.Y = 0;
 			}
 		}
 

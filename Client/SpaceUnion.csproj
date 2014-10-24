@@ -42,9 +42,12 @@
     <Compile Include="Controllers\LobbyBrowser.cs" />
     <Compile Include="Controllers\CreateLobby.cs" />
     <Compile Include="Controllers\LobbyOptions.cs" />
+    <Compile Include="Controllers\Options.cs" />
     <Compile Include="Ships\Bug.cs" />
     <Compile Include="Ships\Copy of Ship.cs" />
-    <Compile Include="Ships\Stunt.cs" />
+    <Compile Include="Tools\QuadTree.cs" />
+    <Compile Include="Weapons\LaserBeam.cs" />
+    <Compile Include="Ships\Scout.cs" />
     <Compile Include="Ships\TestShip.cs" />
     <Compile Include="Ships\UFO.cs" />
     <Compile Include="Ships\Zoid.cs" />
@@ -57,7 +60,6 @@
     <Compile Include="GUI.cs" />
     <Compile Include="Controllers\GameplayScreen.cs" />
     <Compile Include="Controllers\MainMenuScreen.cs" />
-    <Compile Include="Tactile.cs" />
     <Compile Include="Tangible.cs" />
     <Compile Include="StellarObjects\Asteroid.cs" />
     <Compile Include="StellarObjects\Planet.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Tools\ShipButton.cs" />
     <Compile Include="Tools\Sprite.cs" />
     <Compile Include="Weapons\Shield.cs" />
+    <Compile Include="Weapons\WeaponSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -86,6 +89,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>

@@ -17,7 +17,8 @@ namespace SpaceUnion {
 	/// This is the main type for your game
 	/// </summary>
 	public class Game1 : Game {
-		GraphicsDeviceManager graphics;
+
+		public GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
 		/// <summary>
@@ -28,10 +29,6 @@ namespace SpaceUnion {
 		/// An engine to create and manage all explosions, big and small
 		/// </summary>
 		public static ExplosionEngine explosionEngine;
-		/// <summary>
-		/// An engine to handle all collisions.
-		/// </summary>
-		public static CollisionHandler collisionHandler;
 
 		GameplayScreen gameplayScreen;
 		MainMenuScreen mainMenuScreen;
@@ -42,6 +39,7 @@ namespace SpaceUnion {
         CreateLobby createlobby;
         GameLobby gamelobby;
         GameRoom gameroom;
+        Options options;
         //end created by Matthew
 
 		/// <summary>
@@ -74,7 +72,7 @@ namespace SpaceUnion {
 			: base() {
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
-
+			
 			graphics.PreferredBackBufferWidth = 933;
 			graphics.PreferredBackBufferHeight = 700;
 			
@@ -92,7 +90,7 @@ namespace SpaceUnion {
 		/// </summary>
 		protected override void Initialize() {
 			base.Initialize();
-			graphics.IsFullScreen = true;
+			//graphics.IsFullScreen = true;
 			graphics.ApplyChanges();
 		}
 
@@ -107,10 +105,11 @@ namespace SpaceUnion {
 			// All sprites get loaded in to here
 			Assets.loadContent(GraphicsDevice);
 			explosionEngine = new ExplosionEngine(Assets);
-			collisionHandler = new CollisionHandler();
+            
 			//Load Main Menu
 			mainMenuScreen = new MainMenuScreen(this);
 			shipselectionScreen = new ShipSelectionScreen(this);
+            
 			IsMouseVisible = true;
 			
 
@@ -166,6 +165,9 @@ namespace SpaceUnion {
                 case GameState.GameRoom:
                     gameroom.update();
                     break;
+                case GameState.Options:
+                    options.update();
+                    break;
 				default:
 					break;
 			}
@@ -182,7 +184,7 @@ namespace SpaceUnion {
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime) {
 			GraphicsDevice.Clear(Color.Black);
-
+			
 
 
 			switch (currentGameState) {
@@ -190,7 +192,7 @@ namespace SpaceUnion {
 					mainMenuScreen.draw(spriteBatch);
 					break;
 				case GameState.Playing:
-					gameplayScreen.draw();
+					gameplayScreen.draw(gameTime);
 					break;
 				case GameState.Select:
 					shipselectionScreen.draw(spriteBatch);
@@ -210,6 +212,10 @@ namespace SpaceUnion {
                 case GameState.GameRoom:
                     gameroom.draw(spriteBatch);
                     break;
+                case GameState.Options:
+                    options.draw(spriteBatch);
+                    break;
+                    
 
 
 
@@ -224,31 +230,31 @@ namespace SpaceUnion {
 			currentGameState = GameState.MainMenu;
 			IsMouseVisible = true;
 		}
-        public void GoToLayer1()
+        public void GoToLobbyOptions()
         {
             lobbyoptions = new LobbyOptions(this);
             currentGameState = GameState.LobbyOptions;
             IsMouseVisible = true;
         }
-        public void GoToLayer2()
+        public void GoToLobbyBrowser()
         {
             lobbybrowser = new LobbyBrowser(this);
             currentGameState = GameState.LobbyBrowser;
             IsMouseVisible = true;
         }
-        public void GoToLayer3()
+        public void GoToCreateLobby()
         {
             createlobby = new CreateLobby(this);
             currentGameState = GameState.CreateLobby;
             IsMouseVisible = true;
         }
-        public void GoToLayer4()
+        public void GoToGameLobby()
         {
             gamelobby = new GameLobby(this);
             currentGameState = GameState.GameLobby;
             IsMouseVisible = true;
         }
-        public void GoToLayer5()
+        public void GoToGameRoom()
         {
             gameroom = new GameRoom(this);
             currentGameState = GameState.GameRoom;
@@ -261,7 +267,12 @@ namespace SpaceUnion {
 			IsMouseVisible = true;
 		}
 
-
+        public void GoToOptions()
+        {
+            options = new Options(this);
+            currentGameState = GameState.Options;
+            IsMouseVisible = true;
+        }
 		public void StartGame() {
 			gameplayScreen = new GameplayScreen(this, spriteBatch, shipselectionScreen.getship());
 			Viewport v = GraphicsDevice.Viewport;

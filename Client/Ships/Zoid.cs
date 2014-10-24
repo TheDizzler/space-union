@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceUnion.Ships;
 using SpaceUnion.Weapons;
 
 
-namespace SpaceUnion.Ships {
+namespace SpaceUnion.Weapons {
 	class Zoid : Ship {
 
 		Vector2 weaponOrigin2;

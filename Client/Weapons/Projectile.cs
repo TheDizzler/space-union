@@ -2,18 +2,14 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceUnion.Ships;
 using SpaceUnion.StellarObjects;
 using SpaceUnion.Tools;
 
 
 namespace SpaceUnion.Weapons {
 
-	public abstract class Projectile : Tangible {
-
-		/// <summary>
-		/// The firerer of the projectile
-		/// </summary>
-		protected Ship owner;
+	public abstract class Projectile : Tangible, WeaponSystem {
 
 		/// <summary>
 		/// Determines how fast the projectile moves
@@ -28,11 +24,8 @@ namespace SpaceUnion.Weapons {
 		/// </summary>
 		protected float timeActive;
 
-		/// <summary>
-		/// The amount of damage the projectile can inflict
-		/// </summary>
-		protected int projectileDamage;
-
+		public Ship owner { get; set; }
+		public int weaponDamage { get; set; }
 
 		/// <summary>
 		/// 
@@ -52,7 +45,7 @@ namespace SpaceUnion.Weapons {
 
 
 
-		public void update(GameTime gameTime, List<Tangible> targets) {
+		public void update(GameTime gameTime, QuadTree quadTree) {
 
 			timeActive += (float) gameTime.ElapsedGameTime.TotalSeconds;
 			if (projectileTTL > timeActive) {
@@ -60,7 +53,7 @@ namespace SpaceUnion.Weapons {
 				position += velocity * (float) gameTime.ElapsedGameTime.TotalMilliseconds;
 				base.update(position);
 
-				checkForCollision(targets, gameTime);
+				checkForCollision(quadTree, gameTime);
 			} else {
 				isActive = false;
 			}
@@ -76,10 +69,12 @@ namespace SpaceUnion.Weapons {
 			destroy();
 		}
 
+
 		public virtual void doDamage(Tangible target, GameTime gameTime) {
 
-			target.takeDamage(projectileDamage, gameTime);
+			target.takeDamage(weaponDamage, gameTime);
 		}
+
 
 	}
 }

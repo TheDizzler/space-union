@@ -13,7 +13,7 @@ using SpaceUnion.Tools;
 		BaseButton btnPlay;
 		BaseButton shipSelect;
         BaseButton lobby;
-        
+        BaseButton options;
 
 
 		public MainMenuScreen(Game1 game) {
@@ -26,18 +26,26 @@ using SpaceUnion.Tools;
 			shipSelect.setPosition(new Vector2((game.getScreenWidth() - shipSelect.width)/2, (game.getScreenHeight() - shipSelect.height)));
             lobby = new BaseButton(Game1.Assets.lobbyoptions);
             lobby.setPosition(new Vector2(100, 100));
+            options = new BaseButton(Game1.Assets.createlobby) { height = 64, width = 64 };
+            options.setPosition(new Vector2(game.getScreenWidth() - 100,0));
 		}
 
 		public void Update() {
 			MouseState mouseState = Mouse.GetState();
 			btnPlay.update(mouseState);
             shipSelect.update(mouseState);
+            options.update(mouseState);
             lobby.update(mouseState);
 			if (btnPlay.isClicked == true) {
                 btnPlay.isClicked = false;
                 game.StartGame();
                 btnPlay.isClicked = false;
 			}
+            if (options.isClicked == true)
+            {
+                game.GoToOptions();
+                options.isClicked = false;
+            }
             if (shipSelect.isClicked == true)
             {
                 game.GoToSelect();
@@ -45,7 +53,7 @@ using SpaceUnion.Tools;
             }
             if (lobby.isClicked == true)
             {
-                game.GoToLayer1();
+                game.GoToLobbyOptions();
                 lobby.isClicked = false;
             }
 		}
@@ -57,7 +65,7 @@ using SpaceUnion.Tools;
 			btnPlay.draw(spriteBatch);
             shipSelect.draw(spriteBatch);
             lobby.draw(spriteBatch);
-
+            options.draw(spriteBatch);
 			spriteBatch.End();
 		}
 

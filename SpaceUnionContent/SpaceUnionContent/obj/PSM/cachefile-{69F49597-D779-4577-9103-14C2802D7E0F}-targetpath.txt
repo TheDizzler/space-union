@@ -23,14 +23,14 @@ Content\StellarObjects\moon (115x117).xnb
 Content\Projectiles\molten bullet (6x8).xnb
 Content\Projectiles\plasmaball (32x36).xnb
 Content\Spaceships\bug (16x16).xnb
-Content\SpriteFonts\SpriteFont1.xnb
-Content\Buttons\shipselection.xnb
 Content\Buttons\lobbyoptions.xnb
 Content\Buttons\gameroom.xnb
 Content\Buttons\gamelobby.xnb
 Content\Buttons\createlobby.xnb
 Content\Buttons\lobbybrowser.xnb
 Content\Spaceships\galactuship.xnb
+Content\SpriteFonts\SpriteFont1.xnb
+Content\Buttons\shipselection.xnb
 Content\Backgrounds\starfield (800x600).png
 Content\Backgrounds\galaxy.png
 Content\Spaceships\spaceshiptest.png

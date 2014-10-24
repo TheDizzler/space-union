@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceUnion.Ships;
 
 
 namespace SpaceUnion.Weapons {
@@ -19,7 +20,7 @@ namespace SpaceUnion.Weapons {
 				(float) -Math.Cos(rotation) * projectileMoveSpeed);
 			
 
-			projectileDamage = 5;
+			weaponDamage = 5;
 
 		}
 

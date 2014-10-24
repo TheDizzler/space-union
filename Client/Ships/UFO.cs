@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceUnion.Ships;
 using SpaceUnion.Tools;
 using SpaceUnion.Weapons;
 
 
-namespace SpaceUnion.Ships {
+namespace SpaceUnion.Weapons {
 	class UFO : Ship {
 
 		Shield shield;
@@ -31,9 +32,9 @@ namespace SpaceUnion.Ships {
 		}
 
 
-		public override void update(GameTime gameTime, List<Tangible> targets) {
+		public override void update(GameTime gameTime, QuadTree quadTree) {
 
-			base.update(gameTime, targets);
+			base.update(gameTime, quadTree);
 			shield.update(gameTime, position);
 		}
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceUnion.Ships;
 using SpaceUnion.Tools;
 using SpaceUnion.Weapons;
 
@@ -31,10 +32,11 @@ namespace SpaceUnion.StellarObjects {
 			int speed = r.Next(500); // speed in pixels per second
 			velocity = new Vector2((float) (Math.Sin(direction) * speed), (float) (-Math.Cos(direction) * speed));
 
+			mass = 1000;
 			currentHealth = maxHealth = 1;
 		}
 
-		public void update(GameTime gameTime, List<Tangible> tangibles) {
+		public void update(GameTime gameTime, QuadTree quadTree) {
 
 			// move in a straight line
 			position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
@@ -43,12 +45,9 @@ namespace SpaceUnion.StellarObjects {
 
 			checkWorldEdge();
 
-			checkForCollision(tangibles, gameTime);
+			checkForCollision(quadTree, gameTime);
 		}
 
-		public void movement(GameTime gameTime, List<Tangible> targets) {
-			//throw new NotImplementedException();
-		}
 
 		public override void destroy() {
 			isActive = false;
@@ -61,11 +60,11 @@ namespace SpaceUnion.StellarObjects {
 			if (target is Projectile)
 				target.collide(this, gameTime);
 			else if (target is Ship)
-				collisionHandler.shipOnAsteroid((Ship) target, this, gameTime);
+				CollisionHandler.shipOnAsteroid((Ship) target, this, gameTime);
 			else if (target is Asteroid)
-				collisionHandler.asteroidOnAsteroid(this, (Asteroid) target, gameTime);
+				CollisionHandler.asteroidOnAsteroid(this, (Asteroid) target, gameTime);
 			else if (target is Planet)
-				collisionHandler.asteroidOnPlanet(this, (Planet) target, gameTime);
+				CollisionHandler.asteroidOnPlanet(this, (Planet) target, gameTime);
 			else
 				throw new NotImplementedException();
 		}

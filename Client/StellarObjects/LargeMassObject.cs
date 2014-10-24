@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpaceUnion.Tools;
 using SpaceUnion.Weapons;
 
 
@@ -28,7 +29,7 @@ namespace SpaceUnion.StellarObjects {
 		protected LargeMassObject(Texture2D tex, Vector2 pos, float mass, float range)
 			: base(tex, pos) {
 
-			this.mass = mass * 1000;
+			this.mass = mass * 100000;
 			this.range = range;
 
 			maxHealth = 10000;
@@ -36,16 +37,17 @@ namespace SpaceUnion.StellarObjects {
 		}
 
 
-		public void update(GameTime gameTime, List<Tangible> tangibles) {
+		public void update(GameTime gameTime, QuadTree quadTree, List<Tangible> targets) {
 
-			pull(gameTime, tangibles);
 
-			checkForCollision(tangibles, gameTime);
+			pull(gameTime, targets); // this could benefit from the quadtree but would require some tweaking
+
+			checkForCollision(quadTree, gameTime);
 		}
 
 		/// <summary>
 		/// Apply gravitational force to objects within range.
-		/// Call from update.
+		/// Called from update.
 		/// </summary>
 		/// <param name="gameTime"></param>
 		/// <param name="tangibles">List of objects subject to gravity wells</param>
