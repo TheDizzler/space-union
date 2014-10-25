@@ -21,7 +21,7 @@ namespace SpaceUnion {
 		//protected CollisionHandler collisionHandler = Game1.collisionHandler;
 		protected ExplosionEngine explosionEngine = Game1.explosionEngine;
 
-		protected Texture2D miniMapIcon;
+		protected MapIcon miniMapIcon;
 
 		/// <summary>
 		/// If false, the object will be destroyed and removed from the game.

@@ -43,6 +43,7 @@
     <Compile Include="Controllers\LobbyBrowser.cs" />
     <Compile Include="Controllers\CreateLobby.cs" />
     <Compile Include="Controllers\LobbyOptions.cs" />
+    <Compile Include="MapIcon.cs" />
     <Compile Include="Ships\Bug.cs" />
     <Compile Include="Tools\HitCircle.cs" />
     <Compile Include="Tools\QuadTree.cs" />
@@ -81,7 +82,7 @@
     <Compile Include="Tools\ExplosionEngine.cs" />
     <Compile Include="Tools\ShipButton.cs" />
     <Compile Include="Tools\Sprite.cs" />
-    <Compile Include="Weapons\Shield.cs" />
+    <Compile Include="Weapons\Systems\Shield.cs" />
     <Compile Include="Weapons\Systems\WeaponSystem.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -32,14 +32,16 @@ namespace SpaceUnion.Ships {
 		public override void update(GameTime gameTime, QuadTree quadTree) {
 
 			base.update(gameTime, quadTree);
-			shield.update(gameTime, position);
+			if (altFiring)
+				shield.update(gameTime, position);
+			else
+				shield.on = false;
 		}
 
 		public override void draw(SpriteBatch batch) {
 
 			base.draw(batch);
 			if (shield.on)
-			//if (altFiring)
 				shield.draw(batch);
 		}
 
@@ -49,7 +51,7 @@ namespace SpaceUnion.Ships {
 			if (gameTime.TotalGameTime - previousAltFireTime > altFireDelay) {
 
 				previousAltFireTime = gameTime.TotalGameTime;
-				shield.on = !shield.on;
+				shield.on = true;
 			}
 		}
 

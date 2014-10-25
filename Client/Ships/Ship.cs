@@ -90,7 +90,7 @@ namespace SpaceUnion.Ships {
 			//scale = .3f;
 			mass = 10000;
 
-			miniMapIcon = assets.shipMapIcon;
+			miniMapIcon = new MapIcon(assets.shipMapIcon, position);
 
 		}
 
@@ -158,9 +158,15 @@ namespace SpaceUnion.Ships {
 		/// <param name="sBatch"></param>
 		protected abstract void additionalDraw(SpriteBatch sBatch);
 
-
+		/// <summary>
+		/// Draws the ship to the radar.
+		/// </summary>
+		/// <param name="batch"></param>
 		public override void drawMiniMap(SpriteBatch batch) {
-			batch.Draw(miniMapIcon, position, null, Color.White, rotation, origin, scale, SpriteEffects.None, 0);
+
+			miniMapIcon.draw(position, batch);
+			//Vector2 org = new Vector2(miniMapIcon.Width/2, miniMapIcon.Height/2);
+			//batch.Draw(miniMapIcon, position, null, Color.White, 0, org, 6f, SpriteEffects.None, 0);
 		}
 
 		/// <summary>

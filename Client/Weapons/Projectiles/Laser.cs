@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using SpaceUnion.Ships;
+using SpaceUnion.Tools;
 
 
 namespace SpaceUnion.Weapons.Projectiles {
@@ -23,7 +24,7 @@ namespace SpaceUnion.Weapons.Projectiles {
 		/// <param name="target"></param>
 		/// <param name="gameTime"></param>
 		public override void collide(Tangible target, GameTime gameTime) {
-
+			
 			base.collide(target, gameTime);
 		}
 
@@ -39,6 +40,7 @@ namespace SpaceUnion.Weapons.Projectiles {
 
 
 		public override void destroy() {
+			explosionEngine.createSmallExplosion(position);
 			base.destroy();
 		}
 
