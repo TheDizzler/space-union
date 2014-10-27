@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EAF39246-C433-4683-94DC-0DF39FF08810}</ProjectGuid>
+    <ProjectGuid>{DE3E53CE-4F37-475B-ACC0-7BCCB9115A42}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SpaceUnionDatabaseAccess</RootNamespace>
@@ -56,11 +56,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="SpaceUnionModel.Designer.cs">
+    <Compile Include="Model1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SpaceUnionModel.edmx</DependentUpon>
+      <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sysdiagram.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -73,9 +74,9 @@
     <Compile Include="UserTableAccess.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="SpaceUnionModel.edmx">
+    <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SpaceUnionModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
@@ -83,15 +84,15 @@
     <None Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
-      <DependentUpon>SpaceUnionModel.edmx</DependentUpon>
+      <DependentUpon>Model1.edmx</DependentUpon>
     </None>
-    <None Include="SpaceUnionModel.edmx.diagram">
-      <DependentUpon>SpaceUnionModel.edmx</DependentUpon>
+    <None Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
     </None>
     <None Include="Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.cs</LastGenOutput>
-      <DependentUpon>SpaceUnionModel.edmx</DependentUpon>
+      <DependentUpon>Model1.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
