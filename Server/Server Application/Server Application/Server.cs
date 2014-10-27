@@ -54,22 +54,17 @@ namespace Server_Application
         {
             while (true)
             {
-                List<string> usernames = new List<string>();
                 foreach (Gameroom room in gamerooms.ToArray())
                 {
-                    foreach (GameData player in room.getPlayerList().ToArray())
+                    foreach (GameData player in room.getPlayerList())
                     {
                         if (compareTime(player.Time))
                         {
-                            room.getPlayerList().Remove(player);
-                            usernames.Add(player.Player.Username);
+                            room.removePlayer(player);
                         }
                     }
-                }
-                foreach (Player player in onlineplayers.ToArray())
-                {
-                    if(usernames.Contains(player.Username))
-                        onlineplayers.Remove(player);
+                    if (room.Players == 0)
+                        gamerooms.Remove(room);
                 }
                 Thread.Sleep(10000);
             }
@@ -121,7 +116,7 @@ namespace Server_Application
         {
             foreach (Gameroom room in gamerooms.ToArray())
             {
-                if (room.getPlayerList().Count < 6)
+                if (room.Players < 6)
                 {
                     player.GameRoom = room.RoomNumber;
                     room.addPlayer(player);

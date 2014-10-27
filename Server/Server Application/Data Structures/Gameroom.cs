@@ -11,65 +11,33 @@ namespace Data_Structures
     /// </summary>
     public class Gameroom
     {
-        List<GameData> list;
+        Dictionary<string, GameData> players = new Dictionary<string, GameData>();
         public int RoomNumber { get; set; }
+        public int Players { get { return players.Count; } }
 
-        public Gameroom()
-        {
-            list = new List<GameData>();
-        }
+        public Gameroom() { }
 
         public void addPlayer(Player player)
         {
             GameData data = new GameData();
-            GameData temp = null;
             data.Player = player;
             data.Player.GameRoom = RoomNumber;
-            data.XPosition = 500;
-            data.YPosition = 500;
-            data.Angle = 0;
-            data.Health = 100;
-            data.Kills = 0;
-            data.Deaths = 0;
-            foreach (GameData item in list.ToArray())
-            {
-                if (item.Player.Username == data.Player.Username)
-                {
-                    temp = item;
-                    break;
-                }
-            }
-            list.Remove(temp);
-            list.Add(data);
+            players.Add(player.Username, data);
         }
 
-        public void replacePlayer(GameData player)
+        public void updatePlayer(GameData player)
         {
-            foreach (GameData user in list.ToArray())
-            {
-                if (player.Player.Username == user.Player.Username)
-                {
-                    list[list.IndexOf(user)] = player;
-                    return;
-                }
-            }
+            players[player.Player.Username] = player;
         }
 
-        public List<GameData> getPlayerList()
+        public GameData[] getPlayerList()
         {
-            return list;
+            return players.Values.ToArray();
         }
 
         public void removePlayer(GameData user)
         {
-            foreach (GameData player in list.ToArray())
-            {
-                if (player.Player.Username == user.Player.Username)
-                {
-                    list.Remove(player);
-                    return;
-                }
-            }
+            players.Remove(user.Player.Username);
         }
     }
 }
