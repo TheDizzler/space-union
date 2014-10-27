@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceUnionDatabaseAccess", "SpaceUnionDatabaseAccess\SpaceUnionDatabaseAccess.csproj", "{EAF39246-C433-4683-94DC-0DF39FF08810}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceUnionDatabaseAccess", "SpaceUnionDatabaseAccess\SpaceUnionDatabaseAccess.csproj", "{DE3E53CE-4F37-475B-ACC0-7BCCB9115A42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EAF39246-C433-4683-94DC-0DF39FF08810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EAF39246-C433-4683-94DC-0DF39FF08810}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EAF39246-C433-4683-94DC-0DF39FF08810}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EAF39246-C433-4683-94DC-0DF39FF08810}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE3E53CE-4F37-475B-ACC0-7BCCB9115A42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE3E53CE-4F37-475B-ACC0-7BCCB9115A42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE3E53CE-4F37-475B-ACC0-7BCCB9115A42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE3E53CE-4F37-475B-ACC0-7BCCB9115A42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
