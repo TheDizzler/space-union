@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client_Comm_Module
+namespace Server_Application
 {
     using System;
     using System.Collections.Generic;

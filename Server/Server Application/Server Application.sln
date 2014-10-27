@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data Manipulation", "Data M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client Comm Module", "Client Comm Module\Client Comm Module.csproj", "{B0D9E654-2F4C-4891-9DAC-86AF01C74EE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceUnionDatabaseAccess", "..\..\Database\SpaceUnionDatabaseAccess\SpaceUnionDatabaseAccess\SpaceUnionDatabaseAccess.csproj", "{EAF39246-C433-4683-94DC-0DF39FF08810}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceUnionDatabaseAccess", "..\..\Database\SpaceUnionDatabaseAccess\SpaceUnionDatabaseAccess\SpaceUnionDatabaseAccess.csproj", "{DE3E53CE-4F37-475B-ACC0-7BCCB9115A42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +33,10 @@ Global
 		{B0D9E654-2F4C-4891-9DAC-86AF01C74EE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0D9E654-2F4C-4891-9DAC-86AF01C74EE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0D9E654-2F4C-4891-9DAC-86AF01C74EE8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EAF39246-C433-4683-94DC-0DF39FF08810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EAF39246-C433-4683-94DC-0DF39FF08810}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EAF39246-C433-4683-94DC-0DF39FF08810}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EAF39246-C433-4683-94DC-0DF39FF08810}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE3E53CE-4F37-475B-ACC0-7BCCB9115A42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE3E53CE-4F37-475B-ACC0-7BCCB9115A42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE3E53CE-4F37-475B-ACC0-7BCCB9115A42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE3E53CE-4F37-475B-ACC0-7BCCB9115A42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
