@@ -21,9 +21,13 @@ namespace Server_Application
     {
         static void Main(string[] args)
         {
-            Server server = new Server();
+            //Server server = new Server();
             Console.Title = "Space Union Server";
             Console.WriteLine("Enter the phrase \"help\" at any moment to display a list of commands.\n");
+
+
+
+            /*
             while (true)
             {
                 string input = Console.ReadLine();
@@ -73,6 +77,7 @@ namespace Server_Application
                         break;
                 }
             }
+            */
         }
 
         /// <summary>
