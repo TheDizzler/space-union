@@ -31,15 +31,28 @@ namespace Data_Structures
             data.Health = 100;
             data.Kills = 0;
             data.Deaths = 0;
-            foreach (GameData item in list)
+            foreach (GameData item in list.ToArray())
             {
                 if (item.Player.Username == data.Player.Username)
                 {
                     temp = item;
+                    break;
                 }
             }
             list.Remove(temp);
             list.Add(data);
+        }
+
+        public void replacePlayer(GameData player)
+        {
+            foreach (GameData user in list.ToArray())
+            {
+                if (player.Player.Username == user.Player.Username)
+                {
+                    list[list.IndexOf(user)] = player;
+                    return;
+                }
+            }
         }
 
         public List<GameData> getPlayerList()
@@ -49,7 +62,7 @@ namespace Data_Structures
 
         public void removePlayer(GameData user)
         {
-            foreach (GameData player in list)
+            foreach (GameData player in list.ToArray())
             {
                 if (player.Player.Username == user.Player.Username)
                 {

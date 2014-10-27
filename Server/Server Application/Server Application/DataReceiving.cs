@@ -27,7 +27,6 @@ namespace Server_Application
         /// Listens to data from clients (1 for each client)
         /// </summary>
         UdpClient[] UDPListeners = new UdpClient[Constants.NumberOfUdpClients];
-
         /// <summary>
         /// listeners[0] for login requests.
         /// listeners[1] for chat messages. 

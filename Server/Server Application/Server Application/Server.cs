@@ -47,21 +47,29 @@ namespace Server_Application
             searchingplayers = new List<Player>();
             receiving = new DataReceiving(this);
             transmission = new DataTransmission(this);
+            new Thread(cleanRooms).Start();
         }
 
         private void cleanRooms()
         {
             while (true)
             {
-                foreach (Gameroom room in gamerooms)
+                List<string> usernames = new List<string>();
+                foreach (Gameroom room in gamerooms.ToArray())
                 {
-                    foreach (GameData list in room.getPlayerList())
+                    foreach (GameData player in room.getPlayerList().ToArray())
                     {
-                        if (compareTime(list.Time))
+                        if (compareTime(player.Time))
                         {
-
+                            room.getPlayerList().Remove(player);
+                            usernames.Add(player.Player.Username);
                         }
                     }
+                }
+                foreach (Player player in onlineplayers.ToArray())
+                {
+                    if(usernames.Contains(player.Username))
+                        onlineplayers.Remove(player);
                 }
                 Thread.Sleep(10000);
             }
@@ -69,9 +77,9 @@ namespace Server_Application
 
         private bool compareTime(DateTime time)
         {
-            if (time.Second > 0 && DateTime.Now.Second < 50)
+            if ((DateTime.Now - time).Seconds > 10)
             {
-
+                return true;
             }
             return false;
         }
@@ -83,7 +91,7 @@ namespace Server_Application
         /// <returns>The gameroom matching the room number.</returns>
         public Gameroom getGameroom(int roomnum)
         {
-            foreach (Gameroom room in gamerooms)
+            foreach (Gameroom room in gamerooms.ToArray())
             {
                 if (room.RoomNumber == roomnum)
                 {
@@ -111,13 +119,12 @@ namespace Server_Application
 
         private void addPlayerToFreeRoom(Player player)
         {
-            foreach (Gameroom room in gamerooms)
+            foreach (Gameroom room in gamerooms.ToArray())
             {
                 if (room.getPlayerList().Count < 6)
                 {
                     player.GameRoom = room.RoomNumber;
                     room.addPlayer(player);
-                    Console.WriteLine("Games in room " + gamerooms.Count + " Players in room: " + room.getPlayerList().Count + "  player " + player.Username);
                     return;
                 }
             }
@@ -126,7 +133,6 @@ namespace Server_Application
             player.GameRoom = temproom.RoomNumber;
             temproom.addPlayer(player);
             gamerooms.Add(temproom);
-            Console.WriteLine("Games in room " + gamerooms.Count + " Players in room: " + temproom.getPlayerList().Count + "  player " + player.Username);
         }
 
         /// <summary>
