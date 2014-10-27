@@ -182,7 +182,7 @@ namespace Server_Application
             Gameroom room = owner.getGameroom(message.Player.GameRoom);
             if (room == null)
                 return;
-            room.replacePlayer(message);
+            room.updatePlayer(message);
             foreach(GameData player in room.getPlayerList().ToArray())
             {
                 if (player.Player.Username != message.Player.Username)
