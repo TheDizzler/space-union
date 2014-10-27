@@ -1,20 +1,86 @@
-﻿using Microsoft.Xna.Framework;
+﻿#region Using Statements
+using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Storage;
+using Microsoft.Xna.Framework.GamerServices;
+using SpaceUnion.Controllers;
+using SpaceUnion.Tools;
+#endregion
 
+///Edited by Matthew Baldock
 namespace SpaceUnion {
 	/// <summary>
 	/// This is the main type for your game
 	/// </summary>
 	public class Game1 : Game {
-		GraphicsDeviceManager graphics;
+
+		public GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
+
+		/// <summary>
+		/// Contains all game assets (gfx, audio, etc.)
+		/// </summary>
+		public static AssetManager Assets;
+		/// <summary>
+		/// An engine to create and manage all explosions, big and small
+		/// </summary>
+		public static ExplosionEngine explosionEngine;
+
+		GameplayScreen gameplayScreen;
+		MainMenuScreen mainMenuScreen;
+        // Created by Matthew Baldock
+		ShipSelectionScreen shipselectionScreen;
+        LobbyOptions lobbyoptions;
+        LobbyBrowser lobbybrowser;
+        CreateLobby createlobby;
+        GameLobby gamelobby;
+        GameRoom gameroom;
+        Options options;
+        //end created by Matthew
+
+		/// <summary>
+		/// Game State Enum to track game states
+		/// </summary>
+		enum GameState {
+			MainMenu,
+			Playing,
+			Options,
+			TeamBattle,
+			Select,
+            LobbyOptions,
+            LobbyBrowser,
+            CreateLobby,
+            GameLobby,
+            GameRoom
+		}
+
+		GameState currentGameState = GameState.MainMenu;
+
+		public int getScreenWidth() {
+			return Window.ClientBounds.Width;
+		}
+
+		public int getScreenHeight() {
+			return Window.ClientBounds.Height;
+		}
 
 		public Game1()
 			: base() {
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
+			
+			graphics.PreferredBackBufferWidth = 933;
+			graphics.PreferredBackBufferHeight = 700;
+			
+			IsFixedTimeStep = false;
+			
+			Assets = new AssetManager(Content);
 		}
+
 
 		/// <summary>
 		/// Allows the game to perform any initialization it needs to before starting to run.
@@ -23,20 +89,31 @@ namespace SpaceUnion {
 		/// and initialize them as well.
 		/// </summary>
 		protected override void Initialize() {
-			// TODO: Add your initialization logic here
-
 			base.Initialize();
+			//graphics.IsFullScreen = true;
+			graphics.ApplyChanges();
 		}
 
 		/// <summary>
 		/// LoadContent will be called once per game and is the place to load
 		/// all of your content.
 		/// </summary>
+        /// shipselectionscreen added by Matthew Baldock
 		protected override void LoadContent() {
 			// Create a new SpriteBatch, which can be used to draw textures.
 			spriteBatch = new SpriteBatch(GraphicsDevice);
+			// All sprites get loaded in to here
+			Assets.loadContent(GraphicsDevice);
+			explosionEngine = new ExplosionEngine(Assets);
+            
+			//Load Main Menu
+			mainMenuScreen = new MainMenuScreen(this);
+			shipselectionScreen = new ShipSelectionScreen(this);
+            
+			IsMouseVisible = true;
+			
 
-			// TODO: use this.Content to load your game content here
+			
 		}
 
 		/// <summary>
@@ -44,34 +121,169 @@ namespace SpaceUnion {
 		/// all content.
 		/// </summary>
 		protected override void UnloadContent() {
-			// TODO: Unload any non ContentManager content here
+			base.UnloadContent();
+			spriteBatch.Dispose();
 		}
+
+
 
 		/// <summary>
 		/// Allows the game to run logic such as updating the world,
 		/// checking for collisions, gathering input, and playing audio.
 		/// </summary>
+        /// 
+        /// Select - Layer5 added by Matthew Baldock
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update(GameTime gameTime) {
-			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+			//Allows Game to Exit
+			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
+				|| Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
 
-			// TODO: Add your update logic here
+			switch (currentGameState) {
+				case GameState.MainMenu:
+					mainMenuScreen.Update();
+					break;
+				case GameState.Playing:
+					gameplayScreen.Update(gameTime);
+					break;
+				case GameState.Select:
+					shipselectionScreen.update();
+					break;
+                case GameState.LobbyOptions:
+                    lobbyoptions.update();
+                    break;
+                case GameState.LobbyBrowser:
+                    lobbybrowser.update();
+                    break;
+                case GameState.CreateLobby:
+                    createlobby.update();
+                    break;
+                case GameState.GameLobby:
+                    gamelobby.update();
+                    break;
+                case GameState.GameRoom:
+                    gameroom.update();
+                    break;
+                case GameState.Options:
+                    options.update();
+                    break;
+				default:
+					break;
+			}
 
-			// Controller logic goes in here
+
 			base.Update(gameTime);
 		}
 
 		/// <summary>
 		/// This is called when the game should draw itself.
 		/// </summary>
+        /// 
+        /// select - layer5 added by Matthew Baldock
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime) {
-			GraphicsDevice.Clear(Color.CornflowerBlue);
+			GraphicsDevice.Clear(Color.Black);
+			
 
-			// TODO: Add your drawing code here
+
+			switch (currentGameState) {
+				case GameState.MainMenu:
+					mainMenuScreen.draw(spriteBatch);
+					break;
+				case GameState.Playing:
+					gameplayScreen.draw(gameTime);
+					break;
+				case GameState.Select:
+					shipselectionScreen.draw(spriteBatch);
+					break;
+                case GameState.LobbyOptions:
+                    lobbyoptions.draw(spriteBatch);
+                    break;
+                case GameState.LobbyBrowser:
+                    lobbybrowser.draw(spriteBatch);
+                    break;
+                case GameState.CreateLobby:
+                    createlobby.draw(spriteBatch);
+                    break;
+                case GameState.GameLobby:
+                    gamelobby.draw(spriteBatch);
+                    break;
+                case GameState.GameRoom:
+                    gameroom.draw(spriteBatch);
+                    break;
+                case GameState.Options:
+                    options.draw(spriteBatch);
+                    break;
+                    
+
+
+
+			}
 
 			base.Draw(gameTime);
+		}
+
+        //Gotolayer1 - gotoselect added by Matthew Baldock
+		public void GoToMain() {
+
+			currentGameState = GameState.MainMenu;
+			IsMouseVisible = true;
+		}
+        public void GoToLobbyOptions()
+        {
+            lobbyoptions = new LobbyOptions(this);
+            currentGameState = GameState.LobbyOptions;
+            IsMouseVisible = true;
+        }
+        public void GoToLobbyBrowser()
+        {
+            lobbybrowser = new LobbyBrowser(this);
+            currentGameState = GameState.LobbyBrowser;
+            IsMouseVisible = true;
+        }
+        public void GoToCreateLobby()
+        {
+            createlobby = new CreateLobby(this);
+            currentGameState = GameState.CreateLobby;
+            IsMouseVisible = true;
+        }
+        public void GoToGameLobby()
+        {
+            gamelobby = new GameLobby(this);
+            currentGameState = GameState.GameLobby;
+            IsMouseVisible = true;
+        }
+        public void GoToGameRoom()
+        {
+            gameroom = new GameRoom(this);
+            currentGameState = GameState.GameRoom;
+            IsMouseVisible = true;
+        }
+        
+		public void GoToSelect() {
+			shipselectionScreen = new ShipSelectionScreen(this);
+			currentGameState = GameState.Select;
+			IsMouseVisible = true;
+		}
+
+        public void GoToOptions()
+        {
+            options = new Options(this);
+            currentGameState = GameState.Options;
+            IsMouseVisible = true;
+        }
+		public void StartGame() {
+			gameplayScreen = new GameplayScreen(this, spriteBatch, shipselectionScreen.getship());
+			Viewport v = GraphicsDevice.Viewport;
+			currentGameState = GameState.Playing;
+			IsMouseVisible = false;
+		}
+
+
+		public void EndMatch() {
+			currentGameState = GameState.MainMenu;
+			IsMouseVisible = true;
 		}
 	}
 }
