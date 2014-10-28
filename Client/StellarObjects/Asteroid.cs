@@ -41,6 +41,9 @@ namespace SpaceUnion.StellarObjects {
 		public void update(GameTime gameTime, QuadTree quadTree) {
 
 
+			if (willCollide)
+				collide(collideTarget, gameTime);
+
 			moveThisUpdate = velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
 			checkForCollision2(quadTree, gameTime);
 
@@ -50,8 +53,7 @@ namespace SpaceUnion.StellarObjects {
 			if (outOfBounds())
 				destroy();
 
-			if (willCollide)
-				collide(collideTarget, gameTime);
+			
 			//checkWorldEdge();
 
 			//checkForCollision(quadTree, gameTime);

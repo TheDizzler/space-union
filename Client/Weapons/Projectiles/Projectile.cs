@@ -44,29 +44,26 @@ namespace SpaceUnion.Weapons.Projectiles {
 
 		public void update(GameTime gameTime, QuadTree quadTree) {
 
+			//if (willCollide)
+			//	collide(collideTarget, gameTime);
+
 			timeActive += (float) gameTime.ElapsedGameTime.TotalSeconds;
 			if (projectileTTL > timeActive) {
 
 				moveThisUpdate = velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
-				checkForCollisionProjectile(quadTree, gameTime, owner);
+				//checkForCollisionProjectile(quadTree, gameTime, owner);
 
 				position += moveThisUpdate;
 				base.update(position);
 
-				if (willCollide)
-					collide(collideTarget, gameTime);
 
-				//checkForCollision(quadTree, gameTime);
+
+				checkForCollision(quadTree, gameTime);
 			} else {
 				destroy();
 			}
 		}
 
-		
-
-		public override void drawMiniMap(SpriteBatch batch) {
-			throw new NotImplementedException();
-		}
 
 		/// <summary>
 		/// Deal damage and destroy the projectile.
@@ -74,8 +71,10 @@ namespace SpaceUnion.Weapons.Projectiles {
 		/// <param name="target"></param>
 		/// <param name="gameTime"></param>
 		public override void collide(Tangible target, GameTime gameTime) {
-			doDamage(target, gameTime);
-			destroy();
+			if (target != owner) {
+				doDamage(target, gameTime);
+				destroy();
+			}
 		}
 
 		/// <summary>
@@ -103,6 +102,12 @@ namespace SpaceUnion.Weapons.Projectiles {
 			velocity += shipVelocity;
 			timeActive = 0;
 			isActive = true;
+		}
+
+
+
+		public override void drawMiniMap(SpriteBatch batch) {
+			throw new NotImplementedException();
 		}
 	}
 }

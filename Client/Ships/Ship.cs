@@ -115,14 +115,16 @@ namespace SpaceUnion.Ships {
 			if (altFiring)
 				altFire(gameTime);
 
+			if (willCollide)
+				collide(collideTarget, gameTime);
+
 			moveThisUpdate = velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
 			checkForCollision2(quadTree, gameTime);
 
 			position += moveThisUpdate;
 			base.update(position);
 
-			if (willCollide)
-				collide(collideTarget, gameTime);
+			
 
 			checkWorldEdge();
 

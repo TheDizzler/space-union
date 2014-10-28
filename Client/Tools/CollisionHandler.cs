@@ -93,24 +93,24 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		public static void reflect(Tangible tangible1, Tangible tangible2) {
 
-			//Vector2 combinedMassVel = // if both masses stick together (inelastic collision) than the resulting velocity is combinedMassVel
-			//	(tangible1.velocity + tangible2.velocity) / (tangible1.mass + tangible2.mass);
+			Vector2 combinedMassVel = // if both masses stick together (inelastic collision) than the resulting velocity is combinedMassVel
+				(tangible1.velocity + tangible2.velocity) / (tangible1.mass + tangible2.mass);
 
-			//Vector2 normal1 = tangible2.position - tangible1.position;
-			//normal1.Normalize();
-			//Vector2 normal2 = tangible1.position - tangible2.position;
-			//normal2.Normalize();
+			Vector2 normal1 = tangible2.position - tangible1.position;
+			normal1.Normalize();
+			Vector2 normal2 = tangible1.position - tangible2.position;
+			normal2.Normalize();
 
-			//tangible1.velocity -= combinedMassVel;
-			//tangible1.velocity = Vector2.Reflect(tangible1.velocity, normal1);
-			//tangible1.velocity += combinedMassVel;
+			tangible1.velocity -= combinedMassVel;
+			tangible1.velocity = Vector2.Reflect(tangible1.velocity, normal1);
+			tangible1.velocity += combinedMassVel;
 
-			//tangible2.velocity -= combinedMassVel;
-			//tangible2.velocity = Vector2.Reflect(tangible2.velocity, normal1);
-			//tangible2.velocity += combinedMassVel;
+			tangible2.velocity -= combinedMassVel;
+			tangible2.velocity = Vector2.Reflect(tangible2.velocity, normal1);
+			tangible2.velocity += combinedMassVel;
 
-			Vector2 tang1VelFinal = (tangible1.velocity*(tangible1.mass-tangible2.mass) + 2*tangible2.mass*tangible2.velocity)/(tangible1.mass + tangible1.mass);
-			tang1VelFinal += tangible1.velocity;
+			//Vector2 tang1VelFinal = (tangible1.velocity * (tangible1.mass - tangible2.mass) + 2 * tangible2.mass * tangible2.velocity) / (tangible1.mass + tangible1.mass);
+			//tang1VelFinal += tangible1.velocity;
 
 
 		}

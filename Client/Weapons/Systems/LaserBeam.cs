@@ -71,7 +71,7 @@ namespace SpaceUnion.Weapons.Systems {
 
 
 					if (ray.intersects(target.getHitBox())) {
-						float temp = ray.getDistance2();
+						float temp = ray.getDistance();
 						if (temp <= 1 && temp <= distToTarget) {
 							distToTarget = temp;
 							currentTarget = target;
@@ -114,39 +114,39 @@ namespace SpaceUnion.Weapons.Systems {
 		/// </summary>
 		/// <param name="target"></param>
 		/// <returns></returns>
-		private String getLengthClosestHitEdge(HitBox target) {
+		//private String getLengthClosestHitEdge(HitBox target) {
 
-			String edge = null;
-			float t = 0;
-			Vector2[] edgePoints = target.edges["left"];
-			float temp = CollisionHandler.findT(edgePoints[0], edgePoints[1], position, beamDirection); // test left edge
-			if (temp >= 0 && temp <= t) {
-				t = temp;
-				edge = "left";
-			}
+		//	String edge = null;
+		//	float t = 0;
+		//	Vector2[] edgePoints = target.edges["left"];
+		//	float temp = CollisionHandler.findT(edgePoints[0], edgePoints[1], position, beamDirection); // test left edge
+		//	if (temp >= 0 && temp <= t) {
+		//		t = temp;
+		//		edge = "left";
+		//	}
 
-			edgePoints = target.edges["bottom"];
-			temp = CollisionHandler.findT(edgePoints[0], edgePoints[1], position, beamDirection); // test bottom edge
-			if (temp >= 0 && temp <= t) {
-				t = temp;
-				edge = "bottom";
-			}
+		//	edgePoints = target.edges["bottom"];
+		//	temp = CollisionHandler.findT(edgePoints[0], edgePoints[1], position, beamDirection); // test bottom edge
+		//	if (temp >= 0 && temp <= t) {
+		//		t = temp;
+		//		edge = "bottom";
+		//	}
 
-			edgePoints = target.edges["right"];
-			temp = CollisionHandler.findT(edgePoints[0], edgePoints[1], position, beamDirection); // test right edge
-			if (temp >= 0 && temp <= t) {
-				t = temp;
-				edge = "right";
-			}
+		//	edgePoints = target.edges["right"];
+		//	temp = CollisionHandler.findT(edgePoints[0], edgePoints[1], position, beamDirection); // test right edge
+		//	if (temp >= 0 && temp <= t) {
+		//		t = temp;
+		//		edge = "right";
+		//	}
 
-			edgePoints = target.edges["top"];
-			temp = CollisionHandler.findT(edgePoints[0], edgePoints[1], position, beamDirection); // test top edge
-			if (temp >= 0 && temp <= t) {
-				t = temp;
-				edge = "top";
-			}
-			return edge;
-		}
+		//	edgePoints = target.edges["top"];
+		//	temp = CollisionHandler.findT(edgePoints[0], edgePoints[1], position, beamDirection); // test top edge
+		//	if (temp >= 0 && temp <= t) {
+		//		t = temp;
+		//		edge = "top";
+		//	}
+		//	return edge;
+		//}
 
 
 

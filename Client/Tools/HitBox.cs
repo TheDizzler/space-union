@@ -23,7 +23,7 @@ namespace SpaceUnion.Tools {
 		/// Dictionary of edges for raycasting.
 		/// DEPRECATED
 		/// </summary>
-		public Dictionary<String, Vector2[]> edges = new Dictionary<String, Vector2[]>();
+		//public Dictionary<String, Vector2[]> edges = new Dictionary<String, Vector2[]>();
 
 		public float rotation;
 
@@ -40,15 +40,17 @@ namespace SpaceUnion.Tools {
 
 
 		public HitBox(float x, float y, int w, int h) {
-			position.X = x - width / 2;
-			position.Y = y - height / 2;
 			width = w;
 			height = h;
 
-			topLeft = new Vector2(x, y);
-			bottomLeft = new Vector2(x, y + height);
-			topRight = new Vector2(x + width, y);
-			bottomRight = new Vector2(x + width, y + height);
+			position.X = x - width / 2;
+			position.Y = y - height / 2;
+			
+
+			topLeft = new Vector2(position.X, position.Y);
+			bottomLeft = new Vector2(position.X, position.Y + height);
+			topRight = new Vector2(position.X + width, position.Y);
+			bottomRight = new Vector2(position.X + width, position.Y + height);
 
 
 			//edges.Add("left", new Vector2[2] { topLeft, bottomLeft });

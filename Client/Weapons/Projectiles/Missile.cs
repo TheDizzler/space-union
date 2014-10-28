@@ -14,7 +14,7 @@ namespace SpaceUnion.Weapons.Projectiles {
 			projectileTTL = .5f;
 			projectileMoveSpeed = 2000.2f;
 
-			weaponDamage = 3;
+			weaponDamage = 1;
 
 		}
 

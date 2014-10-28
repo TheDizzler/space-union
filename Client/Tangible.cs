@@ -18,8 +18,6 @@ namespace SpaceUnion {
 	/// </summary>
 	public abstract class Tangible : Sprite {
 
-
-		//protected CollisionHandler collisionHandler = Game1.collisionHandler;
 		protected ExplosionEngine explosionEngine = Game1.explosionEngine;
 
 		protected MapIcon miniMapIcon;
@@ -31,12 +29,16 @@ namespace SpaceUnion {
 
 		/// <summary>
 		/// How "big" an object is.
-		/// Influences gravitational 'power' of large masses.
+		/// Influences gravitational 'power' of large masses and collisions
+		/// (collisons not yet implemented).
 		/// </summary>
 		public float mass = 1;
 
 		private HitBox hitBox;
-		//Return Hitbox for collision detection
+		/// <summary>
+		/// Return Hitbox for collision detection
+		/// </summary>
+		/// <returns></returns>
 		public HitBox getHitBox() {
 			return hitBox;
 		}
@@ -100,12 +102,12 @@ namespace SpaceUnion {
 		protected Tangible(Texture2D tex, Vector2 pos)
 			: base(tex, pos) {
 
-
-			hitBox = new HitBox(pos.X, pos.Y, width, height);
+			int padding = 20;
+			hitBox = new HitBox(position.X, position.Y, width + padding, height + padding);
 			isActive = true;
 			currentHealth = maxHealth;
 
-			damageTime = TimeSpan.FromSeconds(3);
+			damageTime = TimeSpan.FromSeconds(1);
 		}
 
 		/// <summary>
@@ -124,8 +126,8 @@ namespace SpaceUnion {
 		/// <param name="batch"></param>
 		public override void draw(SpriteBatch batch) {
 			base.draw(batch);
-			hitBox.draw(batch, assets);
-			
+			hitBox.draw(batch, assets); // Debug hitboxes
+
 		}
 
 		/// <summary>
@@ -164,16 +166,19 @@ namespace SpaceUnion {
 			if (moveThisUpdate.Length() == 0)
 				return;
 
+			Vector2 move = new Vector2();
+			Vector2.Normalize(ref moveThisUpdate, out move);
+
 			List<Tangible> possibleCollisions = quadTree.retrieve(this);
 
-			Ray2 ray0 = new Ray2(hitBox.topLeft, this.moveThisUpdate);
-			Ray2 ray1 = new Ray2(hitBox.bottomLeft, this.moveThisUpdate);
-			Ray2 ray2 = new Ray2(hitBox.bottomRight, this.moveThisUpdate);
-			Ray2 ray3 = new Ray2(hitBox.topRight, this.moveThisUpdate);
-			Ray2 ray4 = new Ray2(hitBox.position, this.moveThisUpdate);
+			Ray2 ray0 = new Ray2(hitBox.topLeft, move);
+			Ray2 ray1 = new Ray2(hitBox.bottomLeft, move);
+			Ray2 ray2 = new Ray2(hitBox.bottomRight, move);
+			Ray2 ray3 = new Ray2(hitBox.topRight, move);
+			Ray2 ray4 = new Ray2(hitBox.position, move);
 
 			float dist0, dist1, dist2, dist3, dist4;
-			float velLength = moveThisUpdate.Length();
+			float velLength = move.Length();
 			float shortestDist = velLength;
 
 
@@ -201,29 +206,34 @@ namespace SpaceUnion {
 				dist3 = ray3.getDistance();
 				dist4 = ray4.getDistance();
 
-				possible.Clear();
+				//possible.Clear();
 
-				if (0 <= dist0 && dist0 <= velLength)
-					possible.Add(dist0);
-				if (0 <= dist1 && dist1 <= velLength)
-					possible.Add(dist1);
-				if (0 <= dist2 && dist2 <= velLength)
-					possible.Add(dist2);
-				if (0 <= dist3 && dist3 <= velLength)
-					possible.Add(dist3);
-				if (0 <= dist4 && dist4 <= velLength)
-					possible.Add(dist4);
+				if (0 <= dist0 && dist0 <= shortestDist)
+					setTarget(dist0, ref shortestDist, target);
+				//possible.Add(dist0);
+				if (0 <= dist1 && dist1 <= shortestDist)
+					setTarget(dist1, ref shortestDist, target);
+				//possible.Add(dist1);
+				if (0 <= dist2 && dist2 <= shortestDist)
+					setTarget(dist2, ref shortestDist, target);
+				//possible.Add(dist2);
+				if (0 <= dist3 && dist3 <= shortestDist)
+					setTarget(dist3, ref shortestDist, target);
+				//possible.Add(dist3);
+				if (0 <= dist4 && dist4 <= shortestDist)
+					setTarget(dist4, ref shortestDist, target);
+				//possible.Add(dist4);
 
-				float temp = possible.Min();
-				if (temp < shortestDist) {
-					shortestDist = temp;
-					willCollide = true;
-					collideTarget = target;
-				}
+				//float temp = possible.Min();
+				//if (temp < shortestDist) {
+				//	shortestDist = temp;
+				//	willCollide = true;
+				//	collideTarget = target;
+				//}
 			}
 
 			if (willCollide) {
-				//Vector2.Normalize(ref velocity, out moveThisUpdate);
+				Vector2.Normalize(ref velocity, out moveThisUpdate);
 				moveThisUpdate = moveThisUpdate * shortestDist;
 			}
 		}
@@ -239,18 +249,20 @@ namespace SpaceUnion {
 
 			if (moveThisUpdate.Length() == 0)
 				return;
+			Vector2 move = new Vector2();
+			Vector2.Normalize(ref moveThisUpdate, out move);
 
 			List<Tangible> possibleCollisions = quadTree.retrieve(this);
 
-			Ray2 ray0 = new Ray2(hitBox.topLeft, this.moveThisUpdate);
-			Ray2 ray1 = new Ray2(hitBox.bottomLeft, this.moveThisUpdate);
-			Ray2 ray2 = new Ray2(hitBox.bottomRight, this.moveThisUpdate);
-			Ray2 ray3 = new Ray2(hitBox.topRight, this.moveThisUpdate);
-			Ray2 ray4 = new Ray2(hitBox.position, this.moveThisUpdate);
+			//Ray2 ray0 = new Ray2(hitBox.topLeft, move);
+			//Ray2 ray1 = new Ray2(hitBox.bottomLeft, move);
+			//Ray2 ray2 = new Ray2(hitBox.bottomRight, move);
+			//Ray2 ray3 = new Ray2(hitBox.topRight, move);
+			Ray2 ray4 = new Ray2(hitBox.position, move);
 
 			float dist0, dist1, dist2, dist3, dist4;
-			float velLength = moveThisUpdate.Length();
-			float shortestDist = velLength;
+			float shortestDist = move.Length();
+			//float shortestDist = velLength;
 
 
 			foreach (Tangible target in possibleCollisions) {
@@ -260,48 +272,66 @@ namespace SpaceUnion {
 				bool r0, r1, r2, r3, r4;
 
 				//note: it is necessary that each of these functions run
-				r0 = ray0.intersectsToRange(target.getHitBox());
-				r1 = ray1.intersectsToRange(target.getHitBox());
-				r2 = ray2.intersectsToRange(target.getHitBox());
-				r3 = ray3.intersectsToRange(target.getHitBox());
+				//r0 = ray0.intersects(target.getHitBox());
+				//r1 = ray1.intersects(target.getHitBox());
+				//r2 = ray2.intersects(target.getHitBox());
+				//r3 = ray3.intersects(target.getHitBox());
 				r4 = ray4.intersectsToRange(target.getHitBox());
 
-				if (!r0 && !r1 && !r2 && !r3 && !r4) // If no rays intersect
+				//if (!r0 && !r1 && !r2 && !r3 && !r4) // If no rays intersect
+				//	continue;
+
+				if (!r4)
 					continue;
 
-
-
-				dist0 = ray0.getDistance();
-				dist1 = ray1.getDistance();
-				dist2 = ray2.getDistance();
-				dist3 = ray3.getDistance();
+				//dist0 = ray0.getDistance();
+				//dist1 = ray1.getDistance();
+				//dist2 = ray2.getDistance();
+				//dist3 = ray3.getDistance();
 				dist4 = ray4.getDistance();
 
-				possible.Clear();
+				//possible.Clear();
 
-				if (0 <= dist0 && dist0 <= velLength)
-					possible.Add(dist0);
-				if (0 <= dist1 && dist1 <= velLength)
-					possible.Add(dist1);
-				if (0 <= dist2 && dist2 <= velLength)
-					possible.Add(dist2);
-				if (0 <= dist3 && dist3 <= velLength)
-					possible.Add(dist3);
-				if (0 <= dist4 && dist4 <= velLength)
-					possible.Add(dist4);
-
-				float temp = possible.Min();
-				if (temp < shortestDist) {
-					shortestDist = temp;
+				//if (0 <= dist0 && dist0 <= shortestDist)
+				//	setTarget(dist0, ref shortestDist, target);
+				////possible.Add(dist0);
+				//if (0 <= dist1 && dist1 <= shortestDist)
+				//	setTarget(dist1, ref shortestDist, target);
+				////possible.Add(dist1);
+				//if (0 <= dist2 && dist2 <= shortestDist)
+				//	setTarget(dist2, ref shortestDist, target);
+				////possible.Add(dist2);
+				//if (0 <= dist3 && dist3 <= shortestDist)
+				//	setTarget(dist3, ref shortestDist, target);
+				//possible.Add(dist3);
+				if (0 <= dist4 && dist4 <= shortestDist) {
+					shortestDist = dist4;
 					willCollide = true;
 					collideTarget = target;
+					Console.WriteLine("Set Target " + collideTarget.GetType() + " shortestDist: " + shortestDist);
+					//setTarget(dist4, ref shortestDist, target);
 				}
+				//possible.Add(dist4);
+
+				//float temp = possible.Min();
+				//if (temp < shortestDist) {
+				//	shortestDist = temp;
+				//	willCollide = true;
+				//	collideTarget = target;
+				//}
 			}
 
 			if (willCollide) {
 				//Vector2.Normalize(ref velocity, out moveThisUpdate);
 				moveThisUpdate = moveThisUpdate * shortestDist;
+				Console.WriteLine("Target " + collideTarget.GetType() + " shortestDist: " + shortestDist);
 			}
+		}
+
+		private void setTarget(float dist, ref float shortestDist, Tangible target) {
+			shortestDist = dist;
+			willCollide = true;
+			collideTarget = target;
 		}
 
 		/// <summary>

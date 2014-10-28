@@ -124,7 +124,7 @@ namespace SpaceUnion.Weapons.Systems {
 
 		/// <summary>
 		/// Passes the spritebatch on to the projectiles. The launcher
-		/// itself (probably?) shouldn't draw itself.
+		/// itself (probably?) shouldn't draw.
 		/// </summary>
 		/// <param name="sBatch"></param>
 		public void draw(SpriteBatch sBatch) {

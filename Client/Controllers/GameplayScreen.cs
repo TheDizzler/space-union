@@ -70,8 +70,8 @@ namespace SpaceUnion.Controllers {
 			playerShip.Position = new Vector2(250, 250);
 			//playerShip.rotation = (float) (Math.PI/2);
 			planets = new List<LargeMassObject>();
-			planets.Add(new Planet(Assets.waterPlanet, new Vector2(4000, 3000), 1000f, 1000));
-			planets.Add(new Planet(Assets.moon, new Vector2(1000, 1000), 500f, 800));
+			planets.Add(new Planet(Assets.waterPlanet, new Vector2(4000, 3000), 500f, 1000));
+			planets.Add(new Planet(Assets.moon, new Vector2(1000, 1000), 250f, 800));
 
 			basicViewport = game.GraphicsDevice.Viewport;
 
@@ -225,17 +225,8 @@ namespace SpaceUnion.Controllers {
 
 
 			//draw grid
-			drawBorder(spriteBatch, new Rectangle(0, 0, worldWidth / 4, worldHeight / 4), 15, Color.White); //top
-			drawBorder(spriteBatch, new Rectangle(worldWidth / 2, 0, worldWidth / 4, worldHeight / 4), 15, Color.White); //top right
-
-			drawBorder(spriteBatch, new Rectangle(worldWidth / 4, worldHeight / 4, worldWidth / 4, worldHeight / 4), 15, Color.White);
-			drawBorder(spriteBatch, new Rectangle(worldWidth * 3 / 4, worldHeight / 4, worldWidth / 4, worldHeight / 4), 15, Color.White);
-
-			drawBorder(spriteBatch, new Rectangle(0, worldHeight / 2, worldWidth / 4, worldHeight / 4), 15, Color.White);
-			drawBorder(spriteBatch, new Rectangle(worldWidth / 2, worldHeight / 2, worldWidth / 4, worldHeight / 4), 15, Color.White);
-
-			drawBorder(spriteBatch, new Rectangle(worldWidth / 4, worldHeight *3/4, worldWidth / 4, worldHeight / 4), 15, Color.White);
-			drawBorder(spriteBatch, new Rectangle(worldWidth * 3 / 4, worldHeight * 3 / 4, worldWidth / 4, worldHeight / 4), 15, Color.White);
+			drawGrid();
+			
 
 			foreach (Ship ship in ships)
 				ship.drawMiniMap(spriteBatch);
@@ -251,6 +242,23 @@ namespace SpaceUnion.Controllers {
 
 
 			spriteBatch.End();
+		}
+
+		private void drawGrid() {
+
+			drawBorder(spriteBatch, new Rectangle(0, 0, worldWidth, worldHeight), 15, Color.White); // World enclosing box
+
+			drawBorder(spriteBatch, new Rectangle(0, 0, worldWidth / 4, worldHeight / 4), 15, Color.White); //top
+			drawBorder(spriteBatch, new Rectangle(worldWidth / 2, 0, worldWidth / 4, worldHeight / 4), 15, Color.White); //top right
+
+			drawBorder(spriteBatch, new Rectangle(worldWidth / 4, worldHeight / 4, worldWidth / 4, worldHeight / 4), 15, Color.White);
+			drawBorder(spriteBatch, new Rectangle(worldWidth * 3 / 4, worldHeight / 4, worldWidth / 4, worldHeight / 4), 15, Color.White);
+
+			drawBorder(spriteBatch, new Rectangle(0, worldHeight / 2, worldWidth / 4, worldHeight / 4), 15, Color.White);
+			drawBorder(spriteBatch, new Rectangle(worldWidth / 2, worldHeight / 2, worldWidth / 4, worldHeight / 4), 15, Color.White);
+
+			drawBorder(spriteBatch, new Rectangle(worldWidth / 4, worldHeight * 3 / 4, worldWidth / 4, worldHeight / 4), 15, Color.White);
+			drawBorder(spriteBatch, new Rectangle(worldWidth * 3 / 4, worldHeight * 3 / 4, worldWidth / 4, worldHeight / 4), 15, Color.White);
 		}
 
 

@@ -39,7 +39,6 @@ namespace SpaceUnion.StellarObjects {
 
 		public void update(GameTime gameTime, QuadTree quadTree, List<Tangible> targets) {
 
-
 			pull(gameTime, targets); // this could benefit from the quadtree but would require some tweaking
 
 			checkForCollision(quadTree, gameTime);
