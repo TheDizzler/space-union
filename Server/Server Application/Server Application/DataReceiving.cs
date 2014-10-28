@@ -67,14 +67,17 @@ namespace Server_Application
                 Data message = (Player)DataControl.receiveTCPData(TCPListeners[0]);
                 if (message == null)
                     return;
-                if (message.Type == Constants.LOGIN_REQUEST)
+
+                switch (message.Type)
                 {
-                    Console.WriteLine(((Player)message).Username);
-                    new Thread(unused => LoginRequests.handleLoginRequest((Player)message, owner)).Start();
-                }
-                else
-                {
-                    owner.addMessageToQueue((GameMessage)message);
+                    case Constants.LOGIN_REQUEST:
+                        Console.WriteLine(((Player)message).Username);
+                        new Thread(unused => LoginRequests.handleLoginRequest((Player)message, owner)).Start();
+                        break;
+
+                    default:
+                        owner.addMessageToQueue((GameMessage)message);
+                        break;
                 }
             }
         }

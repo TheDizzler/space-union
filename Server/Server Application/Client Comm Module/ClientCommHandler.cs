@@ -24,7 +24,6 @@ namespace Client_Comm_Module
         {
             receiver = new ClientMessageReceiving();
             sender = new ClientMessageTransmission();
-            
 
             receiver.gameStart += new ClientMessageReceiving.GameStartEventHandler(initializeDataTransmission);
         }

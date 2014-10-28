@@ -26,19 +26,19 @@ namespace Server_Application
         /// <summary>
         /// The class responsible for transmitting data to clients.
         /// </summary>
-        DataTransmission transmission;
+        public DataTransmission transmission { get; private set; }
         /// <summary>
         /// List of all available game rooms.
         /// </summary>
-        List<Gameroom> gamerooms;
+        public List<Gameroom> gamerooms { get; private set; }
         /// <summary>
         /// Total list of online players.
         /// </summary>
-        List<Player> onlineplayers;
+        public List<Player> onlineplayers { get; private set; }
         /// <summary>
         /// Only players who are currently looking for a game match.
         /// </summary>
-        List<Player> searchingplayers;
+        public List<Player> searchingplayers { get; private set; }
 
         public Server()
         {
@@ -112,6 +112,36 @@ namespace Server_Application
             }
         }
 
+        /// <summary>
+        /// Add the given player to the room matching the given room number.
+        /// </summary>
+        /// <param name="player">The player to add to the room.</param>
+        /// <param name="roomNumber">The room number of the room to add the player to.</param>
+        private void addPlayerToRequestedRoom(Player player, int roomNumber)
+        {
+            foreach (Gameroom room in gamerooms.ToArray())
+            {
+                if (room.RoomNumber == roomNumber)
+                {
+                    if (room.addPlayer(player))
+                    {
+                        // If the player was successfully added.
+
+                        // send confirmation message.
+                    }
+                    else
+                    {
+                        // If the player was not successfully added because the room was full or whatever reason.
+
+                        // Send an error message and update the player's room list.
+                    }
+
+                    // Break out of the loop.
+                    return;
+                }
+            }
+        }
+
         private void addPlayerToFreeRoom(Player player)
         {
             foreach (Gameroom room in gamerooms.ToArray())
@@ -140,70 +170,6 @@ namespace Server_Application
             {
                 transmission.addMessageToQueue(message);
             }
-        }
-
-        public void ports()
-        {
-            foreach (Player player in onlineplayers)
-            {
-                Console.WriteLine("Player - " + player.Username + " Receiving port: " + player.PortReceive);
-            }
-        }
-
-        /// <summary>
-        /// Checks the number of currently active game rooms.
-        /// </summary>
-        public void getNumberOfRooms()
-        {
-            Console.WriteLine("Number of currently active game rooms: " + gamerooms.Count + "\n");
-        }
-
-        /// <summary>
-        /// Checks the number of online players.
-        /// </summary>
-        public void getNumberOfOnlinePlayers()
-        {
-            Console.WriteLine("Number of online players: " + onlineplayers.Count + "\n");
-        }
-
-        /// <summary>
-        /// Checks the number of players searching for games.
-        /// </summary>
-        public void getNumberOfSearchingPlayers()
-        {
-            Console.WriteLine("Number of players searching for games: " + searchingplayers.Count + "\n");
-        }
-        
-        /// <summary>
-        /// Checks the size of the Error Message queue.
-        /// </summary>
-        public void checkErrorQueueSize()
-        {
-            transmission.checkErrorQueueSize();
-        }
-
-        /// <summary>
-        /// Checks the size of the Chat Message queue.
-        /// </summary>
-        public void checkChatMessageQueueSize()
-        {
-            transmission.checkChatMessageQueueSize();
-        }
-
-        /// <summary>
-        /// Checks the size of the Login Request queue.
-        /// </summary>
-        public void checkLoginRequestQueueSize()
-        {
-            transmission.checkLoginRequestQueueSize();
-        }
-
-        /// <summary>
-        /// Checks the size of the Game Data queues.
-        /// </summary>
-        public void checkGameDataQueueSize()
-        {
-            transmission.checkGameDataQueueSize();
         }
     }
 }

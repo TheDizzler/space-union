@@ -21,17 +21,18 @@ namespace Server_Application
     {
         static void Main(string[] args)
         {
-            //Server server = new Server();
-            Console.Title = "Space Union Server";
+            /*Console.Title = "Space Union Server";
             Console.WriteLine("Enter the phrase \"help\" at any moment to display a list of commands.\n");
 
             UserTableAccess db = new UserTableAccess();
             string username =  Console.ReadLine();
             string password = Console.ReadLine();
             int x = 42;
-            db.AddNewUser(username, password, "lol");
+            db.AddNewUser(username, password, "lol");*/
 
-            /*
+            Server server = new Server();
+            ServerAnalyzer analyzer = new ServerAnalyzer(server.transmission, server.gamerooms, server.onlineplayers, server.searchingplayers);
+            
             while (true)
             {
                 string input = Console.ReadLine();
@@ -44,31 +45,31 @@ namespace Server_Application
                         getLocalIPv4Address();
                         break;
                     case "threads":
-                        threadsRunning();
+                        analyzer.threadsRunning();
                         break;
                     case "rooms":
-                        server.getNumberOfRooms();
+                        analyzer.getNumberOfRooms();
                         break;
                     case "players":
-                        server.getNumberOfOnlinePlayers();
+                        analyzer.getNumberOfOnlinePlayers();
                         break;
                     case "searching":
-                        server.getNumberOfSearchingPlayers();
+                        analyzer.getNumberOfSearchingPlayers();
                         break;
                     case "error":
-                        server.checkErrorQueueSize();
+                        analyzer.checkErrorQueueSize();
                         break;
                     case "chat":
-                        server.checkChatMessageQueueSize();
+                        analyzer.checkChatMessageQueueSize();
                         break;
                     case "login":
-                        server.checkLoginRequestQueueSize();
+                        analyzer.checkLoginRequestQueueSize();
                         break;
                     case "data":
-                        server.checkGameDataQueueSize();
+                        analyzer.checkGameDataQueueSize();
                         break;
                     case "ports":
-                        server.ports();
+                        analyzer.getReceivingPorts();
                         break;
                     case "clear":
                         Console.Clear();
@@ -81,23 +82,7 @@ namespace Server_Application
                         break;
                 }
             }
-            */
-        }
-
-        /// <summary>
-        /// Displays the amount of memory used by the server in bytes.
-        /// </summary>
-        private static void usedMemory()
-        {
-            Console.WriteLine("Bytes used by this application: " + Process.GetCurrentProcess().PrivateMemorySize64 + "\n");
-        }
-
-        /// <summary>
-        /// Displays the number of threads running in the application.
-        /// </summary>
-        private static void threadsRunning()
-        {
-            Console.WriteLine("Number of threads running: " + Process.GetCurrentProcess().Threads.Count + "\n");
+            
         }
 
         /// <summary>

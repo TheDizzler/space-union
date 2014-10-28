@@ -12,17 +12,30 @@ namespace Data_Structures
     public class Gameroom
     {
         Dictionary<string, GameData> players = new Dictionary<string, GameData>();
+
         public int RoomNumber { get; set; }
+        public string RoomName { get; set; }
+
         public int Players { get { return players.Count; } }
 
         public Gameroom() { }
 
-        public void addPlayer(Player player)
+        /// <summary>
+        /// Add the given player to the room.
+        /// </summary>
+        /// <param name="player">The player to add to the room.</param>
+        /// <returns>True if the player was successfully added. False otherwise.</returns>
+        public bool addPlayer(Player player)
         {
-            GameData data = new GameData();
-            data.Player = player;
-            data.Player.GameRoom = RoomNumber;
-            players.Add(player.Username, data);
+            if (Players < 6)
+            {
+                GameData data = new GameData();
+                data.Player = player;
+                data.Player.GameRoom = RoomNumber;
+                players.Add(player.Username, data);
+                return true;
+            }
+            return false;
         }
 
         public void updatePlayer(GameData player)
@@ -37,7 +50,10 @@ namespace Data_Structures
 
         public void removePlayer(GameData user)
         {
-            players.Remove(user.Player.Username);
+            if (Players > 0)
+            {
+                players.Remove(user.Player.Username);
+            }
         }
     }
 }

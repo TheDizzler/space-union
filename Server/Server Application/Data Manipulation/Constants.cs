@@ -67,13 +67,16 @@ namespace Data_Manipulation
         /// </summary>
         public const byte ERROR_MESSAGE = 3;
         /// <summary>
-        /// Game setup message = 4;
+        /// Game setup message = 4.
         /// </summary>
         public const byte GAME_SETUP_MESSAGE = 4;
         /// <summary>
-        /// Registration message = 5;
+        /// Registration message = 5.
         /// </summary>
         public const byte REGISTRATION_MESSAGE = 5;
-
+        /// <summary>
+        /// Maximum number of people in a room = 6.
+        /// </summary>
+        public const int ROOM_MAX_SIZE = 6;
     }
 }
