@@ -21,14 +21,8 @@ namespace Server_Application
     {
         static void Main(string[] args)
         {
-            /*Console.Title = "Space Union Server";
+            Console.Title = "Space Union Server";
             Console.WriteLine("Enter the phrase \"help\" at any moment to display a list of commands.\n");
-
-            UserTableAccess db = new UserTableAccess();
-            string username =  Console.ReadLine();
-            string password = Console.ReadLine();
-            int x = 42;
-            db.AddNewUser(username, password, "lol");*/
 
             Server server = new Server();
             ServerAnalyzer analyzer = new ServerAnalyzer(server.transmission, server.gamerooms, server.onlineplayers, server.searchingplayers);
