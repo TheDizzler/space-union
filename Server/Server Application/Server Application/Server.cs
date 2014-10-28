@@ -79,6 +79,14 @@ namespace Server_Application
             return false;
         }
 
+        public void updatePlayer(GameData player)
+        {
+            Gameroom room = getGameroom(player.Player.GameRoom);
+            if (room == null)
+                return;
+            room.updatePlayer(player);
+        }
+
         /// <summary>
         /// Retrieve the gameroom matching the given room number.
         /// </summary>

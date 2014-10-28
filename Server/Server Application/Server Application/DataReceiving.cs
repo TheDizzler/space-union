@@ -89,7 +89,7 @@ namespace Server_Application
             while (true)
             {
                 GameData clientData = (GameData)DataControl.receiveUDPData((UdpClient)UDPListener);
-                owner.addMessageToQueue(clientData);
+                new Thread(() => owner.updatePlayer(clientData)).Start();
             }
         }
     }
