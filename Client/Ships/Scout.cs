@@ -19,7 +19,7 @@ namespace SpaceUnion.Ships {
 
 			maxSpeed = 7;
 			accelSpeed = 250.5f;
-			turnSpeed = 4.5f;
+			turnSpeed = .5f;
 			maxSpeed = 500;
 
 			weaponOrigin = new Vector2(position.X, position.Y - height / 2);
@@ -60,7 +60,7 @@ namespace SpaceUnion.Ships {
 
 			base.draw(sBatch);
 
-			if (beamOn)
+			//if (beamOn)
 				mainWeapon.draw(sBatch);
 		}
 

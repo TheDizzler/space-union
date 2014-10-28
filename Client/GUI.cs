@@ -127,9 +127,11 @@ namespace SpaceUnion {
 			//spriteBatch.DrawString(font, "collidetarget: " + target,
 			//	line7Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 
-			//spriteBatch.DrawString(font, "BeamLength: " + playerShip.getBeam().beamLength
-			//	+ "distToTarget: " + playerShip.getBeam().distToTarget,
-			//	line7Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
+			if (playerShip is Scout) { 
+			spriteBatch.DrawString(font, "BeamLength: " + playerShip.getBeam().beamLength
+				+ " distToTarget: " + playerShip.getBeam().distToTarget,
+				line7Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
+			}
 
 			lastVelocity = playerShip.velocity;
 			lastPosition = playerShip.position;

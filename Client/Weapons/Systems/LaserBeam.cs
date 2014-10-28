@@ -30,6 +30,7 @@ namespace SpaceUnion.Weapons.Systems {
 		private List<Texture2D> beamQuanta = new List<Texture2D>();
 		private Vector2 beamDirection;
 		public float distToTarget;
+		private  bool beamOn;
 
 
 		public LaserBeam(Vector2 startPoint, Ship ship)
@@ -48,6 +49,8 @@ namespace SpaceUnion.Weapons.Systems {
 
 		public void update(GameTime gameTime, QuadTree quadTree) {
 
+			if (!beamOn)
+				return;
 			beamQuanta.Clear();
 			beamQuantum = new Rectangle((int) position.X, (int) position.Y, 1, 3);
 
@@ -67,9 +70,9 @@ namespace SpaceUnion.Weapons.Systems {
 				if (target != owner) {
 
 
-					if (ray.intersectsToRange(target.getHitBox())) {
-						float temp = ray.getDistance();
-						if (temp < distToTarget) {
+					if (ray.intersects(target.getHitBox())) {
+						float temp = ray.getDistance2();
+						if (temp <= 1 && temp <= distToTarget) {
 							distToTarget = temp;
 							currentTarget = target;
 						}
@@ -80,13 +83,14 @@ namespace SpaceUnion.Weapons.Systems {
 			if (currentTarget != null) {
 				doDamage(currentTarget, gameTime);
 			}
+
 			// not quite right. distToTarget should be t in parametric form.
 			for (int i = 0; i < beamLength*distToTarget; ++i) {
 
 				beamQuanta.Add(assets.Content.Load<Texture2D>("Projectiles/molten bullet (6x8)"));// test texture
 
 			}
-
+			beamOn = false;
 		}
 
 
@@ -99,6 +103,7 @@ namespace SpaceUnion.Weapons.Systems {
 				beamQuantum.Y = (int) position.Y;
 				spriteBatch.Draw(dot, beamQuantum, Color.White);
 			}
+			beamQuanta.Clear();
 
 		}
 
@@ -149,6 +154,7 @@ namespace SpaceUnion.Weapons.Systems {
 		public void updatePosition(Vector2 startPoint, float rot) {
 			position = startPoint;
 			rotation = rot;
+			beamOn = true;
 		}
 
 

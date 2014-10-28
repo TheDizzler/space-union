@@ -45,7 +45,7 @@ namespace SpaceUnion.Controllers {
 		private int SCREEN_WIDTH;
 		private int SCREEN_HEIGHT;
 		private Viewport basicViewport;
-		
+
 
 
 		public GameplayScreen(Game1 game, SpriteBatch batch, Ship selectedship) {
@@ -88,13 +88,18 @@ namespace SpaceUnion.Controllers {
 			};
 
 			mainCamera = new Camera(mainViewport, worldWidth, worldHeight, 1.0f);
-			radarCamera = new Camera(radarViewport, worldWidth, worldHeight, 0.1f);
+			radarCamera = new Camera(radarViewport, worldWidth, worldHeight, 0.05f);
 
 			asteroids = new List<Asteroid>();
 			ships = new List<Ship>();
 			targets = new List<Tangible>();
 
+
+			Ship enemy = new Zoid(game);
+			enemy.Position = new Vector2(2250, 150);
 			ships.Add(playerShip);
+			ships.Add(enemy);
+
 
 			foreach (Ship ship in ships)
 				targets.Add(ship);
@@ -136,10 +141,10 @@ namespace SpaceUnion.Controllers {
 
 
 			playerShip.control(keyState, gameTime);
-			
 
-			foreach (Planet planet in planets)
-				planet.update(gameTime, quadTree, targets);
+
+			//foreach (Planet planet in planets)
+			//	planet.update(gameTime, quadTree, targets);
 
 
 
@@ -148,7 +153,7 @@ namespace SpaceUnion.Controllers {
 			Matrix inverse = Matrix.Invert(mainCamera.getTransformation());
 			Vector2 mousePos = Vector2.Transform(
 			   new Vector2(mouseState.X, mouseState.Y), inverse);
-			
+
 
 			//if (asteroids.Count < 50)
 			//	AddAsteroid(new Vector2(gen.Next(100, 4000), gen.Next(100, 2000)));
@@ -218,6 +223,20 @@ namespace SpaceUnion.Controllers {
 			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
 				SamplerState.LinearWrap, null, null, null, radarCamera.getTransformation());
 
+
+			//draw grid
+			drawBorder(spriteBatch, new Rectangle(0, 0, worldWidth / 4, worldHeight / 4), 15, Color.White); //top
+			drawBorder(spriteBatch, new Rectangle(worldWidth / 2, 0, worldWidth / 4, worldHeight / 4), 15, Color.White); //top right
+
+			drawBorder(spriteBatch, new Rectangle(worldWidth / 4, worldHeight / 4, worldWidth / 4, worldHeight / 4), 15, Color.White);
+			drawBorder(spriteBatch, new Rectangle(worldWidth * 3 / 4, worldHeight / 4, worldWidth / 4, worldHeight / 4), 15, Color.White);
+
+			drawBorder(spriteBatch, new Rectangle(0, worldHeight / 2, worldWidth / 4, worldHeight / 4), 15, Color.White);
+			drawBorder(spriteBatch, new Rectangle(worldWidth / 2, worldHeight / 2, worldWidth / 4, worldHeight / 4), 15, Color.White);
+
+			drawBorder(spriteBatch, new Rectangle(worldWidth / 4, worldHeight *3/4, worldWidth / 4, worldHeight / 4), 15, Color.White);
+			drawBorder(spriteBatch, new Rectangle(worldWidth * 3 / 4, worldHeight * 3 / 4, worldWidth / 4, worldHeight / 4), 15, Color.White);
+
 			foreach (Ship ship in ships)
 				ship.drawMiniMap(spriteBatch);
 
@@ -252,7 +271,26 @@ namespace SpaceUnion.Controllers {
 
 			Game1.explosionEngine.draw(spriteBatch);
 		}
-			
+
+
+		private void drawBorder(SpriteBatch batch, Rectangle rectangleToDraw, int thicknessOfBorder, Color borderColor) {
+			// Draw top line
+			batch.Draw(Assets.pixel, new Rectangle(rectangleToDraw.X, rectangleToDraw.Y, rectangleToDraw.Width, thicknessOfBorder), borderColor);
+
+			// Draw left line
+			batch.Draw(Assets.pixel, new Rectangle(rectangleToDraw.X, rectangleToDraw.Y, thicknessOfBorder, rectangleToDraw.Height), borderColor);
+
+			// Draw right line
+			batch.Draw(Assets.pixel, new Rectangle((rectangleToDraw.X + rectangleToDraw.Width - thicknessOfBorder),
+											rectangleToDraw.Y,
+											thicknessOfBorder,
+											rectangleToDraw.Height), borderColor);
+			// Draw bottom line
+			batch.Draw(Assets.pixel, new Rectangle(rectangleToDraw.X,
+											rectangleToDraw.Y + rectangleToDraw.Height - thicknessOfBorder,
+											rectangleToDraw.Width,
+											thicknessOfBorder), borderColor);
+		}
 
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 
 namespace SpaceUnion.Tools {
@@ -39,8 +40,8 @@ namespace SpaceUnion.Tools {
 
 
 		public HitBox(float x, float y, int w, int h) {
-			position.X = x;
-			position.Y = y;
+			position.X = x - width / 2;
+			position.Y = y - height / 2;
 			width = w;
 			height = h;
 
@@ -54,22 +55,47 @@ namespace SpaceUnion.Tools {
 			//edges.Add("bottom", new Vector2[2] { bottomLeft, bottomRight });
 			//edges.Add("right", new Vector2[2] { bottomRight, topRight });
 			//edges.Add("top", new Vector2[2] { topRight, topLeft });
-
-
-			//rectHitBox = new Rectangle((int) position.X, (int) position.Y, width, height);
 		}
 
 		public Rectangle getArray() {
-			return rectHitBox = new Rectangle((int) position.X - width / 2, (int) position.Y - height / 2, width, height);
+			return rectHitBox = new Rectangle((int) position.X, (int) position.Y, width, height);
 			//return rectHitBox = new Rectangle((int) position.X , (int) position.Y, width, height);
 		}
 
 		public void updatePosition(Vector2 newPosition, float rot) {
-			position = newPosition;
-			rotation = rot;
+			position.X = newPosition.X - width / 2;
+			position.Y = newPosition.Y - height / 2;
+
+			topLeft = position;
+			bottomLeft = new Vector2(position.X, position.Y + height);
+			topRight = new Vector2(position.X + width, position.Y);
+			bottomRight = new Vector2(position.X + width, position.Y + height);
+
+			foreach (HitCircle circle in circles)
+				circle.updatePosition(newPosition);
+			//rotation = rot;
 			//rectHitBox = new Rectangle((int) position.X, (int) position.Y, width, height);
 		}
 
+
+		public void createHitCircle(Vector2 pos, int radius) {
+
+			circles.Add(new HitCircle(pos, radius));
+		}
+
+		/// <summary>
+		/// Debugging draw.
+		/// </summary>
+		internal void draw(SpriteBatch batch, AssetManager assets) {
+			// draw rough outer hit box
+			batch.Draw(assets.guiRectangle, getArray(), Color.Pink * .5f);
+
+			//draw inner hitcircles
+			//foreach (HitCircle circle in circles)
+			//	batch.Draw(assets.guiRectangle, circle.getCircle(), Color.Red * .5f);
+
+			//batch.Draw(assets.guiRectangle, hitBox.position, hitBox.getArray(), Color.Pink, hitBox.rotation, hitBox.position, scale, SpriteEffects.None, 0);
+		}
 	}
 
 

@@ -106,6 +106,7 @@ namespace SpaceUnion.Tools {
 
 		// radar icons
 		public Texture2D shipMapIcon;
+		public  Texture2D pixel;
 
 
 		public AssetManager(ContentManager cntnt) {
@@ -170,6 +171,10 @@ namespace SpaceUnion.Tools {
 
 
 			shipMapIcon = Content.Load<Texture2D>("MapIcons/reticle (16x16)");
+
+
+			pixel = new Texture2D(graphicsDevice, 1, 1, false, SurfaceFormat.Color);
+			pixel.SetData(new[] { Color.White });
 		}
 	}
 }

@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceUnion.Controllers;
 using SpaceUnion.Tools;
+using SpaceUnion.Ships;
 
 
 namespace SpaceUnion {
@@ -123,9 +124,8 @@ namespace SpaceUnion {
 		/// <param name="batch"></param>
 		public override void draw(SpriteBatch batch) {
 			base.draw(batch);
-
-			//batch.Draw(assets.guiRectangle, hitBox.getArray(), Color.Pink);
-			//batch.Draw(assets.guiRectangle, hitBox.position, hitBox.getArray(), Color.Pink, hitBox.rotation, hitBox.position, scale, SpriteEffects.None, 0);
+			hitBox.draw(batch, assets);
+			
 		}
 
 		/// <summary>
@@ -223,7 +223,83 @@ namespace SpaceUnion {
 			}
 
 			if (willCollide) {
-				Vector2.Normalize(ref velocity, out moveThisUpdate);
+				//Vector2.Normalize(ref velocity, out moveThisUpdate);
+				moveThisUpdate = moveThisUpdate * shortestDist;
+			}
+		}
+
+		/// <summary>
+		/// Same as checkForCollision2 but with a check to avoid suicide.
+		/// </summary>
+		/// <param name="quadTree"></param>
+		/// <param name="gameTime"></param>
+		protected void checkForCollisionProjectile(QuadTree quadTree, GameTime gameTime, Ship owner) {
+			willCollide = false;
+			collideTarget = null;
+
+			if (moveThisUpdate.Length() == 0)
+				return;
+
+			List<Tangible> possibleCollisions = quadTree.retrieve(this);
+
+			Ray2 ray0 = new Ray2(hitBox.topLeft, this.moveThisUpdate);
+			Ray2 ray1 = new Ray2(hitBox.bottomLeft, this.moveThisUpdate);
+			Ray2 ray2 = new Ray2(hitBox.bottomRight, this.moveThisUpdate);
+			Ray2 ray3 = new Ray2(hitBox.topRight, this.moveThisUpdate);
+			Ray2 ray4 = new Ray2(hitBox.position, this.moveThisUpdate);
+
+			float dist0, dist1, dist2, dist3, dist4;
+			float velLength = moveThisUpdate.Length();
+			float shortestDist = velLength;
+
+
+			foreach (Tangible target in possibleCollisions) {
+				if (target == this || target == owner)
+					continue;
+
+				bool r0, r1, r2, r3, r4;
+
+				//note: it is necessary that each of these functions run
+				r0 = ray0.intersectsToRange(target.getHitBox());
+				r1 = ray1.intersectsToRange(target.getHitBox());
+				r2 = ray2.intersectsToRange(target.getHitBox());
+				r3 = ray3.intersectsToRange(target.getHitBox());
+				r4 = ray4.intersectsToRange(target.getHitBox());
+
+				if (!r0 && !r1 && !r2 && !r3 && !r4) // If no rays intersect
+					continue;
+
+
+
+				dist0 = ray0.getDistance();
+				dist1 = ray1.getDistance();
+				dist2 = ray2.getDistance();
+				dist3 = ray3.getDistance();
+				dist4 = ray4.getDistance();
+
+				possible.Clear();
+
+				if (0 <= dist0 && dist0 <= velLength)
+					possible.Add(dist0);
+				if (0 <= dist1 && dist1 <= velLength)
+					possible.Add(dist1);
+				if (0 <= dist2 && dist2 <= velLength)
+					possible.Add(dist2);
+				if (0 <= dist3 && dist3 <= velLength)
+					possible.Add(dist3);
+				if (0 <= dist4 && dist4 <= velLength)
+					possible.Add(dist4);
+
+				float temp = possible.Min();
+				if (temp < shortestDist) {
+					shortestDist = temp;
+					willCollide = true;
+					collideTarget = target;
+				}
+			}
+
+			if (willCollide) {
+				//Vector2.Normalize(ref velocity, out moveThisUpdate);
 				moveThisUpdate = moveThisUpdate * shortestDist;
 			}
 		}

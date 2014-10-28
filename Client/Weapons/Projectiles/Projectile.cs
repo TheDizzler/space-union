@@ -48,16 +48,21 @@ namespace SpaceUnion.Weapons.Projectiles {
 			if (projectileTTL > timeActive) {
 
 				moveThisUpdate = velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
-				checkForCollision2(quadTree, gameTime);
+				checkForCollisionProjectile(quadTree, gameTime, owner);
 
 				position += moveThisUpdate;
 				base.update(position);
+
+				if (willCollide)
+					collide(collideTarget, gameTime);
 
 				//checkForCollision(quadTree, gameTime);
 			} else {
 				destroy();
 			}
 		}
+
+		
 
 		public override void drawMiniMap(SpriteBatch batch) {
 			throw new NotImplementedException();

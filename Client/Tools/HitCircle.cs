@@ -27,7 +27,11 @@ namespace SpaceUnion.Tools {
 
 		public void updatePosition(Vector2 pos) {
 
+			position = pos;
+		}
 
+		internal Rectangle getCircle() {
+			throw new NotImplementedException();
 		}
 	}
 }
