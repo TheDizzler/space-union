@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SpaceUnionDatabaseAccess")]
+[assembly: AssemblyTitle("SpaceUnionDatabase")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SpaceUnionDatabaseAccess")]
+[assembly: AssemblyProduct("SpaceUnionDatabase")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b28dfabf-f340-4c75-b735-7597a9f4f61e")]
+[assembly: Guid("c4120fc8-cc67-4979-8c26-7d5a98e97bc9")]
 
 // Version information for an assembly consists of the following four values:
 //

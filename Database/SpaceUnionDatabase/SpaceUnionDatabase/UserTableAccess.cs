@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdminControlForm
+namespace SpaceUnionDatabase
 {
     public class UserTableAccess
     {
         public bool AddNewUser(string username, string password, string email)
         {
-            var  db          = new SpaceUnionEntities();
-            var  newUser     = new User();
+            var db           = new SpaceUnionEntities();
+            var newUser      = new User();
             bool isUserAdded = false;
 
             newUser.userName      = username;
@@ -23,27 +23,22 @@ namespace AdminControlForm
             newUser.userIsAdmin   = 0;
 
             try {
-                var user = db.Users
-                    .FirstOrDefault(u => u.userName == username);
-                
-                // if user doesn't already exist
-                if (user == null) {
-                    db.Users.Add(newUser);
-                    db.SaveChanges();
-                    isUserAdded = true;
-                }
+                db.Users.Add(newUser);
+                db.SaveChanges();
+                isUserAdded = true;
             }
             catch (Exception e) {
                 Console.WriteLine(e);
-                isUserAdded = false;
             }
             finally {
                 db.Dispose();
             }
+
             return isUserAdded;
         }
 
-        public bool UpdateUserIsOnline(string username, int isOnline, ref int errCode)
+        public bool
+        UpdateUserIsOnline(string username, int isOnline, ref int errCode)
         {
             bool isUpdated = false;
             var  db        = new SpaceUnionEntities();
@@ -61,6 +56,7 @@ namespace AdminControlForm
                 }
             }
             catch (Exception e) {
+                Console.WriteLine(e);
             }
             finally {
                 db.Dispose();
@@ -69,7 +65,8 @@ namespace AdminControlForm
             return isUpdated;
         }
 
-        public bool UpdateUserIsAdmin(string username, int isAdmin, ref int errCode)
+        public bool
+        UpdateUserIsAdmin(string username, int isAdmin, ref int errCode)
         {
             bool isUpdated = false;
             var  db        = new SpaceUnionEntities();
@@ -87,6 +84,7 @@ namespace AdminControlForm
                 }
             }
             catch (Exception e) {
+                Console.WriteLine(e);
             }
             finally {
                 db.Dispose();
@@ -95,7 +93,8 @@ namespace AdminControlForm
             return isUpdated;
         }
 
-        public bool UpdateUserIsBlocked(string username, int isBlocked, ref int errCode)
+        public bool
+        UpdateUserIsBlocked(string username, int isBlocked, ref int errCode)
         {
             bool isUpdated = false;
             var  db        = new SpaceUnionEntities();
@@ -112,8 +111,8 @@ namespace AdminControlForm
                     isUpdated = true;
                 }
             }
-            catch (Exception e)
-            {
+            catch (Exception e) {
+                Console.WriteLine(e);
             }
             finally {
                 db.Dispose();
@@ -122,7 +121,8 @@ namespace AdminControlForm
             return isUpdated;
         }
 
-        public bool AdminLogin(string username, string password, ref int errCode)
+        public bool
+        AdminLogin(string username, string password, ref int errCode)
         {
             bool isValidUser = false;
             var  db          = new SpaceUnionEntities();
@@ -144,6 +144,7 @@ namespace AdminControlForm
                     isValidUser = true;
             }
             catch (Exception e) {
+                Console.WriteLine(e);
             }
             finally {
                 db.Dispose();
@@ -152,7 +153,8 @@ namespace AdminControlForm
             return isValidUser;
         }
 
-        public bool UserLogin(string username, string password, ref int errCode, string[] info)
+        public bool
+        UserLogin(string username, string password, ref int errCode, string[] info)
         {
             bool isValidUser = false;
             var  db          = new SpaceUnionEntities();
@@ -175,6 +177,7 @@ namespace AdminControlForm
                 }
             }
             catch (Exception e) {
+                Console.WriteLine(e);
             }
             finally {
                 db.Dispose();
@@ -207,6 +210,7 @@ namespace AdminControlForm
                 }
             }
             catch (Exception e) {
+                Console.WriteLine(e);
             }
             finally {
                 db.Dispose();
