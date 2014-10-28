@@ -48,6 +48,8 @@
             this.txtbUsername = new System.Windows.Forms.TextBox();
             this.lablUsername = new System.Windows.Forms.Label();
             this.editUserTab = new System.Windows.Forms.TabPage();
+            this.lablCurrentBlockStatus = new System.Windows.Forms.Label();
+            this.txtbCurrentBlockStatus = new System.Windows.Forms.TextBox();
             this.chkbBlockUnblockUser = new System.Windows.Forms.CheckBox();
             this.bttnBlockUnblock = new System.Windows.Forms.Button();
             this.lablUserEditErrMsg = new System.Windows.Forms.Label();
@@ -61,12 +63,17 @@
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.logintext = new System.Windows.Forms.TextBox();
-            this.txtbCurrentBlockStatus = new System.Windows.Forms.TextBox();
-            this.lablCurrentBlockStatus = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lablAddNewShip = new System.Windows.Forms.Label();
+            this.lablNewShipName = new System.Windows.Forms.Label();
+            this.txtbNewShipName = new System.Windows.Forms.TextBox();
+            this.lablNewShipNameErrMsg = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.createUserTab.SuspendLayout();
             this.editUserTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -74,6 +81,7 @@
             this.tabControl.Controls.Add(this.createUserTab);
             this.tabControl.Controls.Add(this.editUserTab);
             this.tabControl.Controls.Add(this.tabPage1);
+            this.tabControl.Controls.Add(this.tabPage2);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -305,6 +313,25 @@
             this.editUserTab.TabIndex = 1;
             this.editUserTab.Text = "User block/unblock";
             // 
+            // lablCurrentBlockStatus
+            // 
+            this.lablCurrentBlockStatus.AutoSize = true;
+            this.lablCurrentBlockStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablCurrentBlockStatus.ForeColor = System.Drawing.Color.White;
+            this.lablCurrentBlockStatus.Location = new System.Drawing.Point(17, 268);
+            this.lablCurrentBlockStatus.Name = "lablCurrentBlockStatus";
+            this.lablCurrentBlockStatus.Size = new System.Drawing.Size(137, 15);
+            this.lablCurrentBlockStatus.TabIndex = 14;
+            this.lablCurrentBlockStatus.Text = "Current Block Status";
+            // 
+            // txtbCurrentBlockStatus
+            // 
+            this.txtbCurrentBlockStatus.Location = new System.Drawing.Point(20, 286);
+            this.txtbCurrentBlockStatus.Name = "txtbCurrentBlockStatus";
+            this.txtbCurrentBlockStatus.ReadOnly = true;
+            this.txtbCurrentBlockStatus.Size = new System.Drawing.Size(161, 20);
+            this.txtbCurrentBlockStatus.TabIndex = 13;
+            // 
             // chkbBlockUnblockUser
             // 
             this.chkbBlockUnblockUser.AutoSize = true;
@@ -330,7 +357,7 @@
             // 
             this.lablUserEditErrMsg.AutoSize = true;
             this.lablUserEditErrMsg.ForeColor = System.Drawing.Color.Red;
-            this.lablUserEditErrMsg.Location = new System.Drawing.Point(251, 70);
+            this.lablUserEditErrMsg.Location = new System.Drawing.Point(251, 49);
             this.lablUserEditErrMsg.Name = "lablUserEditErrMsg";
             this.lablUserEditErrMsg.Size = new System.Drawing.Size(132, 13);
             this.lablUserEditErrMsg.TabIndex = 9;
@@ -359,7 +386,7 @@
             // bttnGetUserInfo
             // 
             this.bttnGetUserInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bttnGetUserInfo.Location = new System.Drawing.Point(125, 93);
+            this.bttnGetUserInfo.Location = new System.Drawing.Point(125, 72);
             this.bttnGetUserInfo.Name = "bttnGetUserInfo";
             this.bttnGetUserInfo.Size = new System.Drawing.Size(120, 28);
             this.bttnGetUserInfo.TabIndex = 3;
@@ -380,7 +407,7 @@
             // 
             // txtbUserToEdit
             // 
-            this.txtbUserToEdit.Location = new System.Drawing.Point(13, 67);
+            this.txtbUserToEdit.Location = new System.Drawing.Point(13, 46);
             this.txtbUserToEdit.Name = "txtbUserToEdit";
             this.txtbUserToEdit.Size = new System.Drawing.Size(232, 20);
             this.txtbUserToEdit.TabIndex = 1;
@@ -391,7 +418,7 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(10, 47);
+            this.label1.Location = new System.Drawing.Point(10, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(447, 17);
             this.label1.TabIndex = 0;
@@ -436,24 +463,70 @@
             this.logintext.Size = new System.Drawing.Size(161, 20);
             this.logintext.TabIndex = 0;
             // 
-            // txtbCurrentBlockStatus
+            // tabPage2
             // 
-            this.txtbCurrentBlockStatus.Location = new System.Drawing.Point(20, 286);
-            this.txtbCurrentBlockStatus.Name = "txtbCurrentBlockStatus";
-            this.txtbCurrentBlockStatus.ReadOnly = true;
-            this.txtbCurrentBlockStatus.Size = new System.Drawing.Size(161, 20);
-            this.txtbCurrentBlockStatus.TabIndex = 13;
+            this.tabPage2.BackgroundImage = global::AdminControlForm.Properties.Resources.dark_space;
+            this.tabPage2.Controls.Add(this.lablNewShipNameErrMsg);
+            this.tabPage2.Controls.Add(this.txtbNewShipName);
+            this.tabPage2.Controls.Add(this.lablNewShipName);
+            this.tabPage2.Controls.Add(this.lablAddNewShip);
+            this.tabPage2.Controls.Add(this.label2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(488, 486);
+            this.tabPage2.TabIndex = 3;
+            this.tabPage2.Text = "Add/Edit Ships";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // lablCurrentBlockStatus
+            // label2
             // 
-            this.lablCurrentBlockStatus.AutoSize = true;
-            this.lablCurrentBlockStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablCurrentBlockStatus.ForeColor = System.Drawing.Color.White;
-            this.lablCurrentBlockStatus.Location = new System.Drawing.Point(17, 268);
-            this.lablCurrentBlockStatus.Name = "lablCurrentBlockStatus";
-            this.lablCurrentBlockStatus.Size = new System.Drawing.Size(137, 15);
-            this.lablCurrentBlockStatus.TabIndex = 14;
-            this.lablCurrentBlockStatus.Text = "Current Block Status";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(20, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "label2";
+            // 
+            // lablAddNewShip
+            // 
+            this.lablAddNewShip.AutoSize = true;
+            this.lablAddNewShip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablAddNewShip.ForeColor = System.Drawing.Color.White;
+            this.lablAddNewShip.Location = new System.Drawing.Point(19, 20);
+            this.lablAddNewShip.Name = "lablAddNewShip";
+            this.lablAddNewShip.Size = new System.Drawing.Size(136, 20);
+            this.lablAddNewShip.TabIndex = 1;
+            this.lablAddNewShip.Text = "Add a New Ship";
+            // 
+            // lablNewShipName
+            // 
+            this.lablNewShipName.AutoSize = true;
+            this.lablNewShipName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablNewShipName.ForeColor = System.Drawing.Color.White;
+            this.lablNewShipName.Location = new System.Drawing.Point(23, 53);
+            this.lablNewShipName.Name = "lablNewShipName";
+            this.lablNewShipName.Size = new System.Drawing.Size(86, 17);
+            this.lablNewShipName.TabIndex = 2;
+            this.lablNewShipName.Text = "Ship Name";
+            // 
+            // txtbNewShipName
+            // 
+            this.txtbNewShipName.Location = new System.Drawing.Point(26, 74);
+            this.txtbNewShipName.Name = "txtbNewShipName";
+            this.txtbNewShipName.Size = new System.Drawing.Size(210, 20);
+            this.txtbNewShipName.TabIndex = 3;
+            // 
+            // lablNewShipNameErrMsg
+            // 
+            this.lablNewShipNameErrMsg.AutoSize = true;
+            this.lablNewShipNameErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablNewShipNameErrMsg.Location = new System.Drawing.Point(115, 55);
+            this.lablNewShipNameErrMsg.Name = "lablNewShipNameErrMsg";
+            this.lablNewShipNameErrMsg.Size = new System.Drawing.Size(92, 13);
+            this.lablNewShipNameErrMsg.TabIndex = 4;
+            this.lablNewShipNameErrMsg.Text = "ship name err msg";
+            this.lablNewShipNameErrMsg.Visible = false;
             // 
             // AdminForm
             // 
@@ -472,6 +545,8 @@
             this.editUserTab.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -513,6 +588,12 @@
         private System.Windows.Forms.CheckBox chkbBlockUnblockUser;
         private System.Windows.Forms.Label lablCurrentBlockStatus;
         private System.Windows.Forms.TextBox txtbCurrentBlockStatus;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Label lablNewShipNameErrMsg;
+        private System.Windows.Forms.TextBox txtbNewShipName;
+        private System.Windows.Forms.Label lablNewShipName;
+        private System.Windows.Forms.Label lablAddNewShip;
+        private System.Windows.Forms.Label label2;
     }
 }
 
