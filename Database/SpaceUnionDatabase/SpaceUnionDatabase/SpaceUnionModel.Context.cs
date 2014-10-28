@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SpaceUnionDatabaseAccess
+namespace SpaceUnionDatabase
 {
     using System;
     using System.Data.Entity;

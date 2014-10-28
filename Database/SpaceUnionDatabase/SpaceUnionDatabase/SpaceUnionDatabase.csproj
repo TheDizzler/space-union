@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EAF39246-C433-4683-94DC-0DF39FF08810}</ProjectGuid>
+    <ProjectGuid>{45ED07C7-CA09-4371-912A-5DD22323BB40}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SpaceUnionDatabaseAccess</RootNamespace>
-    <AssemblyName>SpaceUnionDatabaseAccess</AssemblyName>
+    <RootNamespace>SpaceUnionDatabase</RootNamespace>
+    <AssemblyName>SpaceUnionDatabase</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -65,6 +65,15 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SpaceUnionDb.Context.tt</DependentUpon>
+    <Compile Include="SpaceUnionModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SpaceUnionModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SpaceUnionModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SpaceUnionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SpaceUnionDb.cs">
       <AutoGen>True</AutoGen>
@@ -84,6 +93,13 @@
     </Compile>
     <Compile Include="UserStat.cs">
       <DependentUpon>SpaceUnionDb.tt</DependentUpon>
+      <DependentUpon>SpaceUnionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>SpaceUnionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserStat.cs">
+      <DependentUpon>SpaceUnionModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserStatTableAccess.cs" />
     <Compile Include="UserTableAccess.cs" />
@@ -115,6 +131,14 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SpaceUnionDb.edmx</DependentUpon>
       <LastGenOutput>SpaceUnionDb.Context.cs</LastGenOutput>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+    <None Include="SpaceUnionModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SpaceUnionModel.edmx</DependentUpon>
+      <LastGenOutput>SpaceUnionModel.Context.cs</LastGenOutput>
     </None>
     <None Include="SpaceUnionDb.edmx.diagram">
       <DependentUpon>SpaceUnionDb.edmx</DependentUpon>
@@ -123,6 +147,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SpaceUnionDb.edmx</DependentUpon>
       <LastGenOutput>SpaceUnionDb.cs</LastGenOutput>
+    <None Include="SpaceUnionModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SpaceUnionModel.edmx</DependentUpon>
+      <LastGenOutput>SpaceUnionModel.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

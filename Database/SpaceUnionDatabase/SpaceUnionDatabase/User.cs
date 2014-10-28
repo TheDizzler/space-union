@@ -7,17 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdminControlForm
+namespace SpaceUnionDatabase
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class User
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public string userName { get; set; }
+        public string userPassword { get; set; }
+        public string userEmail { get; set; }
+        public string userImage { get; set; }
+        public byte userIsOnline { get; set; }
+        public byte userIsBlocked { get; set; }
+        public byte userIsAdmin { get; set; }
     }
 }

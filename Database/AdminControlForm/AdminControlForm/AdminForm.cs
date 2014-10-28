@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SpaceUnionDatabase;
 
 namespace AdminControlForm
 {
@@ -94,7 +95,7 @@ namespace AdminControlForm
                 if (!userTable.AddNewUser(txtbUsername.Text,
                                           txtbPassword.Text,
                                           txtbEmail.Text) ) {
-                    MessageBox.Show("Username is already taken.");
+                    MessageBox.Show("Sorry, the Username is already taken.");
                 }
                 else {
                     MessageBox.Show("User was added to the database successfully");
@@ -180,8 +181,8 @@ namespace AdminControlForm
             string passConfErrMsg = null;
 
             if (!userValidation.ValidateConfirmPassword(txtbPassword.Text,
-                                                    txtbConfirmPassword.Text,
-                                                    ref passConfErrMsg) ) {
+                                                        txtbConfirmPassword.Text,
+                                                        ref passConfErrMsg) ) {
                 lablConfPasswordErrMsg.Text    = passConfErrMsg;
                 lablConfPasswordErrMsg.Visible = true;
                 isConfPassValid                = false;
@@ -239,7 +240,12 @@ namespace AdminControlForm
         {
             const int BLOCK   = 1;
             const int UNBLOCK = 0;
+<<<<<<< HEAD
             int    errCode    = 0;
+=======
+            
+            int errCode = 0;
+>>>>>>> 9a1638b5695bbd263182668fff46011ac7ed9ae4
 
             AcceptCancelBlockActionForm acceptBlock =
                     new AcceptCancelBlockActionForm();
@@ -249,12 +255,19 @@ namespace AdminControlForm
                     new AcceptCancelBlockActionForm();
             acceptUnblock.TxtMsg = "Are you sure you want to unblock " + txtbUserEditing.Text;
 
+<<<<<<< HEAD
             if (chkbBlockUnblockUser.Checked)
             {
                 if (txtbCurrentBlockStatus.Text.Equals("NOT BLOCKED") )
                 {   // User blocking dialog
                     if (acceptBlock.ShowDialog() == DialogResult.OK)
                     {
+=======
+            if (chkbBlockUnblockUser.Checked) {
+                if (txtbCurrentBlockStatus.Text.Equals("NOT BLOCKED") ) {
+                    // User blocking dialog
+                    if (acceptBlock.ShowDialog() == DialogResult.OK) {
+>>>>>>> 9a1638b5695bbd263182668fff46011ac7ed9ae4
                         userTable.UpdateUserIsBlocked(txtbUserEditing.Text, BLOCK, ref errCode);
                         MessageBox.Show("User was blocked.");
                     }
@@ -267,6 +280,7 @@ namespace AdminControlForm
             }
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Occurs when the text in the block/unblock textfield changes. 
         /// Validates the current text in the field input as its being typed
@@ -296,6 +310,8 @@ namespace AdminControlForm
             }
         }*/
 
+=======
+>>>>>>> 9a1638b5695bbd263182668fff46011ac7ed9ae4
         private void button1_Click(object sender, EventArgs e)
         {
             string[] info = new string[7];

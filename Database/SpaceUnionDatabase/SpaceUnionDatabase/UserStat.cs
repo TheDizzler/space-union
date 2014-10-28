@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AdminControlForm
+namespace SpaceUnionDatabase
 {
     using System;
     using System.Collections.Generic;
