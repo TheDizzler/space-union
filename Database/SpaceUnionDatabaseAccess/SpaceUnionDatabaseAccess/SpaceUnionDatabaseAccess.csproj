@@ -39,6 +39,9 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Entity.Design" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -48,59 +51,85 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model1.Context.cs">
+    <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Model1.cs">
+    <Compile Include="SpaceUnionDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>SpaceUnionDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="SpaceUnionModel.Designer.cs">
+    <Compile Include="SpaceUnionDb.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SpaceUnionModel.edmx</DependentUpon>
+      <DependentUpon>SpaceUnionDb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SpaceUnionDb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SpaceUnionDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SpaceUnionDb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SpaceUnionDb.edmx</DependentUpon>
     </Compile>
     <Compile Include="sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>SpaceUnionDb.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>SpaceUnionDb.tt</DependentUpon>
     </Compile>
     <Compile Include="UserStat.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>SpaceUnionDb.tt</DependentUpon>
     </Compile>
     <Compile Include="UserStatTableAccess.cs" />
     <Compile Include="UserTableAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="SpaceUnionModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SpaceUnionModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <None Include="Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-      <DependentUpon>SpaceUnionModel.edmx</DependentUpon>
-    </None>
-    <None Include="SpaceUnionModel.edmx.diagram">
-      <DependentUpon>SpaceUnionModel.edmx</DependentUpon>
-    </None>
-    <None Include="Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-      <DependentUpon>SpaceUnionModel.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
+    <EntityDeploy Include="SpaceUnionDb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SpaceUnionDb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="SpaceUnionDataSet.xsc">
+      <DependentUpon>SpaceUnionDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="SpaceUnionDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SpaceUnionDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SpaceUnionDataSet.xss">
+      <DependentUpon>SpaceUnionDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="SpaceUnionDb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SpaceUnionDb.edmx</DependentUpon>
+      <LastGenOutput>SpaceUnionDb.Context.cs</LastGenOutput>
+    </None>
+    <None Include="SpaceUnionDb.edmx.diagram">
+      <DependentUpon>SpaceUnionDb.edmx</DependentUpon>
+    </None>
+    <None Include="SpaceUnionDb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SpaceUnionDb.edmx</DependentUpon>
+      <LastGenOutput>SpaceUnionDb.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

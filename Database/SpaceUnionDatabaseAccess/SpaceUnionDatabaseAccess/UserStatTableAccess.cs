@@ -8,8 +8,8 @@ namespace SpaceUnionDatabaseAccess
 {
     class UserStatTableAccess
     {
-        private UserStat userStat;
-        private SpaceUnionEntities db;
+        private UserStat userStat = new UserStat();
+        private SpaceUnionEntities db = new SpaceUnionEntities();
 
         /// <summary>
         /// Creates a new empty UserStat entry for a user.
@@ -19,7 +19,7 @@ namespace SpaceUnionDatabaseAccess
         {
             bool success = false;
             db = new SpaceUnionEntities();
-            UserStat userStat = new UserStat
+            userStat = new UserStat
             {
                 userName = username,
                 userstatWin = 0,
