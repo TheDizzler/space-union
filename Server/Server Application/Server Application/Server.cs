@@ -115,8 +115,13 @@ namespace Server_Application
                 player.PortReceive = Constants.UDPServerToClientPort + (onlineplayers.Count % 6);
                 onlineplayers.Add(player);
                 transmission.addMessageToQueue(player);
-                //the following line is only used for the prototype
+                // the following line is only used for the prototype
                 addPlayerToFreeRoom(player);
+
+                // The following line IS NOT only used for the prototype (remove when no longer ambiguous)
+                
+                // Send the current list of rooms to the player that came online.
+                transmission.addMessageToQueue();
             }
         }
 
@@ -135,7 +140,7 @@ namespace Server_Application
                     {
                         // If the player was successfully added.
 
-                        // send confirmation message.
+                        // Send confirmation message.
                     }
                     else
                     {

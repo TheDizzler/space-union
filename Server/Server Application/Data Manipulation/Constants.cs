@@ -50,6 +50,10 @@ namespace Data_Manipulation
         /// The port used by the TCP error message client to send data to a game client.
         /// </summary>
         public const int TCPErrorClient = 6985;
+
+
+        // MESSAGE TYPES
+
         /// <summary>
         /// Login request data = 0.
         /// </summary>
@@ -71,9 +75,12 @@ namespace Data_Manipulation
         /// </summary>
         public const byte GAME_SETUP_MESSAGE = 4;
         /// <summary>
-        /// Registration message = 5.
+        /// Room list message = 5.
         /// </summary>
-        public const byte REGISTRATION_MESSAGE = 5;
+        public const byte ROOM_LIST_MESSAGE = 5;
+
+        // END MESSAGE TYPES
+
         /// <summary>
         /// Maximum number of people in a room = 6.
         /// </summary>
