@@ -15,11 +15,11 @@ using Nuclex.UserInterface.Controls;
 
 namespace SpaceMenus
 {
-    public class MainMenu
+    public class MultiplayerMenu
     {
         private Game1 game;
 
-        public MainMenu(Game1 game)
+        public MultiplayerMenu(Game1 game)
         {
             this.game = game;
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
@@ -39,39 +39,30 @@ namespace SpaceMenus
         private void CreateMenuControls(Screen mainScreen)
         {
             //Logout Button.
-            ButtonControl logoutButton = GuiHelper.CreateButton("Logout", -75, -400, 70, 32);
+            ButtonControl logoutButton = GuiHelper.CreateButton("Back", -75, -400, 70, 32);
             logoutButton.Pressed += delegate(object sender, EventArgs arguments)
             {
-                game.EnterLoginMenu();
+                game.EnterMainMenu();
             };
             mainScreen.Desktop.Children.Add(logoutButton);
 
             //Multiplayer Button.
-            ButtonControl multiplayerButton = GuiHelper.CreateButton("MULTIPLAYER", -435, -250, 200, 32);
-            multiplayerButton.Pressed += delegate(object sender, EventArgs arguments)
+            ButtonControl lobbyBrowserButton = GuiHelper.CreateButton("Lobby Browser", -435, -250, 200, 32);
+            lobbyBrowserButton.Pressed += delegate(object sender, EventArgs arguments)
             {
-                game.EnterMultiplayerMenu();
             };
-            mainScreen.Desktop.Children.Add(multiplayerButton);
+            mainScreen.Desktop.Children.Add(lobbyBrowserButton);
 
             //Options Button.
-            ButtonControl optionsButton = GuiHelper.CreateButton("Options", -435, -200, 200, 32);
-            optionsButton.Pressed += delegate(object sender, EventArgs arguments)
+            ButtonControl createLobbyButton = GuiHelper.CreateButton("Create Lobby", -435, -200, 200, 32);
+            createLobbyButton.Pressed += delegate(object sender, EventArgs arguments)
             {
-                game.EnterOptionsMenu();
+                game.EnterCreateLobbyMenu();
             };
-            mainScreen.Desktop.Children.Add(optionsButton);
-
-            //Credits Button.
-            ButtonControl creditsButton = GuiHelper.CreateButton("Credits", -435, -150, 200, 32);
-            creditsButton.Pressed += delegate(object sender, EventArgs arguments)
-            {
-                game.EnterCreditsMenu();
-            };
-            mainScreen.Desktop.Children.Add(creditsButton);
+            mainScreen.Desktop.Children.Add(createLobbyButton);
 
             //Button to close game.
-            ButtonControl quitButton = GuiHelper.CreateButton("Quit", -435, -100, 200, 32);
+            ButtonControl quitButton = GuiHelper.CreateButton("Quit", -15, -15, 80, 32);
             quitButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.Exit();

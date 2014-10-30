@@ -72,7 +72,7 @@ namespace SpaceMenus
             mainScreen.Desktop.Children.Add(loginButton);
 
             //Debug Button.
-            ButtonControl multiplayerButton = GuiHelper.CreateButton("MULTIPLAYER", -400, -300, 200, 32);
+            ButtonControl multiplayerButton = GuiHelper.CreateButton("Debug Game", -700, -400, 200, 50);
             multiplayerButton.Pressed += delegate(object sender, EventArgs arguments)
             {
             };

@@ -27,8 +27,14 @@ namespace SpaceMenus
         /// <summary>Manages input devices for the game</summary>
         public InputManager input_manager;
         /// <summary>Initializes a new instance of the user interface demo</summary>
-        public LoginMenu login_menu;
-        public MainMenu  main_menu;
+        /// 
+        public LoginMenu        login_menu;
+        public MainMenu         main_menu;
+        public MultiplayerMenu  multiplayer_menu;
+        public OptionsMenu      options_menu;
+        public CreditsMenu      credits_menu;
+        public CreateLobbyMenu  create_lobby_menu;
+
         public Screen mainScreen;
 
         /// <summary>
@@ -38,9 +44,12 @@ namespace SpaceMenus
         {
             Login,
             MainMenu,
-            Playing,
+            Multiplayer,
             Options,
-            TeamBattle,
+            Credits,
+            CreateLobby,
+            LobbyBrowser,
+            Lobby
         }
 
         GameState currentGameState = GameState.Login;
@@ -65,6 +74,9 @@ namespace SpaceMenus
             mainScreen = new Screen(viewport.Width, viewport.Height);
             gui_manager.Screen = mainScreen;
             gui_manager.Initialize();
+
+            
+
             //Screen Margins
             mainScreen.Desktop.Bounds = new UniRectangle(
               new UniScalar(0.1f, 0.0f), new UniScalar(0.1f, 0.0f), // x and y = 10%
@@ -98,6 +110,18 @@ namespace SpaceMenus
                 case GameState.MainMenu:
                     main_menu.Update(gameTime);
                     break;
+                case GameState.Multiplayer:
+                    multiplayer_menu.Update(gameTime);
+                    break;
+                case GameState.Options:
+                    options_menu.Update(gameTime);
+                    break;
+                case GameState.Credits:
+                    credits_menu.Update(gameTime);
+                    break;
+                case GameState.CreateLobby:
+                    create_lobby_menu.Update(gameTime);
+                    break;
                 default:
                     break;
             }
@@ -120,6 +144,18 @@ namespace SpaceMenus
                 case GameState.MainMenu:
                     main_menu.DrawMenu(gameTime);
                     break;
+                case GameState.Multiplayer:
+                    multiplayer_menu.DrawMenu(gameTime);
+                    break;
+                case GameState.Options:
+                    options_menu.DrawMenu(gameTime);
+                    break;
+                case GameState.Credits:
+                    credits_menu.DrawMenu(gameTime);
+                    break;
+                case GameState.CreateLobby:
+                    create_lobby_menu.DrawMenu(gameTime);
+                    break;
                 default:
                     break;
             }
@@ -137,6 +173,31 @@ namespace SpaceMenus
             currentGameState = GameState.Login;
             login_menu = new LoginMenu(this);
         }
+
+        public void EnterMultiplayerMenu()
+        {
+            currentGameState = GameState.Multiplayer;
+            multiplayer_menu = new MultiplayerMenu(this);
+        }
+
+        public void EnterOptionsMenu()
+        {
+            currentGameState = GameState.Options;
+            options_menu = new OptionsMenu(this);
+        }
+
+        public void EnterCreditsMenu()
+        {
+            currentGameState = GameState.Credits;
+            credits_menu = new CreditsMenu(this);
+        }
+
+        public void EnterCreateLobbyMenu()
+        {
+            currentGameState = GameState.CreateLobby;
+            create_lobby_menu = new CreateLobbyMenu(this);
+        }
+
     }
 
 }
