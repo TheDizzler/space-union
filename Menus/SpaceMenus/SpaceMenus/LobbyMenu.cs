@@ -15,15 +15,18 @@ using Nuclex.UserInterface.Controls;
 
 namespace SpaceMenus
 {
-    public class CreditsMenu
+    public class LobbyMenu
     {
         private Game1 game;
+        public String lobbyTitle;
 
-        public CreditsMenu(Game1 game)
+        public LobbyMenu(Game1 game, String title)
         {
             this.game = game;
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
+            lobbyTitle = title;
             CreateMenuControls(game.mainScreen);
+            
         }
 
         public void Update(GameTime gameTime)
@@ -38,19 +41,21 @@ namespace SpaceMenus
 
         private void CreateMenuControls(Screen mainScreen)
         {
-            //Menu Title Label
-            LabelControl menuTitleLabel = new LabelControl();
-            menuTitleLabel.Text = "Credits";
-            menuTitleLabel.Bounds = GuiHelper.MENU_TITLE_LABEL;
-            mainScreen.Desktop.Children.Add(menuTitleLabel);
-            
-            //Logout Button.
-            ButtonControl logoutButton = GuiHelper.CreateButton("Back", -75, -400, 70, 32);
-            logoutButton.Pressed += delegate(object sender, EventArgs arguments)
+            //Back Button.
+            ButtonControl backButton = GuiHelper.CreateButton("Back", -75, -400, 70, 32);
+            backButton.Pressed += delegate(object sender, EventArgs arguments)
             {
-                game.EnterMainMenu();
+                game.EnterLobbyBrowserMenu();
             };
-            mainScreen.Desktop.Children.Add(logoutButton);
+            mainScreen.Desktop.Children.Add(backButton);
+
+            //Menu Name Label
+            LabelControl menuNameLabel = new LabelControl();
+            menuNameLabel.Text = "Lobby: " + lobbyTitle;
+            menuNameLabel.Bounds = GuiHelper.MENU_TITLE_LABEL;
+            mainScreen.Desktop.Children.Add(menuNameLabel);
+
+
         }
     }
 }

@@ -38,6 +38,12 @@ namespace SpaceMenus
 
         private void CreateMenuControls(Screen mainScreen)
         {
+            //Menu Title Label
+            LabelControl menuTitleLabel = new LabelControl();
+            menuTitleLabel.Text = "Multiplayer";
+            menuTitleLabel.Bounds = GuiHelper.MENU_TITLE_LABEL;
+            mainScreen.Desktop.Children.Add(menuTitleLabel);
+            
             //Logout Button.
             ButtonControl logoutButton = GuiHelper.CreateButton("Back", -75, -400, 70, 32);
             logoutButton.Pressed += delegate(object sender, EventArgs arguments)
@@ -50,24 +56,17 @@ namespace SpaceMenus
             ButtonControl lobbyBrowserButton = GuiHelper.CreateButton("Lobby Browser", -435, -250, 200, 32);
             lobbyBrowserButton.Pressed += delegate(object sender, EventArgs arguments)
             {
+                game.EnterLobbyBrowserMenu();
             };
             mainScreen.Desktop.Children.Add(lobbyBrowserButton);
 
-            //Options Button.
+            //Create Lobby Button.
             ButtonControl createLobbyButton = GuiHelper.CreateButton("Create Lobby", -435, -200, 200, 32);
             createLobbyButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterCreateLobbyMenu();
             };
             mainScreen.Desktop.Children.Add(createLobbyButton);
-
-            //Button to close game.
-            ButtonControl quitButton = GuiHelper.CreateButton("Quit", -15, -15, 80, 32);
-            quitButton.Pressed += delegate(object sender, EventArgs arguments)
-            {
-                game.Exit();
-            };
-            mainScreen.Desktop.Children.Add(quitButton);
         }
     }
 }

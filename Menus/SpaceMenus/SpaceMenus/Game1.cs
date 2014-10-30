@@ -34,6 +34,8 @@ namespace SpaceMenus
         public OptionsMenu      options_menu;
         public CreditsMenu      credits_menu;
         public CreateLobbyMenu  create_lobby_menu;
+        public LobbyBrowserMenu lobby_browser_menu;
+        public LobbyMenu        lobby_menu;
 
         public Screen mainScreen;
 
@@ -122,6 +124,12 @@ namespace SpaceMenus
                 case GameState.CreateLobby:
                     create_lobby_menu.Update(gameTime);
                     break;
+                case GameState.LobbyBrowser:
+                    lobby_browser_menu.Update(gameTime);
+                    break;
+                case GameState.Lobby:
+                    lobby_menu.Update(gameTime);
+                    break;
                 default:
                     break;
             }
@@ -155,6 +163,12 @@ namespace SpaceMenus
                     break;
                 case GameState.CreateLobby:
                     create_lobby_menu.DrawMenu(gameTime);
+                    break;
+                case GameState.LobbyBrowser:
+                    lobby_browser_menu.DrawMenu(gameTime);
+                    break;
+                case GameState.Lobby:
+                    lobby_menu.DrawMenu(gameTime);
                     break;
                 default:
                     break;
@@ -198,6 +212,17 @@ namespace SpaceMenus
             create_lobby_menu = new CreateLobbyMenu(this);
         }
 
+        public void EnterLobbyBrowserMenu()
+        {
+            currentGameState = GameState.LobbyBrowser;
+            lobby_browser_menu = new LobbyBrowserMenu(this);
+        }
+
+        public void EnterLobbyMenu()
+        {
+            currentGameState = GameState.Lobby;
+            lobby_menu = new LobbyMenu(this,"Alice's Lobby");
+        }
     }
 
 }

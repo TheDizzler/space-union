@@ -38,6 +38,12 @@ namespace SpaceMenus
 
         private void CreateMenuControls(Screen mainScreen)
         {
+            //Menu Title Label
+            LabelControl menuTitleLabel = new LabelControl();
+            menuTitleLabel.Text = "Options";
+            menuTitleLabel.Bounds = GuiHelper.MENU_TITLE_LABEL;
+            mainScreen.Desktop.Children.Add(menuTitleLabel);
+
             //Logout Button.
             ButtonControl logoutButton = GuiHelper.CreateButton("Back", -75, -400, 70, 32);
             logoutButton.Pressed += delegate(object sender, EventArgs arguments)

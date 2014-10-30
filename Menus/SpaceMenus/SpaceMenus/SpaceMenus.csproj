@@ -86,6 +86,8 @@
     <Compile Include="CreateLobbyMenu.cs" />
     <Compile Include="CreditsMenu.cs" />
     <Compile Include="GuiHelper.cs" />
+    <Compile Include="LobbyBrowserMenu.cs" />
+    <Compile Include="LobbyMenu.cs" />
     <Compile Include="LoginMenu.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="MultiplayerMenu.cs" />
