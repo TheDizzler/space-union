@@ -322,7 +322,7 @@ namespace AdminControlForm
                             "email    : " + info[6]);
         }
 
-<<<<<<< HEAD
+
         private void bttnAddShip_Click(object sender, EventArgs e)
         {
             bool isShipValid = false;
@@ -403,7 +403,8 @@ namespace AdminControlForm
                 lablAccelErrMsg.Visible = false;
                 isAccelerationValid     = true;
             }
-=======
+        }
+
         private void AdminForm_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'spaceUnionDataSet.UserStats' table. You can move, or remove it, as needed.
@@ -439,7 +440,7 @@ namespace AdminControlForm
                 this.btnUpdate.Enabled = true;
             else
                 this.btnUpdate.Enabled = false;
->>>>>>> 4689027318a5996d71e44f0df73cf0f2ab088e2b
+
         }
     }
 }
