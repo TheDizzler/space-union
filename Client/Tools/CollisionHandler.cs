@@ -37,7 +37,7 @@ namespace SpaceUnion.Tools {
 		/// <param name="gameTime"></param>
 		public static void shipOnPlanet(Ship ship, Planet planet, GameTime gameTime) {
 
-			ship.takeDamage(planet.collisionDamage, gameTime);
+			ship.takeDamage(planet.collisionDamage, gameTime, ship);
 			reflect(ship, planet);
 		}
 
@@ -48,7 +48,7 @@ namespace SpaceUnion.Tools {
 		/// <param name="asteroid"></param>
 		/// <param name="gameTime"></param>
 		public static void shipOnAsteroid(Ship ship, Asteroid asteroid, GameTime gameTime) {
-			ship.takeDamage(asteroid.collisionDamage, gameTime);
+			ship.takeDamage(asteroid.collisionDamage, gameTime, ship);
 			//asteroid.takeDamage(asteroid.collisionDamage, gameTime);
 			reflect(ship, asteroid);
 		}

@@ -47,6 +47,15 @@
       <Time>2014-10-16T18:02:01.206085-07:00</Time>
     </Item>
     <Item>
+      <Source>Spaceships\scoutship (128x128).png</Source>
+      <Name>Spaceships\scoutship (128x128)</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\scoutship (128x128).xnb</Output>
+      <Time>2014-10-16T18:02:01.241087-07:00</Time>
+    </Item>
+    <Item>
       <Source>Spaceships\zoidship.png</Source>
       <Name>Spaceships\zoidship</Name>
       <Importer>TextureImporter</Importer>
@@ -263,33 +272,6 @@
       <Time>2014-10-16T18:02:00.9450701-07:00</Time>
     </Item>
     <Item>
-      <Source>SpriteFonts\SpriteFont1.spritefont</Source>
-      <Name>SpriteFonts\SpriteFont1</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb</Output>
-      <Time>2014-10-16T18:02:01.3120911-07:00</Time>
-    </Item>
-    <Item>
-      <Source>Buttons\shipselection.png</Source>
-      <Name>Buttons\shipselection</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.xnb</Output>
-      <Time>2014-10-16T18:02:01.0250747-07:00</Time>
-    </Item>
-    <Item>
-      <Source>Spaceships\scoutship (128x128).png</Source>
-      <Name>Spaceships\scoutship (128x128)</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\scoutship (128x128).xnb</Output>
-      <Time>2014-10-16T18:02:01.241087-07:00</Time>
-    </Item>
-    <Item>
       <Source>MapIcons\base (14x14).png</Source>
       <Name>MapIcons\base (14x14)</Name>
       <Importer>TextureImporter</Importer>
@@ -324,6 +306,24 @@
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\MapIcons\reticle (16x16).xnb</Output>
       <Time>2014-10-24T12:29:16.7558084-07:00</Time>
+    </Item>
+    <Item>
+      <Source>SpriteFonts\SpriteFont1.spritefont</Source>
+      <Name>SpriteFonts\SpriteFont1</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb</Output>
+      <Time>2014-10-16T18:02:01.3120911-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Buttons\shipselection.png</Source>
+      <Name>Buttons\shipselection</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.xnb</Output>
+      <Time>2014-10-16T18:02:01.0250747-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

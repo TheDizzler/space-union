@@ -16,16 +16,15 @@ namespace SpaceUnion {
 	public class GUI {
 
 
-		protected  Game1 game;
-
 		public const int guiHeight = 80;
 
 		protected SpriteFont font;
 
-		protected Texture2D guiRectangle;
+		Texture2D guiRectangle;
 
-		protected  Ship playerShip;
+		private  Ship playerShip;
 
+		LargeMassObject planet;
 		Rectangle rect;
 		Vector2 line1Pos, line2Pos, line3Pos, line4Pos, line5Pos, line6Pos, line7Pos;
 
@@ -44,15 +43,12 @@ namespace SpaceUnion {
 		private Tangible target;
 		private MouseState mouseScreen;
 		private Vector2 mouseWorld;
-		
 
 
-		public GUI(Game1 game, Ship ship) {
+		public GUI(Game1 game, Ship ship, LargeMassObject plnt) {
 
 			guiRectangle = Game1.Assets.guiRectangle;
 			font = Game1.Assets.font;
-
-			this.game = game;
 
 			int screenWidth =  game.getScreenWidth();
 			int screenHeight = game.getScreenHeight();
@@ -60,6 +56,7 @@ namespace SpaceUnion {
 			int guiWidth =screenWidth;
 
 			playerShip = ship;
+			planet = plnt;
 
 			rect = new Rectangle(0, guiY, guiWidth, guiHeight);
 
@@ -78,12 +75,16 @@ namespace SpaceUnion {
 		}
 
 
-		public virtual void update(GameTime gameTime, MouseState mouseState, Vector2 mousePos, QuadTree quadTree) {
+<<<<<<< HEAD
+		public void update(GameTime gameTime, MouseState mouseState, Vector2 mousePos, QuadTree quadTree) {
 
 			/* Debugging */
 			mouseScreen = mouseState;
 			mouseWorld = mousePos;
 
+=======
+		public virtual void update(GameTime gameTime, QuadTree quadTree) {
+>>>>>>> 2fc180d3ab9d910b1d3d28662b4c8f9bb34cc13d
 			if (playerShip.position.X <= 7999) {
 				currentVelocity = playerShip.velocity;
 
@@ -97,24 +98,15 @@ namespace SpaceUnion {
 			if (playerShip.collideTarget != null)
 				target = playerShip.collideTarget;
 
+<<<<<<< HEAD
 			/* Debugging */
 		}
-
-
-		public virtual void update(GameTime gameTime, QuadTree quadTree) {
-
-			/* Debugging */
-			currentVelocity = playerShip.velocity;
-			accel = (currentVelocity - lastVelocity) / (float) gameTime.ElapsedGameTime.TotalSeconds;
-			totalTime += gameTime.ElapsedGameTime.TotalSeconds;
-
-			if (playerShip.collideTarget != null)
-				target = playerShip.collideTarget;
-			/* Debugging */
-		}
-
-
+=======
 		public virtual void draw(SpriteBatch spriteBatch) {
+>>>>>>> 2fc180d3ab9d910b1d3d28662b4c8f9bb34cc13d
+
+
+		public void draw(SpriteBatch spriteBatch) {
 
 
 			spriteBatch.Draw(guiRectangle, rect, Color.DarkSlateBlue); // the gui display
@@ -143,10 +135,10 @@ namespace SpaceUnion {
 			//spriteBatch.DrawString(font, "collidetarget: " + target,
 			//	line7Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 
-			if (playerShip is Scout) {
-				spriteBatch.DrawString(font, "BeamLength: " + playerShip.getBeam().beamLength
-					+ " distToTarget: " + playerShip.getBeam().distToTarget,
-					line7Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
+			if (playerShip is Scout) { 
+			spriteBatch.DrawString(font, "BeamLength: " + playerShip.getBeam().beamLength
+				+ " distToTarget: " + playerShip.getBeam().distToTarget,
+				line7Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 			}
 
 			lastVelocity = playerShip.velocity;

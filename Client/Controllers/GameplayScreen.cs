@@ -33,7 +33,7 @@ namespace SpaceUnion.Controllers {
 		private Game1 game;
 		private Camera mainCamera;
 		private Camera radarCamera;
-		GUI gui;
+		protected GUI gui;
 
 		Random gen;
 
@@ -61,6 +61,8 @@ namespace SpaceUnion.Controllers {
 
 			gen = new Random();
 			Assets = Game1.Assets;
+			Ship enemyship = new Bug(game);
+			enemyship.Position = new Vector2(300, 300);
 
 
 			background = new Background(worldWidth, worldHeight, Assets.starfield2, Assets.starfield1, Assets.starfield1, Assets.starfield1);
@@ -75,7 +77,7 @@ namespace SpaceUnion.Controllers {
 
 			basicViewport = game.GraphicsDevice.Viewport;
 
-			gui = new GUI(game, playerShip, planets[0]);
+			gui = new GUI(game, playerShip);
 
 			Viewport mainViewport = new Viewport {
 				X = 0, Y = 0,
@@ -96,9 +98,10 @@ namespace SpaceUnion.Controllers {
 
 
 			Ship enemy = new Zoid(game);
-			enemy.Position = new Vector2(worldWidth/2 + 150, worldHeight/2 + 550);
+			enemy.Position = new Vector2(worldWidth / 2 + 150, worldHeight / 2 + 550);
 			ships.Add(playerShip);
 			ships.Add(enemy);
+			ships.Add(new Bug(game));
 
 
 			foreach (Ship ship in ships)
@@ -129,7 +132,7 @@ namespace SpaceUnion.Controllers {
 		/// explosion handling, gui update.
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
-		public void Update(GameTime gameTime) {
+		public virtual void Update(GameTime gameTime) {
 
 			quadTree.clear();
 			foreach (Tangible target in targets)
@@ -183,7 +186,7 @@ namespace SpaceUnion.Controllers {
 
 			Game1.explosionEngine.update(gameTime);
 
-			gui.update(gameTime, mouseState, mousePos, quadTree);
+			gui.update(gameTime, quadTree);
 		}
 
 		/// <summary>
@@ -226,7 +229,7 @@ namespace SpaceUnion.Controllers {
 
 			//draw grid
 			drawGrid();
-			
+
 
 			foreach (Ship ship in ships)
 				ship.drawMiniMap(spriteBatch);

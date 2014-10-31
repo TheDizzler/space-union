@@ -84,7 +84,8 @@ namespace SpaceUnion.Weapons.Projectiles {
 		/// <param name="gameTime"></param>
 		public virtual void doDamage(Tangible target, GameTime gameTime) {
 
-			target.takeDamage(weaponDamage, gameTime);
+			target.takeDamage(weaponDamage, gameTime, owner);
+
 		}
 
 		/// <summary>

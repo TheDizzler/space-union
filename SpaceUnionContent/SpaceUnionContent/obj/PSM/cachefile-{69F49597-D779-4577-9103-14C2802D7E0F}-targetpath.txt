@@ -3,6 +3,7 @@ Content\Buttons\playbutton.xnb
 Content\Backgrounds\background.xnb
 Content\Spaceships\ufoship (128x128).xnb
 Content\Spaceships\shuttle.xnb
+Content\Spaceships\scoutship (128x128).xnb
 Content\Spaceships\zoidship.xnb
 Content\Backgrounds\galaxy.xnb
 Content\Projectiles\laser.xnb
@@ -27,13 +28,12 @@ Content\Buttons\gameroom.xnb
 Content\Buttons\gamelobby.xnb
 Content\Buttons\createlobby.xnb
 Content\Buttons\lobbybrowser.xnb
-Content\SpriteFonts\SpriteFont1.xnb
-Content\Buttons\shipselection.xnb
-Content\Spaceships\scoutship (128x128).xnb
 Content\MapIcons\base (14x14).xnb
 Content\MapIcons\base2 (16x16).xnb
 Content\MapIcons\reddot 2 frame (16x16).xnb
 Content\MapIcons\reticle (16x16).xnb
+Content\SpriteFonts\SpriteFont1.xnb
+Content\Buttons\shipselection.xnb
 Content\Backgrounds\starfield (800x600).png
 Content\Backgrounds\galaxy.png
 Content\Spaceships\spaceshiptest.png

@@ -76,6 +76,12 @@ namespace SpaceUnion.Ships {
 		protected bool firing;
 		protected bool altFiring;
 
+        public int kills = 0;
+        public int deaths = 0;
+
+        public bool blueTeam = false;
+        public bool redTeam = false;
+
 		/// <summary>
 		/// Ship constructor
 		/// </summary>
@@ -115,16 +121,16 @@ namespace SpaceUnion.Ships {
 			if (altFiring)
 				altFire(gameTime);
 
-			if (willCollide)
-				collide(collideTarget, gameTime);
+			//if (willCollide)
+			//	collide(collideTarget, gameTime);
 
 			moveThisUpdate = velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
-			checkForCollision2(quadTree, gameTime);
+			//checkForCollision2(quadTree, gameTime);
 
 			position += moveThisUpdate;
 			base.update(position);
 
-			
+			checkForCollision(quadTree, gameTime);
 
 			checkWorldEdge();
 
@@ -132,7 +138,7 @@ namespace SpaceUnion.Ships {
 			additionalUpdate(gameTime, quadTree);
 
 			velocity *= dampening; // apply a little resistance. Any thrust should over power this.
-			//checkForCollision(quadTree, gameTime);
+			
 		}
 
 		/// <summary>

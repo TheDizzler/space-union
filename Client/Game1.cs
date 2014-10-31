@@ -30,7 +30,7 @@ namespace SpaceUnion {
 		/// </summary>
 		public static ExplosionEngine explosionEngine;
 
-		GameplayScreen gameplayScreen;
+		TeamBattle gameplayScreen;
 		MainMenuScreen mainMenuScreen;
 		// Created by Matthew Baldock
 		ShipSelectionScreen shipselectionScreen;
@@ -255,7 +255,8 @@ namespace SpaceUnion {
 
 
 		public void StartGame() {
-			gameplayScreen = new GameplayScreen(this, spriteBatch, shipselectionScreen.getship());
+			//gameplayScreen = new GameplayScreen(this, spriteBatch, shipselectionScreen.getship());
+            gameplayScreen = new TeamBattle(this, spriteBatch, shipselectionScreen.getship());
 			Viewport v = GraphicsDevice.Viewport;
 			currentGameState = GameState.Playing;
 			IsMouseVisible = false;

@@ -163,7 +163,7 @@ namespace SpaceUnion.Weapons.Systems {
 
 
 		public void doDamage(Tangible target, GameTime gameTime) {
-			target.takeDamage(weaponDamage, gameTime);
+			target.takeDamage(weaponDamage, gameTime, owner);
 		}
 
 	}

@@ -44,8 +44,10 @@
     <Compile Include="Controllers\CreateLobby.cs" />
     <Compile Include="Controllers\LobbyOptions.cs" />
     <Compile Include="MapIcon.cs" />
-    <Compile Include="Ships\Bug.cs" />
     <Compile Include="Tools\HitCircle.cs" />
+    <Compile Include="Controllers\TeamBattle.cs" />
+    <Compile Include="Ships\Bug.cs" />
+    <Compile Include="TeamBattleGUI.cs" />
     <Compile Include="Tools\QuadTree.cs" />
     <Compile Include="Tools\Ray2.cs" />
     <Compile Include="Weapons\Systems\LaserBeam.cs" />
