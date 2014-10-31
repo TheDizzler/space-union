@@ -4,12 +4,22 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SpaceUnionModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SpaceUnionModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="SpaceUnionModelStoreContainer">
+          <EntitySet Name="Ship" EntityType="SpaceUnionModel.Store.Ship" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="sysdiagrams" EntityType="SpaceUnionModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Users" EntityType="SpaceUnionModel.Store.Users" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserStats" EntityType="SpaceUnionModel.Store.UserStats" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
+        <EntityType Name="Ship">
+          <Key>
+            <PropertyRef Name="shipName" />
+          </Key>
+          <Property Name="shipName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="maxSpeed" Type="float" Nullable="false" />
+          <Property Name="accelerateSpeed" Type="float" Nullable="false" />
+          <Property Name="turnSpeed" Type="float" Nullable="false" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -48,8 +58,7 @@
           <Property Name="userstatShipUsed_3" Type="int" Nullable="false" />
           <Property Name="userstatFlagsCaptured" Type="int" Nullable="false" />
         </EntityType>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SpaceUnionModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -57,6 +66,7 @@
           <EntitySet Name="sysdiagrams" EntityType="SpaceUnionModel.sysdiagram" />
           <EntitySet Name="Users" EntityType="SpaceUnionModel.User" />
           <EntitySet Name="UserStats" EntityType="SpaceUnionModel.UserStat" />
+          <EntitySet Name="Ships" EntityType="SpaceUnionModel.Ship" />
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -95,6 +105,15 @@
           <Property Name="userstatShipUsed_2" Type="Int32" Nullable="false" />
           <Property Name="userstatShipUsed_3" Type="Int32" Nullable="false" />
           <Property Name="userstatFlagsCaptured" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ship">
+          <Key>
+            <PropertyRef Name="shipName" />
+          </Key>
+          <Property Type="Double" Name="maxSpeed" Nullable="false" />
+          <Property Type="Double" Name="accelerateSpeed" Nullable="false" />
+          <Property Type="Double" Name="turnSpeed" Nullable="false" />
+          <Property Type="String" Name="shipName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -140,6 +159,16 @@
                 <ScalarProperty Name="userstatShipUsed_2" ColumnName="userstatShipUsed_2" />
                 <ScalarProperty Name="userstatShipUsed_3" ColumnName="userstatShipUsed_3" />
                 <ScalarProperty Name="userstatFlagsCaptured" ColumnName="userstatFlagsCaptured" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ships">
+            <EntityTypeMapping TypeName="SpaceUnionModel.Ship">
+              <MappingFragment StoreEntitySet="Ship">
+                <ScalarProperty Name="shipName" ColumnName="shipName" />
+                <ScalarProperty Name="turnSpeed" ColumnName="turnSpeed" />
+                <ScalarProperty Name="accelerateSpeed" ColumnName="accelerateSpeed" />
+                <ScalarProperty Name="maxSpeed" ColumnName="maxSpeed" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

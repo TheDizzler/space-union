@@ -28,5 +28,6 @@ namespace SpaceUnionDatabase
         public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserStat> UserStats { get; set; }
+        public DbSet<Ship> Ships { get; set; }
     }
 }

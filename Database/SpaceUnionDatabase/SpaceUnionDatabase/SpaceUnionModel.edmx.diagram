@@ -8,6 +8,7 @@
         <EntityTypeShape EntityType="SpaceUnionModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SpaceUnionModel.User" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SpaceUnionModel.UserStat" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SpaceUnionModel.Ship" Width="1.5" PointX="2.375" PointY="3.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

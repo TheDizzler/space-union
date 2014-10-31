@@ -40,8 +40,16 @@ namespace AdminControlForm
         /// </summary>
         private UserTableAccess userTable = new UserTableAccess();
 
+        /// <summary>
+        /// Allows access to read/write to the ship table in the Space Union database
+        /// </summary>
+        private ShipTableAccess shipTable = new ShipTableAccess();
 
+        /// <summary>
+        /// Allows access to read/write to the user stat table in the Space Union database
+        /// </summary>
         private UserStatTableAccess userStatTable = new UserStatTableAccess();
+        
         /// <summary>
         /// Helper class to validate input when a new user is being blocked/unblocked
         /// </summary>
@@ -113,17 +121,14 @@ namespace AdminControlForm
                            && isPasswordValid
                            && isConfPassValid;
 
-            if (isvalidUserInfo)
-            {
+            if (isvalidUserInfo) {
                 // if a user isnt added to the database
                 if (!userTable.AddNewUser(txtbUsername.Text,
                                           txtbPassword.Text,
-                                          txtbEmail.Text))
-                {
+                                          txtbEmail.Text)) {
                     MessageBox.Show("Sorry, the Username is already taken.");
                 }
-                else
-                {
+                else {
                     MessageBox.Show("User was added to the database successfully");
                 }
             }
@@ -337,8 +342,18 @@ namespace AdminControlForm
                        && isAccelerationValid
                        && isShipNameValid;
 
-            if (isShipValid)
-               ; //save to database
+            if (isShipValid) {
+                // if a user isnt added to the database
+                if (!shipTable.AddNewShip(txtbNewShipName.Text,
+                                          txtbTurnSpeed.Text,
+                                          txtbMaxSpeed.Text,
+                                          txtbAccelerate.Text) ) {
+                    MessageBox.Show("Sorry, the Ship name is already in use.");
+                }
+                else {
+                    MessageBox.Show("Ship was added to the database successfully.");
+                }
+            }
         }
 
         private void validateTurnSpeed(object sender, EventArgs e)
@@ -385,7 +400,7 @@ namespace AdminControlForm
             }
             else {
                 lablNewShipNameErrMsg.Visible = false;
-                isShipNameValid     = true;
+                isShipNameValid               = true;
             }
         }
 

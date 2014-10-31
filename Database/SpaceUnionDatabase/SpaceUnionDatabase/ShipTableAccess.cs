@@ -6,19 +6,30 @@ using System.Threading.Tasks;
 
 namespace SpaceUnionDatabase
 {
-    class ShipTableAccess
+    public class ShipTableAccess
     {
         public bool
-        AddNewShip(string username, string password, string email)
+        AddNewShip(string shipName, string turnSpeed, string maxSpeed, string accelerateSpeed)
         {
             var db           = new SpaceUnionEntities();
-            //var newUser      = new User();
+            var newShip      = new Ship();
             bool isShipAdded = false;
+            
+            float turnSpd;
+            float maxSpd;
+            float accelerateSpd;
 
-            //newUser.userName      = username;
+            float.TryParse(turnSpeed, out turnSpd);
+            float.TryParse(maxSpeed, out maxSpd);
+            float.TryParse(accelerateSpeed, out accelerateSpd);
+
+            newShip.shipName        = shipName;
+            newShip.turnSpeed       = turnSpd;
+            newShip.maxSpeed        = maxSpd;
+            newShip.accelerateSpeed = accelerateSpd;
 
             try {
-                //db.Users.Add(newUser);
+                db.Ships.Add(newShip);
                 db.SaveChanges();
                 isShipAdded = true;
             }
