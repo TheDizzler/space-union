@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceUnion.Ships;
 using SpaceUnion.Tools;
+using SpaceUnion.Controllers;
 
 
 namespace SpaceUnion.Weapons.Systems {
@@ -39,7 +40,7 @@ namespace SpaceUnion.Weapons.Systems {
 			owner = ship;
 
 			weaponDamage = 1;
-			beamLength = 250;
+			beamLength = 650;
 		}
 
 
@@ -61,18 +62,21 @@ namespace SpaceUnion.Weapons.Systems {
 			distToTarget = 1;
 
 			// find targets within line of fire
-			List<Tangible> possibleCollisions = quadTree.retrieve(owner); /* This method and may result in missed ships.
+			/*List<Tangible> possibleCollisions = quadTree.retrieveNeighbors(owner);*/ /* This method and may result in missed ships.
 																		   * A different retriever using a raycast
 																		   will likely be necessary. -Tristan-*/
+			
+			List<Tangible> possibleCollisions = GameplayScreen.targets;
+			
 			Tangible currentTarget = null;
 
 			foreach (Tangible target in possibleCollisions) {
 				if (target != owner) {
 
 
-					if (ray.intersects(target.getHitBox())) {
+					if (ray.intersectsToRange(target.getHitBox())) {
 						float temp = ray.getDistance();
-						if (temp <= 1 && temp <= distToTarget) {
+						if (temp <= distToTarget) {
 							distToTarget = temp;
 							currentTarget = target;
 						}
@@ -84,7 +88,7 @@ namespace SpaceUnion.Weapons.Systems {
 				doDamage(currentTarget, gameTime);
 			}
 
-			// not quite right. distToTarget should be t in parametric form.
+			
 			for (int i = 0; i < beamLength*distToTarget; ++i) {
 
 				beamQuanta.Add(assets.Content.Load<Texture2D>("Projectiles/molten bullet (6x8)"));// test texture

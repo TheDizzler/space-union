@@ -14,7 +14,7 @@ using SpaceUnion.Weapons;
 
 namespace SpaceUnion.Controllers {
 
-	class GameplayScreen {
+	public class GameplayScreen {
 
 		private KeyboardState keyState;
 		private MouseState mouseState;
@@ -96,7 +96,7 @@ namespace SpaceUnion.Controllers {
 
 
 			Ship enemy = new Zoid(game);
-			enemy.Position = new Vector2(2250, 150);
+			enemy.Position = new Vector2(worldWidth/2 + 150, worldHeight/2 + 550);
 			ships.Add(playerShip);
 			ships.Add(enemy);
 
@@ -280,7 +280,14 @@ namespace SpaceUnion.Controllers {
 			Game1.explosionEngine.draw(spriteBatch);
 		}
 
-
+		/// <summary>
+		/// Hollow rectangle drawing code from:
+		/// http://bluelinegamestudios.com/posts/drawing-a-hollow-rectangle-border-in-xna-4-0/
+		/// </summary>
+		/// <param name="batch"></param>
+		/// <param name="rectangleToDraw"></param>
+		/// <param name="thicknessOfBorder"></param>
+		/// <param name="borderColor"></param>
 		private void drawBorder(SpriteBatch batch, Rectangle rectangleToDraw, int thicknessOfBorder, Color borderColor) {
 			// Draw top line
 			batch.Draw(Assets.pixel, new Rectangle(rectangleToDraw.X, rectangleToDraw.Y, rectangleToDraw.Width, thicknessOfBorder), borderColor);

@@ -93,6 +93,7 @@ namespace SpaceUnion.Tools {
 		/// <returns></returns>
 		private int getIndex(Tangible tangible) {
 
+			/** RightTop = 0, LeftTop = 1, LeftBottom = 2, RightBottom = 3 */
 			int index =-1;
 			double verticalMidpoint = bounds.X + bounds.Width / 2;
 			double horizontalMidpoint = bounds.Y + bounds.Height / 2;
@@ -176,6 +177,38 @@ namespace SpaceUnion.Tools {
 			possibleCollisions.AddRange(tangibles);
 
 			return possibleCollisions;
+		}
+
+		/// <summary>
+		/// This works the same as retrieve(Tangible) but retrieves all the actors in 
+		/// neighbour nodes as well.
+		/// </summary>
+		/// <param name="actor"></param>
+		/// <returns></returns>
+		public List<Tangible> retrieveNeighbors(Tangible actor) {
+
+			/** RightTop = 0, LeftTop = 1, LeftBottom = 2, RightBottom = 3 */
+			int index = getIndex(actor);
+			possibleCollisions.Clear();
+
+			if (index != -1 && nodes[0] != null) {
+
+				int neigbour1 = index - 1;
+				int neigbour2 = index + 1;
+				if (neigbour1 < 0)
+					neigbour1 = 3;
+				if (neigbour2 > 3)
+					neigbour2 = 0;
+
+				possibleCollisions.AddRange(nodes[neigbour1].retrieve(actor));
+				possibleCollisions.AddRange(nodes[index].retrieve(actor));
+				possibleCollisions.AddRange(nodes[neigbour2].retrieve(actor));
+			}
+
+			possibleCollisions.AddRange(tangibles);
+
+			return possibleCollisions;
+
 		}
 	}
 }
