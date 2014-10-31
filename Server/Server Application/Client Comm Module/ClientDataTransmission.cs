@@ -16,22 +16,24 @@ namespace Client_Comm_Module
         /// <summary>
         /// Whether this transmission client is disposed.
         /// </summary>
-        private bool disposed = false;
+        private bool Disposed { get; set; }
 
         /// <summary>
         /// Used to store data to send.
         /// </summary>
-        private List<GameData> dataQueue;
+        private GameData Data { get; set; }
 
         /// <summary>
         /// UDP client used to send data.
         /// </summary>
-        private UdpClient UDPClient;
+        private UdpClient UDPClient { get; set; }
 
         /// <summary>
         /// The UDP port to use when sending; assigned by the server.
         /// </summary>
-        private int assignedUDPPort_Send;
+        private int UDPPort { get; set; }
+
+        private Object Locker { get; set; }
 
         /// <summary>
         /// Initiate the data transmission client.
@@ -39,9 +41,8 @@ namespace Client_Comm_Module
         /// <param name="assignedPort">The port assigned by the server.</param>
         public ClientDataTransmission(int assignedPort)
         {
-            assignedUDPPort_Send = assignedPort;
-            UDPClient = new UdpClient(assignedUDPPort_Send);
-            dataQueue = new List<GameData>();
+            UDPPort = assignedPort;
+            UDPClient = new UdpClient(UDPPort);
             
             try
             {
@@ -56,24 +57,15 @@ namespace Client_Comm_Module
         /// Assign a UDP port to send the data to.
         /// </summary>
         /// <param name="UDPPort">The UDP port to assign.</param>
-        public void assignUDPPort_Send(int UDPPort)
+        public void updateUDPPort(int UDPPort)
         {
-            assignedUDPPort_Send = UDPPort;
+            this.UDPPort = UDPPort;
         }
 
-        /// <summary>
-        /// Add the given message to the appropriate queue.
-        /// </summary>
-        /// <param name="message">The message to add to a queue.</param>
-        public void addDataToQueue(Data message)
+        public void updateData(GameData data)
         {
-            if (message == null)
-                return;
-            try
-            {
-                dataQueue.Add((GameData)message);
-            }
-            catch (InvalidCastException e) { Console.WriteLine(e.ToString()); return; }
+            lock (Locker)
+                Data = data;
         }
 
         /// <summary>
@@ -83,28 +75,16 @@ namespace Client_Comm_Module
         {
             while (true)
             {
-                GameData data = removeDataFromQueue();
+                GameData data;
+                lock (Locker)
+                    data = Data;                
                 if (data == null)
                 {
                     Thread.Sleep(ClientConstants.DATA_SEND_INTERVAL);
                     continue;
                 }
-                //Console.WriteLine("Port: " + ((IPEndPoint)UDPClient.Client.LocalEndPoint).Port);
-                DataControl.sendUDPData(UDPClient, data, ClientConstants.SERVER_IPADDRESS, assignedUDPPort_Send);
+                DataControl.sendUDPData(UDPClient, data, ClientConstants.SERVER_IPADDRESS, UDPPort);
             }
-        }
-
-        /// <summary>
-        /// Returns the oldest game data in the queue.
-        /// </summary>
-        /// <returns>The oldest message awaiting transfer.</returns>
-        private GameData removeDataFromQueue()
-        {
-            if (dataQueue.Count == 0)
-                return null;
-            GameData data = dataQueue.ElementAt(0);
-            dataQueue.RemoveAt(0);
-            return data;
         }
 
         /// <summary>
@@ -123,7 +103,7 @@ namespace Client_Comm_Module
         /// <param name="disposing">True if the client is to be disposed.</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (disposed)
+            if (Disposed)
                 return;
 
             if (disposing)
@@ -131,7 +111,7 @@ namespace Client_Comm_Module
                 // clean up here
             }
 
-            disposed = true;
+            Disposed = true;
         }
     }
 }

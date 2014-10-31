@@ -22,31 +22,31 @@ namespace Server_Application
         /// <summary>
         /// The class responsible for listening to data from clients.
         /// </summary>
-        DataReceiving receiving;
+        public DataReceiving Receiving { get; private set; }
         /// <summary>
         /// The class responsible for transmitting data to clients.
         /// </summary>
-        public DataTransmission transmission { get; private set; }
+        public DataTransmission Transmission { get; private set; }
         /// <summary>
         /// List of all available game rooms.
         /// </summary>
-        public List<Gameroom> gamerooms { get; private set; }
+        public List<Gameroom> Gamerooms { get; private set; }
         /// <summary>
         /// Total list of online players.
         /// </summary>
-        public List<Player> onlineplayers { get; private set; }
+        public List<Player> OnlinePlayers { get; private set; }
         /// <summary>
         /// Only players who are currently looking for a game match.
         /// </summary>
-        public List<Player> searchingplayers { get; private set; }
+        public List<Player> SearchingPlayers { get; private set; }
 
         public Server()
         {
-            gamerooms = new List<Gameroom>();
-            onlineplayers = new List<Player>();
-            searchingplayers = new List<Player>();
-            receiving = new DataReceiving(this);
-            transmission = new DataTransmission(this);
+            Gamerooms = new List<Gameroom>();
+            OnlinePlayers = new List<Player>();
+            SearchingPlayers = new List<Player>();
+            Receiving = new DataReceiving(this);
+            Transmission = new DataTransmission(this);
             new Thread(cleanRooms).Start();
         }
 
@@ -54,28 +54,30 @@ namespace Server_Application
         {
             while (true)
             {
-                foreach (Gameroom room in gamerooms.ToArray())
+                foreach (Gameroom room in Gamerooms.ToArray())
                 {
                     foreach (GameData player in room.getPlayerList())
                     {
-                        if (compareTime(player.Time))
+                        if (compareTime(player.Time, 10, true))
                         {
                             room.removePlayer(player);
                         }
                     }
                     if (room.Players == 0)
-                        gamerooms.Remove(room);
+                        Gamerooms.Remove(room);
                 }
                 Thread.Sleep(10000);
             }
         }
 
-        private bool compareTime(DateTime time)
+        private bool compareTime(DateTime time, int period, bool seconds)
         {
-            if ((DateTime.Now - time).Seconds > 10)
-            {
-                return true;
-            }
+            if(seconds)
+                if ((DateTime.Now - time).Seconds > period)
+                    return true;
+            if (!seconds)
+                if ((DateTime.Now - time).Minutes > period)
+                    return true;
             return false;
         }
 
@@ -94,7 +96,7 @@ namespace Server_Application
         /// <returns>The gameroom matching the room number.</returns>
         public Gameroom getGameroom(int roomnum)
         {
-            foreach (Gameroom room in gamerooms.ToArray())
+            foreach (Gameroom room in Gamerooms.ToArray())
             {
                 if (room.RoomNumber == roomnum)
                 {
@@ -111,17 +113,12 @@ namespace Server_Application
         {
             if (player != null)
             {
-                player.PortSend = Constants.UDPClientToServerPort + (onlineplayers.Count % 6);
-                player.PortReceive = Constants.UDPServerToClientPort + (onlineplayers.Count % 6);
-                onlineplayers.Add(player);
-                transmission.addMessageToQueue(player);
+                player.PortSend = Constants.UDPClientToServerPort + (OnlinePlayers.Count % 6);
+                player.PortReceive = Constants.UDPServerToClientPort + (OnlinePlayers.Count % 6);
+                OnlinePlayers.Add(player);
+                Transmission.addMessageToQueue(player);
                 // the following line is only used for the prototype
                 addPlayerToFreeRoom(player);
-
-                // The following line IS NOT only used for the prototype (remove when no longer ambiguous)
-                
-                // Send the current list of rooms to the player that came online.
-                transmission.addMessageToQueue();
             }
         }
 
@@ -132,7 +129,7 @@ namespace Server_Application
         /// <param name="roomNumber">The room number of the room to add the player to.</param>
         private void addPlayerToRequestedRoom(Player player, int roomNumber)
         {
-            foreach (Gameroom room in gamerooms.ToArray())
+            foreach (Gameroom room in Gamerooms.ToArray())
             {
                 if (room.RoomNumber == roomNumber)
                 {
@@ -157,7 +154,7 @@ namespace Server_Application
 
         private void addPlayerToFreeRoom(Player player)
         {
-            foreach (Gameroom room in gamerooms.ToArray())
+            foreach (Gameroom room in Gamerooms.ToArray())
             {
                 if (room.Players < 6)
                 {
@@ -167,10 +164,10 @@ namespace Server_Application
                 }
             }
             Gameroom temproom = new Gameroom();
-            temproom.RoomNumber = gamerooms.Count;
+            temproom.RoomNumber = Gamerooms.Count;
             player.GameRoom = temproom.RoomNumber;
             temproom.addPlayer(player);
-            gamerooms.Add(temproom);
+            Gamerooms.Add(temproom);
         }
 
         /// <summary>
@@ -181,7 +178,7 @@ namespace Server_Application
         {
             if (message != null)
             {
-                transmission.addMessageToQueue(message);
+                Transmission.addMessageToQueue(message);
             }
         }
     }

@@ -5,15 +5,19 @@ using System.Text;
 
 namespace Data_Structures
 {
-    class GameFrame : Data
+    public class GameFrame : Data
     {
-        GameData[] data;
-        string[] ip;
+        public GameData[] Data { get; set; }
+        public string[] IPList { get; set; }
         public GameFrame(GameData[] data)
         {
             Type = 6;
-            this.data = data;
-            ip = new string[data.Length];
+            Data = data;
+            IPList = new string[data.Length];
+            for (int x = 0; x < data.Length; x++ )
+            {
+                IPList[x] = Data[x].Player.IPAddress;
+            }
         }
     }
 }

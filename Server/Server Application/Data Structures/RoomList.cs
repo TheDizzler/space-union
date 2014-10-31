@@ -7,7 +7,7 @@ namespace Data_Structures
 {
     class RoomList
     {
-        public List<List<string>> RoomList { get; set; }
+        public List<List<string>> List { get; set; }
 
         public RoomList()
         {

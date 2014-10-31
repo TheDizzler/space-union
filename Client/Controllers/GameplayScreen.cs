@@ -278,21 +278,18 @@ namespace SpaceUnion.Controllers {
 
             drawWorld(); //Draws background
 
-            playerShip.draw(spriteBatch); //Draws player space ship
+            //playerShip.draw(spriteBatch); //Draws player space ship
 
-            GameData[] players = MainMenuScreen.clientCommHandler.getPlayersData();
-            for (int x = 0; x < players.Length; x++)
-            {
-                if (players[x] != null)
+            GameFrame players = MainMenuScreen.clientCommHandler.getPlayersData();
+            if(players != null)
+                for (int x = 0; x < players.Data.Length; x++)
                 {
-                    Console.WriteLine(players[x].Player.Username);
-                    Ship otherPlayer = new Ship(Assets.spaceShipTest, new Vector2(200, 200)); //Create new player ship
-                    otherPlayer.updateX(players[x].XPosition);
-                    otherPlayer.updateY(players[x].YPosition);
-                    otherPlayer.updateRotation(players[x].Angle); 
-                    otherPlayer.draw(spriteBatch); //Draws other player
+                    Ship otherPlayer = new Ship(Assets.spaceShipTest, new Vector2(200, 200));
+                    otherPlayer.updateX(players.Data[x].XPosition);
+                    otherPlayer.updateY(players.Data[x].YPosition);
+                    otherPlayer.updateRotation(players.Data[x].Angle);
+                    otherPlayer.draw(spriteBatch);
                 }
-            }
 
             //loop everty ship and draw 
 			planet.draw(spriteBatch);

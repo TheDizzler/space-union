@@ -13,29 +13,22 @@ namespace Client_Comm_Module
 {
     public class ClientHandlerHelper
     {
-        public delegate GameData GameDataDelegate();
+        public delegate GameFrame GameDataDelegate();
 
-        //private GameData[] gameDataPlayers = new GameData[ClientConstants.NumberOfPlayers];
-        private volatile Dictionary<string, GameData> gameDataPlayers = new Dictionary<string, GameData>();
+        private volatile GameFrame gameDataPlayers;
 
-        private Object listLock = new Object();
+        private Object Locker = new Object();
 
         public ClientHandlerHelper(GameDataDelegate getGameData)
         {
-            /*for (int x = 0; x < ClientConstants.NumberOfPlayers; x++)
-            {
-                gameDataPlayers. = null;
-            }*/
-                
-            ThreadStart ts = new ThreadStart(() => updatePlayerList(getGameData));
-            new Thread(ts).Start();
+            new Thread(() => updatePlayerList(getGameData)).Start();
         }
 
         /// <summary>
         /// Gets the other players in the gameroom as an array.
         /// </summary>
         /// <returns>Gets an array of data about the positions of the other players.</returns>
-        public Dictionary<string, GameData> getPlayersData()
+        public GameFrame getPlayersData()
         {
             return gameDataPlayers;
         }
@@ -47,49 +40,14 @@ namespace Client_Comm_Module
         {
             while (true)
             {
-                GameData player = getGameData();
+                GameFrame player = getGameData();
                 if (player == null)
                 {
                     Thread.Sleep(ClientConstants.DATA_SEND_INTERVAL);
                     continue;
                 }
-
-                if (gameDataPlayers.ContainsKey(player.Player.Username))
-                {
-                    lock (listLock)
-                    {
-                        gameDataPlayers[player.Player.Username] = player;
-                    }
-                }
-                else
-                {
-                    lock (listLock)
-                    {
-                        gameDataPlayers.Add(player.Player.Username, player);
-                    }
-                }
-                
-                /*
-
-
-
-                if (gameDataPlayers[x] == null)
-                {
-                    for (int y = 0; y < ClientConstants.NumberOfPlayers; y++)
-                    {
-                        if (gameDataPlayers[y] != null && gameDataPlayers[y].Player.Username == player.Player.Username)
-                        {
-                            gameDataPlayers[y] = player;
-                            break;
-                        }
-                    }
-                }
-                if (player.Player.Username == gameDataPlayers[x].Player.Username)
-                {
-                    gameDataPlayers.get = player;
-                    break;
-                }
-                 * */
+                lock (Locker)
+                    gameDataPlayers = player;
             }
         }
 

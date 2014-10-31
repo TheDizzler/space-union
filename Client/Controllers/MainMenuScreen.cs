@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using Data_Structures;
 using Client_Comm_Module;
+using System.Threading;
 
 namespace SpaceUnion {
 	class MainMenuScreen {
@@ -29,7 +30,10 @@ namespace SpaceUnion {
             player.Password = MainMenuScreen.password;
             player.IPAddress = ClientHandlerHelper.getLocalIPv4Address();
             clientCommHandler.sendLoginRequest(player);
-            player = clientCommHandler.getLoginConfirmation();
+            if (clientCommHandler.getPlayer() == null)
+                Console.WriteLine("-------------player is null----------------------");
+            Thread.Sleep(2000);
+            player = clientCommHandler.getPlayer();
 		}
 
 		public void Update() {
