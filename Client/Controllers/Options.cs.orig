@@ -8,9 +8,12 @@ using System.Text;
 using SpaceUnion.Ships;
 using SpaceUnion.Weapons;
 using SpaceUnion.Tools;
+<<<<<<< HEAD
 using SpaceUnion.Animations;
+=======
 using System.Runtime.InteropServices;
 
+>>>>>>> 453c84e5e0688768d0e0091aee50d4db5f9a3eb7
 namespace SpaceUnion.Controllers
 {
 
@@ -59,15 +62,18 @@ namespace SpaceUnion.Controllers
     {
         Game1 game;
         BaseButton confirmButton;
-        BaseButton changeGameReso;
-        BaseButton dropDownList;
-
+<<<<<<< HEAD
         ScrollingBackground scroll;
         GameTime gametime;
         /// <summary>
         /// Constructor for Options
         /// </summary>
         /// <param name="game"></param>
+=======
+        BaseButton changeGameReso;
+        BaseButton dropDownList;
+
+>>>>>>> 453c84e5e0688768d0e0091aee50d4db5f9a3eb7
         public Options(Game1 game)
         {
             this.game = game;
@@ -75,11 +81,15 @@ namespace SpaceUnion.Controllers
             confirmButton = new BaseButton(Game1.Assets.confirm) { height = 100, width = 200 };
             confirmButton.setPosition(new Vector2((int)(100),
                                                   (int)(100)));
+<<<<<<< HEAD
             scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
             scroll.setPosition(new Vector2((int)0, (int)0));
+            
+=======
             changeGameReso = new BaseButton(Game1.Assets.confirm) { height = 100, width = 200 };
             changeGameReso.setPosition(new Vector2((int)(100),
                                                   (int)(500)));
+>>>>>>> 453c84e5e0688768d0e0091aee50d4db5f9a3eb7
         }
         /// <summary>
         /// Update Options, buttons and background
@@ -88,14 +98,20 @@ namespace SpaceUnion.Controllers
         {
             MouseState mouseState = Mouse.GetState();
             confirmButton.update(mouseState);
-            changeGameReso.update(mouseState);
+<<<<<<< HEAD
             
+=======
+            changeGameReso.update(mouseState);
+
+>>>>>>> 453c84e5e0688768d0e0091aee50d4db5f9a3eb7
             if (confirmButton.isClicked == true)
             {
                 game.GoToMain();
                 confirmButton.isClicked = false;
             }
+<<<<<<< HEAD
             scroll.update();
+=======
 
             if (changeGameReso.isClicked == true)
             {
@@ -167,6 +183,7 @@ namespace SpaceUnion.Controllers
             int height = GetSystemMetrics(0x01);
 
             return string.Format("{0}x{1}", width, height);
+>>>>>>> 453c84e5e0688768d0e0091aee50d4db5f9a3eb7
         }
 
         /// <summary>
@@ -178,8 +195,11 @@ namespace SpaceUnion.Controllers
             spriteBatch.Begin();
             scroll.draw(spriteBatch);
             confirmButton.draw(spriteBatch);
+<<<<<<< HEAD
             
+=======
             changeGameReso.draw(spriteBatch);
+>>>>>>> 453c84e5e0688768d0e0091aee50d4db5f9a3eb7
             spriteBatch.End();
         }
     }

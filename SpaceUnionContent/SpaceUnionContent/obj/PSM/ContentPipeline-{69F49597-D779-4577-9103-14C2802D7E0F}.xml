@@ -8,7 +8,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).xnb</Output>
-      <Time>2014-10-16T18:02:00.4030391-07:00</Time>
+      <Time>2014-10-31T13:49:46.7954839-07:00</Time>
     </Item>
     <Item>
       <Source>Buttons\playbutton.png</Source>
@@ -17,7 +17,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.xnb</Output>
-      <Time>2014-10-16T18:02:01.0100738-07:00</Time>
+      <Time>2014-10-31T13:49:46.855484-07:00</Time>
     </Item>
     <Item>
       <Source>Backgrounds\background.jpg</Source>
@@ -26,7 +26,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.xnb</Output>
-      <Time>2014-10-16T18:02:00.3110338-07:00</Time>
+      <Time>2014-10-31T13:49:46.7554838-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\ufoship (128x128).png</Source>
@@ -35,7 +35,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\ufoship (128x128).xnb</Output>
-      <Time>2014-10-16T18:02:01.2650884-07:00</Time>
+      <Time>2014-10-31T13:49:46.9254841-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\shuttle.png</Source>
@@ -44,7 +44,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.xnb</Output>
-      <Time>2014-10-16T18:02:01.206085-07:00</Time>
+      <Time>2014-10-31T13:49:46.9154841-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\scoutship (128x128).png</Source>
@@ -53,7 +53,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\scoutship (128x128).xnb</Output>
-      <Time>2014-10-16T18:02:01.241087-07:00</Time>
+      <Time>2014-10-31T13:49:46.895484-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\zoidship.png</Source>
@@ -62,7 +62,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\zoidship.xnb</Output>
-      <Time>2014-10-16T18:02:01.3010905-07:00</Time>
+      <Time>2014-10-31T13:49:46.9454841-07:00</Time>
     </Item>
     <Item>
       <Source>Backgrounds\galaxy.png</Source>
@@ -71,7 +71,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\galaxy.xnb</Output>
-      <Time>2014-10-16T18:02:00.3930385-07:00</Time>
+      <Time>2014-10-31T13:49:46.7854839-07:00</Time>
     </Item>
     <Item>
       <Source>Projectiles\laser.png</Source>
@@ -80,7 +80,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.xnb</Output>
-      <Time>2014-10-16T18:02:01.0260747-07:00</Time>
+      <Time>2014-10-31T13:49:46.875484-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\spaceshiptest.png</Source>
@@ -89,7 +89,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.xnb</Output>
-      <Time>2014-10-16T18:02:01.2080851-07:00</Time>
+      <Time>2014-10-31T13:49:46.9154841-07:00</Time>
     </Item>
     <Item>
       <Source>Backgrounds\beautifulbg.png</Source>
@@ -98,7 +98,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\beautifulbg.xnb</Output>
-      <Time>2014-10-16T18:02:00.3330351-07:00</Time>
+      <Time>2014-10-31T13:49:46.7654839-07:00</Time>
     </Item>
     <Item>
       <Source>Backgrounds\doodlebg.png</Source>
@@ -107,7 +107,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\doodlebg.xnb</Output>
-      <Time>2014-10-16T18:02:00.3520362-07:00</Time>
+      <Time>2014-10-31T13:49:46.7754839-07:00</Time>
     </Item>
     <Item>
       <Source>WinFlags\WinFlag1.png</Source>
@@ -116,7 +116,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\WinFlags\WinFlag1.xnb</Output>
-      <Time>2014-10-16T18:02:01.4000961-07:00</Time>
+      <Time>2014-10-31T13:49:47.3454847-07:00</Time>
     </Item>
     <Item>
       <Source>StellarObjects\asteroid(56x56).png</Source>
@@ -125,7 +125,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\asteroid(56x56).xnb</Output>
-      <Time>2014-10-16T18:02:01.3230917-07:00</Time>
+      <Time>2014-10-31T13:49:46.9954842-07:00</Time>
     </Item>
     <Item>
       <Source>Buttons\confirm.png</Source>
@@ -134,7 +134,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\confirm.xnb</Output>
-      <Time>2014-10-16T18:02:00.437041-07:00</Time>
+      <Time>2014-10-31T13:49:46.8054839-07:00</Time>
     </Item>
     <Item>
       <Source>StellarObjects\waterplanet (256x256).png</Source>
@@ -143,7 +143,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\waterplanet (256x256).xnb</Output>
-      <Time>2014-10-16T18:02:01.398096-07:00</Time>
+      <Time>2014-10-31T13:49:47.3454847-07:00</Time>
     </Item>
     <Item>
       <Source>Animations\fireballs.png</Source>
@@ -152,7 +152,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fireballs.xnb</Output>
-      <Time>2014-10-16T18:02:00.2820322-07:00</Time>
+      <Time>2014-10-31T13:49:46.7454838-07:00</Time>
     </Item>
     <Item>
       <Source>Animations\fireballs (test).png</Source>
@@ -161,7 +161,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fireballs (test).xnb</Output>
-      <Time>2014-10-16T18:02:00.262031-07:00</Time>
+      <Time>2014-10-31T13:49:46.7354838-07:00</Time>
     </Item>
     <Item>
       <Source>Animations\big fireballs with blur.png</Source>
@@ -170,7 +170,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\big fireballs with blur.xnb</Output>
-      <Time>2014-10-16T18:02:00.1620253-07:00</Time>
+      <Time>2014-10-31T13:49:46.6954838-07:00</Time>
     </Item>
     <Item>
       <Source>Projectiles\short missile (16x16).png</Source>
@@ -179,7 +179,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\short missile (16x16).xnb</Output>
-      <Time>2014-10-16T18:02:01.0740775-07:00</Time>
+      <Time>2014-10-31T13:49:46.875484-07:00</Time>
     </Item>
     <Item>
       <Source>Animations\bubble shield sheet.png</Source>
@@ -188,7 +188,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\bubble shield sheet.xnb</Output>
-      <Time>2014-10-16T18:02:00.2230288-07:00</Time>
+      <Time>2014-10-31T13:49:46.7354838-07:00</Time>
     </Item>
     <Item>
       <Source>StellarObjects\moon (115x117).png</Source>
@@ -197,7 +197,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\moon (115x117).xnb</Output>
-      <Time>2014-10-16T18:02:01.3520934-07:00</Time>
+      <Time>2014-10-31T13:49:47.0354842-07:00</Time>
     </Item>
     <Item>
       <Source>Projectiles\molten bullet (6x8).png</Source>
@@ -206,7 +206,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\molten bullet (6x8).xnb</Output>
-      <Time>2014-10-16T18:02:01.0430757-07:00</Time>
+      <Time>2014-10-31T13:49:46.875484-07:00</Time>
     </Item>
     <Item>
       <Source>Projectiles\plasmaball (32x36).png</Source>
@@ -215,7 +215,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\plasmaball (32x36).xnb</Output>
-      <Time>2014-10-16T18:02:01.0730774-07:00</Time>
+      <Time>2014-10-31T13:49:46.875484-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\bug (16x16).png</Source>
@@ -224,7 +224,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\bug (16x16).xnb</Output>
-      <Time>2014-10-16T18:02:01.1410813-07:00</Time>
+      <Time>2014-10-31T13:49:46.885484-07:00</Time>
     </Item>
     <Item>
       <Source>Buttons\lobbyoptions.png</Source>
@@ -233,7 +233,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbyoptions.xnb</Output>
-      <Time>2014-10-16T18:02:00.996073-07:00</Time>
+      <Time>2014-10-31T13:49:46.855484-07:00</Time>
     </Item>
     <Item>
       <Source>Buttons\gameroom.png</Source>
@@ -242,7 +242,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gameroom.xnb</Output>
-      <Time>2014-10-16T18:02:00.8750661-07:00</Time>
+      <Time>2014-10-31T13:49:46.845484-07:00</Time>
     </Item>
     <Item>
       <Source>Buttons\gamelobby.png</Source>
@@ -251,7 +251,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gamelobby.xnb</Output>
-      <Time>2014-10-16T18:02:00.7830608-07:00</Time>
+      <Time>2014-10-31T13:49:46.835484-07:00</Time>
     </Item>
     <Item>
       <Source>Buttons\createlobby.png</Source>
@@ -260,7 +260,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\createlobby.xnb</Output>
-      <Time>2014-10-16T18:02:00.4760433-07:00</Time>
+      <Time>2014-10-31T13:49:46.8254839-07:00</Time>
     </Item>
     <Item>
       <Source>Buttons\lobbybrowser.png</Source>
@@ -269,7 +269,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbybrowser.xnb</Output>
-      <Time>2014-10-16T18:02:00.9450701-07:00</Time>
+      <Time>2014-10-31T13:49:46.845484-07:00</Time>
     </Item>
     <Item>
       <Source>MapIcons\base (14x14).png</Source>
@@ -278,7 +278,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\MapIcons\base (14x14).xnb</Output>
-      <Time>2014-10-24T12:29:03.3180398-07:00</Time>
+      <Time>2014-10-31T13:49:46.875484-07:00</Time>
     </Item>
     <Item>
       <Source>MapIcons\base2 (16x16).png</Source>
@@ -287,7 +287,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\MapIcons\base2 (16x16).xnb</Output>
-      <Time>2014-10-24T12:29:10.0944274-07:00</Time>
+      <Time>2014-10-31T13:49:46.875484-07:00</Time>
     </Item>
     <Item>
       <Source>MapIcons\reddot 2 frame (16x16).png</Source>
@@ -296,7 +296,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\MapIcons\reddot 2 frame (16x16).xnb</Output>
-      <Time>2014-10-24T12:29:13.2926104-07:00</Time>
+      <Time>2014-10-31T13:49:46.875484-07:00</Time>
     </Item>
     <Item>
       <Source>MapIcons\reticle (16x16).png</Source>
@@ -305,7 +305,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\MapIcons\reticle (16x16).xnb</Output>
-      <Time>2014-10-24T12:29:16.7558084-07:00</Time>
+      <Time>2014-10-31T13:49:46.875484-07:00</Time>
     </Item>
     <Item>
       <Source>SpriteFonts\SpriteFont1.spritefont</Source>
@@ -314,7 +314,7 @@
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb</Output>
-      <Time>2014-10-16T18:02:01.3120911-07:00</Time>
+      <Time>2014-10-31T13:49:46.9654841-07:00</Time>
     </Item>
     <Item>
       <Source>Buttons\shipselection.png</Source>
@@ -323,7 +323,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.xnb</Output>
-      <Time>2014-10-16T18:02:01.0250747-07:00</Time>
+      <Time>2014-10-31T13:49:46.865484-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\galactuship.png</Source>
@@ -332,7 +332,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\galactuship.xnb</Output>
-      <Time>2014-10-16T18:02:01.171083-07:00</Time>
+      <Time>2014-10-31T13:49:46.895484-07:00</Time>
     </Item>
     <Item>
       <Source>Buttons\optionsbutton.png</Source>
@@ -341,7 +341,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\optionsbutton.xnb</Output>
-      <Time>2014-10-31T12:58:43.8090486-07:00</Time>
+      <Time>2014-10-31T13:49:46.855484-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

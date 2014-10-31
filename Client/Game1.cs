@@ -68,6 +68,20 @@ namespace SpaceUnion {
 			return Window.ClientBounds.Height;
 		}
 
+        public void setScreenSize(int width, int height, bool fullScreen = false)
+        {
+            if (fullScreen)
+            {
+                //width = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                //height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                Window.IsBorderless = true;
+            }
+            graphics.PreferredBackBufferHeight = height;
+            graphics.PreferredBackBufferWidth = width;
+            Window.Position = new Point(0, 0);
+            graphics.ApplyChanges();
+        }
+
 		public Game1()
 			: base() {
 			graphics = new GraphicsDeviceManager(this);

@@ -41,8 +41,11 @@ namespace SpaceUnion.Ships {
 		/// Turn speed in radians per second
 		/// </summary>
 		protected float turnSpeed = 4.5f;
-
-
+        /// <summary>
+        /// Keep track of old acceleration
+        /// </summary>
+        protected Vector2 oldAccel = Vector2.Zero;
+        protected bool inertiaOn = false;
 		/// <summary>
 		/// Amount of time in seconds between main weaponfire
 		/// </summary>
@@ -60,7 +63,6 @@ namespace SpaceUnion.Ships {
 		/// </summary>
 		protected TimeSpan previousAltFireTime;
 
-<<<<<<< HEAD
 		/// <summary>
 		/// The main weapon of the ship. Created by calling:
 		/// mainWeapon = Launcher &lt; T &gt; .CreateLauncher(this, (x, y) => new T(x, y), numBullets);
@@ -68,12 +70,6 @@ namespace SpaceUnion.Ships {
 		/// Ya, it's ugly, I know...sorry....
 		/// </summary>
 		public WeaponSystem mainWeapon;
-=======
-		public List<Projectile> projectiles;
-
-
-		//private WeaponSystem mainWeapon;
->>>>>>> e39e8f68e60af8663ca8a22d428939578eabde15
 		/// <summary>
 		/// Location on sprite where weapon appears from
 		/// </summary>
@@ -256,6 +252,7 @@ namespace SpaceUnion.Ships {
 			// Vectorize the unit acceleration
 			Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
 			acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+<<<<<<< HEAD
 
 			if (Math.Abs(tempVelocity.Length()) > maxSpeed) {
 				Vector2 tempVelocity2 = tempVelocity;
@@ -266,6 +263,25 @@ namespace SpaceUnion.Ships {
 			} else if (Math.Abs(tempVelocity.Length()) < maxSpeed) {
 				Vector2.Add(ref velocity, ref acceleration, out velocity);
 			}
+=======
+            Vector2.Add(ref tempVelocity, ref acceleration, out tempVelocity);
+
+
+
+            /*
+            if (Math.Abs(tempVelocity.Length()) > maxSpeed)
+            {
+                Vector2 tempVelocity2 = tempVelocity;
+                Vector2.Add(ref tempVelocity2, ref acceleration, out tempVelocity2);
+                if (Math.Abs(tempVelocity2.Length()) < tempVelocity.Length())
+                {
+                    Vector2.Add(ref velocity, ref acceleration, out velocity);
+                }
+            } else if (Math.Abs(tempVelocity.Length()) < maxSpeed)
+            {
+                Vector2.Add(ref velocity, ref acceleration, out velocity);
+            }*/
+>>>>>>> 453c84e5e0688768d0e0091aee50d4db5f9a3eb7
 		}
 
 
@@ -322,6 +338,7 @@ namespace SpaceUnion.Ships {
 		protected virtual void rotateLeft(GameTime gameTime) {
 
 			float oldRotation = rotation;
+            
 			if (rotation > 6.283185 || rotation < -6.283185) {
 				rotation = rotation % 6.283185f;
 			}
@@ -342,7 +359,8 @@ namespace SpaceUnion.Ships {
 		protected virtual void rotateRight(GameTime gameTime) {
 
 			float oldRotation = rotation;
-			if (rotation > 6.283185 || rotation < -6.283185) {
+
+            if (rotation > 6.283185 || rotation < -6.283185) {
 				rotation = rotation % 6.283185f;
 			}
 			rotation += turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
