@@ -65,6 +65,7 @@ namespace SpaceUnion.Tools {
         /// Created by Matthew Baldock
         /// </summary>
         public Texture2D gameroom;
+        public Texture2D options;
 
 		// bgs and doodads
 		public Texture2D background;
@@ -143,6 +144,7 @@ namespace SpaceUnion.Tools {
             createlobby = Content.Load<Texture2D>("Buttons/createlobby");
             gamelobby = Content.Load<Texture2D>("Buttons/gamelobby");
             gameroom = Content.Load<Texture2D>("Buttons/gameroom");
+            options = Content.Load<Texture2D>("Buttons/optionsbutton");
             ///end added by Matthew Baldock
 
 			guiRectangle = new Texture2D(graphicsDevice, 1, 1);

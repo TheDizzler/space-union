@@ -26,8 +26,8 @@ using SpaceUnion.Tools;
 			shipSelect.setPosition(new Vector2((game.getScreenWidth() - shipSelect.width)/2, (game.getScreenHeight() - shipSelect.height)));
             lobby = new BaseButton(Game1.Assets.lobbyoptions);
             lobby.setPosition(new Vector2(100, 100));
-            options = new BaseButton(Game1.Assets.createlobby) { height = 64, width = 64 };
-            options.setPosition(new Vector2(game.getScreenWidth() - 100,0));
+            options = new BaseButton(Game1.Assets.options);
+            options.setPosition(new Vector2(game.getScreenWidth() - 300,0));
 		}
 
 		public void Update() {

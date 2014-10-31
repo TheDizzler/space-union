@@ -298,6 +298,15 @@
       <Output>C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.xnb</Output>
       <Time>2014-10-03T11:01:21.1437313-07:00</Time>
     </Item>
+    <Item>
+      <Source>Buttons\optionsbutton.png</Source>
+      <Name>Buttons\optionsbutton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\optionsbutton.xnb</Output>
+      <Time>2014-10-27T15:14:46.3195458-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{69F49597-D779-4577-9103-14C2802D7E0F}</ContentProjectGUID>

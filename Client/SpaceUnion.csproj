@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="Animations\BigExplosion.cs" />
     <Compile Include="Animations\Explosion.cs" />
+    <Compile Include="Animations\ScrollingBackground.cs" />
     <Compile Include="Controllers\GameRoom.cs" />
     <Compile Include="Controllers\GameLobby.cs" />
     <Compile Include="Controllers\LobbyBrowser.cs" />

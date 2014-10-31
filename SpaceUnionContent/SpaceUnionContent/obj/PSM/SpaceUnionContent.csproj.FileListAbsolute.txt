@@ -101,7 +101,6 @@ C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group pro
 C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\createlobby.png
 C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbybrowser.png
 C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\galactuship.xnb
-
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\obj\PSM\SpaceUnionContent.csprojResolveAssemblyReference.cache
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbyoptions.xnb
@@ -114,4 +113,4 @@ C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gamero
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gamelobby.png
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\createlobby.png
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbybrowser.png
-
+C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\optionsbutton.xnb
