@@ -133,14 +133,23 @@ namespace Server_Application
         {
             while (true)
             {
+                /*
                 GameData data = getGameData(client);
                 if (data == null)
                 {
-                    Thread.Sleep(30);
+                    Thread.Sleep(1);
                     continue;
                 }
-                //Console.WriteLine("Player - " + data.Player.Username + " Port sent to - " + ((IPEndPoint)UDPClients[client].Client.LocalEndPoint).Port + " IP - " + data.Player.IPAddress);
                 DataControl.sendUDPData(UDPClients[client], data, data.Player.IPAddress, ((IPEndPoint)UDPClients[client].Client.LocalEndPoint).Port);
+                */
+                foreach (Gameroom room in owner.Gamerooms.ToArray())
+                {
+                    GameFrame frame = room.getGameFrame();
+                    foreach (string ip in frame.IPList)
+                    {
+                        DataControl.sendUDPData(UDPClients[client], frame, ip, ((IPEndPoint)UDPClients[client].Client.LocalEndPoint).Port);
+                    }
+                }
             }
         }
 

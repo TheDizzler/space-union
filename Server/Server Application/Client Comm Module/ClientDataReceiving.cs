@@ -16,18 +16,15 @@ namespace Client_Comm_Module
         /// <summary>
         /// True if this class has been disposed.
         /// </summary>
-        private bool disposed = false;
-
+        private bool Disposed { get; set; }
         /// <summary>
         ///  UDP client used to listen to the server.
         /// </summary>
-        private UdpClient UDPListener;
-
+        private UdpClient UDPListener { get; set; }
         /// <summary>
         /// List used to store received data.
         /// </summary>
-        private List<GameData> dataQueue;
-
+        public GameFrame Data { get; private set; }
         /// <summary>
         /// UDP port to listen to; assigned by the server.
         /// </summary>
@@ -35,27 +32,15 @@ namespace Client_Comm_Module
 
         /// <summary>
         /// Initiate the data receiver client.
+        /// Initialize the data receiver client.
         /// </summary>
         /// <param name="assignedPort">UDP port to listen to; assigned by the server.</param>
         public ClientDataReceiving(int assignedPort)
         {
-            Console.WriteLine("------------RECEIVER IS INITIALIZED--------" + assignedPort);
-            dataQueue = new List<GameData>();
             UDPListener = new UdpClient(assignedPort);
             assignedUDPPort_Listen = assignedPort;
             new Thread(receiveData).Start();
         }
-
-        /// <summary>
-        /// Receive login information from the server. 
-        /// </summary>
-        /// <returns></returns>
-        /*public Player receiveLoginConfirmation()
-        {
-            TcpListener listener = new TcpListener(IPAddress.Any, Constants.TCPLoginClient);
-            listener.Start();
-            return (Player)DataControl.receiveTCPData(listener);
-        }*/
 
         /// <summary>
         /// Begin receiving game data from the server.
@@ -63,39 +48,7 @@ namespace Client_Comm_Module
         public void receiveData()
         {
             while (true)
-            {
-                Console.WriteLine("Waiting for data from the server");
-                GameData clientData = (GameData)DataControl.receiveUDPData(UDPListener);
-                //Console.WriteLine("null Message Received: ");
-                if (clientData != null)
-                {
-                    Console.WriteLine("Message Received: " + clientData.XPosition + ", " + clientData.YPosition + ", " + clientData.Player.Username);
-                    Console.WriteLine(getGameDataQueueSize());
-                    dataQueue.Add(clientData);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets the oldest data from the data queue.
-        /// </summary>
-        /// <returns>The oldest data in the queue.</returns>
-        public GameData getGameData()
-        {
-            if (dataQueue.Count == 0)
-                return null;
-            GameData data = dataQueue.ElementAt(0);
-            dataQueue.RemoveAt(0);
-            return data;
-        }
-
-        /// <summary>
-        /// Gets the size of the GameData queue.
-        /// </summary>
-        /// <returns>Size of the GameData queue.</returns>
-        public int getGameDataQueueSize()
-        {
-            return dataQueue.Count;
+                Data = (GameFrame)DataControl.receiveUDPData(UDPListener);
         }
 
         /// <summary>
@@ -114,7 +67,7 @@ namespace Client_Comm_Module
         /// <param name="disposing">True if the client is to be disposed.</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (disposed)
+            if (Disposed)
                 return;
 
             if (disposing)
@@ -122,7 +75,7 @@ namespace Client_Comm_Module
                 // clean up here
             }
 
-            disposed = true;
+            Disposed = true;
         }
     }
 }

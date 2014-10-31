@@ -25,7 +25,7 @@ namespace Server_Application
             Console.WriteLine("Enter the phrase \"help\" at any moment to display a list of commands.\n");
 
             Server server = new Server();
-            ServerAnalyzer analyzer = new ServerAnalyzer(server.transmission, server.gamerooms, server.onlineplayers, server.searchingplayers);
+            ServerAnalyzer analyzer = new ServerAnalyzer(server.Transmission, server.Gamerooms, server.OnlinePlayers, server.SearchingPlayers);
             
             while (true)
             {

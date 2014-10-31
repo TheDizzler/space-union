@@ -99,7 +99,6 @@ namespace Client_Comm_Module
                 Console.WriteLine("-------player is null--------");
                 return null;
             }
-            Console.WriteLine(player.PortReceive);
             return player;
         }
 

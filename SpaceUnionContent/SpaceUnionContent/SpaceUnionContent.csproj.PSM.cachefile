@@ -1,18 +1,18 @@
-Content\Backgrounds\starfield (800x600).xnb
-Content\Buttons\playbutton.xnb
-Content\Backgrounds\background.xnb
-Content\Spaceships\circleship (128x128).xnb
-Content\Spaceships\shuttle.xnb
-Content\Spaceships\triangleship (128x128).xnb
-Content\Spaceships\wrenchship.xnb
-Content\Backgrounds\galaxy.xnb
-Content\Projectiles\laser.xnb
-Content\Spaceships\spaceshiptest.xnb
-Content\Backgrounds\beautifulbg.xnb
-Content\Backgrounds\doodlebg.xnb
-Content\WinFlags\WinFlag1.xnb
-Content\StellarObjects\waterplanet (256x256).xnb
-Content\SpriteFonts\SpriteFont1.xnb
+starfield (800x600).xnb
+playbutton.xnb
+background.xnb
+circleship (128x128).xnb
+shuttle.xnb
+triangleship (128x128).xnb
+wrenchship.xnb
+galaxy.xnb
+laser.xnb
+spaceshiptest.xnb
+beautifulbg.xnb
+doodlebg.xnb
+WinFlag1.xnb
+waterplanet (256x256).xnb
+SpriteFont1.xnb
 Content\Buttons\playbutton.png
 Content\Backgrounds\background.jpg
 Content\Spaceships\circleship (128x128).png

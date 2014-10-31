@@ -47,7 +47,7 @@ namespace Client_Comm_Module
         /// Gets the other players in the gameroom as an array.
         /// </summary>
         /// <returns>Gets an array of data about the positions of the other players.</returns>
-        public Dictionary<string, GameData> getPlayersData()
+        public GameFrame getPlayersData()
         {
             return helper.getPlayersData();
         }
@@ -87,6 +87,7 @@ namespace Client_Comm_Module
         {
             if (message != null)
                 sender.addMessageToQueue(message);
+            
         }
 
         /// <summary>
@@ -105,7 +106,7 @@ namespace Client_Comm_Module
         public void sendGameData(GameData data)
         {
             if (data != null && dataSender != null)
-                dataSender.addDataToQueue(data);
+                dataSender.updateData(data);
         }
 
         // GET FUNCTIONS ----------------------------------------------------
@@ -114,12 +115,10 @@ namespace Client_Comm_Module
         /// Fetch a game data received from the server.
         /// </summary>
         /// <returns>Game data received from the server.</returns>
-        private GameData getGameData()
+        private GameFrame getGameData()
         {
             if (dataReceiver != null)
-            {
-                return dataReceiver.getGameData();
-            }
+                return dataReceiver.Data;
             return null;
         }
 
