@@ -15,10 +15,16 @@ namespace Data_Structures
 
         public int RoomNumber { get; set; }
         public string RoomName { get; set; }
+        public Boolean InGame { get; set; }
 
         public int Players { get { return players.Count; } }
 
         public Gameroom() { }
+
+        public GameFrame getGameFrame()
+        {
+            return new GameFrame(players.Values.ToArray());
+        }
 
         /// <summary>
         /// Add the given player to the room.
