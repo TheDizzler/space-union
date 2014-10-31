@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.createUserTab = new System.Windows.Forms.TabPage();
             this.lablConfPasswordErrMsg = new System.Windows.Forms.Label();
@@ -64,16 +65,81 @@
             this.button1 = new System.Windows.Forms.Button();
             this.logintext = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lablAddNewShip = new System.Windows.Forms.Label();
-            this.lablNewShipName = new System.Windows.Forms.Label();
-            this.txtbNewShipName = new System.Windows.Forms.TextBox();
             this.lablNewShipNameErrMsg = new System.Windows.Forms.Label();
+            this.txtbNewShipName = new System.Windows.Forms.TextBox();
+            this.lablNewShipName = new System.Windows.Forms.Label();
+            this.lablAddNewShip = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.gvUsers = new System.Windows.Forms.DataGridView();
+            this.spaceUnionDataSet = new AdminControlForm.SpaceUnionDataSet();
+            this.usersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.usersTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UsersTableAdapter();
+            this.userNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userPasswordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userEmailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userImageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userIsOnlineDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userIsBlockedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userIsAdminDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gvStats = new System.Windows.Forms.DataGridView();
+            this.userStatsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.userStatsTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UserStatsTableAdapter();
+            this.userNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userstatWinDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userstatLoseDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userstatShotsFiredDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userstatHitsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userstatKillsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userstatDiedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userstatShipUsed1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userstatShipUsed2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userstatShipUsed3DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userstatFlagsCapturedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tbUserStatName = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.nudWins = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.nudLoses = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.nudShotsFired = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.nudHits = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.nudKills = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
+            this.nudDied = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
+            this.nudShip1 = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
+            this.nudShip2 = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
+            this.nudShip3 = new System.Windows.Forms.NumericUpDown();
+            this.label14 = new System.Windows.Forms.Label();
+            this.nudFlagsCaptured = new System.Windows.Forms.NumericUpDown();
+            this.btnUpdate = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.createUserTab.SuspendLayout();
             this.editUserTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvUsers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvStats)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userStatsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudWins)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLoses)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudShotsFired)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHits)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudKills)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudDied)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudShip1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudShip2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudShip3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFlagsCaptured)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -82,6 +148,7 @@
             this.tabControl.Controls.Add(this.editUserTab);
             this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Controls.Add(this.tabPage2);
+            this.tabControl.Controls.Add(this.tabPage3);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -479,25 +546,23 @@
             this.tabPage2.Text = "Add/Edit Ships";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // lablNewShipNameErrMsg
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 27);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "label2";
+            this.lablNewShipNameErrMsg.AutoSize = true;
+            this.lablNewShipNameErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablNewShipNameErrMsg.Location = new System.Drawing.Point(115, 55);
+            this.lablNewShipNameErrMsg.Name = "lablNewShipNameErrMsg";
+            this.lablNewShipNameErrMsg.Size = new System.Drawing.Size(92, 13);
+            this.lablNewShipNameErrMsg.TabIndex = 4;
+            this.lablNewShipNameErrMsg.Text = "ship name err msg";
+            this.lablNewShipNameErrMsg.Visible = false;
             // 
-            // lablAddNewShip
+            // txtbNewShipName
             // 
-            this.lablAddNewShip.AutoSize = true;
-            this.lablAddNewShip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablAddNewShip.ForeColor = System.Drawing.Color.White;
-            this.lablAddNewShip.Location = new System.Drawing.Point(19, 20);
-            this.lablAddNewShip.Name = "lablAddNewShip";
-            this.lablAddNewShip.Size = new System.Drawing.Size(136, 20);
-            this.lablAddNewShip.TabIndex = 1;
-            this.lablAddNewShip.Text = "Add a New Ship";
+            this.txtbNewShipName.Location = new System.Drawing.Point(26, 74);
+            this.txtbNewShipName.Name = "txtbNewShipName";
+            this.txtbNewShipName.Size = new System.Drawing.Size(210, 20);
+            this.txtbNewShipName.TabIndex = 3;
             // 
             // lablNewShipName
             // 
@@ -510,23 +575,419 @@
             this.lablNewShipName.TabIndex = 2;
             this.lablNewShipName.Text = "Ship Name";
             // 
-            // txtbNewShipName
+            // lablAddNewShip
             // 
-            this.txtbNewShipName.Location = new System.Drawing.Point(26, 74);
-            this.txtbNewShipName.Name = "txtbNewShipName";
-            this.txtbNewShipName.Size = new System.Drawing.Size(210, 20);
-            this.txtbNewShipName.TabIndex = 3;
+            this.lablAddNewShip.AutoSize = true;
+            this.lablAddNewShip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablAddNewShip.ForeColor = System.Drawing.Color.White;
+            this.lablAddNewShip.Location = new System.Drawing.Point(19, 20);
+            this.lablAddNewShip.Name = "lablAddNewShip";
+            this.lablAddNewShip.Size = new System.Drawing.Size(136, 20);
+            this.lablAddNewShip.TabIndex = 1;
+            this.lablAddNewShip.Text = "Add a New Ship";
             // 
-            // lablNewShipNameErrMsg
+            // label2
             // 
-            this.lablNewShipNameErrMsg.AutoSize = true;
-            this.lablNewShipNameErrMsg.ForeColor = System.Drawing.Color.Red;
-            this.lablNewShipNameErrMsg.Location = new System.Drawing.Point(115, 55);
-            this.lablNewShipNameErrMsg.Name = "lablNewShipNameErrMsg";
-            this.lablNewShipNameErrMsg.Size = new System.Drawing.Size(92, 13);
-            this.lablNewShipNameErrMsg.TabIndex = 4;
-            this.lablNewShipNameErrMsg.Text = "ship name err msg";
-            this.lablNewShipNameErrMsg.Visible = false;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(20, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "label2";
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.btnUpdate);
+            this.tabPage3.Controls.Add(this.label14);
+            this.tabPage3.Controls.Add(this.nudFlagsCaptured);
+            this.tabPage3.Controls.Add(this.label13);
+            this.tabPage3.Controls.Add(this.nudShip3);
+            this.tabPage3.Controls.Add(this.label12);
+            this.tabPage3.Controls.Add(this.nudShip2);
+            this.tabPage3.Controls.Add(this.label11);
+            this.tabPage3.Controls.Add(this.nudShip1);
+            this.tabPage3.Controls.Add(this.label10);
+            this.tabPage3.Controls.Add(this.nudDied);
+            this.tabPage3.Controls.Add(this.label9);
+            this.tabPage3.Controls.Add(this.nudKills);
+            this.tabPage3.Controls.Add(this.label8);
+            this.tabPage3.Controls.Add(this.nudHits);
+            this.tabPage3.Controls.Add(this.label7);
+            this.tabPage3.Controls.Add(this.nudShotsFired);
+            this.tabPage3.Controls.Add(this.label6);
+            this.tabPage3.Controls.Add(this.nudLoses);
+            this.tabPage3.Controls.Add(this.label5);
+            this.tabPage3.Controls.Add(this.nudWins);
+            this.tabPage3.Controls.Add(this.label4);
+            this.tabPage3.Controls.Add(this.tbUserStatName);
+            this.tabPage3.Controls.Add(this.gvStats);
+            this.tabPage3.Controls.Add(this.gvUsers);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(488, 486);
+            this.tabPage3.TabIndex = 4;
+            this.tabPage3.Text = "UserStats";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // gvUsers
+            // 
+            this.gvUsers.AutoGenerateColumns = false;
+            this.gvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvUsers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.userNameDataGridViewTextBoxColumn,
+            this.userPasswordDataGridViewTextBoxColumn,
+            this.userEmailDataGridViewTextBoxColumn,
+            this.userImageDataGridViewTextBoxColumn,
+            this.userIsOnlineDataGridViewTextBoxColumn,
+            this.userIsBlockedDataGridViewTextBoxColumn,
+            this.userIsAdminDataGridViewTextBoxColumn});
+            this.gvUsers.DataSource = this.usersBindingSource;
+            this.gvUsers.Location = new System.Drawing.Point(7, 7);
+            this.gvUsers.Name = "gvUsers";
+            this.gvUsers.Size = new System.Drawing.Size(473, 115);
+            this.gvUsers.TabIndex = 0;
+            // 
+            // spaceUnionDataSet
+            // 
+            this.spaceUnionDataSet.DataSetName = "SpaceUnionDataSet";
+            this.spaceUnionDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // usersBindingSource
+            // 
+            this.usersBindingSource.DataMember = "Users";
+            this.usersBindingSource.DataSource = this.spaceUnionDataSet;
+            // 
+            // usersTableAdapter
+            // 
+            this.usersTableAdapter.ClearBeforeFill = true;
+            // 
+            // userNameDataGridViewTextBoxColumn
+            // 
+            this.userNameDataGridViewTextBoxColumn.DataPropertyName = "userName";
+            this.userNameDataGridViewTextBoxColumn.HeaderText = "userName";
+            this.userNameDataGridViewTextBoxColumn.Name = "userNameDataGridViewTextBoxColumn";
+            // 
+            // userPasswordDataGridViewTextBoxColumn
+            // 
+            this.userPasswordDataGridViewTextBoxColumn.DataPropertyName = "userPassword";
+            this.userPasswordDataGridViewTextBoxColumn.HeaderText = "userPassword";
+            this.userPasswordDataGridViewTextBoxColumn.Name = "userPasswordDataGridViewTextBoxColumn";
+            // 
+            // userEmailDataGridViewTextBoxColumn
+            // 
+            this.userEmailDataGridViewTextBoxColumn.DataPropertyName = "userEmail";
+            this.userEmailDataGridViewTextBoxColumn.HeaderText = "userEmail";
+            this.userEmailDataGridViewTextBoxColumn.Name = "userEmailDataGridViewTextBoxColumn";
+            // 
+            // userImageDataGridViewTextBoxColumn
+            // 
+            this.userImageDataGridViewTextBoxColumn.DataPropertyName = "userImage";
+            this.userImageDataGridViewTextBoxColumn.HeaderText = "userImage";
+            this.userImageDataGridViewTextBoxColumn.Name = "userImageDataGridViewTextBoxColumn";
+            // 
+            // userIsOnlineDataGridViewTextBoxColumn
+            // 
+            this.userIsOnlineDataGridViewTextBoxColumn.DataPropertyName = "userIsOnline";
+            this.userIsOnlineDataGridViewTextBoxColumn.HeaderText = "userIsOnline";
+            this.userIsOnlineDataGridViewTextBoxColumn.Name = "userIsOnlineDataGridViewTextBoxColumn";
+            // 
+            // userIsBlockedDataGridViewTextBoxColumn
+            // 
+            this.userIsBlockedDataGridViewTextBoxColumn.DataPropertyName = "userIsBlocked";
+            this.userIsBlockedDataGridViewTextBoxColumn.HeaderText = "userIsBlocked";
+            this.userIsBlockedDataGridViewTextBoxColumn.Name = "userIsBlockedDataGridViewTextBoxColumn";
+            // 
+            // userIsAdminDataGridViewTextBoxColumn
+            // 
+            this.userIsAdminDataGridViewTextBoxColumn.DataPropertyName = "userIsAdmin";
+            this.userIsAdminDataGridViewTextBoxColumn.HeaderText = "userIsAdmin";
+            this.userIsAdminDataGridViewTextBoxColumn.Name = "userIsAdminDataGridViewTextBoxColumn";
+            // 
+            // gvStats
+            // 
+            this.gvStats.AutoGenerateColumns = false;
+            this.gvStats.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvStats.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.userNameDataGridViewTextBoxColumn1,
+            this.userstatWinDataGridViewTextBoxColumn,
+            this.userstatLoseDataGridViewTextBoxColumn,
+            this.userstatShotsFiredDataGridViewTextBoxColumn,
+            this.userstatHitsDataGridViewTextBoxColumn,
+            this.userstatKillsDataGridViewTextBoxColumn,
+            this.userstatDiedDataGridViewTextBoxColumn,
+            this.userstatShipUsed1DataGridViewTextBoxColumn,
+            this.userstatShipUsed2DataGridViewTextBoxColumn,
+            this.userstatShipUsed3DataGridViewTextBoxColumn,
+            this.userstatFlagsCapturedDataGridViewTextBoxColumn});
+            this.gvStats.DataSource = this.userStatsBindingSource;
+            this.gvStats.Location = new System.Drawing.Point(9, 129);
+            this.gvStats.Name = "gvStats";
+            this.gvStats.Size = new System.Drawing.Size(471, 100);
+            this.gvStats.TabIndex = 1;
+            // 
+            // userStatsBindingSource
+            // 
+            this.userStatsBindingSource.DataMember = "UserStats";
+            this.userStatsBindingSource.DataSource = this.spaceUnionDataSet;
+            // 
+            // userStatsTableAdapter
+            // 
+            this.userStatsTableAdapter.ClearBeforeFill = true;
+            // 
+            // userNameDataGridViewTextBoxColumn1
+            // 
+            this.userNameDataGridViewTextBoxColumn1.DataPropertyName = "userName";
+            this.userNameDataGridViewTextBoxColumn1.HeaderText = "userName";
+            this.userNameDataGridViewTextBoxColumn1.Name = "userNameDataGridViewTextBoxColumn1";
+            // 
+            // userstatWinDataGridViewTextBoxColumn
+            // 
+            this.userstatWinDataGridViewTextBoxColumn.DataPropertyName = "userstatWin";
+            this.userstatWinDataGridViewTextBoxColumn.HeaderText = "userstatWin";
+            this.userstatWinDataGridViewTextBoxColumn.Name = "userstatWinDataGridViewTextBoxColumn";
+            // 
+            // userstatLoseDataGridViewTextBoxColumn
+            // 
+            this.userstatLoseDataGridViewTextBoxColumn.DataPropertyName = "userstatLose";
+            this.userstatLoseDataGridViewTextBoxColumn.HeaderText = "userstatLose";
+            this.userstatLoseDataGridViewTextBoxColumn.Name = "userstatLoseDataGridViewTextBoxColumn";
+            // 
+            // userstatShotsFiredDataGridViewTextBoxColumn
+            // 
+            this.userstatShotsFiredDataGridViewTextBoxColumn.DataPropertyName = "userstatShotsFired";
+            this.userstatShotsFiredDataGridViewTextBoxColumn.HeaderText = "userstatShotsFired";
+            this.userstatShotsFiredDataGridViewTextBoxColumn.Name = "userstatShotsFiredDataGridViewTextBoxColumn";
+            // 
+            // userstatHitsDataGridViewTextBoxColumn
+            // 
+            this.userstatHitsDataGridViewTextBoxColumn.DataPropertyName = "userstatHits";
+            this.userstatHitsDataGridViewTextBoxColumn.HeaderText = "userstatHits";
+            this.userstatHitsDataGridViewTextBoxColumn.Name = "userstatHitsDataGridViewTextBoxColumn";
+            // 
+            // userstatKillsDataGridViewTextBoxColumn
+            // 
+            this.userstatKillsDataGridViewTextBoxColumn.DataPropertyName = "userstatKills";
+            this.userstatKillsDataGridViewTextBoxColumn.HeaderText = "userstatKills";
+            this.userstatKillsDataGridViewTextBoxColumn.Name = "userstatKillsDataGridViewTextBoxColumn";
+            // 
+            // userstatDiedDataGridViewTextBoxColumn
+            // 
+            this.userstatDiedDataGridViewTextBoxColumn.DataPropertyName = "userstatDied";
+            this.userstatDiedDataGridViewTextBoxColumn.HeaderText = "userstatDied";
+            this.userstatDiedDataGridViewTextBoxColumn.Name = "userstatDiedDataGridViewTextBoxColumn";
+            // 
+            // userstatShipUsed1DataGridViewTextBoxColumn
+            // 
+            this.userstatShipUsed1DataGridViewTextBoxColumn.DataPropertyName = "userstatShipUsed_1";
+            this.userstatShipUsed1DataGridViewTextBoxColumn.HeaderText = "userstatShipUsed_1";
+            this.userstatShipUsed1DataGridViewTextBoxColumn.Name = "userstatShipUsed1DataGridViewTextBoxColumn";
+            // 
+            // userstatShipUsed2DataGridViewTextBoxColumn
+            // 
+            this.userstatShipUsed2DataGridViewTextBoxColumn.DataPropertyName = "userstatShipUsed_2";
+            this.userstatShipUsed2DataGridViewTextBoxColumn.HeaderText = "userstatShipUsed_2";
+            this.userstatShipUsed2DataGridViewTextBoxColumn.Name = "userstatShipUsed2DataGridViewTextBoxColumn";
+            // 
+            // userstatShipUsed3DataGridViewTextBoxColumn
+            // 
+            this.userstatShipUsed3DataGridViewTextBoxColumn.DataPropertyName = "userstatShipUsed_3";
+            this.userstatShipUsed3DataGridViewTextBoxColumn.HeaderText = "userstatShipUsed_3";
+            this.userstatShipUsed3DataGridViewTextBoxColumn.Name = "userstatShipUsed3DataGridViewTextBoxColumn";
+            // 
+            // userstatFlagsCapturedDataGridViewTextBoxColumn
+            // 
+            this.userstatFlagsCapturedDataGridViewTextBoxColumn.DataPropertyName = "userstatFlagsCaptured";
+            this.userstatFlagsCapturedDataGridViewTextBoxColumn.HeaderText = "userstatFlagsCaptured";
+            this.userstatFlagsCapturedDataGridViewTextBoxColumn.Name = "userstatFlagsCapturedDataGridViewTextBoxColumn";
+            // 
+            // tbUserStatName
+            // 
+            this.tbUserStatName.Location = new System.Drawing.Point(68, 232);
+            this.tbUserStatName.Name = "tbUserStatName";
+            this.tbUserStatName.Size = new System.Drawing.Size(224, 20);
+            this.tbUserStatName.TabIndex = 2;
+            this.tbUserStatName.TextChanged += new System.EventHandler(this.tbUserStatName_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 235);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "username";
+            // 
+            // nudWins
+            // 
+            this.nudWins.Location = new System.Drawing.Point(68, 292);
+            this.nudWins.Name = "nudWins";
+            this.nudWins.Size = new System.Drawing.Size(120, 20);
+            this.nudWins.TabIndex = 4;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(9, 299);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(28, 13);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "wins";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(9, 325);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(31, 13);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "loses";
+            // 
+            // nudLoses
+            // 
+            this.nudLoses.Location = new System.Drawing.Point(68, 318);
+            this.nudLoses.Name = "nudLoses";
+            this.nudLoses.Size = new System.Drawing.Size(120, 20);
+            this.nudLoses.TabIndex = 6;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(9, 351);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(55, 13);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "shots fired";
+            // 
+            // nudShotsFired
+            // 
+            this.nudShotsFired.Location = new System.Drawing.Point(68, 344);
+            this.nudShotsFired.Name = "nudShotsFired";
+            this.nudShotsFired.Size = new System.Drawing.Size(120, 20);
+            this.nudShotsFired.TabIndex = 8;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(9, 377);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(23, 13);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "hits";
+            // 
+            // nudHits
+            // 
+            this.nudHits.Location = new System.Drawing.Point(68, 370);
+            this.nudHits.Name = "nudHits";
+            this.nudHits.Size = new System.Drawing.Size(120, 20);
+            this.nudHits.TabIndex = 10;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(9, 403);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(24, 13);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "kills";
+            // 
+            // nudKills
+            // 
+            this.nudKills.Location = new System.Drawing.Point(68, 396);
+            this.nudKills.Name = "nudKills";
+            this.nudKills.Size = new System.Drawing.Size(120, 20);
+            this.nudKills.TabIndex = 12;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(216, 299);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(27, 13);
+            this.label10.TabIndex = 15;
+            this.label10.Text = "died";
+            // 
+            // nudDied
+            // 
+            this.nudDied.Location = new System.Drawing.Point(296, 292);
+            this.nudDied.Name = "nudDied";
+            this.nudDied.Size = new System.Drawing.Size(120, 20);
+            this.nudDied.TabIndex = 14;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(216, 325);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(32, 13);
+            this.label11.TabIndex = 17;
+            this.label11.Text = "ship1";
+            // 
+            // nudShip1
+            // 
+            this.nudShip1.Location = new System.Drawing.Point(296, 318);
+            this.nudShip1.Name = "nudShip1";
+            this.nudShip1.Size = new System.Drawing.Size(120, 20);
+            this.nudShip1.TabIndex = 16;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(216, 351);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(32, 13);
+            this.label12.TabIndex = 19;
+            this.label12.Text = "ship2";
+            // 
+            // nudShip2
+            // 
+            this.nudShip2.Location = new System.Drawing.Point(296, 344);
+            this.nudShip2.Name = "nudShip2";
+            this.nudShip2.Size = new System.Drawing.Size(120, 20);
+            this.nudShip2.TabIndex = 18;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(216, 377);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(32, 13);
+            this.label13.TabIndex = 21;
+            this.label13.Text = "ship3";
+            // 
+            // nudShip3
+            // 
+            this.nudShip3.Location = new System.Drawing.Point(296, 370);
+            this.nudShip3.Name = "nudShip3";
+            this.nudShip3.Size = new System.Drawing.Size(120, 20);
+            this.nudShip3.TabIndex = 20;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(218, 403);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(74, 13);
+            this.label14.TabIndex = 23;
+            this.label14.Text = "flags captured";
+            // 
+            // nudFlagsCaptured
+            // 
+            this.nudFlagsCaptured.Location = new System.Drawing.Point(298, 396);
+            this.nudFlagsCaptured.Name = "nudFlagsCaptured";
+            this.nudFlagsCaptured.Size = new System.Drawing.Size(120, 20);
+            this.nudFlagsCaptured.TabIndex = 22;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Enabled = false;
+            this.btnUpdate.Location = new System.Drawing.Point(404, 457);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdate.TabIndex = 25;
+            this.btnUpdate.Text = "Update Stats";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // AdminForm
             // 
@@ -538,6 +999,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "AdminForm";
             this.Text = "Admin Controls";
+            this.Load += new System.EventHandler(this.AdminForm_Load);
             this.tabControl.ResumeLayout(false);
             this.createUserTab.ResumeLayout(false);
             this.createUserTab.PerformLayout();
@@ -547,6 +1009,23 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvUsers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvStats)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userStatsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudWins)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLoses)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudShotsFired)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHits)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudKills)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudDied)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudShip1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudShip2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudShip3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFlagsCaptured)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -594,6 +1073,55 @@
         private System.Windows.Forms.Label lablNewShipName;
         private System.Windows.Forms.Label lablAddNewShip;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.DataGridView gvUsers;
+        private SpaceUnionDataSet spaceUnionDataSet;
+        private System.Windows.Forms.BindingSource usersBindingSource;
+        private SpaceUnionDataSetTableAdapters.UsersTableAdapter usersTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userPasswordDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userEmailDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userImageDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userIsOnlineDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userIsBlockedDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userIsAdminDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridView gvStats;
+        private System.Windows.Forms.BindingSource userStatsBindingSource;
+        private SpaceUnionDataSetTableAdapters.UserStatsTableAdapter userStatsTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userNameDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userstatWinDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userstatLoseDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userstatShotsFiredDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userstatHitsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userstatKillsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userstatDiedDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userstatShipUsed1DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userstatShipUsed2DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userstatShipUsed3DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userstatFlagsCapturedDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown nudWins;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox tbUserStatName;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown nudShotsFired;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown nudLoses;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.NumericUpDown nudFlagsCaptured;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.NumericUpDown nudShip3;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.NumericUpDown nudShip2;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.NumericUpDown nudShip1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.NumericUpDown nudDied;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.NumericUpDown nudKills;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown nudHits;
+        private System.Windows.Forms.Button btnUpdate;
     }
 }
 

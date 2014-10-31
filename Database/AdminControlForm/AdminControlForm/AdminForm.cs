@@ -34,22 +34,24 @@ namespace AdminControlForm
         /// Allows access to read/write to the user table in the Space Union database
         /// </summary>
         private UserTableAccess userTable = new UserTableAccess();
-        
+
+
+        private UserStatTableAccess userStatTable = new UserStatTableAccess();
         /// <summary>
         /// Helper class to validate input when a new user is being blocked/unblocked
         /// </summary>
         private BlockUnblockUserValidation blockValidation = new BlockUnblockUserValidation();
-        
+
         /// <summary>
         /// States if a username is input correctly
         /// </summary>
         private bool isUsernameValid = false;
-        
+
         /// <summary>
         /// States if a password is input correctly
         /// </summary>
         private bool isPasswordValid = false;
-        
+
         /// <summary>
         /// States if a confirmation password is the same as the original password
         /// </summary>
@@ -81,23 +83,26 @@ namespace AdminControlForm
         private void bttnCreateUser_Click(object sender, EventArgs e)
         {
             bool isvalidUserInfo;
-            
+
             validateUsername(sender, e);
             validatePassword(sender, e);
-            validateConfPassword(sender,e);
+            validateConfPassword(sender, e);
 
             isvalidUserInfo = isUsernameValid
                            && isPasswordValid
                            && isConfPassValid;
-            
-            if (isvalidUserInfo) {
+
+            if (isvalidUserInfo)
+            {
                 // if a user isnt added to the database
                 if (!userTable.AddNewUser(txtbUsername.Text,
                                           txtbPassword.Text,
-                                          txtbEmail.Text) ) {
+                                          txtbEmail.Text))
+                {
                     MessageBox.Show("Sorry, the Username is already taken.");
                 }
-                else {
+                else
+                {
                     MessageBox.Show("User was added to the database successfully");
                 }
             }
@@ -120,14 +125,16 @@ namespace AdminControlForm
         {
             string userErrMsg = null;
 
-            if (!userValidation.ValidateUsername(txtbUsername.Text, ref userErrMsg)) {
-                lablUsernameErrMsg.Text    = userErrMsg;
+            if (!userValidation.ValidateUsername(txtbUsername.Text, ref userErrMsg))
+            {
+                lablUsernameErrMsg.Text = userErrMsg;
                 lablUsernameErrMsg.Visible = true;
-                isUsernameValid            = false;
+                isUsernameValid = false;
             }
-            else {
+            else
+            {
                 lablUsernameErrMsg.Visible = false;
-                isUsernameValid            = true;
+                isUsernameValid = true;
             }
         }
 
@@ -150,14 +157,16 @@ namespace AdminControlForm
         {
             string passErrMsg = null;
 
-            if (!userValidation.ValidatePassword(txtbPassword.Text, ref passErrMsg) ) {
-                lablPasswordErrMsg.Text    = passErrMsg;
+            if (!userValidation.ValidatePassword(txtbPassword.Text, ref passErrMsg))
+            {
+                lablPasswordErrMsg.Text = passErrMsg;
                 lablPasswordErrMsg.Visible = true;
-                isPasswordValid            = false;
+                isPasswordValid = false;
             }
-            else {
+            else
+            {
                 lablPasswordErrMsg.Visible = false;
-                isPasswordValid            = true;
+                isPasswordValid = true;
             }
         }
 
@@ -182,14 +191,16 @@ namespace AdminControlForm
 
             if (!userValidation.ValidateConfirmPassword(txtbPassword.Text,
                                                         txtbConfirmPassword.Text,
-                                                        ref passConfErrMsg) ) {
-                lablConfPasswordErrMsg.Text    = passConfErrMsg;
+                                                        ref passConfErrMsg))
+            {
+                lablConfPasswordErrMsg.Text = passConfErrMsg;
                 lablConfPasswordErrMsg.Visible = true;
-                isConfPassValid                = false;
+                isConfPassValid = false;
             }
-            else {
+            else
+            {
                 lablConfPasswordErrMsg.Visible = false;
-                isConfPassValid                = true;
+                isConfPassValid = true;
             }
         }
 
@@ -205,23 +216,27 @@ namespace AdminControlForm
         {
             const string BLOCKED = "1";
 
-            int      errCode  = 0;
+            int errCode = 0;
             string[] userInfo = new string[7];
-            
 
-            if (userTable.AdminGetUserInfo(txtbUserToEdit.Text, ref errCode, userInfo) ) {
+
+            if (userTable.AdminGetUserInfo(txtbUserToEdit.Text, ref errCode, userInfo))
+            {
                 txtbUserEditing.Text = userInfo[0];
 
-                if (userInfo[1].Equals(BLOCKED) ) {
+                if (userInfo[1].Equals(BLOCKED))
+                {
                     txtbCurrentBlockStatus.Text = "BLOCKED";
-                    chkbBlockUnblockUser.Text   = "Do you want to UNBLOCK " + txtbUserEditing.Text;
+                    chkbBlockUnblockUser.Text = "Do you want to UNBLOCK " + txtbUserEditing.Text;
                 }
-                else {
+                else
+                {
                     txtbCurrentBlockStatus.Text = "NOT BLOCKED";
-                    chkbBlockUnblockUser.Text   = "Do you want to BLOCK " + txtbUserEditing.Text;
-                }            
+                    chkbBlockUnblockUser.Text = "Do you want to BLOCK " + txtbUserEditing.Text;
+                }
             }
-            else {
+            else
+            {
                 MessageBox.Show("Username may not exist");
             }
         }
@@ -238,14 +253,10 @@ namespace AdminControlForm
         /// <param name="e"></param>
         private void bttnBlockUnblock_Click(object sender, EventArgs e)
         {
-            const int BLOCK   = 1;
+            const int BLOCK = 1;
             const int UNBLOCK = 0;
-<<<<<<< HEAD
-            int    errCode    = 0;
-=======
-            
+
             int errCode = 0;
->>>>>>> 9a1638b5695bbd263182668fff46011ac7ed9ae4
 
             AcceptCancelBlockActionForm acceptBlock =
                     new AcceptCancelBlockActionForm();
@@ -255,19 +266,13 @@ namespace AdminControlForm
                     new AcceptCancelBlockActionForm();
             acceptUnblock.TxtMsg = "Are you sure you want to unblock " + txtbUserEditing.Text;
 
-<<<<<<< HEAD
             if (chkbBlockUnblockUser.Checked)
             {
-                if (txtbCurrentBlockStatus.Text.Equals("NOT BLOCKED") )
-                {   // User blocking dialog
+                if (txtbCurrentBlockStatus.Text.Equals("NOT BLOCKED"))
+                {
+                    // User blocking dialog
                     if (acceptBlock.ShowDialog() == DialogResult.OK)
                     {
-=======
-            if (chkbBlockUnblockUser.Checked) {
-                if (txtbCurrentBlockStatus.Text.Equals("NOT BLOCKED") ) {
-                    // User blocking dialog
-                    if (acceptBlock.ShowDialog() == DialogResult.OK) {
->>>>>>> 9a1638b5695bbd263182668fff46011ac7ed9ae4
                         userTable.UpdateUserIsBlocked(txtbUserEditing.Text, BLOCK, ref errCode);
                         MessageBox.Show("User was blocked.");
                     }
@@ -280,44 +285,12 @@ namespace AdminControlForm
             }
         }
 
-<<<<<<< HEAD
-        /// <summary>
-        /// Occurs when the text in the block/unblock textfield changes. 
-        /// Validates the current text in the field input as its being typed
-        /// and if there is an error displays the error as to why or no error
-        /// if the field is valid.
-        /// 
-        /// Uses the isPasswordValid boolean to track the state the password
-        /// is in.
-        /// - true if valid
-        /// - false otherwise
-        /// 
-        /// Author:Robert Purdey
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-       /* private void validBlockInput(object sender, EventArgs e)
-        {
-            string blockErrMsg = null;
-            bool   isBlocked = txtbBlockedStatus.Text;
-
-            if (!blockValidation.ValidateBlockUnblockUser2(chkbBlockUnblockUser.Checked,
-                                                          ref blockErrMsg) ) {
-                isUserBlockActionValid = false;
-            }
-            else {
-                isUserBlockActionValid = true;
-            }
-        }*/
-
-=======
->>>>>>> 9a1638b5695bbd263182668fff46011ac7ed9ae4
         private void button1_Click(object sender, EventArgs e)
         {
             string[] info = new string[7];
             int i = 3;
             userTable.AdminGetUserInfo(logintext.Text, ref i, info);
- 
+
 
             MessageBox.Show("username : " + info[0] + "\n" +
                             "blocked  : " + info[1] + "\n" +
@@ -326,6 +299,43 @@ namespace AdminControlForm
                             "image    : " + info[4] + "\n" +
                             "password : " + info[5] + "\n" +
                             "email    : " + info[6]);
+        }
+
+        private void AdminForm_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'spaceUnionDataSet.UserStats' table. You can move, or remove it, as needed.
+            this.userStatsTableAdapter.Fill(this.spaceUnionDataSet.UserStats);
+            // TODO: This line of code loads data into the 'spaceUnionDataSet.Users' table. You can move, or remove it, as needed.
+            this.usersTableAdapter.Fill(this.spaceUnionDataSet.Users);
+
+        }
+
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            UserStat oldStat = userStatTable.getUserStat(this.tbUserStatName.Text);
+
+            if (!string.IsNullOrWhiteSpace(this.tbUserStatName.Text))
+            {
+                userStatTable.setUserStatWin(oldStat.userName.ToString(), (int)this.nudWins.Value);
+                userStatTable.setUserStatLose(oldStat.userName.ToString(), (int)this.nudLoses.Value);
+                userStatTable.setUserStatDied(oldStat.userName.ToString(), (int)this.nudDied.Value);
+                userStatTable.setUserStatHits(oldStat.userName.ToString(), (int)this.nudHits.Value);
+                userStatTable.setUserStatKills(oldStat.userName.ToString(), (int)this.nudKills.Value);
+                userStatTable.setUserStatShip1(oldStat.userName.ToString(), (int)this.nudShip1.Value);
+                userStatTable.setUserStatShip2(oldStat.userName.ToString(), (int)this.nudShip2.Value);
+                userStatTable.setUserStatShip3(oldStat.userName.ToString(), (int)this.nudShip3.Value);
+                userStatTable.setUserStatFlagsCaptured(oldStat.userName.ToString(), (int)this.nudFlagsCaptured.Value);
+                
+            }
+        }
+
+        private void tbUserStatName_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(this.tbUserStatName.Text))
+                this.btnUpdate.Enabled = true;
+            else
+                this.btnUpdate.Enabled = false;
         }
     }
 }

@@ -59,6 +59,11 @@
       <DependentUpon>AcceptCancelBlockActionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="BlockUnblockUserValidation.cs" />
+    <Compile Include="SpaceUnionDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SpaceUnionDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="UserValidation.cs" />
     <Compile Include="AdminForm.cs">
       <SubType>Form</SubType>
@@ -94,6 +99,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="SpaceUnionDataSet.xsc">
+      <DependentUpon>SpaceUnionDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="SpaceUnionDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SpaceUnionDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="SpaceUnionDataSet.xss">
+      <DependentUpon>SpaceUnionDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
