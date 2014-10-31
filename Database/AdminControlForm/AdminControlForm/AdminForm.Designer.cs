@@ -119,17 +119,10 @@
             this.userstatFlagsCapturedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.userStatsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.spaceUnionDataSet = new AdminControlForm.SpaceUnionDataSet();
-            this.gvUsers = new System.Windows.Forms.DataGridView();
-            this.userNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userPasswordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userEmailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userImageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userIsOnlineDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userIsBlockedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userIsAdminDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.usersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.usersTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UsersTableAdapter();
             this.userStatsTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UserStatsTableAdapter();
+            this.gvUsers = new System.Windows.Forms.DataGridView();
             this.tabControl.SuspendLayout();
             this.createUserTab.SuspendLayout();
             this.editUserTab.SuspendLayout();
@@ -149,8 +142,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvStats)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userStatsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvUsers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvUsers)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -516,6 +509,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.gvUsers);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.logintext);
@@ -530,7 +524,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(77, 30);
+            this.label3.Location = new System.Drawing.Point(9, 148);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 4;
@@ -538,7 +532,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(80, 89);
+            this.button1.Location = new System.Drawing.Point(176, 164);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(158, 23);
             this.button1.TabIndex = 2;
@@ -548,7 +542,7 @@
             // 
             // logintext
             // 
-            this.logintext.Location = new System.Drawing.Point(77, 49);
+            this.logintext.Location = new System.Drawing.Point(9, 167);
             this.logintext.Name = "logintext";
             this.logintext.Size = new System.Drawing.Size(161, 20);
             this.logintext.TabIndex = 0;
@@ -756,7 +750,6 @@
             this.tabPage3.Controls.Add(this.label4);
             this.tabPage3.Controls.Add(this.tbUserStatName);
             this.tabPage3.Controls.Add(this.gvStats);
-            this.tabPage3.Controls.Add(this.gvUsers);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -970,9 +963,9 @@
             this.userstatShipUsed3DataGridViewTextBoxColumn,
             this.userstatFlagsCapturedDataGridViewTextBoxColumn});
             this.gvStats.DataSource = this.userStatsBindingSource;
-            this.gvStats.Location = new System.Drawing.Point(9, 129);
+            this.gvStats.Location = new System.Drawing.Point(9, 6);
             this.gvStats.Name = "gvStats";
-            this.gvStats.Size = new System.Drawing.Size(471, 100);
+            this.gvStats.Size = new System.Drawing.Size(471, 223);
             this.gvStats.TabIndex = 1;
             // 
             // userNameDataGridViewTextBoxColumn1
@@ -1051,66 +1044,6 @@
             this.spaceUnionDataSet.DataSetName = "SpaceUnionDataSet";
             this.spaceUnionDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // gvUsers
-            // 
-            this.gvUsers.AutoGenerateColumns = false;
-            this.gvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvUsers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.userNameDataGridViewTextBoxColumn,
-            this.userPasswordDataGridViewTextBoxColumn,
-            this.userEmailDataGridViewTextBoxColumn,
-            this.userImageDataGridViewTextBoxColumn,
-            this.userIsOnlineDataGridViewTextBoxColumn,
-            this.userIsBlockedDataGridViewTextBoxColumn,
-            this.userIsAdminDataGridViewTextBoxColumn});
-            this.gvUsers.DataSource = this.usersBindingSource;
-            this.gvUsers.Location = new System.Drawing.Point(7, 7);
-            this.gvUsers.Name = "gvUsers";
-            this.gvUsers.Size = new System.Drawing.Size(473, 115);
-            this.gvUsers.TabIndex = 0;
-            // 
-            // userNameDataGridViewTextBoxColumn
-            // 
-            this.userNameDataGridViewTextBoxColumn.DataPropertyName = "userName";
-            this.userNameDataGridViewTextBoxColumn.HeaderText = "userName";
-            this.userNameDataGridViewTextBoxColumn.Name = "userNameDataGridViewTextBoxColumn";
-            // 
-            // userPasswordDataGridViewTextBoxColumn
-            // 
-            this.userPasswordDataGridViewTextBoxColumn.DataPropertyName = "userPassword";
-            this.userPasswordDataGridViewTextBoxColumn.HeaderText = "userPassword";
-            this.userPasswordDataGridViewTextBoxColumn.Name = "userPasswordDataGridViewTextBoxColumn";
-            // 
-            // userEmailDataGridViewTextBoxColumn
-            // 
-            this.userEmailDataGridViewTextBoxColumn.DataPropertyName = "userEmail";
-            this.userEmailDataGridViewTextBoxColumn.HeaderText = "userEmail";
-            this.userEmailDataGridViewTextBoxColumn.Name = "userEmailDataGridViewTextBoxColumn";
-            // 
-            // userImageDataGridViewTextBoxColumn
-            // 
-            this.userImageDataGridViewTextBoxColumn.DataPropertyName = "userImage";
-            this.userImageDataGridViewTextBoxColumn.HeaderText = "userImage";
-            this.userImageDataGridViewTextBoxColumn.Name = "userImageDataGridViewTextBoxColumn";
-            // 
-            // userIsOnlineDataGridViewTextBoxColumn
-            // 
-            this.userIsOnlineDataGridViewTextBoxColumn.DataPropertyName = "userIsOnline";
-            this.userIsOnlineDataGridViewTextBoxColumn.HeaderText = "userIsOnline";
-            this.userIsOnlineDataGridViewTextBoxColumn.Name = "userIsOnlineDataGridViewTextBoxColumn";
-            // 
-            // userIsBlockedDataGridViewTextBoxColumn
-            // 
-            this.userIsBlockedDataGridViewTextBoxColumn.DataPropertyName = "userIsBlocked";
-            this.userIsBlockedDataGridViewTextBoxColumn.HeaderText = "userIsBlocked";
-            this.userIsBlockedDataGridViewTextBoxColumn.Name = "userIsBlockedDataGridViewTextBoxColumn";
-            // 
-            // userIsAdminDataGridViewTextBoxColumn
-            // 
-            this.userIsAdminDataGridViewTextBoxColumn.DataPropertyName = "userIsAdmin";
-            this.userIsAdminDataGridViewTextBoxColumn.HeaderText = "userIsAdmin";
-            this.userIsAdminDataGridViewTextBoxColumn.Name = "userIsAdminDataGridViewTextBoxColumn";
-            // 
             // usersBindingSource
             // 
             this.usersBindingSource.DataMember = "Users";
@@ -1123,6 +1056,14 @@
             // userStatsTableAdapter
             // 
             this.userStatsTableAdapter.ClearBeforeFill = true;
+            // 
+            // gvUsers
+            // 
+            this.gvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvUsers.Location = new System.Drawing.Point(9, 6);
+            this.gvUsers.Name = "gvUsers";
+            this.gvUsers.Size = new System.Drawing.Size(471, 130);
+            this.gvUsers.TabIndex = 5;
             // 
             // AdminForm
             // 
@@ -1159,8 +1100,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvStats)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userStatsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvUsers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvUsers)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1222,17 +1163,9 @@
         private System.Windows.Forms.Label lablTurnSpeedErrMsg;
 
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.DataGridView gvUsers;
         private SpaceUnionDataSet spaceUnionDataSet;
         private System.Windows.Forms.BindingSource usersBindingSource;
         private SpaceUnionDataSetTableAdapters.UsersTableAdapter usersTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn userNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn userPasswordDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn userEmailDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn userImageDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn userIsOnlineDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn userIsBlockedDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn userIsAdminDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridView gvStats;
         private System.Windows.Forms.BindingSource userStatsBindingSource;
         private SpaceUnionDataSetTableAdapters.UserStatsTableAdapter userStatsTableAdapter;
@@ -1270,6 +1203,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.NumericUpDown nudHits;
         private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.DataGridView gvUsers;
 
     }
 }

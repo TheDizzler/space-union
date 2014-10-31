@@ -187,7 +187,7 @@ namespace SpaceUnionDatabase
         }
 
         public bool
-        AdminGetUserInfo(string username, ref int errCode, string[] info)
+        AdminGetUserInfo(string username, ref int errCode, List<User> info)
         {
             bool isValidUser = false;
             var  db          = new SpaceUnionEntities();
@@ -200,13 +200,7 @@ namespace SpaceUnionDatabase
                     errCode = 0;//incorrect user/pass
                 else {
                     isValidUser = true;
-                    info[0] = user.userName;
-                    info[1] = user.userIsBlocked.ToString();
-                    info[2] = user.userIsAdmin.ToString();
-                    info[3] = user.userIsOnline.ToString();
-                    info[4] = user.userImage;
-                    info[5] = user.userPassword;
-                    info[6] = user.userEmail;
+                    info.Add(user);
                 }
             }
             catch (Exception e) {

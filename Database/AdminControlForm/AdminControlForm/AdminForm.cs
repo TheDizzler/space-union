@@ -238,14 +238,14 @@ namespace AdminControlForm
             const string BLOCKED = "1";
 
             int errCode = 0;
-            string[] userInfo = new string[7];
+            List<User> userInfo = new List<User>();
 
 
             if (userTable.AdminGetUserInfo(txtbUserToEdit.Text, ref errCode, userInfo))
             {
-                txtbUserEditing.Text = userInfo[0];
+                txtbUserEditing.Text = userInfo[0].userName;
 
-                if (userInfo[1].Equals(BLOCKED))
+                if (userInfo[0].userIsBlocked.Equals(BLOCKED))
                 {
                     txtbCurrentBlockStatus.Text = "BLOCKED";
                     chkbBlockUnblockUser.Text = "Do you want to UNBLOCK " + txtbUserEditing.Text;
@@ -308,18 +308,13 @@ namespace AdminControlForm
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string[] info = new string[7];
             int i = 3;
+            List<User> info = new List<User>();
             userTable.AdminGetUserInfo(logintext.Text, ref i, info);
 
-
-            MessageBox.Show("username : " + info[0] + "\n" +
-                            "blocked  : " + info[1] + "\n" +
-                            "admin    : " + info[2] + "\n" +
-                            "online   : " + info[3] + "\n" +
-                            "image    : " + info[4] + "\n" +
-                            "password : " + info[5] + "\n" +
-                            "email    : " + info[6]);
+            this.gvUsers.DataSource = info;
+            this.gvUsers.Refresh();
+            
         }
 
 
@@ -338,7 +333,7 @@ namespace AdminControlForm
                        && isShipNameValid;
 
             if (isShipValid)
-               ; //save to database
+                ; //save to database
         }
 
         private void validateTurnSpeed(object sender, EventArgs e)
@@ -346,14 +341,16 @@ namespace AdminControlForm
             string turnSpeedErrMsg = null;
 
             if (!shipValidation.ValidateTurnSpeed(txtbTurnSpeed.Text,
-                                                  ref turnSpeedErrMsg) ) {
-                lablTurnSpeedErrMsg.Text    = turnSpeedErrMsg;
+                                                  ref turnSpeedErrMsg))
+            {
+                lablTurnSpeedErrMsg.Text = turnSpeedErrMsg;
                 lablTurnSpeedErrMsg.Visible = true;
-                isTurnSpeedValid            = false;
+                isTurnSpeedValid = false;
             }
-            else {
+            else
+            {
                 lablTurnSpeedErrMsg.Visible = false;
-                isTurnSpeedValid            = true;
+                isTurnSpeedValid = true;
             }
         }
 
@@ -362,14 +359,16 @@ namespace AdminControlForm
             string turnMaxSpeedErrMsg = null;
 
             if (!shipValidation.ValidateMaxSpeed(txtbMaxSpeed.Text,
-                                                  ref turnMaxSpeedErrMsg) ) {
-                lablMaxSpeedErrMsg.Text    = turnMaxSpeedErrMsg;
+                                                  ref turnMaxSpeedErrMsg))
+            {
+                lablMaxSpeedErrMsg.Text = turnMaxSpeedErrMsg;
                 lablMaxSpeedErrMsg.Visible = true;
-                isMaxSpeedValid            = false;
+                isMaxSpeedValid = false;
             }
-            else {
+            else
+            {
                 lablMaxSpeedErrMsg.Visible = false;
-                isMaxSpeedValid            = true;
+                isMaxSpeedValid = true;
             }
         }
 
@@ -378,14 +377,16 @@ namespace AdminControlForm
             string shipNameErrMsg = null;
 
             if (!shipValidation.ValidateShipName(txtbNewShipName.Text,
-                                                 ref shipNameErrMsg) ) {
-                lablNewShipNameErrMsg.Text    = shipNameErrMsg;
+                                                 ref shipNameErrMsg))
+            {
+                lablNewShipNameErrMsg.Text = shipNameErrMsg;
                 lablNewShipNameErrMsg.Visible = true;
-                isShipNameValid               = false;
+                isShipNameValid = false;
             }
-            else {
+            else
+            {
                 lablNewShipNameErrMsg.Visible = false;
-                isShipNameValid     = true;
+                isShipNameValid = true;
             }
         }
 
@@ -394,14 +395,16 @@ namespace AdminControlForm
             string turnAccelerateErrMsg = null;
 
             if (!shipValidation.ValidateAcceleration(txtbAccelerate.Text,
-                                                     ref turnAccelerateErrMsg) ) {
-                lablAccelErrMsg.Text    = turnAccelerateErrMsg;
+                                                     ref turnAccelerateErrMsg))
+            {
+                lablAccelErrMsg.Text = turnAccelerateErrMsg;
                 lablAccelErrMsg.Visible = true;
-                isAccelerationValid     = false;
+                isAccelerationValid = false;
             }
-            else {
+            else
+            {
                 lablAccelErrMsg.Visible = false;
-                isAccelerationValid     = true;
+                isAccelerationValid = true;
             }
         }
 
@@ -414,7 +417,11 @@ namespace AdminControlForm
 
         }
 
-
+        /// <summary>
+        /// updates the userstats with the data entered.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             UserStat oldStat = userStatTable.getUserStat(this.tbUserStatName.Text);
@@ -436,6 +443,10 @@ namespace AdminControlForm
             }
         }
 
+        /// <summary>
+        /// checks to make sure a valid username is entered before allowing an update.       /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tbUserStatName_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(this.tbUserStatName.Text))
