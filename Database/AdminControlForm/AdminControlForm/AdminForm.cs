@@ -31,6 +31,11 @@ namespace AdminControlForm
         private UserValidation userValidation = new UserValidation();
 
         /// <summary>
+        /// Helper class to validate input when a new ship is being added
+        /// </summary>
+        private ShipValidation shipValidation = new ShipValidation();
+
+        /// <summary>
         /// Allows access to read/write to the user table in the Space Union database
         /// </summary>
         private UserTableAccess userTable = new UserTableAccess();
@@ -58,9 +63,25 @@ namespace AdminControlForm
         private bool isConfPassValid = false;
 
         /// <summary>
-        /// States if the message the admin type to block/unblock the user is valid
+        /// States if the Ship being added is valid
         /// </summary>
-        private bool isUserBlockActionValid = false;
+        private bool isShipNameValid = false;
+
+        /// <summary>
+        /// States if the turn speed input for an added ship is valid
+        /// </summary>
+        private bool isTurnSpeedValid = false;
+
+        /// <summary>
+        /// States if the max speed input for an added ship is valid
+        /// </summary>
+        private bool isMaxSpeedValid = false;
+
+        /// <summary>
+        /// States if the acceleration input for an added ship is valid
+        /// </summary>
+        private bool isAccelerationValid = false;
+
 
         /// <summary>
         /// Inits the form application
@@ -301,6 +322,89 @@ namespace AdminControlForm
                             "email    : " + info[6]);
         }
 
+
+        private void bttnAddShip_Click(object sender, EventArgs e)
+        {
+            bool isShipValid = false;
+
+            validateTurnSpeed(sender, e);
+            validateMaxSpeed(sender, e);
+            validateAcceleration(sender, e);
+            validateShipName(sender, e);
+
+            isShipValid = isMaxSpeedValid
+                       && isTurnSpeedValid
+                       && isAccelerationValid
+                       && isShipNameValid;
+
+            if (isShipValid)
+               ; //save to database
+        }
+
+        private void validateTurnSpeed(object sender, EventArgs e)
+        {
+            string turnSpeedErrMsg = null;
+
+            if (!shipValidation.ValidateTurnSpeed(txtbTurnSpeed.Text,
+                                                  ref turnSpeedErrMsg) ) {
+                lablTurnSpeedErrMsg.Text    = turnSpeedErrMsg;
+                lablTurnSpeedErrMsg.Visible = true;
+                isTurnSpeedValid            = false;
+            }
+            else {
+                lablTurnSpeedErrMsg.Visible = false;
+                isTurnSpeedValid            = true;
+            }
+        }
+
+        private void validateMaxSpeed(object sender, EventArgs e)
+        {
+            string turnMaxSpeedErrMsg = null;
+
+            if (!shipValidation.ValidateMaxSpeed(txtbMaxSpeed.Text,
+                                                  ref turnMaxSpeedErrMsg) ) {
+                lablMaxSpeedErrMsg.Text    = turnMaxSpeedErrMsg;
+                lablMaxSpeedErrMsg.Visible = true;
+                isMaxSpeedValid            = false;
+            }
+            else {
+                lablMaxSpeedErrMsg.Visible = false;
+                isMaxSpeedValid            = true;
+            }
+        }
+
+        private void validateShipName(object sender, EventArgs e)
+        {
+            string shipNameErrMsg = null;
+
+            if (!shipValidation.ValidateShipName(txtbNewShipName.Text,
+                                                 ref shipNameErrMsg) ) {
+                lablNewShipNameErrMsg.Text    = shipNameErrMsg;
+                lablNewShipNameErrMsg.Visible = true;
+                isShipNameValid               = false;
+            }
+            else {
+                lablNewShipNameErrMsg.Visible = false;
+                isShipNameValid     = true;
+            }
+        }
+
+        private void validateAcceleration(object sender, EventArgs e)
+        {
+            string turnAccelerateErrMsg = null;
+
+            if (!shipValidation.ValidateAcceleration(txtbAccelerate.Text,
+                                                     ref turnAccelerateErrMsg) ) {
+                lablAccelErrMsg.Text    = turnAccelerateErrMsg;
+                lablAccelErrMsg.Visible = true;
+                isAccelerationValid     = false;
+            }
+            else {
+                lablAccelErrMsg.Visible = false;
+                isAccelerationValid     = true;
+            }
+        }
+
         private void AdminForm_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'spaceUnionDataSet.UserStats' table. You can move, or remove it, as needed.
@@ -340,6 +444,7 @@ namespace AdminControlForm
                 this.btnUpdate.Enabled = true;
             else
                 this.btnUpdate.Enabled = false;
+
         }
     }
 }
