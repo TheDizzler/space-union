@@ -37,8 +37,11 @@ namespace SpaceUnion.Ships {
 		/// Turn speed in radians per second
 		/// </summary>
 		protected float turnSpeed = 4.5f;
-
-
+        /// <summary>
+        /// Keep track of old acceleration
+        /// </summary>
+        protected Vector2 oldAccel = Vector2.Zero;
+        protected bool inertiaOn = false;
 		/// <summary>
 		/// Amount of time in seconds between main weaponfire
 		/// </summary>
@@ -145,7 +148,11 @@ namespace SpaceUnion.Ships {
             Vector2 tempVelocity = velocity;
 			Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
 			acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
-            
+            Vector2.Add(ref tempVelocity, ref acceleration, out tempVelocity);
+
+
+
+            /*
             if (Math.Abs(tempVelocity.Length()) > maxSpeed)
             {
                 Vector2 tempVelocity2 = tempVelocity;
@@ -157,7 +164,7 @@ namespace SpaceUnion.Ships {
             } else if (Math.Abs(tempVelocity.Length()) < maxSpeed)
             {
                 Vector2.Add(ref velocity, ref acceleration, out velocity);
-            }
+            }*/
 		}
 
 
@@ -206,6 +213,7 @@ namespace SpaceUnion.Ships {
 		public virtual void rotateLeft(GameTime gameTime) {
 
 			float oldRotation = rotation;
+            
 			if (rotation > 6.283185 || rotation < -6.283185) {
 				rotation = rotation % 6.283185f;
 			}
@@ -225,7 +233,8 @@ namespace SpaceUnion.Ships {
 		public virtual void rotateRight(GameTime gameTime) {
 
 			float oldRotation = rotation;
-			if (rotation > 6.283185 || rotation < -6.283185) {
+
+            if (rotation > 6.283185 || rotation < -6.283185) {
 				rotation = rotation % 6.283185f;
 			}
 			rotation += turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;

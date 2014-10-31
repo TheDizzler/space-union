@@ -83,8 +83,65 @@
     <Compile Include="Weapons\WeaponSystem.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="LzmaSharp">
+      <HintPath>..\..\..\..\..\xna-4.0-x86\LzmaSharp.dll</HintPath>
+    </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MSBuildProgramFiles32)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="NMock.StrongNamed">
+      <HintPath>..\..\..\..\..\xna-4.0-x86\NMock.StrongNamed.dll</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.Audio">
+      <HintPath>..\..\..\..\..\xna-4.0-x86\Nuclex.Audio.dll</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.Fonts">
+      <HintPath>..\..\..\..\..\xna-4.0-x86\Nuclex.Fonts.dll</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.Fonts.Content.TrueTypeImporter">
+      <HintPath>..\..\..\..\..\xna-4.0-x86\Nuclex.Fonts.Content.TrueTypeImporter.dll</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.Game">
+      <HintPath>..\..\..\..\..\xna-4.0-x86\Nuclex.Game.dll</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.Game.ContentCompressor">
+      <HintPath>..\..\..\..\..\xna-4.0-x86\Nuclex.Game.ContentCompressor.exe</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.Geometry">
+      <HintPath>..\..\..\..\..\xna-4.0-x86\Nuclex.Geometry.dll</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.Graphics">
+      <HintPath>..\..\..\..\..\xna-4.0-x86\Nuclex.Graphics.dll</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.Graphics.SpecialEffects">
+      <HintPath>..\..\..\..\..\xna-4.0-x86\Nuclex.Graphics.SpecialEffects.dll</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.Input">
+      <HintPath>..\..\..\..\..\xna-4.0-x86\Nuclex.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.Math">
+      <HintPath>..\..\..\..\..\xna-4.0-x86\Nuclex.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.Networking">
+      <HintPath>..\..\..\..\..\xna-4.0-x86\Nuclex.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.Support">
+      <HintPath>..\..\..\..\..\xna-4.0-x86\Nuclex.Support.dll</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.Testing.Xna">
+      <HintPath>..\..\..\..\..\xna-4.0-x86\Nuclex.Testing.Xna.dll</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.UserInterface">
+      <HintPath>..\..\..\..\..\xna-4.0-x86\Nuclex.UserInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="Nuclex.Windows.Forms">
+      <HintPath>..\..\..\..\..\xna-4.0-x86\Nuclex.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\..\..\..\xna-4.0-x86\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="SlimDX.DirectInput">
+      <HintPath>..\..\..\..\..\xna-4.0-x86\SlimDX.DirectInput.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
