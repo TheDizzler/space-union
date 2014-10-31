@@ -326,7 +326,11 @@ namespace AdminControlForm
                 userStatTable.setUserStatShip2(oldStat.userName.ToString(), (int)this.nudShip2.Value);
                 userStatTable.setUserStatShip3(oldStat.userName.ToString(), (int)this.nudShip3.Value);
                 userStatTable.setUserStatFlagsCaptured(oldStat.userName.ToString(), (int)this.nudFlagsCaptured.Value);
-                
+
+                Object DS = this.gvStats.DataSource;
+                this.gvStats.DataSource = null;
+                this.gvStats.DataSource = DS;
+                this.gvStats.Refresh();
             }
         }
 
