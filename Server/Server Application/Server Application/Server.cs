@@ -146,8 +146,8 @@ namespace Server_Application
                         // If the player was not successfully added because the room was full or whatever reason.
 
                         // Send an error message and update the player's room list.
-                        transmission.addMessageToQueue(new ErrorMessage(player, 2));
-                        transmission.addMessageToQueue(new RoomList(player, organizeRoomList()));
+                        Transmission.addMessageToQueue(new ErrorMessage(player, 2));
+                        Transmission.addMessageToQueue(new RoomList(player, organizeRoomList()));
                         return false;
                     }
                 }
@@ -189,7 +189,7 @@ namespace Server_Application
         {
             List<RoomInfo> list = new List<RoomInfo>();
 
-            foreach (Gameroom room in gamerooms.ToArray())
+            foreach (Gameroom room in Gamerooms.ToArray())
             {
                 RoomInfo info = new RoomInfo(room.getPlayers(), room.RoomNumber, room.RoomName, room.Host, room.InGame);
                 list.Add(info);
