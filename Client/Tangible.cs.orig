@@ -53,6 +53,20 @@ namespace SpaceUnion {
 		}
 
 		public void takeDamage(int amount, GameTime gameTime, Ship owner) {
+<<<<<<< HEAD
+
+			// check last time taken damage
+			if (gameTime.TotalGameTime - previousDamageTime > damageTime) {
+				// Reset our current time
+				previousDamageTime = gameTime.TotalGameTime;
+				currentHealth -= amount;
+			}
+
+			if (currentHealth <= 0) {
+				owner.kills += 1;
+				destroy();
+			}
+=======
             if (this != owner)
             {
 
@@ -64,12 +78,14 @@ namespace SpaceUnion {
                     currentHealth -= amount;
                 }
 
-			if (currentHealth <= 0) {
-				owner.kills += 1;
-				destroy();
+                if (currentHealth <= 0)
+                {   
+                    owner.kills += 1;
+                    destroy();
                 }
                 
-			}
+            }
+>>>>>>> 7f0d6b427ecac65e03e612d99fe4ef83f7c96631
 		}
 
 		/// <summary>

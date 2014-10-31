@@ -35,11 +35,12 @@ namespace SpaceUnion.Controllers {
 		QuadTree quadTree;
 		List<Asteroid> asteroids;
 		protected List<Ship> ships;
+        protected List<Ship> inactiveShips;
 		protected List<Tangible> targets;
 		protected List<Planet> planets;
 
 		protected Ship playerShip;
->>>>>>> 2fc180d3ab9d910b1d3d28662b4c8f9bb34cc13d
+>>>>>>> 7f0d6b427ecac65e03e612d99fe4ef83f7c96631
 		private Game1 game;
 		private Camera mainCamera;
 		private Camera radarCamera;
@@ -59,7 +60,7 @@ namespace SpaceUnion.Controllers {
 
 
 		public GameplayScreen(Game1 game, SpriteBatch batch, Ship selectedship) {
-            
+
 			this.game = game;
 			SCREEN_HEIGHT = game.getScreenHeight();
 			SCREEN_WIDTH = game.getScreenWidth();
@@ -71,17 +72,13 @@ namespace SpaceUnion.Controllers {
 
 			gen = new Random();
 			Assets = Game1.Assets;
-<<<<<<< HEAD
+			Ship enemyship = new Bug(game);
+			enemyship.Position = new Vector2(300, 300);
 
 
 			background = new Background(worldWidth, worldHeight, Assets.starfield2, Assets.starfield1, Assets.starfield1, Assets.starfield1);
 
 
-=======
-            Ship enemyship = new Bug(game);
-            enemyship.Position = new Vector2(300, 300);
-            
->>>>>>> 2fc180d3ab9d910b1d3d28662b4c8f9bb34cc13d
 			playerShip = selectedship;
 			playerShip.Position = new Vector2(250, 250);
 			//playerShip.rotation = (float) (Math.PI/2);
@@ -91,7 +88,7 @@ namespace SpaceUnion.Controllers {
 
 			basicViewport = game.GraphicsDevice.Viewport;
 
-			gui = new GUI(game, playerShip, planets[0]);
+			gui = new GUI(game, playerShip);
 
 			Viewport mainViewport = new Viewport {
 				X = 0, Y = 0,
@@ -108,19 +105,21 @@ namespace SpaceUnion.Controllers {
 
 			asteroids = new List<Asteroid>();
 			ships = new List<Ship>();
+            inactiveShips = new List<Ship>();
 			targets = new List<Tangible>();
 
 
 			Ship enemy = new Zoid(game);
-			enemy.Position = new Vector2(worldWidth/2 + 150, worldHeight/2 + 550);
+			enemy.Position = new Vector2(worldWidth / 2 + 150, worldHeight / 2 + 550);
 			ships.Add(playerShip);
 <<<<<<< HEAD
 			ships.Add(enemy);
+			ships.Add(new Bug(game));
 
 
 =======
-            ships.Add(new Bug(game));
->>>>>>> 2fc180d3ab9d910b1d3d28662b4c8f9bb34cc13d
+            ships.Add(enemyship);
+>>>>>>> 7f0d6b427ecac65e03e612d99fe4ef83f7c96631
 			foreach (Ship ship in ships)
 				targets.Add(ship);
 			for (int i = 0; i < 50; i++)
@@ -179,20 +178,32 @@ namespace SpaceUnion.Controllers {
 			//	AddAsteroid(new Vector2(gen.Next(100, 4000), gen.Next(100, 2000)));
 
 
-			foreach (Ship ship in ships)
-				ship.update(gameTime, quadTree);
-
+            foreach (Ship ship in ships.ToList())
+            {
+                if (!ship.isActive)
+                {
+                    ship.inactiveStart = gameTime.TotalGameTime;
+                    inactiveShips.Add(ship);
+                    ships.Remove(ship);
+                }
+                ship.update(gameTime, quadTree);
+            }
+            foreach (Ship ship in inactiveShips.ToList())
+            {
+                if (ship.isActive)
+                {
+                    ship.inactiveTime = TimeSpan.Zero;
+                    ships.Add(ship);
+                    inactiveShips.Remove(ship);
+                }
+                ship.update(gameTime, quadTree);
+            }
 
 			for (int i = asteroids.Count - 1; i >= 0; i--) {
 				asteroids[i].update(gameTime, quadTree);
-<<<<<<< HEAD
 				if (!asteroids[i].isActive) {
 					asteroids.RemoveAt(i);
 				}
-=======
-                if (!asteroids[i].isActive)
-                    asteroids.RemoveAt(i);
->>>>>>> 2fc180d3ab9d910b1d3d28662b4c8f9bb34cc13d
 			}
 
 			if (keyState.IsKeyDown(Keys.P))
@@ -208,7 +219,8 @@ namespace SpaceUnion.Controllers {
 
 			Game1.explosionEngine.update(gameTime);
 
-			gui.update(gameTime, mouseState, mousePos, quadTree);
+			gui.update(gameTime, quadTree);
+
 		}
 
 		/// <summary>
@@ -251,7 +263,7 @@ namespace SpaceUnion.Controllers {
 
 			//draw grid
 			drawGrid();
-			
+
 
 			foreach (Ship ship in ships)
 				ship.drawMiniMap(spriteBatch);

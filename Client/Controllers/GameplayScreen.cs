@@ -23,6 +23,7 @@ namespace SpaceUnion.Controllers {
 		private QuadTree quadTree;
 		private List<Asteroid> asteroids;
 		private List<Ship> ships;
+		protected List<Ship> inactiveShips;
 		/// <summary>
 		/// All objects in this list get added to the quadtree every update.
 		/// </summary>
@@ -94,6 +95,7 @@ namespace SpaceUnion.Controllers {
 
 			asteroids = new List<Asteroid>();
 			ships = new List<Ship>();
+			inactiveShips = new List<Ship>();
 			targets = new List<Tangible>();
 
 
@@ -101,6 +103,7 @@ namespace SpaceUnion.Controllers {
 			enemy.Position = new Vector2(worldWidth / 2 + 150, worldHeight / 2 + 550);
 			ships.Add(playerShip);
 			ships.Add(enemy);
+			ships.Add(enemyship);
 			ships.Add(new Bug(game));
 
 
@@ -162,9 +165,23 @@ namespace SpaceUnion.Controllers {
 			//	AddAsteroid(new Vector2(gen.Next(100, 4000), gen.Next(100, 2000)));
 
 
-			foreach (Ship ship in ships)
+			foreach (Ship ship in ships.ToList()) {
+				if (!ship.isActive) {
+					ship.inactiveStart = gameTime.TotalGameTime;
+					inactiveShips.Add(ship);
+					ships.Remove(ship);
+				}
 				ship.update(gameTime, quadTree);
+			}
 
+			foreach (Ship ship in inactiveShips.ToList()) {
+				if (ship.isActive) {
+					ship.inactiveTime = TimeSpan.Zero;
+					ships.Add(ship);
+					inactiveShips.Remove(ship);
+				}
+				ship.update(gameTime, quadTree);
+			}
 
 			for (int i = asteroids.Count - 1; i >= 0; i--) {
 				asteroids[i].update(gameTime, quadTree);
@@ -187,6 +204,7 @@ namespace SpaceUnion.Controllers {
 			Game1.explosionEngine.update(gameTime);
 
 			gui.update(gameTime, quadTree);
+
 		}
 
 		/// <summary>
@@ -247,23 +265,6 @@ namespace SpaceUnion.Controllers {
 			spriteBatch.End();
 		}
 
-		private void drawGrid() {
-
-			drawBorder(spriteBatch, new Rectangle(0, 0, worldWidth, worldHeight), 15, Color.White); // World enclosing box
-
-			drawBorder(spriteBatch, new Rectangle(0, 0, worldWidth / 4, worldHeight / 4), 15, Color.White); //top
-			drawBorder(spriteBatch, new Rectangle(worldWidth / 2, 0, worldWidth / 4, worldHeight / 4), 15, Color.White); //top right
-
-			drawBorder(spriteBatch, new Rectangle(worldWidth / 4, worldHeight / 4, worldWidth / 4, worldHeight / 4), 15, Color.White);
-			drawBorder(spriteBatch, new Rectangle(worldWidth * 3 / 4, worldHeight / 4, worldWidth / 4, worldHeight / 4), 15, Color.White);
-
-			drawBorder(spriteBatch, new Rectangle(0, worldHeight / 2, worldWidth / 4, worldHeight / 4), 15, Color.White);
-			drawBorder(spriteBatch, new Rectangle(worldWidth / 2, worldHeight / 2, worldWidth / 4, worldHeight / 4), 15, Color.White);
-
-			drawBorder(spriteBatch, new Rectangle(worldWidth / 4, worldHeight * 3 / 4, worldWidth / 4, worldHeight / 4), 15, Color.White);
-			drawBorder(spriteBatch, new Rectangle(worldWidth * 3 / 4, worldHeight * 3 / 4, worldWidth / 4, worldHeight / 4), 15, Color.White);
-		}
-
 
 		private void drawScreen() {
 
@@ -282,6 +283,27 @@ namespace SpaceUnion.Controllers {
 
 			Game1.explosionEngine.draw(spriteBatch);
 		}
+
+		/// <summary>
+		/// Draw grid on radar screen
+		/// </summary>
+		private void drawGrid() {
+
+			drawBorder(spriteBatch, new Rectangle(0, 0, worldWidth, worldHeight), 15, Color.White); // World enclosing box
+
+			drawBorder(spriteBatch, new Rectangle(0, 0, worldWidth / 4, worldHeight / 4), 15, Color.White); //top
+			drawBorder(spriteBatch, new Rectangle(worldWidth / 2, 0, worldWidth / 4, worldHeight / 4), 15, Color.White); //top right
+
+			drawBorder(spriteBatch, new Rectangle(worldWidth / 4, worldHeight / 4, worldWidth / 4, worldHeight / 4), 15, Color.White);
+			drawBorder(spriteBatch, new Rectangle(worldWidth * 3 / 4, worldHeight / 4, worldWidth / 4, worldHeight / 4), 15, Color.White);
+
+			drawBorder(spriteBatch, new Rectangle(0, worldHeight / 2, worldWidth / 4, worldHeight / 4), 15, Color.White);
+			drawBorder(spriteBatch, new Rectangle(worldWidth / 2, worldHeight / 2, worldWidth / 4, worldHeight / 4), 15, Color.White);
+
+			drawBorder(spriteBatch, new Rectangle(worldWidth / 4, worldHeight * 3 / 4, worldWidth / 4, worldHeight / 4), 15, Color.White);
+			drawBorder(spriteBatch, new Rectangle(worldWidth * 3 / 4, worldHeight * 3 / 4, worldWidth / 4, worldHeight / 4), 15, Color.White);
+		}
+
 
 		/// <summary>
 		/// Hollow rectangle drawing code from:

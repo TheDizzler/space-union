@@ -81,9 +81,12 @@ namespace SpaceUnion.Ships {
 
 		public int kills = 0;
 		public int deaths = 0;
-
+        
 		public bool blueTeam = false;
 		public bool redTeam = false;
+
+        public TimeSpan inactiveStart;
+        public TimeSpan inactiveTime = TimeSpan.Zero;
 
 		/// <summary>
 		/// Ship constructor
@@ -141,7 +144,14 @@ namespace SpaceUnion.Ships {
 			additionalUpdate(gameTime, quadTree);
 
 			velocity *= dampening; // apply a little resistance. Any thrust should over power this.
-
+            if (isActive == false)
+            {
+                inactiveTime = gameTime.TotalGameTime - inactiveStart;
+                if (inactiveTime.Seconds >= 2)
+                {
+                    isActive = true;
+                }
+            }
 		}
 
 		/// <summary>
@@ -303,6 +313,7 @@ namespace SpaceUnion.Ships {
 		protected abstract void altFire(GameTime gameTime);
 
 		public override void destroy() {
+            isActive = false;
 			explode();
 			//base.destroy();
 		}

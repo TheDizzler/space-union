@@ -49,7 +49,7 @@
     <Compile Include="Controllers\TeamBattle.cs" />
     <Compile Include="Controllers\Options.cs" />
     <Compile Include="Ships\Bug.cs" />
-    <Compile Include="TeamBattleGUI.cs" />
+    <Compile Include="Tools\TeamBattleGUI.cs" />
     <Compile Include="Tools\QuadTree.cs" />
     <Compile Include="Tools\Ray2.cs" />
     <Compile Include="Weapons\Systems\LaserBeam.cs" />

@@ -71,10 +71,24 @@ namespace SpaceUnion.Weapons.Projectiles {
 		/// <param name="target"></param>
 		/// <param name="gameTime"></param>
 		public override void collide(Tangible target, GameTime gameTime) {
+<<<<<<< HEAD:Client/Weapons/Projectiles/Projectile.cs
 			if (target != owner) {
 				doDamage(target, gameTime);
 				destroy();
 			}
+		}
+
+		/// <summary>
+		/// Inflict damage on the target.
+		/// </summary>
+		/// <param name="target"></param>
+		/// <param name="gameTime"></param>
+=======
+            if (owner != target)
+            {
+                doDamage(target, gameTime);
+                destroy();
+            }
 		}
 
         public override void destroy()
@@ -83,11 +97,8 @@ namespace SpaceUnion.Weapons.Projectiles {
             explosionEngine.createBigExplosion(position);
         }
 
-		/// <summary>
-		/// Inflict damage on the target.
-		/// </summary>
-		/// <param name="target"></param>
-		/// <param name="gameTime"></param>
+
+>>>>>>> 7f0d6b427ecac65e03e612d99fe4ef83f7c96631:Client/Weapons/Projectile.cs
 		public virtual void doDamage(Tangible target, GameTime gameTime) {
 
 			target.takeDamage(weaponDamage, gameTime, owner);

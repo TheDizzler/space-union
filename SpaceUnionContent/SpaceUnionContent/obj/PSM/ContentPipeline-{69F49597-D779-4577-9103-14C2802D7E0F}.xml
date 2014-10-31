@@ -308,24 +308,6 @@
       <Time>2014-10-31T13:49:46.875484-07:00</Time>
     </Item>
     <Item>
-      <Source>SpriteFonts\SpriteFont1.spritefont</Source>
-      <Name>SpriteFonts\SpriteFont1</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb</Output>
-      <Time>2014-10-31T13:49:46.9654841-07:00</Time>
-    </Item>
-    <Item>
-      <Source>Buttons\shipselection.png</Source>
-      <Name>Buttons\shipselection</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.xnb</Output>
-      <Time>2014-10-31T13:49:46.865484-07:00</Time>
-    </Item>
-    <Item>
       <Source>Spaceships\galactuship.png</Source>
       <Name>Spaceships\galactuship</Name>
       <Importer>TextureImporter</Importer>
@@ -342,6 +324,24 @@
       <Options>None</Options>
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\optionsbutton.xnb</Output>
       <Time>2014-10-31T13:49:46.855484-07:00</Time>
+    </Item>
+    <Item>
+      <Source>SpriteFonts\SpriteFont1.spritefont</Source>
+      <Name>SpriteFonts\SpriteFont1</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb</Output>
+      <Time>2014-10-31T13:49:46.9654841-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Buttons\shipselection.png</Source>
+      <Name>Buttons\shipselection</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.xnb</Output>
+      <Time>2014-10-31T13:49:46.865484-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SpaceUnion {
+namespace SpaceUnion.Tools {
 	class TeamBattleGUI : GUI {
 		//private Game1 game;
 		private TimeSpan teamBattleTime;

@@ -1,63 +1,3 @@
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\ufoship (128x128).xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\scoutship (128x128).xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\zoidship.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\galaxy.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\beautifulbg.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\doodlebg.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\WinFlags\WinFlag1.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\asteroid(56x56).xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\confirm.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\waterplanet (256x256).xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fireballs.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fireballs (test).xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\big fireballs with blur.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\short missile (16x16).xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\bubble shield sheet.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\moon (115x117).xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\molten bullet (6x8).xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\plasmaball (32x36).xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\bug (16x16).xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbyoptions.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gameroom.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gamelobby.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\createlobby.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbybrowser.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\MapIcons\base (14x14).xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\MapIcons\base2 (16x16).xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\MapIcons\reddot 2 frame (16x16).xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\MapIcons\reticle (16x16).xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.jpg
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\ufoship (128x128).png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\scoutship (128x128).png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\zoidship.png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\confirm.png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbyoptions.png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gameroom.png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gamelobby.png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\createlobby.png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbybrowser.png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\galaxy.png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\beautifulbg.png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\doodlebg.png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\asteroid(56x56).png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\short missile (16x16).png
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\IgnoreMe.dll
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\obj\PSM\Microsoft.Xna.Framework.RuntimeProfile.txt
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\obj\PSM\IgnoreMe.dll
 C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).xnb
 C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.xnb
 C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.xnb
@@ -116,7 +56,123 @@ C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group pro
 C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\createlobby.png
 C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbybrowser.png
 C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\galactuship.xnb
-C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\obj\PSM\SpaceUnionContent.csprojResolveAssemblyReference.cache
 C:\Users\Matthew\Documents\Assignments and Labs Term 4\4952-Tech Pro 2\Group project\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\optionsbutton.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\ufoship (128x128).xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\stuntship (128x128).xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\zoidship.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\galaxy.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\beautifulbg.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\doodlebg.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\WinFlags\WinFlag1.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\asteroid(56x56).xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\confirm.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\waterplanet (256x256).xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fireballs.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fireballs (test).xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\big fireballs with blur.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\short missile (16x16).xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\bubble shield sheet.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\moon (115x117).xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\molten bullet (6x8).xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\plasmaball (32x36).xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\bug (16x16).xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbyoptions.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gameroom.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gamelobby.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\createlobby.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbybrowser.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.xnb
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.png
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.jpg
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\ufoship (128x128).png
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.png
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\stuntship (128x128).png
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\zoidship.png
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.png
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\confirm.png
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.png
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbyoptions.png
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gameroom.png
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gamelobby.png
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\createlobby.png
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbybrowser.png
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).png
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\galaxy.png
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.png
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\beautifulbg.png
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\doodlebg.png
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\asteroid(56x56).png
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\short missile (16x16).png
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\IgnoreMe.dll
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\SpaceUnionContent.csprojResolveAssemblyReference.cache
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\IgnoreMe.dll
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\ufoship (128x128).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\scoutship (128x128).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\zoidship.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\galaxy.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\beautifulbg.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\doodlebg.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\WinFlags\WinFlag1.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\asteroid(56x56).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\confirm.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\waterplanet (256x256).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fireballs.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fireballs (test).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\big fireballs with blur.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\short missile (16x16).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\bubble shield sheet.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\moon (115x117).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\molten bullet (6x8).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\plasmaball (32x36).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\bug (16x16).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbyoptions.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gameroom.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gamelobby.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\createlobby.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbybrowser.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\MapIcons\base (14x14).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\MapIcons\base2 (16x16).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\MapIcons\reddot 2 frame (16x16).xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\MapIcons\reticle (16x16).xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\galactuship.xnb
 C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\optionsbutton.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.xnb
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.jpg
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\ufoship (128x128).png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\scoutship (128x128).png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\zoidship.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\confirm.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbyoptions.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gameroom.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gamelobby.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\createlobby.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbybrowser.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\galaxy.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\beautifulbg.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\doodlebg.png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\asteroid(56x56).png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\short missile (16x16).png
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\IgnoreMe.dll
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\obj\PSM\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\obj\PSM\IgnoreMe.dll
