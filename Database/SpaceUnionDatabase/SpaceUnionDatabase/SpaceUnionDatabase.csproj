@@ -71,6 +71,7 @@
     <Compile Include="UserStat.cs">
       <DependentUpon>SpaceUnionModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserStatTableAccess.cs" />
     <Compile Include="UserTableAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
