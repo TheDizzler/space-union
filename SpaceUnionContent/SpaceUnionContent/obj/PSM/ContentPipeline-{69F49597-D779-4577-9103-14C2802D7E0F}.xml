@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).xnb</Output>
-      <Time>2014-10-17T12:58:56.3301747-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\starfield (800x600).xnb</Output>
+      <Time>2014-10-31T10:42:11.3172673-07:00</Time>
     </Item>
     <Item>
       <Source>Buttons\playbutton.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.xnb</Output>
-      <Time>2014-10-17T12:58:56.3614243-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\playbutton.xnb</Output>
+      <Time>2014-10-31T10:42:11.332893-07:00</Time>
     </Item>
     <Item>
       <Source>Backgrounds\background.jpg</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.xnb</Output>
-      <Time>2014-10-17T12:58:56.3145442-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\background.xnb</Output>
+      <Time>2014-10-31T10:42:11.3016421-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\ufoship (128x128).png</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\ufoship (128x128).xnb</Output>
-      <Time>2014-10-17T12:58:56.408299-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\ufoship (128x128).xnb</Output>
+      <Time>2014-10-31T10:42:11.4266525-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\shuttle.png</Source>
@@ -43,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.xnb</Output>
-      <Time>2014-10-17T12:58:56.408299-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\shuttle.xnb</Output>
+      <Time>2014-10-31T10:42:11.3953967-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\stuntship (128x128).png</Source>
@@ -52,8 +52,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\stuntship (128x128).xnb</Output>
-      <Time>2014-10-17T12:58:56.408299-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\stuntship (128x128).xnb</Output>
+      <Time>2014-10-31T10:42:11.4266525-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\zoidship.png</Source>
@@ -61,8 +61,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\zoidship.xnb</Output>
-      <Time>2014-10-17T12:58:56.423925-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\zoidship.xnb</Output>
+      <Time>2014-10-31T10:42:11.4266525-07:00</Time>
     </Item>
     <Item>
       <Source>Backgrounds\galaxy.png</Source>
@@ -70,8 +70,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\galaxy.xnb</Output>
-      <Time>2014-10-17T12:58:56.3301747-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\galaxy.xnb</Output>
+      <Time>2014-10-31T10:42:11.3172673-07:00</Time>
     </Item>
     <Item>
       <Source>Projectiles\laser.png</Source>
@@ -79,8 +79,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.xnb</Output>
-      <Time>2014-10-17T12:58:56.3614243-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\laser.xnb</Output>
+      <Time>2014-10-31T10:42:11.332893-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\spaceshiptest.png</Source>
@@ -88,8 +88,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.xnb</Output>
-      <Time>2014-10-17T12:58:56.408299-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\spaceshiptest.xnb</Output>
+      <Time>2014-10-31T10:42:11.4266525-07:00</Time>
     </Item>
     <Item>
       <Source>Backgrounds\beautifulbg.png</Source>
@@ -97,8 +97,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\beautifulbg.xnb</Output>
-      <Time>2014-10-17T12:58:56.3145442-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\beautifulbg.xnb</Output>
+      <Time>2014-10-31T10:42:11.3016421-07:00</Time>
     </Item>
     <Item>
       <Source>Backgrounds\doodlebg.png</Source>
@@ -106,8 +106,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\doodlebg.xnb</Output>
-      <Time>2014-10-17T12:58:56.3301747-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Backgrounds\doodlebg.xnb</Output>
+      <Time>2014-10-31T10:42:11.3016421-07:00</Time>
     </Item>
     <Item>
       <Source>WinFlags\WinFlag1.png</Source>
@@ -115,8 +115,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\WinFlags\WinFlag1.xnb</Output>
-      <Time>2014-10-17T12:58:56.4395506-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\WinFlags\WinFlag1.xnb</Output>
+      <Time>2014-10-31T10:42:11.4735306-07:00</Time>
     </Item>
     <Item>
       <Source>StellarObjects\asteroid(56x56).png</Source>
@@ -124,8 +124,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\asteroid(56x56).xnb</Output>
-      <Time>2014-10-17T12:58:56.4395506-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\asteroid(56x56).xnb</Output>
+      <Time>2014-10-31T10:42:11.4422748-07:00</Time>
     </Item>
     <Item>
       <Source>Buttons\confirm.png</Source>
@@ -133,8 +133,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\confirm.xnb</Output>
-      <Time>2014-10-17T12:58:56.3301747-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\confirm.xnb</Output>
+      <Time>2014-10-31T10:42:11.3172673-07:00</Time>
     </Item>
     <Item>
       <Source>StellarObjects\waterplanet (256x256).png</Source>
@@ -142,8 +142,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\waterplanet (256x256).xnb</Output>
-      <Time>2014-10-17T12:58:56.4395506-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\waterplanet (256x256).xnb</Output>
+      <Time>2014-10-31T10:42:11.4735306-07:00</Time>
     </Item>
     <Item>
       <Source>Animations\fireballs.png</Source>
@@ -151,8 +151,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fireballs.xnb</Output>
-      <Time>2014-10-17T12:58:56.3145442-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fireballs.xnb</Output>
+      <Time>2014-10-31T10:42:11.2860157-07:00</Time>
     </Item>
     <Item>
       <Source>Animations\fireballs (test).png</Source>
@@ -160,8 +160,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fireballs (test).xnb</Output>
-      <Time>2014-10-17T12:58:56.2989182-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\fireballs (test).xnb</Output>
+      <Time>2014-10-31T10:42:11.2860157-07:00</Time>
     </Item>
     <Item>
       <Source>Animations\big fireballs with blur.png</Source>
@@ -169,8 +169,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\big fireballs with blur.xnb</Output>
-      <Time>2014-10-17T12:58:56.2520451-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\big fireballs with blur.xnb</Output>
+      <Time>2014-10-31T10:42:11.2703966-07:00</Time>
     </Item>
     <Item>
       <Source>Projectiles\short missile (16x16).png</Source>
@@ -178,8 +178,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\short missile (16x16).xnb</Output>
-      <Time>2014-10-17T12:58:56.3770532-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\short missile (16x16).xnb</Output>
+      <Time>2014-10-31T10:42:11.3797698-07:00</Time>
     </Item>
     <Item>
       <Source>Animations\bubble shield sheet.png</Source>
@@ -187,8 +187,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\bubble shield sheet.xnb</Output>
-      <Time>2014-10-17T12:58:56.2989182-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Animations\bubble shield sheet.xnb</Output>
+      <Time>2014-10-31T10:42:11.2860157-07:00</Time>
     </Item>
     <Item>
       <Source>StellarObjects\moon (115x117).png</Source>
@@ -196,8 +196,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\moon (115x117).xnb</Output>
-      <Time>2014-10-17T12:58:56.4395506-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\StellarObjects\moon (115x117).xnb</Output>
+      <Time>2014-10-31T10:42:11.4422748-07:00</Time>
     </Item>
     <Item>
       <Source>Projectiles\molten bullet (6x8).png</Source>
@@ -205,8 +205,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\molten bullet (6x8).xnb</Output>
-      <Time>2014-10-17T12:58:56.3614243-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\molten bullet (6x8).xnb</Output>
+      <Time>2014-10-31T10:42:11.3485194-07:00</Time>
     </Item>
     <Item>
       <Source>Projectiles\plasmaball (32x36).png</Source>
@@ -214,8 +214,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\plasmaball (32x36).xnb</Output>
-      <Time>2014-10-17T12:58:56.3614243-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Projectiles\plasmaball (32x36).xnb</Output>
+      <Time>2014-10-31T10:42:11.3797698-07:00</Time>
     </Item>
     <Item>
       <Source>Spaceships\bug (16x16).png</Source>
@@ -223,8 +223,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\bug (16x16).xnb</Output>
-      <Time>2014-10-17T12:58:56.392678-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\bug (16x16).xnb</Output>
+      <Time>2014-10-31T10:42:11.3953967-07:00</Time>
     </Item>
     <Item>
       <Source>Buttons\lobbyoptions.png</Source>
@@ -232,8 +232,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbyoptions.xnb</Output>
-      <Time>2014-10-17T12:58:56.3614243-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbyoptions.xnb</Output>
+      <Time>2014-10-31T10:42:11.332893-07:00</Time>
     </Item>
     <Item>
       <Source>Buttons\gameroom.png</Source>
@@ -241,8 +241,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gameroom.xnb</Output>
-      <Time>2014-10-17T12:58:56.3457962-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gameroom.xnb</Output>
+      <Time>2014-10-31T10:42:11.3172673-07:00</Time>
     </Item>
     <Item>
       <Source>Buttons\gamelobby.png</Source>
@@ -250,8 +250,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gamelobby.xnb</Output>
-      <Time>2014-10-17T12:58:56.3457962-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\gamelobby.xnb</Output>
+      <Time>2014-10-31T10:42:11.3172673-07:00</Time>
     </Item>
     <Item>
       <Source>Buttons\createlobby.png</Source>
@@ -259,8 +259,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\createlobby.xnb</Output>
-      <Time>2014-10-17T12:58:56.3301747-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\createlobby.xnb</Output>
+      <Time>2014-10-31T10:42:11.3172673-07:00</Time>
     </Item>
     <Item>
       <Source>Buttons\lobbybrowser.png</Source>
@@ -268,8 +268,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbybrowser.xnb</Output>
-      <Time>2014-10-17T12:58:56.3457962-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\lobbybrowser.xnb</Output>
+      <Time>2014-10-31T10:42:11.332893-07:00</Time>
     </Item>
     <Item>
       <Source>SpriteFonts\SpriteFont1.spritefont</Source>
@@ -277,8 +277,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb</Output>
-      <Time>2014-10-17T12:58:56.423925-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\SpriteFonts\SpriteFont1.xnb</Output>
+      <Time>2014-10-31T10:42:11.4422748-07:00</Time>
     </Item>
     <Item>
       <Source>Buttons\shipselection.png</Source>
@@ -286,8 +286,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.xnb</Output>
-      <Time>2014-10-17T12:58:56.3614243-07:00</Time>
+      <Output>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.xnb</Output>
+      <Time>2014-10-31T10:42:11.332893-07:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -296,10 +296,10 @@
       <TargetProfile>HiDef</TargetProfile>
       <BuildConfiguration>PSM</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContentContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union B\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContentContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\obj\PSM\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Kyle\Documents\BCIT Courses\Term 4\4952 Tech Pro 2\Space Union C\space-union\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

@@ -65,9 +65,18 @@ namespace SpaceUnion.Weapons {
 		/// <param name="target"></param>
 		/// <param name="gameTime"></param>
 		public override void collide(Tangible target, GameTime gameTime) {
-			doDamage(target, gameTime);
-			destroy();
+            if (owner != target)
+            {
+                doDamage(target, gameTime);
+                destroy();
+            }
 		}
+
+        public override void destroy()
+        {
+            isActive = false;
+            explosionEngine.createBigExplosion(position);
+        }
 
 
 		public virtual void doDamage(Tangible target, GameTime gameTime) {

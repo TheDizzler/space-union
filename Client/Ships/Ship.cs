@@ -67,9 +67,12 @@ namespace SpaceUnion.Ships {
 
         public int kills = 0;
         public int deaths = 0;
-
+        
         public bool blueTeam = false;
         public bool redTeam = false;
+
+        public TimeSpan inactiveStart;
+        public TimeSpan inactiveTime = TimeSpan.Zero;
 
 		/// <summary>
 		/// Ship constructor
@@ -109,8 +112,15 @@ namespace SpaceUnion.Ships {
 					projectiles.RemoveAt(i);
 				}
 			}
-
 			checkForCollision(quadTree, gameTime);
+            if (isActive == false)
+            {
+                inactiveTime = gameTime.TotalGameTime - inactiveStart;
+                if (inactiveTime.Seconds >= 2)
+                {
+                    isActive = true;
+                }
+            }
 		}
 
 		
@@ -192,6 +202,7 @@ namespace SpaceUnion.Ships {
 		public abstract void altFire(GameTime gameTime);
 
 		public override void destroy() {
+            isActive = false;
 			explode();
 		}
 

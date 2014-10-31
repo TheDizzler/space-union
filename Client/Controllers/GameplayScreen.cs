@@ -23,6 +23,7 @@ namespace SpaceUnion.Controllers {
 		QuadTree quadTree;
 		List<Asteroid> asteroids;
 		protected List<Ship> ships;
+        protected List<Ship> inactiveShips;
 		protected List<Tangible> targets;
 		protected List<Planet> planets;
 
@@ -85,10 +86,11 @@ namespace SpaceUnion.Controllers {
 
 			asteroids = new List<Asteroid>();
 			ships = new List<Ship>();
+            inactiveShips = new List<Ship>();
 			targets = new List<Tangible>();
 
 			ships.Add(playerShip);
-            ships.Add(new Bug(game));
+            ships.Add(enemyship);
 			foreach (Ship ship in ships)
 				targets.Add(ship);
 			for (int i = 0; i < 50; i++)
@@ -172,9 +174,26 @@ namespace SpaceUnion.Controllers {
 			//	AddAsteroid(new Vector2(gen.Next(100, 4000), gen.Next(100, 2000)));
 
 
-			foreach (Ship ship in ships)
-				ship.update(gameTime, quadTree);
-
+            foreach (Ship ship in ships.ToList())
+            {
+                if (!ship.isActive)
+                {
+                    ship.inactiveStart = gameTime.TotalGameTime;
+                    inactiveShips.Add(ship);
+                    ships.Remove(ship);
+                }
+                ship.update(gameTime, quadTree);
+            }
+            foreach (Ship ship in inactiveShips.ToList())
+            {
+                if (ship.isActive)
+                {
+                    ship.inactiveTime = TimeSpan.Zero;
+                    ships.Add(ship);
+                    inactiveShips.Remove(ship);
+                }
+                ship.update(gameTime, quadTree);
+            }
 
 			for (int i = asteroids.Count - 1; i >= 0; i--) {
 				asteroids[i].update(gameTime, quadTree);
@@ -193,6 +212,7 @@ namespace SpaceUnion.Controllers {
 			Game1.explosionEngine.update(gameTime);
 
 			gui.update(gameTime, quadTree);
+
 		}
 
 		/// <summary>

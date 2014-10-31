@@ -39,7 +39,7 @@ namespace SpaceUnion {
 			return hitBox;
 		}
 
-		protected int maxHealth = 100;
+		protected int maxHealth = 1;
 		protected int currentHealth;
 		/// <summary>
 		/// Get % health remaining
@@ -49,18 +49,23 @@ namespace SpaceUnion {
 		}
 
 		public void takeDamage(int amount, GameTime gameTime, Ship owner) {
-
-			// check last time taken damage
-			if (gameTime.TotalGameTime - previousDamageTime > damageTime) {
-				// Reset our current time
-				previousDamageTime = gameTime.TotalGameTime;
-				currentHealth -= amount;
-			}
-
-            if (currentHealth <= 0)
+            if (this != owner)
             {
-                owner.kills += 1;
-                destroy();
+
+                // check last time taken damage
+                if (gameTime.TotalGameTime - previousDamageTime > damageTime)
+                {
+                    // Reset our current time
+                    previousDamageTime = gameTime.TotalGameTime;
+                    currentHealth -= amount;
+                }
+
+                if (currentHealth <= 0)
+                {   
+                    owner.kills += 1;
+                    destroy();
+                }
+                
             }
 		}
 

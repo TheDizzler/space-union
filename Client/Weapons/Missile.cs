@@ -46,7 +46,7 @@ namespace SpaceUnion.Weapons {
 
 
 		public override void destroy() {
-			//isActive = false;
+			isActive = false;
 			explosionEngine.createSmallExplosion(position);
 		}
 
