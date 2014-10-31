@@ -65,6 +65,7 @@ namespace SpaceUnion.Tools {
         /// Created by Matthew Baldock
         /// </summary>
         public Texture2D gameroom;
+        public Texture2D options;
 
 		// bgs and doodads
 		public Texture2D background;
@@ -94,7 +95,15 @@ namespace SpaceUnion.Tools {
         /// Created by Matthew Baldock
         /// </summary>
 		public Texture2D zoid;
-		public Texture2D bug;
+
+        /// <summary>
+        /// Galactus Ship Texture
+        /// 
+        /// Created by Matthew Baldock
+        /// </summary>
+        public Texture2D galactusship;
+        public Texture2D bug;
+
 
 
 		// projectiles
@@ -103,6 +112,10 @@ namespace SpaceUnion.Tools {
 		public Texture2D shield;
 		public Texture2D moltenBullet;
 		public GraphicsDevice graphicsDevice;
+
+		// radar icons
+		public Texture2D shipMapIcon;
+		public  Texture2D pixel;
 
 
 		public AssetManager(ContentManager cntnt) {
@@ -126,18 +139,22 @@ namespace SpaceUnion.Tools {
 
 			playButton = Content.Load<Texture2D>("Buttons/playbutton");
 <<<<<<< HEAD
+            ///Added by Matthew Baldock
 			confirm = Content.Load<Texture2D>("Buttons/confirm");
 			shipselection = Content.Load<Texture2D>("Buttons/shipselection");
 =======
+
             ///Added by Matthew Baldock
             confirm = Content.Load<Texture2D>("Buttons/confirm");
             shipselection = Content.Load<Texture2D>("Buttons/shipselection");
->>>>>>> 27d8bdea19bea6a8962d91a82c70275d63ef4049
+
+>>>>>>> e39e8f68e60af8663ca8a22d428939578eabde15
             lobbyoptions = Content.Load<Texture2D>("Buttons/lobbyoptions");
             lobbybrowser = Content.Load<Texture2D>("Buttons/lobbybrowser");
             createlobby = Content.Load<Texture2D>("Buttons/createlobby");
             gamelobby = Content.Load<Texture2D>("Buttons/gamelobby");
             gameroom = Content.Load<Texture2D>("Buttons/gameroom");
+            options = Content.Load<Texture2D>("Buttons/optionsbutton");
             ///end added by Matthew Baldock
 
 			guiRectangle = new Texture2D(graphicsDevice, 1, 1);
@@ -158,9 +175,16 @@ namespace SpaceUnion.Tools {
 
 			spaceShipTest = Content.Load<Texture2D>("Spaceships/spaceshiptest");
 			ufo = Content.Load<Texture2D>("Spaceships/ufoship (128x128)");
+<<<<<<< HEAD
+			stunt = Content.Load<Texture2D>("Spaceships/scoutship (128x128)");
+=======
 			stunt = Content.Load<Texture2D>("Spaceships/stuntship (128x128)");
+            ///Added by Matthew Baldock
+>>>>>>> e39e8f68e60af8663ca8a22d428939578eabde15
 			zoid = Content.Load<Texture2D>("Spaceships/zoidship");
 			bug = Content.Load<Texture2D>("Spaceships/bug (16x16)");
+            ///Added by Matthew Baldock
+            //galactusship = Content.Load<Texture2D>("Spaceships/galactuship.png");
 
 
 			winflag1 = Content.Load<Texture2D>("WinFlags/WinFlag1");
@@ -169,6 +193,13 @@ namespace SpaceUnion.Tools {
 			missile = Content.Load<Texture2D>("Projectiles/short missile (16x16)");
 			moltenBullet = Content.Load<Texture2D>("Projectiles/molten bullet (6x8)");
 			shield = Content.Load<Texture2D>("Animations/bubble shield sheet");
+
+
+			shipMapIcon = Content.Load<Texture2D>("MapIcons/reticle (16x16)");
+
+
+			pixel = new Texture2D(graphicsDevice, 1, 1, false, SurfaceFormat.Color);
+			pixel.SetData(new[] { Color.White });
 		}
 	}
 }

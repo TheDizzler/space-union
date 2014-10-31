@@ -43,13 +43,13 @@ namespace SpaceUnion.Controllers
             lastlayerButton.update(mouseState);
             if (nextlayerButton.isClicked == true)
             {
-                game.GoToLayer4();
+                game.GoToGameLobby();
                 nextlayerButton.isClicked = false;
             }
             
             if (lastlayerButton.isClicked == true)
             {
-                game.GoToLayer1();
+                game.GoToLobbyOptions();
                 lastlayerButton.isClicked = false;
             }
 

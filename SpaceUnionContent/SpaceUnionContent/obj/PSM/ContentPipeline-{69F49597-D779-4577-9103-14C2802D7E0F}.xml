@@ -325,6 +325,24 @@
       <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\shipselection.xnb</Output>
       <Time>2014-10-16T18:02:01.0250747-07:00</Time>
     </Item>
+    <Item>
+      <Source>Spaceships\galactuship.png</Source>
+      <Name>Spaceships\galactuship</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Spaceships\galactuship.xnb</Output>
+      <Time>2014-10-16T18:02:01.171083-07:00</Time>
+    </Item>
+    <Item>
+      <Source>Buttons\optionsbutton.png</Source>
+      <Name>Buttons\optionsbutton</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\SpaceUnion\SpaceUnionContent\SpaceUnionContent\bin\PSM\Content\Buttons\optionsbutton.xnb</Output>
+      <Time>2014-10-31T12:58:43.8090486-07:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{69F49597-D779-4577-9103-14C2802D7E0F}</ContentProjectGUID>

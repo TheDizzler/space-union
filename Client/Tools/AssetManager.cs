@@ -65,6 +65,7 @@ namespace SpaceUnion.Tools {
         /// Created by Matthew Baldock
         /// </summary>
         public Texture2D gameroom;
+        public Texture2D options;
 
 		// bgs and doodads
 		public Texture2D background;
@@ -94,7 +95,15 @@ namespace SpaceUnion.Tools {
         /// Created by Matthew Baldock
         /// </summary>
 		public Texture2D zoid;
-		public Texture2D bug;
+
+        /// <summary>
+        /// Galactus Ship Texture
+        /// 
+        /// Created by Matthew Baldock
+        /// </summary>
+        public Texture2D galactusship;
+        public Texture2D bug;
+
 
 
 		// projectiles
@@ -129,14 +138,17 @@ namespace SpaceUnion.Tools {
 			shuttle = Content.Load<Texture2D>("Spaceships/shuttle");
 
 			playButton = Content.Load<Texture2D>("Buttons/playbutton");
+
             ///Added by Matthew Baldock
 			confirm = Content.Load<Texture2D>("Buttons/confirm");
 			shipselection = Content.Load<Texture2D>("Buttons/shipselection");
+
             lobbyoptions = Content.Load<Texture2D>("Buttons/lobbyoptions");
             lobbybrowser = Content.Load<Texture2D>("Buttons/lobbybrowser");
             createlobby = Content.Load<Texture2D>("Buttons/createlobby");
             gamelobby = Content.Load<Texture2D>("Buttons/gamelobby");
             gameroom = Content.Load<Texture2D>("Buttons/gameroom");
+            options = Content.Load<Texture2D>("Buttons/optionsbutton");
             ///end added by Matthew Baldock
 
 			guiRectangle = new Texture2D(graphicsDevice, 1, 1);
@@ -158,8 +170,11 @@ namespace SpaceUnion.Tools {
 			spaceShipTest = Content.Load<Texture2D>("Spaceships/spaceshiptest");
 			ufo = Content.Load<Texture2D>("Spaceships/ufoship (128x128)");
 			stunt = Content.Load<Texture2D>("Spaceships/scoutship (128x128)");
+            ///Added by Matthew Baldock
 			zoid = Content.Load<Texture2D>("Spaceships/zoidship");
 			bug = Content.Load<Texture2D>("Spaceships/bug (16x16)");
+            ///Added by Matthew Baldock
+            //galactusship = Content.Load<Texture2D>("Spaceships/galactuship.png");
 
 
 			winflag1 = Content.Load<Texture2D>("WinFlags/WinFlag1");

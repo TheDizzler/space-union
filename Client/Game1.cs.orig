@@ -34,13 +34,22 @@ namespace SpaceUnion {
 		MainMenuScreen mainMenuScreen;
 		// Created by Matthew Baldock
 		ShipSelectionScreen shipselectionScreen;
+<<<<<<< HEAD
 		LobbyOptions lobbyoptions;
 		LobbyBrowser lobbybrowser;
 		CreateLobby createlobby;
 		GameLobby gamelobby;
 		GameRoom gameroom;
-		Options options;
 		//end created by Matthew
+=======
+        LobbyOptions lobbyoptions;
+        LobbyBrowser lobbybrowser;
+        CreateLobby createlobby;
+        GameLobby gamelobby;
+        GameRoom gameroom;
+        Options options;
+        //end created by Matthew
+>>>>>>> e39e8f68e60af8663ca8a22d428939578eabde15
 
 		/// <summary>
 		/// Game State Enum to track game states
@@ -51,11 +60,19 @@ namespace SpaceUnion {
 			Options,
 			TeamBattle,
 			Select,
-			LobbyOptions,
-			LobbyBrowser,
-			CreateLobby,
-			GameLobby,
-			GameRoom
+<<<<<<< HEAD
+			Layer1,
+			Layer2,
+			Layer3,
+			Layer4,
+			Layer5
+=======
+            LobbyOptions,
+            LobbyBrowser,
+            CreateLobby,
+            GameLobby,
+            GameRoom
+>>>>>>> e39e8f68e60af8663ca8a22d428939578eabde15
 		}
 
 		GameState currentGameState = GameState.MainMenu;
@@ -105,11 +122,15 @@ namespace SpaceUnion {
 			// All sprites get loaded in to here
 			Assets.loadContent(GraphicsDevice);
 			explosionEngine = new ExplosionEngine(Assets);
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> e39e8f68e60af8663ca8a22d428939578eabde15
 			//Load Main Menu
 			mainMenuScreen = new MainMenuScreen(this);
 			shipselectionScreen = new ShipSelectionScreen(this);
-
+            
 			IsMouseVisible = true;
 
 
@@ -150,25 +171,42 @@ namespace SpaceUnion {
 				case GameState.Select:
 					shipselectionScreen.update();
 					break;
-				case GameState.LobbyOptions:
+<<<<<<< HEAD
+				case GameState.Layer1:
 					lobbyoptions.update();
 					break;
-				case GameState.LobbyBrowser:
-					break;
+				case GameState.Layer2:
 					lobbybrowser.update();
 					break;
-				case GameState.CreateLobby:
+				case GameState.Layer3:
 					createlobby.update();
 					break;
-				case GameState.GameLobby:
+				case GameState.Layer4:
 					gamelobby.update();
 					break;
-				case GameState.GameRoom:
+				case GameState.Layer5:
 					gameroom.update();
 					break;
-				case GameState.Options:
-					options.update();
-					break;
+=======
+                case GameState.LobbyOptions:
+                    lobbyoptions.update();
+                    break;
+                case GameState.LobbyBrowser:
+                    lobbybrowser.update();
+                    break;
+                case GameState.CreateLobby:
+                    createlobby.update();
+                    break;
+                case GameState.GameLobby:
+                    gamelobby.update();
+                    break;
+                case GameState.GameRoom:
+                    gameroom.update();
+                    break;
+                case GameState.Options:
+                    options.update();
+                    break;
+>>>>>>> e39e8f68e60af8663ca8a22d428939578eabde15
 				default:
 					break;
 			}
@@ -198,24 +236,46 @@ namespace SpaceUnion {
 				case GameState.Select:
 					shipselectionScreen.draw(spriteBatch);
 					break;
-				case GameState.LobbyOptions:
+<<<<<<< HEAD
+				case GameState.Layer1:
 					lobbyoptions.draw(spriteBatch);
 					break;
-				case GameState.LobbyBrowser:
+				case GameState.Layer2:
 					lobbybrowser.draw(spriteBatch);
 					break;
-				case GameState.CreateLobby:
+				case GameState.Layer3:
 					createlobby.draw(spriteBatch);
 					break;
-				case GameState.GameLobby:
+				case GameState.Layer4:
 					gamelobby.draw(spriteBatch);
 					break;
-				case GameState.GameRoom:
+				case GameState.Layer5:
 					gameroom.draw(spriteBatch);
 					break;
-				case GameState.Options:
-					options.draw(spriteBatch);
-					break;
+=======
+                case GameState.LobbyOptions:
+                    lobbyoptions.draw(spriteBatch);
+                    break;
+                case GameState.LobbyBrowser:
+                    lobbybrowser.draw(spriteBatch);
+                    break;
+                case GameState.CreateLobby:
+                    createlobby.draw(spriteBatch);
+                    break;
+                case GameState.GameLobby:
+                    gamelobby.draw(spriteBatch);
+                    break;
+                case GameState.GameRoom:
+                    gameroom.draw(spriteBatch);
+                    break;
+                case GameState.Options:
+                    options.draw(spriteBatch);
+                    break;
+                    
+>>>>>>> e39e8f68e60af8663ca8a22d428939578eabde15
+
+
+
 			}
 
 			base.Draw(gameTime);
@@ -227,46 +287,81 @@ namespace SpaceUnion {
 			currentGameState = GameState.MainMenu;
 			IsMouseVisible = true;
 		}
-		public void GoToLobbyOptions() {
+<<<<<<< HEAD
+		public void GoToLayer1() {
 			lobbyoptions = new LobbyOptions(this);
-			currentGameState = GameState.LobbyOptions;
+			currentGameState = GameState.Layer1;
 			IsMouseVisible = true;
 		}
-		public void GoToLobbyBrowser() {
+		public void GoToLayer2() {
 			lobbybrowser = new LobbyBrowser(this);
-			currentGameState = GameState.LobbyBrowser;
+			currentGameState = GameState.Layer2;
 			IsMouseVisible = true;
 		}
-		public void GoToCreateLobby() {
+		public void GoToLayer3() {
 			createlobby = new CreateLobby(this);
-			currentGameState = GameState.CreateLobby;
+			currentGameState = GameState.Layer3;
 			IsMouseVisible = true;
 		}
-		public void GoToGameLobby() {
+		public void GoToLayer4() {
 			gamelobby = new GameLobby(this);
-			currentGameState = GameState.GameLobby;
+			currentGameState = GameState.Layer4;
 			IsMouseVisible = true;
 		}
-		public void GoToGameRoom() {
+		public void GoToLayer5() {
 			gameroom = new GameRoom(this);
-			currentGameState = GameState.GameRoom;
+			currentGameState = GameState.Layer5;
 			IsMouseVisible = true;
 		}
 
+=======
+        public void GoToLobbyOptions()
+        {
+            lobbyoptions = new LobbyOptions(this);
+            currentGameState = GameState.LobbyOptions;
+            IsMouseVisible = true;
+        }
+        public void GoToLobbyBrowser()
+        {
+            lobbybrowser = new LobbyBrowser(this);
+            currentGameState = GameState.LobbyBrowser;
+            IsMouseVisible = true;
+        }
+        public void GoToCreateLobby()
+        {
+            createlobby = new CreateLobby(this);
+            currentGameState = GameState.CreateLobby;
+            IsMouseVisible = true;
+        }
+        public void GoToGameLobby()
+        {
+            gamelobby = new GameLobby(this);
+            currentGameState = GameState.GameLobby;
+            IsMouseVisible = true;
+        }
+        public void GoToGameRoom()
+        {
+            gameroom = new GameRoom(this);
+            currentGameState = GameState.GameRoom;
+            IsMouseVisible = true;
+        }
+        
+>>>>>>> e39e8f68e60af8663ca8a22d428939578eabde15
 		public void GoToSelect() {
 			shipselectionScreen = new ShipSelectionScreen(this);
 			currentGameState = GameState.Select;
 			IsMouseVisible = true;
 		}
 
-		public void GoToOptions() {
-			options = new Options(this);
-			currentGameState = GameState.Options;
-			IsMouseVisible = true;
-		}
+        public void GoToOptions()
+        {
+            options = new Options(this);
+            currentGameState = GameState.Options;
+            IsMouseVisible = true;
+        }
 		public void StartGame() {
 			//gameplayScreen = new GameplayScreen(this, spriteBatch, shipselectionScreen.getship());
-			gameplayScreen = new TeamBattle(this, spriteBatch, shipselectionScreen.getship());
+            gameplayScreen = new TeamBattle(this, spriteBatch, shipselectionScreen.getship());
 			Viewport v = GraphicsDevice.Viewport;
 			currentGameState = GameState.Playing;
 			IsMouseVisible = false;

@@ -34,6 +34,8 @@ Content\MapIcons\reddot 2 frame (16x16).xnb
 Content\MapIcons\reticle (16x16).xnb
 Content\SpriteFonts\SpriteFont1.xnb
 Content\Buttons\shipselection.xnb
+Content\Spaceships\galactuship.xnb
+Content\Buttons\optionsbutton.xnb
 Content\Backgrounds\starfield (800x600).png
 Content\Backgrounds\galaxy.png
 Content\Spaceships\spaceshiptest.png

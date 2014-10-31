@@ -46,17 +46,17 @@ namespace SpaceUnion.Controllers
             lastlayerButton.update(mouseState);
             if (nextlayerButton.isClicked == true)
             {
-                game.GoToLayer2();
+                game.GoToLobbyBrowser();
                 nextlayerButton.isClicked = false;
             }
             if (nextlayerButton2.isClicked == true)
             {
-                game.GoToLayer5();
+                game.GoToGameRoom();
                 nextlayerButton2.isClicked = false;
             }
             if (lastlayerButton.isClicked == true)
             {
-                game.GoToLayer3();
+                game.GoToCreateLobby();
                 lastlayerButton.isClicked = false;
             }
 

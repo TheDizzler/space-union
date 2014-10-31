@@ -38,6 +38,7 @@
     <Compile Include="Animations\BigExplosion.cs" />
     <Compile Include="Animations\Explosion.cs" />
     <Compile Include="Background.cs" />
+    <Compile Include="Animations\ScrollingBackground.cs" />
     <Compile Include="Controllers\GameRoom.cs" />
     <Compile Include="Controllers\GameLobby.cs" />
     <Compile Include="Controllers\LobbyBrowser.cs" />
@@ -46,6 +47,7 @@
     <Compile Include="MapIcon.cs" />
     <Compile Include="Tools\HitCircle.cs" />
     <Compile Include="Controllers\TeamBattle.cs" />
+    <Compile Include="Controllers\Options.cs" />
     <Compile Include="Ships\Bug.cs" />
     <Compile Include="TeamBattleGUI.cs" />
     <Compile Include="Tools\QuadTree.cs" />
