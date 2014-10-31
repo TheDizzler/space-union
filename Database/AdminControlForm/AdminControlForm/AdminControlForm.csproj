@@ -59,6 +59,7 @@
       <DependentUpon>AcceptCancelBlockActionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="BlockUnblockUserValidation.cs" />
+    <Compile Include="ShipValidation.cs" />
     <Compile Include="UserValidation.cs" />
     <Compile Include="AdminForm.cs">
       <SubType>Form</SubType>

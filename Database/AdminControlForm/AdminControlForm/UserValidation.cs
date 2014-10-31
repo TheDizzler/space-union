@@ -8,7 +8,8 @@ namespace AdminControlForm
 {
     class UserValidation
     {
-        public bool ValidateUsername(string username, ref string errMsg)
+        public bool
+        ValidateUsername(string username, ref string errMsg)
         {
             const int  MIN_LENGTH     = 4;
             const int  MAX_LENGTH     = 16;
@@ -52,7 +53,8 @@ namespace AdminControlForm
         }
 
         
-        public bool ValidatePassword(string password, ref string errMsg)
+        public bool
+        ValidatePassword(string password, ref string errMsg)
         {
             const int MIN_LENGTH =  4;
             const int MAX_LENGTH = 32;

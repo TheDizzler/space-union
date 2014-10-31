@@ -30,6 +30,7 @@
         {
             this.tabControl = new System.Windows.Forms.TabControl();
             this.createUserTab = new System.Windows.Forms.TabPage();
+            this.lablCreateNewUser = new System.Windows.Forms.Label();
             this.lablConfPasswordErrMsg = new System.Windows.Forms.Label();
             this.bttnCreateUser = new System.Windows.Forms.Button();
             this.lablUsernameSpec2 = new System.Windows.Forms.Label();
@@ -64,11 +65,21 @@
             this.button1 = new System.Windows.Forms.Button();
             this.logintext = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lablAddNewShip = new System.Windows.Forms.Label();
-            this.lablNewShipName = new System.Windows.Forms.Label();
-            this.txtbNewShipName = new System.Windows.Forms.TextBox();
+            this.lablMaxSpeedErrMsg = new System.Windows.Forms.Label();
+            this.lablAccelErrMsg = new System.Windows.Forms.Label();
+            this.lablTurnSpeedErrMsg = new System.Windows.Forms.Label();
+            this.bttnAddShip = new System.Windows.Forms.Button();
+            this.lablMaxSpeed = new System.Windows.Forms.Label();
+            this.txtbMaxSpeed = new System.Windows.Forms.TextBox();
+            this.lablAccelerate = new System.Windows.Forms.Label();
+            this.txtbAccelerate = new System.Windows.Forms.TextBox();
+            this.lablTurnSpeed = new System.Windows.Forms.Label();
+            this.txtbTurnSpeed = new System.Windows.Forms.TextBox();
             this.lablNewShipNameErrMsg = new System.Windows.Forms.Label();
+            this.txtbNewShipName = new System.Windows.Forms.TextBox();
+            this.lablNewShipName = new System.Windows.Forms.Label();
+            this.lablAddNewShip = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.createUserTab.SuspendLayout();
             this.editUserTab.SuspendLayout();
@@ -93,6 +104,7 @@
             // 
             this.createUserTab.BackColor = System.Drawing.Color.Transparent;
             this.createUserTab.BackgroundImage = global::AdminControlForm.Properties.Resources.dark_space;
+            this.createUserTab.Controls.Add(this.lablCreateNewUser);
             this.createUserTab.Controls.Add(this.lablConfPasswordErrMsg);
             this.createUserTab.Controls.Add(this.bttnCreateUser);
             this.createUserTab.Controls.Add(this.lablUsernameSpec2);
@@ -117,11 +129,22 @@
             this.createUserTab.TabIndex = 0;
             this.createUserTab.Text = "Create New User";
             // 
+            // lablCreateNewUser
+            // 
+            this.lablCreateNewUser.AutoSize = true;
+            this.lablCreateNewUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablCreateNewUser.ForeColor = System.Drawing.Color.White;
+            this.lablCreateNewUser.Location = new System.Drawing.Point(24, 16);
+            this.lablCreateNewUser.Name = "lablCreateNewUser";
+            this.lablCreateNewUser.Size = new System.Drawing.Size(145, 20);
+            this.lablCreateNewUser.TabIndex = 18;
+            this.lablCreateNewUser.Text = "Create New User";
+            // 
             // lablConfPasswordErrMsg
             // 
             this.lablConfPasswordErrMsg.AutoSize = true;
             this.lablConfPasswordErrMsg.ForeColor = System.Drawing.Color.Red;
-            this.lablConfPasswordErrMsg.Location = new System.Drawing.Point(188, 203);
+            this.lablConfPasswordErrMsg.Location = new System.Drawing.Point(188, 245);
             this.lablConfPasswordErrMsg.Name = "lablConfPasswordErrMsg";
             this.lablConfPasswordErrMsg.Size = new System.Drawing.Size(139, 13);
             this.lablConfPasswordErrMsg.TabIndex = 17;
@@ -144,7 +167,7 @@
             // 
             this.lablUsernameSpec2.AutoSize = true;
             this.lablUsernameSpec2.ForeColor = System.Drawing.Color.White;
-            this.lablUsernameSpec2.Location = new System.Drawing.Point(45, 73);
+            this.lablUsernameSpec2.Location = new System.Drawing.Point(45, 106);
             this.lablUsernameSpec2.Name = "lablUsernameSpec2";
             this.lablUsernameSpec2.Size = new System.Drawing.Size(181, 13);
             this.lablUsernameSpec2.TabIndex = 15;
@@ -154,7 +177,7 @@
             // 
             this.lablPasswordSpec2.AutoSize = true;
             this.lablPasswordSpec2.ForeColor = System.Drawing.Color.White;
-            this.lablPasswordSpec2.Location = new System.Drawing.Point(45, 163);
+            this.lablPasswordSpec2.Location = new System.Drawing.Point(45, 200);
             this.lablPasswordSpec2.Name = "lablPasswordSpec2";
             this.lablPasswordSpec2.Size = new System.Drawing.Size(309, 13);
             this.lablPasswordSpec2.TabIndex = 14;
@@ -165,7 +188,7 @@
             this.lablPasswordSpec.AutoSize = true;
             this.lablPasswordSpec.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lablPasswordSpec.ForeColor = System.Drawing.Color.White;
-            this.lablPasswordSpec.Location = new System.Drawing.Point(45, 150);
+            this.lablPasswordSpec.Location = new System.Drawing.Point(45, 187);
             this.lablPasswordSpec.Name = "lablPasswordSpec";
             this.lablPasswordSpec.Size = new System.Drawing.Size(81, 13);
             this.lablPasswordSpec.TabIndex = 13;
@@ -176,7 +199,7 @@
             this.lablUsernameSpec.AutoSize = true;
             this.lablUsernameSpec.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lablUsernameSpec.ForeColor = System.Drawing.Color.White;
-            this.lablUsernameSpec.Location = new System.Drawing.Point(45, 60);
+            this.lablUsernameSpec.Location = new System.Drawing.Point(45, 93);
             this.lablUsernameSpec.Name = "lablUsernameSpec";
             this.lablUsernameSpec.Size = new System.Drawing.Size(81, 13);
             this.lablUsernameSpec.TabIndex = 12;
@@ -186,7 +209,7 @@
             // 
             this.lablEmailErrMsg.AutoSize = true;
             this.lablEmailErrMsg.ForeColor = System.Drawing.Color.Red;
-            this.lablEmailErrMsg.Location = new System.Drawing.Point(98, 269);
+            this.lablEmailErrMsg.Location = new System.Drawing.Point(98, 314);
             this.lablEmailErrMsg.Name = "lablEmailErrMsg";
             this.lablEmailErrMsg.Size = new System.Drawing.Size(78, 13);
             this.lablEmailErrMsg.TabIndex = 11;
@@ -197,7 +220,7 @@
             // 
             this.lablPasswordErrMsg.AutoSize = true;
             this.lablPasswordErrMsg.ForeColor = System.Drawing.Color.Red;
-            this.lablPasswordErrMsg.Location = new System.Drawing.Point(125, 109);
+            this.lablPasswordErrMsg.Location = new System.Drawing.Point(127, 146);
             this.lablPasswordErrMsg.Name = "lablPasswordErrMsg";
             this.lablPasswordErrMsg.Size = new System.Drawing.Size(99, 13);
             this.lablPasswordErrMsg.TabIndex = 10;
@@ -208,7 +231,7 @@
             // 
             this.lablUsernameErrMsg.AutoSize = true;
             this.lablUsernameErrMsg.ForeColor = System.Drawing.Color.Red;
-            this.lablUsernameErrMsg.Location = new System.Drawing.Point(132, 19);
+            this.lablUsernameErrMsg.Location = new System.Drawing.Point(125, 52);
             this.lablUsernameErrMsg.Name = "lablUsernameErrMsg";
             this.lablUsernameErrMsg.Size = new System.Drawing.Size(101, 13);
             this.lablUsernameErrMsg.TabIndex = 9;
@@ -217,7 +240,7 @@
             // 
             // txtbEmail
             // 
-            this.txtbEmail.Location = new System.Drawing.Point(48, 287);
+            this.txtbEmail.Location = new System.Drawing.Point(45, 332);
             this.txtbEmail.Name = "txtbEmail";
             this.txtbEmail.Size = new System.Drawing.Size(223, 20);
             this.txtbEmail.TabIndex = 7;
@@ -227,7 +250,7 @@
             this.lablEmail.AutoSize = true;
             this.lablEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lablEmail.ForeColor = System.Drawing.Color.White;
-            this.lablEmail.Location = new System.Drawing.Point(45, 267);
+            this.lablEmail.Location = new System.Drawing.Point(45, 312);
             this.lablEmail.Name = "lablEmail";
             this.lablEmail.Size = new System.Drawing.Size(47, 17);
             this.lablEmail.TabIndex = 6;
@@ -235,7 +258,7 @@
             // 
             // txtbConfirmPassword
             // 
-            this.txtbConfirmPassword.Location = new System.Drawing.Point(48, 221);
+            this.txtbConfirmPassword.Location = new System.Drawing.Point(45, 263);
             this.txtbConfirmPassword.Name = "txtbConfirmPassword";
             this.txtbConfirmPassword.Size = new System.Drawing.Size(223, 20);
             this.txtbConfirmPassword.TabIndex = 5;
@@ -246,7 +269,7 @@
             this.lablConfirmPassword.AutoSize = true;
             this.lablConfirmPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lablConfirmPassword.ForeColor = System.Drawing.Color.White;
-            this.lablConfirmPassword.Location = new System.Drawing.Point(45, 201);
+            this.lablConfirmPassword.Location = new System.Drawing.Point(45, 243);
             this.lablConfirmPassword.Name = "lablConfirmPassword";
             this.lablConfirmPassword.Size = new System.Drawing.Size(137, 17);
             this.lablConfirmPassword.TabIndex = 4;
@@ -254,7 +277,7 @@
             // 
             // txtbPassword
             // 
-            this.txtbPassword.Location = new System.Drawing.Point(48, 127);
+            this.txtbPassword.Location = new System.Drawing.Point(45, 164);
             this.txtbPassword.Name = "txtbPassword";
             this.txtbPassword.Size = new System.Drawing.Size(223, 20);
             this.txtbPassword.TabIndex = 3;
@@ -265,7 +288,7 @@
             this.lablPassword.AutoSize = true;
             this.lablPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lablPassword.ForeColor = System.Drawing.Color.White;
-            this.lablPassword.Location = new System.Drawing.Point(45, 107);
+            this.lablPassword.Location = new System.Drawing.Point(45, 144);
             this.lablPassword.Name = "lablPassword";
             this.lablPassword.Size = new System.Drawing.Size(77, 17);
             this.lablPassword.TabIndex = 2;
@@ -273,7 +296,7 @@
             // 
             // txtbUsername
             // 
-            this.txtbUsername.Location = new System.Drawing.Point(48, 37);
+            this.txtbUsername.Location = new System.Drawing.Point(45, 70);
             this.txtbUsername.Name = "txtbUsername";
             this.txtbUsername.Size = new System.Drawing.Size(223, 20);
             this.txtbUsername.TabIndex = 1;
@@ -285,7 +308,7 @@
             this.lablUsername.BackColor = System.Drawing.Color.Transparent;
             this.lablUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lablUsername.ForeColor = System.Drawing.Color.White;
-            this.lablUsername.Location = new System.Drawing.Point(45, 17);
+            this.lablUsername.Location = new System.Drawing.Point(45, 50);
             this.lablUsername.Name = "lablUsername";
             this.lablUsername.Size = new System.Drawing.Size(81, 17);
             this.lablUsername.TabIndex = 0;
@@ -466,6 +489,16 @@
             // tabPage2
             // 
             this.tabPage2.BackgroundImage = global::AdminControlForm.Properties.Resources.dark_space;
+            this.tabPage2.Controls.Add(this.lablMaxSpeedErrMsg);
+            this.tabPage2.Controls.Add(this.lablAccelErrMsg);
+            this.tabPage2.Controls.Add(this.lablTurnSpeedErrMsg);
+            this.tabPage2.Controls.Add(this.bttnAddShip);
+            this.tabPage2.Controls.Add(this.lablMaxSpeed);
+            this.tabPage2.Controls.Add(this.txtbMaxSpeed);
+            this.tabPage2.Controls.Add(this.lablAccelerate);
+            this.tabPage2.Controls.Add(this.txtbAccelerate);
+            this.tabPage2.Controls.Add(this.lablTurnSpeed);
+            this.tabPage2.Controls.Add(this.txtbTurnSpeed);
             this.tabPage2.Controls.Add(this.lablNewShipNameErrMsg);
             this.tabPage2.Controls.Add(this.txtbNewShipName);
             this.tabPage2.Controls.Add(this.lablNewShipName);
@@ -476,8 +509,150 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(488, 486);
             this.tabPage2.TabIndex = 3;
-            this.tabPage2.Text = "Add/Edit Ships";
+            this.tabPage2.Text = "Add Ship";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // lablMaxSpeedErrMsg
+            // 
+            this.lablMaxSpeedErrMsg.AutoSize = true;
+            this.lablMaxSpeedErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablMaxSpeedErrMsg.Location = new System.Drawing.Point(187, 338);
+            this.lablMaxSpeedErrMsg.Name = "lablMaxSpeedErrMsg";
+            this.lablMaxSpeedErrMsg.Size = new System.Drawing.Size(95, 13);
+            this.lablMaxSpeedErrMsg.TabIndex = 14;
+            this.lablMaxSpeedErrMsg.Text = "max speed err msg";
+            this.lablMaxSpeedErrMsg.Visible = false;
+            // 
+            // lablAccelErrMsg
+            // 
+            this.lablAccelErrMsg.AutoSize = true;
+            this.lablAccelErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablAccelErrMsg.Location = new System.Drawing.Point(197, 239);
+            this.lablAccelErrMsg.Name = "lablAccelErrMsg";
+            this.lablAccelErrMsg.Size = new System.Drawing.Size(70, 13);
+            this.lablAccelErrMsg.TabIndex = 13;
+            this.lablAccelErrMsg.Text = "accel err msg";
+            this.lablAccelErrMsg.Visible = false;
+            // 
+            // lablTurnSpeedErrMsg
+            // 
+            this.lablTurnSpeedErrMsg.AutoSize = true;
+            this.lablTurnSpeedErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablTurnSpeedErrMsg.Location = new System.Drawing.Point(194, 145);
+            this.lablTurnSpeedErrMsg.Name = "lablTurnSpeedErrMsg";
+            this.lablTurnSpeedErrMsg.Size = new System.Drawing.Size(94, 13);
+            this.lablTurnSpeedErrMsg.TabIndex = 12;
+            this.lablTurnSpeedErrMsg.Text = "turn speed err msg";
+            this.lablTurnSpeedErrMsg.Visible = false;
+            // 
+            // bttnAddShip
+            // 
+            this.bttnAddShip.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bttnAddShip.Location = new System.Drawing.Point(140, 417);
+            this.bttnAddShip.Name = "bttnAddShip";
+            this.bttnAddShip.Size = new System.Drawing.Size(114, 40);
+            this.bttnAddShip.TabIndex = 11;
+            this.bttnAddShip.Text = "Add Ship";
+            this.bttnAddShip.UseVisualStyleBackColor = true;
+            this.bttnAddShip.Click += new System.EventHandler(this.bttnAddShip_Click);
+            // 
+            // lablMaxSpeed
+            // 
+            this.lablMaxSpeed.AutoSize = true;
+            this.lablMaxSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablMaxSpeed.ForeColor = System.Drawing.Color.White;
+            this.lablMaxSpeed.Location = new System.Drawing.Point(45, 334);
+            this.lablMaxSpeed.Name = "lablMaxSpeed";
+            this.lablMaxSpeed.Size = new System.Drawing.Size(136, 17);
+            this.lablMaxSpeed.TabIndex = 10;
+            this.lablMaxSpeed.Text = "Max Speed (float)";
+            // 
+            // txtbMaxSpeed
+            // 
+            this.txtbMaxSpeed.Location = new System.Drawing.Point(45, 354);
+            this.txtbMaxSpeed.Name = "txtbMaxSpeed";
+            this.txtbMaxSpeed.Size = new System.Drawing.Size(210, 20);
+            this.txtbMaxSpeed.TabIndex = 9;
+            this.txtbMaxSpeed.TextChanged += new System.EventHandler(this.validateMaxSpeed);
+            // 
+            // lablAccelerate
+            // 
+            this.lablAccelerate.AutoSize = true;
+            this.lablAccelerate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablAccelerate.ForeColor = System.Drawing.Color.White;
+            this.lablAccelerate.Location = new System.Drawing.Point(45, 239);
+            this.lablAccelerate.Name = "lablAccelerate";
+            this.lablAccelerate.Size = new System.Drawing.Size(147, 17);
+            this.lablAccelerate.TabIndex = 8;
+            this.lablAccelerate.Text = "Acceleration (float)";
+            // 
+            // txtbAccelerate
+            // 
+            this.txtbAccelerate.Location = new System.Drawing.Point(45, 259);
+            this.txtbAccelerate.Name = "txtbAccelerate";
+            this.txtbAccelerate.Size = new System.Drawing.Size(210, 20);
+            this.txtbAccelerate.TabIndex = 7;
+            this.txtbAccelerate.TextChanged += new System.EventHandler(this.validateAcceleration);
+            // 
+            // lablTurnSpeed
+            // 
+            this.lablTurnSpeed.AutoSize = true;
+            this.lablTurnSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablTurnSpeed.ForeColor = System.Drawing.Color.White;
+            this.lablTurnSpeed.Location = new System.Drawing.Point(45, 145);
+            this.lablTurnSpeed.Name = "lablTurnSpeed";
+            this.lablTurnSpeed.Size = new System.Drawing.Size(142, 17);
+            this.lablTurnSpeed.TabIndex = 6;
+            this.lablTurnSpeed.Text = "Turn Speed (float)";
+            // 
+            // txtbTurnSpeed
+            // 
+            this.txtbTurnSpeed.Location = new System.Drawing.Point(45, 165);
+            this.txtbTurnSpeed.Name = "txtbTurnSpeed";
+            this.txtbTurnSpeed.Size = new System.Drawing.Size(210, 20);
+            this.txtbTurnSpeed.TabIndex = 5;
+            this.txtbTurnSpeed.TextChanged += new System.EventHandler(this.validateTurnSpeed);
+            // 
+            // lablNewShipNameErrMsg
+            // 
+            this.lablNewShipNameErrMsg.AutoSize = true;
+            this.lablNewShipNameErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablNewShipNameErrMsg.Location = new System.Drawing.Point(137, 52);
+            this.lablNewShipNameErrMsg.Name = "lablNewShipNameErrMsg";
+            this.lablNewShipNameErrMsg.Size = new System.Drawing.Size(92, 13);
+            this.lablNewShipNameErrMsg.TabIndex = 4;
+            this.lablNewShipNameErrMsg.Text = "ship name err msg";
+            this.lablNewShipNameErrMsg.Visible = false;
+            // 
+            // txtbNewShipName
+            // 
+            this.txtbNewShipName.Location = new System.Drawing.Point(45, 70);
+            this.txtbNewShipName.Name = "txtbNewShipName";
+            this.txtbNewShipName.Size = new System.Drawing.Size(210, 20);
+            this.txtbNewShipName.TabIndex = 3;
+            this.txtbNewShipName.TextChanged += new System.EventHandler(this.validateShipName);
+            // 
+            // lablNewShipName
+            // 
+            this.lablNewShipName.AutoSize = true;
+            this.lablNewShipName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablNewShipName.ForeColor = System.Drawing.Color.White;
+            this.lablNewShipName.Location = new System.Drawing.Point(45, 50);
+            this.lablNewShipName.Name = "lablNewShipName";
+            this.lablNewShipName.Size = new System.Drawing.Size(86, 17);
+            this.lablNewShipName.TabIndex = 2;
+            this.lablNewShipName.Text = "Ship Name";
+            // 
+            // lablAddNewShip
+            // 
+            this.lablAddNewShip.AutoSize = true;
+            this.lablAddNewShip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablAddNewShip.ForeColor = System.Drawing.Color.White;
+            this.lablAddNewShip.Location = new System.Drawing.Point(24, 16);
+            this.lablAddNewShip.Name = "lablAddNewShip";
+            this.lablAddNewShip.Size = new System.Drawing.Size(136, 20);
+            this.lablAddNewShip.TabIndex = 1;
+            this.lablAddNewShip.Text = "Add a New Ship";
             // 
             // label2
             // 
@@ -487,46 +662,6 @@
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "label2";
-            // 
-            // lablAddNewShip
-            // 
-            this.lablAddNewShip.AutoSize = true;
-            this.lablAddNewShip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablAddNewShip.ForeColor = System.Drawing.Color.White;
-            this.lablAddNewShip.Location = new System.Drawing.Point(19, 20);
-            this.lablAddNewShip.Name = "lablAddNewShip";
-            this.lablAddNewShip.Size = new System.Drawing.Size(136, 20);
-            this.lablAddNewShip.TabIndex = 1;
-            this.lablAddNewShip.Text = "Add a New Ship";
-            // 
-            // lablNewShipName
-            // 
-            this.lablNewShipName.AutoSize = true;
-            this.lablNewShipName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablNewShipName.ForeColor = System.Drawing.Color.White;
-            this.lablNewShipName.Location = new System.Drawing.Point(23, 53);
-            this.lablNewShipName.Name = "lablNewShipName";
-            this.lablNewShipName.Size = new System.Drawing.Size(86, 17);
-            this.lablNewShipName.TabIndex = 2;
-            this.lablNewShipName.Text = "Ship Name";
-            // 
-            // txtbNewShipName
-            // 
-            this.txtbNewShipName.Location = new System.Drawing.Point(26, 74);
-            this.txtbNewShipName.Name = "txtbNewShipName";
-            this.txtbNewShipName.Size = new System.Drawing.Size(210, 20);
-            this.txtbNewShipName.TabIndex = 3;
-            // 
-            // lablNewShipNameErrMsg
-            // 
-            this.lablNewShipNameErrMsg.AutoSize = true;
-            this.lablNewShipNameErrMsg.ForeColor = System.Drawing.Color.Red;
-            this.lablNewShipNameErrMsg.Location = new System.Drawing.Point(115, 55);
-            this.lablNewShipNameErrMsg.Name = "lablNewShipNameErrMsg";
-            this.lablNewShipNameErrMsg.Size = new System.Drawing.Size(92, 13);
-            this.lablNewShipNameErrMsg.TabIndex = 4;
-            this.lablNewShipNameErrMsg.Text = "ship name err msg";
-            this.lablNewShipNameErrMsg.Visible = false;
             // 
             // AdminForm
             // 
@@ -594,6 +729,17 @@
         private System.Windows.Forms.Label lablNewShipName;
         private System.Windows.Forms.Label lablAddNewShip;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lablAccelerate;
+        private System.Windows.Forms.TextBox txtbAccelerate;
+        private System.Windows.Forms.Label lablTurnSpeed;
+        private System.Windows.Forms.TextBox txtbTurnSpeed;
+        private System.Windows.Forms.Label lablMaxSpeed;
+        private System.Windows.Forms.TextBox txtbMaxSpeed;
+        private System.Windows.Forms.Label lablCreateNewUser;
+        private System.Windows.Forms.Button bttnAddShip;
+        private System.Windows.Forms.Label lablMaxSpeedErrMsg;
+        private System.Windows.Forms.Label lablAccelErrMsg;
+        private System.Windows.Forms.Label lablTurnSpeedErrMsg;
     }
 }
 
