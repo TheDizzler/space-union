@@ -87,6 +87,7 @@ namespace Client_Comm_Module
         {
             if (message != null)
                 sender.addMessageToQueue(message);
+            
         }
 
         /// <summary>
