@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ShipTableAccess.cs" />
     <Compile Include="SpaceUnionModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
