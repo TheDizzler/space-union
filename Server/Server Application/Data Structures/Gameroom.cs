@@ -11,15 +11,19 @@ namespace Data_Structures
     /// </summary>
     public class Gameroom
     {
-        Dictionary<string, GameData> players = new Dictionary<string, GameData>();
+        Dictionary<string, GameData> players;
 
         public int RoomNumber { get; set; }
         public string RoomName { get; set; }
-        public Boolean InGame { get; set; }
+        public bool InGame { get; set; }
+        public Player Host { get; set; }
 
         public int Players { get { return players.Count; } }
 
-        public Gameroom() { }
+        public Gameroom() 
+        {
+            players = new Dictionary<string, GameData>();
+        }
 
         public GameFrame getGameFrame()
         {
@@ -60,6 +64,11 @@ namespace Data_Structures
             {
                 players.Remove(user.Player.Username);
             }
+        }
+
+        public Dictionary<string, GameData> getPlayers()
+        {
+            return players;
         }
     }
 }

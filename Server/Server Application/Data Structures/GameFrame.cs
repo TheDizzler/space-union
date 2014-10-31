@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Data_Structures
 {
-    class GameFrame : Data
+    public class GameFrame : Data
     {
         GameData[] data;
         string[] ip;

@@ -51,13 +51,13 @@ namespace Server_Application
                         analyzer.getNumberOfSearchingPlayers();
                         break;
                     case "error":
-                        analyzer.checkErrorQueueSize();
+                        analyzer.checkGenericQueueSize();
                         break;
                     case "chat":
                         analyzer.checkChatMessageQueueSize();
                         break;
                     case "login":
-                        analyzer.checkLoginRequestQueueSize();
+                        analyzer.checkGenericQueueSize();
                         break;
                     case "data":
                         analyzer.checkGameDataQueueSize();

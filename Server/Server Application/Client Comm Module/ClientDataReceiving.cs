@@ -34,7 +34,7 @@ namespace Client_Comm_Module
         private int assignedUDPPort_Listen;
 
         /// <summary>
-        /// Initia the data receiver client.
+        /// Initiate the data receiver client.
         /// </summary>
         /// <param name="assignedPort">UDP port to listen to; assigned by the server.</param>
         public ClientDataReceiving(int assignedPort)

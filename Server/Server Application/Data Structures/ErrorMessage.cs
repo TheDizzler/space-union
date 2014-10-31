@@ -10,6 +10,7 @@ namespace Data_Structures
     /// Message containing the error code.
     /// 0 - non-existent user / incorrect password
     /// 1- user blocked
+    /// 2- room is full
     /// </summary>
     [Serializable]
     public class ErrorMessage : Data

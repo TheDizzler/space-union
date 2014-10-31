@@ -80,16 +80,6 @@ namespace Client_Comm_Module
         }
 
         /// <summary>
-        /// Send a registration request to the server.
-        /// </summary>
-        /// <param name="d">Registration data containing player information.</param>
-        public void sendRegistrationInfo(RegistrationData data)
-        {
-            if (data != null)
-                sender.sendRegistrationInfo(data);
-        }
-
-        /// <summary>
         /// Send a game message to the server.
         /// </summary>
         /// <param name="message">The message to send to the server.</param>

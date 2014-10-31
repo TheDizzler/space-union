@@ -49,15 +49,6 @@ namespace Client_Comm_Module
         }
 
         /// <summary>
-        /// Send a registration request to the server.
-        /// </summary>
-        /// <param name="data">Registration data containing player information.</param>
-        public void sendRegistrationInfo(RegistrationData data)
-        {
-            DataControl.sendTCPData(TCPClient, data, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCPLoginListener);
-        }
-
-        /// <summary>
         /// Add the given message to the appropriate queue.
         /// </summary>
         /// <param name="message">The message to add to a queue.</param>

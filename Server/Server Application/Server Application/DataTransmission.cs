@@ -22,19 +22,20 @@ namespace Server_Application
         TcpClient[] TCPClients;
         List<GameData>[] UDPQueue;
         List<GameMessage> chatmessages;
-        List<Player> loginrequests;
-        List<ErrorMessage> errormessages;
+        /// <summary>
+        /// Queue for handling intermittent message types (ie. login requests, error messages, room lists).
+        /// </summary>
+        List<Data> genericQueue;
         Server owner;
 
         public DataTransmission(Server owner)
         {
-            UDPClients = new UdpClient[Constants.NumberOfUdpClients];
-            TCPClients = new TcpClient[Constants.NumberOfTcpClients];
-            UDPQueue = new List<GameData>[6];
+            UDPClients   = new UdpClient[Constants.NumberOfUdpClients];
+            TCPClients   = new TcpClient[Constants.NumberOfTcpClients];
+            UDPQueue     = new List<GameData>[6];
             chatmessages = new List<GameMessage>();
-            loginrequests = new List<Player>();
-            errormessages = new List<ErrorMessage>();
-            this.owner = owner;
+            genericQueue = new List<Data>();
+            this.owner   = owner;
             setup();
         }
 
@@ -51,9 +52,8 @@ namespace Server_Application
                 UDPQueue[x] = new List<GameData>();
             try
             {
-                new Thread(sendLoginValidationMessage).Start();
+                new Thread(sendMessage).Start();
                 new Thread(sendChatMessages).Start();
-                new Thread(sendErrorMessage).Start();
                 for (byte x = 0; x < Constants.NumberOfUdpClients; x++)
                 {
                     byte client = x;
@@ -66,20 +66,37 @@ namespace Server_Application
         }
 
         /// <summary>
-        /// Validates the oldest login request and replies with either permission to
-        /// login to the game or a denial.
+        /// Sends a generic message to a client.
         /// </summary>
-        private void sendLoginValidationMessage()
+        private void sendMessage()
         {
             while (true)
             {
-                Player request = (Player)removeFromQueue(Constants.LOGIN_REQUEST);
-                if (request == null)
+                Data message = removeFromQueue(Constants.ERROR_MESSAGE);
+                if (message == null)
                 {
                     Thread.Sleep(5);
                     continue;
                 }
-                DataControl.sendTCPData(TCPClients[0], request, request.IPAddress, Constants.TCPLoginClient);
+
+                string ipAddress = null;
+                switch (message.Type)
+                {
+                    case Constants.LOGIN_REQUEST:
+                        ipAddress = ((Player)message).IPAddress;
+                        break;
+                    case Constants.ERROR_MESSAGE:
+                        ipAddress = ((ErrorMessage)message).Player.IPAddress;
+                        break;
+                    case Constants.ROOM_LIST:
+                        ipAddress = null;
+                        break;
+                }
+
+                if (ipAddress != null)
+                {
+                    DataControl.sendTCPData(TCPClients[2], message, ipAddress, Constants.TCPErrorClient);
+                }
             }
         }
 
@@ -106,23 +123,6 @@ namespace Server_Application
                         DataControl.sendTCPData(TCPClients[0], message, player.Player.IPAddress, Constants.TCPLoginClient);
                     }
                 }
-            }
-        }
-
-        /// <summary>
-        /// Sends an error message to a client.
-        /// </summary>
-        private void sendErrorMessage()
-        {
-            while (true)
-            {
-                ErrorMessage message = (ErrorMessage)removeFromQueue(Constants.ERROR_MESSAGE);
-                if (message == null)
-                {
-                    Thread.Sleep(5);
-                    continue;
-                }
-                DataControl.sendTCPData(TCPClients[2], message, message.Player.IPAddress, Constants.TCPErrorClient);
             }
         }
 
@@ -157,16 +157,15 @@ namespace Server_Application
                 switch (message.Type)
                 {
                     case Constants.LOGIN_REQUEST:
-                        loginrequests.Add((Player)message);
+                    case Constants.ERROR_MESSAGE:
+                    case Constants.ROOM_LIST:
+                        genericQueue.Add(message);
                         break;
                     case Constants.GAME_DATA:
                         addGameDataToQueue((GameData)message);
                         break;
                     case Constants.CHAT_MESSAGE:
                         chatmessages.Add((GameMessage)message);
-                        break;
-                    case Constants.ERROR_MESSAGE:
-                        errormessages.Add((ErrorMessage)message);
                         break;
                 }
             }
@@ -204,11 +203,10 @@ namespace Server_Application
             switch (type)
             {
                 case Constants.LOGIN_REQUEST:
-                    return removeLoginRequestFromQueue();
+                case Constants.ERROR_MESSAGE:
+                    return removeGenericMessageFromQueue();
                 case Constants.CHAT_MESSAGE:
                     return removeMessageFromQueue();
-                case Constants.ERROR_MESSAGE:
-                    return removeErrorMessageFromQueue();
             }
             return null;
         }
@@ -229,20 +227,6 @@ namespace Server_Application
         }
 
         /// <summary>
-        /// Returns the oldest error message in the queue.
-        /// </summary>
-        /// <returns>The oldest error message awaiting transfer.</returns>
-        private ErrorMessage removeErrorMessageFromQueue()
-        {
-            if (errormessages.Count == 0)
-                return null;
-            ErrorMessage message = null;
-            message = errormessages.ElementAt(0);
-            errormessages.RemoveAt(0);
-            return message;
-        }
-
-        /// <summary>
         /// Returns the oldest chat message in the queue.
         /// </summary>
         /// <returns>The oldest message awaiting transfer.</returns>
@@ -260,22 +244,22 @@ namespace Server_Application
         /// Returns the oldest login request in the queue.
         /// </summary>
         /// <returns>The oldest login request awaiting validation.</returns>
-        private Player removeLoginRequestFromQueue()
+        private Data removeGenericMessageFromQueue()
         {
-            if (loginrequests.Count == 0)
+            if (genericQueue.Count == 0)
                 return null;
-            Player message = null;
-            message = loginrequests.ElementAt(0);
-            loginrequests.RemoveAt(0);
+            Data message = null;
+            message = genericQueue.ElementAt(0);
+            genericQueue.RemoveAt(0);
             return message;
         }
 
         /// <summary>
-        /// Checks the size of the Error Message queue.
+        /// Checks the size of the generic queue.
         /// </summary>
-        public void checkErrorQueueSize()
+        public void checkGenericQueueSize()
         {
-            Console.WriteLine("Queue size of the Error Message list: " + errormessages.Count + "\n");
+            Console.WriteLine("Generic queue size: " + genericQueue.Count + "\n");
         }
 
         /// <summary>
@@ -284,14 +268,6 @@ namespace Server_Application
         public void checkChatMessageQueueSize()
         {
             Console.WriteLine("Queue size of the Chat Message list: " + chatmessages.Count + "\n");
-        }
-
-        /// <summary>
-        /// Checks the size of the Login Request queue.
-        /// </summary>
-        public void checkLoginRequestQueueSize()
-        {
-            Console.WriteLine("Queue size for Login Requests list: " + loginrequests.Count + "\n");
         }
 
         /// <summary>

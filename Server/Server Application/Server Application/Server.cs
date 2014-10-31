@@ -117,11 +117,6 @@ namespace Server_Application
                 transmission.addMessageToQueue(player);
                 // the following line is only used for the prototype
                 addPlayerToFreeRoom(player);
-
-                // The following line IS NOT only used for the prototype (remove when no longer ambiguous)
-                
-                // Send the current list of rooms to the player that came online.
-                transmission.addMessageToQueue();
             }
         }
 
@@ -130,7 +125,7 @@ namespace Server_Application
         /// </summary>
         /// <param name="player">The player to add to the room.</param>
         /// <param name="roomNumber">The room number of the room to add the player to.</param>
-        private void addPlayerToRequestedRoom(Player player, int roomNumber)
+        private bool addPlayerToRequestedRoom(Player player, int roomNumber)
         {
             foreach (Gameroom room in gamerooms.ToArray())
             {
@@ -141,18 +136,21 @@ namespace Server_Application
                         // If the player was successfully added.
 
                         // Send confirmation message.
+
+                        return true;
                     }
                     else
                     {
                         // If the player was not successfully added because the room was full or whatever reason.
 
                         // Send an error message and update the player's room list.
+                        transmission.addMessageToQueue(new ErrorMessage(player, 2));
+                        transmission.addMessageToQueue(new RoomList(player, organizeRoomList()));
+                        return false;
                     }
-
-                    // Break out of the loop.
-                    return;
                 }
             }
+            return false;
         }
 
         private void addPlayerToFreeRoom(Player player)
@@ -183,6 +181,19 @@ namespace Server_Application
             {
                 transmission.addMessageToQueue(message);
             }
+        }
+
+        private List<RoomInfo> organizeRoomList()
+        {
+            List<RoomInfo> list = new List<RoomInfo>();
+
+            foreach (Gameroom room in gamerooms.ToArray())
+            {
+                RoomInfo info = new RoomInfo(room.getPlayers(), room.RoomNumber, room.RoomName, room.Host, room.InGame);
+                list.Add(info);
+            }
+
+            return list;
         }
     }
 }

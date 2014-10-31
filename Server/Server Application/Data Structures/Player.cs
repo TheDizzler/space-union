@@ -42,7 +42,7 @@ namespace Data_Structures
 
         public Player()
         {
-            Type = 0;
+            Type = 8;
         }
     }
 }

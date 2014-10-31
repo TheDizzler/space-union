@@ -54,10 +54,8 @@ namespace Data_Manipulation
 
         // MESSAGE TYPES
 
-        /// <summary>
-        /// Login request data = 0.
-        /// </summary>
-        public const byte LOGIN_REQUEST = 0;
+        // ********* MESSAGE TYPE 0 IS RESERVED *********
+
         /// <summary>
         /// Game data = 1.
         /// </summary>
@@ -78,6 +76,18 @@ namespace Data_Manipulation
         /// Room list message = 5.
         /// </summary>
         public const byte ROOM_LIST_MESSAGE = 5;
+        /// <summary>
+        /// Game frame message = 6.
+        /// </summary>
+        public const byte GAME_FRAME_MESSAGE = 6;
+        /// <summary>
+        /// Room list = 7.
+        /// </summary>
+        public const byte ROOM_LIST = 7;
+        /// <summary>
+        /// Login request data = 8.
+        /// </summary>
+        public const byte LOGIN_REQUEST = 8;
 
         // END MESSAGE TYPES
 

@@ -5,13 +5,20 @@ using System.Text;
 
 namespace Data_Structures
 {
-    class RoomList
+    [Serializable]
+    public class RoomList : Data
     {
-        public List<List<string>> RoomList { get; set; }
+        /// <summary>
+        /// The player to receive this message.
+        /// </summary>
+        public Player Receiver { get; set; }
+        public List<RoomInfo> RoomInfoList { get; set; }
 
-        public RoomList()
+        public RoomList(Player receiver, List<RoomInfo> list)
         {
-
+            Type = 7;
+            Receiver = receiver;
+            RoomInfoList = list;
         }
     }
 }

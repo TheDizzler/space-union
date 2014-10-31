@@ -75,10 +75,10 @@ namespace Server_Application
         /// <summary>
         /// Checks the size of the Error Message queue.
         /// </summary>
-        public void checkErrorQueueSize()
+        /*public void checkErrorQueueSize()
         {
             transmission.checkErrorQueueSize();
-        }
+        }*/
 
         /// <summary>
         /// Checks the size of the Chat Message queue.
@@ -91,9 +91,14 @@ namespace Server_Application
         /// <summary>
         /// Checks the size of the Login Request queue.
         /// </summary>
-        public void checkLoginRequestQueueSize()
+        /*public void checkLoginRequestQueueSize()
         {
             transmission.checkLoginRequestQueueSize();
+        }*/
+
+        public void checkGenericQueueSize()
+        {
+            transmission.checkGenericQueueSize();
         }
 
         /// <summary>
