@@ -28,9 +28,9 @@ namespace Client_Comm_Module
         public const int NumberOfPlayers = 5;
 
         /// <summary>
-        /// The interval between each chat message transmission.
+        /// The interval between each message transmission.
         /// </summary>
-        public const int CHAT_SEND_INTERVAL = 100;
+        public const int MESSAGE_SEND_INTERVAL = 100;
 
         /// <summary>
         /// THe interval between each data transmission.

@@ -109,6 +109,16 @@ namespace Client_Comm_Module
                 dataSender.updateData(data);
         }
 
+        /// <summary>
+        /// Send a room list request to the server.
+        /// </summary>
+        /// <param name="player">The sender of the request.</param>
+        public void sendRoomListRequest(Player player)
+        {
+            PlayerRequest request = new PlayerRequest(player, Constants.PLAYER_REQUEST_ROOMLIST);
+            sender.addMessageToQueue(request);
+        }
+
         // GET FUNCTIONS ----------------------------------------------------
 
         /// <summary>

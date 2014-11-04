@@ -75,6 +75,10 @@ namespace Server_Application
                         new Thread(unused => LoginRequests.handleLoginRequest((Player)message, owner)).Start();
                         break;
 
+                    case Constants.PLAYER_REQUEST:
+                        
+                        break;
+
                     default:
                         owner.addMessageToQueue((GameMessage)message);
                         break;
@@ -94,6 +98,11 @@ namespace Server_Application
                 GameData clientData = (GameData)DataControl.receiveUDPData((UdpClient)UDPListener);
                 new Thread(() => owner.updatePlayer(clientData)).Start();
             }
+        }
+
+        private void handlePlayerRequest(PlayerRequest request)
+        {
+
         }
     }
 }

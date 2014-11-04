@@ -88,8 +88,18 @@ namespace Data_Manipulation
         /// Login request data = 8.
         /// </summary>
         public const byte LOGIN_REQUEST = 8;
+        /// <summary>
+        /// Player request data = 9.
+        /// </summary>
+        public const byte PLAYER_REQUEST = 9;
 
         // END MESSAGE TYPES
+
+
+        // REQUEST TYPES
+        public const byte PLAYER_REQUEST_ROOMLIST = 0;
+        // END REQUEST TYPES
+
 
         /// <summary>
         /// Maximum number of people in a room = 6.

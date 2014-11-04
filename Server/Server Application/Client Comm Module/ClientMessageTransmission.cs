@@ -13,7 +13,7 @@ namespace Client_Comm_Module
 {
     class ClientMessageTransmission
     {
-        private List<GameMessage> messageQueue;
+        private List<Data> messageQueue;
 
         private TcpClient TCPClient;
 
@@ -28,11 +28,11 @@ namespace Client_Comm_Module
         private void setup()
         {
             TCPClient = new TcpClient();
-            messageQueue = new List<GameMessage>();
+            messageQueue = new List<Data>();
 
             try
             {
-                new Thread(sendChatMessages).Start();
+                new Thread(sendMessages).Start();
             }
             catch (ThreadStateException e) { Console.WriteLine("Client has crashed." + e.ToString()); return; }
             catch (OutOfMemoryException e) { Console.WriteLine("Client has crashed." + e.ToString()); return; }
@@ -58,12 +58,7 @@ namespace Client_Comm_Module
                 return;
             try
             {
-                switch (message.Type)
-                {
-                    case Constants.CHAT_MESSAGE:
-                        messageQueue.Add((GameMessage)message);
-                        break;
-                }
+                messageQueue.Add(message);
             }
             catch (InvalidCastException e) { Console.WriteLine(e.ToString()); return; }
         }
@@ -71,14 +66,14 @@ namespace Client_Comm_Module
         /// <summary>
         /// Sends a chat message to the server.
         /// </summary>
-        private void sendChatMessages()
+        private void sendMessages()
         {
             while (true)
             {
-                GameMessage message = (GameMessage)removeFromQueue(Constants.CHAT_MESSAGE);
+                Data message = removeMessageFromQueue();
                 if (message == null)
                 {
-                    Thread.Sleep(ClientConstants.CHAT_SEND_INTERVAL);
+                    Thread.Sleep(ClientConstants.MESSAGE_SEND_INTERVAL);
                     continue;
                 }
                 DataControl.sendTCPData(TCPClient, message, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCPLoginListener);
@@ -90,7 +85,7 @@ namespace Client_Comm_Module
         /// </summary>
         /// <param name="type">The type of message to get.</param>
         /// <returns>The oldest message in the queue.</returns>
-        private Data removeFromQueue(byte type)
+        /*private Data removeFromQueue(byte type)
         {
             switch (type)
             {
@@ -98,17 +93,17 @@ namespace Client_Comm_Module
                     return removeMessageFromQueue();
             }
             return null;
-        }
+        }*/
 
         /// <summary>
         /// Returns the oldest chat message in the queue.
         /// </summary>
         /// <returns>The oldest message awaiting transfer.</returns>
-        private GameMessage removeMessageFromQueue()
+        private Data removeMessageFromQueue()
         {
             if (messageQueue.Count == 0)
                 return null;
-            GameMessage message = messageQueue.ElementAt(0);
+            Data message = messageQueue.ElementAt(0);
             messageQueue.RemoveAt(0);
             return message;
         }
