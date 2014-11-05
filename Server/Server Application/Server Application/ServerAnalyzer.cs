@@ -16,25 +16,19 @@ namespace Server_Application
         /// <summary>
         /// List of all available game rooms.
         /// </summary>
-        List<Gameroom> gamerooms;
+        Dictionary<int, Gameroom> gamerooms;
         /// <summary>
         /// Total list of online players.
         /// </summary>
-        List<Player> onlineplayers;
-        /// <summary>
-        /// Only players who are currently looking for a game match.
-        /// </summary>
-        List<Player> searchingplayers;
+        Dictionary<string, Player> onlineplayers;
 
         public ServerAnalyzer(DataTransmission transmission,
-                              List<Gameroom> gamerooms,
-                              List<Player> onlineplayers,
-                              List<Player> searchingplayers)
+                              Dictionary<int, Gameroom> gamerooms,
+                              Dictionary<string, Player> onlineplayers)
         {
             this.transmission = transmission;
             this.gamerooms = gamerooms;
             this.onlineplayers = onlineplayers;
-            this.searchingplayers = searchingplayers;
         }
 
         /// <summary>
@@ -42,9 +36,9 @@ namespace Server_Application
         /// </summary>
         public void getReceivingPorts()
         {
-            foreach (Player player in onlineplayers)
+            foreach (KeyValuePair<string, Player> player in onlineplayers)
             {
-                Console.WriteLine("Player - " + player.Username + " Receiving port: " + player.PortReceive);
+                Console.WriteLine("Player - " + player.Key + " Receiving port: " + player.Value.PortReceive);
             }
         }
 
@@ -62,14 +56,6 @@ namespace Server_Application
         public void getNumberOfOnlinePlayers()
         {
             Console.WriteLine("Number of online players: " + onlineplayers.Count + "\n");
-        }
-
-        /// <summary>
-        /// Checks the number of players searching for games.
-        /// </summary>
-        public void getNumberOfSearchingPlayers()
-        {
-            Console.WriteLine("Number of players searching for games: " + searchingplayers.Count + "\n");
         }
 
         /// <summary>

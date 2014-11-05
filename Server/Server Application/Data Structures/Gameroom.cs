@@ -12,12 +12,10 @@ namespace Data_Structures
     public class Gameroom
     {
         Dictionary<string, GameData> players;
-
         public int RoomNumber { get; set; }
         public string RoomName { get; set; }
         public bool InGame { get; set; }
         public Player Host { get; set; }
-
         public int Players { get { return players.Count; } }
 
         public Gameroom() 

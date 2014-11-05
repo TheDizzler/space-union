@@ -30,46 +30,38 @@ namespace Server_Application
         /// <summary>
         /// List of all available game rooms.
         /// </summary>
-        public List<Gameroom> Gamerooms { get; private set; }
+        //public List<Gameroom> Gamerooms { get; private set; }
+        public Dictionary<int, Gameroom> Gamerooms { get; private set; }
         /// <summary>
         /// Total list of online players.
         /// </summary>
-        public List<Player> OnlinePlayers { get; private set; }
-        /// <summary>
-        /// Only players who are currently looking for a game match.
-        /// </summary>
-        public List<Player> SearchingPlayers { get; private set; }
+        public Dictionary<string, Player> OnlinePlayers { get; private set; }
 
         public Server()
         {
-            Gamerooms = new List<Gameroom>();
-            OnlinePlayers = new List<Player>();
-            SearchingPlayers = new List<Player>();
+            Gamerooms = new Dictionary<int, Gameroom>();
+            OnlinePlayers = new Dictionary<string, Player>();
             Receiving = new DataReceiving(this);
             Transmission = new DataTransmission(this);
             new Thread(cleanRooms).Start();
         }
-
+        
         private void cleanRooms()
         {
             while (true)
             {
-                foreach (Gameroom room in Gamerooms.ToArray())
+                foreach (KeyValuePair<int, Gameroom> room in Gamerooms.ToArray())
                 {
-                    foreach (GameData player in room.getPlayerList())
-                    {
+                    if (room.Value.Players == 0)
+                        Gamerooms.Remove(room.Key);
+                    foreach (GameData player in room.Value.getPlayerList())
                         if (compareTime(player.Time, 10, true))
-                        {
-                            room.removePlayer(player);
-                        }
-                    }
-                    if (room.Players == 0)
-                        Gamerooms.Remove(room);
+                            room.Value.removePlayer(player);
                 }
-                Thread.Sleep(10000);
+                Thread.Sleep(5000);
             }
         }
-
+        
         private bool compareTime(DateTime time, int period, bool seconds)
         {
             if(seconds)
@@ -96,14 +88,9 @@ namespace Server_Application
         /// <returns>The gameroom matching the room number.</returns>
         public Gameroom getGameroom(int roomnum)
         {
-            foreach (Gameroom room in Gamerooms.ToArray())
-            {
-                if (room.RoomNumber == roomnum)
-                {
-                    return room;
-                }
-            }
-            return null;
+            Gameroom room;
+            Gamerooms.TryGetValue(roomnum, out room);
+            return room;
         }
         /// <summary>
         /// Add the given player to the list of online players.
@@ -115,9 +102,8 @@ namespace Server_Application
             {
                 player.PortSend = Constants.UDPClientToServerPort + (OnlinePlayers.Count % 6);
                 player.PortReceive = Constants.UDPServerToClientPort + (OnlinePlayers.Count % 6);
-                OnlinePlayers.Add(player);
+                OnlinePlayers.Add(player.Username, player);
                 Transmission.addMessageToQueue(player);
-                // the following line is only used for the prototype
                 addPlayerToFreeRoom(player);
             }
         }
@@ -129,40 +115,24 @@ namespace Server_Application
         /// <param name="roomNumber">The room number of the room to add the player to.</param>
         private bool addPlayerToRequestedRoom(Player player, int roomNumber)
         {
-            foreach (Gameroom room in Gamerooms.ToArray())
+            Gameroom room = getGameroom(roomNumber);
+            if (room == null || !room.addPlayer(player))
             {
-                if (room.RoomNumber == roomNumber)
-                {
-                    if (room.addPlayer(player))
-                    {
-                        // If the player was successfully added.
-
-                        // Send confirmation message.
-
-                        return true;
-                    }
-                    else
-                    {
-                        // If the player was not successfully added because the room was full or whatever reason.
-
-                        // Send an error message and update the player's room list.
-                        Transmission.addMessageToQueue(new ErrorMessage(player, 2));
-                        Transmission.addMessageToQueue(new RoomList(player, organizeRoomList()));
-                        return false;
-                    }
-                }
+                Transmission.addMessageToQueue(new ErrorMessage(player, 2));
+                Transmission.addMessageToQueue(new RoomList(player, organizeRoomList()));
+                return false;
             }
-            return false;
+            return true;
         }
 
         private void addPlayerToFreeRoom(Player player)
         {
-            foreach (Gameroom room in Gamerooms.ToArray())
+            foreach (KeyValuePair<int, Gameroom> room in Gamerooms.ToArray())
             {
-                if (room.Players < 6)
+                if (room.Value.Players < 6)
                 {
-                    player.GameRoom = room.RoomNumber;
-                    room.addPlayer(player);
+                    player.GameRoom = room.Value.RoomNumber;
+                    room.Value.addPlayer(player);
                     return;
                 }
             }
@@ -170,7 +140,7 @@ namespace Server_Application
             temproom.RoomNumber = Gamerooms.Count;
             player.GameRoom = temproom.RoomNumber;
             temproom.addPlayer(player);
-            Gamerooms.Add(temproom);
+            Gamerooms.Add(temproom.RoomNumber, temproom);
         }
 
         /// <summary>
@@ -189,9 +159,9 @@ namespace Server_Application
         {
             List<RoomInfo> list = new List<RoomInfo>();
 
-            foreach (Gameroom room in Gamerooms.ToArray())
+            foreach (KeyValuePair<int, Gameroom> room in Gamerooms.ToArray())
             {
-                RoomInfo info = new RoomInfo(room.getPlayers(), room.RoomNumber, room.RoomName, room.Host, room.InGame);
+                RoomInfo info = new RoomInfo(room.Value.getPlayers(), room.Value.RoomNumber, room.Value.RoomName, room.Value.Host, room.Value.InGame);
                 list.Add(info);
             }
 
