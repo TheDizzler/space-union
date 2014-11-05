@@ -127,6 +127,8 @@ namespace Server_Application
         {
             while (true)
             {
+                if (owner.Gamerooms.Count == 0)
+                    Thread.Sleep(1);
                 foreach (KeyValuePair<int, Gameroom> room in owner.Gamerooms.ToArray())
                 {
                     GameFrame frame = room.Value.getGameFrame();
