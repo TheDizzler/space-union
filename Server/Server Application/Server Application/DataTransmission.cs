@@ -19,8 +19,7 @@ namespace Server_Application
     class DataTransmission
     {
         UdpClient[] UDPClients;
-        TcpClient[] TCPClients;
-        List<GameData>[] UDPQueue;
+        TcpClient TCPClient;
         List<GameMessage> chatmessages;
         /// <summary>
         /// Queue for handling intermittent message types (ie. login requests, error messages, room lists).
@@ -31,8 +30,7 @@ namespace Server_Application
         public DataTransmission(Server owner)
         {
             UDPClients   = new UdpClient[Constants.NumberOfUdpClients];
-            TCPClients   = new TcpClient[Constants.NumberOfTcpClients];
-            UDPQueue     = new List<GameData>[6];
+            TCPClient   = new TcpClient();
             chatmessages = new List<GameMessage>();
             genericQueue = new List<Data>();
             this.owner   = owner;
@@ -46,10 +44,7 @@ namespace Server_Application
         {
             for (int x = 0; x < Constants.NumberOfUdpClients; x++)
                 UDPClients[x] = new UdpClient(Constants.UDPServerToClientPort + x);
-            for (int x = 0; x < Constants.NumberOfTcpClients; x++)
-                TCPClients[x] = new TcpClient();
-            for (int x = 0; x < Constants.NumberOfUdpClients; x++)
-                UDPQueue[x] = new List<GameData>();
+            TCPClient = new TcpClient();
             try
             {
                 new Thread(sendMessage).Start();
@@ -98,7 +93,7 @@ namespace Server_Application
 
                 if (ipAddress != null)
                 {
-                    DataControl.sendTCPData(TCPClients[2], message, ipAddress, Constants.TCPErrorClient);
+                    DataControl.sendTCPData(TCPClient, message, ipAddress, Constants.TCPErrorClient);
                 }
             }
         }
@@ -120,12 +115,8 @@ namespace Server_Application
                 if (room == null)
                     continue;
                 foreach (GameData player in room.getPlayerList().ToArray())
-                {
                     if (player.Player.Username != message.Username)
-                    {
-                        DataControl.sendTCPData(TCPClients[0], message, player.Player.IPAddress, Constants.TCPLoginClient);
-                    }
-                }
+                        DataControl.sendTCPData(TCPClient, message, player.Player.IPAddress, Constants.TCPLoginClient);
             }
         }
 
@@ -184,15 +175,6 @@ namespace Server_Application
             if (room == null)
                 return;
             room.updatePlayer(message);
-            foreach(GameData player in room.getPlayerList().ToArray())
-            {
-                if (player.Player.Username != message.Player.Username)
-                {
-                    GameData temp = (GameData)DataControl.bytesToObject(DataControl.objectToBytes(message));
-                    temp.Player.IPAddress = player.Player.IPAddress;
-                    UDPQueue[player.Player.PortReceive - Constants.UDPServerToClientPort].Add(temp);
-                }
-            }
         }
 
         /// <summary>
@@ -211,21 +193,6 @@ namespace Server_Application
                     return removeMessageFromQueue();
             }
             return null;
-        }
-
-        /// <summary>
-        /// Removes an item from the GameData queue.
-        /// </summary>
-        /// <param name="queue">The queue from which to remove.</param>
-        /// <returns></returns>
-        private GameData getGameData(byte queue)
-        {
-            if (UDPQueue[queue].Count == 0)
-                return null;
-            GameData data = null;
-            data = UDPQueue[queue].ElementAt(0);
-            UDPQueue[queue].RemoveAt(0);
-            return data;
         }
 
         /// <summary>
@@ -272,16 +239,6 @@ namespace Server_Application
             Console.WriteLine("Queue size of the Chat Message list: " + chatmessages.Count + "\n");
         }
 
-        /// <summary>
-        /// Checks the size of the Game Data queues.
-        /// </summary>
-        public void checkGameDataQueueSize()
-        {
-            for (int x = 0; x < Constants.NumberOfUdpClients; x++)
-            {
-                Console.WriteLine("Queue " + x + ": " + UDPQueue[x].Count);
-            }
-            Console.WriteLine();
-        }
+
     }
 }
