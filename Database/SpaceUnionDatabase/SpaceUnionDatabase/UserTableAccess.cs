@@ -167,6 +167,8 @@ namespace SpaceUnionDatabase
 
                 if (user.userIsBlocked == 1)
                     errCode = 1;//user is blocked
+                else if (user.userIsOnline == 1)
+                    errCode = 3;//user is already online
                 else if (user == null)
                     errCode = 0;//incorrect user/pass
                 else {

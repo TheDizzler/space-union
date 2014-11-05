@@ -323,14 +323,19 @@ namespace AdminControlForm
         }
 
 
+        /// <summary>
+        /// Adds the new ship to the ship table in the database.
+        /// First checks if all fields are valid and if so, attempts
+        /// to add the ship to the table. Shows a message of
+        /// success or failure
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bttnAddShip_Click(object sender, EventArgs e)
         {
             bool isShipValid = false;
 
-            validateTurnSpeed(sender, e);
-            validateMaxSpeed(sender, e);
-            validateAcceleration(sender, e);
-            validateShipName(sender, e);
+            validateAllShipAddFields(sender, e);
 
             isShipValid = isMaxSpeedValid
                        && isTurnSpeedValid
@@ -349,10 +354,22 @@ namespace AdminControlForm
                     MessageBox.Show("Ship was added to the database successfully.");
                 }
             }
+        }
 
-            if (isShipValid)
-                ; //save to database
-
+        /// <summary>
+        /// Helper funticon for when the ship add button is clicked.
+        /// 
+        /// Validates all fields before adding the ship by calling
+        /// all validation functions
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void validateAllShipAddFields(object sender, EventArgs e)
+        {
+            validateTurnSpeed(sender, e);
+            validateMaxSpeed(sender, e);
+            validateAcceleration(sender, e);
+            validateShipName(sender, e);
         }
 
         private void validateTurnSpeed(object sender, EventArgs e)
