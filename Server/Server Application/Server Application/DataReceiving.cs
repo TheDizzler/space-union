@@ -66,7 +66,7 @@ namespace Server_Application
             {
                 Data message = (Player)DataControl.receiveTCPData(TCPListeners[0]);
                 if (message == null)
-                    return;
+                    continue;
 
                 switch (message.Type)
                 {
