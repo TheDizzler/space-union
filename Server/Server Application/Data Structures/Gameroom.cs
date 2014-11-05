@@ -25,6 +25,18 @@ namespace Data_Structures
             players = new Dictionary<string, GameData>();
         }
 
+        public Gameroom(int roomNumber, string roomName, Player host)
+        {
+            RoomNumber = roomNumber;
+            RoomName = roomName;
+            Host = host;
+            InGame = false;
+            GameData data = new GameData();
+            data.Player = host;
+            data.Player.GameRoom = roomNumber;
+            players.Add(host.Username, data);
+        }
+
         public GameFrame getGameFrame()
         {
             return new GameFrame(players.Values.ToArray());

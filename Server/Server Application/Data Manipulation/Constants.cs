@@ -93,11 +93,19 @@ namespace Data_Manipulation
         /// </summary>
         public const byte PLAYER_REQUEST = 9;
 
+        public const byte ROOM_INFO = 10;
+
         // END MESSAGE TYPES
 
 
         // REQUEST TYPES
+
         public const byte PLAYER_REQUEST_ROOMLIST = 0;
+
+        public const byte PLAYER_REQUEST_ROOMCREATE = 1;
+
+        public const byte PLAYER_REQUEST_ROOMJOIN = 2;
+
         // END REQUEST TYPES
 
 
@@ -105,5 +113,7 @@ namespace Data_Manipulation
         /// Maximum number of people in a room = 6.
         /// </summary>
         public const int ROOM_MAX_SIZE = 6;
+
+        public const int MAX_NUMBER_OF_ROOMS = 100;
     }
 }

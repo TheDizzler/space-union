@@ -123,38 +123,90 @@ namespace Server_Application
         }
 
         /// <summary>
+        /// Sends the room list to the given player.
+        /// </summary>
+        /// <param name="player">The player to send the room list to.</param>
+        public void sendRoomList(Player player)
+        {
+            addMessageToQueue(new RoomList(player, organizeRoomList()));
+        }
+
+        /// <summary>
         /// Add the given player to the room matching the given room number.
         /// </summary>
         /// <param name="player">The player to add to the room.</param>
         /// <param name="roomNumber">The room number of the room to add the player to.</param>
-        private bool addPlayerToRequestedRoom(Player player, int roomNumber)
+        public void addPlayerToRequestedRoom(Player player, int roomNumber)
         {
             foreach (Gameroom room in Gamerooms.ToArray())
             {
-                if (room.RoomNumber == roomNumber)
+                // If a room matching the given room number was found 
+                // and the player was successfully added to it.
+                if (room.RoomNumber == roomNumber && room.addPlayer(player))
                 {
-                    if (room.addPlayer(player))
-                    {
-                        // If the player was successfully added.
-
-                        // Send confirmation message.
-
-                        return true;
-                    }
-                    else
-                    {
-                        // If the player was not successfully added because the room was full or whatever reason.
-
-                        // Send an error message and update the player's room list.
-                        Transmission.addMessageToQueue(new ErrorMessage(player, 2));
-                        Transmission.addMessageToQueue(new RoomList(player, organizeRoomList()));
-                        return false;
-                    }
+                    // Send the room information to the player.
+                    addMessageToQueue(new RoomInfo(room.getPlayers(), room.RoomNumber, room.RoomName, room.Host, room.InGame, player));   
+                }
+                else
+                {
+                    // If the player was not successfully added because the room was full or whatever reason,
+                    // then send the room list.
+                    addMessageToQueue(new RoomList(player, organizeRoomList()));
                 }
             }
-            return false;
         }
 
+        /// <summary>
+        /// Create a game room upon a player request.
+        /// </summary>
+        /// <param name="player">The player requesting the room creation.</param>
+        /// <param name="roomName">The name of the room specified by the player.</param>
+        public void createPlayerRequestedRoom(Player player, string roomName)
+        {
+            int assignedRoomNumber = findAvailableRoomNumber();
+
+            // If no more rooms can be created.
+            if (assignedRoomNumber == 0)
+            {
+                // then send the room list.
+                addMessageToQueue(new RoomList(player, organizeRoomList()));
+            }
+            else
+            {
+                // If a room was successfully created
+                // add the room to the list and send the room info to the player.
+                Gameroom room = new Gameroom(findAvailableRoomNumber(), roomName, player);
+                Gamerooms.Add(room);
+                addMessageToQueue(new RoomInfo(room.getPlayers(), room.RoomNumber, room.RoomName, room.Host, room.InGame, player));
+            }
+        }
+
+        /// <summary>
+        /// Find the lowest available game room number.
+        /// If no more rooms can be created, return 0.
+        /// </summary>
+        /// <returns>The lowest available game room number. 0 if no more rooms can be created.</returns>
+        private int findAvailableRoomNumber()
+        {
+            for (int roomNumber = 1; roomNumber <= Constants.MAX_NUMBER_OF_ROOMS; ++roomNumber)
+            {
+                bool matchFound = false;
+                foreach (Gameroom room in Gamerooms.ToArray())
+                {
+                    matchFound = (room.RoomNumber == roomNumber);
+                }
+                if (!matchFound)
+                {
+                    return roomNumber;
+                }
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// TEMPORARY METHOD FOR TESTING.
+        /// </summary>
+        /// <param name="player"></param>
         private void addPlayerToFreeRoom(Player player)
         {
             foreach (Gameroom room in Gamerooms.ToArray())

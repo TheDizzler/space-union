@@ -19,6 +19,9 @@ namespace Client_Comm_Module
         private TcpListener TCPListener;
         private List<GameMessage> messageQueue;
 
+        private List<RoomInfo> roomInfoQueue;
+        private List<RoomList> roomListQueue;
+
         private Player player = null;
 
         /// <summary>
@@ -27,6 +30,8 @@ namespace Client_Comm_Module
         public ClientMessageReceiving()
         {
             messageQueue = new List<GameMessage>();
+            roomInfoQueue = new List<RoomInfo>();
+            roomListQueue = new List<RoomList>();
 
             // NOTE: fix required to only listen to the server.
             TCPListener = new TcpListener(IPAddress.Any, Constants.TCPLoginClient);
@@ -67,23 +72,31 @@ namespace Client_Comm_Module
         {
             while (true)
             {
-                Console.WriteLine("-----------------A message was received-----------------");
                 Data data = (Data)DataControl.receiveTCPData(TCPListener);
                 if (data != null)
                     switch(data.Type) {
-                        case Constants.CHAT_MESSAGE:
-                            Console.WriteLine("-----------------A chat message was received-----------------");
-                            Console.WriteLine(((GameMessage)data).Message);
-                            messageQueue.Add((GameMessage)data);
-                            break;
-                            
                         case Constants.LOGIN_REQUEST:
-                            Console.WriteLine("-----------------A login request was received-----------------");
+                            Console.WriteLine("-----------------LOGIN request received-----------------");
                             Console.WriteLine(((Player)data).PortReceive + "AND" + ((Player)data).PortSend);
                             player = (Player)data;
                             gameStart((Player)data);
                             break;
-                             
+
+                        case Constants.CHAT_MESSAGE:
+                            Console.WriteLine("-----------------CHAT message received-----------------");
+                            Console.WriteLine(((GameMessage)data).Message);
+                            messageQueue.Add((GameMessage)data);
+                            break;
+                        
+                        case Constants.ROOM_LIST:
+                            Console.WriteLine("-----------------ROOM LIST received-----------------");
+                            roomListQueue.Add((RoomList)data);
+                            break;
+
+                        case Constants.ROOM_INFO:
+                            Console.WriteLine("-----------------ROOM INFO received-----------------");
+                            roomInfoQueue.Add((RoomInfo)data);
+                            break;
                     }
             }
         }
@@ -113,6 +126,24 @@ namespace Client_Comm_Module
             GameMessage message = messageQueue.ElementAt(0);
             messageQueue.RemoveAt(0);
             return message;
+        }
+
+        public RoomInfo getRoomInfo()
+        {
+            if (roomInfoQueue.Count == 0)
+                return null;
+            RoomInfo roomInfo = roomInfoQueue.ElementAt(0);
+            roomInfoQueue.RemoveAt(0);
+            return roomInfo;
+        }
+
+        public RoomList getRoomList()
+        {
+            if (roomListQueue.Count == 0)
+                return null;
+            RoomList roomList = roomListQueue.ElementAt(0);
+            roomListQueue.RemoveAt(0);
+            return roomList;
         }
     }
 }

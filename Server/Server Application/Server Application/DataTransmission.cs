@@ -89,7 +89,10 @@ namespace Server_Application
                         ipAddress = ((ErrorMessage)message).Player.IPAddress;
                         break;
                     case Constants.ROOM_LIST:
-                        ipAddress = null;
+                        ipAddress = ((RoomList)message).Receiver.IPAddress;
+                        break;
+                    case Constants.ROOM_INFO:
+                        ipAddress = ((RoomInfo)message).Requester.IPAddress;
                         break;
                 }
 
@@ -168,6 +171,7 @@ namespace Server_Application
                     case Constants.LOGIN_REQUEST:
                     case Constants.ERROR_MESSAGE:
                     case Constants.ROOM_LIST:
+                    case Constants.PLAYER_REQUEST:
                         genericQueue.Add(message);
                         break;
                     case Constants.GAME_DATA:
