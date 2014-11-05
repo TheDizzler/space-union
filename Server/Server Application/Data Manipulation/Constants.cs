@@ -17,7 +17,7 @@ namespace Data_Manipulation
         /// The number of TCP clients, specifically used for login requests and 
         /// message sent through the in game chat.
         /// </summary>
-        public const int NumberOfTcpClients = 3;
+        public const int NumberOfTcpClients = 2;
         /// <summary>
         /// The first UDP port which listens to incoming data.
         /// </summary>

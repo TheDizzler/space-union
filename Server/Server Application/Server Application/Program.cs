@@ -56,9 +56,6 @@ namespace Server_Application
                     case "login":
                         analyzer.checkGenericQueueSize();
                         break;
-                    case "data":
-                        analyzer.checkGameDataQueueSize();
-                        break;
                     case "ports":
                         analyzer.getReceivingPorts();
                         break;

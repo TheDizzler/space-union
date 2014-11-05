@@ -142,7 +142,7 @@ namespace Client_Comm_Module
         /// Send a room join request to the server.
         /// </summary>
         /// <param name="player"></param>
-        public void sendRoomJoinRequest(Player player, int roomNumber)
+        public Data sendRoomJoinRequest(Player player, int roomNumber)
         {
             sender.addMessageToQueue(new PlayerRequest(player, roomNumber));
 

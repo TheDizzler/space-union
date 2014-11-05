@@ -88,14 +88,6 @@ namespace Server_Application
         }
 
         /// <summary>
-        /// Checks the size of the Game Data queues.
-        /// </summary>
-        public void checkGameDataQueueSize()
-        {
-            transmission.checkGameDataQueueSize();
-        }
-
-        /// <summary>
         /// Displays the amount of memory used by the server in bytes.
         /// </summary>
         public void usedMemory()

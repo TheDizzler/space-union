@@ -28,10 +28,9 @@ namespace Server_Application
         /// </summary>
         UdpClient[] UDPListeners = new UdpClient[Constants.NumberOfUdpClients];
         /// <summary>
-        /// listeners[0] for login requests.
-        /// listeners[1] for chat messages. 
+        /// TCP listener, used to listen to message and login requests.
         /// </summary>
-        TcpListener[] TCPListeners = new TcpListener[Constants.NumberOfTcpClients];
+        TcpListener TCPListener = new TcpListener(IPAddress.Parse("0.0.0.0"), Constants.TCPLoginListener);
 
         public DataReceiving(Server owner)
         {
@@ -46,13 +45,9 @@ namespace Server_Application
         {
             for (int x = 0; x < Constants.NumberOfUdpClients; x++)
                 UDPListeners[x] = new UdpClient(Constants.UDPClientToServerPort + x);
-            //Number of TCP clients - 1 because it created an error listener which wasn't being used.
-            for (int x = 0; x < Constants.NumberOfTcpClients - 2; x++)
-                TCPListeners[x] = new TcpListener(IPAddress.Parse("0.0.0.0"), Constants.TCPLoginListener + x);
-            for (int x = 0; x < Constants.NumberOfTcpClients - 2; x++)
-                TCPListeners[x].Start();
             for (int x = 0; x < Constants.NumberOfUdpClients; x++)
                 new Thread(receiveClientData).Start(UDPListeners[x]);
+            TCPListener.Start();
             new Thread(receiveLoginRequests).Start();
         }
 
@@ -64,22 +59,19 @@ namespace Server_Application
         {
             while (true)
             {
-                Data message = (Player)DataControl.receiveTCPData(TCPListeners[0]);
+                Data message = (Player)DataControl.receiveTCPData(TCPListener);
                 if (message == null)
-                    return;
+                    continue;
 
                 switch (message.Type)
                 {
                     case Constants.LOGIN_REQUEST:
-                        Console.WriteLine(((Player)message).Username);
                         new Thread(() => LoginRequests.handleLoginRequest((Player)message, owner)).Start();
                         break;
-
                     case Constants.PLAYER_REQUEST:
                         new Thread(() => handlePlayerRequest((PlayerRequest)message)).Start();
                         break;
-
-                    default:
+                    case Constants.CHAT_MESSAGE:
                         owner.addMessageToQueue((GameMessage)message);
                         break;
                 }
