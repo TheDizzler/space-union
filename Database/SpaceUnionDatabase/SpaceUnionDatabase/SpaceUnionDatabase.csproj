@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PasswordHash.cs" />
     <Compile Include="Ship.cs">
       <DependentUpon>SpaceUnionModel.tt</DependentUpon>
     </Compile>

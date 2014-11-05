@@ -63,6 +63,7 @@ namespace AdminControlForm
             bool hasUpperCaseLetter      = false;
             bool hasLowerCaseLetter      = false;
             bool hasDigit                = false;
+            bool isValidChar             = true;
 
             if (password.Length < MIN_LENGTH || password.Length > MAX_LENGTH) {
                 errMsg  = "The password must be 4-32 characters long";
@@ -71,7 +72,10 @@ namespace AdminControlForm
 
             if (meetsLengthRequirements) {
                 foreach (char c in password) {
-                    if (char.IsUpper(c)) {
+                    if (!char.IsLetterOrDigit(c) ) {
+                        isValidChar = false;
+                    }
+                    else if (char.IsUpper(c)) {
                         hasUpperCaseLetter = true;
                     }
                     else if (char.IsLower(c) ) {
@@ -80,12 +84,15 @@ namespace AdminControlForm
                     else if (char.IsDigit(c) ) {
                         hasDigit = true;
                     }
-                    // checks for letter
+
                     if ( !(   hasUpperCaseLetter
                            && hasLowerCaseLetter
                            && hasDigit) ) {
                         errMsg = "Password must contain at least one lower " +
-                                 " and uppercase and digit";
+                                 " and uppercase letter, and digit";
+                    } 
+                    else if (!isValidChar) {
+                        errMsg = "Password must consist of digits and letters only";
                     }
                 }
             }
@@ -93,7 +100,8 @@ namespace AdminControlForm
             bool isValid = meetsLengthRequirements
                         && hasUpperCaseLetter
                         && hasLowerCaseLetter
-                        && hasDigit;
+                        && hasDigit
+                        && isValidChar;
 
             return isValid ;
         }
