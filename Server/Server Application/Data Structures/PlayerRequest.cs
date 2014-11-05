@@ -7,33 +7,70 @@ namespace Data_Structures
 {
     /// <summary>
     /// Contains player request information.
+    /// An appropriate constructor must be called to construct specific messages.
+    /// 
     /// RequestType
-    /// 0 - RoomList
+    /// 0 - Room List
+    /// 1 - Room Creation
+    /// 2 - Room Join
     /// </summary>
     [Serializable]
     public class PlayerRequest : Data
     {
-        // The sender of the mssage.
+        /// <summary>
+        /// The sender of the mssage. 
+        /// </summary>
         public Player Sender { get; set; }
 
-        // The type of request (ie. Room list request = 0).
+        /// <summary>
+        /// The type of request (ie. Room list request = 0). 
+        /// </summary>
         public byte RequestType { get; set; }
 
         /// <summary>
         /// The IP address of the current player.
         /// </summary>
-        public string IPAddress { get; set; }
+        //public string IPAddress { get; set; }
+
+        public int RoomNumber { get; set; }
+
+        public string RoomName { get; set; }
 
         /// <summary>
-        /// Construct a request to the server.
+        /// Construct a room list request.
         /// </summary>
         /// <param name="sender">The sender of the request.</param>
-        /// <param name="requestType">The type of request.</param>
-        public PlayerRequest(Player sender, byte requestType)
+        public PlayerRequest(Player sender)
         {
             Type        = 9;
             Sender      = sender;
-            RequestType = requestType;
+            RequestType = 0;
+        }
+
+        /// <summary>
+        /// Construct a room creation request.
+        /// </summary>
+        /// <param name="sender">The sender of the request.</param>
+        /// <param name="roomName">The name of the room.</param>
+        public PlayerRequest(Player sender, string roomName)
+        {
+            Type        = 9;
+            Sender      = sender;
+            RequestType = 1;
+            RoomName    = roomName;
+        }
+
+        /// <summary>
+        /// Construct a room join request.
+        /// </summary>
+        /// <param name="sender">The sender of the request.</param>
+        /// <param name="requestType">The number of the room to join.</param>
+        public PlayerRequest(Player sender, int roomNumber)
+        {
+            Type        = 9;
+            Sender      = sender;
+            RequestType = 2;
+            RoomNumber  = roomNumber;
         }
     }
 }

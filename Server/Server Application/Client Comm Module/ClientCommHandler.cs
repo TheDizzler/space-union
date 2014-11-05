@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using Data_Structures;
 using Data_Manipulation;
 
@@ -113,11 +114,49 @@ namespace Client_Comm_Module
         /// Send a room list request to the server.
         /// </summary>
         /// <param name="player">The sender of the request.</param>
-        public void sendRoomListRequest(Player player)
+        public Data sendRoomListRequest(Player player)
         {
-            PlayerRequest request = new PlayerRequest(player, Constants.PLAYER_REQUEST_ROOMLIST);
-            sender.addMessageToQueue(request);
+            sender.addMessageToQueue(new PlayerRequest(player));
+
+            Thread.Sleep(ClientConstants.CLIENT_REQUEST_WAIT_TIME);
+
+            RoomInfo roomInfo;
+            return (roomInfo = receiver.getRoomInfo()) != null ? roomInfo : (Data)receiver.getRoomList();
         }
+
+        /// <summary>
+        /// Send a room creation request to the server.
+        /// </summary>
+        /// <param name="player"></param>
+        public Data sendRoomCreationRequest(Player player, string roomName)
+        {
+            sender.addMessageToQueue(new PlayerRequest(player, roomName));
+
+            Thread.Sleep(ClientConstants.CLIENT_REQUEST_WAIT_TIME);
+
+            RoomInfo roomInfo;
+            return (roomInfo = receiver.getRoomInfo()) != null ? roomInfo : (Data)receiver.getRoomList();
+        }
+
+        /// <summary>
+        /// Send a room join request to the server.
+        /// </summary>
+        /// <param name="player"></param>
+        public void sendRoomJoinRequest(Player player, int roomNumber)
+        {
+            sender.addMessageToQueue(new PlayerRequest(player, roomNumber));
+
+            Thread.Sleep(ClientConstants.CLIENT_REQUEST_WAIT_TIME);
+
+            RoomInfo roomInfo;
+            return (roomInfo = receiver.getRoomInfo()) != null ? roomInfo : (Data)receiver.getRoomList();
+        }
+
+        /*public void sendPlayerRequest(Player player, Byte requestType)
+        {
+            PlayerRequest request = new PlayerRequest(player, requestType);
+            sender.addMessageToQueue(request);
+        }*/
 
         // GET FUNCTIONS ----------------------------------------------------
 

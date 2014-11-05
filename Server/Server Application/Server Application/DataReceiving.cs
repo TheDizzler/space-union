@@ -72,11 +72,11 @@ namespace Server_Application
                 {
                     case Constants.LOGIN_REQUEST:
                         Console.WriteLine(((Player)message).Username);
-                        new Thread(unused => LoginRequests.handleLoginRequest((Player)message, owner)).Start();
+                        new Thread(() => LoginRequests.handleLoginRequest((Player)message, owner)).Start();
                         break;
 
                     case Constants.PLAYER_REQUEST:
-                        
+                        new Thread(() => handlePlayerRequest((PlayerRequest)message)).Start();
                         break;
 
                     default:
@@ -100,9 +100,24 @@ namespace Server_Application
             }
         }
 
+        /// <summary>
+        /// Handle the given player request.
+        /// </summary>
+        /// <param name="request">The player request to handle.</param>
         private void handlePlayerRequest(PlayerRequest request)
         {
-
+            switch (request.RequestType)
+            {
+                case Constants.PLAYER_REQUEST_ROOMLIST:
+                    owner.sendRoomList(request.Sender);
+                    break;
+                case Constants.PLAYER_REQUEST_ROOMCREATE:
+                    owner.createPlayerRequestedRoom(request.Sender, request.RoomName);
+                    break;
+                case Constants.PLAYER_REQUEST_ROOMJOIN:
+                    owner.addPlayerToRequestedRoom(request.Sender, request.RoomNumber);
+                    break;
+            }
         }
     }
 }

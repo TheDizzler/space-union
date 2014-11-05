@@ -15,7 +15,6 @@ namespace Data_Structures
     [Serializable]
     public class GameData : Data
     {
-
         public Player Player { get; set; }
 
         /// <summary>

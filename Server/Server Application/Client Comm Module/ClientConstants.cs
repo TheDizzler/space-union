@@ -36,5 +36,10 @@ namespace Client_Comm_Module
         /// THe interval between each data transmission.
         /// </summary>
         public const int DATA_SEND_INTERVAL = 30;
+
+        /// <summary>
+        /// The duration of time to wait for a server response after sending a request.
+        /// </summary>
+        public const int CLIENT_REQUEST_WAIT_TIME = 2000;
     }
 }

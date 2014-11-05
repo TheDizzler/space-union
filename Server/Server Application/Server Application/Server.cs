@@ -45,7 +45,7 @@ namespace Server_Application
             Transmission = new DataTransmission(this);
             new Thread(cleanRooms).Start();
         }
-        
+
         private void cleanRooms()
         {
             while (true)
@@ -61,10 +61,10 @@ namespace Server_Application
                 Thread.Sleep(5000);
             }
         }
-        
+
         private bool compareTime(DateTime time, int period, bool seconds)
         {
-            if(seconds)
+            if (seconds)
                 if ((DateTime.Now - time).Seconds > period)
                     return true;
             if (!seconds)
@@ -109,22 +109,62 @@ namespace Server_Application
         }
 
         /// <summary>
+        /// Sends the room list to the given player.
+        /// </summary>
+        /// <param name="player">The player to send the room list to.</param>
+        public void sendRoomList(Player player)
+        {
+            addMessageToQueue(new RoomList(player, organizeRoomList()));
+        }
+
+        /// <summary>
         /// Add the given player to the room matching the given room number.
         /// </summary>
         /// <param name="player">The player to add to the room.</param>
         /// <param name="roomNumber">The room number of the room to add the player to.</param>
-        private bool addPlayerToRequestedRoom(Player player, int roomNumber)
+        public void addPlayerToRequestedRoom(Player player, int roomNumber)
         {
             Gameroom room = getGameroom(roomNumber);
             if (room == null || !room.addPlayer(player))
-            {
-                Transmission.addMessageToQueue(new ErrorMessage(player, 2));
-                Transmission.addMessageToQueue(new RoomList(player, organizeRoomList()));
-                return false;
-            }
-            return true;
+                addMessageToQueue(new RoomList(player, organizeRoomList()));
+            addMessageToQueue(new RoomInfo(room.getPlayers(), room.RoomNumber, room.RoomName, room.Host, room.InGame, player));
         }
 
+        /// <summary>
+        /// Create a game room upon a player request.
+        /// </summary>
+        /// <param name="player">The player requesting the room creation.</param>
+        /// <param name="roomName">The name of the room specified by the player.</param>
+        public void createPlayerRequestedRoom(Player player, string roomName)
+        {
+            int assignedRoomNumber = findAvailableRoomNumber();
+            if (assignedRoomNumber == 0)
+            {
+                addMessageToQueue(new RoomList(player, organizeRoomList()));
+                return;
+            }
+            Gameroom room = new Gameroom(assignedRoomNumber, roomName, player);
+            Gamerooms.Add(assignedRoomNumber, room);
+            addMessageToQueue(new RoomInfo(room.getPlayers(), room.RoomNumber, room.RoomName, room.Host, room.InGame, player));
+        }
+
+        /// <summary>
+        /// Find the lowest available game room number.
+        /// If no more rooms can be created, return 0.
+        /// </summary>
+        /// <returns>The lowest available game room number. 0 if no more rooms can be created.</returns>
+        private int findAvailableRoomNumber()
+        {
+            for (int roomNumber = 1; roomNumber <= Constants.MAX_NUMBER_OF_ROOMS; roomNumber++)
+                if (getGameroom(roomNumber) == null)
+                    return roomNumber;
+            return 0;
+        }
+
+        /// <summary>
+        /// TEMPORARY METHOD FOR TESTING.
+        /// </summary>
+        /// <param name="player"></param>
         private void addPlayerToFreeRoom(Player player)
         {
             foreach (KeyValuePair<int, Gameroom> room in Gamerooms.ToArray())
@@ -150,21 +190,17 @@ namespace Server_Application
         public void addMessageToQueue(Data message)
         {
             if (message != null)
-            {
                 Transmission.addMessageToQueue(message);
-            }
         }
 
         private List<RoomInfo> organizeRoomList()
         {
             List<RoomInfo> list = new List<RoomInfo>();
-
             foreach (KeyValuePair<int, Gameroom> room in Gamerooms.ToArray())
             {
                 RoomInfo info = new RoomInfo(room.Value.getPlayers(), room.Value.RoomNumber, room.Value.RoomName, room.Value.Host, room.Value.InGame);
                 list.Add(info);
             }
-
             return list;
         }
     }
