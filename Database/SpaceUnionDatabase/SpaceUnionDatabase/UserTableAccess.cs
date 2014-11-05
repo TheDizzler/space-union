@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PasswordHash;
 
 namespace SpaceUnionDatabase
 {
@@ -15,7 +16,7 @@ namespace SpaceUnionDatabase
             bool isUserAdded = false;
 
             newUser.userName      = username;
-            newUser.userPassword  = password;
+            newUser.userPassword  = PasswordHash.PasswordHash.CreateHash(password);
             newUser.userEmail     = email;
             newUser.userImage     = "noimage";
             newUser.userIsOnline  = 0;
@@ -132,14 +133,16 @@ namespace SpaceUnionDatabase
                     .FirstOrDefault(u => u.userName     == username && 
                                          u.userPassword == password);
 
-                if (user.userIsBlocked == 1)
+                if (user == null)
+                    errCode = 0;//incorrect username/pass
+                else if (!PasswordHash.PasswordHash.ValidatePassword(password, user.userPassword) )
+                    errCode = 0;//incorrect username/pass
+                else if (user.userIsBlocked == 1)
                     errCode = 1;//user is blocked
                 else if (user.userIsAdmin == 0)
                     errCode = 2;//user is not an admin
                 else if (user.userIsOnline == 1)
                     errCode = 3;//user is already logged in
-                else if (user == null)
-                    errCode = 0;//incorrect user/pass
                 else
                     isValidUser = true;
             }
@@ -159,18 +162,18 @@ namespace SpaceUnionDatabase
             bool isValidUser = false;
             var  db          = new SpaceUnionEntities();
  
-            try
-            {
+            try {
                 var user = db.Users
-                    .FirstOrDefault(u => u.userName     == username && 
-                                         u.userPassword == password);
+                    .FirstOrDefault(u => u.userName == username);
 
-                if (user.userIsBlocked == 1)
+                if (user == null)
+                    errCode = 0;//incorrect username/pass
+                else if (!PasswordHash.PasswordHash.ValidatePassword(password, user.userPassword) )
+                    errCode = 0;//incorrect username/pass
+                else if (user.userIsBlocked == 1)
                     errCode = 1;//user is blocked
                 else if (user.userIsOnline == 1)
                     errCode = 3;//user is already online
-                else if (user == null)
-                    errCode = 0;//incorrect user/pass
                 else {
                     isValidUser = true;
                     info[0] = user.userName;
