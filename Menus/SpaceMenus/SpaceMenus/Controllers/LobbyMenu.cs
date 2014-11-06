@@ -12,6 +12,8 @@ using Nuclex.UserInterface.Controls.Desktop;
 using Nuclex.Input;
 using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;
+using Data_Structures;
+using System.Threading;
 
 namespace SpaceMenus
 {
@@ -19,6 +21,7 @@ namespace SpaceMenus
     {
         private Game1 game;
         public String lobbyTitle;
+        LabelControl playersLabel;
 
         public LobbyMenu(Game1 game, String title)
         {
@@ -26,7 +29,7 @@ namespace SpaceMenus
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
             lobbyTitle = title;
             CreateMenuControls(game.mainScreen);
-            
+            new Thread(updatePlayerList).Start();
         }
 
         public void Update(GameTime gameTime)
@@ -43,9 +46,15 @@ namespace SpaceMenus
         {
             //Menu Name Label
             LabelControl menuNameLabel = new LabelControl();
-            menuNameLabel.Text = "Lobby: " + lobbyTitle;
+            menuNameLabel.Text = "Lobby: " + game.roomInfo.RoomName;
             menuNameLabel.Bounds = GuiHelper.MENU_TITLE_LABEL;
             mainScreen.Desktop.Children.Add(menuNameLabel);
+
+            //Players Label
+            playersLabel = new LabelControl();
+            playersLabel.Text = "Players:";
+            playersLabel.Bounds = new UniRectangle(10.0f, 80.0f, 120.0f, 16.0f);
+            mainScreen.Desktop.Children.Add(playersLabel);
 
             //Choose Chip Label
             LabelControl chooseShipLabel = new LabelControl();
@@ -94,10 +103,25 @@ namespace SpaceMenus
             ButtonControl cancelGameButton = GuiHelper.CreateButton("Cancel", -200, -75, 100, 60);
             cancelGameButton.Pressed += delegate(object sender, EventArgs arguments)
             {
+                game.Communication.sendRoomExitRequest(game.Player, game.roomInfo.RoomNumber);
                 game.EnterLobbyBrowserMenu();
             };
             mainScreen.Desktop.Children.Add(cancelGameButton);
 
+        }
+
+        private void updatePlayerList()
+        {
+            while (game.currentGameState == SpaceMenus.Game1.GameState.Lobby)
+            {
+                game.roomInfo = (RoomInfo)game.Communication.sendRoomInfoRequest(game.Player, game.roomInfo.RoomNumber);
+                playersLabel.Text = "Players: ";
+                foreach (KeyValuePair<string, GameData> lobbyPlayer in game.roomInfo.Players.ToArray())
+                {
+                    playersLabel.Text += lobbyPlayer.Key;
+                }
+                Thread.Sleep(3000);
+            }
         }
     }
 }

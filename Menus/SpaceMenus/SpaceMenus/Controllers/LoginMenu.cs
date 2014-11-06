@@ -12,12 +12,17 @@ using Nuclex.UserInterface.Controls.Desktop;
 using Nuclex.Input;
 using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;
+using System.Threading;
 
 namespace SpaceMenus
 {
     public class LoginMenu
     {
         private Game1 game;
+        private PasswordInputControl passwordInput;
+        private LabelControl passwordLabel;
+        InputControl accountNameInput;
+
 
         public LoginMenu(Game1 game)
         {
@@ -28,11 +33,13 @@ namespace SpaceMenus
 
         public void Update(GameTime gameTime)
         {
+                
         }
 
         public void DrawMenu(GameTime gameTime)
         {
             game.gui_manager.Draw(gameTime);
+            passwordLabel.Text = passwordInput.GetText();
         }
 
         private void CreateMenuControls(Screen mainScreen)
@@ -45,29 +52,38 @@ namespace SpaceMenus
             mainScreen.Desktop.Children.Add(accountNameLabel);
 
             //Account Name Input
-            InputControl accountNameInput = new InputControl();
+            accountNameInput = new InputControl();
             accountNameInput.Bounds = new UniRectangle(200.0f, 175.0f, 200.0f, 24.0f);
             accountNameInput.Text = "";
             mainScreen.Desktop.Children.Add(accountNameInput);
 
             //Password Label
-            LabelControl passwordLabel = new LabelControl();
+            passwordLabel = new LabelControl();
             passwordLabel.Text = "Password";
             passwordLabel.Bounds = new UniRectangle(200.0f, 200.0f, 110.0f, 24.0f);
             mainScreen.Desktop.Children.Add(passwordLabel);
-
+            
             //TODO: Create Password field where characters show up as black circles
             //Password Input
-            InputControl passwordInput = new InputControl();
+            passwordInput = new PasswordInputControl();
             passwordInput.Bounds = new UniRectangle(200.0f, 225.0f, 200.0f, 24.0f);
             mainScreen.Desktop.Children.Add(passwordInput);
-
             //TODO: Change to a contrasting color (Yellow)
             //Login Button.
             ButtonControl loginButton = GuiHelper.CreateButton("Login", -415, -50, 150, 32);
             loginButton.Pressed += delegate(object sender, EventArgs arguments)
             {
-                game.EnterMainMenu();
+                if (accountNameInput.Text != null)
+                {
+                    game.Player.Username = accountNameInput.Text;
+                }
+
+                game.Communication.sendLoginRequest(game.Player);
+                Thread.Sleep(2000);
+                game.Player = game.Communication.getPlayer();
+                Console.WriteLine(game.Player.Username);
+                if(game.Player != null)
+                    game.EnterMainMenu();
             };
             mainScreen.Desktop.Children.Add(loginButton);
 

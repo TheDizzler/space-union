@@ -28,7 +28,7 @@ namespace SpaceMenus
 
         public void Update(GameTime gameTime)
         {
-
+            
         }
 
         public void DrawMenu(GameTime gameTime)
@@ -77,6 +77,13 @@ namespace SpaceMenus
                 game.Exit();
             };
             mainScreen.Desktop.Children.Add(quitButton);
+
+            //Player Username Label
+            LabelControl playerUsernameLabel = new LabelControl();
+            playerUsernameLabel.Text = game.Player.Username.ToString();
+            playerUsernameLabel.Bounds = new UniRectangle(500.0f, 50.0f, 110.0f, 24.0f);
+            mainScreen.Desktop.Children.Add(playerUsernameLabel);
+
         }
     }
 }

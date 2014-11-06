@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Client_Comm_Module;
+using Data_Structures;
+
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -39,10 +42,14 @@ namespace SpaceMenus
 
         public Screen mainScreen;
 
+        public ClientCommHandler Communication { get; private set; }
+        public Player Player { get; set; }
+        public RoomInfo roomInfo;
+
         /// <summary>
         /// Game State Enum to track game states
         /// </summary>
-        enum GameState
+        public enum GameState
         {
             Login,
             MainMenu,
@@ -54,7 +61,7 @@ namespace SpaceMenus
             Lobby
         }
 
-        GameState currentGameState = GameState.Login;
+        public GameState currentGameState = GameState.Login;
 
 
         public Game1()
@@ -67,6 +74,12 @@ namespace SpaceMenus
             gui_manager.DrawOrder = 1000;
 
             IsMouseVisible = true;
+
+            Communication = new ClientCommHandler();
+            Player = new Player();
+            Player.Username = "Troy";
+            Player.Password = "loltroy";
+            Player.IPAddress = Communication.getLocalIPv4Address();
         }
 
         protected override void Initialize()

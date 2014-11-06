@@ -12,6 +12,7 @@ using Nuclex.UserInterface.Controls.Desktop;
 using Nuclex.Input;
 using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;
+using Data_Structures;
 
 namespace SpaceMenus
 {
@@ -19,7 +20,7 @@ namespace SpaceMenus
     {
         private Game1 game;
         public String lobbyTitle;
-        private InputControl lobbyTitleInput; 
+        private InputControl lobbyTitleInput;
 
         public CreateLobbyMenu(Game1 game)
         {
@@ -70,7 +71,20 @@ namespace SpaceMenus
             ButtonControl createLobbyButton = GuiHelper.CreateButton("Create Lobby", -435, -150, 200, 32);
             createLobbyButton.Pressed += delegate(object sender, EventArgs arguments)
             {
-                game.EnterLobbyMenu();
+                if(lobbyTitleInput.Text != null){
+                    
+                    Data lobbyData = game.Communication.sendRoomCreationRequest(game.Player, lobbyTitleInput.Text);
+                    
+                    if (lobbyData.Type == 10)
+                    {
+                        game.roomInfo = (RoomInfo)lobbyData;
+                        game.EnterLobbyMenu();
+                    }
+                    else if (lobbyData.Type == 7)
+                    {
+                        Console.WriteLine("cannot create lobby");
+                    }
+                }
             };
             mainScreen.Desktop.Children.Add(createLobbyButton);
         }
