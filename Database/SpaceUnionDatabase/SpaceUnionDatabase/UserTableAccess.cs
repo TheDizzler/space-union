@@ -81,6 +81,7 @@ namespace SpaceUnionDatabase
                 else
                 {
                     user.userIsOnline = (byte)isAdmin;
+                    db.SaveChanges();
                     isUpdated         = true;
                 }
             }

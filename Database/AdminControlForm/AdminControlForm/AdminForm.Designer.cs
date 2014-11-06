@@ -62,6 +62,7 @@
             this.txtbUserToEdit = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.gvUsers = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.logintext = new System.Windows.Forms.TextBox();
@@ -122,11 +123,25 @@
             this.usersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.usersTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UsersTableAdapter();
             this.userStatsTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UserStatsTableAdapter();
-            this.gvUsers = new System.Windows.Forms.DataGridView();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.lablEditShip = new System.Windows.Forms.Label();
+            this.lablShipEditing = new System.Windows.Forms.Label();
+            this.txtbShipEditing = new System.Windows.Forms.TextBox();
+            this.lablCurrentShipStats = new System.Windows.Forms.Label();
+            this.rtxtCurrentShipStats = new System.Windows.Forms.RichTextBox();
+            this.lablNewShipTurnSpeed = new System.Windows.Forms.Label();
+            this.txtbNewTurnSpeed = new System.Windows.Forms.TextBox();
+            this.lablNewShipAccelerate = new System.Windows.Forms.Label();
+            this.txtbNewAccelerate = new System.Windows.Forms.TextBox();
+            this.lablNewShipMaxSpeed = new System.Windows.Forms.Label();
+            this.txtbNewMaxSpeed = new System.Windows.Forms.TextBox();
+            this.bttnShipToEdit = new System.Windows.Forms.Button();
+            this.bttnShipUpdate = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.createUserTab.SuspendLayout();
             this.editUserTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvUsers)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFlagsCaptured)).BeginInit();
@@ -143,7 +158,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.userStatsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvUsers)).BeginInit();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -153,6 +168,7 @@
             this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Controls.Add(this.tabPage2);
             this.tabControl.Controls.Add(this.tabPage3);
+            this.tabControl.Controls.Add(this.tabPage4);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -520,6 +536,14 @@
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // gvUsers
+            // 
+            this.gvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvUsers.Location = new System.Drawing.Point(9, 6);
+            this.gvUsers.Name = "gvUsers";
+            this.gvUsers.Size = new System.Drawing.Size(471, 130);
+            this.gvUsers.TabIndex = 5;
             // 
             // label3
             // 
@@ -1057,13 +1081,150 @@
             // 
             this.userStatsTableAdapter.ClearBeforeFill = true;
             // 
-            // gvUsers
+            // tabPage4
             // 
-            this.gvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvUsers.Location = new System.Drawing.Point(9, 6);
-            this.gvUsers.Name = "gvUsers";
-            this.gvUsers.Size = new System.Drawing.Size(471, 130);
-            this.gvUsers.TabIndex = 5;
+            this.tabPage4.BackgroundImage = global::AdminControlForm.Properties.Resources.dark_space;
+            this.tabPage4.Controls.Add(this.bttnShipUpdate);
+            this.tabPage4.Controls.Add(this.bttnShipToEdit);
+            this.tabPage4.Controls.Add(this.txtbNewMaxSpeed);
+            this.tabPage4.Controls.Add(this.lablNewShipMaxSpeed);
+            this.tabPage4.Controls.Add(this.txtbNewAccelerate);
+            this.tabPage4.Controls.Add(this.lablNewShipAccelerate);
+            this.tabPage4.Controls.Add(this.txtbNewTurnSpeed);
+            this.tabPage4.Controls.Add(this.lablNewShipTurnSpeed);
+            this.tabPage4.Controls.Add(this.rtxtCurrentShipStats);
+            this.tabPage4.Controls.Add(this.lablCurrentShipStats);
+            this.tabPage4.Controls.Add(this.txtbShipEditing);
+            this.tabPage4.Controls.Add(this.lablShipEditing);
+            this.tabPage4.Controls.Add(this.lablEditShip);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(488, 486);
+            this.tabPage4.TabIndex = 5;
+            this.tabPage4.Text = "Edit Ship";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // lablEditShip
+            // 
+            this.lablEditShip.AutoSize = true;
+            this.lablEditShip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablEditShip.ForeColor = System.Drawing.Color.White;
+            this.lablEditShip.Location = new System.Drawing.Point(19, 20);
+            this.lablEditShip.Name = "lablEditShip";
+            this.lablEditShip.Size = new System.Drawing.Size(97, 20);
+            this.lablEditShip.TabIndex = 1;
+            this.lablEditShip.Text = "Edit a Ship";
+            // 
+            // lablShipEditing
+            // 
+            this.lablShipEditing.AutoSize = true;
+            this.lablShipEditing.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablShipEditing.ForeColor = System.Drawing.Color.White;
+            this.lablShipEditing.Location = new System.Drawing.Point(45, 61);
+            this.lablShipEditing.Name = "lablShipEditing";
+            this.lablShipEditing.Size = new System.Drawing.Size(185, 17);
+            this.lablShipEditing.TabIndex = 2;
+            this.lablShipEditing.Text = "Name of the Ship to Edit";
+            // 
+            // txtbShipEditing
+            // 
+            this.txtbShipEditing.Location = new System.Drawing.Point(45, 82);
+            this.txtbShipEditing.Name = "txtbShipEditing";
+            this.txtbShipEditing.Size = new System.Drawing.Size(194, 20);
+            this.txtbShipEditing.TabIndex = 3;
+            // 
+            // lablCurrentShipStats
+            // 
+            this.lablCurrentShipStats.AutoSize = true;
+            this.lablCurrentShipStats.BackColor = System.Drawing.Color.Transparent;
+            this.lablCurrentShipStats.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablCurrentShipStats.ForeColor = System.Drawing.Color.White;
+            this.lablCurrentShipStats.Location = new System.Drawing.Point(280, 61);
+            this.lablCurrentShipStats.Name = "lablCurrentShipStats";
+            this.lablCurrentShipStats.Size = new System.Drawing.Size(141, 17);
+            this.lablCurrentShipStats.TabIndex = 4;
+            this.lablCurrentShipStats.Text = "Current Ship Stats";
+            // 
+            // rtxtCurrentShipStats
+            // 
+            this.rtxtCurrentShipStats.Location = new System.Drawing.Point(277, 81);
+            this.rtxtCurrentShipStats.Name = "rtxtCurrentShipStats";
+            this.rtxtCurrentShipStats.Size = new System.Drawing.Size(194, 61);
+            this.rtxtCurrentShipStats.TabIndex = 5;
+            this.rtxtCurrentShipStats.Text = "";
+            // 
+            // lablNewShipTurnSpeed
+            // 
+            this.lablNewShipTurnSpeed.AutoSize = true;
+            this.lablNewShipTurnSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablNewShipTurnSpeed.ForeColor = System.Drawing.Color.White;
+            this.lablNewShipTurnSpeed.Location = new System.Drawing.Point(45, 220);
+            this.lablNewShipTurnSpeed.Name = "lablNewShipTurnSpeed";
+            this.lablNewShipTurnSpeed.Size = new System.Drawing.Size(128, 17);
+            this.lablNewShipTurnSpeed.TabIndex = 6;
+            this.lablNewShipTurnSpeed.Text = "New Turn Speed";
+            // 
+            // txtbNewTurnSpeed
+            // 
+            this.txtbNewTurnSpeed.Location = new System.Drawing.Point(45, 240);
+            this.txtbNewTurnSpeed.Name = "txtbNewTurnSpeed";
+            this.txtbNewTurnSpeed.Size = new System.Drawing.Size(194, 20);
+            this.txtbNewTurnSpeed.TabIndex = 7;
+            // 
+            // lablNewShipAccelerate
+            // 
+            this.lablNewShipAccelerate.AutoSize = true;
+            this.lablNewShipAccelerate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablNewShipAccelerate.ForeColor = System.Drawing.Color.White;
+            this.lablNewShipAccelerate.Location = new System.Drawing.Point(45, 281);
+            this.lablNewShipAccelerate.Name = "lablNewShipAccelerate";
+            this.lablNewShipAccelerate.Size = new System.Drawing.Size(184, 17);
+            this.lablNewShipAccelerate.TabIndex = 8;
+            this.lablNewShipAccelerate.Text = "New Acceleration Speed";
+            // 
+            // txtbNewAccelerate
+            // 
+            this.txtbNewAccelerate.Location = new System.Drawing.Point(45, 301);
+            this.txtbNewAccelerate.Name = "txtbNewAccelerate";
+            this.txtbNewAccelerate.Size = new System.Drawing.Size(194, 20);
+            this.txtbNewAccelerate.TabIndex = 9;
+            // 
+            // lablNewShipMaxSpeed
+            // 
+            this.lablNewShipMaxSpeed.AutoSize = true;
+            this.lablNewShipMaxSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablNewShipMaxSpeed.ForeColor = System.Drawing.Color.White;
+            this.lablNewShipMaxSpeed.Location = new System.Drawing.Point(45, 344);
+            this.lablNewShipMaxSpeed.Name = "lablNewShipMaxSpeed";
+            this.lablNewShipMaxSpeed.Size = new System.Drawing.Size(122, 17);
+            this.lablNewShipMaxSpeed.TabIndex = 10;
+            this.lablNewShipMaxSpeed.Text = "New Max Speed";
+            // 
+            // txtbNewMaxSpeed
+            // 
+            this.txtbNewMaxSpeed.Location = new System.Drawing.Point(45, 364);
+            this.txtbNewMaxSpeed.Name = "txtbNewMaxSpeed";
+            this.txtbNewMaxSpeed.Size = new System.Drawing.Size(194, 20);
+            this.txtbNewMaxSpeed.TabIndex = 11;
+            // 
+            // bttnShipToEdit
+            // 
+            this.bttnShipToEdit.Location = new System.Drawing.Point(124, 119);
+            this.bttnShipToEdit.Name = "bttnShipToEdit";
+            this.bttnShipToEdit.Size = new System.Drawing.Size(115, 23);
+            this.bttnShipToEdit.TabIndex = 12;
+            this.bttnShipToEdit.Text = "Retrieve Ship Stats";
+            this.bttnShipToEdit.UseVisualStyleBackColor = true;
+            // 
+            // bttnShipUpdate
+            // 
+            this.bttnShipUpdate.Location = new System.Drawing.Point(148, 402);
+            this.bttnShipUpdate.Name = "bttnShipUpdate";
+            this.bttnShipUpdate.Size = new System.Drawing.Size(91, 35);
+            this.bttnShipUpdate.TabIndex = 13;
+            this.bttnShipUpdate.Text = "Update Ship";
+            this.bttnShipUpdate.UseVisualStyleBackColor = true;
             // 
             // AdminForm
             // 
@@ -1072,6 +1233,7 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(496, 512);
             this.Controls.Add(this.tabControl);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "AdminForm";
             this.Text = "Admin Controls";
@@ -1083,6 +1245,7 @@
             this.editUserTab.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvUsers)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -1101,7 +1264,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.userStatsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvUsers)).EndInit();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1204,6 +1368,20 @@
         private System.Windows.Forms.NumericUpDown nudHits;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.DataGridView gvUsers;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Label lablEditShip;
+        private System.Windows.Forms.Label lablShipEditing;
+        private System.Windows.Forms.TextBox txtbShipEditing;
+        private System.Windows.Forms.Label lablNewShipTurnSpeed;
+        private System.Windows.Forms.RichTextBox rtxtCurrentShipStats;
+        private System.Windows.Forms.Label lablCurrentShipStats;
+        private System.Windows.Forms.Button bttnShipUpdate;
+        private System.Windows.Forms.Button bttnShipToEdit;
+        private System.Windows.Forms.TextBox txtbNewMaxSpeed;
+        private System.Windows.Forms.Label lablNewShipMaxSpeed;
+        private System.Windows.Forms.TextBox txtbNewAccelerate;
+        private System.Windows.Forms.Label lablNewShipAccelerate;
+        private System.Windows.Forms.TextBox txtbNewTurnSpeed;
 
     }
 }
