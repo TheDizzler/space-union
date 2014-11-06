@@ -107,11 +107,6 @@ namespace Client_Comm_Module
         /// <returns>The current player.</returns>
         public Player getPlayer()
         {
-            if (player == null)
-            {
-                Console.WriteLine("-------player is null--------");
-                return null;
-            }
             return player;
         }
 
