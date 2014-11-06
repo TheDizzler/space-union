@@ -50,15 +50,6 @@ namespace Server_Application
         {
             while (true)
             {
-                /*
-                foreach (KeyValuePair<string, Player> player in OnlinePlayers.ToArray())
-                {
-                    if (compareTime(player.Value.Time, 10))
-                    {
-                        Player temp;
-                        OnlinePlayers.TryRemove(player.Key, out temp);
-                    }
-                }*/
                 foreach (KeyValuePair<int, Gameroom> room in Gamerooms.ToArray())
                 {
                     foreach (GameData player in room.Value.getPlayerList())

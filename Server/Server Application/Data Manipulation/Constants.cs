@@ -110,8 +110,6 @@ namespace Data_Manipulation
 
         public const byte PLAYER_REQUEST_ROOMINFO = 4;
 
-        public const byte PLAYER_REQUEST_HEARTBEAT = 5;
-
         // END REQUEST TYPES
 
 

@@ -40,6 +40,6 @@ namespace Client_Comm_Module
         /// <summary>
         /// The duration of time to wait for a server response after sending a request.
         /// </summary>
-        public const int CLIENT_REQUEST_WAIT_TIME = 2000;
+        public const int CLIENT_REQUEST_WAIT_TIME = 1000;
     }
 }

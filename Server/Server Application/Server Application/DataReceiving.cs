@@ -114,8 +114,6 @@ namespace Server_Application
                 case Constants.PLAYER_REQUEST_ROOMINFO:
                     owner.sendRoomInfo(request.Sender, request.RoomNumber);
                     break;
-                case Constants.PLAYER_REQUEST_HEARTBEAT:
-                    break;
             }
         }
     }

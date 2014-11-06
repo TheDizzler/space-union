@@ -23,6 +23,7 @@ namespace Client_Comm_Module
             receiver = new ClientMessageReceiving();
             sender = new ClientMessageTransmission();
             receiver.gameStart += new ClientMessageReceiving.GameStartEventHandler(initializeDataTransmission);
+            Console.WriteLine("Created ClientCommHandler()");
         }
 
         public Player getPlayer()
@@ -51,6 +52,7 @@ namespace Client_Comm_Module
                 dataReceiver = new ClientDataReceiving(setupMessage.PortReceive);
                 dataSender = new ClientDataTransmission(setupMessage.PortSend);
                 helper = new ClientHandlerHelper(getGameData);
+                Console.WriteLine("InitializedDataTransmission");
             }
         }
 
@@ -100,7 +102,7 @@ namespace Client_Comm_Module
         /// Send a room list request to the server.
         /// </summary>
         /// <param name="player">The sender of the request.</param>
-        public RoomList sendRoomListRequest(Player player)
+        public Data sendRoomListRequest(Player player)
         {
             sender.addMessageToQueue(new PlayerRequest(player));
             Thread.Sleep(ClientConstants.CLIENT_REQUEST_WAIT_TIME);
@@ -126,11 +128,24 @@ namespace Client_Comm_Module
         public Data sendRoomJoinRequest(Player player, int roomNumber)
         {
             RoomInfo roomInfo;
-            sender.addMessageToQueue(new PlayerRequest(player, roomNumber));
+            sender.addMessageToQueue(new PlayerRequest(player, roomNumber, Constants.PLAYER_REQUEST_ROOMJOIN));
             Thread.Sleep(ClientConstants.CLIENT_REQUEST_WAIT_TIME);
             return (roomInfo = receiver.getRoomInfo()) != null ? roomInfo : (Data)receiver.getRoomList();
         }
 
+        public Data sendRoomInfoRequest(Player player, int roomNumber)
+        {
+            sender.addMessageToQueue(new PlayerRequest(player, roomNumber, Constants.PLAYER_REQUEST_ROOMINFO));
+
+            Thread.Sleep(ClientConstants.CLIENT_REQUEST_WAIT_TIME);
+
+            return receiver.getRoomInfo();
+        }
+
+        public void sendRoomExitRequest(Player player, int roomNumber)
+        {
+            sender.addMessageToQueue(new PlayerRequest(player, roomNumber, Constants.PLAYER_REQUEST_ROOMEXIT));
+        }
         // GET FUNCTIONS ----------------------------------------------------
 
         /// <summary>
