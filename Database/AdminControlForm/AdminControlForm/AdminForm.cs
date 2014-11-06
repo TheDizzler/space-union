@@ -149,6 +149,7 @@ namespace AdminControlForm
                     MessageBox.Show("Sorry, the Username is already taken.");
                 }
                 else {
+                    userStatTable.addUserStat(txtbUsername.Text);
                     MessageBox.Show("User was added to the database successfully");
                 }
             }
@@ -404,7 +405,7 @@ namespace AdminControlForm
             string turnMaxSpeedErrMsg = null;
 
             if (!shipValidation.ValidateMaxSpeed(txtbMaxSpeed.Text,
-                                                  ref turnMaxSpeedErrMsg)) {
+                                                 ref turnMaxSpeedErrMsg)) {
                 lablMaxSpeedErrMsg.Text = turnMaxSpeedErrMsg;
                 lablMaxSpeedErrMsg.Visible = true;
                 isMaxSpeedValid = false;
