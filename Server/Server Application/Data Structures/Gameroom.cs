@@ -79,14 +79,6 @@ namespace Data_Structures
                 players.TryRemove(user.Player.Username, out temp);
             }
         }
-        public void removePlayer(Player user)
-        {
-            if (Players > 0)
-            {
-                GameData temp;
-                players.TryRemove(user.Username, out temp);
-            }
-        }
 
         public ConcurrentDictionary<string, GameData> getPlayers()
         {

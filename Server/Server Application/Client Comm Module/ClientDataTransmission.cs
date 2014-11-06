@@ -51,6 +51,7 @@ namespace Client_Comm_Module
             catch (ThreadStateException e) { Console.WriteLine("Client has crashed." + e.ToString()); return; }
             catch (OutOfMemoryException e) { Console.WriteLine("Client has crashed." + e.ToString()); return; }
             catch (InvalidOperationException e) { Console.WriteLine("Client has crashed." + e.ToString()); return; }
+            Locker = new object();
         }
 
         /// <summary>

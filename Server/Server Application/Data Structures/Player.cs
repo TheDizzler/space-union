@@ -39,10 +39,6 @@ namespace Data_Structures
         /// The port through which the client receives data.
         /// </summary>
         public int PortReceive { get; set; }
-        /// <summary>
-        /// The time this packet was received. Used to time out players from the server.
-        /// </summary>
-        public DateTime Time { get; set; }
 
         public Player()
         {

@@ -65,11 +65,11 @@ namespace Data_Structures
         /// </summary>
         /// <param name="sender">The sender of the request.</param>
         /// <param name="requestType">The number of the room to join.</param>
-        public PlayerRequest(Player sender, int roomNumber)
+        public PlayerRequest(Player sender, int roomNumber, byte requestType)
         {
             Type        = 9;
             Sender      = sender;
-            RequestType = 2;
+            RequestType = requestType;
             RoomNumber  = roomNumber;
         }
     }
