@@ -59,7 +59,7 @@ namespace Server_Application
         {
             while (true)
             {
-                Data message = (Player)DataControl.receiveTCPData(TCPListener);
+                Data message = (Data)DataControl.receiveTCPData(TCPListener);
                 if (message == null)
                     continue;
 
@@ -67,6 +67,7 @@ namespace Server_Application
                 {
                     case Constants.LOGIN_REQUEST:
                         new Thread(() => LoginRequests.handleLoginRequest((Player)message, owner)).Start();
+                        
                         break;
                     case Constants.PLAYER_REQUEST:
                         new Thread(() => handlePlayerRequest((PlayerRequest)message)).Start();
@@ -108,6 +109,14 @@ namespace Server_Application
                     break;
                 case Constants.PLAYER_REQUEST_ROOMJOIN:
                     owner.addPlayerToRequestedRoom(request.Sender, request.RoomNumber);
+                    break;
+                case Constants.PLAYER_REQUEST_ROOMEXIT:
+                    owner.removePlayerFromRoom(request.Sender, request.RoomNumber);
+                    break;
+                case Constants.PLAYER_REQUEST_ROOMINFO:
+                    owner.sendRoomInfo(request.Sender, request.RoomNumber);
+                    break;
+                case Constants.PLAYER_REQUEST_HEARTBEAT:
                     break;
             }
         }

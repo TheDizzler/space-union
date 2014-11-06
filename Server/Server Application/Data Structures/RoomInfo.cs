@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,19 +12,20 @@ namespace Data_Structures
     [Serializable]
     public class RoomInfo : Data
     {
-        public Dictionary<string, GameData> Players { get; set; }
+        public ConcurrentDictionary<string, GameData> Players { get; set; }
         public int RoomNumber { get; set; }
         public string RoomName { get; set; }
         public Player Host { get; set; }
         public bool InGame { get; set; }
         public Player Requester { get; set; }
 
-        public RoomInfo(Dictionary<string, GameData> players, 
+        public RoomInfo(ConcurrentDictionary<string, GameData> players, 
                         int roomNumber, 
                         string roomName, 
                         Player host, 
                         bool inGame)
         {
+            Type = 10;
             Players    = players;
             RoomNumber = roomNumber;
             RoomName   = roomName;
@@ -31,13 +33,14 @@ namespace Data_Structures
             InGame     = inGame;
         }
 
-        public RoomInfo(Dictionary<string, GameData> players,
+        public RoomInfo(ConcurrentDictionary<string, GameData> players,
                         int roomNumber,
                         string roomName,
                         Player host,
                         bool inGame,
                         Player requester)
         {
+            Type = 10;
             Players = players;
             RoomNumber = roomNumber;
             RoomName = roomName;

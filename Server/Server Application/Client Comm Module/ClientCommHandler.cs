@@ -114,14 +114,13 @@ namespace Client_Comm_Module
         /// Send a room list request to the server.
         /// </summary>
         /// <param name="player">The sender of the request.</param>
-        public Data sendRoomListRequest(Player player)
+        public RoomList sendRoomListRequest(Player player)
         {
             sender.addMessageToQueue(new PlayerRequest(player));
 
             Thread.Sleep(ClientConstants.CLIENT_REQUEST_WAIT_TIME);
 
-            RoomInfo roomInfo;
-            return (roomInfo = receiver.getRoomInfo()) != null ? roomInfo : (Data)receiver.getRoomList();
+            return receiver.getRoomList();
         }
 
         /// <summary>
