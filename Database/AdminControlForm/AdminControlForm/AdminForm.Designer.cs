@@ -137,6 +137,9 @@
             this.txtbNewMaxSpeed = new System.Windows.Forms.TextBox();
             this.bttnShipToEdit = new System.Windows.Forms.Button();
             this.bttnShipUpdate = new System.Windows.Forms.Button();
+            this.lablShipEditTurnSpdErrMsg = new System.Windows.Forms.Label();
+            this.lablShipEditAccelerateErrMsg = new System.Windows.Forms.Label();
+            this.lablShipEditMaxSpeed = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.createUserTab.SuspendLayout();
             this.editUserTab.SuspendLayout();
@@ -1084,6 +1087,9 @@
             // tabPage4
             // 
             this.tabPage4.BackgroundImage = global::AdminControlForm.Properties.Resources.dark_space;
+            this.tabPage4.Controls.Add(this.lablShipEditMaxSpeed);
+            this.tabPage4.Controls.Add(this.lablShipEditAccelerateErrMsg);
+            this.tabPage4.Controls.Add(this.lablShipEditTurnSpdErrMsg);
             this.tabPage4.Controls.Add(this.bttnShipUpdate);
             this.tabPage4.Controls.Add(this.bttnShipToEdit);
             this.tabPage4.Controls.Add(this.txtbNewMaxSpeed);
@@ -1150,7 +1156,8 @@
             // 
             this.rtxtCurrentShipStats.Location = new System.Drawing.Point(277, 81);
             this.rtxtCurrentShipStats.Name = "rtxtCurrentShipStats";
-            this.rtxtCurrentShipStats.Size = new System.Drawing.Size(194, 61);
+            this.rtxtCurrentShipStats.ReadOnly = true;
+            this.rtxtCurrentShipStats.Size = new System.Drawing.Size(194, 70);
             this.rtxtCurrentShipStats.TabIndex = 5;
             this.rtxtCurrentShipStats.Text = "";
             // 
@@ -1171,6 +1178,7 @@
             this.txtbNewTurnSpeed.Name = "txtbNewTurnSpeed";
             this.txtbNewTurnSpeed.Size = new System.Drawing.Size(194, 20);
             this.txtbNewTurnSpeed.TabIndex = 7;
+            this.txtbNewTurnSpeed.TextChanged += new System.EventHandler(this.validateTurnSpeedEdit);
             // 
             // lablNewShipAccelerate
             // 
@@ -1189,6 +1197,7 @@
             this.txtbNewAccelerate.Name = "txtbNewAccelerate";
             this.txtbNewAccelerate.Size = new System.Drawing.Size(194, 20);
             this.txtbNewAccelerate.TabIndex = 9;
+            this.txtbNewAccelerate.TextChanged += new System.EventHandler(this.validateAccelerationEdit);
             // 
             // lablNewShipMaxSpeed
             // 
@@ -1207,15 +1216,17 @@
             this.txtbNewMaxSpeed.Name = "txtbNewMaxSpeed";
             this.txtbNewMaxSpeed.Size = new System.Drawing.Size(194, 20);
             this.txtbNewMaxSpeed.TabIndex = 11;
+            this.txtbNewMaxSpeed.TextChanged += new System.EventHandler(this.validateMaxSpeedEdit);
             // 
             // bttnShipToEdit
             // 
-            this.bttnShipToEdit.Location = new System.Drawing.Point(124, 119);
+            this.bttnShipToEdit.Location = new System.Drawing.Point(124, 128);
             this.bttnShipToEdit.Name = "bttnShipToEdit";
             this.bttnShipToEdit.Size = new System.Drawing.Size(115, 23);
             this.bttnShipToEdit.TabIndex = 12;
             this.bttnShipToEdit.Text = "Retrieve Ship Stats";
             this.bttnShipToEdit.UseVisualStyleBackColor = true;
+            this.bttnShipToEdit.Click += new System.EventHandler(this.bttnShipToEdit_Click);
             // 
             // bttnShipUpdate
             // 
@@ -1225,6 +1236,43 @@
             this.bttnShipUpdate.TabIndex = 13;
             this.bttnShipUpdate.Text = "Update Ship";
             this.bttnShipUpdate.UseVisualStyleBackColor = true;
+            this.bttnShipUpdate.Click += new System.EventHandler(this.bttnShipUpdate_Click);
+            // 
+            // lablShipEditTurnSpdErrMsg
+            // 
+            this.lablShipEditTurnSpdErrMsg.AutoSize = true;
+            this.lablShipEditTurnSpdErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablShipEditTurnSpdErrMsg.Location = new System.Drawing.Point(179, 222);
+            this.lablShipEditTurnSpdErrMsg.Name = "lablShipEditTurnSpdErrMsg";
+            this.lablShipEditTurnSpdErrMsg.Size = new System.Drawing.Size(109, 13);
+            this.lablShipEditTurnSpdErrMsg.TabIndex = 14;
+            this.lablShipEditTurnSpdErrMsg.Text = "err msg for turn speed";
+            this.lablShipEditTurnSpdErrMsg.Visible = false;
+            this.lablShipEditTurnSpdErrMsg.TextChanged += new System.EventHandler(this.validateTurnSpeedEdit);
+            // 
+            // lablShipEditAccelerateErrMsg
+            // 
+            this.lablShipEditAccelerateErrMsg.AutoSize = true;
+            this.lablShipEditAccelerateErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablShipEditAccelerateErrMsg.Location = new System.Drawing.Point(235, 283);
+            this.lablShipEditAccelerateErrMsg.Name = "lablShipEditAccelerateErrMsg";
+            this.lablShipEditAccelerateErrMsg.Size = new System.Drawing.Size(109, 13);
+            this.lablShipEditAccelerateErrMsg.TabIndex = 15;
+            this.lablShipEditAccelerateErrMsg.Text = "err msg for accelerate";
+            this.lablShipEditAccelerateErrMsg.Visible = false;
+            this.lablShipEditAccelerateErrMsg.TextChanged += new System.EventHandler(this.validateAccelerationEdit);
+            // 
+            // lablShipEditMaxSpeed
+            // 
+            this.lablShipEditMaxSpeed.AutoSize = true;
+            this.lablShipEditMaxSpeed.ForeColor = System.Drawing.Color.Red;
+            this.lablShipEditMaxSpeed.Location = new System.Drawing.Point(173, 346);
+            this.lablShipEditMaxSpeed.Name = "lablShipEditMaxSpeed";
+            this.lablShipEditMaxSpeed.Size = new System.Drawing.Size(110, 13);
+            this.lablShipEditMaxSpeed.TabIndex = 16;
+            this.lablShipEditMaxSpeed.Text = "err msg for max speed";
+            this.lablShipEditMaxSpeed.Visible = false;
+            this.lablShipEditMaxSpeed.TextChanged += new System.EventHandler(this.validateMaxSpeedEdit);
             // 
             // AdminForm
             // 
@@ -1382,6 +1430,9 @@
         private System.Windows.Forms.TextBox txtbNewAccelerate;
         private System.Windows.Forms.Label lablNewShipAccelerate;
         private System.Windows.Forms.TextBox txtbNewTurnSpeed;
+        private System.Windows.Forms.Label lablShipEditMaxSpeed;
+        private System.Windows.Forms.Label lablShipEditAccelerateErrMsg;
+        private System.Windows.Forms.Label lablShipEditTurnSpdErrMsg;
 
     }
 }

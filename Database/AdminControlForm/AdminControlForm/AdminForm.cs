@@ -31,7 +31,7 @@ namespace AdminControlForm
         private UserValidation userValidation = new UserValidation();
 
         /// <summary>
-        /// Helper class to validate input when a new ship is being added
+        /// Helper class to validate input when a new ship is being added / edited
         /// </summary>
         private ShipValidation shipValidation = new ShipValidation();
 
@@ -89,6 +89,26 @@ namespace AdminControlForm
         /// States if the acceleration input for an added ship is valid
         /// </summary>
         private bool isAccelerationValid = false;
+
+        /// <summary>
+        /// States if the turn speed input for an edited ship is valid
+        /// </summary>
+        private bool isTurnSpeedEditValid = false;
+
+        /// <summary>
+        /// States if the max speed input for an edited ship is valid
+        /// </summary>
+        private bool isMaxSpeedEditValid = false;
+
+        /// <summary>
+        /// States if the acceleration input for an edited ship is valid
+        /// </summary>
+        private bool isAccelerationEditValid = false;
+
+        /// <summary>
+        /// Name of the ship to update (gets set everytime an admin retrieves ship info)
+        /// </summary>
+        private string shipToEdit = null;
 
 
         /// <summary>
@@ -279,33 +299,29 @@ namespace AdminControlForm
         /// <param name="e"></param>
         private void bttnBlockUnblock_Click(object sender, EventArgs e)
         {
-            const int BLOCK = 1;
+            const int BLOCK   = 1;
             const int UNBLOCK = 0;
-
-            int errCode = 0;
+            string username   = txtbUserEditing.Text;
+            int errCode       = 0;
 
             AcceptCancelBlockActionForm acceptBlock =
                     new AcceptCancelBlockActionForm();
-            acceptBlock.TxtMsg = "Are you sure you want to block " + txtbUserEditing.Text;
+            acceptBlock.TxtMsg = "Are you sure you want to block " + username;
 
             AcceptCancelBlockActionForm acceptUnblock =
                     new AcceptCancelBlockActionForm();
-            acceptUnblock.TxtMsg = "Are you sure you want to unblock " + txtbUserEditing.Text;
+            acceptUnblock.TxtMsg = "Are you sure you want to unblock " + username;
 
-            if (chkbBlockUnblockUser.Checked)
-            {
-                if (txtbCurrentBlockStatus.Text.Equals("NOT BLOCKED"))
-                {
+            if (chkbBlockUnblockUser.Checked) {
+                if (txtbCurrentBlockStatus.Text.Equals("NOT BLOCKED")) {
                     // User blocking dialog
-                    if (acceptBlock.ShowDialog() == DialogResult.OK)
-                    {
-                        userTable.UpdateUserIsBlocked(txtbUserEditing.Text, BLOCK, ref errCode);
+                    if (acceptBlock.ShowDialog() == DialogResult.OK) {
+                        userTable.UpdateUserIsBlocked(username, BLOCK, ref errCode);
                         MessageBox.Show("User was blocked.");
                     }
                 }// User unblocking dialog
-                else if (acceptUnblock.ShowDialog() == DialogResult.OK)
-                {
-                    userTable.UpdateUserIsBlocked(txtbUserEditing.Text, UNBLOCK, ref errCode);
+                else if (acceptUnblock.ShowDialog() == DialogResult.OK) {
+                    userTable.UpdateUserIsBlocked(username, UNBLOCK, ref errCode);
                     MessageBox.Show("User was unblocked");
                 }
             }
@@ -377,14 +393,12 @@ namespace AdminControlForm
             string turnSpeedErrMsg = null;
 
             if (!shipValidation.ValidateTurnSpeed(txtbTurnSpeed.Text,
-                                                  ref turnSpeedErrMsg))
-            {
+                                                  ref turnSpeedErrMsg)) {
                 lablTurnSpeedErrMsg.Text = turnSpeedErrMsg;
                 lablTurnSpeedErrMsg.Visible = true;
                 isTurnSpeedValid = false;
             }
-            else
-            {
+            else {
                 lablTurnSpeedErrMsg.Visible = false;
                 isTurnSpeedValid = true;
             }
@@ -395,14 +409,12 @@ namespace AdminControlForm
             string turnMaxSpeedErrMsg = null;
 
             if (!shipValidation.ValidateMaxSpeed(txtbMaxSpeed.Text,
-                                                  ref turnMaxSpeedErrMsg))
-            {
+                                                  ref turnMaxSpeedErrMsg)) {
                 lablMaxSpeedErrMsg.Text = turnMaxSpeedErrMsg;
                 lablMaxSpeedErrMsg.Visible = true;
                 isMaxSpeedValid = false;
             }
-            else
-            {
+            else {
                 lablMaxSpeedErrMsg.Visible = false;
                 isMaxSpeedValid = true;
             }
@@ -413,14 +425,12 @@ namespace AdminControlForm
             string shipNameErrMsg = null;
 
             if (!shipValidation.ValidateShipName(txtbNewShipName.Text,
-                                                 ref shipNameErrMsg))
-            {
+                                                 ref shipNameErrMsg)) {
                 lablNewShipNameErrMsg.Text = shipNameErrMsg;
                 lablNewShipNameErrMsg.Visible = true;
                 isShipNameValid = false;
             }
-            else
-            {
+            else {
                 lablNewShipNameErrMsg.Visible = false;
                 isShipNameValid               = true;
             }
@@ -431,14 +441,12 @@ namespace AdminControlForm
             string turnAccelerateErrMsg = null;
 
             if (!shipValidation.ValidateAcceleration(txtbAccelerate.Text,
-                                                     ref turnAccelerateErrMsg))
-            {
+                                                     ref turnAccelerateErrMsg)) {
                 lablAccelErrMsg.Text = turnAccelerateErrMsg;
                 lablAccelErrMsg.Visible = true;
                 isAccelerationValid = false;
             }
-            else
-            {
+            else {
                 lablAccelErrMsg.Visible = false;
                 isAccelerationValid = true;
             }
@@ -480,9 +488,10 @@ namespace AdminControlForm
         }
 
         /// <summary>
-        /// checks to make sure a valid username is entered before allowing an update.       /// </summary>
+        /// checks to make sure a valid username is entered before allowing an update.
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        /// </summary>
         private void tbUserStatName_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(this.tbUserStatName.Text))
@@ -490,6 +499,123 @@ namespace AdminControlForm
             else
                 this.btnUpdate.Enabled = false;
 
+        }
+
+        private void bttnShipToEdit_Click(object sender, EventArgs e)
+        {
+            List<Ship> shipInfo = new List<Ship>();
+            string shipname     = txtbShipEditing.Text;
+            int errCode         = -1;
+
+            if (shipTable.GetShipInfo(shipname, ref errCode, shipInfo) ) {
+                Ship ship = shipInfo.First();
+
+                rtxtCurrentShipStats.Text  = "Ship Name: "    + ship.shipName.ToString()        + "\n";
+                rtxtCurrentShipStats.Text += "Turn Speed: "   + ship.turnSpeed.ToString()       + "\n";
+                rtxtCurrentShipStats.Text += "Acceleration: " + ship.accelerateSpeed.ToString() + "\n";
+                rtxtCurrentShipStats.Text += "Max Speed: "    + ship.maxSpeed.ToString()        + "\n";
+
+                shipToEdit = ship.shipName.ToString();
+            }
+            else {
+                rtxtCurrentShipStats.Text  = "The ship was not found.";
+            }
+        }
+
+        /// <summary>
+        /// Helper funticon for when the ship add button is clicked.
+        /// 
+        /// Validates all fields before adding the ship by calling
+        /// all validation functions
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void validateAllShipEditFields(object sender, EventArgs e)
+        {
+            validateTurnSpeedEdit(sender, e);
+            validateMaxSpeedEdit(sender, e);
+            validateAccelerationEdit(sender, e);
+        }
+
+        private void validateTurnSpeedEdit(object sender, EventArgs e)
+        {
+            string turnSpeedErrMsg = null;
+
+            if (!shipValidation.ValidateTurnSpeed(txtbNewTurnSpeed.Text,
+                                                  ref turnSpeedErrMsg)) {
+                lablShipEditTurnSpdErrMsg.Text = turnSpeedErrMsg;
+                lablShipEditTurnSpdErrMsg.Visible = true;
+                isTurnSpeedEditValid = false;
+            }
+            else {
+                lablShipEditTurnSpdErrMsg.Visible = false;
+                isTurnSpeedEditValid = true;
+            }
+        }
+
+        private void validateMaxSpeedEdit(object sender, EventArgs e)
+        {
+            string maxSpeedErrMsg = null;
+
+            if (!shipValidation.ValidateMaxSpeed(txtbNewMaxSpeed.Text,
+                                                 ref maxSpeedErrMsg)) {
+                lablShipEditMaxSpeed.Text    = maxSpeedErrMsg;
+                lablShipEditMaxSpeed.Visible = true;
+                isMaxSpeedEditValid          = false;
+            }
+            else {
+                lablShipEditMaxSpeed.Visible = false;
+                isMaxSpeedEditValid          = true;
+            }
+        }
+
+        private void validateAccelerationEdit(object sender, EventArgs e)
+        {
+            string accelerateErrMsg = null;
+
+            if (!shipValidation.ValidateAcceleration(txtbNewAccelerate.Text,
+                                                     ref accelerateErrMsg)) {
+                lablShipEditAccelerateErrMsg.Text    = accelerateErrMsg;
+                lablShipEditAccelerateErrMsg.Visible = true;
+                isAccelerationEditValid              = false;
+            }
+            else {
+                lablShipEditAccelerateErrMsg.Visible = false;
+                isAccelerationEditValid              = true;
+            }
+        }
+
+        private void bttnShipUpdate_Click(object sender, EventArgs e)
+        {
+            bool isShipEditValid = false;
+            int errCode          = -1;
+            
+            AcceptCancelBlockActionForm acceptShipEdit =
+                    new AcceptCancelBlockActionForm();
+            
+            validateAllShipEditFields(sender, e);
+
+            isShipEditValid = isMaxSpeedEditValid
+                           && isTurnSpeedEditValid
+                           && isAccelerationEditValid;
+
+            if (isShipEditValid && !String.IsNullOrEmpty(shipToEdit) ) {
+                acceptShipEdit.TxtMsg = "Are you sure you want to update " + shipToEdit;
+
+                // check to see if they really want to edit the ship
+                if (acceptShipEdit.ShowDialog() == DialogResult.OK) {
+                    shipTable.UpdateShipStats(shipToEdit,
+                                              txtbNewTurnSpeed.Text,
+                                              txtbNewMaxSpeed.Text,
+                                              txtbNewAccelerate.Text,
+                                              ref errCode);
+
+                    MessageBox.Show(shipToEdit + " has been updated.");
+                }
+            }
+            else if (String.IsNullOrEmpty(shipToEdit) ) {
+                 MessageBox.Show("A ship to edit has not been chosen yet.");
+            }
         }
     }
 }

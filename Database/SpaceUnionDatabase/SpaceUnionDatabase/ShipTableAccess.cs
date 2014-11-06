@@ -15,12 +15,12 @@ namespace SpaceUnionDatabase
             var newShip      = new Ship();
             bool isShipAdded = false;
 
-            float turnSpd;
-            float maxSpd;
-            float accelerateSpd;
-
-            convertShipInfoToFloats(turnSpeed, maxSpeed, accelerateSpeed,
-                                    out turnSpd, out maxSpd, out accelerateSpd);
+            float turnSpd       = 0f;
+            float maxSpd        = 0f;
+            float accelerateSpd = 0f;
+            
+            ConvertShipInfoToFloat(turnSpeed, maxSpeed, accelerateSpeed,
+                                   out turnSpd, out maxSpd, out accelerateSpd);
 
             newShip.shipName        = shipName;
             newShip.turnSpeed       = turnSpd;
@@ -42,27 +42,20 @@ namespace SpaceUnionDatabase
             return isShipAdded;
         }
 
-        private static void convertShipInfoToFloats(string turnSpeed, string maxSpeed, string accelerateSpeed, out float turnSpd, out float maxSpd, out float accelerateSpd)
-        {
-            float.TryParse(turnSpeed, out turnSpd);
-            float.TryParse(maxSpeed, out maxSpd);
-            float.TryParse(accelerateSpeed, out accelerateSpd);
-        }
-
         public bool
-        UpdateShipStats(string shipname,string turnSpeed,
+        UpdateShipStats(string shipname, string turnSpeed,
                         string maxSpeed, string accelerateSpeed,
                         ref int errCode)
         {
             bool isUpdated = false;
             var  db        = new SpaceUnionEntities();
-            
+
             float turnSpd;
             float maxSpd;
             float accelerateSpd;
 
-            convertShipInfoToFloats(turnSpeed, maxSpeed, accelerateSpeed,
-                                    out turnSpd, out maxSpd, out accelerateSpd);
+            ConvertShipInfoToFloat(turnSpeed, maxSpeed, accelerateSpeed,
+                                   out turnSpd, out maxSpd, out accelerateSpd);
 
             try {
                 var ship = db.Ships
@@ -87,6 +80,17 @@ namespace SpaceUnionDatabase
             }
 
             return isUpdated;
+        }
+
+        private static void ConvertShipInfoToFloat(string turnSpeed, string maxSpeed, string accelerateSpeed, out float turnSpd, out float maxSpd, out float accelerateSpd)
+        {
+            turnSpd = 0f;
+            maxSpd = 0f;
+            accelerateSpd = 0f;
+
+            float.TryParse(turnSpeed, out turnSpd);
+            float.TryParse(maxSpeed, out maxSpd);
+            float.TryParse(accelerateSpeed, out accelerateSpd);
         }
 
         public bool
