@@ -8,7 +8,7 @@
         <EntityContainer Name="SpaceUnionModelStoreContainer">
           <EntitySet Name="Ship" EntityType="SpaceUnionModel.Store.Ship" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="sysdiagrams" EntityType="SpaceUnionModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Users" EntityType="SpaceUnionModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="SpaceUnionModel.Store.User" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserStats" EntityType="SpaceUnionModel.Store.UserStats" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
         <EntityType Name="Ship">
@@ -30,14 +30,14 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <EntityType Name="Users">
+        <EntityType Name="User">
           <Key>
             <PropertyRef Name="userName" />
           </Key>
-          <Property Name="userName" Type="nchar" Nullable="false" MaxLength="32" />
-          <Property Name="userPassword" Type="nchar" Nullable="false" MaxLength="128" />
-          <Property Name="userEmail" Type="nchar" Nullable="false" MaxLength="128" />
-          <Property Name="userImage" Type="nchar" Nullable="false" MaxLength="256" />
+          <Property Name="userName" Type="varchar" Nullable="false" MaxLength="32" />
+          <Property Name="userPassword" Type="varchar" Nullable="false" MaxLength="128" />
+          <Property Name="userEmail" Type="varchar" Nullable="false" MaxLength="128" />
+          <Property Name="userImage" Type="varchar" Nullable="false" MaxLength="256" />
           <Property Name="userIsOnline" Type="tinyint" Nullable="false" />
           <Property Name="userIsBlocked" Type="tinyint" Nullable="false" />
           <Property Name="userIsAdmin" Type="tinyint" Nullable="false" />
@@ -63,11 +63,20 @@
     <edmx:ConceptualModels>
       <Schema Namespace="SpaceUnionModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="SpaceUnionEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Ships" EntityType="SpaceUnionModel.Ship" />
           <EntitySet Name="sysdiagrams" EntityType="SpaceUnionModel.sysdiagram" />
           <EntitySet Name="Users" EntityType="SpaceUnionModel.User" />
           <EntitySet Name="UserStats" EntityType="SpaceUnionModel.UserStat" />
-          <EntitySet Name="Ships" EntityType="SpaceUnionModel.Ship" />
         </EntityContainer>
+        <EntityType Name="Ship">
+          <Key>
+            <PropertyRef Name="shipName" />
+          </Key>
+          <Property Name="shipName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="maxSpeed" Type="Double" Nullable="false" />
+          <Property Name="accelerateSpeed" Type="Double" Nullable="false" />
+          <Property Name="turnSpeed" Type="Double" Nullable="false" />
+        </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -82,10 +91,10 @@
           <Key>
             <PropertyRef Name="userName" />
           </Key>
-          <Property Name="userName" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="true" />
-          <Property Name="userPassword" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="true" />
-          <Property Name="userEmail" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="true" />
-          <Property Name="userImage" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="true" />
+          <Property Name="userName" Type="String" Nullable="false" MaxLength="32" Unicode="false" FixedLength="false" />
+          <Property Name="userPassword" Type="String" Nullable="false" MaxLength="128" Unicode="false" FixedLength="false" />
+          <Property Name="userEmail" Type="String" Nullable="false" MaxLength="128" Unicode="false" FixedLength="false" />
+          <Property Name="userImage" Type="String" Nullable="false" MaxLength="256" Unicode="false" FixedLength="false" />
           <Property Name="userIsOnline" Type="Byte" Nullable="false" />
           <Property Name="userIsBlocked" Type="Byte" Nullable="false" />
           <Property Name="userIsAdmin" Type="Byte" Nullable="false" />
@@ -106,21 +115,22 @@
           <Property Name="userstatShipUsed_3" Type="Int32" Nullable="false" />
           <Property Name="userstatFlagsCaptured" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="Ship">
-          <Key>
-            <PropertyRef Name="shipName" />
-          </Key>
-          <Property Type="Double" Name="maxSpeed" Nullable="false" />
-          <Property Type="Double" Name="accelerateSpeed" Nullable="false" />
-          <Property Type="Double" Name="turnSpeed" Nullable="false" />
-          <Property Type="String" Name="shipName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SpaceUnionModelStoreContainer" CdmEntityContainer="SpaceUnionEntities">
+          <EntitySetMapping Name="Ships">
+            <EntityTypeMapping TypeName="SpaceUnionModel.Ship">
+              <MappingFragment StoreEntitySet="Ship">
+                <ScalarProperty Name="shipName" ColumnName="shipName" />
+                <ScalarProperty Name="maxSpeed" ColumnName="maxSpeed" />
+                <ScalarProperty Name="accelerateSpeed" ColumnName="accelerateSpeed" />
+                <ScalarProperty Name="turnSpeed" ColumnName="turnSpeed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="SpaceUnionModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -134,7 +144,7 @@
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="SpaceUnionModel.User">
-              <MappingFragment StoreEntitySet="Users">
+              <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="userName" ColumnName="userName" />
                 <ScalarProperty Name="userPassword" ColumnName="userPassword" />
                 <ScalarProperty Name="userEmail" ColumnName="userEmail" />
@@ -159,16 +169,6 @@
                 <ScalarProperty Name="userstatShipUsed_2" ColumnName="userstatShipUsed_2" />
                 <ScalarProperty Name="userstatShipUsed_3" ColumnName="userstatShipUsed_3" />
                 <ScalarProperty Name="userstatFlagsCaptured" ColumnName="userstatFlagsCaptured" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Ships">
-            <EntityTypeMapping TypeName="SpaceUnionModel.Ship">
-              <MappingFragment StoreEntitySet="Ship">
-                <ScalarProperty Name="shipName" ColumnName="shipName" />
-                <ScalarProperty Name="turnSpeed" ColumnName="turnSpeed" />
-                <ScalarProperty Name="accelerateSpeed" ColumnName="accelerateSpeed" />
-                <ScalarProperty Name="maxSpeed" ColumnName="maxSpeed" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

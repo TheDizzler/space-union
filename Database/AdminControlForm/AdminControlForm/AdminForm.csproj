@@ -60,6 +60,10 @@
     </Compile>
     <Compile Include="BlockUnblockUserValidation.cs" />
     <Compile Include="ShipValidation.cs" />
+    <Compile Include="SpaceUnionDataSet.cs">
+      <DependentUpon>SpaceUnionDataSet.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="SpaceUnionDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

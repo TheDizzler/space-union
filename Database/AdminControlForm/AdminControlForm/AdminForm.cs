@@ -260,29 +260,24 @@ namespace AdminControlForm
         /// <param name="e"></param>
         private void bttnGetUserInfo_Click(object sender, EventArgs e)
         {
-            const string BLOCKED = "1";
+            const byte BLOCKED = 1;
 
             int errCode = 0;
             List<User> userInfo = new List<User>();
 
-
-            if (userTable.AdminGetUserInfo(txtbUserToEdit.Text, ref errCode, userInfo))
-            {
+            if (userTable.AdminGetUserInfo(txtbUserToEdit.Text, ref errCode, userInfo) ) {
                 txtbUserEditing.Text = userInfo[0].userName;
 
-                if (userInfo[0].userIsBlocked.Equals(BLOCKED))
-                {
+                if (userInfo[0].userIsBlocked.Equals(BLOCKED)) {
                     txtbCurrentBlockStatus.Text = "BLOCKED";
                     chkbBlockUnblockUser.Text = "Do you want to UNBLOCK " + txtbUserEditing.Text;
                 }
-                else
-                {
+                else {
                     txtbCurrentBlockStatus.Text = "NOT BLOCKED";
                     chkbBlockUnblockUser.Text = "Do you want to BLOCK " + txtbUserEditing.Text;
                 }
             }
-            else
-            {
+            else {
                 MessageBox.Show("Username may not exist");
             }
         }
@@ -317,12 +312,12 @@ namespace AdminControlForm
                     // User blocking dialog
                     if (acceptBlock.ShowDialog() == DialogResult.OK) {
                         userTable.UpdateUserIsBlocked(username, BLOCK, ref errCode);
-                        MessageBox.Show("User was blocked.");
+                        MessageBox.Show(username + " is now blocked.");
                     }
                 }// User unblocking dialog
                 else if (acceptUnblock.ShowDialog() == DialogResult.OK) {
                     userTable.UpdateUserIsBlocked(username, UNBLOCK, ref errCode);
-                    MessageBox.Show("User was unblocked");
+                    MessageBox.Show(username + " is now unblocked.");
                 }
             }
         }
@@ -457,7 +452,7 @@ namespace AdminControlForm
             // TODO: This line of code loads data into the 'spaceUnionDataSet.UserStats' table. You can move, or remove it, as needed.
             this.userStatsTableAdapter.Fill(this.spaceUnionDataSet.UserStats);
             // TODO: This line of code loads data into the 'spaceUnionDataSet.Users' table. You can move, or remove it, as needed.
-            this.usersTableAdapter.Fill(this.spaceUnionDataSet.Users);
+            this.userTableAdapter.Fill(this.spaceUnionDataSet.User);
 
         }
 

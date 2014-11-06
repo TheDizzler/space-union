@@ -14,9 +14,9 @@ namespace SpaceUnionDatabase
     
     public partial class Ship
     {
+        public string shipName { get; set; }
         public double maxSpeed { get; set; }
         public double accelerateSpeed { get; set; }
         public double turnSpeed { get; set; }
-        public string shipName { get; set; }
     }
 }

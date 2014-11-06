@@ -121,7 +121,7 @@
             this.userStatsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.spaceUnionDataSet = new AdminControlForm.SpaceUnionDataSet();
             this.usersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.usersTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UsersTableAdapter();
+            this.userTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UserTableAdapter();
             this.userStatsTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UserStatsTableAdapter();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.lablEditShip = new System.Windows.Forms.Label();
@@ -1073,12 +1073,12 @@
             // 
             // usersBindingSource
             // 
-            this.usersBindingSource.DataMember = "Users";
+            this.usersBindingSource.DataMember = "User";
             this.usersBindingSource.DataSource = this.spaceUnionDataSet;
             // 
             // usersTableAdapter
             // 
-            this.usersTableAdapter.ClearBeforeFill = true;
+            this.userTableAdapter.ClearBeforeFill = true;
             // 
             // userStatsTableAdapter
             // 
@@ -1377,7 +1377,7 @@
         private System.Windows.Forms.TabPage tabPage3;
         private SpaceUnionDataSet spaceUnionDataSet;
         private System.Windows.Forms.BindingSource usersBindingSource;
-        private SpaceUnionDataSetTableAdapters.UsersTableAdapter usersTableAdapter;
+        private SpaceUnionDataSetTableAdapters.UserTableAdapter userTableAdapter;
         private System.Windows.Forms.DataGridView gvStats;
         private System.Windows.Forms.BindingSource userStatsBindingSource;
         private SpaceUnionDataSetTableAdapters.UserStatsTableAdapter userStatsTableAdapter;
