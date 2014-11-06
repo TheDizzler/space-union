@@ -12,32 +12,18 @@ namespace Client_Comm_Module
     public class ClientCommHandler
     {
         private ClientMessageReceiving receiver;
-        private ClientMessageTransmission sender;
-        
+        private ClientMessageTransmission sender;        
         private ClientDataReceiving dataReceiver;
         private ClientDataTransmission dataSender;
-
         private ClientHandlerHelper helper;
-
         private bool gameStarted = false;
 
         public ClientCommHandler()
         {
             receiver = new ClientMessageReceiving();
             sender = new ClientMessageTransmission();
-
             receiver.gameStart += new ClientMessageReceiving.GameStartEventHandler(initializeDataTransmission);
         }
-
-        /// <summary>
-        /// Returns the login confirmation data to the client with
-        /// port assignment data.
-        /// </summary>
-        /// <returns>The login confirmation data.</returns>
-        /*public Player getLoginConfirmation()
-        {
-            return receiver.receiveLoginConfirmation();
-        }*/
 
         public Player getPlayer()
         {
@@ -117,9 +103,7 @@ namespace Client_Comm_Module
         public RoomList sendRoomListRequest(Player player)
         {
             sender.addMessageToQueue(new PlayerRequest(player));
-
             Thread.Sleep(ClientConstants.CLIENT_REQUEST_WAIT_TIME);
-
             return receiver.getRoomList();
         }
 
@@ -129,11 +113,9 @@ namespace Client_Comm_Module
         /// <param name="player"></param>
         public Data sendRoomCreationRequest(Player player, string roomName)
         {
-            sender.addMessageToQueue(new PlayerRequest(player, roomName));
-
-            Thread.Sleep(ClientConstants.CLIENT_REQUEST_WAIT_TIME);
-
             RoomInfo roomInfo;
+            sender.addMessageToQueue(new PlayerRequest(player, roomName));
+            Thread.Sleep(ClientConstants.CLIENT_REQUEST_WAIT_TIME);
             return (roomInfo = receiver.getRoomInfo()) != null ? roomInfo : (Data)receiver.getRoomList();
         }
 
@@ -143,19 +125,11 @@ namespace Client_Comm_Module
         /// <param name="player"></param>
         public Data sendRoomJoinRequest(Player player, int roomNumber)
         {
-            sender.addMessageToQueue(new PlayerRequest(player, roomNumber));
-
-            Thread.Sleep(ClientConstants.CLIENT_REQUEST_WAIT_TIME);
-
             RoomInfo roomInfo;
+            sender.addMessageToQueue(new PlayerRequest(player, roomNumber));
+            Thread.Sleep(ClientConstants.CLIENT_REQUEST_WAIT_TIME);
             return (roomInfo = receiver.getRoomInfo()) != null ? roomInfo : (Data)receiver.getRoomList();
         }
-
-        /*public void sendPlayerRequest(Player player, Byte requestType)
-        {
-            PlayerRequest request = new PlayerRequest(player, requestType);
-            sender.addMessageToQueue(request);
-        }*/
 
         // GET FUNCTIONS ----------------------------------------------------
 

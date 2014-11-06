@@ -59,6 +59,9 @@ namespace Server_Application
                     case "ports":
                         analyzer.getReceivingPorts();
                         break;
+                    case "memory":
+                        analyzer.usedMemory();
+                        break;
                     case "clear":
                         Console.Clear();
                         break;
@@ -89,6 +92,7 @@ namespace Server_Application
             Console.WriteLine("chat - Displays the size of the chat message queue.");
             Console.WriteLine("login - Displays the size of the login queue.");
             Console.WriteLine("data - Displays the size of the game data queue.");
+            Console.WriteLine("memory - Gets the amount of memory used by this program.");
             Console.WriteLine("clear - Clears the console screen.");
             Console.WriteLine("exit - Shuts down the server." + "\n");
         }

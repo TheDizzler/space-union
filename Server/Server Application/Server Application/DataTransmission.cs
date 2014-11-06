@@ -55,9 +55,9 @@ namespace Server_Application
                     new Thread(() => sendClientData(client)).Start();
                 }
             }
-            catch (ThreadStateException e) { Console.WriteLine("Server has crashed." + e.ToString()); return; }
-            catch (OutOfMemoryException e) { Console.WriteLine("Server has crashed." + e.ToString()); return; }
-            catch (InvalidOperationException e) { Console.WriteLine("Server has crashed." + e.ToString()); return; }
+            catch (ThreadStateException e) { Console.WriteLine("Server has crashed.\n" + e.ToString()); return; }
+            catch (OutOfMemoryException e) { Console.WriteLine("Server has crashed.\n" + e.ToString()); return; }
+            catch (InvalidOperationException e) { Console.WriteLine("Server has crashed.\n" + e.ToString()); return; }
         }
 
         /// <summary>
@@ -65,23 +65,18 @@ namespace Server_Application
         /// </summary>
         private void sendMessage()
         {
-            Console.WriteLine("Send loop initialized");
+            string ipAddress = null;
             while (true)
             {
                 Data message = removeGenericMessageFromQueue();
-                //Console.WriteLine("message removed");
                 if (message == null)
                 {
-                    //Console.WriteLine("message is null");
                     Thread.Sleep(5);
                     continue;
                 }
-
-                string ipAddress = null;
                 switch (message.Type)
                 {
                     case Constants.LOGIN_REQUEST:
-                        Console.WriteLine("Sending login request to the client");
                         ipAddress = ((Player)message).IPAddress;
                         break;
                     case Constants.ERROR_MESSAGE:
@@ -91,16 +86,11 @@ namespace Server_Application
                         ipAddress = ((RoomList)message).Receiver.IPAddress;
                         break;
                     case Constants.ROOM_INFO:
-                        Console.WriteLine("Sending ROOMINFO " + message.Type + " " + ((RoomInfo)message).Requester.Username);
                         ipAddress = ((RoomInfo)message).Requester.IPAddress;
                         break;
                 }
-
                 if (ipAddress != null)
-                {
-                    Console.WriteLine("Sent " + message.Type + " to " + ipAddress + " Port " + Constants.TCPLoginClient);
                     DataControl.sendTCPData(TCPClient, message, ipAddress, Constants.TCPLoginClient);
-                }
             }
         }
 
@@ -162,19 +152,14 @@ namespace Server_Application
             {
                 switch (message.Type)
                 {
-                    case Constants.LOGIN_REQUEST:
-                    case Constants.ERROR_MESSAGE:
-                    case Constants.ROOM_INFO:
-                    case Constants.ROOM_LIST:
-                    case Constants.PLAYER_REQUEST:
-                        Console.WriteLine("Added message to queue");
-                        genericQueue.Add(message);
-                        break;
                     case Constants.GAME_DATA:
                         addGameDataToQueue((GameData)message);
                         break;
                     case Constants.CHAT_MESSAGE:
                         chatmessages.Add((GameMessage)message);
+                        break;
+                    default:
+                        genericQueue.Add(message);
                         break;
                 }
             }
@@ -202,13 +187,12 @@ namespace Server_Application
         {
             switch (type)
             {
-                case Constants.LOGIN_REQUEST:
-                case Constants.ERROR_MESSAGE:
-                    return removeGenericMessageFromQueue();
                 case Constants.CHAT_MESSAGE:
                     return removeMessageFromQueue();
+                default:
+                    return removeGenericMessageFromQueue();
+                    
             }
-            return null;
         }
 
         /// <summary>
@@ -254,7 +238,5 @@ namespace Server_Application
         {
             Console.WriteLine("Queue size of the Chat Message list: " + chatmessages.Count + "\n");
         }
-
-
     }
 }

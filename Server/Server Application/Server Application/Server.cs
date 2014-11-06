@@ -8,7 +8,6 @@ using Data_Manipulation;
 using System.Threading;
 using System.Collections.Concurrent;
 
-//complete game room creation system
 namespace Server_Application
 {
     /// <summary>
@@ -50,7 +49,8 @@ namespace Server_Application
         private void cleanRooms()
         {
             while (true)
-            {/*
+            {
+                /*
                 foreach (KeyValuePair<string, Player> player in OnlinePlayers.ToArray())
                 {
                     if (compareTime(player.Value.Time, 10))
@@ -64,7 +64,7 @@ namespace Server_Application
                     foreach (GameData player in room.Value.getPlayerList())
                     {
                         if (room.Value.InGame && compareTime(player.Player.Time, 10))
-                            room.Value.removePlayer(player);
+                            room.Value.removePlayer(player.Player);
                     }
                     if (room.Value.Players == 0)
                     {
@@ -85,9 +85,7 @@ namespace Server_Application
 
         public void updateOnlinePlayer(Player player)
         {
-            Player temp;
-            OnlinePlayers.TryRemove(player.Username, out temp);
-            OnlinePlayers.TryAdd(player.Username, player);
+            OnlinePlayers.AddOrUpdate(player.Username, player, (k, v) => v = player);
         }
 
         public void updatePlayer(GameData player)
@@ -111,9 +109,7 @@ namespace Server_Application
         {
             Gameroom room = getGameroom(roomNumber);
             foreach (GameData p in room.getPlayerList())
-            {
                 addMessageToQueue(new RoomInfo(room.getPlayers(), room.RoomNumber, room.RoomName, room.Host, room.InGame, p.Player));
-            }
         }
 
         /// <summary>
@@ -133,18 +129,12 @@ namespace Server_Application
         /// <param name="player">The player to mark as active.</param>
         public void addOnlinePlayer(Player player)
         {
-            if (player != null)
-            {
-                if (OnlinePlayers.ContainsKey(player.Username))
-                {
-                    Player temp;
-                    OnlinePlayers.TryRemove(player.Username, out temp);
-                }
-                player.PortSend = Constants.UDPClientToServerPort + (OnlinePlayers.Count % 6);
-                player.PortReceive = Constants.UDPServerToClientPort + (OnlinePlayers.Count % 6);
-                OnlinePlayers.TryAdd(player.Username, player);
-                Transmission.addMessageToQueue(player);
-            }
+            if (player == null)
+                return;
+            player.PortSend = Constants.UDPClientToServerPort + (OnlinePlayers.Count % 6);
+            player.PortReceive = Constants.UDPServerToClientPort + (OnlinePlayers.Count % 6);
+            OnlinePlayers.AddOrUpdate(player.Username, player, (k, v) => v = player);
+            Transmission.addMessageToQueue(player);
         }
 
         /// <summary>
@@ -160,9 +150,7 @@ namespace Server_Application
         {
             Gameroom room = getGameroom(roomNumber);
             if (room != null)
-            {
                 addMessageToQueue(new RoomInfo(room.getPlayers(), room.RoomNumber, room.RoomName, room.Host, room.InGame, player));
-            }
         }
 
         /// <summary>
@@ -194,14 +182,11 @@ namespace Server_Application
             }
             Gameroom room = new Gameroom(assignedRoomNumber, roomName, player);
             Gamerooms.TryAdd(assignedRoomNumber, room);
-            Console.WriteLine("adding message to queue");
             addMessageToQueue(new RoomInfo(room.getPlayers(), room.RoomNumber, room.RoomName, room.Host, room.InGame, player));
         }
 
         public void sendLoginConfirmation(Player player)
         {
-            Console.WriteLine("conf sent");
-            Console.WriteLine(player.Username);
             addMessageToQueue(player);
         }
 
@@ -217,29 +202,7 @@ namespace Server_Application
                     return roomNumber;
             return 0;
         }
-        /*
-        /// <summary>
-        /// TEMPORARY METHOD FOR TESTING.
-        /// </summary>
-        /// <param name="player"></param>
-        private void addPlayerToFreeRoom(Player player)
-        {
-            foreach (KeyValuePair<int, Gameroom> room in Gamerooms.ToArray())
-            {
-                if (room.Value.Players < 6)
-                {
-                    player.GameRoom = room.Value.RoomNumber;
-                    room.Value.addPlayer(player);
-                    return;
-                }
-            }
-            Gameroom temproom = new Gameroom();
-            temproom.RoomNumber = Gamerooms.Count;
-            player.GameRoom = temproom.RoomNumber;
-            temproom.addPlayer(player);
-            Gamerooms.Add(temproom.RoomNumber, temproom);
-        }
-        */
+
         /// <summary>
         /// Adds a message to the DataTransmission queue.
         /// </summary>

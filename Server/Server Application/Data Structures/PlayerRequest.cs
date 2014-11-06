@@ -27,11 +27,6 @@ namespace Data_Structures
         /// </summary>
         public byte RequestType { get; set; }
 
-        /// <summary>
-        /// The IP address of the current player.
-        /// </summary>
-        //public string IPAddress { get; set; }
-
         public int RoomNumber { get; set; }
 
         public string RoomName { get; set; }

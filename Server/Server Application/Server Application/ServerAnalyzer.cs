@@ -38,9 +38,7 @@ namespace Server_Application
         public void getReceivingPorts()
         {
             foreach (KeyValuePair<string, Player> player in onlineplayers)
-            {
                 Console.WriteLine("Player - " + player.Key + " Receiving port: " + player.Value.PortReceive);
-            }
         }
 
         /// <summary>
@@ -60,28 +58,12 @@ namespace Server_Application
         }
 
         /// <summary>
-        /// Checks the size of the Error Message queue.
-        /// </summary>
-        /*public void checkErrorQueueSize()
-        {
-            transmission.checkErrorQueueSize();
-        }*/
-
-        /// <summary>
         /// Checks the size of the Chat Message queue.
         /// </summary>
         public void checkChatMessageQueueSize()
         {
             transmission.checkChatMessageQueueSize();
         }
-
-        /// <summary>
-        /// Checks the size of the Login Request queue.
-        /// </summary>
-        /*public void checkLoginRequestQueueSize()
-        {
-            transmission.checkLoginRequestQueueSize();
-        }*/
 
         public void checkGenericQueueSize()
         {
@@ -93,7 +75,7 @@ namespace Server_Application
         /// </summary>
         public void usedMemory()
         {
-            Console.WriteLine("Bytes used by this application: " + Process.GetCurrentProcess().PrivateMemorySize64 + "\n");
+            Console.WriteLine("Megabytes used by this application: " + (Process.GetCurrentProcess().PrivateMemorySize64 / 1048576) + "\n");
         }
 
         /// <summary>

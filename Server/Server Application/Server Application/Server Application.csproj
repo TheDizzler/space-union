@@ -55,7 +55,6 @@
     <Compile Include="DataReceiving.cs" />
     <Compile Include="DataTransmission.cs" />
     <Compile Include="LoginRequests.cs" />
-    <Compile Include="Physics.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server.cs" />

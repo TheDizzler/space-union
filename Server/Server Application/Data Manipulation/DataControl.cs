@@ -69,7 +69,6 @@ namespace Data_Manipulation
             client = new TcpClient();
             try
             {
-                Console.WriteLine("Starting connection to client:");
                 client.Connect(ipaddress, port);
             }
             catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return; }
@@ -79,13 +78,11 @@ namespace Data_Manipulation
             Stream stream = null;
             try
             {
-                Console.WriteLine("Getting the client stream");
                 stream = client.GetStream();
             }
             catch (ObjectDisposedException e) { Console.WriteLine(e.ToString()); return; }
             catch (InvalidOperationException e) { Console.WriteLine(e.ToString()); return; }
             byte[] data = objectToBytes(input);
-            Console.WriteLine("Data send size: " + data.Length);
             try
             {
                 stream.Write(data, 0, data.Length);
@@ -104,9 +101,8 @@ namespace Data_Manipulation
         /// <param name="listener">The TCP listener through which to receive data.</param>
         public static object receiveTCPData(TcpListener listener)
         {
-            //should be called after the listener.start() is called
             Socket socket = listener.AcceptSocket();
-            byte[] received = new byte[1024];
+            byte[] received = new byte[32768];
             int size = socket.Receive(received);
             byte[] input = new byte[size];
             for (int x = 0; x < size; x++)
@@ -130,7 +126,6 @@ namespace Data_Manipulation
                 try
                 {
                     bf.Serialize(ms, target);
-                    Console.WriteLine(ms.ToArray().Length);
                     return ms.ToArray();
                 }
                 catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return null; }

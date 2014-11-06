@@ -21,12 +21,7 @@ namespace Server_Application
         public static void handleLoginRequest(Player loginData, Server owner)
         {
             if (validateUserData(loginData, owner))
-            {
-                Console.WriteLine(loginData.Type);
-                Console.WriteLine(loginData.Username);
-                Console.WriteLine(loginData.IPAddress);
                 owner.addOnlinePlayer(loginData);
-            }
         }
 
         /// <summary>

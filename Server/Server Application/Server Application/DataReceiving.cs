@@ -62,12 +62,10 @@ namespace Server_Application
                 Data message = (Data)DataControl.receiveTCPData(TCPListener);
                 if (message == null)
                     continue;
-
                 switch (message.Type)
                 {
                     case Constants.LOGIN_REQUEST:
-                        new Thread(() => LoginRequests.handleLoginRequest((Player)message, owner)).Start();
-                        
+                        new Thread(() => LoginRequests.handleLoginRequest((Player)message, owner)).Start();                        
                         break;
                     case Constants.PLAYER_REQUEST:
                         new Thread(() => handlePlayerRequest((PlayerRequest)message)).Start();

@@ -71,14 +71,6 @@ namespace Data_Structures
             return players.Values.ToArray();
         }
 
-        public void removePlayer(GameData user)
-        {
-            if (Players > 0)
-            {
-                GameData temp;
-                players.TryRemove(user.Player.Username, out temp);
-            }
-        }
         public void removePlayer(Player user)
         {
             if (Players > 0)
