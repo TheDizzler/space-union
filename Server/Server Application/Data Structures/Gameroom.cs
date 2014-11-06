@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace Data_Structures
     /// </summary>
     public class Gameroom
     {
-        Dictionary<string, GameData> players;
+        ConcurrentDictionary<string, GameData> players;
         public int RoomNumber { get; set; }
         public string RoomName { get; set; }
         public bool InGame { get; set; }
@@ -20,11 +21,12 @@ namespace Data_Structures
 
         public Gameroom() 
         {
-            players = new Dictionary<string, GameData>();
+            players = new ConcurrentDictionary<string, GameData>();
         }
 
         public Gameroom(int roomNumber, string roomName, Player host)
         {
+            players = new ConcurrentDictionary<string, GameData>();
             RoomNumber = roomNumber;
             RoomName = roomName;
             Host = host;
@@ -32,7 +34,8 @@ namespace Data_Structures
             GameData data = new GameData();
             data.Player = host;
             data.Player.GameRoom = roomNumber;
-            players.Add(host.Username, data);
+            Console.WriteLine(host.Username);
+            players.TryAdd(host.Username, data);
         }
 
         public GameFrame getGameFrame()
@@ -52,7 +55,7 @@ namespace Data_Structures
                 GameData data = new GameData();
                 data.Player = player;
                 data.Player.GameRoom = RoomNumber;
-                players.Add(player.Username, data);
+                players.TryAdd(player.Username, data);
                 return true;
             }
             return false;
@@ -72,11 +75,20 @@ namespace Data_Structures
         {
             if (Players > 0)
             {
-                players.Remove(user.Player.Username);
+                GameData temp;
+                players.TryRemove(user.Player.Username, out temp);
+            }
+        }
+        public void removePlayer(Player user)
+        {
+            if (Players > 0)
+            {
+                GameData temp;
+                players.TryRemove(user.Username, out temp);
             }
         }
 
-        public Dictionary<string, GameData> getPlayers()
+        public ConcurrentDictionary<string, GameData> getPlayers()
         {
             return players;
         }

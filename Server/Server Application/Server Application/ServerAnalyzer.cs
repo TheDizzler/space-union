@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using Data_Structures;
+using System.Collections.Concurrent;
 
 namespace Server_Application
 {
@@ -16,15 +17,15 @@ namespace Server_Application
         /// <summary>
         /// List of all available game rooms.
         /// </summary>
-        Dictionary<int, Gameroom> gamerooms;
+        ConcurrentDictionary<int, Gameroom> gamerooms;
         /// <summary>
         /// Total list of online players.
         /// </summary>
-        Dictionary<string, Player> onlineplayers;
+        ConcurrentDictionary<string, Player> onlineplayers;
 
         public ServerAnalyzer(DataTransmission transmission,
-                              Dictionary<int, Gameroom> gamerooms,
-                              Dictionary<string, Player> onlineplayers)
+                              ConcurrentDictionary<int, Gameroom> gamerooms,
+                              ConcurrentDictionary<string, Player> onlineplayers)
         {
             this.transmission = transmission;
             this.gamerooms = gamerooms;

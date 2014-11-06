@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Data_Structures;
 using Data_Manipulation;
 using System.Threading;
+using System.Collections.Concurrent;
 
 //complete game room creation system
 namespace Server_Application
@@ -31,16 +32,16 @@ namespace Server_Application
         /// List of all available game rooms.
         /// </summary>
         //public List<Gameroom> Gamerooms { get; private set; }
-        public Dictionary<int, Gameroom> Gamerooms { get; private set; }
+        public ConcurrentDictionary<int, Gameroom> Gamerooms { get; private set; }
         /// <summary>
         /// Total list of online players.
         /// </summary>
-        public Dictionary<string, Player> OnlinePlayers { get; private set; }
+        public ConcurrentDictionary<string, Player> OnlinePlayers { get; private set; }
 
         public Server()
         {
-            Gamerooms = new Dictionary<int, Gameroom>();
-            OnlinePlayers = new Dictionary<string, Player>();
+            Gamerooms = new ConcurrentDictionary<int, Gameroom>();
+            OnlinePlayers = new ConcurrentDictionary<string, Player>();
             Receiving = new DataReceiving(this);
             Transmission = new DataTransmission(this);
             new Thread(cleanRooms).Start();
@@ -49,28 +50,44 @@ namespace Server_Application
         private void cleanRooms()
         {
             while (true)
-            {
+            {/*
+                foreach (KeyValuePair<string, Player> player in OnlinePlayers.ToArray())
+                {
+                    if (compareTime(player.Value.Time, 10))
+                    {
+                        Player temp;
+                        OnlinePlayers.TryRemove(player.Key, out temp);
+                    }
+                }*/
                 foreach (KeyValuePair<int, Gameroom> room in Gamerooms.ToArray())
                 {
-                    if (room.Value.Players == 0)
-                        Gamerooms.Remove(room.Key);
                     foreach (GameData player in room.Value.getPlayerList())
-                        if (compareTime(player.Time, 10, true))
+                    {
+                        if (room.Value.InGame && compareTime(player.Player.Time, 10))
                             room.Value.removePlayer(player);
+                    }
+                    if (room.Value.Players == 0)
+                    {
+                        Gameroom temp;
+                        Gamerooms.TryRemove(room.Key, out temp);
+                    }
                 }
-                Thread.Sleep(5000);
+                Thread.Sleep(10000);
             }
         }
 
-        private bool compareTime(DateTime time, int period, bool seconds)
+        private bool compareTime(DateTime time, int period)
         {
-            if (seconds)
-                if ((DateTime.Now - time).Seconds > period)
-                    return true;
-            if (!seconds)
-                if ((DateTime.Now - time).Minutes > period)
-                    return true;
+            if ((DateTime.Now - time).Seconds > period)
+                return true;
             return false;
+        }
+
+        public void updateOnlinePlayer(Player player)
+        {
+            Player temp;
+            OnlinePlayers.TryRemove(player.Username, out temp);
+            OnlinePlayers.TryAdd(player.Username, player);
         }
 
         public void updatePlayer(GameData player)
@@ -79,6 +96,24 @@ namespace Server_Application
             if (room == null)
                 return;
             room.updatePlayer(player);
+        }
+
+        public void removePlayerFromRoom(Player player, int roomNumber)
+        {
+            Gameroom room = getGameroom(roomNumber);
+            room.removePlayer(player);
+            if (room.Players == 0)
+                Gamerooms.TryRemove(roomNumber, out room);
+            sendRoomUpdate(roomNumber);
+        }
+
+        private void sendRoomUpdate(int roomNumber)
+        {
+            Gameroom room = getGameroom(roomNumber);
+            foreach (GameData p in room.getPlayerList())
+            {
+                addMessageToQueue(new RoomInfo(room.getPlayers(), room.RoomNumber, room.RoomName, room.Host, room.InGame, p.Player));
+            }
         }
 
         /// <summary>
@@ -100,11 +135,15 @@ namespace Server_Application
         {
             if (player != null)
             {
+                if (OnlinePlayers.ContainsKey(player.Username))
+                {
+                    Player temp;
+                    OnlinePlayers.TryRemove(player.Username, out temp);
+                }
                 player.PortSend = Constants.UDPClientToServerPort + (OnlinePlayers.Count % 6);
                 player.PortReceive = Constants.UDPServerToClientPort + (OnlinePlayers.Count % 6);
-                OnlinePlayers.Add(player.Username, player);
+                OnlinePlayers.TryAdd(player.Username, player);
                 Transmission.addMessageToQueue(player);
-                addPlayerToFreeRoom(player);
             }
         }
 
@@ -117,6 +156,15 @@ namespace Server_Application
             addMessageToQueue(new RoomList(player, organizeRoomList()));
         }
 
+        public void sendRoomInfo(Player player, int roomNumber)
+        {
+            Gameroom room = getGameroom(roomNumber);
+            if (room != null)
+            {
+                addMessageToQueue(new RoomInfo(room.getPlayers(), room.RoomNumber, room.RoomName, room.Host, room.InGame, player));
+            }
+        }
+
         /// <summary>
         /// Add the given player to the room matching the given room number.
         /// </summary>
@@ -127,7 +175,8 @@ namespace Server_Application
             Gameroom room = getGameroom(roomNumber);
             if (room == null || !room.addPlayer(player))
                 addMessageToQueue(new RoomList(player, organizeRoomList()));
-            addMessageToQueue(new RoomInfo(room.getPlayers(), room.RoomNumber, room.RoomName, room.Host, room.InGame, player));
+            //addMessageToQueue(new RoomInfo(room.getPlayers(), room.RoomNumber, room.RoomName, room.Host, room.InGame, player));
+            sendRoomUpdate(roomNumber);
         }
 
         /// <summary>
@@ -144,8 +193,16 @@ namespace Server_Application
                 return;
             }
             Gameroom room = new Gameroom(assignedRoomNumber, roomName, player);
-            Gamerooms.Add(assignedRoomNumber, room);
+            Gamerooms.TryAdd(assignedRoomNumber, room);
+            Console.WriteLine("adding message to queue");
             addMessageToQueue(new RoomInfo(room.getPlayers(), room.RoomNumber, room.RoomName, room.Host, room.InGame, player));
+        }
+
+        public void sendLoginConfirmation(Player player)
+        {
+            Console.WriteLine("conf sent");
+            Console.WriteLine(player.Username);
+            addMessageToQueue(player);
         }
 
         /// <summary>
@@ -160,7 +217,7 @@ namespace Server_Application
                     return roomNumber;
             return 0;
         }
-
+        /*
         /// <summary>
         /// TEMPORARY METHOD FOR TESTING.
         /// </summary>
@@ -182,7 +239,7 @@ namespace Server_Application
             temproom.addPlayer(player);
             Gamerooms.Add(temproom.RoomNumber, temproom);
         }
-
+        */
         /// <summary>
         /// Adds a message to the DataTransmission queue.
         /// </summary>

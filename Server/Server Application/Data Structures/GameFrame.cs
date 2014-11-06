@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Data_Structures
 {
+    [Serializable]
     public class GameFrame : Data
     {
         public GameData[] Data { get; set; }

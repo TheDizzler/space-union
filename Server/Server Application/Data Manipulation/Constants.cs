@@ -106,6 +106,12 @@ namespace Data_Manipulation
 
         public const byte PLAYER_REQUEST_ROOMJOIN = 2;
 
+        public const byte PLAYER_REQUEST_ROOMEXIT = 3;
+
+        public const byte PLAYER_REQUEST_ROOMINFO = 4;
+
+        public const byte PLAYER_REQUEST_HEARTBEAT = 5;
+
         // END REQUEST TYPES
 
 

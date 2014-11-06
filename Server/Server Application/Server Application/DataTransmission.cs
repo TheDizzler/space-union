@@ -65,11 +65,14 @@ namespace Server_Application
         /// </summary>
         private void sendMessage()
         {
+            Console.WriteLine("Send loop initialized");
             while (true)
             {
-                Data message = removeFromQueue(Constants.ERROR_MESSAGE);
+                Data message = removeGenericMessageFromQueue();
+                //Console.WriteLine("message removed");
                 if (message == null)
                 {
+                    //Console.WriteLine("message is null");
                     Thread.Sleep(5);
                     continue;
                 }
@@ -78,6 +81,7 @@ namespace Server_Application
                 switch (message.Type)
                 {
                     case Constants.LOGIN_REQUEST:
+                        Console.WriteLine("Sending login request to the client");
                         ipAddress = ((Player)message).IPAddress;
                         break;
                     case Constants.ERROR_MESSAGE:
@@ -87,13 +91,15 @@ namespace Server_Application
                         ipAddress = ((RoomList)message).Receiver.IPAddress;
                         break;
                     case Constants.ROOM_INFO:
+                        Console.WriteLine("Sending ROOMINFO " + message.Type + " " + ((RoomInfo)message).Requester.Username);
                         ipAddress = ((RoomInfo)message).Requester.IPAddress;
                         break;
                 }
 
                 if (ipAddress != null)
                 {
-                    DataControl.sendTCPData(TCPClient, message, ipAddress, Constants.TCPErrorClient);
+                    Console.WriteLine("Sent " + message.Type + " to " + ipAddress + " Port " + Constants.TCPLoginClient);
+                    DataControl.sendTCPData(TCPClient, message, ipAddress, Constants.TCPLoginClient);
                 }
             }
         }
@@ -128,12 +134,18 @@ namespace Server_Application
             while (true)
             {
                 if (owner.Gamerooms.Count == 0)
+                {
                     Thread.Sleep(1);
+                    continue;
+                }
                 foreach (KeyValuePair<int, Gameroom> room in owner.Gamerooms.ToArray())
                 {
-                    GameFrame frame = room.Value.getGameFrame();
-                    foreach (string ip in frame.IPList)
-                        DataControl.sendUDPData(UDPClients[client], frame, ip, ((IPEndPoint)UDPClients[client].Client.LocalEndPoint).Port);
+                    if (room.Value.InGame)
+                    {
+                        GameFrame frame = room.Value.getGameFrame();
+                        foreach (string ip in frame.IPList)
+                            DataControl.sendUDPData(UDPClients[client], frame, ip, ((IPEndPoint)UDPClients[client].Client.LocalEndPoint).Port);
+                    }
                 }
             }
         }
@@ -152,8 +164,10 @@ namespace Server_Application
                 {
                     case Constants.LOGIN_REQUEST:
                     case Constants.ERROR_MESSAGE:
+                    case Constants.ROOM_INFO:
                     case Constants.ROOM_LIST:
                     case Constants.PLAYER_REQUEST:
+                        Console.WriteLine("Added message to queue");
                         genericQueue.Add(message);
                         break;
                     case Constants.GAME_DATA:

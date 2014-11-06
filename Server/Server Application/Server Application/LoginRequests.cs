@@ -22,6 +22,9 @@ namespace Server_Application
         {
             if (validateUserData(loginData, owner))
             {
+                Console.WriteLine(loginData.Type);
+                Console.WriteLine(loginData.Username);
+                Console.WriteLine(loginData.IPAddress);
                 owner.addOnlinePlayer(loginData);
             }
         }

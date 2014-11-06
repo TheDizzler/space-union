@@ -47,11 +47,6 @@ namespace Data_Structures
         /// </summary>
         public byte Deaths { get; set; }
 
-        /// <summary>
-        /// The time this packet was received. Used to time out players from the server.
-        /// </summary>
-        public DateTime Time { get; set; }
-
         //projectiles fired, direction, velocity
 
         public GameData()
