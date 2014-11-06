@@ -19,11 +19,12 @@ namespace Server_Application
     /// </summary>
     class Program
     {
+        public static string IP_Address;
         static void Main(string[] args)
         {
             Console.Title = "Space Union Server";
             Console.WriteLine("Enter the phrase \"help\" at any moment to display a list of commands.\n");
-
+            IP_Address = getLocalIPv4Address();
             Server server = new Server();
             ServerAnalyzer analyzer = new ServerAnalyzer(server.Transmission, server.Gamerooms, server.OnlinePlayers);
             
@@ -36,7 +37,7 @@ namespace Server_Application
                         helpMenu();
                         break;
                     case "ip":
-                        getLocalIPv4Address();
+                        Console.WriteLine(getLocalIPv4Address());
                         break;
                     case "threads":
                         analyzer.threadsRunning();
@@ -101,24 +102,21 @@ namespace Server_Application
         /// Gets the current IP address.
         /// </summary>
         /// <returns>Returns the current IP address.</returns>
-        private static void getLocalIPv4Address()
+        private static string getLocalIPv4Address()
         {
             IPHostEntry host = null;
             try
             {
                 host = Dns.GetHostEntry(Dns.GetHostName());
             }
-            catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return; }
-            catch (ArgumentOutOfRangeException e) { Console.WriteLine(e.ToString()); return; }
-            catch (ArgumentException e) { Console.WriteLine(e.ToString()); return; }
-            catch (SocketException e) { Console.WriteLine(e.ToString()); return; }
+            catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return null; }
+            catch (ArgumentOutOfRangeException e) { Console.WriteLine(e.ToString()); return null; }
+            catch (ArgumentException e) { Console.WriteLine(e.ToString()); return null; }
+            catch (SocketException e) { Console.WriteLine(e.ToString()); return null; }
             foreach (IPAddress ipv4 in host.AddressList)
-            {
                 if (ipv4.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    Console.WriteLine("Current IP address is: " + ipv4.ToString() + "\n");
-                }
-            }
+                    return ipv4.ToString();
+            return null;
         }
     }
 }

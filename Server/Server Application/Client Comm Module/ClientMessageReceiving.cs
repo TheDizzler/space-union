@@ -18,10 +18,8 @@ namespace Client_Comm_Module
         
         private TcpListener TCPListener;
         private List<GameMessage> messageQueue;
-
         private List<RoomInfo> roomInfoQueue;
         private List<RoomList> roomListQueue;
-
         private Player player = null;
 
         /// <summary>
@@ -34,36 +32,11 @@ namespace Client_Comm_Module
             roomListQueue = new List<RoomList>();
 
             // NOTE: fix required to only listen to the server.
-            TCPListener = new TcpListener(IPAddress.Any, 6985);
+            TCPListener = new TcpListener(IPAddress.Any, Constants.TCPLoginClient);
             TCPListener.Start();
 
             new Thread(receiveMessages).Start();
-            //new Thread(receiveChatMessages).Start();
         }
-
-        /// <summary>
-        /// Waits for the server to send a login confirmation with
-        /// the port assignments for this client.
-        /// </summary>
-        /*public Player receiveLoginConfirmation()
-        {
-            //TcpListener listener = new TcpListener(IPAddress.Any, Constants.TCPLoginClient);
-            //listener.Start();
-            return (Player)DataControl.receiveTCPData(TCPListener);
-        }*/
-
-        /// <summary>
-        /// Begin receiving chat messages from the server.
-        /// </summary>
-        /*public void receiveChatMessages()
-        {
-            while (true)
-            {
-                GameMessage chatData = (GameMessage)DataControl.receiveTCPData(TCPListener);
-                if (chatData != null)
-                    messageQueue.Add(chatData);
-            }
-        }*/
 
         /// <summary>
         /// Begin receiving chat and setup messages from the server.
