@@ -4,14 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SpaceUnionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Powerups">
+      <Schema Namespace="SpaceUnionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Powerup">
           <Key>
-            <PropertyRef Name="powerupID" />
+            <PropertyRef Name="PowerupName" />
           </Key>
-          <Property Name="powerupID" Type="int" Nullable="false" />
-          <Property Name="pwrName" Type="nchar" MaxLength="10" />
-          <Property Name="pwrValue" Type="int" />
+          <Property Name="PowerupName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="PowerupValue" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Ship">
           <Key>
@@ -61,28 +60,29 @@
           <Property Name="userstatFlagsCaptured" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="SpaceUnionModelStoreContainer">
-          <EntitySet Name="Powerups" EntityType="Self.Powerups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Powerup" EntityType="Self.Powerup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ship" EntityType="Self.Ship" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserStats" EntityType="Self.UserStats" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="SpaceUnionModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="SpaceUnionEntities" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="Ships" EntityType="SpaceUnionModel.Ship" />
-          <EntitySet Name="sysdiagrams" EntityType="SpaceUnionModel.sysdiagram" />
-          <EntitySet Name="Users" EntityType="SpaceUnionModel.User" />
-          <EntitySet Name="UserStats" EntityType="SpaceUnionModel.UserStat" />
-          <EntitySet Name="Powerups" EntityType="SpaceUnionModel.Powerup" />
-        </EntityContainer>
+      <Schema Namespace="SpaceUnionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Powerup">
+          <Key>
+            <PropertyRef Name="PowerupName" />
+          </Key>
+          <Property Name="PowerupName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="PowerupValue" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Ship">
           <Key>
             <PropertyRef Name="shipName" />
           </Key>
-          <Property Name="shipName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="shipName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="maxSpeed" Type="Double" Nullable="false" />
           <Property Name="accelerateSpeed" Type="Double" Nullable="false" />
           <Property Name="turnSpeed" Type="Double" Nullable="false" />
@@ -91,9 +91,9 @@
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
@@ -101,10 +101,10 @@
           <Key>
             <PropertyRef Name="userName" />
           </Key>
-          <Property Name="userName" Type="String" Nullable="false" MaxLength="32" Unicode="false" FixedLength="false" />
-          <Property Name="userPassword" Type="String" Nullable="false" MaxLength="128" Unicode="false" FixedLength="false" />
-          <Property Name="userEmail" Type="String" Nullable="false" MaxLength="128" Unicode="false" FixedLength="false" />
-          <Property Name="userImage" Type="String" Nullable="false" MaxLength="256" Unicode="false" FixedLength="false" />
+          <Property Name="userName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userPassword" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userEmail" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userImage" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="userIsOnline" Type="Byte" Nullable="false" />
           <Property Name="userIsBlocked" Type="Byte" Nullable="false" />
           <Property Name="userIsAdmin" Type="Byte" Nullable="false" />
@@ -113,7 +113,7 @@
           <Key>
             <PropertyRef Name="userName" />
           </Key>
-          <Property Name="userName" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="true" />
+          <Property Name="userName" Type="String" MaxLength="32" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="userstatWin" Type="Int32" Nullable="false" />
           <Property Name="userstatLose" Type="Int32" Nullable="false" />
           <Property Name="userstatShotsFired" Type="Int32" Nullable="false" />
@@ -125,20 +125,27 @@
           <Property Name="userstatShipUsed_3" Type="Int32" Nullable="false" />
           <Property Name="userstatFlagsCaptured" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="Powerup">
-          <Key>
-            <PropertyRef Name="powerupID" />
-          </Key>
-          <Property Name="powerupID" Type="Int32" Nullable="false" />
-          <Property Name="pwrName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="pwrValue" Type="Int32" />
-        </EntityType>
+        <EntityContainer Name="SpaceUnionEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Powerups" EntityType="Self.Powerup" />
+          <EntitySet Name="Ships" EntityType="Self.Ship" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserStats" EntityType="Self.UserStat" />
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SpaceUnionModelStoreContainer" CdmEntityContainer="SpaceUnionEntities">
+          <EntitySetMapping Name="Powerups">
+            <EntityTypeMapping TypeName="SpaceUnionModel.Powerup">
+              <MappingFragment StoreEntitySet="Powerup">
+                <ScalarProperty Name="PowerupName" ColumnName="PowerupName" />
+                <ScalarProperty Name="PowerupValue" ColumnName="PowerupValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Ships">
             <EntityTypeMapping TypeName="SpaceUnionModel.Ship">
               <MappingFragment StoreEntitySet="Ship">
@@ -190,15 +197,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Powerups">
-            <EntityTypeMapping TypeName="SpaceUnionModel.Powerup">
-              <MappingFragment StoreEntitySet="Powerups">
-                <ScalarProperty Name="pwrValue" ColumnName="pwrValue" />
-                <ScalarProperty Name="pwrName" ColumnName="pwrName" />
-                <ScalarProperty Name="powerupID" ColumnName="powerupID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -213,10 +211,10 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
-        <DesignerProperty Name="UseLegacyProvider" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

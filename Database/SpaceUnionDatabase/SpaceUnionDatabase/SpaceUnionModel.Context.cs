@@ -25,10 +25,10 @@ namespace SpaceUnionDatabase
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<Powerup> Powerups { get; set; }
         public DbSet<Ship> Ships { get; set; }
         public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserStat> UserStats { get; set; }
-        public DbSet<Powerup> Powerups { get; set; }
     }
 }
