@@ -17,8 +17,8 @@ namespace SpaceUnionDatabase
             db = new SpaceUnionEntities();
             pwrup = new Powerup
             {
-                PowerupName = pwrName,
-                PowerupValue = value
+                pwrName = pwrName,
+                pwrValue = value
             };
 
             try
@@ -45,7 +45,7 @@ namespace SpaceUnionDatabase
 
             try
             {
-                pwrup = db.Powerups.FirstOrDefault(u => u.PowerupName == pwrName);
+                pwrup = db.Powerups.FirstOrDefault(u => u.pwrName == pwrName);
             }
             catch (Exception e)
             {
@@ -66,9 +66,9 @@ namespace SpaceUnionDatabase
 
             try
             {
-                pwrup = db.Powerups.FirstOrDefault(u => u.PowerupName == pwrName);
+                pwrup = db.Powerups.FirstOrDefault(u => u.pwrName == pwrName);
 
-                pwrup.PowerupValue = value;
+                pwrup.pwrValue = value;
                 db.SaveChanges();
                 success = true;
             }
