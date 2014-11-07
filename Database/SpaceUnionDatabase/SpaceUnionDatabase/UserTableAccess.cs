@@ -7,6 +7,10 @@ using PasswordHash;
 
 namespace SpaceUnionDatabase
 {
+    /// <summary>
+    /// Contains functionality to read/write to the user
+    /// table.
+    /// </summary>
     public class UserTableAccess
     {
         public bool AddNewUser(string username, string password, string email)
@@ -158,7 +162,7 @@ namespace SpaceUnionDatabase
         }
 
         public bool
-        UserLogin(string username, string password, ref int errCode, string[] info)
+        UserLogin(string username, string password, ref int errCode, List<User> userInfo)
         {
             bool isValidUser = false;
             var  db          = new SpaceUnionEntities();
@@ -177,9 +181,7 @@ namespace SpaceUnionDatabase
                     errCode = 3;//user is already online
                 else {
                     isValidUser = true;
-                    info[0] = user.userName;
-                    info[1] = user.userIsBlocked.ToString();
-                    info[2] = user.userIsAdmin.ToString();
+                    userInfo.Add(user);
                 }
             }
             catch (Exception e) {
