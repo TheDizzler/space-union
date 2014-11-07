@@ -251,6 +251,9 @@ namespace SpaceUnionXNA
                 case GameState.Playing:
                     gameplayScreen.Update(gameTime);
                     break;
+                case GameState.Select:
+                    shipselectionScreen.update();
+                    break;
                 default:
                     break;
             }
@@ -298,6 +301,9 @@ namespace SpaceUnionXNA
                 case GameState.Playing:
                     GraphicsDevice.Clear(Color.Black);
                     gameplayScreen.draw(gameTime);
+                    break;
+                case GameState.Select:
+                    shipselectionScreen.draw(spriteBatch);
                     break;
                 default:
                     break;
@@ -351,6 +357,12 @@ namespace SpaceUnionXNA
         {
             currentGameState = GameState.Lobby;
             lobby_menu = new LobbyMenu(this, "Alice's Lobby");
+        }
+
+        public void EnterShipSelectionScreen()
+        {
+            currentGameState = GameState.Select;
+            shipselectionScreen = new ShipSelectionScreen(this);
         }
 
 

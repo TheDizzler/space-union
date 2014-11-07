@@ -209,7 +209,7 @@ namespace SpaceUnionXNA.Controllers {
 			}
 
 			if (confirmButton.isClicked == true) {
-				game.EnterMainMenu();
+				game.EnterLoginMenu();
 				confirmButton.isClicked = false;
 			}
 

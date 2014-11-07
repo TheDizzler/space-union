@@ -100,6 +100,14 @@ namespace SpaceUnionXNA.Controllers
             };
             mainScreen.Desktop.Children.Add(multiplayerButton);
 
+            //Ship Select Button.
+            ButtonControl shipSelectButton = GuiHelper.CreateButton("Select Ship", -700, -350, 200, 50);
+            shipSelectButton.Pressed += delegate(object sender, EventArgs arguments)
+            {
+                game.EnterShipSelectionScreen();
+            };
+            mainScreen.Desktop.Children.Add(shipSelectButton);
+
             //Button to close game.
             ButtonControl quitButton = GuiHelper.CreateButton("Quit", -15, -15, 80, 32);
             quitButton.Pressed += delegate(object sender, EventArgs arguments)
