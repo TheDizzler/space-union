@@ -46,6 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PasswordHash.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Ship.cs">
+      <DependentUpon>SpaceUnionModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShipTableAccess.cs" />
     <Compile Include="SpaceUnionModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -71,18 +80,23 @@
     <Compile Include="UserStat.cs">
       <DependentUpon>SpaceUnionModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserStatTableAccess.cs" />
     <Compile Include="UserTableAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <EntityDeploy Include="SpaceUnionModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SpaceUnionModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
-    <None Include="packages.config" />
     <None Include="SpaceUnionModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SpaceUnionModel.edmx</DependentUpon>

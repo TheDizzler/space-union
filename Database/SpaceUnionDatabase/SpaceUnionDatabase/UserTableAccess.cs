@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PasswordHash;
 
 namespace SpaceUnionDatabase
 {
+    /// <summary>
+    /// Contains functionality to read/write to the user
+    /// table.
+    /// </summary>
     public class UserTableAccess
     {
         public bool AddNewUser(string username, string password, string email)
@@ -15,7 +20,7 @@ namespace SpaceUnionDatabase
             bool isUserAdded = false;
 
             newUser.userName      = username;
-            newUser.userPassword  = password;
+            newUser.userPassword  = PasswordHash.PasswordHash.CreateHash(password);
             newUser.userEmail     = email;
             newUser.userImage     = "noimage";
             newUser.userIsOnline  = 0;
@@ -80,6 +85,7 @@ namespace SpaceUnionDatabase
                 else
                 {
                     user.userIsOnline = (byte)isAdmin;
+                    db.SaveChanges();
                     isUpdated         = true;
                 }
             }
@@ -132,14 +138,16 @@ namespace SpaceUnionDatabase
                     .FirstOrDefault(u => u.userName     == username && 
                                          u.userPassword == password);
 
-                if (user.userIsBlocked == 1)
+                if (user == null)
+                    errCode = 0;//incorrect username/pass
+                else if (!PasswordHash.PasswordHash.ValidatePassword(password, user.userPassword) )
+                    errCode = 0;//incorrect username/pass
+                else if (user.userIsBlocked == 1)
                     errCode = 1;//user is blocked
                 else if (user.userIsAdmin == 0)
                     errCode = 2;//user is not an admin
                 else if (user.userIsOnline == 1)
                     errCode = 3;//user is already logged in
-                else if (user == null)
-                    errCode = 0;//incorrect user/pass
                 else
                     isValidUser = true;
             }
@@ -154,26 +162,26 @@ namespace SpaceUnionDatabase
         }
 
         public bool
-        UserLogin(string username, string password, ref int errCode, string[] info)
+        UserLogin(string username, string password, ref int errCode, List<User> userInfo)
         {
             bool isValidUser = false;
             var  db          = new SpaceUnionEntities();
  
-            try
-            {
+            try {
                 var user = db.Users
-                    .FirstOrDefault(u => u.userName     == username && 
-                                         u.userPassword == password);
+                    .FirstOrDefault(u => u.userName == username);
 
-                if (user.userIsBlocked == 1)
+                if (user == null)
+                    errCode = 0;//incorrect username/pass
+                else if (!PasswordHash.PasswordHash.ValidatePassword(password, user.userPassword) )
+                    errCode = 0;//incorrect username/pass
+                else if (user.userIsBlocked == 1)
                     errCode = 1;//user is blocked
-                else if (user == null)
-                    errCode = 0;//incorrect user/pass
+                else if (user.userIsOnline == 1)
+                    errCode = 3;//user is already online
                 else {
                     isValidUser = true;
-                    info[0] = user.userName;
-                    info[1] = user.userIsBlocked.ToString();
-                    info[2] = user.userIsAdmin.ToString();
+                    userInfo.Add(user);
                 }
             }
             catch (Exception e) {
@@ -187,7 +195,7 @@ namespace SpaceUnionDatabase
         }
 
         public bool
-        AdminGetUserInfo(string username, ref int errCode, string[] info)
+        AdminGetUserInfo(string username, ref int errCode, List<User> info)
         {
             bool isValidUser = false;
             var  db          = new SpaceUnionEntities();
@@ -200,13 +208,7 @@ namespace SpaceUnionDatabase
                     errCode = 0;//incorrect user/pass
                 else {
                     isValidUser = true;
-                    info[0] = user.userName;
-                    info[1] = user.userIsBlocked.ToString();
-                    info[2] = user.userIsAdmin.ToString();
-                    info[3] = user.userIsOnline.ToString();
-                    info[4] = user.userImage;
-                    info[5] = user.userPassword;
-                    info[6] = user.userEmail;
+                    info.Add(user);
                 }
             }
             catch (Exception e) {
