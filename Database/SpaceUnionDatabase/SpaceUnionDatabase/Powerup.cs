@@ -14,8 +14,7 @@ namespace SpaceUnionDatabase
     
     public partial class Powerup
     {
-        public int powerupID { get; set; }
-        public string pwrName { get; set; }
-        public Nullable<int> pwrValue { get; set; }
+        public string PowerupName { get; set; }
+        public int PowerupValue { get; set; }
     }
 }

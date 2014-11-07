@@ -17,8 +17,8 @@ namespace SpaceUnionDatabase
             db = new SpaceUnionEntities();
             pwrup = new Powerup
             {
-                pwrName = pwrName,
-                pwrValue = value
+                PowerupName = pwrName,
+                PowerupValue = value
             };
 
             try

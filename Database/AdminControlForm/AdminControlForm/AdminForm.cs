@@ -690,7 +690,7 @@ namespace AdminControlForm
 
             if (!string.IsNullOrWhiteSpace(this.tbPowerupName.Text) && oldPwrup != null)
             {
-                powerupTable.setPowerup(oldPwrup.pwrName.ToString(), (int)this.nudPwrValue.Value);                
+                powerupTable.setPowerup(oldPwrup.PowerupName.ToString(), (int)this.nudPwrValue.Value);                
             }
             else
             {

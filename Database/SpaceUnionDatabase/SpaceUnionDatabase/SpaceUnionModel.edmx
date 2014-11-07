@@ -5,13 +5,12 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="SpaceUnionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Powerups">
+        <EntityType Name="Powerup">
           <Key>
-            <PropertyRef Name="powerupID" />
+            <PropertyRef Name="PowerupName" />
           </Key>
-          <Property Name="powerupID" Type="int" Nullable="false" />
-          <Property Name="pwrName" Type="nchar" MaxLength="10" />
-          <Property Name="pwrValue" Type="int" />
+          <Property Name="PowerupName" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="PowerupValue" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Ship">
           <Key>
@@ -61,7 +60,7 @@
           <Property Name="userstatFlagsCaptured" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="SpaceUnionModelStoreContainer">
-          <EntitySet Name="Powerups" EntityType="Self.Powerups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Powerup" EntityType="Self.Powerup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ship" EntityType="Self.Ship" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -127,11 +126,10 @@
         </EntityType>
         <EntityType Name="Powerup">
           <Key>
-            <PropertyRef Name="powerupID" />
+            <PropertyRef Name="PowerupName" />
           </Key>
-          <Property Name="powerupID" Type="Int32" Nullable="false" />
-          <Property Name="pwrName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="pwrValue" Type="Int32" />
+          <Property Name="PowerupName" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="PowerupValue" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -192,10 +190,9 @@
           </EntitySetMapping>
           <EntitySetMapping Name="Powerups">
             <EntityTypeMapping TypeName="SpaceUnionModel.Powerup">
-              <MappingFragment StoreEntitySet="Powerups">
-                <ScalarProperty Name="pwrValue" ColumnName="pwrValue" />
-                <ScalarProperty Name="pwrName" ColumnName="pwrName" />
-                <ScalarProperty Name="powerupID" ColumnName="powerupID" />
+              <MappingFragment StoreEntitySet="Powerup">
+                <ScalarProperty Name="PowerupValue" ColumnName="PowerupValue" />
+                <ScalarProperty Name="PowerupName" ColumnName="PowerupName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
