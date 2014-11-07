@@ -293,7 +293,7 @@ namespace SpaceUnionXNA
                     create_lobby_menu.DrawMenu(gameTime);
                     break;
                 case GameState.LobbyBrowser:
-                    lobby_browser_menu.DrawMenu(gameTime);
+                    lobby_browser_menu.DrawMenu(gameTime, spriteBatch);
                     break;
                 case GameState.Lobby:
                     lobby_menu.DrawMenu(gameTime);

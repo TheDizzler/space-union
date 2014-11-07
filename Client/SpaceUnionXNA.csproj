@@ -116,6 +116,7 @@
     <Compile Include="StellarObjects\Asteroid.cs" />
     <Compile Include="StellarObjects\LargeMassObject.cs" />
     <Compile Include="StellarObjects\Planet.cs" />
+    <Compile Include="Gui\Table.cs" />
     <Compile Include="Tangible.cs" />
     <Compile Include="Tools\AnimationClass.cs" />
     <Compile Include="Tools\AssetManager.cs" />
