@@ -504,7 +504,7 @@ namespace AdminControlForm
         private void AdminForm_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'spaceUnionDataSet.Powerups' table. You can move, or remove it, as needed.
-            this.powerupsTableAdapter.Fill(this.spaceUnionDataSet.Powerups);
+            this.powerupTableAdapter.Fill(this.spaceUnionDataSet.Powerup);
             // TODO: This line of code loads data into the 'spaceUnionDataSet.UserStats' table. You can move, or remove it, as needed.
             this.userStatsTableAdapter.Fill(this.spaceUnionDataSet.UserStats);
             // TODO: This line of code loads data into the 'spaceUnionDataSet.User' table. You can move, or remove it, as needed.
@@ -704,13 +704,13 @@ namespace AdminControlForm
 
             if (!string.IsNullOrWhiteSpace(this.tbPowerupName.Text) && oldPwrup != null)
             {
-                powerupTable.setPowerup(oldPwrup.pwrName.ToString(), (int)this.nudPwrValue.Value);                
+                powerupTable.setPowerup(oldPwrup.PowerupName.ToString(), (int)this.nudPwrValue.Value);         
             }
             else
             {
                 powerupTable.addPowerup(this.tbPowerupName.Text, (int)this.nudPwrValue.Value);
             }
-            this.powerupsTableAdapter.Fill(this.spaceUnionDataSet.Powerups);
+            this.powerupTableAdapter.Fill(this.spaceUnionDataSet.Powerup);
             this.dgvPwrup.Refresh();
         }
     }
