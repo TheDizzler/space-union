@@ -53,10 +53,8 @@ namespace Server_Application
                 foreach (KeyValuePair<int, Gameroom> room in Gamerooms.ToArray())
                 {
                     foreach (GameData player in room.Value.getPlayerList())
-                    {
                         if (room.Value.InGame && compareTime(player.Player.Time, 10))
                             room.Value.removePlayer(player.Player);
-                    }
                     if (room.Value.Players == 0)
                     {
                         Gameroom temp;

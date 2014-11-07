@@ -16,17 +16,14 @@ namespace Data_Structures
         /// The username of the current player.
         /// </summary>
         public string Username { get; set; }
-
         /// <summary>
         /// The password of the current player.
         /// </summary>
         public string Password { get; set; }
-
         /// <summary>
         /// The game room in which the current player is located.
         /// </summary>
         public int GameRoom { get; set; }
-
         /// <summary>
         /// The IP address of the current player.
         /// </summary>

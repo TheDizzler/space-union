@@ -30,7 +30,7 @@ namespace Server_Application
         /// <summary>
         /// TCP listener, used to listen to message and login requests.
         /// </summary>
-        TcpListener TCPListener = new TcpListener(IPAddress.Parse("0.0.0.0"), Constants.TCPLoginListener);
+        TcpListener TCPListener = new TcpListener(IPAddress.Parse("0.0.0.0"), Constants.TCPMessageListener);
 
         public DataReceiving(Server owner)
         {

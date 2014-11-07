@@ -21,7 +21,6 @@ namespace Data_Structures
         /// The type of this object.
         /// </summary>
         public byte Type { get; set; }
-        public string ServerIPAddress { get; set; }
 
         public Data() { }
     }

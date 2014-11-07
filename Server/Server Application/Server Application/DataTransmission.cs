@@ -90,7 +90,7 @@ namespace Server_Application
                         break;
                 }
                 if (ipAddress != null)
-                    DataControl.sendTCPData(TCPClient, message, ipAddress, Constants.TCPLoginClient);
+                    DataControl.sendTCPData(TCPClient, message, ipAddress, Constants.TCPMessageClient);
             }
         }
 
@@ -112,7 +112,7 @@ namespace Server_Application
                     continue;
                 foreach (GameData player in room.getPlayerList().ToArray())
                     if (player.Player.Username != message.Username)
-                        DataControl.sendTCPData(TCPClient, message, player.Player.IPAddress, Constants.TCPLoginClient);
+                        DataControl.sendTCPData(TCPClient, message, player.Player.IPAddress, Constants.TCPMessageClient);
             }
         }
 
@@ -190,8 +190,7 @@ namespace Server_Application
                 case Constants.CHAT_MESSAGE:
                     return removeMessageFromQueue();
                 default:
-                    return removeGenericMessageFromQueue();
-                    
+                    return removeGenericMessageFromQueue();                    
             }
         }
 

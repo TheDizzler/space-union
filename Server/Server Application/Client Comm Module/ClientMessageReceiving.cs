@@ -32,7 +32,7 @@ namespace Client_Comm_Module
             roomListQueue = new List<RoomList>();
 
             // NOTE: fix required to only listen to the server.
-            TCPListener = new TcpListener(IPAddress.Any, Constants.TCPLoginClient);
+            TCPListener = new TcpListener(IPAddress.Any, Constants.TCPMessageClient);
             TCPListener.Start();
 
             new Thread(receiveMessages).Start();

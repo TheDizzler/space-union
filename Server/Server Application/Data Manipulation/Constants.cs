@@ -29,27 +29,11 @@ namespace Data_Manipulation
         /// <summary>
         /// The port used by the TCP login request client to send data to a game client.
         /// </summary>
-        public const int TCPLoginListener = 6980;
-        /// <summary>
-        /// The port used by the TCP chat message client to send data to a game client.
-        /// </summary>
-        public const int TCPMessageListener = 6981;
-        /// <summary>
-        /// The port used by the TCP error message client to send data to a game client.
-        /// </summary>
-        public const int TCPErrorListener = 6982;
+        public const int TCPMessageListener = 6980;
         /// <summary>
         /// The port used by the TCP login request client to send data to a game client.
         /// </summary>
-        public const int TCPLoginClient = 6983;
-        /// <summary>
-        /// The port used by the TCP chat message client to send data to a game client.
-        /// </summary>
-        public const int TCPMessageClient = 6984;
-        /// <summary>
-        /// The port used by the TCP error message client to send data to a game client.
-        /// </summary>
-        public const int TCPErrorClient = 6985;
+        public const int TCPMessageClient = 6983;
 
 
         // MESSAGE TYPES
@@ -72,10 +56,6 @@ namespace Data_Manipulation
         /// Game setup message = 4.
         /// </summary>
         public const byte GAME_SETUP_MESSAGE = 4;
-        /// <summary>
-        /// Room list message = 5.
-        /// </summary>
-        public const byte ROOM_LIST_MESSAGE = 5;
         /// <summary>
         /// Game frame message = 6.
         /// </summary>

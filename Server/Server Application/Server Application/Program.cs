@@ -19,12 +19,10 @@ namespace Server_Application
     /// </summary>
     class Program
     {
-        public static string IP_Address;
         static void Main(string[] args)
         {
             Console.Title = "Space Union Server";
             Console.WriteLine("Enter the phrase \"help\" at any moment to display a list of commands.\n");
-            IP_Address = getLocalIPv4Address();
             Server server = new Server();
             ServerAnalyzer analyzer = new ServerAnalyzer(server.Transmission, server.Gamerooms, server.OnlinePlayers);
             

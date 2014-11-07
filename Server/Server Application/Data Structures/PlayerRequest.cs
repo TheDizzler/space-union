@@ -21,7 +21,6 @@ namespace Data_Structures
         /// The sender of the mssage. 
         /// </summary>
         public Player Sender { get; set; }
-
         /// <summary>
         /// The type of request (ie. Room list request = 0). 
         /// </summary>

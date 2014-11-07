@@ -16,9 +16,7 @@ namespace Data_Structures
             Data = data;
             IPList = new string[data.Length];
             for (int x = 0; x < data.Length; x++ )
-            {
                 IPList[x] = Data[x].Player.IPAddress;
-            }
         }
     }
 }
