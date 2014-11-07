@@ -347,22 +347,6 @@ namespace AdminControlForm
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            int i = 3;
-            User userInfo   = new User();
-            List<User> user = new List<User>();
-
-            userTable.AdminGetUserInfo(logintext.Text, ref i, ref userInfo);
-
-            user.Add(userInfo);
-
-            this.gvUsers.DataSource = user;
-            this.gvUsers.Refresh();
-
-        }
-
-
         /// <summary>
         /// Adds the new ship to the ship table in the database.
         /// First checks if all fields are valid and if so, attempts
@@ -491,15 +475,6 @@ namespace AdminControlForm
         {
             // TODO: This line of code loads data into the 'spaceUnionDataSet.Powerups' table. You can move, or remove it, as needed.
             this.powerupTableAdapter.Fill(this.spaceUnionDataSet.Powerup);
-            // TODO: This line of code loads data into the 'spaceUnionDataSet.UserStats' table. You can move, or remove it, as needed.
-            this.userStatsTableAdapter.Fill(this.spaceUnionDataSet.UserStats);
-            // TODO: This line of code loads data into the 'spaceUnionDataSet.User' table. You can move, or remove it, as needed.
-            this.userTableAdapter.Fill(this.spaceUnionDataSet.User);
-            // TODO: This line of code loads data into the 'spaceUnionDataSet.UserStats' table. You can move, or remove it, as needed.
-            //this.userStatsTableAdapter.Fill(this.spaceUnionDataSet.UserStats);
-            // TODO: This line of code loads data into the 'spaceUnionDataSet.Users' table. You can move, or remove it, as needed.
-            //this.userTableAdapter.Fill(this.spaceUnionDataSet.User);
-
         }
 
         /// <summary>
@@ -513,18 +488,38 @@ namespace AdminControlForm
 
             if (!string.IsNullOrWhiteSpace(this.tbUserStatName.Text))
             {
-                userStatTable.setUserStatWin(oldStat.userName.ToString(), (int)this.nudWins.Value);
-                userStatTable.setUserStatLose(oldStat.userName.ToString(), (int)this.nudLoses.Value);
-                userStatTable.setUserStatDied(oldStat.userName.ToString(), (int)this.nudDied.Value);
-                userStatTable.setUserStatHits(oldStat.userName.ToString(), (int)this.nudHits.Value);
-                userStatTable.setUserStatKills(oldStat.userName.ToString(), (int)this.nudKills.Value);
-                userStatTable.setUserStatShip1(oldStat.userName.ToString(), (int)this.nudShip1.Value);
-                userStatTable.setUserStatShip2(oldStat.userName.ToString(), (int)this.nudShip2.Value);
-                userStatTable.setUserStatShip3(oldStat.userName.ToString(), (int)this.nudShip3.Value);
-                userStatTable.setUserStatFlagsCaptured(oldStat.userName.ToString(), (int)this.nudFlagsCaptured.Value);
+                userStatTable.setUserStatWin(oldStat.userName.ToString(), (int)this.nudWins.Value - oldStat.userstatWin);
+                userStatTable.setUserStatLose(oldStat.userName.ToString(), (int)this.nudLoses.Value - oldStat.userstatLose);
+                userStatTable.setUserStatDied(oldStat.userName.ToString(), (int)this.nudDied.Value - oldStat.userstatDied);
+                userStatTable.setUserStatHits(oldStat.userName.ToString(), (int)this.nudHits.Value - oldStat.userstatHits);
+                userStatTable.setUserStatKills(oldStat.userName.ToString(), (int)this.nudKills.Value - oldStat.userstatKills);
+                userStatTable.setUserStatShip1(oldStat.userName.ToString(), (int)this.nudShip1.Value - oldStat.userstatShipUsed_1);
+                userStatTable.setUserStatShip2(oldStat.userName.ToString(), (int)this.nudShip2.Value - oldStat.userstatShipUsed_2);
+                userStatTable.setUserStatShip3(oldStat.userName.ToString(), (int)this.nudShip3.Value - oldStat.userstatShipUsed_3);
+                userStatTable.setUserStatFlagsCaptured(oldStat.userName.ToString(), (int)this.nudFlagsCaptured.Value - oldStat.userstatFlagsCaptured);
+                userStatTable.setUserStatShotsFired(oldStat.userName.ToString(), (int)this.nudShotsFired.Value - oldStat.userstatShotsFired);
+            }
+        }
 
-                this.userStatsTableAdapter.Fill(this.spaceUnionDataSet.UserStats);
-                this.gvStats.Refresh();
+
+        private void btnGetUserStats_Click(object sender, EventArgs e)
+        {
+            UserStat oldStat = userStatTable.getUserStat(this.tbUserStatName.Text);
+
+            if (oldStat != null)
+            {
+                this.nudDied.Value = oldStat.userstatDied;
+                this.nudFlagsCaptured.Value = oldStat.userstatFlagsCaptured;
+                this.nudHits.Value = oldStat.userstatHits;
+                this.nudKills.Value = oldStat.userstatKills;
+                this.nudLoses.Value = oldStat.userstatLose;
+                this.nudShip1.Value = oldStat.userstatShipUsed_1;
+                this.nudShip2.Value = oldStat.userstatShipUsed_2;
+                this.nudShip3.Value = oldStat.userstatShipUsed_3;
+                this.nudShotsFired.Value = oldStat.userstatShotsFired;
+                this.nudWins.Value = oldStat.userstatWin;
+
+                this.btnUpdate.Enabled = true;
             }
         }
 
@@ -536,9 +531,9 @@ namespace AdminControlForm
         private void tbUserStatName_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(this.tbUserStatName.Text))
-                this.btnUpdate.Enabled = true;
+                this.btnGetUserStats.Enabled = true;
             else
-                this.btnUpdate.Enabled = false;
+                this.btnGetUserStats.Enabled = false;
 
         }
 
@@ -690,7 +685,7 @@ namespace AdminControlForm
 
             if (!string.IsNullOrWhiteSpace(this.tbPowerupName.Text) && oldPwrup != null)
             {
-                powerupTable.setPowerup(oldPwrup.PowerupName.ToString(), (int)this.nudPwrValue.Value);         
+                powerupTable.setPowerup(oldPwrup.PowerupName.ToString(), (int)this.nudPwrValue.Value);
             }
             else
             {
