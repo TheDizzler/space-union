@@ -47,6 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PasswordHash.cs" />
+    <Compile Include="Powerup.cs">
+      <DependentUpon>SpaceUnionModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PowerupTableAccess.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
