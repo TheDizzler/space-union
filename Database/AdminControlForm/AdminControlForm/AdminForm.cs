@@ -264,12 +264,12 @@ namespace AdminControlForm
             const byte BLOCKED = 1;
 
             int errCode = 0;
-            List<User> userInfo = new List<User>();
+            User userInfo = new User();
 
-            if (userTable.AdminGetUserInfo(txtbUserToEdit.Text, ref errCode, userInfo) ) {
-                txtbUserEditing.Text = userInfo[0].userName;
+            if (userTable.AdminGetUserInfo(txtbUserToEdit.Text, ref errCode, ref userInfo) ) {
+                txtbUserEditing.Text = userInfo.userName;
 
-                if (userInfo[0].userIsBlocked.Equals(BLOCKED)) {
+                if (userInfo.userIsBlocked.Equals(BLOCKED)) {
                     txtbCurrentBlockStatus.Text = "BLOCKED";
                     chkbBlockUnblockUser.Text = "Do you want to UNBLOCK " + txtbUserEditing.Text;
                 }
@@ -326,10 +326,14 @@ namespace AdminControlForm
         private void button1_Click(object sender, EventArgs e)
         {
             int i = 3;
-            List<User> info = new List<User>();
-            userTable.AdminGetUserInfo(logintext.Text, ref i, info);
+            User userInfo   = new User();
+            List<User> user = new List<User>();
 
-            this.gvUsers.DataSource = info;
+            userTable.AdminGetUserInfo(logintext.Text, ref i, ref userInfo);
+
+            user.Add(userInfo);
+
+            this.gvUsers.DataSource = user;
             this.gvUsers.Refresh();
             
         }
@@ -451,9 +455,9 @@ namespace AdminControlForm
         private void AdminForm_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'spaceUnionDataSet.UserStats' table. You can move, or remove it, as needed.
-            this.userStatsTableAdapter.Fill(this.spaceUnionDataSet.UserStats);
+            //this.userStatsTableAdapter.Fill(this.spaceUnionDataSet.UserStats);
             // TODO: This line of code loads data into the 'spaceUnionDataSet.Users' table. You can move, or remove it, as needed.
-            this.userTableAdapter.Fill(this.spaceUnionDataSet.User);
+            //this.userTableAdapter.Fill(this.spaceUnionDataSet.User);
 
         }
 
