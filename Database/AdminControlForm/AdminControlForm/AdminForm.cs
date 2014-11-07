@@ -274,31 +274,32 @@ namespace AdminControlForm
             int errCode = 0;
             User userInfo = new User();
 
-<<<<<<< HEAD
-            if (userTable.AdminGetUserInfo(txtbUserToEdit.Text, ref errCode, ref userInfo) ) {
+            if (userTable.AdminGetUserInfo(txtbUserToEdit.Text, ref errCode, ref userInfo))
+            {
                 txtbUserEditing.Text = userInfo.userName;
 
-                if (userInfo.userIsBlocked.Equals(BLOCKED)) {
-=======
-            if (userTable.AdminGetUserInfo(txtbUserToEdit.Text, ref errCode, userInfo))
-            {
-                txtbUserEditing.Text = userInfo[0].userName;
+                if (userInfo.userIsBlocked.Equals(BLOCKED))
+                {
+                    if (userTable.AdminGetUserInfo(txtbUserToEdit.Text, ref errCode, ref userInfo))
+                    {
+                        txtbUserEditing.Text = userInfo.userName;
 
-                if (userInfo[0].userIsBlocked.Equals(BLOCKED))
-                {
->>>>>>> f66978d669a8eea7e2107fda1abda67dd6e7c993
-                    txtbCurrentBlockStatus.Text = "BLOCKED";
-                    chkbBlockUnblockUser.Text = "Do you want to UNBLOCK " + txtbUserEditing.Text;
+                        if (userInfo.userIsBlocked.Equals(BLOCKED))
+                        {
+                            txtbCurrentBlockStatus.Text = "BLOCKED";
+                            chkbBlockUnblockUser.Text = "Do you want to UNBLOCK " + txtbUserEditing.Text;
+                        }
+                        else
+                        {
+                            txtbCurrentBlockStatus.Text = "NOT BLOCKED";
+                            chkbBlockUnblockUser.Text = "Do you want to BLOCK " + txtbUserEditing.Text;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Username may not exist");
+                    }
                 }
-                else
-                {
-                    txtbCurrentBlockStatus.Text = "NOT BLOCKED";
-                    chkbBlockUnblockUser.Text = "Do you want to BLOCK " + txtbUserEditing.Text;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Username may not exist");
             }
         }
 
