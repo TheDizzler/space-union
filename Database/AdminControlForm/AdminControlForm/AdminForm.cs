@@ -49,7 +49,12 @@ namespace AdminControlForm
         /// Allows access to read/write to the user stat table in the Space Union database
         /// </summary>
         private UserStatTableAccess userStatTable = new UserStatTableAccess();
-        
+
+        /// <summary>
+        /// Allows access to read/write to the Powerup table in the Space Union database
+        /// </summary>
+        private PowerupTableAccess powerupTable = new PowerupTableAccess();
+
         /// <summary>
         /// Helper class to validate input when a new user is being blocked/unblocked
         /// </summary>
@@ -141,14 +146,17 @@ namespace AdminControlForm
                            && isPasswordValid
                            && isConfPassValid;
 
-            if (isvalidUserInfo) {
+            if (isvalidUserInfo)
+            {
                 // if a user isnt added to the database
                 if (!userTable.AddNewUser(txtbUsername.Text,
                                           txtbPassword.Text,
-                                          txtbEmail.Text)) {
+                                          txtbEmail.Text))
+                {
                     MessageBox.Show("Sorry, the Username is already taken.");
                 }
-                else {
+                else
+                {
                     userStatTable.addUserStat(txtbUsername.Text);
                     MessageBox.Show("User was added to the database successfully");
                 }
@@ -266,19 +274,23 @@ namespace AdminControlForm
             int errCode = 0;
             List<User> userInfo = new List<User>();
 
-            if (userTable.AdminGetUserInfo(txtbUserToEdit.Text, ref errCode, userInfo) ) {
+            if (userTable.AdminGetUserInfo(txtbUserToEdit.Text, ref errCode, userInfo))
+            {
                 txtbUserEditing.Text = userInfo[0].userName;
 
-                if (userInfo[0].userIsBlocked.Equals(BLOCKED)) {
+                if (userInfo[0].userIsBlocked.Equals(BLOCKED))
+                {
                     txtbCurrentBlockStatus.Text = "BLOCKED";
                     chkbBlockUnblockUser.Text = "Do you want to UNBLOCK " + txtbUserEditing.Text;
                 }
-                else {
+                else
+                {
                     txtbCurrentBlockStatus.Text = "NOT BLOCKED";
                     chkbBlockUnblockUser.Text = "Do you want to BLOCK " + txtbUserEditing.Text;
                 }
             }
-            else {
+            else
+            {
                 MessageBox.Show("Username may not exist");
             }
         }
@@ -295,10 +307,10 @@ namespace AdminControlForm
         /// <param name="e"></param>
         private void bttnBlockUnblock_Click(object sender, EventArgs e)
         {
-            const int BLOCK   = 1;
+            const int BLOCK = 1;
             const int UNBLOCK = 0;
-            string username   = txtbUserEditing.Text;
-            int errCode       = 0;
+            string username = txtbUserEditing.Text;
+            int errCode = 0;
 
             AcceptCancelBlockActionForm acceptBlock =
                     new AcceptCancelBlockActionForm();
@@ -308,15 +320,19 @@ namespace AdminControlForm
                     new AcceptCancelBlockActionForm();
             acceptUnblock.TxtMsg = "Are you sure you want to unblock " + username;
 
-            if (chkbBlockUnblockUser.Checked) {
-                if (txtbCurrentBlockStatus.Text.Equals("NOT BLOCKED")) {
+            if (chkbBlockUnblockUser.Checked)
+            {
+                if (txtbCurrentBlockStatus.Text.Equals("NOT BLOCKED"))
+                {
                     // User blocking dialog
-                    if (acceptBlock.ShowDialog() == DialogResult.OK) {
+                    if (acceptBlock.ShowDialog() == DialogResult.OK)
+                    {
                         userTable.UpdateUserIsBlocked(username, BLOCK, ref errCode);
                         MessageBox.Show(username + " is now blocked.");
                     }
                 }// User unblocking dialog
-                else if (acceptUnblock.ShowDialog() == DialogResult.OK) {
+                else if (acceptUnblock.ShowDialog() == DialogResult.OK)
+                {
                     userTable.UpdateUserIsBlocked(username, UNBLOCK, ref errCode);
                     MessageBox.Show(username + " is now unblocked.");
                 }
@@ -331,7 +347,7 @@ namespace AdminControlForm
 
             this.gvUsers.DataSource = info;
             this.gvUsers.Refresh();
-            
+
         }
 
 
@@ -354,15 +370,18 @@ namespace AdminControlForm
                        && isAccelerationValid
                        && isShipNameValid;
 
-            if (isShipValid) {
+            if (isShipValid)
+            {
                 // if a user isnt added to the database
                 if (!shipTable.AddNewShip(txtbNewShipName.Text,
                                           txtbTurnSpeed.Text,
                                           txtbMaxSpeed.Text,
-                                          txtbAccelerate.Text) ) {
+                                          txtbAccelerate.Text))
+                {
                     MessageBox.Show("Sorry, the Ship name is already in use.");
                 }
-                else {
+                else
+                {
                     MessageBox.Show("Ship was added to the database successfully.");
                 }
             }
@@ -389,12 +408,14 @@ namespace AdminControlForm
             string turnSpeedErrMsg = null;
 
             if (!shipValidation.ValidateTurnSpeed(txtbTurnSpeed.Text,
-                                                  ref turnSpeedErrMsg)) {
+                                                  ref turnSpeedErrMsg))
+            {
                 lablTurnSpeedErrMsg.Text = turnSpeedErrMsg;
                 lablTurnSpeedErrMsg.Visible = true;
                 isTurnSpeedValid = false;
             }
-            else {
+            else
+            {
                 lablTurnSpeedErrMsg.Visible = false;
                 isTurnSpeedValid = true;
             }
@@ -405,12 +426,14 @@ namespace AdminControlForm
             string turnMaxSpeedErrMsg = null;
 
             if (!shipValidation.ValidateMaxSpeed(txtbMaxSpeed.Text,
-                                                 ref turnMaxSpeedErrMsg)) {
+                                                 ref turnMaxSpeedErrMsg))
+            {
                 lablMaxSpeedErrMsg.Text = turnMaxSpeedErrMsg;
                 lablMaxSpeedErrMsg.Visible = true;
                 isMaxSpeedValid = false;
             }
-            else {
+            else
+            {
                 lablMaxSpeedErrMsg.Visible = false;
                 isMaxSpeedValid = true;
             }
@@ -421,14 +444,16 @@ namespace AdminControlForm
             string shipNameErrMsg = null;
 
             if (!shipValidation.ValidateShipName(txtbNewShipName.Text,
-                                                 ref shipNameErrMsg)) {
+                                                 ref shipNameErrMsg))
+            {
                 lablNewShipNameErrMsg.Text = shipNameErrMsg;
                 lablNewShipNameErrMsg.Visible = true;
                 isShipNameValid = false;
             }
-            else {
+            else
+            {
                 lablNewShipNameErrMsg.Visible = false;
-                isShipNameValid               = true;
+                isShipNameValid = true;
             }
         }
 
@@ -437,12 +462,14 @@ namespace AdminControlForm
             string turnAccelerateErrMsg = null;
 
             if (!shipValidation.ValidateAcceleration(txtbAccelerate.Text,
-                                                     ref turnAccelerateErrMsg)) {
+                                                     ref turnAccelerateErrMsg))
+            {
                 lablAccelErrMsg.Text = turnAccelerateErrMsg;
                 lablAccelErrMsg.Visible = true;
                 isAccelerationValid = false;
             }
-            else {
+            else
+            {
                 lablAccelErrMsg.Visible = false;
                 isAccelerationValid = true;
             }
@@ -450,6 +477,12 @@ namespace AdminControlForm
 
         private void AdminForm_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'spaceUnionDataSet.Powerups' table. You can move, or remove it, as needed.
+            this.powerupsTableAdapter.Fill(this.spaceUnionDataSet.Powerups);
+            // TODO: This line of code loads data into the 'spaceUnionDataSet.UserStats' table. You can move, or remove it, as needed.
+            this.userStatsTableAdapter.Fill(this.spaceUnionDataSet.UserStats);
+            // TODO: This line of code loads data into the 'spaceUnionDataSet.User' table. You can move, or remove it, as needed.
+            this.userTableAdapter.Fill(this.spaceUnionDataSet.User);
             // TODO: This line of code loads data into the 'spaceUnionDataSet.UserStats' table. You can move, or remove it, as needed.
             this.userStatsTableAdapter.Fill(this.spaceUnionDataSet.UserStats);
             // TODO: This line of code loads data into the 'spaceUnionDataSet.Users' table. You can move, or remove it, as needed.
@@ -500,21 +533,23 @@ namespace AdminControlForm
         private void bttnShipToEdit_Click(object sender, EventArgs e)
         {
             List<Ship> shipInfo = new List<Ship>();
-            string shipname     = txtbShipEditing.Text;
-            int errCode         = -1;
+            string shipname = txtbShipEditing.Text;
+            int errCode = -1;
 
-            if (shipTable.GetShipInfo(shipname, ref errCode, shipInfo) ) {
+            if (shipTable.GetShipInfo(shipname, ref errCode, shipInfo))
+            {
                 Ship ship = shipInfo.First();
 
-                rtxtCurrentShipStats.Text  = "Ship Name: "    + ship.shipName.ToString()        + "\n";
-                rtxtCurrentShipStats.Text += "Turn Speed: "   + ship.turnSpeed.ToString()       + "\n";
+                rtxtCurrentShipStats.Text = "Ship Name: " + ship.shipName.ToString() + "\n";
+                rtxtCurrentShipStats.Text += "Turn Speed: " + ship.turnSpeed.ToString() + "\n";
                 rtxtCurrentShipStats.Text += "Acceleration: " + ship.accelerateSpeed.ToString() + "\n";
-                rtxtCurrentShipStats.Text += "Max Speed: "    + ship.maxSpeed.ToString()        + "\n";
+                rtxtCurrentShipStats.Text += "Max Speed: " + ship.maxSpeed.ToString() + "\n";
 
                 shipToEdit = ship.shipName.ToString();
             }
-            else {
-                rtxtCurrentShipStats.Text  = "The ship was not found.";
+            else
+            {
+                rtxtCurrentShipStats.Text = "The ship was not found.";
             }
         }
 
@@ -538,12 +573,14 @@ namespace AdminControlForm
             string turnSpeedErrMsg = null;
 
             if (!shipValidation.ValidateTurnSpeed(txtbNewTurnSpeed.Text,
-                                                  ref turnSpeedErrMsg)) {
+                                                  ref turnSpeedErrMsg))
+            {
                 lablShipEditTurnSpdErrMsg.Text = turnSpeedErrMsg;
                 lablShipEditTurnSpdErrMsg.Visible = true;
                 isTurnSpeedEditValid = false;
             }
-            else {
+            else
+            {
                 lablShipEditTurnSpdErrMsg.Visible = false;
                 isTurnSpeedEditValid = true;
             }
@@ -554,14 +591,16 @@ namespace AdminControlForm
             string maxSpeedErrMsg = null;
 
             if (!shipValidation.ValidateMaxSpeed(txtbNewMaxSpeed.Text,
-                                                 ref maxSpeedErrMsg)) {
-                lablShipEditMaxSpeed.Text    = maxSpeedErrMsg;
+                                                 ref maxSpeedErrMsg))
+            {
+                lablShipEditMaxSpeed.Text = maxSpeedErrMsg;
                 lablShipEditMaxSpeed.Visible = true;
-                isMaxSpeedEditValid          = false;
+                isMaxSpeedEditValid = false;
             }
-            else {
+            else
+            {
                 lablShipEditMaxSpeed.Visible = false;
-                isMaxSpeedEditValid          = true;
+                isMaxSpeedEditValid = true;
             }
         }
 
@@ -570,36 +609,40 @@ namespace AdminControlForm
             string accelerateErrMsg = null;
 
             if (!shipValidation.ValidateAcceleration(txtbNewAccelerate.Text,
-                                                     ref accelerateErrMsg)) {
-                lablShipEditAccelerateErrMsg.Text    = accelerateErrMsg;
+                                                     ref accelerateErrMsg))
+            {
+                lablShipEditAccelerateErrMsg.Text = accelerateErrMsg;
                 lablShipEditAccelerateErrMsg.Visible = true;
-                isAccelerationEditValid              = false;
+                isAccelerationEditValid = false;
             }
-            else {
+            else
+            {
                 lablShipEditAccelerateErrMsg.Visible = false;
-                isAccelerationEditValid              = true;
+                isAccelerationEditValid = true;
             }
         }
 
         private void bttnShipUpdate_Click(object sender, EventArgs e)
         {
             bool isShipEditValid = false;
-            int errCode          = -1;
-            
+            int errCode = -1;
+
             AcceptCancelBlockActionForm acceptShipEdit =
                     new AcceptCancelBlockActionForm();
-            
+
             validateAllShipEditFields(sender, e);
 
             isShipEditValid = isMaxSpeedEditValid
                            && isTurnSpeedEditValid
                            && isAccelerationEditValid;
 
-            if (isShipEditValid && !String.IsNullOrEmpty(shipToEdit) ) {
+            if (isShipEditValid && !String.IsNullOrEmpty(shipToEdit))
+            {
                 acceptShipEdit.TxtMsg = "Are you sure you want to update " + shipToEdit;
 
                 // check to see if they really want to edit the ship
-                if (acceptShipEdit.ShowDialog() == DialogResult.OK) {
+                if (acceptShipEdit.ShowDialog() == DialogResult.OK)
+                {
                     shipTable.UpdateShipStats(shipToEdit,
                                               txtbNewTurnSpeed.Text,
                                               txtbNewMaxSpeed.Text,
@@ -609,9 +652,40 @@ namespace AdminControlForm
                     MessageBox.Show(shipToEdit + " has been updated.");
                 }
             }
-            else if (String.IsNullOrEmpty(shipToEdit) ) {
-                 MessageBox.Show("A ship to edit has not been chosen yet.");
+            else if (String.IsNullOrEmpty(shipToEdit))
+            {
+                MessageBox.Show("A ship to edit has not been chosen yet.");
             }
+        }
+
+        /// <summary>
+        /// checks to make sure a valid powerup is entered before allowing an update.
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// </summary>
+        private void tbPowerupName_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(this.tbPowerupName.Text))
+                this.btnUpdatePwr.Enabled = true;
+            else
+                this.btnUpdatePwr.Enabled = false;
+
+        }
+
+        private void btnUpdatePwr_Click(object sender, EventArgs e)
+        {
+            Powerup oldPwrup = powerupTable.getPowerup(this.tbPowerupName.Text);
+
+            if (!string.IsNullOrWhiteSpace(this.tbPowerupName.Text) && oldPwrup != null)
+            {
+                powerupTable.setPowerup(oldPwrup.pwrName.ToString(), (int)this.nudPwrValue.Value);                
+            }
+            else
+            {
+                powerupTable.addPowerup(this.tbPowerupName.Text, (int)this.nudPwrValue.Value);
+            }
+            this.powerupsTableAdapter.Fill(this.spaceUnionDataSet.Powerups);
+            this.dgvPwrup.Refresh();
         }
     }
 }

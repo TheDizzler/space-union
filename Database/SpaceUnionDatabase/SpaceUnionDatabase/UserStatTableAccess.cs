@@ -9,7 +9,7 @@ namespace SpaceUnionDatabase
     public class UserStatTableAccess
     {
         private SpaceUnionEntities db = new SpaceUnionEntities();
-        private UserStat userStat = new UserStat();        
+        private UserStat userStat = new UserStat();
 
         /// <summary>
         /// Creates a new empty UserStat entry for a user.

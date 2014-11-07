@@ -4,18 +4,20 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SpaceUnionModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="SpaceUnionModelStoreContainer">
-          <EntitySet Name="Ship" EntityType="SpaceUnionModel.Store.Ship" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="sysdiagrams" EntityType="SpaceUnionModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="User" EntityType="SpaceUnionModel.Store.User" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserStats" EntityType="SpaceUnionModel.Store.UserStats" store:Type="Tables" Schema="dbo" />
-        </EntityContainer>
+    <Schema Namespace="SpaceUnionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Powerups">
+          <Key>
+            <PropertyRef Name="powerupID" />
+          </Key>
+          <Property Name="powerupID" Type="int" Nullable="false" />
+          <Property Name="pwrName" Type="nchar" MaxLength="10" />
+          <Property Name="pwrValue" Type="int" />
+        </EntityType>
         <EntityType Name="Ship">
           <Key>
             <PropertyRef Name="shipName" />
           </Key>
-          <Property Name="shipName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="shipName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="maxSpeed" Type="float" Nullable="false" />
           <Property Name="accelerateSpeed" Type="float" Nullable="false" />
           <Property Name="turnSpeed" Type="float" Nullable="false" />
@@ -24,9 +26,9 @@
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
@@ -34,10 +36,10 @@
           <Key>
             <PropertyRef Name="userName" />
           </Key>
-          <Property Name="userName" Type="varchar" Nullable="false" MaxLength="32" />
-          <Property Name="userPassword" Type="varchar" Nullable="false" MaxLength="128" />
-          <Property Name="userEmail" Type="varchar" Nullable="false" MaxLength="128" />
-          <Property Name="userImage" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="userName" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="userPassword" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="userEmail" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="userImage" Type="varchar" MaxLength="256" Nullable="false" />
           <Property Name="userIsOnline" Type="tinyint" Nullable="false" />
           <Property Name="userIsBlocked" Type="tinyint" Nullable="false" />
           <Property Name="userIsAdmin" Type="tinyint" Nullable="false" />
@@ -46,7 +48,7 @@
           <Key>
             <PropertyRef Name="userName" />
           </Key>
-          <Property Name="userName" Type="nchar" Nullable="false" MaxLength="32" />
+          <Property Name="userName" Type="nchar" MaxLength="32" Nullable="false" />
           <Property Name="userstatWin" Type="int" Nullable="false" />
           <Property Name="userstatLose" Type="int" Nullable="false" />
           <Property Name="userstatShotsFired" Type="int" Nullable="false" />
@@ -58,6 +60,13 @@
           <Property Name="userstatShipUsed_3" Type="int" Nullable="false" />
           <Property Name="userstatFlagsCaptured" Type="int" Nullable="false" />
         </EntityType>
+        <EntityContainer Name="SpaceUnionModelStoreContainer">
+          <EntitySet Name="Powerups" EntityType="Self.Powerups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ship" EntityType="Self.Ship" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserStats" EntityType="Self.UserStats" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -67,6 +76,7 @@
           <EntitySet Name="sysdiagrams" EntityType="SpaceUnionModel.sysdiagram" />
           <EntitySet Name="Users" EntityType="SpaceUnionModel.User" />
           <EntitySet Name="UserStats" EntityType="SpaceUnionModel.UserStat" />
+          <EntitySet Name="Powerups" EntityType="SpaceUnionModel.Powerup" />
         </EntityContainer>
         <EntityType Name="Ship">
           <Key>
@@ -114,6 +124,14 @@
           <Property Name="userstatShipUsed_2" Type="Int32" Nullable="false" />
           <Property Name="userstatShipUsed_3" Type="Int32" Nullable="false" />
           <Property Name="userstatFlagsCaptured" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Powerup">
+          <Key>
+            <PropertyRef Name="powerupID" />
+          </Key>
+          <Property Name="powerupID" Type="Int32" Nullable="false" />
+          <Property Name="pwrName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="pwrValue" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -172,6 +190,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Powerups">
+            <EntityTypeMapping TypeName="SpaceUnionModel.Powerup">
+              <MappingFragment StoreEntitySet="Powerups">
+                <ScalarProperty Name="pwrValue" ColumnName="pwrValue" />
+                <ScalarProperty Name="pwrName" ColumnName="pwrName" />
+                <ScalarProperty Name="powerupID" ColumnName="powerupID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -189,6 +216,7 @@
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

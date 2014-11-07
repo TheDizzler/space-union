@@ -60,10 +60,6 @@
     </Compile>
     <Compile Include="BlockUnblockUserValidation.cs" />
     <Compile Include="ShipValidation.cs" />
-    <Compile Include="SpaceUnionDataSet.cs">
-      <DependentUpon>SpaceUnionDataSet.xsd</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="SpaceUnionDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -108,9 +104,9 @@
       <DependentUpon>SpaceUnionDataSet.xsd</DependentUpon>
     </None>
     <None Include="SpaceUnionDataSet.xsd">
+      <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>SpaceUnionDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
     </None>
     <None Include="SpaceUnionDataSet.xss">
       <DependentUpon>SpaceUnionDataSet.xsd</DependentUpon>
