@@ -126,11 +126,12 @@
             this.userstatShipUsed2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.userstatShipUsed3DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.userstatFlagsCapturedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-//            this.userStatsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-//            this.spaceUnionDataSet = new AdminControlForm.SpaceUnionDataSet();
-//            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
-//            this.userTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UserTableAdapter();
-//            this.userStatsTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UserStatsTableAdapter();
+<<<<<<< HEAD
+            this.userStatsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.spaceUnionDataSet = new AdminControlForm.SpaceUnionDataSet();
+            this.usersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.userTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UserTableAdapter();
+            this.userStatsTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UserStatsTableAdapter();
             this.editUserTab = new System.Windows.Forms.TabPage();
             this.lablCurrentBlockStatus = new System.Windows.Forms.Label();
             this.txtbCurrentBlockStatus = new System.Windows.Forms.TextBox();
@@ -159,28 +160,30 @@
             this.lablNewShipName = new System.Windows.Forms.Label();
             this.lablAddNewShip = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-//            this.tabPage4 = new System.Windows.Forms.TabPage();
-//            this.lablShipEditMaxSpeed = new System.Windows.Forms.Label();
-//            this.lablShipEditAccelerateErrMsg = new System.Windows.Forms.Label();
-//            this.lablShipEditTurnSpdErrMsg = new System.Windows.Forms.Label();
-//            this.bttnShipUpdate = new System.Windows.Forms.Button();
-//            this.bttnShipToEdit = new System.Windows.Forms.Button();
-//            this.txtbNewMaxSpeed = new System.Windows.Forms.TextBox();
-//            this.lablNewShipMaxSpeed = new System.Windows.Forms.Label();
-//            this.txtbNewAccelerate = new System.Windows.Forms.TextBox();
-//            this.lablNewShipAccelerate = new System.Windows.Forms.Label();
-//            this.txtbNewTurnSpeed = new System.Windows.Forms.TextBox();
-//            this.lablNewShipTurnSpeed = new System.Windows.Forms.Label();
-//            this.rtxtCurrentShipStats = new System.Windows.Forms.RichTextBox();
-//            this.lablCurrentShipStats = new System.Windows.Forms.Label();
-//            this.txtbShipEditing = new System.Windows.Forms.TextBox();
-//            this.lablShipEditing = new System.Windows.Forms.Label();
-//            this.lablEditShip = new System.Windows.Forms.Label();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.lablShipEditMaxSpeed = new System.Windows.Forms.Label();
+            this.lablShipEditAccelerateErrMsg = new System.Windows.Forms.Label();
+            this.lablShipEditTurnSpdErrMsg = new System.Windows.Forms.Label();
+            this.bttnShipUpdate = new System.Windows.Forms.Button();
+            this.bttnShipToEdit = new System.Windows.Forms.Button();
+            this.txtbNewMaxSpeed = new System.Windows.Forms.TextBox();
+            this.lablNewShipMaxSpeed = new System.Windows.Forms.Label();
+            this.txtbNewAccelerate = new System.Windows.Forms.TextBox();
+            this.lablNewShipAccelerate = new System.Windows.Forms.Label();
+            this.txtbNewTurnSpeed = new System.Windows.Forms.TextBox();
+            this.lablNewShipTurnSpeed = new System.Windows.Forms.Label();
+            this.rtxtCurrentShipStats = new System.Windows.Forms.RichTextBox();
+            this.lablCurrentShipStats = new System.Windows.Forms.Label();
+            this.txtbShipEditing = new System.Windows.Forms.TextBox();
+            this.lablShipEditing = new System.Windows.Forms.Label();
+            this.lablEditShip = new System.Windows.Forms.Label();
+=======
             this.powerupsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.powerupsTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.PowerupsTableAdapter();
             this.powerupIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pwrNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pwrValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+>>>>>>> f66978d669a8eea7e2107fda1abda67dd6e7c993
             this.tabControl.SuspendLayout();
             this.createUserTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -197,11 +200,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudLoses)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWins)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvStats)).BeginInit();
+<<<<<<< HEAD
             ((System.ComponentModel.ISupportInitialize)(this.userStatsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
             this.editUserTab.SuspendLayout();
             this.tabPage2.SuspendLayout();
+=======
+>>>>>>> f66978d669a8eea7e2107fda1abda67dd6e7c993
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPwrValue)).BeginInit();
@@ -1139,6 +1145,7 @@
             this.userstatFlagsCapturedDataGridViewTextBoxColumn.HeaderText = "userstatFlagsCaptured";
             this.userstatFlagsCapturedDataGridViewTextBoxColumn.Name = "userstatFlagsCapturedDataGridViewTextBoxColumn";
             // 
+<<<<<<< HEAD
             // userStatsBindingSource
             // 
             this.userStatsBindingSource.DataMember = "UserStats";
@@ -1151,8 +1158,8 @@
             // 
             // usersBindingSource
             // 
-            this.userBindingSource.DataMember = "User";
-            this.userBindingSource.DataSource = this.spaceUnionDataSet;
+            this.usersBindingSource.DataMember = "User";
+            this.usersBindingSource.DataSource = this.spaceUnionDataSet;
             // 
             // userTableAdapter
             // 
@@ -1510,6 +1517,7 @@
             this.lablShipEditMaxSpeed.Text = "err msg for max speed";
             this.lablShipEditMaxSpeed.Visible = false;
             this.lablShipEditMaxSpeed.TextChanged += new System.EventHandler(this.validateMaxSpeedEdit);
+=======
             // powerupsBindingSource
             // 
             this.powerupsBindingSource.DataMember = "Powerups";
@@ -1536,6 +1544,7 @@
             this.pwrValueDataGridViewTextBoxColumn.DataPropertyName = "pwrValue";
             this.pwrValueDataGridViewTextBoxColumn.HeaderText = "pwrValue";
             this.pwrValueDataGridViewTextBoxColumn.Name = "pwrValueDataGridViewTextBoxColumn";
+>>>>>>> f66978d669a8eea7e2107fda1abda67dd6e7c993
             // 
             // lablShipEditAccelerateErrMsg
             // 
@@ -1719,13 +1728,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudLoses)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWins)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvStats)).EndInit();
+<<<<<<< HEAD
             ((System.ComponentModel.ISupportInitialize)(this.userStatsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).EndInit();
             this.editUserTab.ResumeLayout(false);
             this.editUserTab.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+=======
+>>>>>>> f66978d669a8eea7e2107fda1abda67dd6e7c993
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
