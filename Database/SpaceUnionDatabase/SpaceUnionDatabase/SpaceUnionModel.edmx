@@ -76,7 +76,6 @@
           <EntitySet Name="Users" EntityType="SpaceUnionModel.User" />
           <EntitySet Name="UserStats" EntityType="SpaceUnionModel.UserStat" />
           <EntitySet Name="Powerups" EntityType="SpaceUnionModel.Powerup" />
-          <EntitySet Name="Powerup1" EntityType="SpaceUnionModel.Powerup1" />
         </EntityContainer>
         <EntityType Name="Ship">
           <Key>
@@ -126,14 +125,6 @@
           <Property Name="userstatFlagsCaptured" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Powerup">
-          <Key>
-            <PropertyRef Name="powerupID" />
-          </Key>
-          <Property Name="powerupID" Type="Int32" Nullable="false" />
-          <Property Name="pwrName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="pwrValue" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Powerup1">
           <Key>
             <PropertyRef Name="PowerupName" />
           </Key>
@@ -197,8 +188,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Powerup1">
-            <EntityTypeMapping TypeName="SpaceUnionModel.Powerup1">
+          <EntitySetMapping Name="Powerups">
+            <EntityTypeMapping TypeName="SpaceUnionModel.Powerup">
               <MappingFragment StoreEntitySet="Powerup">
                 <ScalarProperty Name="PowerupValue" ColumnName="PowerupValue" />
                 <ScalarProperty Name="PowerupName" ColumnName="PowerupName" />

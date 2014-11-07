@@ -50,9 +50,6 @@
     <Compile Include="Powerup.cs">
       <DependentUpon>SpaceUnionModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Powerup1.cs">
-      <DependentUpon>SpaceUnionModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="PowerupTableAccess.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

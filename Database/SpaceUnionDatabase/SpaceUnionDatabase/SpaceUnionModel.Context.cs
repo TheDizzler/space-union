@@ -30,6 +30,5 @@ namespace SpaceUnionDatabase
         public DbSet<User> Users { get; set; }
         public DbSet<UserStat> UserStats { get; set; }
         public DbSet<Powerup> Powerups { get; set; }
-        public DbSet<Powerup1> Powerup1 { get; set; }
     }
 }
