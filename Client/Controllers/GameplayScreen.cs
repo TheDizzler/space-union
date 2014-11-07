@@ -26,6 +26,8 @@ namespace SpaceUnion.Controllers {
         protected List<Ship> inactiveShips;
 		protected List<Tangible> targets;
 		protected List<Planet> planets;
+        protected List<Vector2> respawnpoints;
+        protected List<Vector2> usedspawn;
 
 		protected Ship playerShip;
 		private Game1 game;
@@ -88,6 +90,18 @@ namespace SpaceUnion.Controllers {
 			ships = new List<Ship>();
             inactiveShips = new List<Ship>();
 			targets = new List<Tangible>();
+            respawnpoints = new List<Vector2>();
+            usedspawn = new List<Vector2>();
+
+            respawnpoints.Add(new Vector2(game.getScreenWidth() / 2, game.getScreenHeight() - 100));
+            respawnpoints.Add(new Vector2(game.getScreenWidth() - 100, game.getScreenHeight() / 2));
+            respawnpoints.Add(new Vector2(game.getScreenWidth() / 2, game.getScreenHeight()));
+            respawnpoints.Add(new Vector2(100, game.getScreenHeight() / 2));
+            respawnpoints.Add(new Vector2(100, 100));
+            respawnpoints.Add(new Vector2(game.getScreenWidth() - 100, 100));
+            respawnpoints.Add(new Vector2(game.getScreenWidth() - 100, game.getScreenHeight() - 100));
+            respawnpoints.Add(new Vector2(100, game.getScreenHeight() - 100));
+
 
 			ships.Add(playerShip);
             ships.Add(enemyship);
@@ -119,7 +133,7 @@ namespace SpaceUnion.Controllers {
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public virtual void Update(GameTime gameTime) {
-
+            Random r = new Random();
 			quadTree.clear();
 			foreach (Tangible target in targets)
 				quadTree.insert(target);
@@ -186,13 +200,22 @@ namespace SpaceUnion.Controllers {
             }
             foreach (Ship ship in inactiveShips.ToList())
             {
+                Random randomspawn = new Random();
                 if (ship.isActive)
                 {
                     ship.inactiveTime = TimeSpan.Zero;
+                    ship.Position = respawnpoints.ElementAt(randomspawn.Next(respawnpoints.Count));
+                    usedspawn.Add(respawnpoints.ElementAt(respawnpoints.IndexOf(ship.Position)));
+                    respawnpoints.RemoveAt(respawnpoints.IndexOf(ship.Position));
                     ships.Add(ship);
                     inactiveShips.Remove(ship);
                 }
                 ship.update(gameTime, quadTree);
+            }
+            foreach (Vector2 spawn in usedspawn.ToList())
+            {
+                respawnpoints.Add(spawn);
+                usedspawn.Remove(spawn);
             }
 
 			for (int i = asteroids.Count - 1; i >= 0; i--) {
