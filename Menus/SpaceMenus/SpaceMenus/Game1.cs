@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.GamerServices;
 
 using Nuclex.UserInterface.Controls.Desktop;
 using Nuclex.UserInterface.Visuals.Flat;
@@ -37,6 +38,9 @@ namespace SpaceMenus
         public LobbyBrowserMenu lobby_browser_menu;
         public LobbyMenu        lobby_menu;
 
+        private int topBtmBorderPixels = 38;
+        private int leftRightBorderPixels = 14;
+
         public Screen mainScreen;
 
         /// <summary>
@@ -65,8 +69,45 @@ namespace SpaceMenus
             // Automatically query the input devices once per update
             Components.Add(this.input_manager);
             gui_manager.DrawOrder = 1000;
-
             IsMouseVisible = true;
+        }
+
+        /// <summary>
+        /// Returns the screen size 
+        /// </summary>
+        /// <returns></returns>
+        public Viewport getScreenSize() {
+            Viewport viewport = GraphicsDevice.Viewport;
+            return viewport;
+        }
+
+        /// <summary>
+        /// Sets the screen size given from the OptionMenu
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="fullscreen"></param>
+        public void setScreenSize(int width, int height, bool fullscreen = false)
+        {
+            if (fullscreen)
+            {
+                width = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                graphics_device_manager.IsFullScreen = true;
+            }
+            else
+            {
+                /* Compensate for the windows border size */
+                System.Windows.Forms.Application.EnableVisualStyles();
+                graphics_device_manager.IsFullScreen = false;
+                height -= topBtmBorderPixels;
+                width -= leftRightBorderPixels;
+            }
+
+            graphics_device_manager.PreferredBackBufferHeight = height;
+            graphics_device_manager.PreferredBackBufferWidth = width;
+            //Window.Position = new Point(0, 0);
+            graphics_device_manager.ApplyChanges();
         }
 
         protected override void Initialize()
