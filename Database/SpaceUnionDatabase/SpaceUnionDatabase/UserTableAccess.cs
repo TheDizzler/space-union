@@ -53,7 +53,7 @@ namespace SpaceUnionDatabase
                     .FirstOrDefault(u => u.userName == username);
 
                 if (user == null)
-                    errCode = 0;//incorrect username
+                    errCode = 4;//incorrect username
                 else {
                     user.userIsOnline = (byte)isOnline;
                     db.SaveChanges();
@@ -81,7 +81,7 @@ namespace SpaceUnionDatabase
                     .FirstOrDefault(u => u.userName == username);
 
                 if (user == null)
-                    errCode = 0;//incorrect username
+                    errCode = 4;//incorrect username
                 else
                 {
                     user.userIsOnline = (byte)isAdmin;
@@ -110,7 +110,7 @@ namespace SpaceUnionDatabase
                     .FirstOrDefault(u => u.userName == username);
 
                 if (user == null)
-                    errCode = 0;//incorrect username
+                    errCode = 4;//incorrect username
                 else {
                     user.userIsBlocked = (byte)isBlocked;
                     db.SaveChanges();
@@ -139,9 +139,9 @@ namespace SpaceUnionDatabase
                                          u.userPassword == password);
 
                 if (user == null)
-                    errCode = 0;//incorrect username/pass
+                    errCode = 4;//incorrect username/pass
                 else if (!PasswordHash.PasswordHash.ValidatePassword(password, user.userPassword) )
-                    errCode = 0;//incorrect username/pass
+                    errCode = 4;//incorrect username/pass
                 else if (user.userIsBlocked == 1)
                     errCode = 1;//user is blocked
                 else if (user.userIsAdmin == 0)
@@ -162,7 +162,7 @@ namespace SpaceUnionDatabase
         }
 
         public bool
-        UserLogin(string username, string password, ref int errCode, List<User> userInfo)
+        UserLogin(string username, string password, ref int errCode, ref User userInfo)
         {
             bool isValidUser = false;
             var  db          = new SpaceUnionEntities();
@@ -172,16 +172,16 @@ namespace SpaceUnionDatabase
                     .FirstOrDefault(u => u.userName == username);
 
                 if (user == null)
-                    errCode = 0;//incorrect username/pass
+                    errCode = 4;//incorrect username/pass
                 else if (!PasswordHash.PasswordHash.ValidatePassword(password, user.userPassword) )
-                    errCode = 0;//incorrect username/pass
+                    errCode = 4;//incorrect username/pass
                 else if (user.userIsBlocked == 1)
                     errCode = 1;//user is blocked
                 else if (user.userIsOnline == 1)
                     errCode = 3;//user is already online
                 else {
                     isValidUser = true;
-                    userInfo.Add(user);
+                    userInfo    = user;
                 }
             }
             catch (Exception e) {
@@ -195,7 +195,7 @@ namespace SpaceUnionDatabase
         }
 
         public bool
-        AdminGetUserInfo(string username, ref int errCode, List<User> info)
+        AdminGetUserInfo(string username, ref int errCode, ref User userInfo)
         {
             bool isValidUser = false;
             var  db          = new SpaceUnionEntities();
@@ -208,7 +208,7 @@ namespace SpaceUnionDatabase
                     errCode = 0;//incorrect user/pass
                 else {
                     isValidUser = true;
-                    info.Add(user);
+                    userInfo = user;
                 }
             }
             catch (Exception e) {

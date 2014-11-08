@@ -62,7 +62,7 @@ namespace SpaceUnionDatabase
                     .FirstOrDefault(s => s.shipName == shipname);
 
                 if (ship == null)
-                    errCode = 0;//incorrect shipname
+                    errCode = 10;//incorrect shipname
                 else {
                     ship.turnSpeed       = turnSpd;
                     ship.accelerateSpeed = accelerateSpd;

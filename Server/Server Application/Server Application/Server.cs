@@ -7,6 +7,7 @@ using Data_Structures;
 using Data_Manipulation;
 using System.Threading;
 using System.Collections.Concurrent;
+using SpaceUnionDatabase;
 
 namespace Server_Application
 {
@@ -37,6 +38,11 @@ namespace Server_Application
         /// </summary>
         public ConcurrentDictionary<string, Player> OnlinePlayers { get; private set; }
 
+        /// <summary>
+        /// Allows read/write to the user table in the spaceunion database
+        /// </summary>
+        private UserTableAccess userTable = new UserTableAccess();
+
         public Server()
         {
             Gamerooms = new ConcurrentDictionary<int, Gameroom>();
@@ -48,13 +54,20 @@ namespace Server_Application
 
         private void cleanRooms()
         {
+            int updateOnlinErrCode = 0;
+
             while (true)
             {
                 foreach (KeyValuePair<int, Gameroom> room in Gamerooms.ToArray())
                 {
                     foreach (GameData player in room.Value.getPlayerList())
+                    {
                         if (room.Value.InGame && compareTime(player.Player.Time, 10))
+                        {
                             room.Value.removePlayer(player.Player);
+                            userTable.UpdateUserIsOnline(player.Player.Username, 0, ref updateOnlinErrCode); //to be moved when a user is kicked from server
+                        }
+                    }
                     if (room.Value.Players == 0)
                     {
                         Gameroom temp;

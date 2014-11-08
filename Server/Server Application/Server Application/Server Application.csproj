@@ -61,10 +61,16 @@
     <Compile Include="ServerAnalyzer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Database\SpaceUnionDatabase\SpaceUnionDatabase\SpaceUnionDatabase.csproj">
+      <Project>{45ed07c7-ca09-4371-912a-5dd22323bb40}</Project>
+      <Name>SpaceUnionDatabase</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Data Manipulation\Data Manipulation.csproj">
       <Project>{93ea3317-84d9-4b61-9c03-020646b3eb05}</Project>
       <Name>Data Manipulation</Name>

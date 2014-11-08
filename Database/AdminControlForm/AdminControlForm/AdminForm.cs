@@ -264,12 +264,12 @@ namespace AdminControlForm
             const byte BLOCKED = 1;
 
             int errCode = 0;
-            List<User> userInfo = new List<User>();
+            User userInfo = new User();
 
-            if (userTable.AdminGetUserInfo(txtbUserToEdit.Text, ref errCode, userInfo) ) {
-                txtbUserEditing.Text = userInfo[0].userName;
+            if (userTable.AdminGetUserInfo(txtbUserToEdit.Text, ref errCode, ref userInfo) ) {
+                txtbUserEditing.Text = userInfo.userName;
 
-                if (userInfo[0].userIsBlocked.Equals(BLOCKED)) {
+                if (userInfo.userIsBlocked.Equals(BLOCKED)) {
                     txtbCurrentBlockStatus.Text = "BLOCKED";
                     chkbBlockUnblockUser.Text = "Do you want to UNBLOCK " + txtbUserEditing.Text;
                 }
@@ -326,10 +326,11 @@ namespace AdminControlForm
         private void button1_Click(object sender, EventArgs e)
         {
             int i = 3;
-            List<User> info = new List<User>();
-            userTable.AdminGetUserInfo(logintext.Text, ref i, info);
-
-            this.gvUsers.DataSource = info;
+            User user = new User();
+            List<User> users = new List<User>();
+            userTable.AdminGetUserInfo(logintext.Text, ref i, ref user);
+            users.Add(user);
+            this.gvUsers.DataSource = users;
             this.gvUsers.Refresh();
             
         }

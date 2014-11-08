@@ -32,9 +32,12 @@ namespace Server_Application
         /// </summary>
         TcpListener TCPListener = new TcpListener(IPAddress.Parse("0.0.0.0"), Constants.TCPMessageListener);
 
+        LoginRequests login;
+
         public DataReceiving(Server owner)
         {
             this.owner = owner;
+            login = new LoginRequests();
             setup();
         }
 
@@ -65,7 +68,7 @@ namespace Server_Application
                 switch (message.Type)
                 {
                     case Constants.LOGIN_REQUEST:
-                        new Thread(() => LoginRequests.handleLoginRequest((Player)message, owner)).Start();                        
+                        new Thread(() => login.handleLoginRequest((Player)message, owner)).Start();                        
                         break;
                     case Constants.PLAYER_REQUEST:
                         new Thread(() => handlePlayerRequest((PlayerRequest)message)).Start();
