@@ -267,6 +267,7 @@ namespace AdminControlForm
             }
         }
 
+<<<<<<< HEAD
         private void button1_Click(object sender, EventArgs e)
         {
             string[] info = new string[7];
@@ -281,6 +282,354 @@ namespace AdminControlForm
                             "image    : " + info[4] + "\n" +
                             "password : " + info[5] + "\n" +
                             "email    : " + info[6]);
+=======
+        /// <summary>
+        /// Adds the new ship to the ship table in the database.
+        /// First checks if all fields are valid and if so, attempts
+        /// to add the ship to the table. Shows a message of
+        /// success or failure
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void bttnAddShip_Click(object sender, EventArgs e)
+        {
+            bool isShipValid = false;
+
+            validateAllShipAddFields(sender, e);
+
+            isShipValid = isMaxSpeedValid
+                       && isTurnSpeedValid
+                       && isAccelerationValid
+                       && isShipNameValid;
+
+            if (isShipValid)
+            {
+                // if a user isnt added to the database
+                if (!shipTable.AddNewShip(txtbNewShipName.Text,
+                                          txtbTurnSpeed.Text,
+                                          txtbMaxSpeed.Text,
+                                          txtbAccelerate.Text))
+                {
+                    MessageBox.Show("Sorry, the Ship name is already in use.");
+                }
+                else
+                {
+                    MessageBox.Show("Ship was added to the database successfully.");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Helper funticon for when the ship add button is clicked.
+        /// 
+        /// Validates all fields before adding the ship by calling
+        /// all validation functions
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void validateAllShipAddFields(object sender, EventArgs e)
+        {
+            validateTurnSpeed(sender, e);
+            validateMaxSpeed(sender, e);
+            validateAcceleration(sender, e);
+            validateShipName(sender, e);
+        }
+
+        private void validateTurnSpeed(object sender, EventArgs e)
+        {
+            string turnSpeedErrMsg = null;
+
+            if (!shipValidation.ValidateTurnSpeed(txtbTurnSpeed.Text,
+                                                  ref turnSpeedErrMsg))
+            {
+                lablTurnSpeedErrMsg.Text = turnSpeedErrMsg;
+                lablTurnSpeedErrMsg.Visible = true;
+                isTurnSpeedValid = false;
+            }
+            else
+            {
+                lablTurnSpeedErrMsg.Visible = false;
+                isTurnSpeedValid = true;
+            }
+        }
+
+        private void validateMaxSpeed(object sender, EventArgs e)
+        {
+            string turnMaxSpeedErrMsg = null;
+
+            if (!shipValidation.ValidateMaxSpeed(txtbMaxSpeed.Text,
+                                                 ref turnMaxSpeedErrMsg))
+            {
+                lablMaxSpeedErrMsg.Text = turnMaxSpeedErrMsg;
+                lablMaxSpeedErrMsg.Visible = true;
+                isMaxSpeedValid = false;
+            }
+            else
+            {
+                lablMaxSpeedErrMsg.Visible = false;
+                isMaxSpeedValid = true;
+            }
+        }
+
+        private void validateShipName(object sender, EventArgs e)
+        {
+            string shipNameErrMsg = null;
+
+            if (!shipValidation.ValidateShipName(txtbNewShipName.Text,
+                                                 ref shipNameErrMsg))
+            {
+                lablNewShipNameErrMsg.Text = shipNameErrMsg;
+                lablNewShipNameErrMsg.Visible = true;
+                isShipNameValid = false;
+            }
+            else
+            {
+                lablNewShipNameErrMsg.Visible = false;
+                isShipNameValid = true;
+            }
+        }
+
+        private void validateAcceleration(object sender, EventArgs e)
+        {
+            string turnAccelerateErrMsg = null;
+
+            if (!shipValidation.ValidateAcceleration(txtbAccelerate.Text,
+                                                     ref turnAccelerateErrMsg))
+            {
+                lablAccelErrMsg.Text = turnAccelerateErrMsg;
+                lablAccelErrMsg.Visible = true;
+                isAccelerationValid = false;
+            }
+            else
+            {
+                lablAccelErrMsg.Visible = false;
+                isAccelerationValid = true;
+            }
+        }
+
+        private void AdminForm_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'spaceUnionDataSet.Powerups' table. You can move, or remove it, as needed.
+            this.powerupTableAdapter.Fill(this.spaceUnionDataSet.Powerup);
+        }
+
+        /// <summary>
+        /// updates the userstats with the data entered.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            UserStat oldStat = userStatTable.getUserStat(this.tbUserStatName.Text);
+
+            if (!string.IsNullOrWhiteSpace(this.tbUserStatName.Text))
+            {
+                userStatTable.setUserStatWin(oldStat.userName.ToString(), (int)this.nudWins.Value - oldStat.userstatWin);
+                userStatTable.setUserStatLose(oldStat.userName.ToString(), (int)this.nudLoses.Value - oldStat.userstatLose);
+                userStatTable.setUserStatDied(oldStat.userName.ToString(), (int)this.nudDied.Value - oldStat.userstatDied);
+                userStatTable.setUserStatHits(oldStat.userName.ToString(), (int)this.nudHits.Value - oldStat.userstatHits);
+                userStatTable.setUserStatKills(oldStat.userName.ToString(), (int)this.nudKills.Value - oldStat.userstatKills);
+                userStatTable.setUserStatShip1(oldStat.userName.ToString(), (int)this.nudShip1.Value - oldStat.userstatShipUsed_1);
+                userStatTable.setUserStatShip2(oldStat.userName.ToString(), (int)this.nudShip2.Value - oldStat.userstatShipUsed_2);
+                userStatTable.setUserStatShip3(oldStat.userName.ToString(), (int)this.nudShip3.Value - oldStat.userstatShipUsed_3);
+                userStatTable.setUserStatFlagsCaptured(oldStat.userName.ToString(), (int)this.nudFlagsCaptured.Value - oldStat.userstatFlagsCaptured);
+                userStatTable.setUserStatShotsFired(oldStat.userName.ToString(), (int)this.nudShotsFired.Value - oldStat.userstatShotsFired);
+            }
+        }
+
+
+        private void btnGetUserStats_Click(object sender, EventArgs e)
+        {
+            UserStat oldStat = userStatTable.getUserStat(this.tbUserStatName.Text);
+
+            if (oldStat != null)
+            {
+                this.nudDied.Value = oldStat.userstatDied;
+                this.nudFlagsCaptured.Value = oldStat.userstatFlagsCaptured;
+                this.nudHits.Value = oldStat.userstatHits;
+                this.nudKills.Value = oldStat.userstatKills;
+                this.nudLoses.Value = oldStat.userstatLose;
+                this.nudShip1.Value = oldStat.userstatShipUsed_1;
+                this.nudShip2.Value = oldStat.userstatShipUsed_2;
+                this.nudShip3.Value = oldStat.userstatShipUsed_3;
+                this.nudShotsFired.Value = oldStat.userstatShotsFired;
+                this.nudWins.Value = oldStat.userstatWin;
+
+                this.btnUpdate.Enabled = true;
+            }
+        }
+
+        /// <summary>
+        /// checks to make sure a valid username is entered before allowing an update.
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// </summary>
+        private void tbUserStatName_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(this.tbUserStatName.Text))
+                this.btnGetUserStats.Enabled = true;
+            else
+                this.btnGetUserStats.Enabled = false;
+
+        }
+
+        private void bttnShipToEdit_Click(object sender, EventArgs e)
+        {
+            List<Ship> shipInfo = new List<Ship>();
+            string shipname = txtbShipEditing.Text;
+            int errCode = -1;
+
+            if (shipTable.GetShipInfo(shipname, ref errCode, shipInfo))
+            {
+                Ship ship = shipInfo.First();
+
+                rtxtCurrentShipStats.Text = "Ship Name: " + ship.shipName.ToString() + "\n";
+                rtxtCurrentShipStats.Text += "Turn Speed: " + ship.turnSpeed.ToString() + "\n";
+                rtxtCurrentShipStats.Text += "Acceleration: " + ship.accelerateSpeed.ToString() + "\n";
+                rtxtCurrentShipStats.Text += "Max Speed: " + ship.maxSpeed.ToString() + "\n";
+
+                shipToEdit = ship.shipName.ToString();
+            }
+            else
+            {
+                rtxtCurrentShipStats.Text = "The ship was not found.";
+            }
+        }
+
+        /// <summary>
+        /// Helper funticon for when the ship add button is clicked.
+        /// 
+        /// Validates all fields before adding the ship by calling
+        /// all validation functions
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void validateAllShipEditFields(object sender, EventArgs e)
+        {
+            validateTurnSpeedEdit(sender, e);
+            validateMaxSpeedEdit(sender, e);
+            validateAccelerationEdit(sender, e);
+        }
+
+        private void validateTurnSpeedEdit(object sender, EventArgs e)
+        {
+            string turnSpeedErrMsg = null;
+
+            if (!shipValidation.ValidateTurnSpeed(txtbNewTurnSpeed.Text,
+                                                  ref turnSpeedErrMsg))
+            {
+                lablShipEditTurnSpdErrMsg.Text = turnSpeedErrMsg;
+                lablShipEditTurnSpdErrMsg.Visible = true;
+                isTurnSpeedEditValid = false;
+            }
+            else
+            {
+                lablShipEditTurnSpdErrMsg.Visible = false;
+                isTurnSpeedEditValid = true;
+            }
+        }
+
+        private void validateMaxSpeedEdit(object sender, EventArgs e)
+        {
+            string maxSpeedErrMsg = null;
+
+            if (!shipValidation.ValidateMaxSpeed(txtbNewMaxSpeed.Text,
+                                                 ref maxSpeedErrMsg))
+            {
+                lablShipEditMaxSpeed.Text = maxSpeedErrMsg;
+                lablShipEditMaxSpeed.Visible = true;
+                isMaxSpeedEditValid = false;
+            }
+            else
+            {
+                lablShipEditMaxSpeed.Visible = false;
+                isMaxSpeedEditValid = true;
+            }
+        }
+
+        private void validateAccelerationEdit(object sender, EventArgs e)
+        {
+            string accelerateErrMsg = null;
+
+            if (!shipValidation.ValidateAcceleration(txtbNewAccelerate.Text,
+                                                     ref accelerateErrMsg))
+            {
+                lablShipEditAccelerateErrMsg.Text = accelerateErrMsg;
+                lablShipEditAccelerateErrMsg.Visible = true;
+                isAccelerationEditValid = false;
+            }
+            else
+            {
+                lablShipEditAccelerateErrMsg.Visible = false;
+                isAccelerationEditValid = true;
+            }
+        }
+
+        private void bttnShipUpdate_Click(object sender, EventArgs e)
+        {
+            bool isShipEditValid = false;
+            int errCode = -1;
+
+            AcceptCancelBlockActionForm acceptShipEdit =
+                    new AcceptCancelBlockActionForm();
+
+            validateAllShipEditFields(sender, e);
+
+            isShipEditValid = isMaxSpeedEditValid
+                           && isTurnSpeedEditValid
+                           && isAccelerationEditValid;
+
+            if (isShipEditValid && !String.IsNullOrEmpty(shipToEdit))
+            {
+                acceptShipEdit.TxtMsg = "Are you sure you want to update " + shipToEdit;
+
+                // check to see if they really want to edit the ship
+                if (acceptShipEdit.ShowDialog() == DialogResult.OK)
+                {
+                    shipTable.UpdateShipStats(shipToEdit,
+                                              txtbNewTurnSpeed.Text,
+                                              txtbNewMaxSpeed.Text,
+                                              txtbNewAccelerate.Text,
+                                              ref errCode);
+
+                    MessageBox.Show(shipToEdit + " has been updated.");
+                }
+            }
+            else if (String.IsNullOrEmpty(shipToEdit))
+            {
+                MessageBox.Show("A ship to edit has not been chosen yet.");
+            }
+        }
+
+        /// <summary>
+        /// checks to make sure a valid powerup is entered before allowing an update.
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// </summary>
+        private void tbPowerupName_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(this.tbPowerupName.Text))
+                this.btnUpdatePwr.Enabled = true;
+            else
+                this.btnUpdatePwr.Enabled = false;
+
+        }
+
+        private void btnUpdatePwr_Click(object sender, EventArgs e)
+        {
+            Powerup oldPwrup = powerupTable.getPowerup(this.tbPowerupName.Text);
+
+            if (!string.IsNullOrWhiteSpace(this.tbPowerupName.Text) && oldPwrup != null)
+            {
+                powerupTable.setPowerup(oldPwrup.PowerupName.ToString(), (int)this.nudPwrValue.Value);
+            }
+            else
+            {
+                powerupTable.addPowerup(this.tbPowerupName.Text, (int)this.nudPwrValue.Value);
+            }
+            this.powerupTableAdapter.Fill(this.spaceUnionDataSet.Powerup);
+            this.dgvPwrup.Refresh();
+>>>>>>> 0187f50c6dcf5dd78a3fcf9bfa1804582faa739e
         }
     }
 }
