@@ -37,7 +37,6 @@ namespace Server_Application
         /// Total list of online players.
         /// </summary>
         public ConcurrentDictionary<string, Player> OnlinePlayers { get; private set; }
-
         /// <summary>
         /// Allows read/write to the user table in the spaceunion database
         /// </summary>
@@ -92,7 +91,7 @@ namespace Server_Application
 
         public void updatePlayer(GameData player)
         {
-            Gameroom room = getGameroom(player.Player.GameRoom);
+                Gameroom room = getGameroom(player.Player.GameRoom);
             if (room == null)
                 return;
             room.updatePlayer(player);
