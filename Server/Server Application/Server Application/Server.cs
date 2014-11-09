@@ -91,7 +91,7 @@ namespace Server_Application
 
         public void updatePlayer(GameData player)
         {
-                Gameroom room = getGameroom(player.Player.GameRoom);
+            Gameroom room = getGameroom(player.Player.GameRoom);
             if (room == null)
                 return;
             room.updatePlayer(player);
@@ -223,6 +223,11 @@ namespace Server_Application
                 list.Add(info);
             }
             return list;
+        }
+
+        public void getRequests()
+        {
+            Console.WriteLine("Requests handled: " + Receiving.requests);
         }
     }
 }

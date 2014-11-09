@@ -61,6 +61,9 @@ namespace Server_Application
                     case "memory":
                         analyzer.usedMemory();
                         break;
+                    case "requests":
+                        server.getRequests();
+                        break;
                     case "clear":
                         Console.Clear();
                         break;

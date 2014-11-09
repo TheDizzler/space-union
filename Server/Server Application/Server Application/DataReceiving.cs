@@ -33,7 +33,7 @@ namespace Server_Application
         TcpListener TCPListener = new TcpListener(IPAddress.Parse("0.0.0.0"), Constants.TCPMessageListener);
 
         LoginRequests login;
-
+        public long requests = 0;
         public DataReceiving(Server owner)
         {
             this.owner = owner;
@@ -90,8 +90,8 @@ namespace Server_Application
             while (true)
             {
                 GameData clientData = (GameData)DataControl.receiveUDPData((UdpClient)UDPListener);
-                Console.WriteLine("received data");
                 new Thread(() => owner.updatePlayer(clientData)).Start();
+                requests++;
             }
         }
 
