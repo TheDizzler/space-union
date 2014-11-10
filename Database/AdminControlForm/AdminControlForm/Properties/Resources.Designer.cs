@@ -73,6 +73,16 @@ namespace AdminControlForm.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap deep_space_PS {
+            get {
+                object obj = ResourceManager.GetObject("deep-space-PS", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap galaxy_background {
             get {
                 object obj = ResourceManager.GetObject("galaxy_background", resourceCulture);

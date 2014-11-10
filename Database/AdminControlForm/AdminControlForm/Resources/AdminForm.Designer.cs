@@ -30,27 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.createUserTab = new System.Windows.Forms.TabPage();
-            this.lablCreateNewUser = new System.Windows.Forms.Label();
-            this.lablConfPasswordErrMsg = new System.Windows.Forms.Label();
-            this.bttnCreateUser = new System.Windows.Forms.Button();
-            this.lablUsernameSpec2 = new System.Windows.Forms.Label();
-            this.lablPasswordSpec2 = new System.Windows.Forms.Label();
-            this.lablPasswordSpec = new System.Windows.Forms.Label();
-            this.lablUsernameSpec = new System.Windows.Forms.Label();
-            this.lablEmailErrMsg = new System.Windows.Forms.Label();
-            this.lablPasswordErrMsg = new System.Windows.Forms.Label();
-            this.lablUsernameErrMsg = new System.Windows.Forms.Label();
-            this.txtbEmail = new System.Windows.Forms.TextBox();
-            this.lablEmail = new System.Windows.Forms.Label();
-            this.txtbConfirmPassword = new System.Windows.Forms.TextBox();
-            this.lablConfirmPassword = new System.Windows.Forms.Label();
-            this.txtbPassword = new System.Windows.Forms.TextBox();
-            this.lablPassword = new System.Windows.Forms.Label();
-            this.txtbUsername = new System.Windows.Forms.TextBox();
-            this.lablUsername = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.gvUsers = new System.Windows.Forms.DataGridView();
+            this.userNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userPasswordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userEmailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userImageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userIsOnlineDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userIsBlockedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userIsAdminDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.spaceUnionDataSet = new AdminControlForm.SpaceUnionDataSet();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.logintext = new System.Windows.Forms.TextBox();
@@ -79,42 +69,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tbUserStatName = new System.Windows.Forms.TextBox();
             this.gvStats = new System.Windows.Forms.DataGridView();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.lablShipEditMaxSpeed = new System.Windows.Forms.Label();
-            this.lablShipEditAccelerateErrMsg = new System.Windows.Forms.Label();
-            this.lablShipEditTurnSpdErrMsg = new System.Windows.Forms.Label();
-            this.bttnShipUpdate = new System.Windows.Forms.Button();
-            this.bttnShipToEdit = new System.Windows.Forms.Button();
-            this.txtbNewMaxSpeed = new System.Windows.Forms.TextBox();
-            this.lablNewShipMaxSpeed = new System.Windows.Forms.Label();
-            this.txtbNewAccelerate = new System.Windows.Forms.TextBox();
-            this.lablNewShipAccelerate = new System.Windows.Forms.Label();
-            this.txtbNewTurnSpeed = new System.Windows.Forms.TextBox();
-            this.lablNewShipTurnSpeed = new System.Windows.Forms.Label();
-            this.rtxtCurrentShipStats = new System.Windows.Forms.RichTextBox();
-            this.lablCurrentShipStats = new System.Windows.Forms.Label();
-            this.txtbShipEditing = new System.Windows.Forms.TextBox();
-            this.lablShipEditing = new System.Windows.Forms.Label();
-            this.lablEditShip = new System.Windows.Forms.Label();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.btnUpdatePwr = new System.Windows.Forms.Button();
-            this.label16 = new System.Windows.Forms.Label();
-            this.nudPwrValue = new System.Windows.Forms.NumericUpDown();
-            this.label17 = new System.Windows.Forms.Label();
-            this.tbPowerupName = new System.Windows.Forms.TextBox();
-            this.dgvPwrup = new System.Windows.Forms.DataGridView();
-            this.spaceUnionDataSet = new AdminControlForm.SpaceUnionDataSet();
-            
-            this.userTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UserTableAdapter();
-            this.userNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userPasswordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userEmailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userImageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userIsOnlineDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userIsBlockedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userIsAdminDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userStatsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.userStatsTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UserStatsTableAdapter();
             this.userNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.userstatWinDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.userstatLoseDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -126,10 +80,40 @@
             this.userstatShipUsed2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.userstatShipUsed3DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.userstatFlagsCapturedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-
-        
-            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            
+            this.userStatsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.btnUpdatePwr = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            this.nudPwrValue = new System.Windows.Forms.NumericUpDown();
+            this.label17 = new System.Windows.Forms.Label();
+            this.tbPowerupName = new System.Windows.Forms.TextBox();
+            this.dgvPwrup = new System.Windows.Forms.DataGridView();
+            this.powerupIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pwrNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pwrValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.powerupsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.userTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UserTableAdapter();
+            this.userStatsTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UserStatsTableAdapter();
+            this.powerupsTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.PowerupsTableAdapter();
+            this.createUserTab = new System.Windows.Forms.TabPage();
+            this.lablCreateNewUser = new System.Windows.Forms.Label();
+            this.lablConfPasswordErrMsg = new System.Windows.Forms.Label();
+            this.bttnCreateUser = new System.Windows.Forms.Button();
+            this.lablUsernameSpec2 = new System.Windows.Forms.Label();
+            this.lablPasswordSpec2 = new System.Windows.Forms.Label();
+            this.lablPasswordSpec = new System.Windows.Forms.Label();
+            this.lablUsernameSpec = new System.Windows.Forms.Label();
+            this.lablEmailErrMsg = new System.Windows.Forms.Label();
+            this.lablPasswordErrMsg = new System.Windows.Forms.Label();
+            this.lablUsernameErrMsg = new System.Windows.Forms.Label();
+            this.txtbEmail = new System.Windows.Forms.TextBox();
+            this.lablEmail = new System.Windows.Forms.Label();
+            this.txtbConfirmPassword = new System.Windows.Forms.TextBox();
+            this.lablConfirmPassword = new System.Windows.Forms.Label();
+            this.txtbPassword = new System.Windows.Forms.TextBox();
+            this.lablPassword = new System.Windows.Forms.Label();
+            this.txtbUsername = new System.Windows.Forms.TextBox();
+            this.lablUsername = new System.Windows.Forms.Label();
             this.editUserTab = new System.Windows.Forms.TabPage();
             this.lablCurrentBlockStatus = new System.Windows.Forms.Label();
             this.txtbCurrentBlockStatus = new System.Windows.Forms.TextBox();
@@ -158,17 +142,28 @@
             this.lablNewShipName = new System.Windows.Forms.Label();
             this.lablAddNewShip = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-
-            this.powerupsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.powerupsTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.PowerupsTableAdapter();
-            this.powerupIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pwrNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pwrValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.lablShipEditMaxSpeed = new System.Windows.Forms.Label();
+            this.lablShipEditAccelerateErrMsg = new System.Windows.Forms.Label();
+            this.lablShipEditTurnSpdErrMsg = new System.Windows.Forms.Label();
+            this.bttnShipUpdate = new System.Windows.Forms.Button();
+            this.bttnShipToEdit = new System.Windows.Forms.Button();
+            this.txtbNewMaxSpeed = new System.Windows.Forms.TextBox();
+            this.lablNewShipMaxSpeed = new System.Windows.Forms.Label();
+            this.txtbNewAccelerate = new System.Windows.Forms.TextBox();
+            this.lablNewShipAccelerate = new System.Windows.Forms.Label();
+            this.txtbNewTurnSpeed = new System.Windows.Forms.TextBox();
+            this.lablNewShipTurnSpeed = new System.Windows.Forms.Label();
+            this.rtxtCurrentShipStats = new System.Windows.Forms.RichTextBox();
+            this.lablCurrentShipStats = new System.Windows.Forms.Label();
+            this.txtbShipEditing = new System.Windows.Forms.TextBox();
+            this.lablShipEditing = new System.Windows.Forms.Label();
+            this.lablEditShip = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
-            this.createUserTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvUsers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFlagsCaptured)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudShip3)).BeginInit();
@@ -181,21 +176,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudLoses)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWins)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvStats)).BeginInit();
-
             ((System.ComponentModel.ISupportInitialize)(this.userStatsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
-            this.editUserTab.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-
-            this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPwrValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPwrup)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userStatsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.powerupsBindingSource)).BeginInit();
+            this.createUserTab.SuspendLayout();
+            this.editUserTab.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -213,220 +202,6 @@
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(496, 512);
             this.tabControl.TabIndex = 0;
-            // 
-            // createUserTab
-            // 
-            this.createUserTab.BackColor = System.Drawing.Color.Transparent;
-            this.createUserTab.BackgroundImage = global::AdminControlForm.Properties.Resources.dark_space;
-            this.createUserTab.Controls.Add(this.lablCreateNewUser);
-            this.createUserTab.Controls.Add(this.lablConfPasswordErrMsg);
-            this.createUserTab.Controls.Add(this.bttnCreateUser);
-            this.createUserTab.Controls.Add(this.lablUsernameSpec2);
-            this.createUserTab.Controls.Add(this.lablPasswordSpec2);
-            this.createUserTab.Controls.Add(this.lablPasswordSpec);
-            this.createUserTab.Controls.Add(this.lablUsernameSpec);
-            this.createUserTab.Controls.Add(this.lablEmailErrMsg);
-            this.createUserTab.Controls.Add(this.lablPasswordErrMsg);
-            this.createUserTab.Controls.Add(this.lablUsernameErrMsg);
-            this.createUserTab.Controls.Add(this.txtbEmail);
-            this.createUserTab.Controls.Add(this.lablEmail);
-            this.createUserTab.Controls.Add(this.txtbConfirmPassword);
-            this.createUserTab.Controls.Add(this.lablConfirmPassword);
-            this.createUserTab.Controls.Add(this.txtbPassword);
-            this.createUserTab.Controls.Add(this.lablPassword);
-            this.createUserTab.Controls.Add(this.txtbUsername);
-            this.createUserTab.Controls.Add(this.lablUsername);
-            this.createUserTab.Location = new System.Drawing.Point(4, 22);
-            this.createUserTab.Name = "createUserTab";
-            this.createUserTab.Padding = new System.Windows.Forms.Padding(3);
-            this.createUserTab.Size = new System.Drawing.Size(488, 486);
-            this.createUserTab.TabIndex = 0;
-            this.createUserTab.Text = "Create New User";
-            // 
-            // lablCreateNewUser
-            // 
-            this.lablCreateNewUser.AutoSize = true;
-            this.lablCreateNewUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablCreateNewUser.ForeColor = System.Drawing.Color.White;
-            this.lablCreateNewUser.Location = new System.Drawing.Point(24, 16);
-            this.lablCreateNewUser.Name = "lablCreateNewUser";
-            this.lablCreateNewUser.Size = new System.Drawing.Size(145, 20);
-            this.lablCreateNewUser.TabIndex = 18;
-            this.lablCreateNewUser.Text = "Create New User";
-            // 
-            // lablConfPasswordErrMsg
-            // 
-            this.lablConfPasswordErrMsg.AutoSize = true;
-            this.lablConfPasswordErrMsg.ForeColor = System.Drawing.Color.Red;
-            this.lablConfPasswordErrMsg.Location = new System.Drawing.Point(188, 245);
-            this.lablConfPasswordErrMsg.Name = "lablConfPasswordErrMsg";
-            this.lablConfPasswordErrMsg.Size = new System.Drawing.Size(139, 13);
-            this.lablConfPasswordErrMsg.TabIndex = 17;
-            this.lablConfPasswordErrMsg.Text = "Confirm Password Error Msg";
-            this.lablConfPasswordErrMsg.Visible = false;
-            // 
-            // bttnCreateUser
-            // 
-            this.bttnCreateUser.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.bttnCreateUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bttnCreateUser.Location = new System.Drawing.Point(48, 397);
-            this.bttnCreateUser.Name = "bttnCreateUser";
-            this.bttnCreateUser.Size = new System.Drawing.Size(154, 42);
-            this.bttnCreateUser.TabIndex = 16;
-            this.bttnCreateUser.Text = "Create New User";
-            this.bttnCreateUser.UseVisualStyleBackColor = true;
-            this.bttnCreateUser.Click += new System.EventHandler(this.bttnCreateUser_Click);
-            // 
-            // lablUsernameSpec2
-            // 
-            this.lablUsernameSpec2.AutoSize = true;
-            this.lablUsernameSpec2.ForeColor = System.Drawing.Color.White;
-            this.lablUsernameSpec2.Location = new System.Drawing.Point(45, 106);
-            this.lablUsernameSpec2.Name = "lablUsernameSpec2";
-            this.lablUsernameSpec2.Size = new System.Drawing.Size(181, 13);
-            this.lablUsernameSpec2.TabIndex = 15;
-            this.lablUsernameSpec2.Text = "Can only contain letters and numbers";
-            // 
-            // lablPasswordSpec2
-            // 
-            this.lablPasswordSpec2.AutoSize = true;
-            this.lablPasswordSpec2.ForeColor = System.Drawing.Color.White;
-            this.lablPasswordSpec2.Location = new System.Drawing.Point(45, 200);
-            this.lablPasswordSpec2.Name = "lablPasswordSpec2";
-            this.lablPasswordSpec2.Size = new System.Drawing.Size(309, 13);
-            this.lablPasswordSpec2.TabIndex = 14;
-            this.lablPasswordSpec2.Text = "Must contain one digit as well as an upper- and lower-case letter";
-            // 
-            // lablPasswordSpec
-            // 
-            this.lablPasswordSpec.AutoSize = true;
-            this.lablPasswordSpec.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablPasswordSpec.ForeColor = System.Drawing.Color.White;
-            this.lablPasswordSpec.Location = new System.Drawing.Point(45, 187);
-            this.lablPasswordSpec.Name = "lablPasswordSpec";
-            this.lablPasswordSpec.Size = new System.Drawing.Size(81, 13);
-            this.lablPasswordSpec.TabIndex = 13;
-            this.lablPasswordSpec.Text = "4-32 characters";
-            // 
-            // lablUsernameSpec
-            // 
-            this.lablUsernameSpec.AutoSize = true;
-            this.lablUsernameSpec.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablUsernameSpec.ForeColor = System.Drawing.Color.White;
-            this.lablUsernameSpec.Location = new System.Drawing.Point(45, 93);
-            this.lablUsernameSpec.Name = "lablUsernameSpec";
-            this.lablUsernameSpec.Size = new System.Drawing.Size(81, 13);
-            this.lablUsernameSpec.TabIndex = 12;
-            this.lablUsernameSpec.Text = "4-16 characters";
-            // 
-            // lablEmailErrMsg
-            // 
-            this.lablEmailErrMsg.AutoSize = true;
-            this.lablEmailErrMsg.ForeColor = System.Drawing.Color.Red;
-            this.lablEmailErrMsg.Location = new System.Drawing.Point(98, 314);
-            this.lablEmailErrMsg.Name = "lablEmailErrMsg";
-            this.lablEmailErrMsg.Size = new System.Drawing.Size(78, 13);
-            this.lablEmailErrMsg.TabIndex = 11;
-            this.lablEmailErrMsg.Text = "Email error msg";
-            this.lablEmailErrMsg.Visible = false;
-            // 
-            // lablPasswordErrMsg
-            // 
-            this.lablPasswordErrMsg.AutoSize = true;
-            this.lablPasswordErrMsg.ForeColor = System.Drawing.Color.Red;
-            this.lablPasswordErrMsg.Location = new System.Drawing.Point(127, 146);
-            this.lablPasswordErrMsg.Name = "lablPasswordErrMsg";
-            this.lablPasswordErrMsg.Size = new System.Drawing.Size(99, 13);
-            this.lablPasswordErrMsg.TabIndex = 10;
-            this.lablPasswordErrMsg.Text = "Password error msg";
-            this.lablPasswordErrMsg.Visible = false;
-            // 
-            // lablUsernameErrMsg
-            // 
-            this.lablUsernameErrMsg.AutoSize = true;
-            this.lablUsernameErrMsg.ForeColor = System.Drawing.Color.Red;
-            this.lablUsernameErrMsg.Location = new System.Drawing.Point(125, 52);
-            this.lablUsernameErrMsg.Name = "lablUsernameErrMsg";
-            this.lablUsernameErrMsg.Size = new System.Drawing.Size(101, 13);
-            this.lablUsernameErrMsg.TabIndex = 9;
-            this.lablUsernameErrMsg.Text = "Username error msg";
-            this.lablUsernameErrMsg.Visible = false;
-            // 
-            // txtbEmail
-            // 
-            this.txtbEmail.Location = new System.Drawing.Point(45, 332);
-            this.txtbEmail.Name = "txtbEmail";
-            this.txtbEmail.Size = new System.Drawing.Size(223, 20);
-            this.txtbEmail.TabIndex = 7;
-            // 
-            // lablEmail
-            // 
-            this.lablEmail.AutoSize = true;
-            this.lablEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablEmail.ForeColor = System.Drawing.Color.White;
-            this.lablEmail.Location = new System.Drawing.Point(45, 312);
-            this.lablEmail.Name = "lablEmail";
-            this.lablEmail.Size = new System.Drawing.Size(47, 17);
-            this.lablEmail.TabIndex = 6;
-            this.lablEmail.Text = "Email";
-            // 
-            // txtbConfirmPassword
-            // 
-            this.txtbConfirmPassword.Location = new System.Drawing.Point(45, 263);
-            this.txtbConfirmPassword.Name = "txtbConfirmPassword";
-            this.txtbConfirmPassword.Size = new System.Drawing.Size(223, 20);
-            this.txtbConfirmPassword.TabIndex = 5;
-            this.txtbConfirmPassword.TextChanged += new System.EventHandler(this.validateConfPassword);
-            // 
-            // lablConfirmPassword
-            // 
-            this.lablConfirmPassword.AutoSize = true;
-            this.lablConfirmPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablConfirmPassword.ForeColor = System.Drawing.Color.White;
-            this.lablConfirmPassword.Location = new System.Drawing.Point(45, 243);
-            this.lablConfirmPassword.Name = "lablConfirmPassword";
-            this.lablConfirmPassword.Size = new System.Drawing.Size(137, 17);
-            this.lablConfirmPassword.TabIndex = 4;
-            this.lablConfirmPassword.Text = "Confirm Password";
-            // 
-            // txtbPassword
-            // 
-            this.txtbPassword.Location = new System.Drawing.Point(45, 164);
-            this.txtbPassword.Name = "txtbPassword";
-            this.txtbPassword.Size = new System.Drawing.Size(223, 20);
-            this.txtbPassword.TabIndex = 3;
-            this.txtbPassword.TextChanged += new System.EventHandler(this.validatePassword);
-            // 
-            // lablPassword
-            // 
-            this.lablPassword.AutoSize = true;
-            this.lablPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablPassword.ForeColor = System.Drawing.Color.White;
-            this.lablPassword.Location = new System.Drawing.Point(45, 144);
-            this.lablPassword.Name = "lablPassword";
-            this.lablPassword.Size = new System.Drawing.Size(77, 17);
-            this.lablPassword.TabIndex = 2;
-            this.lablPassword.Text = "Password";
-            // 
-            // txtbUsername
-            // 
-            this.txtbUsername.Location = new System.Drawing.Point(45, 70);
-            this.txtbUsername.Name = "txtbUsername";
-            this.txtbUsername.Size = new System.Drawing.Size(223, 20);
-            this.txtbUsername.TabIndex = 1;
-            this.txtbUsername.TextChanged += new System.EventHandler(this.validateUsername);
-            // 
-            // lablUsername
-            // 
-            this.lablUsername.AutoSize = true;
-            this.lablUsername.BackColor = System.Drawing.Color.Transparent;
-            this.lablUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablUsername.ForeColor = System.Drawing.Color.White;
-            this.lablUsername.Location = new System.Drawing.Point(45, 50);
-            this.lablUsername.Name = "lablUsername";
-            this.lablUsername.Size = new System.Drawing.Size(81, 17);
-            this.lablUsername.TabIndex = 0;
-            this.lablUsername.Text = "Username";
             // 
             // tabPage1
             // 
@@ -459,6 +234,58 @@
             this.gvUsers.Name = "gvUsers";
             this.gvUsers.Size = new System.Drawing.Size(471, 130);
             this.gvUsers.TabIndex = 5;
+            // 
+            // userNameDataGridViewTextBoxColumn
+            // 
+            this.userNameDataGridViewTextBoxColumn.DataPropertyName = "userName";
+            this.userNameDataGridViewTextBoxColumn.HeaderText = "userName";
+            this.userNameDataGridViewTextBoxColumn.Name = "userNameDataGridViewTextBoxColumn";
+            // 
+            // userPasswordDataGridViewTextBoxColumn
+            // 
+            this.userPasswordDataGridViewTextBoxColumn.DataPropertyName = "userPassword";
+            this.userPasswordDataGridViewTextBoxColumn.HeaderText = "userPassword";
+            this.userPasswordDataGridViewTextBoxColumn.Name = "userPasswordDataGridViewTextBoxColumn";
+            // 
+            // userEmailDataGridViewTextBoxColumn
+            // 
+            this.userEmailDataGridViewTextBoxColumn.DataPropertyName = "userEmail";
+            this.userEmailDataGridViewTextBoxColumn.HeaderText = "userEmail";
+            this.userEmailDataGridViewTextBoxColumn.Name = "userEmailDataGridViewTextBoxColumn";
+            // 
+            // userImageDataGridViewTextBoxColumn
+            // 
+            this.userImageDataGridViewTextBoxColumn.DataPropertyName = "userImage";
+            this.userImageDataGridViewTextBoxColumn.HeaderText = "userImage";
+            this.userImageDataGridViewTextBoxColumn.Name = "userImageDataGridViewTextBoxColumn";
+            // 
+            // userIsOnlineDataGridViewTextBoxColumn
+            // 
+            this.userIsOnlineDataGridViewTextBoxColumn.DataPropertyName = "userIsOnline";
+            this.userIsOnlineDataGridViewTextBoxColumn.HeaderText = "userIsOnline";
+            this.userIsOnlineDataGridViewTextBoxColumn.Name = "userIsOnlineDataGridViewTextBoxColumn";
+            // 
+            // userIsBlockedDataGridViewTextBoxColumn
+            // 
+            this.userIsBlockedDataGridViewTextBoxColumn.DataPropertyName = "userIsBlocked";
+            this.userIsBlockedDataGridViewTextBoxColumn.HeaderText = "userIsBlocked";
+            this.userIsBlockedDataGridViewTextBoxColumn.Name = "userIsBlockedDataGridViewTextBoxColumn";
+            // 
+            // userIsAdminDataGridViewTextBoxColumn
+            // 
+            this.userIsAdminDataGridViewTextBoxColumn.DataPropertyName = "userIsAdmin";
+            this.userIsAdminDataGridViewTextBoxColumn.HeaderText = "userIsAdmin";
+            this.userIsAdminDataGridViewTextBoxColumn.Name = "userIsAdminDataGridViewTextBoxColumn";
+            // 
+            // userBindingSource
+            // 
+            this.userBindingSource.DataMember = "User";
+            this.userBindingSource.DataSource = this.spaceUnionDataSet;
+            // 
+            // spaceUnionDataSet
+            // 
+            this.spaceUnionDataSet.DataSetName = "SpaceUnionDataSet";
+            this.spaceUnionDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label3
             // 
@@ -730,195 +557,76 @@
             this.gvStats.Size = new System.Drawing.Size(471, 223);
             this.gvStats.TabIndex = 1;
             // 
-            // tabPage4
+            // userNameDataGridViewTextBoxColumn1
             // 
-            this.tabPage4.BackgroundImage = global::AdminControlForm.Properties.Resources.dark_space;
-            this.tabPage4.Controls.Add(this.lablShipEditMaxSpeed);
-            this.tabPage4.Controls.Add(this.lablShipEditAccelerateErrMsg);
-            this.tabPage4.Controls.Add(this.lablShipEditTurnSpdErrMsg);
-            this.tabPage4.Controls.Add(this.bttnShipUpdate);
-            this.tabPage4.Controls.Add(this.bttnShipToEdit);
-            this.tabPage4.Controls.Add(this.txtbNewMaxSpeed);
-            this.tabPage4.Controls.Add(this.lablNewShipMaxSpeed);
-            this.tabPage4.Controls.Add(this.txtbNewAccelerate);
-            this.tabPage4.Controls.Add(this.lablNewShipAccelerate);
-            this.tabPage4.Controls.Add(this.txtbNewTurnSpeed);
-            this.tabPage4.Controls.Add(this.lablNewShipTurnSpeed);
-            this.tabPage4.Controls.Add(this.rtxtCurrentShipStats);
-            this.tabPage4.Controls.Add(this.lablCurrentShipStats);
-            this.tabPage4.Controls.Add(this.txtbShipEditing);
-            this.tabPage4.Controls.Add(this.lablShipEditing);
-            this.tabPage4.Controls.Add(this.lablEditShip);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(488, 486);
-            this.tabPage4.TabIndex = 5;
-            this.tabPage4.Text = "Edit Ship";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.userNameDataGridViewTextBoxColumn1.DataPropertyName = "userName";
+            this.userNameDataGridViewTextBoxColumn1.HeaderText = "userName";
+            this.userNameDataGridViewTextBoxColumn1.Name = "userNameDataGridViewTextBoxColumn1";
             // 
-            // lablShipEditMaxSpeed
+            // userstatWinDataGridViewTextBoxColumn
             // 
-            this.lablShipEditMaxSpeed.AutoSize = true;
-            this.lablShipEditMaxSpeed.ForeColor = System.Drawing.Color.Red;
-            this.lablShipEditMaxSpeed.Location = new System.Drawing.Point(173, 346);
-            this.lablShipEditMaxSpeed.Name = "lablShipEditMaxSpeed";
-            this.lablShipEditMaxSpeed.Size = new System.Drawing.Size(110, 13);
-            this.lablShipEditMaxSpeed.TabIndex = 16;
-            this.lablShipEditMaxSpeed.Text = "err msg for max speed";
-            this.lablShipEditMaxSpeed.Visible = false;
-            this.lablShipEditMaxSpeed.TextChanged += new System.EventHandler(this.validateMaxSpeedEdit);
+            this.userstatWinDataGridViewTextBoxColumn.DataPropertyName = "userstatWin";
+            this.userstatWinDataGridViewTextBoxColumn.HeaderText = "userstatWin";
+            this.userstatWinDataGridViewTextBoxColumn.Name = "userstatWinDataGridViewTextBoxColumn";
             // 
-            // lablShipEditAccelerateErrMsg
+            // userstatLoseDataGridViewTextBoxColumn
             // 
-            this.lablShipEditAccelerateErrMsg.AutoSize = true;
-            this.lablShipEditAccelerateErrMsg.ForeColor = System.Drawing.Color.Red;
-            this.lablShipEditAccelerateErrMsg.Location = new System.Drawing.Point(235, 283);
-            this.lablShipEditAccelerateErrMsg.Name = "lablShipEditAccelerateErrMsg";
-            this.lablShipEditAccelerateErrMsg.Size = new System.Drawing.Size(109, 13);
-            this.lablShipEditAccelerateErrMsg.TabIndex = 15;
-            this.lablShipEditAccelerateErrMsg.Text = "err msg for accelerate";
-            this.lablShipEditAccelerateErrMsg.Visible = false;
-            this.lablShipEditAccelerateErrMsg.TextChanged += new System.EventHandler(this.validateAccelerationEdit);
+            this.userstatLoseDataGridViewTextBoxColumn.DataPropertyName = "userstatLose";
+            this.userstatLoseDataGridViewTextBoxColumn.HeaderText = "userstatLose";
+            this.userstatLoseDataGridViewTextBoxColumn.Name = "userstatLoseDataGridViewTextBoxColumn";
             // 
-            // lablShipEditTurnSpdErrMsg
+            // userstatShotsFiredDataGridViewTextBoxColumn
             // 
-            this.lablShipEditTurnSpdErrMsg.AutoSize = true;
-            this.lablShipEditTurnSpdErrMsg.ForeColor = System.Drawing.Color.Red;
-            this.lablShipEditTurnSpdErrMsg.Location = new System.Drawing.Point(179, 222);
-            this.lablShipEditTurnSpdErrMsg.Name = "lablShipEditTurnSpdErrMsg";
-            this.lablShipEditTurnSpdErrMsg.Size = new System.Drawing.Size(109, 13);
-            this.lablShipEditTurnSpdErrMsg.TabIndex = 14;
-            this.lablShipEditTurnSpdErrMsg.Text = "err msg for turn speed";
-            this.lablShipEditTurnSpdErrMsg.Visible = false;
-            this.lablShipEditTurnSpdErrMsg.TextChanged += new System.EventHandler(this.validateTurnSpeedEdit);
+            this.userstatShotsFiredDataGridViewTextBoxColumn.DataPropertyName = "userstatShotsFired";
+            this.userstatShotsFiredDataGridViewTextBoxColumn.HeaderText = "userstatShotsFired";
+            this.userstatShotsFiredDataGridViewTextBoxColumn.Name = "userstatShotsFiredDataGridViewTextBoxColumn";
             // 
-            // bttnShipUpdate
+            // userstatHitsDataGridViewTextBoxColumn
             // 
-            this.bttnShipUpdate.Location = new System.Drawing.Point(148, 402);
-            this.bttnShipUpdate.Name = "bttnShipUpdate";
-            this.bttnShipUpdate.Size = new System.Drawing.Size(91, 35);
-            this.bttnShipUpdate.TabIndex = 13;
-            this.bttnShipUpdate.Text = "Update Ship";
-            this.bttnShipUpdate.UseVisualStyleBackColor = true;
-            this.bttnShipUpdate.Click += new System.EventHandler(this.bttnShipUpdate_Click);
+            this.userstatHitsDataGridViewTextBoxColumn.DataPropertyName = "userstatHits";
+            this.userstatHitsDataGridViewTextBoxColumn.HeaderText = "userstatHits";
+            this.userstatHitsDataGridViewTextBoxColumn.Name = "userstatHitsDataGridViewTextBoxColumn";
             // 
-            // bttnShipToEdit
+            // userstatKillsDataGridViewTextBoxColumn
             // 
-            this.bttnShipToEdit.Location = new System.Drawing.Point(124, 128);
-            this.bttnShipToEdit.Name = "bttnShipToEdit";
-            this.bttnShipToEdit.Size = new System.Drawing.Size(115, 23);
-            this.bttnShipToEdit.TabIndex = 12;
-            this.bttnShipToEdit.Text = "Retrieve Ship Stats";
-            this.bttnShipToEdit.UseVisualStyleBackColor = true;
-            this.bttnShipToEdit.Click += new System.EventHandler(this.bttnShipToEdit_Click);
+            this.userstatKillsDataGridViewTextBoxColumn.DataPropertyName = "userstatKills";
+            this.userstatKillsDataGridViewTextBoxColumn.HeaderText = "userstatKills";
+            this.userstatKillsDataGridViewTextBoxColumn.Name = "userstatKillsDataGridViewTextBoxColumn";
             // 
-            // txtbNewMaxSpeed
+            // userstatDiedDataGridViewTextBoxColumn
             // 
-            this.txtbNewMaxSpeed.Location = new System.Drawing.Point(45, 364);
-            this.txtbNewMaxSpeed.Name = "txtbNewMaxSpeed";
-            this.txtbNewMaxSpeed.Size = new System.Drawing.Size(194, 20);
-            this.txtbNewMaxSpeed.TabIndex = 11;
-            this.txtbNewMaxSpeed.TextChanged += new System.EventHandler(this.validateMaxSpeedEdit);
+            this.userstatDiedDataGridViewTextBoxColumn.DataPropertyName = "userstatDied";
+            this.userstatDiedDataGridViewTextBoxColumn.HeaderText = "userstatDied";
+            this.userstatDiedDataGridViewTextBoxColumn.Name = "userstatDiedDataGridViewTextBoxColumn";
             // 
-            // lablNewShipMaxSpeed
+            // userstatShipUsed1DataGridViewTextBoxColumn
             // 
-            this.lablNewShipMaxSpeed.AutoSize = true;
-            this.lablNewShipMaxSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablNewShipMaxSpeed.ForeColor = System.Drawing.Color.White;
-            this.lablNewShipMaxSpeed.Location = new System.Drawing.Point(45, 344);
-            this.lablNewShipMaxSpeed.Name = "lablNewShipMaxSpeed";
-            this.lablNewShipMaxSpeed.Size = new System.Drawing.Size(122, 17);
-            this.lablNewShipMaxSpeed.TabIndex = 10;
-            this.lablNewShipMaxSpeed.Text = "New Max Speed";
+            this.userstatShipUsed1DataGridViewTextBoxColumn.DataPropertyName = "userstatShipUsed_1";
+            this.userstatShipUsed1DataGridViewTextBoxColumn.HeaderText = "userstatShipUsed_1";
+            this.userstatShipUsed1DataGridViewTextBoxColumn.Name = "userstatShipUsed1DataGridViewTextBoxColumn";
             // 
-            // txtbNewAccelerate
+            // userstatShipUsed2DataGridViewTextBoxColumn
             // 
-            this.txtbNewAccelerate.Location = new System.Drawing.Point(45, 301);
-            this.txtbNewAccelerate.Name = "txtbNewAccelerate";
-            this.txtbNewAccelerate.Size = new System.Drawing.Size(194, 20);
-            this.txtbNewAccelerate.TabIndex = 9;
-            this.txtbNewAccelerate.TextChanged += new System.EventHandler(this.validateAccelerationEdit);
+            this.userstatShipUsed2DataGridViewTextBoxColumn.DataPropertyName = "userstatShipUsed_2";
+            this.userstatShipUsed2DataGridViewTextBoxColumn.HeaderText = "userstatShipUsed_2";
+            this.userstatShipUsed2DataGridViewTextBoxColumn.Name = "userstatShipUsed2DataGridViewTextBoxColumn";
             // 
-            // lablNewShipAccelerate
+            // userstatShipUsed3DataGridViewTextBoxColumn
             // 
-            this.lablNewShipAccelerate.AutoSize = true;
-            this.lablNewShipAccelerate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablNewShipAccelerate.ForeColor = System.Drawing.Color.White;
-            this.lablNewShipAccelerate.Location = new System.Drawing.Point(45, 281);
-            this.lablNewShipAccelerate.Name = "lablNewShipAccelerate";
-            this.lablNewShipAccelerate.Size = new System.Drawing.Size(184, 17);
-            this.lablNewShipAccelerate.TabIndex = 8;
-            this.lablNewShipAccelerate.Text = "New Acceleration Speed";
+            this.userstatShipUsed3DataGridViewTextBoxColumn.DataPropertyName = "userstatShipUsed_3";
+            this.userstatShipUsed3DataGridViewTextBoxColumn.HeaderText = "userstatShipUsed_3";
+            this.userstatShipUsed3DataGridViewTextBoxColumn.Name = "userstatShipUsed3DataGridViewTextBoxColumn";
             // 
-            // txtbNewTurnSpeed
+            // userstatFlagsCapturedDataGridViewTextBoxColumn
             // 
-            this.txtbNewTurnSpeed.Location = new System.Drawing.Point(45, 240);
-            this.txtbNewTurnSpeed.Name = "txtbNewTurnSpeed";
-            this.txtbNewTurnSpeed.Size = new System.Drawing.Size(194, 20);
-            this.txtbNewTurnSpeed.TabIndex = 7;
-            this.txtbNewTurnSpeed.TextChanged += new System.EventHandler(this.validateTurnSpeedEdit);
+            this.userstatFlagsCapturedDataGridViewTextBoxColumn.DataPropertyName = "userstatFlagsCaptured";
+            this.userstatFlagsCapturedDataGridViewTextBoxColumn.HeaderText = "userstatFlagsCaptured";
+            this.userstatFlagsCapturedDataGridViewTextBoxColumn.Name = "userstatFlagsCapturedDataGridViewTextBoxColumn";
             // 
-            // lablNewShipTurnSpeed
+            // userStatsBindingSource
             // 
-            this.lablNewShipTurnSpeed.AutoSize = true;
-            this.lablNewShipTurnSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablNewShipTurnSpeed.ForeColor = System.Drawing.Color.White;
-            this.lablNewShipTurnSpeed.Location = new System.Drawing.Point(45, 220);
-            this.lablNewShipTurnSpeed.Name = "lablNewShipTurnSpeed";
-            this.lablNewShipTurnSpeed.Size = new System.Drawing.Size(128, 17);
-            this.lablNewShipTurnSpeed.TabIndex = 6;
-            this.lablNewShipTurnSpeed.Text = "New Turn Speed";
-            // 
-            // rtxtCurrentShipStats
-            // 
-            this.rtxtCurrentShipStats.Location = new System.Drawing.Point(277, 81);
-            this.rtxtCurrentShipStats.Name = "rtxtCurrentShipStats";
-            this.rtxtCurrentShipStats.ReadOnly = true;
-            this.rtxtCurrentShipStats.Size = new System.Drawing.Size(194, 70);
-            this.rtxtCurrentShipStats.TabIndex = 5;
-            this.rtxtCurrentShipStats.Text = "";
-            // 
-            // lablCurrentShipStats
-            // 
-            this.lablCurrentShipStats.AutoSize = true;
-            this.lablCurrentShipStats.BackColor = System.Drawing.Color.Transparent;
-            this.lablCurrentShipStats.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablCurrentShipStats.ForeColor = System.Drawing.Color.White;
-            this.lablCurrentShipStats.Location = new System.Drawing.Point(280, 61);
-            this.lablCurrentShipStats.Name = "lablCurrentShipStats";
-            this.lablCurrentShipStats.Size = new System.Drawing.Size(141, 17);
-            this.lablCurrentShipStats.TabIndex = 4;
-            this.lablCurrentShipStats.Text = "Current Ship Stats";
-            // 
-            // txtbShipEditing
-            // 
-            this.txtbShipEditing.Location = new System.Drawing.Point(45, 82);
-            this.txtbShipEditing.Name = "txtbShipEditing";
-            this.txtbShipEditing.Size = new System.Drawing.Size(194, 20);
-            this.txtbShipEditing.TabIndex = 3;
-            // 
-            // lablShipEditing
-            // 
-            this.lablShipEditing.AutoSize = true;
-            this.lablShipEditing.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablShipEditing.ForeColor = System.Drawing.Color.White;
-            this.lablShipEditing.Location = new System.Drawing.Point(45, 61);
-            this.lablShipEditing.Name = "lablShipEditing";
-            this.lablShipEditing.Size = new System.Drawing.Size(185, 17);
-            this.lablShipEditing.TabIndex = 2;
-            this.lablShipEditing.Text = "Name of the Ship to Edit";
-            // 
-            // lablEditShip
-            // 
-            this.lablEditShip.AutoSize = true;
-            this.lablEditShip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lablEditShip.ForeColor = System.Drawing.Color.White;
-            this.lablEditShip.Location = new System.Drawing.Point(19, 20);
-            this.lablEditShip.Name = "lablEditShip";
-            this.lablEditShip.Size = new System.Drawing.Size(97, 20);
-            this.lablEditShip.TabIndex = 1;
-            this.lablEditShip.Text = "Edit a Ship";
+            this.userStatsBindingSource.DataMember = "UserStats";
+            this.userStatsBindingSource.DataSource = this.spaceUnionDataSet;
             // 
             // tabPage5
             // 
@@ -994,149 +702,28 @@
             this.dgvPwrup.Size = new System.Drawing.Size(471, 286);
             this.dgvPwrup.TabIndex = 0;
             // 
-            // spaceUnionDataSet
+            // powerupIDDataGridViewTextBoxColumn
             // 
-            this.spaceUnionDataSet.DataSetName = "SpaceUnionDataSet";
-            this.spaceUnionDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.powerupIDDataGridViewTextBoxColumn.DataPropertyName = "powerupID";
+            this.powerupIDDataGridViewTextBoxColumn.HeaderText = "powerupID";
+            this.powerupIDDataGridViewTextBoxColumn.Name = "powerupIDDataGridViewTextBoxColumn";
             // 
-            // userBindingSource
+            // pwrNameDataGridViewTextBoxColumn
             // 
-            this.userBindingSource.DataMember = "User";
-            this.userBindingSource.DataSource = this.spaceUnionDataSet;
+            this.pwrNameDataGridViewTextBoxColumn.DataPropertyName = "pwrName";
+            this.pwrNameDataGridViewTextBoxColumn.HeaderText = "pwrName";
+            this.pwrNameDataGridViewTextBoxColumn.Name = "pwrNameDataGridViewTextBoxColumn";
             // 
-            // userTableAdapter
+            // pwrValueDataGridViewTextBoxColumn
             // 
-            this.userTableAdapter.ClearBeforeFill = true;
+            this.pwrValueDataGridViewTextBoxColumn.DataPropertyName = "pwrValue";
+            this.pwrValueDataGridViewTextBoxColumn.HeaderText = "pwrValue";
+            this.pwrValueDataGridViewTextBoxColumn.Name = "pwrValueDataGridViewTextBoxColumn";
             // 
-            // userNameDataGridViewTextBoxColumn
+            // powerupsBindingSource
             // 
-            this.userNameDataGridViewTextBoxColumn.DataPropertyName = "userName";
-            this.userNameDataGridViewTextBoxColumn.HeaderText = "userName";
-            this.userNameDataGridViewTextBoxColumn.Name = "userNameDataGridViewTextBoxColumn";
-            // 
-            // userPasswordDataGridViewTextBoxColumn
-            // 
-            this.userPasswordDataGridViewTextBoxColumn.DataPropertyName = "userPassword";
-            this.userPasswordDataGridViewTextBoxColumn.HeaderText = "userPassword";
-            this.userPasswordDataGridViewTextBoxColumn.Name = "userPasswordDataGridViewTextBoxColumn";
-            // 
-            // userEmailDataGridViewTextBoxColumn
-            // 
-            this.userEmailDataGridViewTextBoxColumn.DataPropertyName = "userEmail";
-            this.userEmailDataGridViewTextBoxColumn.HeaderText = "userEmail";
-            this.userEmailDataGridViewTextBoxColumn.Name = "userEmailDataGridViewTextBoxColumn";
-            // 
-            // userImageDataGridViewTextBoxColumn
-            // 
-            this.userImageDataGridViewTextBoxColumn.DataPropertyName = "userImage";
-            this.userImageDataGridViewTextBoxColumn.HeaderText = "userImage";
-            this.userImageDataGridViewTextBoxColumn.Name = "userImageDataGridViewTextBoxColumn";
-            // 
-            // userIsOnlineDataGridViewTextBoxColumn
-            // 
-            this.userIsOnlineDataGridViewTextBoxColumn.DataPropertyName = "userIsOnline";
-            this.userIsOnlineDataGridViewTextBoxColumn.HeaderText = "userIsOnline";
-            this.userIsOnlineDataGridViewTextBoxColumn.Name = "userIsOnlineDataGridViewTextBoxColumn";
-            // 
-            // userIsBlockedDataGridViewTextBoxColumn
-            // 
-            this.userIsBlockedDataGridViewTextBoxColumn.DataPropertyName = "userIsBlocked";
-            this.userIsBlockedDataGridViewTextBoxColumn.HeaderText = "userIsBlocked";
-            this.userIsBlockedDataGridViewTextBoxColumn.Name = "userIsBlockedDataGridViewTextBoxColumn";
-            // 
-            // userIsAdminDataGridViewTextBoxColumn
-            // 
-            this.userIsAdminDataGridViewTextBoxColumn.DataPropertyName = "userIsAdmin";
-            this.userIsAdminDataGridViewTextBoxColumn.HeaderText = "userIsAdmin";
-            this.userIsAdminDataGridViewTextBoxColumn.Name = "userIsAdminDataGridViewTextBoxColumn";
-            // 
-            // userStatsBindingSource
-            // 
-            this.userStatsBindingSource.DataMember = "UserStats";
-            this.userStatsBindingSource.DataSource = this.spaceUnionDataSet;
-            // 
-            // userStatsTableAdapter
-            // 
-            this.userStatsTableAdapter.ClearBeforeFill = true;
-            // 
-            // userNameDataGridViewTextBoxColumn1
-            // 
-            this.userNameDataGridViewTextBoxColumn1.DataPropertyName = "userName";
-            this.userNameDataGridViewTextBoxColumn1.HeaderText = "userName";
-            this.userNameDataGridViewTextBoxColumn1.Name = "userNameDataGridViewTextBoxColumn1";
-            // 
-            // userstatWinDataGridViewTextBoxColumn
-            // 
-            this.userstatWinDataGridViewTextBoxColumn.DataPropertyName = "userstatWin";
-            this.userstatWinDataGridViewTextBoxColumn.HeaderText = "userstatWin";
-            this.userstatWinDataGridViewTextBoxColumn.Name = "userstatWinDataGridViewTextBoxColumn";
-            // 
-            // userstatLoseDataGridViewTextBoxColumn
-            // 
-            this.userstatLoseDataGridViewTextBoxColumn.DataPropertyName = "userstatLose";
-            this.userstatLoseDataGridViewTextBoxColumn.HeaderText = "userstatLose";
-            this.userstatLoseDataGridViewTextBoxColumn.Name = "userstatLoseDataGridViewTextBoxColumn";
-            // 
-            // userstatShotsFiredDataGridViewTextBoxColumn
-            // 
-            this.userstatShotsFiredDataGridViewTextBoxColumn.DataPropertyName = "userstatShotsFired";
-            this.userstatShotsFiredDataGridViewTextBoxColumn.HeaderText = "userstatShotsFired";
-            this.userstatShotsFiredDataGridViewTextBoxColumn.Name = "userstatShotsFiredDataGridViewTextBoxColumn";
-            // 
-            // userstatHitsDataGridViewTextBoxColumn
-            // 
-            this.userstatHitsDataGridViewTextBoxColumn.DataPropertyName = "userstatHits";
-            this.userstatHitsDataGridViewTextBoxColumn.HeaderText = "userstatHits";
-            this.userstatHitsDataGridViewTextBoxColumn.Name = "userstatHitsDataGridViewTextBoxColumn";
-            // 
-            // userstatKillsDataGridViewTextBoxColumn
-            // 
-            this.userstatKillsDataGridViewTextBoxColumn.DataPropertyName = "userstatKills";
-            this.userstatKillsDataGridViewTextBoxColumn.HeaderText = "userstatKills";
-            this.userstatKillsDataGridViewTextBoxColumn.Name = "userstatKillsDataGridViewTextBoxColumn";
-            // 
-            // userstatDiedDataGridViewTextBoxColumn
-            // 
-            this.userstatDiedDataGridViewTextBoxColumn.DataPropertyName = "userstatDied";
-            this.userstatDiedDataGridViewTextBoxColumn.HeaderText = "userstatDied";
-            this.userstatDiedDataGridViewTextBoxColumn.Name = "userstatDiedDataGridViewTextBoxColumn";
-            // 
-            // userstatShipUsed1DataGridViewTextBoxColumn
-            // 
-            this.userstatShipUsed1DataGridViewTextBoxColumn.DataPropertyName = "userstatShipUsed_1";
-            this.userstatShipUsed1DataGridViewTextBoxColumn.HeaderText = "userstatShipUsed_1";
-            this.userstatShipUsed1DataGridViewTextBoxColumn.Name = "userstatShipUsed1DataGridViewTextBoxColumn";
-            // 
-            // userstatShipUsed2DataGridViewTextBoxColumn
-            // 
-            this.userstatShipUsed2DataGridViewTextBoxColumn.DataPropertyName = "userstatShipUsed_2";
-            this.userstatShipUsed2DataGridViewTextBoxColumn.HeaderText = "userstatShipUsed_2";
-            this.userstatShipUsed2DataGridViewTextBoxColumn.Name = "userstatShipUsed2DataGridViewTextBoxColumn";
-            // 
-            // userstatShipUsed3DataGridViewTextBoxColumn
-            // 
-            this.userstatShipUsed3DataGridViewTextBoxColumn.DataPropertyName = "userstatShipUsed_3";
-            this.userstatShipUsed3DataGridViewTextBoxColumn.HeaderText = "userstatShipUsed_3";
-            this.userstatShipUsed3DataGridViewTextBoxColumn.Name = "userstatShipUsed3DataGridViewTextBoxColumn";
-            // 
-            // userstatFlagsCapturedDataGridViewTextBoxColumn
-            // 
-            this.userstatFlagsCapturedDataGridViewTextBoxColumn.DataPropertyName = "userstatFlagsCaptured";
-            this.userstatFlagsCapturedDataGridViewTextBoxColumn.HeaderText = "userstatFlagsCaptured";
-            this.userstatFlagsCapturedDataGridViewTextBoxColumn.Name = "userstatFlagsCapturedDataGridViewTextBoxColumn";
-            // 
-
-
-            // 
-            // spaceUnionDataSet
-            // 
-            this.spaceUnionDataSet.DataSetName = "SpaceUnionDataSet";
-            this.spaceUnionDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // usersBindingSource
-            // 
-            this.userBindingSource.DataMember = "User";
-            this.userBindingSource.DataSource = this.spaceUnionDataSet;
+            this.powerupsBindingSource.DataMember = "Powerups";
+            this.powerupsBindingSource.DataSource = this.spaceUnionDataSet;
             // 
             // userTableAdapter
             // 
@@ -1145,11 +732,229 @@
             // userStatsTableAdapter
             // 
             this.userStatsTableAdapter.ClearBeforeFill = true;
+            // 
+            // powerupsTableAdapter
+            // 
+            this.powerupsTableAdapter.ClearBeforeFill = true;
+            // 
+            // createUserTab
+            // 
+            this.createUserTab.BackColor = System.Drawing.Color.Transparent;
+            this.createUserTab.BackgroundImage = global::AdminControlForm.Properties.Resources.deep_space_PS;
+            this.createUserTab.Controls.Add(this.lablCreateNewUser);
+            this.createUserTab.Controls.Add(this.lablConfPasswordErrMsg);
+            this.createUserTab.Controls.Add(this.bttnCreateUser);
+            this.createUserTab.Controls.Add(this.lablUsernameSpec2);
+            this.createUserTab.Controls.Add(this.lablPasswordSpec2);
+            this.createUserTab.Controls.Add(this.lablPasswordSpec);
+            this.createUserTab.Controls.Add(this.lablUsernameSpec);
+            this.createUserTab.Controls.Add(this.lablEmailErrMsg);
+            this.createUserTab.Controls.Add(this.lablPasswordErrMsg);
+            this.createUserTab.Controls.Add(this.lablUsernameErrMsg);
+            this.createUserTab.Controls.Add(this.txtbEmail);
+            this.createUserTab.Controls.Add(this.lablEmail);
+            this.createUserTab.Controls.Add(this.txtbConfirmPassword);
+            this.createUserTab.Controls.Add(this.lablConfirmPassword);
+            this.createUserTab.Controls.Add(this.txtbPassword);
+            this.createUserTab.Controls.Add(this.lablPassword);
+            this.createUserTab.Controls.Add(this.txtbUsername);
+            this.createUserTab.Controls.Add(this.lablUsername);
+            this.createUserTab.Location = new System.Drawing.Point(4, 22);
+            this.createUserTab.Name = "createUserTab";
+            this.createUserTab.Padding = new System.Windows.Forms.Padding(3);
+            this.createUserTab.Size = new System.Drawing.Size(488, 486);
+            this.createUserTab.TabIndex = 0;
+            this.createUserTab.Text = "Create New User";
+            // 
+            // lablCreateNewUser
+            // 
+            this.lablCreateNewUser.AutoSize = true;
+            this.lablCreateNewUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablCreateNewUser.ForeColor = System.Drawing.Color.White;
+            this.lablCreateNewUser.Location = new System.Drawing.Point(24, 16);
+            this.lablCreateNewUser.Name = "lablCreateNewUser";
+            this.lablCreateNewUser.Size = new System.Drawing.Size(145, 20);
+            this.lablCreateNewUser.TabIndex = 18;
+            this.lablCreateNewUser.Text = "Create New User";
+            // 
+            // lablConfPasswordErrMsg
+            // 
+            this.lablConfPasswordErrMsg.AutoSize = true;
+            this.lablConfPasswordErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablConfPasswordErrMsg.Location = new System.Drawing.Point(188, 245);
+            this.lablConfPasswordErrMsg.Name = "lablConfPasswordErrMsg";
+            this.lablConfPasswordErrMsg.Size = new System.Drawing.Size(139, 13);
+            this.lablConfPasswordErrMsg.TabIndex = 17;
+            this.lablConfPasswordErrMsg.Text = "Confirm Password Error Msg";
+            this.lablConfPasswordErrMsg.Visible = false;
+            // 
+            // bttnCreateUser
+            // 
+            this.bttnCreateUser.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.bttnCreateUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bttnCreateUser.Location = new System.Drawing.Point(48, 397);
+            this.bttnCreateUser.Name = "bttnCreateUser";
+            this.bttnCreateUser.Size = new System.Drawing.Size(154, 42);
+            this.bttnCreateUser.TabIndex = 16;
+            this.bttnCreateUser.Text = "Create New User";
+            this.bttnCreateUser.UseVisualStyleBackColor = true;
+            this.bttnCreateUser.Click += new System.EventHandler(this.bttnCreateUser_Click);
+            // 
+            // lablUsernameSpec2
+            // 
+            this.lablUsernameSpec2.AutoSize = true;
+            this.lablUsernameSpec2.ForeColor = System.Drawing.Color.White;
+            this.lablUsernameSpec2.Location = new System.Drawing.Point(45, 106);
+            this.lablUsernameSpec2.Name = "lablUsernameSpec2";
+            this.lablUsernameSpec2.Size = new System.Drawing.Size(181, 13);
+            this.lablUsernameSpec2.TabIndex = 15;
+            this.lablUsernameSpec2.Text = "Can only contain letters and numbers";
+            // 
+            // lablPasswordSpec2
+            // 
+            this.lablPasswordSpec2.AutoSize = true;
+            this.lablPasswordSpec2.ForeColor = System.Drawing.Color.White;
+            this.lablPasswordSpec2.Location = new System.Drawing.Point(45, 200);
+            this.lablPasswordSpec2.Name = "lablPasswordSpec2";
+            this.lablPasswordSpec2.Size = new System.Drawing.Size(309, 13);
+            this.lablPasswordSpec2.TabIndex = 14;
+            this.lablPasswordSpec2.Text = "Must contain one digit as well as an upper- and lower-case letter";
+            // 
+            // lablPasswordSpec
+            // 
+            this.lablPasswordSpec.AutoSize = true;
+            this.lablPasswordSpec.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablPasswordSpec.ForeColor = System.Drawing.Color.White;
+            this.lablPasswordSpec.Location = new System.Drawing.Point(45, 187);
+            this.lablPasswordSpec.Name = "lablPasswordSpec";
+            this.lablPasswordSpec.Size = new System.Drawing.Size(81, 13);
+            this.lablPasswordSpec.TabIndex = 13;
+            this.lablPasswordSpec.Text = "4-32 characters";
+            // 
+            // lablUsernameSpec
+            // 
+            this.lablUsernameSpec.AutoSize = true;
+            this.lablUsernameSpec.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablUsernameSpec.ForeColor = System.Drawing.Color.White;
+            this.lablUsernameSpec.Location = new System.Drawing.Point(45, 93);
+            this.lablUsernameSpec.Name = "lablUsernameSpec";
+            this.lablUsernameSpec.Size = new System.Drawing.Size(81, 13);
+            this.lablUsernameSpec.TabIndex = 12;
+            this.lablUsernameSpec.Text = "4-16 characters";
+            // 
+            // lablEmailErrMsg
+            // 
+            this.lablEmailErrMsg.AutoSize = true;
+            this.lablEmailErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablEmailErrMsg.Location = new System.Drawing.Point(98, 314);
+            this.lablEmailErrMsg.Name = "lablEmailErrMsg";
+            this.lablEmailErrMsg.Size = new System.Drawing.Size(78, 13);
+            this.lablEmailErrMsg.TabIndex = 11;
+            this.lablEmailErrMsg.Text = "Email error msg";
+            this.lablEmailErrMsg.Visible = false;
+            // 
+            // lablPasswordErrMsg
+            // 
+            this.lablPasswordErrMsg.AutoSize = true;
+            this.lablPasswordErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablPasswordErrMsg.Location = new System.Drawing.Point(127, 146);
+            this.lablPasswordErrMsg.Name = "lablPasswordErrMsg";
+            this.lablPasswordErrMsg.Size = new System.Drawing.Size(99, 13);
+            this.lablPasswordErrMsg.TabIndex = 10;
+            this.lablPasswordErrMsg.Text = "Password error msg";
+            this.lablPasswordErrMsg.Visible = false;
+            // 
+            // lablUsernameErrMsg
+            // 
+            this.lablUsernameErrMsg.AutoSize = true;
+            this.lablUsernameErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablUsernameErrMsg.Location = new System.Drawing.Point(125, 52);
+            this.lablUsernameErrMsg.Name = "lablUsernameErrMsg";
+            this.lablUsernameErrMsg.Size = new System.Drawing.Size(101, 13);
+            this.lablUsernameErrMsg.TabIndex = 9;
+            this.lablUsernameErrMsg.Text = "Username error msg";
+            this.lablUsernameErrMsg.Visible = false;
+            // 
+            // txtbEmail
+            // 
+            this.txtbEmail.Location = new System.Drawing.Point(45, 332);
+            this.txtbEmail.Name = "txtbEmail";
+            this.txtbEmail.Size = new System.Drawing.Size(223, 20);
+            this.txtbEmail.TabIndex = 7;
+            // 
+            // lablEmail
+            // 
+            this.lablEmail.AutoSize = true;
+            this.lablEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablEmail.ForeColor = System.Drawing.Color.White;
+            this.lablEmail.Location = new System.Drawing.Point(45, 312);
+            this.lablEmail.Name = "lablEmail";
+            this.lablEmail.Size = new System.Drawing.Size(47, 17);
+            this.lablEmail.TabIndex = 6;
+            this.lablEmail.Text = "Email";
+            // 
+            // txtbConfirmPassword
+            // 
+            this.txtbConfirmPassword.Location = new System.Drawing.Point(45, 263);
+            this.txtbConfirmPassword.Name = "txtbConfirmPassword";
+            this.txtbConfirmPassword.Size = new System.Drawing.Size(223, 20);
+            this.txtbConfirmPassword.TabIndex = 5;
+            this.txtbConfirmPassword.TextChanged += new System.EventHandler(this.validateConfPassword);
+            // 
+            // lablConfirmPassword
+            // 
+            this.lablConfirmPassword.AutoSize = true;
+            this.lablConfirmPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablConfirmPassword.ForeColor = System.Drawing.Color.White;
+            this.lablConfirmPassword.Location = new System.Drawing.Point(45, 243);
+            this.lablConfirmPassword.Name = "lablConfirmPassword";
+            this.lablConfirmPassword.Size = new System.Drawing.Size(137, 17);
+            this.lablConfirmPassword.TabIndex = 4;
+            this.lablConfirmPassword.Text = "Confirm Password";
+            // 
+            // txtbPassword
+            // 
+            this.txtbPassword.Location = new System.Drawing.Point(45, 164);
+            this.txtbPassword.Name = "txtbPassword";
+            this.txtbPassword.Size = new System.Drawing.Size(223, 20);
+            this.txtbPassword.TabIndex = 3;
+            this.txtbPassword.TextChanged += new System.EventHandler(this.validatePassword);
+            // 
+            // lablPassword
+            // 
+            this.lablPassword.AutoSize = true;
+            this.lablPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablPassword.ForeColor = System.Drawing.Color.White;
+            this.lablPassword.Location = new System.Drawing.Point(45, 144);
+            this.lablPassword.Name = "lablPassword";
+            this.lablPassword.Size = new System.Drawing.Size(77, 17);
+            this.lablPassword.TabIndex = 2;
+            this.lablPassword.Text = "Password";
+            // 
+            // txtbUsername
+            // 
+            this.txtbUsername.Location = new System.Drawing.Point(45, 70);
+            this.txtbUsername.Name = "txtbUsername";
+            this.txtbUsername.Size = new System.Drawing.Size(223, 20);
+            this.txtbUsername.TabIndex = 1;
+            this.txtbUsername.TextChanged += new System.EventHandler(this.validateUsername);
+            // 
+            // lablUsername
+            // 
+            this.lablUsername.AutoSize = true;
+            this.lablUsername.BackColor = System.Drawing.Color.Transparent;
+            this.lablUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablUsername.ForeColor = System.Drawing.Color.White;
+            this.lablUsername.Location = new System.Drawing.Point(45, 50);
+            this.lablUsername.Name = "lablUsername";
+            this.lablUsername.Size = new System.Drawing.Size(81, 17);
+            this.lablUsername.TabIndex = 0;
+            this.lablUsername.Text = "Username";
             // 
             // editUserTab
             // 
             this.editUserTab.BackColor = System.Drawing.Color.Transparent;
-            this.editUserTab.BackgroundImage = global::AdminControlForm.Properties.Resources.dark_space;
+            this.editUserTab.BackgroundImage = global::AdminControlForm.Properties.Resources.deep_space_PS;
             this.editUserTab.Controls.Add(this.lablCurrentBlockStatus);
             this.editUserTab.Controls.Add(this.txtbCurrentBlockStatus);
             this.editUserTab.Controls.Add(this.chkbBlockUnblockUser);
@@ -1281,7 +1086,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.BackgroundImage = global::AdminControlForm.Properties.Resources.dark_space;
+            this.tabPage2.BackgroundImage = global::AdminControlForm.Properties.Resources.deep_space_PS;
             this.tabPage2.Controls.Add(this.lablMaxSpeedErrMsg);
             this.tabPage2.Controls.Add(this.lablAccelErrMsg);
             this.tabPage2.Controls.Add(this.lablTurnSpeedErrMsg);
@@ -1458,7 +1263,7 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.BackgroundImage = global::AdminControlForm.Properties.Resources.dark_space;
+            this.tabPage4.BackgroundImage = global::AdminControlForm.Properties.Resources.deep_space_PS;
             this.tabPage4.Controls.Add(this.lablShipEditMaxSpeed);
             this.tabPage4.Controls.Add(this.lablShipEditAccelerateErrMsg);
             this.tabPage4.Controls.Add(this.lablShipEditTurnSpdErrMsg);
@@ -1494,34 +1299,6 @@
             this.lablShipEditMaxSpeed.Text = "err msg for max speed";
             this.lablShipEditMaxSpeed.Visible = false;
             this.lablShipEditMaxSpeed.TextChanged += new System.EventHandler(this.validateMaxSpeedEdit);
-
-            // powerupsBindingSource
-            // 
-            this.powerupsBindingSource.DataMember = "Powerups";
-            this.powerupsBindingSource.DataSource = this.spaceUnionDataSet;
-            // 
-            // powerupsTableAdapter
-            // 
-            this.powerupsTableAdapter.ClearBeforeFill = true;
-            // 
-            // powerupIDDataGridViewTextBoxColumn
-            // 
-            this.powerupIDDataGridViewTextBoxColumn.DataPropertyName = "powerupID";
-            this.powerupIDDataGridViewTextBoxColumn.HeaderText = "powerupID";
-            this.powerupIDDataGridViewTextBoxColumn.Name = "powerupIDDataGridViewTextBoxColumn";
-            // 
-            // pwrNameDataGridViewTextBoxColumn
-            // 
-            this.pwrNameDataGridViewTextBoxColumn.DataPropertyName = "pwrName";
-            this.pwrNameDataGridViewTextBoxColumn.HeaderText = "pwrName";
-            this.pwrNameDataGridViewTextBoxColumn.Name = "pwrNameDataGridViewTextBoxColumn";
-            // 
-            // pwrValueDataGridViewTextBoxColumn
-            // 
-            this.pwrValueDataGridViewTextBoxColumn.DataPropertyName = "pwrValue";
-            this.pwrValueDataGridViewTextBoxColumn.HeaderText = "pwrValue";
-            this.pwrValueDataGridViewTextBoxColumn.Name = "pwrValueDataGridViewTextBoxColumn";
-
             // 
             // lablShipEditAccelerateErrMsg
             // 
@@ -1687,11 +1464,11 @@
             this.Text = "Admin Controls";
             this.Load += new System.EventHandler(this.AdminForm_Load);
             this.tabControl.ResumeLayout(false);
-            this.createUserTab.ResumeLayout(false);
-            this.createUserTab.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvUsers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFlagsCaptured)).EndInit();
@@ -1705,25 +1482,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudLoses)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWins)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvStats)).EndInit();
-
             ((System.ComponentModel.ISupportInitialize)(this.userStatsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
-            this.editUserTab.ResumeLayout(false);
-            this.editUserTab.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPwrValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPwrup)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userStatsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.powerupsBindingSource)).EndInit();
+            this.createUserTab.ResumeLayout(false);
+            this.createUserTab.PerformLayout();
+            this.editUserTab.ResumeLayout(false);
+            this.editUserTab.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
 
         }

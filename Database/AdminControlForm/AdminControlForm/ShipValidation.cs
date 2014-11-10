@@ -6,8 +6,19 @@ using System.Threading.Tasks;
 
 namespace AdminControlForm
 {
+    /// <summary>
+    /// Helper class to validate ship information fields
+    /// when adding or editing a ship
+    /// </summary>
     class ShipValidation
     {
+        /// <summary>
+        /// Validates that the ship name has been entered. (error message is set only if
+        /// this function returns false)
+        /// </summary>
+        /// <param name="shipName">name of the ship to validate</param>
+        /// <param name="errMsg">error message explaining the error</param>
+        /// <returns>True if the shipname is valid, false otherwise</returns>
         public bool
         ValidateShipName(string shipName, ref string errMsg) {
             bool isValid = false;
@@ -20,6 +31,13 @@ namespace AdminControlForm
             return isValid;
         }
 
+        /// <summary>
+        /// Validates the turn speed of the ship. (error message is set only if
+        /// this function returns false)
+        /// </summary>
+        /// <param name="turnSpeed">turn speed of the ship to validate</param>
+        /// <param name="errMsg">error message explaining the error</param>
+        /// <returns>True if the turn speed is valid, false otherwise</returns>
         public bool
         ValidateTurnSpeed(string turnSpeed, ref string errMsg) {
             const float MIN_TURN = 0.0f;
@@ -42,6 +60,13 @@ namespace AdminControlForm
             return isValid;
         }
 
+        /// <summary>
+        /// Validates the acceleration for the ship. (error message is set only if
+        /// this function returns false)
+        /// </summary>
+        /// <param name="accelSpeed">acceleration of the ship to validate</param>
+        /// <param name="errMsg">error message explaning the error</param>
+        /// <returns>True if the acceleration is valid, false otherwise</returns>
         public bool
         ValidateAcceleration(string accelSpeed, ref string errMsg) {
             const float MIN_ACCEL = 0.0f;
@@ -64,6 +89,13 @@ namespace AdminControlForm
             return isValid;
         }
 
+        /// <summary>
+        /// Validates the max speed for the ship. (error message is set only if
+        /// this function returns false)
+        /// </summary>
+        /// <param name="maxSpeed">max speed of the ship to validate</param>
+        /// <param name="errMsg">error message explaining the error</param>
+        /// <returns>True if the max speed is valid, false otherwise</returns>
         public bool
         ValidateMaxSpeed(string maxSpeed, ref string errMsg) {
             const float MIN_SPEED = 0.0f;

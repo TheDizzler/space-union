@@ -130,7 +130,9 @@ namespace AdminControlForm
         /// Checks if the input into the textfields is valid and if so,
         /// adds the new user into the database. If the database fails
         /// to write to the database a message why is displayed to the
-        /// admin. 
+        /// admin.
+        /// 
+        /// author - robert purdey
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -169,10 +171,7 @@ namespace AdminControlForm
         /// and if there is an error displays an error as to why or no
         /// error if the username is valid.
         /// 
-        /// Uses the isUsernameValid boolean to track the state the
-        /// username is in
-        /// - true if valid
-        /// - false otherwise
+        /// author - robert purdey
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -199,10 +198,6 @@ namespace AdminControlForm
         /// and if there is an error displays an error as to why or no
         /// error if the password is valid.
         /// 
-        /// Uses the isPasswordValid boolean to track the state the password
-        /// is in.
-        /// - true if valid
-        /// - false otherwise
         /// 
         /// Author: Robert Purdey
         /// </summary>
@@ -230,11 +225,6 @@ namespace AdminControlForm
         /// Validates the current confirm password input as its being typed
         /// and if there is an error displays an error as to why or no error
         /// if the confirm password is valid.
-        /// 
-        /// Uses the isPasswordValid boolean to track the state the password
-        /// is in.
-        /// - true if valid
-        /// - false otherwise
         /// 
         /// Author:Robert Purdey
         /// </summary>
@@ -301,16 +291,17 @@ namespace AdminControlForm
         /// unblocks the user if input is valid, otherwise displays an
         /// error message why.
         /// 
+        /// Sends a message checking if the admin is sure they want to
+        /// commit this change before proceeding.
+        /// 
         /// Author: Robert Purdey
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void bttnBlockUnblock_Click(object sender, EventArgs e)
         {
-            const int BLOCK = 1;
-            const int UNBLOCK = 0;
             string username = txtbUserEditing.Text;
-            int errCode = 0;
+            int errCode     = 0;
 
             AcceptCancelBlockActionForm acceptBlock =
                     new AcceptCancelBlockActionForm();
@@ -327,18 +318,19 @@ namespace AdminControlForm
                     // User blocking dialog
                     if (acceptBlock.ShowDialog() == DialogResult.OK)
                     {
-                        userTable.UpdateUserIsBlocked(username, BLOCK, ref errCode);
+                        userTable.UpdateUserIsBlocked(username, true, ref errCode);
                         MessageBox.Show(username + " is now blocked.");
                     }
                 }// User unblocking dialog
                 else if (acceptUnblock.ShowDialog() == DialogResult.OK)
                 {
-                    userTable.UpdateUserIsBlocked(username, UNBLOCK, ref errCode);
+                    userTable.UpdateUserIsBlocked(username, false, ref errCode);
                     MessageBox.Show(username + " is now unblocked.");
                 }
             }
         }
 
+        //NOT NEEDED ANYMORE REMOVE IT LATER
         private void button1_Click(object sender, EventArgs e)
         {
             int i = 3;
@@ -360,6 +352,8 @@ namespace AdminControlForm
         /// First checks if all fields are valid and if so, attempts
         /// to add the ship to the table. Shows a message of
         /// success or failure
+        /// 
+        ///  author - robert purdey
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -396,6 +390,8 @@ namespace AdminControlForm
         /// 
         /// Validates all fields before adding the ship by calling
         /// all validation functions
+        /// 
+        ///  author - robert purdey
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -407,6 +403,16 @@ namespace AdminControlForm
             validateShipName(sender, e);
         }
 
+        /// <summary>
+        /// Checks if the turn speed input is valid when its being entered during the process of
+        /// adding a new ship (used on textchange event)
+        /// 
+        /// If the turn speed is invalid an error message showing why is displayed
+        /// 
+        ///  author - robert purdey
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void validateTurnSpeed(object sender, EventArgs e)
         {
             string turnSpeedErrMsg = null;
@@ -425,6 +431,16 @@ namespace AdminControlForm
             }
         }
 
+        /// <summary>
+        /// Checks if the max speed input is valid when its being entered during the process of
+        /// adding a new ship (used on textchange event)
+        /// 
+        /// If the max speed is invalid an error message showing why is displayed
+        /// 
+        ///  author - robert purdey
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void validateMaxSpeed(object sender, EventArgs e)
         {
             string turnMaxSpeedErrMsg = null;
@@ -443,6 +459,16 @@ namespace AdminControlForm
             }
         }
 
+        /// <summary>
+        /// Checks if the ship name input is valid when its being entered during the process of
+        /// adding a new ship (used on textchange event)
+        /// 
+        /// If the ship name is invalid an error message showing why is displayed
+        /// 
+        ///  author - robert purdey
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void validateShipName(object sender, EventArgs e)
         {
             string shipNameErrMsg = null;
@@ -461,6 +487,16 @@ namespace AdminControlForm
             }
         }
 
+        /// <summary>
+        /// Checks if the acceleration input is valid when its being entered during the process of
+        /// adding a new ship (used on textchange event)
+        /// 
+        /// If the acceleration is invalid an error message showing why is displayed
+        /// 
+        ///  author - robert purdey
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void validateAcceleration(object sender, EventArgs e)
         {
             string turnAccelerateErrMsg = null;
@@ -517,6 +553,8 @@ namespace AdminControlForm
 
         /// <summary>
         /// checks to make sure a valid username is entered before allowing an update.
+        /// 
+        /// NOT NEEDED ANYMORE i think
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// </summary>
@@ -529,6 +567,14 @@ namespace AdminControlForm
 
         }
 
+        /// <summary>
+        /// Displays the ships name and information for the ship the admin
+        /// has searched for.
+        /// 
+        /// author - robert purdey
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bttnShipToEdit_Click(object sender, EventArgs e)
         {
             List<Ship> shipInfo = new List<Ship>();
@@ -555,8 +601,10 @@ namespace AdminControlForm
         /// <summary>
         /// Helper funticon for when the ship add button is clicked.
         /// 
-        /// Validates all fields before adding the ship by calling
+        /// Validates all fields before editing the ship by calling
         /// all validation functions
+        /// 
+        /// author - robert purdey
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -567,6 +615,16 @@ namespace AdminControlForm
             validateAccelerationEdit(sender, e);
         }
 
+        /// <summary>
+        /// Checks if the turn speed input is valid when its being entered during the process of
+        /// editing a new ship (used on textchange event)
+        /// 
+        /// If the turn speed is invalid an error message showing why is displayed
+        /// 
+        ///  author - robert purdey
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void validateTurnSpeedEdit(object sender, EventArgs e)
         {
             string turnSpeedErrMsg = null;
@@ -585,6 +643,16 @@ namespace AdminControlForm
             }
         }
 
+        /// <summary>
+        /// Checks if the max speed input is valid when its being entered during the process of
+        /// editing a new ship (used on textchange event)
+        /// 
+        /// If the max speed is invalid an error message showing why is displayed
+        /// 
+        ///  author - robert purdey
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void validateMaxSpeedEdit(object sender, EventArgs e)
         {
             string maxSpeedErrMsg = null;
@@ -603,6 +671,16 @@ namespace AdminControlForm
             }
         }
 
+        /// <summary>
+        /// Checks if the acceleration input is valid when its being entered during the process of
+        /// editing a new ship (used on textchange event)
+        /// 
+        /// If the acceleration is invalid an error message showing why is displayed
+        /// 
+        ///  author - robert purdey
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void validateAccelerationEdit(object sender, EventArgs e)
         {
             string accelerateErrMsg = null;
@@ -621,6 +699,16 @@ namespace AdminControlForm
             }
         }
 
+        /// <summary>
+        /// Edits the current ship being accessed by the admin.
+        /// First checks if all fields are valid and if so, attempts
+        /// to edit the ship. Checks if the admin is sure they want
+        /// to make the update and also shows a message of success or failure
+        /// 
+        ///  author - robert purdey
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bttnShipUpdate_Click(object sender, EventArgs e)
         {
             bool isShipEditValid = false;

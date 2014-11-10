@@ -58,6 +58,12 @@
     <Compile Include="AcceptCancelBlockActionForm.Designer.cs">
       <DependentUpon>AcceptCancelBlockActionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AdminLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminLogin.Designer.cs">
+      <DependentUpon>AdminLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="BlockUnblockUserValidation.cs" />
     <Compile Include="ShipValidation.cs" />
     <Compile Include="SpaceUnionDataSet.Designer.cs">
@@ -76,6 +82,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AcceptCancelBlockActionForm.resx">
       <DependentUpon>AcceptCancelBlockActionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminLogin.resx">
+      <DependentUpon>AdminLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
@@ -132,6 +141,9 @@
       <Project>{45ed07c7-ca09-4371-912a-5dd22323bb40}</Project>
       <Name>SpaceUnionDatabase</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\deep-space-PS.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
