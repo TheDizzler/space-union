@@ -15,6 +15,8 @@ namespace AdminControlForm
         /// <summary>
         /// Validates that the ship name has been entered. (error message is set only if
         /// this function returns false)
+        /// 
+        /// author - Robert Purdey
         /// </summary>
         /// <param name="shipName">name of the ship to validate</param>
         /// <param name="errMsg">error message explaining the error</param>
@@ -34,6 +36,8 @@ namespace AdminControlForm
         /// <summary>
         /// Validates the turn speed of the ship. (error message is set only if
         /// this function returns false)
+        /// 
+        /// author - Robert Purdey
         /// </summary>
         /// <param name="turnSpeed">turn speed of the ship to validate</param>
         /// <param name="errMsg">error message explaining the error</param>
@@ -63,6 +67,8 @@ namespace AdminControlForm
         /// <summary>
         /// Validates the acceleration for the ship. (error message is set only if
         /// this function returns false)
+        /// 
+        /// author - Robert Purdey
         /// </summary>
         /// <param name="accelSpeed">acceleration of the ship to validate</param>
         /// <param name="errMsg">error message explaning the error</param>
@@ -92,6 +98,8 @@ namespace AdminControlForm
         /// <summary>
         /// Validates the max speed for the ship. (error message is set only if
         /// this function returns false)
+        /// 
+        /// author - Robert Purdey
         /// </summary>
         /// <param name="maxSpeed">max speed of the ship to validate</param>
         /// <param name="errMsg">error message explaining the error</param>
