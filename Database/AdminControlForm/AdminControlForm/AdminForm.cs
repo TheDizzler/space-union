@@ -536,7 +536,6 @@ namespace AdminControlForm
 
             if (!string.IsNullOrWhiteSpace(this.tbUserStatName.Text))
             {
-<<<<<<< HEAD
                 userStatTable.setUserStatWin(oldStat.userName.ToString(), (int)this.nudWins.Value);
                 userStatTable.setUserStatLose(oldStat.userName.ToString(), (int)this.nudLoses.Value);
                 userStatTable.setUserStatDied(oldStat.userName.ToString(), (int)this.nudDied.Value);
@@ -549,57 +548,6 @@ namespace AdminControlForm
 
                 this.userStatsTableAdapter.Fill(this.spaceUnionDataSet.UserStats);
                 this.gvStats.Refresh();
-=======
-                userStatTable.setUserStatWin(oldStat.userName.ToString(), (int)this.nudWins.Value - oldStat.userstatWin);
-                userStatTable.setUserStatLose(oldStat.userName.ToString(), (int)this.nudLoses.Value - oldStat.userstatLose);
-                userStatTable.setUserStatDied(oldStat.userName.ToString(), (int)this.nudDied.Value - oldStat.userstatDied);
-                userStatTable.setUserStatHits(oldStat.userName.ToString(), (int)this.nudHits.Value - oldStat.userstatHits);
-                userStatTable.setUserStatKills(oldStat.userName.ToString(), (int)this.nudKills.Value - oldStat.userstatKills);
-                userStatTable.setUserStatShip1(oldStat.userName.ToString(), (int)this.nudShip1.Value - oldStat.userstatShipUsed_1);
-                userStatTable.setUserStatShip2(oldStat.userName.ToString(), (int)this.nudShip2.Value - oldStat.userstatShipUsed_2);
-                userStatTable.setUserStatShip3(oldStat.userName.ToString(), (int)this.nudShip3.Value - oldStat.userstatShipUsed_3);
-                userStatTable.setUserStatFlagsCaptured(oldStat.userName.ToString(), (int)this.nudFlagsCaptured.Value - oldStat.userstatFlagsCaptured);
-                userStatTable.setUserStatShotsFired(oldStat.userName.ToString(), (int)this.nudShotsFired.Value - oldStat.userstatShotsFired);
-            }
-        }
-
-
-        private void btnGetUserStats_Click(object sender, EventArgs e)
-        {
-            UserStat oldStat = userStatTable.getUserStat(this.tbUserStatName.Text);
-
-            if (oldStat != null)
-            {
-                this.nudDied.Value = oldStat.userstatDied;
-                this.nudFlagsCaptured.Value = oldStat.userstatFlagsCaptured;
-                this.nudHits.Value = oldStat.userstatHits;
-                this.nudKills.Value = oldStat.userstatKills;
-                this.nudLoses.Value = oldStat.userstatLose;
-                this.nudShip1.Value = oldStat.userstatShipUsed_1;
-                this.nudShip2.Value = oldStat.userstatShipUsed_2;
-                this.nudShip3.Value = oldStat.userstatShipUsed_3;
-                this.nudShotsFired.Value = oldStat.userstatShotsFired;
-                this.nudWins.Value = oldStat.userstatWin;
-
-                this.btnUpdate.Enabled = true;
-                this.lblUserStatError.Visible = false;
-            }
-            else
-            {
-                this.nudDied.Value = 0;
-                this.nudFlagsCaptured.Value = 0;
-                this.nudHits.Value = 0;
-                this.nudKills.Value = 0;
-                this.nudLoses.Value = 0;
-                this.nudShip1.Value = 0;
-                this.nudShip2.Value = 0;
-                this.nudShip3.Value = 0;
-                this.nudShotsFired.Value = 0;
-                this.nudWins.Value = 0;
-
-                this.btnUpdate.Enabled = false;
-                this.lblUserStatError.Visible = true;
->>>>>>> 38404402317eaf5533cfd02e9c2e5b28d17b3095
             }
         }
 
@@ -805,15 +753,9 @@ namespace AdminControlForm
         private void tbPowerupName_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(this.tbPowerupName.Text))
-            {
                 this.btnUpdatePwr.Enabled = true;
-                this.btnDelPower.Enabled = true;
-            }
             else
-            {
                 this.btnUpdatePwr.Enabled = false;
-                this.btnDelPower.Enabled = false;
-            }
 
         }
 
@@ -829,29 +771,7 @@ namespace AdminControlForm
             {
                 powerupTable.addPowerup(this.tbPowerupName.Text, (int)this.nudPwrValue.Value);
             }
-<<<<<<< HEAD
             this.powerupsTableAdapter.Fill(this.spaceUnionDataSet.Powerups);
-=======
-            this.lblPwrError.Visible = false;
-            this.powerupTableAdapter.Fill(this.spaceUnionDataSet.Powerup);
-            this.dgvPwrup.Refresh();
-        }
-
-        private void btnDelPower_Click(object sender, EventArgs e)
-        {
-            Powerup oldPwrup = powerupTable.getPowerup(this.tbPowerupName.Text);
-
-            if (!string.IsNullOrWhiteSpace(this.tbPowerupName.Text) && oldPwrup != null)
-            {
-                powerupTable.deletePowerup(this.tbPowerupName.Text);
-                this.lblPwrError.Visible = false;
-            }
-            else
-            {
-                this.lblPwrError.Visible = true;
-            }
-            this.powerupTableAdapter.Fill(this.spaceUnionDataSet.Powerup);
->>>>>>> 38404402317eaf5533cfd02e9c2e5b28d17b3095
             this.dgvPwrup.Refresh();
         }
     }
