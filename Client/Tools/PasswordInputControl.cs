@@ -3,94 +3,107 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
-namespace SpaceUnionXNA.Tools
+namespace SpaceMenus
 {
-        public class PasswordInputControl : Nuclex.UserInterface.Controls.Desktop.InputControl
+    public class PasswordInputControl : Nuclex.UserInterface.Controls.Desktop.InputControl
+    {
+        private String enteredText = "";
+        public event EventHandler Activated;
+        public PasswordInputControl()
         {
-            private String enteredText = "";
-            public event EventHandler Activated;
-            public PasswordInputControl()
-            {
 
+        }
+        /// <summary>
+        /// Gets the string from the textbox
+        /// </summary>
+        /// <returns></returns>
+        public String GetText()
+        {
+            return enteredText;
+        }
+
+
+        protected override void OnCharacterEntered(char character)
+        {
+            if (character == '\n' || character == '\r')
+            {
+                OnActivate();
+                return;
             }
-            /// <summary>
-            /// Obtem a String da caixa de texto
-            /// </summary>
-            /// <returns></returns>
-            public String GetText()
+            if (this.HasFocus &&
+               (!Char.IsWhiteSpace(character) || !Char.IsPunctuation(character) || !Char.IsSeparator(character))
+                && character != '\b')
             {
-                return enteredText;
+                enteredText += character;
+                this.Text = String.Empty;
+                for (int i = 0; i < enteredText.Length; i++)
+                    this.Text += "*";
+                this.CaretPosition = this.Text.Length;
             }
-
-
-            protected override void OnCharacterEntered(char character)
+            else if (character == '\b')
             {
-                if (character == '\n' || character == '\r')
+                if (enteredText.Length >= 1)
                 {
-                    OnActivate();
-                    return;
-                }
-                if (this.HasFocus &&
-                   (Char.IsLetter(character) || Char.IsNumber(character)))
-                {
-                    enteredText += character;
-                    this.Text = String.Empty;
-                    for (int i = 0; i < enteredText.Length; i++)
-                        this.Text += "*";
-                    this.CaretPosition = this.Text.Length;
-                }
-
-            }
-
-            protected override void OnKeyReleased(Microsoft.Xna.Framework.Input.Keys key)
-            {
-                if (!HasFocus) return;
-                if (!String.IsNullOrEmpty(enteredText)
-                    && (Keys.Back == key || Keys.Delete == key))
-                {
-                    int oldIndex = this.CaretPosition;
                     enteredText = RemoveIndex(enteredText.ToCharArray(), this.CaretPosition);
                     this.Text = string.Empty;
                     for (int i = 0; i < enteredText.Length; i++)
-                        this.Text += "*";
-                    this.CaretPosition = oldIndex;
-                    return;
-                }
-            }
-
-            private String RemoveIndex(Char[] IndicesArray, int RemoveAt)
-            {
-                Char[] newIndicesArray = new char[IndicesArray.Length - 1];
-
-                int i = 0;
-                int j = 0;
-                while (i < IndicesArray.Length)
-                {
-                    if (i != RemoveAt)
                     {
-                        newIndicesArray[j] = IndicesArray[i];
-                        j++;
+                        this.Text += "*";
                     }
-                    i++;
-                }
-
-                return new string(newIndicesArray);
-            }
-
-
-            /// <summary>
-            /// Call our delegate and clear text
-            /// </summary>
-            protected void OnActivate()
-            {
-                if (Activated != null)
-                {
-                    Activated(this, EventArgs.Empty);
-                    Text = string.Empty;
-
+                    this.CaretPosition = this.Text.Length;
                 }
             }
         }
-    }
+        /*
+        protected override void OnKeyReleased(Microsoft.Xna.Framework.Input.Keys key)
+        {
+            if (!HasFocus) return;
+            if (!String.IsNullOrEmpty(enteredText)
+                && (Keys.Back == key || Keys.Delete == key))
+            {
+                int oldIndex = this.CaretPosition;
+                enteredText = RemoveIndex(enteredText.ToCharArray(), this.CaretPosition);
+                this.Text = string.Empty;
+                for (int i = 0; i < enteredText.Length; i++)
+                    this.Text += "*";
+                this.CaretPosition = oldIndex;
+                return;
+            }
+        }*/
 
+        private String RemoveIndex(Char[] IndicesArray, int RemoveAt)
+        {
+            Char[] newIndicesArray = new char[IndicesArray.Length - 1];
+
+            int i = 0;
+            int j = 0;
+            while (i < IndicesArray.Length)
+            {
+                if (i != RemoveAt)
+                {
+                    newIndicesArray[j] = IndicesArray[i];
+                    j++;
+                }
+                i++;
+            }
+
+            return new string(newIndicesArray);
+        }
+
+
+        /// <summary>
+        /// Call our delegate and clear text
+        /// </summary>
+        protected void OnActivate()
+        {
+            if (Activated != null)
+            {
+                Activated(this, EventArgs.Empty);
+                Text = string.Empty;
+
+            }
+        }
+    }
+}

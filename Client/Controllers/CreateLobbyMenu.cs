@@ -73,6 +73,7 @@ namespace SpaceUnionXNA.Controllers
             ButtonControl createLobbyButton = GuiHelper.CreateButton("Create Lobby", -435, -150, 200, 32);
             createLobbyButton.Pressed += delegate(object sender, EventArgs arguments)
             {
+                game.EnterLobbyMenu();
                 //NETWORKING
                 /*
                 if(lobbyTitleInput.Text != null){

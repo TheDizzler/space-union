@@ -17,11 +17,13 @@ namespace SpaceUnionXNA.Tools {
 		private Rectangle rect;
 		//private Ship playerShip;
 		private BaseButton button = new BaseButton(Game1.Assets.playButton);
+        private List<Ship> ships;
+        private List<Ship> inactiveships;
 		private int redTeamKills = 0;
 		private int blueTeamKills = 0;
 		public bool timeOver = false;
 
-		public TeamBattleGUI(Game1 game, Ship ship, TimeSpan time)
+		public TeamBattleGUI(Game1 game, Ship ship, TimeSpan time, List<Ship> ships, List<Ship> inactiveships)
 			: base(game, ship) {
 			//this.game = game;
 			teamBattleTime = time;
@@ -29,11 +31,14 @@ namespace SpaceUnionXNA.Tools {
 			rect = new Rectangle(50, 50, game.getScreenWidth() - 100, game.getScreenHeight() - 100);
 			//playerShip = ship;
 			playerShip.redTeam = true;
+            this.ships = ships;
+            this.inactiveships = inactiveships;
 		}
 
 
 		public override void update(GameTime gameTime, QuadTree quadTree) {
-
+            redTeamKills = 0;
+            blueTeamKills = 0;
 			if (teamBattleTime <= TimeSpan.Zero) {
 
 				timeOver = true;
@@ -49,12 +54,28 @@ namespace SpaceUnionXNA.Tools {
 
 				base.update(gameTime, quadTree);
 				teamBattleTime -= gameTime.ElapsedGameTime;
-				if (playerShip.redTeam == true) {
-					redTeamKills = playerShip.kills;
-				}
-				if (playerShip.blueTeam == true) {
-					blueTeamKills = playerShip.kills;
-				}
+                foreach (Ship ship in ships)
+                {
+                    if (ship.redTeam == true)
+                    {
+                        redTeamKills += ship.kills;
+                    }
+                    if (ship.blueTeam == true)
+                    {
+                        blueTeamKills += ship.kills;
+                    }
+                }
+                foreach (Ship ship in inactiveships)
+                {
+                    if (ship.redTeam == true)
+                    {
+                        redTeamKills += ship.kills;
+                    }
+                    if (ship.blueTeam == true)
+                    {
+                        blueTeamKills += ship.kills;
+                    }
+                }
 
 			}
 		}

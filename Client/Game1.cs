@@ -320,6 +320,11 @@ namespace SpaceUnionXNA
         public void EnterLoginMenu()
         {
             currentGameState = GameState.Login;
+            //Screen Margins
+            mainScreen.Desktop.Bounds = new UniRectangle(
+              new UniScalar(0.1f, 0.0f), new UniScalar(0.1f, 0.0f), // x and y = 10%
+              new UniScalar(0.8f, 0.0f), new UniScalar(0.8f, 0.0f) // width and height = 80%
+            );
             login_menu = new LoginMenu(this);
         }
 

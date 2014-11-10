@@ -34,6 +34,7 @@ namespace SpaceUnionXNA.Controllers
 
         public void DrawMenu(GameTime gameTime)
         {
+           
             game.gui_manager.Draw(gameTime);
         }
 
