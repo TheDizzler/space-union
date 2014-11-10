@@ -142,22 +142,38 @@ namespace SpaceUnion.Ships {
 		/// </summary>
 		/// <param name="gameTime"></param>
 		public virtual void thrust(GameTime gameTime) {
+            ///Max speed logic by
+            ///Matthew Baldock
+            ///Steven Chen
             Vector2 tempVelocity = velocity;
-			Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
+			Vector2 acceleration = new Vector2((float) Math.Sin(rotation),(float) -Math.Cos(rotation));
 			acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+            float differencex;
+            float differencey;
+            Vector2 max = new Vector2((float)Math.Sqrt(maxSpeed*maxSpeed/2), (float)Math.Sqrt(maxSpeed*maxSpeed/2));
             
-            if (Math.Abs(tempVelocity.Length()) > maxSpeed)
+            Vector2.Add(ref tempVelocity, ref acceleration, out tempVelocity);
+            float newangle = (float)Math.Atan(tempVelocity.Y/tempVelocity.X);
+            if (tempVelocity.Length() > maxSpeed && newangle != rotation)
             {
-                Vector2 tempVelocity2 = tempVelocity;
-                Vector2.Add(ref tempVelocity2, ref acceleration, out tempVelocity2);
-                if (Math.Abs(tempVelocity2.Length()) < tempVelocity.Length())
-                {
-                    Vector2.Add(ref velocity, ref acceleration, out velocity);
-                }
-            } else if (Math.Abs(tempVelocity.Length()) < maxSpeed)
+                differencex = (float)Math.Sin(rotation) * maxSpeed;
+                differencey = (float)-Math.Cos(rotation) * maxSpeed;
+                acceleration.X = differencex - velocity.X;
+                acceleration.Y = differencey - velocity.Y;
+                Vector2.Add(ref velocity, ref acceleration, out velocity);
+                
+            }
+
+            if (tempVelocity.Length() < maxSpeed)
             {
                 Vector2.Add(ref velocity, ref acceleration, out velocity);
             }
+            
+
+            
+            
+            
+           
 		}
 
 
