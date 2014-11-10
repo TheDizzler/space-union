@@ -520,6 +520,23 @@ namespace AdminControlForm
                 this.nudWins.Value = oldStat.userstatWin;
 
                 this.btnUpdate.Enabled = true;
+                this.lblUserStatError.Visible = false;
+            }
+            else
+            {
+                this.nudDied.Value = 0;
+                this.nudFlagsCaptured.Value = 0;
+                this.nudHits.Value = 0;
+                this.nudKills.Value = 0;
+                this.nudLoses.Value = 0;
+                this.nudShip1.Value = 0;
+                this.nudShip2.Value = 0;
+                this.nudShip3.Value = 0;
+                this.nudShotsFired.Value = 0;
+                this.nudWins.Value = 0;
+
+                this.btnUpdate.Enabled = false;
+                this.lblUserStatError.Visible = true;
             }
         }
 
@@ -673,9 +690,15 @@ namespace AdminControlForm
         private void tbPowerupName_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(this.tbPowerupName.Text))
+            {
                 this.btnUpdatePwr.Enabled = true;
+                this.btnDelPower.Enabled = true;
+            }
             else
+            {
                 this.btnUpdatePwr.Enabled = false;
+                this.btnDelPower.Enabled = false;
+            }
 
         }
 
@@ -690,6 +713,24 @@ namespace AdminControlForm
             else
             {
                 powerupTable.addPowerup(this.tbPowerupName.Text, (int)this.nudPwrValue.Value);
+            }
+            this.lblPwrError.Visible = false;
+            this.powerupTableAdapter.Fill(this.spaceUnionDataSet.Powerup);
+            this.dgvPwrup.Refresh();
+        }
+
+        private void btnDelPower_Click(object sender, EventArgs e)
+        {
+            Powerup oldPwrup = powerupTable.getPowerup(this.tbPowerupName.Text);
+
+            if (!string.IsNullOrWhiteSpace(this.tbPowerupName.Text) && oldPwrup != null)
+            {
+                powerupTable.deletePowerup(this.tbPowerupName.Text);
+                this.lblPwrError.Visible = false;
+            }
+            else
+            {
+                this.lblPwrError.Visible = true;
             }
             this.powerupTableAdapter.Fill(this.spaceUnionDataSet.Powerup);
             this.dgvPwrup.Refresh();

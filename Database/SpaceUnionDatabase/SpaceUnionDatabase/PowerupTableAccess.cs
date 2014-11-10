@@ -82,5 +82,29 @@ namespace SpaceUnionDatabase
             }
             return success;
         }
+
+        public bool deletePowerup(string pwrName)
+        {
+            bool success = false;
+            var db = new SpaceUnionEntities();
+
+            try
+            {
+                pwrup = db.Powerups.FirstOrDefault(u => u.PowerupName == pwrName);
+
+                db.Powerups.Remove(pwrup);
+                db.SaveChanges();
+                success = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+            return success;
+        }
     }
 }

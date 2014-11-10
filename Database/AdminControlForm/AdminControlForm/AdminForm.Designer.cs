@@ -39,6 +39,8 @@
             this.label17 = new System.Windows.Forms.Label();
             this.tbPowerupName = new System.Windows.Forms.TextBox();
             this.dgvPwrup = new System.Windows.Forms.DataGridView();
+            this.powerupNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.powerupValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.lablShipEditMaxSpeed = new System.Windows.Forms.Label();
             this.lablShipEditAccelerateErrMsg = new System.Windows.Forms.Label();
@@ -57,6 +59,7 @@
             this.lablShipEditing = new System.Windows.Forms.Label();
             this.lablEditShip = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnGetUserStats = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.nudFlagsCaptured = new System.Windows.Forms.NumericUpDown();
@@ -128,9 +131,9 @@
             this.lablPassword = new System.Windows.Forms.Label();
             this.lablUsername = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.btnGetUserStats = new System.Windows.Forms.Button();
-            this.powerupNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.powerupValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblUserStatError = new System.Windows.Forms.Label();
+            this.btnDelPower = new System.Windows.Forms.Button();
+            this.lblPwrError = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.powerupBindingSource)).BeginInit();
             this.tabPage5.SuspendLayout();
@@ -170,6 +173,8 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.lblPwrError);
+            this.tabPage5.Controls.Add(this.btnDelPower);
             this.tabPage5.Controls.Add(this.btnUpdatePwr);
             this.tabPage5.Controls.Add(this.label16);
             this.tabPage5.Controls.Add(this.nudPwrValue);
@@ -230,16 +235,39 @@
             // 
             // dgvPwrup
             // 
+            this.dgvPwrup.AllowUserToAddRows = false;
+            this.dgvPwrup.AllowUserToDeleteRows = false;
+            this.dgvPwrup.AllowUserToResizeColumns = false;
+            this.dgvPwrup.AllowUserToResizeRows = false;
             this.dgvPwrup.AutoGenerateColumns = false;
             this.dgvPwrup.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPwrup.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.powerupNameDataGridViewTextBoxColumn,
             this.powerupValueDataGridViewTextBoxColumn});
             this.dgvPwrup.DataSource = this.powerupBindingSource;
+            this.dgvPwrup.Enabled = false;
             this.dgvPwrup.Location = new System.Drawing.Point(9, 7);
+            this.dgvPwrup.MultiSelect = false;
             this.dgvPwrup.Name = "dgvPwrup";
+            this.dgvPwrup.ReadOnly = true;
             this.dgvPwrup.Size = new System.Drawing.Size(244, 471);
             this.dgvPwrup.TabIndex = 0;
+            this.dgvPwrup.TabStop = false;
+            // 
+            // powerupNameDataGridViewTextBoxColumn
+            // 
+            this.powerupNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.powerupNameDataGridViewTextBoxColumn.DataPropertyName = "PowerupName";
+            this.powerupNameDataGridViewTextBoxColumn.HeaderText = "PowerupName";
+            this.powerupNameDataGridViewTextBoxColumn.Name = "powerupNameDataGridViewTextBoxColumn";
+            this.powerupNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // powerupValueDataGridViewTextBoxColumn
+            // 
+            this.powerupValueDataGridViewTextBoxColumn.DataPropertyName = "PowerupValue";
+            this.powerupValueDataGridViewTextBoxColumn.HeaderText = "PowerupValue";
+            this.powerupValueDataGridViewTextBoxColumn.Name = "powerupValueDataGridViewTextBoxColumn";
+            this.powerupValueDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // tabPage4
             // 
@@ -433,6 +461,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.lblUserStatError);
             this.tabPage3.Controls.Add(this.btnGetUserStats);
             this.tabPage3.Controls.Add(this.btnUpdate);
             this.tabPage3.Controls.Add(this.label14);
@@ -465,6 +494,17 @@
             this.tabPage3.TabIndex = 4;
             this.tabPage3.Text = "UserStats";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // btnGetUserStats
+            // 
+            this.btnGetUserStats.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnGetUserStats.Location = new System.Drawing.Point(338, 142);
+            this.btnGetUserStats.Name = "btnGetUserStats";
+            this.btnGetUserStats.Size = new System.Drawing.Size(101, 23);
+            this.btnGetUserStats.TabIndex = 26;
+            this.btnGetUserStats.Text = "Get User Stats";
+            this.btnGetUserStats.UseVisualStyleBackColor = true;
+            this.btnGetUserStats.Click += new System.EventHandler(this.btnGetUserStats_Click);
             // 
             // btnUpdate
             // 
@@ -1315,29 +1355,37 @@
             this.tabControl.Size = new System.Drawing.Size(496, 512);
             this.tabControl.TabIndex = 0;
             // 
-            // btnGetUserStats
+            // lblUserStatError
             // 
-            this.btnGetUserStats.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnGetUserStats.Location = new System.Drawing.Point(338, 142);
-            this.btnGetUserStats.Name = "btnGetUserStats";
-            this.btnGetUserStats.Size = new System.Drawing.Size(101, 23);
-            this.btnGetUserStats.TabIndex = 26;
-            this.btnGetUserStats.Text = "Get User Stats";
-            this.btnGetUserStats.UseVisualStyleBackColor = true;
-            this.btnGetUserStats.Click += new System.EventHandler(this.btnGetUserStats_Click);
+            this.lblUserStatError.AutoSize = true;
+            this.lblUserStatError.ForeColor = System.Drawing.Color.Red;
+            this.lblUserStatError.Location = new System.Drawing.Point(108, 172);
+            this.lblUserStatError.Name = "lblUserStatError";
+            this.lblUserStatError.Size = new System.Drawing.Size(85, 13);
+            this.lblUserStatError.TabIndex = 27;
+            this.lblUserStatError.Text = "- not a valid user";
+            this.lblUserStatError.Visible = false;
             // 
-            // powerupNameDataGridViewTextBoxColumn
+            // btnDelPower
             // 
-            this.powerupNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.powerupNameDataGridViewTextBoxColumn.DataPropertyName = "PowerupName";
-            this.powerupNameDataGridViewTextBoxColumn.HeaderText = "PowerupName";
-            this.powerupNameDataGridViewTextBoxColumn.Name = "powerupNameDataGridViewTextBoxColumn";
+            this.btnDelPower.Location = new System.Drawing.Point(387, 69);
+            this.btnDelPower.Name = "btnDelPower";
+            this.btnDelPower.Size = new System.Drawing.Size(95, 23);
+            this.btnDelPower.TabIndex = 27;
+            this.btnDelPower.Text = "Delete Powerup";
+            this.btnDelPower.UseVisualStyleBackColor = true;
+            this.btnDelPower.Click += new System.EventHandler(this.btnDelPower_Click);
             // 
-            // powerupValueDataGridViewTextBoxColumn
+            // lblPwrError
             // 
-            this.powerupValueDataGridViewTextBoxColumn.DataPropertyName = "PowerupValue";
-            this.powerupValueDataGridViewTextBoxColumn.HeaderText = "PowerupValue";
-            this.powerupValueDataGridViewTextBoxColumn.Name = "powerupValueDataGridViewTextBoxColumn";
+            this.lblPwrError.AutoSize = true;
+            this.lblPwrError.ForeColor = System.Drawing.Color.Red;
+            this.lblPwrError.Location = new System.Drawing.Point(345, 95);
+            this.lblPwrError.Name = "lblPwrError";
+            this.lblPwrError.Size = new System.Drawing.Size(135, 13);
+            this.lblPwrError.TabIndex = 28;
+            this.lblPwrError.Text = "- not a valid powerup name";
+            this.lblPwrError.Visible = false;
             // 
             // AdminForm
             // 
@@ -1486,6 +1534,9 @@
         private System.Windows.Forms.Button btnGetUserStats;
         private System.Windows.Forms.DataGridViewTextBoxColumn powerupNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn powerupValueDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label lblUserStatError;
+        private System.Windows.Forms.Button btnDelPower;
+        private System.Windows.Forms.Label lblPwrError;
 
     }
 }
