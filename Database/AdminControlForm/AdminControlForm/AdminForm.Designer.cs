@@ -33,6 +33,8 @@
             this.powerupBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.powerupTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.PowerupTableAdapter();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.lblPwrError = new System.Windows.Forms.Label();
+            this.btnDelPower = new System.Windows.Forms.Button();
             this.btnUpdatePwr = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.nudPwrValue = new System.Windows.Forms.NumericUpDown();
@@ -59,6 +61,7 @@
             this.lablShipEditing = new System.Windows.Forms.Label();
             this.lablEditShip = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.lblUserStatError = new System.Windows.Forms.Label();
             this.btnGetUserStats = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
@@ -131,9 +134,6 @@
             this.lablPassword = new System.Windows.Forms.Label();
             this.lablUsername = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
-            this.lblUserStatError = new System.Windows.Forms.Label();
-            this.btnDelPower = new System.Windows.Forms.Button();
-            this.lblPwrError = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.powerupBindingSource)).BeginInit();
             this.tabPage5.SuspendLayout();
@@ -188,6 +188,27 @@
             this.tabPage5.TabIndex = 6;
             this.tabPage5.Text = "Powerups";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // lblPwrError
+            // 
+            this.lblPwrError.AutoSize = true;
+            this.lblPwrError.ForeColor = System.Drawing.Color.Red;
+            this.lblPwrError.Location = new System.Drawing.Point(345, 95);
+            this.lblPwrError.Name = "lblPwrError";
+            this.lblPwrError.Size = new System.Drawing.Size(135, 13);
+            this.lblPwrError.TabIndex = 28;
+            this.lblPwrError.Text = "- not a valid powerup name";
+            this.lblPwrError.Visible = false;
+            // 
+            // btnDelPower
+            // 
+            this.btnDelPower.Location = new System.Drawing.Point(387, 69);
+            this.btnDelPower.Name = "btnDelPower";
+            this.btnDelPower.Size = new System.Drawing.Size(95, 23);
+            this.btnDelPower.TabIndex = 27;
+            this.btnDelPower.Text = "Delete Powerup";
+            this.btnDelPower.UseVisualStyleBackColor = true;
+            this.btnDelPower.Click += new System.EventHandler(this.btnDelPower_Click);
             // 
             // btnUpdatePwr
             // 
@@ -271,7 +292,7 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.BackgroundImage = global::AdminControlForm.Properties.Resources.dark_space;
+            this.tabPage4.BackColor = System.Drawing.Color.Black;
             this.tabPage4.Controls.Add(this.lablShipEditMaxSpeed);
             this.tabPage4.Controls.Add(this.lablShipEditAccelerateErrMsg);
             this.tabPage4.Controls.Add(this.lablShipEditTurnSpdErrMsg);
@@ -294,7 +315,6 @@
             this.tabPage4.Size = new System.Drawing.Size(488, 486);
             this.tabPage4.TabIndex = 5;
             this.tabPage4.Text = "Edit Ship";
-            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // lablShipEditMaxSpeed
             // 
@@ -494,6 +514,17 @@
             this.tabPage3.TabIndex = 4;
             this.tabPage3.Text = "UserStats";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // lblUserStatError
+            // 
+            this.lblUserStatError.AutoSize = true;
+            this.lblUserStatError.ForeColor = System.Drawing.Color.Red;
+            this.lblUserStatError.Location = new System.Drawing.Point(108, 172);
+            this.lblUserStatError.Name = "lblUserStatError";
+            this.lblUserStatError.Size = new System.Drawing.Size(85, 13);
+            this.lblUserStatError.TabIndex = 27;
+            this.lblUserStatError.Text = "- not a valid user";
+            this.lblUserStatError.Visible = false;
             // 
             // btnGetUserStats
             // 
@@ -818,7 +849,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.BackgroundImage = global::AdminControlForm.Properties.Resources.dark_space;
+            this.tabPage2.BackColor = System.Drawing.Color.Black;
             this.tabPage2.Controls.Add(this.lablMaxSpeedErrMsg);
             this.tabPage2.Controls.Add(this.lablAccelErrMsg);
             this.tabPage2.Controls.Add(this.lablTurnSpeedErrMsg);
@@ -840,7 +871,6 @@
             this.tabPage2.Size = new System.Drawing.Size(488, 486);
             this.tabPage2.TabIndex = 3;
             this.tabPage2.Text = "Add Ship";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // lablMaxSpeedErrMsg
             // 
@@ -995,8 +1025,7 @@
             // 
             // editUserTab
             // 
-            this.editUserTab.BackColor = System.Drawing.Color.Transparent;
-            this.editUserTab.BackgroundImage = global::AdminControlForm.Properties.Resources.dark_space;
+            this.editUserTab.BackColor = System.Drawing.Color.Black;
             this.editUserTab.Controls.Add(this.lablCurrentBlockStatus);
             this.editUserTab.Controls.Add(this.txtbCurrentBlockStatus);
             this.editUserTab.Controls.Add(this.txtbUserEditing);
@@ -1128,8 +1157,7 @@
             // 
             // createUserTab
             // 
-            this.createUserTab.BackColor = System.Drawing.Color.Transparent;
-            this.createUserTab.BackgroundImage = global::AdminControlForm.Properties.Resources.dark_space;
+            this.createUserTab.BackColor = System.Drawing.Color.Black;
             this.createUserTab.Controls.Add(this.lablCreateNewUser);
             this.createUserTab.Controls.Add(this.lablConfPasswordErrMsg);
             this.createUserTab.Controls.Add(this.bttnCreateUser);
@@ -1354,38 +1382,6 @@
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(496, 512);
             this.tabControl.TabIndex = 0;
-            // 
-            // lblUserStatError
-            // 
-            this.lblUserStatError.AutoSize = true;
-            this.lblUserStatError.ForeColor = System.Drawing.Color.Red;
-            this.lblUserStatError.Location = new System.Drawing.Point(108, 172);
-            this.lblUserStatError.Name = "lblUserStatError";
-            this.lblUserStatError.Size = new System.Drawing.Size(85, 13);
-            this.lblUserStatError.TabIndex = 27;
-            this.lblUserStatError.Text = "- not a valid user";
-            this.lblUserStatError.Visible = false;
-            // 
-            // btnDelPower
-            // 
-            this.btnDelPower.Location = new System.Drawing.Point(387, 69);
-            this.btnDelPower.Name = "btnDelPower";
-            this.btnDelPower.Size = new System.Drawing.Size(95, 23);
-            this.btnDelPower.TabIndex = 27;
-            this.btnDelPower.Text = "Delete Powerup";
-            this.btnDelPower.UseVisualStyleBackColor = true;
-            this.btnDelPower.Click += new System.EventHandler(this.btnDelPower_Click);
-            // 
-            // lblPwrError
-            // 
-            this.lblPwrError.AutoSize = true;
-            this.lblPwrError.ForeColor = System.Drawing.Color.Red;
-            this.lblPwrError.Location = new System.Drawing.Point(345, 95);
-            this.lblPwrError.Name = "lblPwrError";
-            this.lblPwrError.Size = new System.Drawing.Size(135, 13);
-            this.lblPwrError.TabIndex = 28;
-            this.lblPwrError.Text = "- not a valid powerup name";
-            this.lblPwrError.Visible = false;
             // 
             // AdminForm
             // 
