@@ -31,34 +31,90 @@ namespace AdminControlForm
         private UserValidation userValidation = new UserValidation();
 
         /// <summary>
+        /// Helper class to validate input when a new ship is being added / edited
+        /// </summary>
+        private ShipValidation shipValidation = new ShipValidation();
+
+        /// <summary>
         /// Allows access to read/write to the user table in the Space Union database
         /// </summary>
         private UserTableAccess userTable = new UserTableAccess();
-        
+
+        /// <summary>
+        /// Allows access to read/write to the ship table in the Space Union database
+        /// </summary>
+        private ShipTableAccess shipTable = new ShipTableAccess();
+
+        /// <summary>
+        /// Allows access to read/write to the user stat table in the Space Union database
+        /// </summary>
+        private UserStatTableAccess userStatTable = new UserStatTableAccess();
+
+        /// <summary>
+        /// Allows access to read/write to the Powerup table in the Space Union database
+        /// </summary>
+        private PowerupTableAccess powerupTable = new PowerupTableAccess();
+
         /// <summary>
         /// Helper class to validate input when a new user is being blocked/unblocked
         /// </summary>
         private BlockUnblockUserValidation blockValidation = new BlockUnblockUserValidation();
-        
+
         /// <summary>
         /// States if a username is input correctly
         /// </summary>
         private bool isUsernameValid = false;
-        
+
         /// <summary>
         /// States if a password is input correctly
         /// </summary>
         private bool isPasswordValid = false;
-        
+
         /// <summary>
         /// States if a confirmation password is the same as the original password
         /// </summary>
         private bool isConfPassValid = false;
 
         /// <summary>
-        /// States if the message the admin type to block/unblock the user is valid
+        /// States if the Ship being added is valid
         /// </summary>
-        private bool isUserBlockActionValid = false;
+        private bool isShipNameValid = false;
+
+        /// <summary>
+        /// States if the turn speed input for an added ship is valid
+        /// </summary>
+        private bool isTurnSpeedValid = false;
+
+        /// <summary>
+        /// States if the max speed input for an added ship is valid
+        /// </summary>
+        private bool isMaxSpeedValid = false;
+
+        /// <summary>
+        /// States if the acceleration input for an added ship is valid
+        /// </summary>
+        private bool isAccelerationValid = false;
+
+        /// <summary>
+        /// States if the turn speed input for an edited ship is valid
+        /// </summary>
+        private bool isTurnSpeedEditValid = false;
+
+        /// <summary>
+        /// States if the max speed input for an edited ship is valid
+        /// </summary>
+        private bool isMaxSpeedEditValid = false;
+
+        /// <summary>
+        /// States if the acceleration input for an edited ship is valid
+        /// </summary>
+        private bool isAccelerationEditValid = false;
+
+        /// <summary>
+        /// Name of the ship to update (gets set everytime an admin retrieves ship info)
+        /// </summary>
+        private string shipToEdit = null;
+
 
         /// <summary>
         /// Inits the form application
@@ -74,30 +130,36 @@ namespace AdminControlForm
         /// Checks if the input into the textfields is valid and if so,
         /// adds the new user into the database. If the database fails
         /// to write to the database a message why is displayed to the
-        /// admin. 
+        /// admin.
+        /// 
+        /// author - robert purdey
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void bttnCreateUser_Click(object sender, EventArgs e)
         {
             bool isvalidUserInfo;
-            
+
             validateUsername(sender, e);
             validatePassword(sender, e);
-            validateConfPassword(sender,e);
+            validateConfPassword(sender, e);
 
             isvalidUserInfo = isUsernameValid
                            && isPasswordValid
                            && isConfPassValid;
-            
-            if (isvalidUserInfo) {
+
+            if (isvalidUserInfo)
+            {
                 // if a user isnt added to the database
                 if (!userTable.AddNewUser(txtbUsername.Text,
                                           txtbPassword.Text,
-                                          txtbEmail.Text) ) {
+                                          txtbEmail.Text))
+                {
                     MessageBox.Show("Sorry, the Username is already taken.");
                 }
-                else {
+                else
+                {
+                    userStatTable.addUserStat(txtbUsername.Text);
                     MessageBox.Show("User was added to the database successfully");
                 }
             }
@@ -109,10 +171,7 @@ namespace AdminControlForm
         /// and if there is an error displays an error as to why or no
         /// error if the username is valid.
         /// 
-        /// Uses the isUsernameValid boolean to track the state the
-        /// username is in
-        /// - true if valid
-        /// - false otherwise
+        /// author - robert purdey
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -120,14 +179,16 @@ namespace AdminControlForm
         {
             string userErrMsg = null;
 
-            if (!userValidation.ValidateUsername(txtbUsername.Text, ref userErrMsg)) {
-                lablUsernameErrMsg.Text    = userErrMsg;
+            if (!userValidation.ValidateUsername(txtbUsername.Text, ref userErrMsg))
+            {
+                lablUsernameErrMsg.Text = userErrMsg;
                 lablUsernameErrMsg.Visible = true;
-                isUsernameValid            = false;
+                isUsernameValid = false;
             }
-            else {
+            else
+            {
                 lablUsernameErrMsg.Visible = false;
-                isUsernameValid            = true;
+                isUsernameValid = true;
             }
         }
 
@@ -137,10 +198,6 @@ namespace AdminControlForm
         /// and if there is an error displays an error as to why or no
         /// error if the password is valid.
         /// 
-        /// Uses the isPasswordValid boolean to track the state the password
-        /// is in.
-        /// - true if valid
-        /// - false otherwise
         /// 
         /// Author: Robert Purdey
         /// </summary>
@@ -150,14 +207,16 @@ namespace AdminControlForm
         {
             string passErrMsg = null;
 
-            if (!userValidation.ValidatePassword(txtbPassword.Text, ref passErrMsg) ) {
-                lablPasswordErrMsg.Text    = passErrMsg;
+            if (!userValidation.ValidatePassword(txtbPassword.Text, ref passErrMsg))
+            {
+                lablPasswordErrMsg.Text = passErrMsg;
                 lablPasswordErrMsg.Visible = true;
-                isPasswordValid            = false;
+                isPasswordValid = false;
             }
-            else {
+            else
+            {
                 lablPasswordErrMsg.Visible = false;
-                isPasswordValid            = true;
+                isPasswordValid = true;
             }
         }
 
@@ -166,11 +225,6 @@ namespace AdminControlForm
         /// Validates the current confirm password input as its being typed
         /// and if there is an error displays an error as to why or no error
         /// if the confirm password is valid.
-        /// 
-        /// Uses the isPasswordValid boolean to track the state the password
-        /// is in.
-        /// - true if valid
-        /// - false otherwise
         /// 
         /// Author:Robert Purdey
         /// </summary>
@@ -182,14 +236,16 @@ namespace AdminControlForm
 
             if (!userValidation.ValidateConfirmPassword(txtbPassword.Text,
                                                         txtbConfirmPassword.Text,
-                                                        ref passConfErrMsg) ) {
-                lablConfPasswordErrMsg.Text    = passConfErrMsg;
+                                                        ref passConfErrMsg))
+            {
+                lablConfPasswordErrMsg.Text = passConfErrMsg;
                 lablConfPasswordErrMsg.Visible = true;
-                isConfPassValid                = false;
+                isConfPassValid = false;
             }
-            else {
+            else
+            {
                 lablConfPasswordErrMsg.Visible = false;
-                isConfPassValid                = true;
+                isConfPassValid = true;
             }
         }
 
@@ -203,25 +259,28 @@ namespace AdminControlForm
         /// <param name="e"></param>
         private void bttnGetUserInfo_Click(object sender, EventArgs e)
         {
-            const string BLOCKED = "1";
+            const byte BLOCKED = 1;
 
-            int      errCode  = 0;
-            string[] userInfo = new string[7];
-            
+            int errCode = 0;
+            User userInfo = new User();
 
-            if (userTable.AdminGetUserInfo(txtbUserToEdit.Text, ref errCode, userInfo) ) {
-                txtbUserEditing.Text = userInfo[0];
+            if (userTable.AdminGetUserInfo(txtbUserToEdit.Text, ref errCode, ref userInfo))
+            {
+                txtbUserEditing.Text = userInfo.userName;
 
-                if (userInfo[1].Equals(BLOCKED) ) {
+                if (userInfo.userIsBlocked.Equals(BLOCKED))
+                {
                     txtbCurrentBlockStatus.Text = "BLOCKED";
-                    chkbBlockUnblockUser.Text   = "Do you want to UNBLOCK " + txtbUserEditing.Text;
+                    chkbBlockUnblockUser.Text = "Do you want to UNBLOCK " + txtbUserEditing.Text;
                 }
-                else {
+                else
+                {
                     txtbCurrentBlockStatus.Text = "NOT BLOCKED";
-                    chkbBlockUnblockUser.Text   = "Do you want to BLOCK " + txtbUserEditing.Text;
-                }            
+                    chkbBlockUnblockUser.Text = "Do you want to BLOCK " + txtbUserEditing.Text;
+                }
             }
-            else {
+            else
+            {
                 MessageBox.Show("Username may not exist");
             }
         }
@@ -232,62 +291,69 @@ namespace AdminControlForm
         /// unblocks the user if input is valid, otherwise displays an
         /// error message why.
         /// 
+        /// Sends a message checking if the admin is sure they want to
+        /// commit this change before proceeding.
+        /// 
         /// Author: Robert Purdey
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void bttnBlockUnblock_Click(object sender, EventArgs e)
         {
-            const int BLOCK   = 1;
-            const int UNBLOCK = 0;
-            
-            int errCode = 0;
+            string username = txtbUserEditing.Text;
+            int errCode     = 0;
 
             AcceptCancelBlockActionForm acceptBlock =
                     new AcceptCancelBlockActionForm();
-            acceptBlock.TxtMsg = "Are you sure you want to block " + txtbUserEditing.Text;
+            acceptBlock.TxtMsg = "Are you sure you want to block " + username;
 
             AcceptCancelBlockActionForm acceptUnblock =
                     new AcceptCancelBlockActionForm();
-            acceptUnblock.TxtMsg = "Are you sure you want to unblock " + txtbUserEditing.Text;
+            acceptUnblock.TxtMsg = "Are you sure you want to unblock " + username;
 
-            if (chkbBlockUnblockUser.Checked) {
-                if (txtbCurrentBlockStatus.Text.Equals("NOT BLOCKED") ) {
+            if (chkbBlockUnblockUser.Checked)
+            {
+                if (txtbCurrentBlockStatus.Text.Equals("NOT BLOCKED"))
+                {
                     // User blocking dialog
-                    if (acceptBlock.ShowDialog() == DialogResult.OK) {
-                        userTable.UpdateUserIsBlocked(txtbUserEditing.Text, BLOCK, ref errCode);
-                        MessageBox.Show("User was blocked.");
+                    if (acceptBlock.ShowDialog() == DialogResult.OK)
+                    {
+                        userTable.UpdateUserIsBlocked(username, true, ref errCode);
+                        MessageBox.Show(username + " is now blocked.");
                     }
                 }// User unblocking dialog
                 else if (acceptUnblock.ShowDialog() == DialogResult.OK)
                 {
-                    userTable.UpdateUserIsBlocked(txtbUserEditing.Text, UNBLOCK, ref errCode);
-                    MessageBox.Show("User was unblocked");
+                    userTable.UpdateUserIsBlocked(username, false, ref errCode);
+                    MessageBox.Show(username + " is now unblocked.");
                 }
             }
         }
 
-<<<<<<< HEAD
+        //NOT NEEDED ANYMORE REMOVE IT LATER
         private void button1_Click(object sender, EventArgs e)
         {
-            string[] info = new string[7];
             int i = 3;
-            userTable.AdminGetUserInfo(logintext.Text, ref i, info);
- 
+            User userInfo   = new User();
+            List<User> user = new List<User>();
 
-            MessageBox.Show("username : " + info[0] + "\n" +
-                            "blocked  : " + info[1] + "\n" +
-                            "admin    : " + info[2] + "\n" +
-                            "online   : " + info[3] + "\n" +
-                            "image    : " + info[4] + "\n" +
-                            "password : " + info[5] + "\n" +
-                            "email    : " + info[6]);
-=======
+            userTable.AdminGetUserInfo(logintext.Text, ref i, ref userInfo);
+
+            user.Add(userInfo);
+
+            this.gvUsers.DataSource = user;
+            this.gvUsers.Refresh();
+
+        }
+
+
         /// <summary>
         /// Adds the new ship to the ship table in the database.
         /// First checks if all fields are valid and if so, attempts
         /// to add the ship to the table. Shows a message of
         /// success or failure
+        /// 
+        ///  author - robert purdey
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -324,6 +390,8 @@ namespace AdminControlForm
         /// 
         /// Validates all fields before adding the ship by calling
         /// all validation functions
+        /// 
+        ///  author - robert purdey
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -335,6 +403,16 @@ namespace AdminControlForm
             validateShipName(sender, e);
         }
 
+        /// <summary>
+        /// Checks if the turn speed input is valid when its being entered during the process of
+        /// adding a new ship (used on textchange event)
+        /// 
+        /// If the turn speed is invalid an error message showing why is displayed
+        /// 
+        ///  author - robert purdey
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void validateTurnSpeed(object sender, EventArgs e)
         {
             string turnSpeedErrMsg = null;
@@ -353,6 +431,16 @@ namespace AdminControlForm
             }
         }
 
+        /// <summary>
+        /// Checks if the max speed input is valid when its being entered during the process of
+        /// adding a new ship (used on textchange event)
+        /// 
+        /// If the max speed is invalid an error message showing why is displayed
+        /// 
+        ///  author - robert purdey
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void validateMaxSpeed(object sender, EventArgs e)
         {
             string turnMaxSpeedErrMsg = null;
@@ -371,6 +459,16 @@ namespace AdminControlForm
             }
         }
 
+        /// <summary>
+        /// Checks if the ship name input is valid when its being entered during the process of
+        /// adding a new ship (used on textchange event)
+        /// 
+        /// If the ship name is invalid an error message showing why is displayed
+        /// 
+        ///  author - robert purdey
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void validateShipName(object sender, EventArgs e)
         {
             string shipNameErrMsg = null;
@@ -389,6 +487,16 @@ namespace AdminControlForm
             }
         }
 
+        /// <summary>
+        /// Checks if the acceleration input is valid when its being entered during the process of
+        /// adding a new ship (used on textchange event)
+        /// 
+        /// If the acceleration is invalid an error message showing why is displayed
+        /// 
+        ///  author - robert purdey
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void validateAcceleration(object sender, EventArgs e)
         {
             string turnAccelerateErrMsg = null;
@@ -410,7 +518,11 @@ namespace AdminControlForm
         private void AdminForm_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'spaceUnionDataSet.Powerups' table. You can move, or remove it, as needed.
-            this.powerupTableAdapter.Fill(this.spaceUnionDataSet.Powerup);
+            //this.powerupsTableAdapter.Fill(this.spaceUnionDataSet.Powerups);
+            // TODO: This line of code loads data into the 'spaceUnionDataSet.UserStats' table. You can move, or remove it, as needed.
+            this.userStatsTableAdapter.Fill(this.spaceUnionDataSet.UserStats);
+            // TODO: This line of code loads data into the 'spaceUnionDataSet.User' table. You can move, or remove it, as needed.
+            this.userTableAdapter.Fill(this.spaceUnionDataSet.User);
         }
 
         /// <summary>
@@ -424,55 +536,45 @@ namespace AdminControlForm
 
             if (!string.IsNullOrWhiteSpace(this.tbUserStatName.Text))
             {
-                userStatTable.setUserStatWin(oldStat.userName.ToString(), (int)this.nudWins.Value - oldStat.userstatWin);
-                userStatTable.setUserStatLose(oldStat.userName.ToString(), (int)this.nudLoses.Value - oldStat.userstatLose);
-                userStatTable.setUserStatDied(oldStat.userName.ToString(), (int)this.nudDied.Value - oldStat.userstatDied);
-                userStatTable.setUserStatHits(oldStat.userName.ToString(), (int)this.nudHits.Value - oldStat.userstatHits);
-                userStatTable.setUserStatKills(oldStat.userName.ToString(), (int)this.nudKills.Value - oldStat.userstatKills);
-                userStatTable.setUserStatShip1(oldStat.userName.ToString(), (int)this.nudShip1.Value - oldStat.userstatShipUsed_1);
-                userStatTable.setUserStatShip2(oldStat.userName.ToString(), (int)this.nudShip2.Value - oldStat.userstatShipUsed_2);
-                userStatTable.setUserStatShip3(oldStat.userName.ToString(), (int)this.nudShip3.Value - oldStat.userstatShipUsed_3);
-                userStatTable.setUserStatFlagsCaptured(oldStat.userName.ToString(), (int)this.nudFlagsCaptured.Value - oldStat.userstatFlagsCaptured);
-                userStatTable.setUserStatShotsFired(oldStat.userName.ToString(), (int)this.nudShotsFired.Value - oldStat.userstatShotsFired);
-            }
-        }
+                userStatTable.setUserStatWin(oldStat.userName.ToString(), (int)this.nudWins.Value);
+                userStatTable.setUserStatLose(oldStat.userName.ToString(), (int)this.nudLoses.Value);
+                userStatTable.setUserStatDied(oldStat.userName.ToString(), (int)this.nudDied.Value);
+                userStatTable.setUserStatHits(oldStat.userName.ToString(), (int)this.nudHits.Value);
+                userStatTable.setUserStatKills(oldStat.userName.ToString(), (int)this.nudKills.Value);
+                userStatTable.setUserStatShip1(oldStat.userName.ToString(), (int)this.nudShip1.Value);
+                userStatTable.setUserStatShip2(oldStat.userName.ToString(), (int)this.nudShip2.Value);
+                userStatTable.setUserStatShip3(oldStat.userName.ToString(), (int)this.nudShip3.Value);
+                userStatTable.setUserStatFlagsCaptured(oldStat.userName.ToString(), (int)this.nudFlagsCaptured.Value);
 
-
-        private void btnGetUserStats_Click(object sender, EventArgs e)
-        {
-            UserStat oldStat = userStatTable.getUserStat(this.tbUserStatName.Text);
-
-            if (oldStat != null)
-            {
-                this.nudDied.Value = oldStat.userstatDied;
-                this.nudFlagsCaptured.Value = oldStat.userstatFlagsCaptured;
-                this.nudHits.Value = oldStat.userstatHits;
-                this.nudKills.Value = oldStat.userstatKills;
-                this.nudLoses.Value = oldStat.userstatLose;
-                this.nudShip1.Value = oldStat.userstatShipUsed_1;
-                this.nudShip2.Value = oldStat.userstatShipUsed_2;
-                this.nudShip3.Value = oldStat.userstatShipUsed_3;
-                this.nudShotsFired.Value = oldStat.userstatShotsFired;
-                this.nudWins.Value = oldStat.userstatWin;
-
-                this.btnUpdate.Enabled = true;
+                this.userStatsTableAdapter.Fill(this.spaceUnionDataSet.UserStats);
+                this.gvStats.Refresh();
             }
         }
 
         /// <summary>
         /// checks to make sure a valid username is entered before allowing an update.
+        /// 
+        /// NOT NEEDED ANYMORE i think
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// </summary>
         private void tbUserStatName_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(this.tbUserStatName.Text))
-                this.btnGetUserStats.Enabled = true;
+                this.btnUpdate.Enabled = true;
             else
-                this.btnGetUserStats.Enabled = false;
+                this.btnUpdate.Enabled = false;
 
         }
 
+        /// <summary>
+        /// Displays the ships name and information for the ship the admin
+        /// has searched for.
+        /// 
+        /// author - robert purdey
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bttnShipToEdit_Click(object sender, EventArgs e)
         {
             List<Ship> shipInfo = new List<Ship>();
@@ -499,8 +601,10 @@ namespace AdminControlForm
         /// <summary>
         /// Helper funticon for when the ship add button is clicked.
         /// 
-        /// Validates all fields before adding the ship by calling
+        /// Validates all fields before editing the ship by calling
         /// all validation functions
+        /// 
+        /// author - robert purdey
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -511,6 +615,16 @@ namespace AdminControlForm
             validateAccelerationEdit(sender, e);
         }
 
+        /// <summary>
+        /// Checks if the turn speed input is valid when its being entered during the process of
+        /// editing a new ship (used on textchange event)
+        /// 
+        /// If the turn speed is invalid an error message showing why is displayed
+        /// 
+        ///  author - robert purdey
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void validateTurnSpeedEdit(object sender, EventArgs e)
         {
             string turnSpeedErrMsg = null;
@@ -529,6 +643,16 @@ namespace AdminControlForm
             }
         }
 
+        /// <summary>
+        /// Checks if the max speed input is valid when its being entered during the process of
+        /// editing a new ship (used on textchange event)
+        /// 
+        /// If the max speed is invalid an error message showing why is displayed
+        /// 
+        ///  author - robert purdey
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void validateMaxSpeedEdit(object sender, EventArgs e)
         {
             string maxSpeedErrMsg = null;
@@ -547,6 +671,16 @@ namespace AdminControlForm
             }
         }
 
+        /// <summary>
+        /// Checks if the acceleration input is valid when its being entered during the process of
+        /// editing a new ship (used on textchange event)
+        /// 
+        /// If the acceleration is invalid an error message showing why is displayed
+        /// 
+        ///  author - robert purdey
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void validateAccelerationEdit(object sender, EventArgs e)
         {
             string accelerateErrMsg = null;
@@ -565,6 +699,16 @@ namespace AdminControlForm
             }
         }
 
+        /// <summary>
+        /// Edits the current ship being accessed by the admin.
+        /// First checks if all fields are valid and if so, attempts
+        /// to edit the ship. Checks if the admin is sure they want
+        /// to make the update and also shows a message of success or failure
+        /// 
+        ///  author - robert purdey
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bttnShipUpdate_Click(object sender, EventArgs e)
         {
             bool isShipEditValid = false;
@@ -621,15 +765,14 @@ namespace AdminControlForm
 
             if (!string.IsNullOrWhiteSpace(this.tbPowerupName.Text) && oldPwrup != null)
             {
-                powerupTable.setPowerup(oldPwrup.PowerupName.ToString(), (int)this.nudPwrValue.Value);
+                powerupTable.setPowerup(oldPwrup.PowerupName.ToString(), (int)this.nudPwrValue.Value);                
             }
             else
             {
                 powerupTable.addPowerup(this.tbPowerupName.Text, (int)this.nudPwrValue.Value);
             }
-            this.powerupTableAdapter.Fill(this.spaceUnionDataSet.Powerup);
+            this.powerupsTableAdapter.Fill(this.spaceUnionDataSet.Powerups);
             this.dgvPwrup.Refresh();
->>>>>>> 0187f50c6dcf5dd78a3fcf9bfa1804582faa739e
         }
     }
 }
