@@ -20,5 +20,7 @@ namespace SpaceUnionXNA
         }
 
         public static UniRectangle MENU_TITLE_LABEL = new UniRectangle(50.0f, 0.0f, 110.0f, 24.0f);
+
+        
     }
 }

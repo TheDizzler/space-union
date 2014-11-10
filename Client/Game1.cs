@@ -40,7 +40,8 @@ namespace SpaceUnionXNA
         public InputManager input_manager;
         /// <summary>Initializes a new instance of the user interface demo</summary>
         /// 
-
+        public string currentSound = "Medium";
+        public string currentMusic = "Medium";
         //Menu Classes with Nuclex Framework
         public LoginMenu login_menu;
         public MainMenu main_menu;
