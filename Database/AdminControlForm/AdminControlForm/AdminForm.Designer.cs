@@ -41,10 +41,42 @@
             this.userIsAdminDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.spaceUnionDataSet = new AdminControlForm.SpaceUnionDataSet();
+<<<<<<< HEAD
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.logintext = new System.Windows.Forms.TextBox();
+=======
+            this.powerupBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.powerupTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.PowerupTableAdapter();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.btnUpdatePwr = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            this.nudPwrValue = new System.Windows.Forms.NumericUpDown();
+            this.label17 = new System.Windows.Forms.Label();
+            this.tbPowerupName = new System.Windows.Forms.TextBox();
+            this.dgvPwrup = new System.Windows.Forms.DataGridView();
+            this.powerupNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.powerupValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.lablShipEditMaxSpeed = new System.Windows.Forms.Label();
+            this.lablShipEditAccelerateErrMsg = new System.Windows.Forms.Label();
+            this.lablShipEditTurnSpdErrMsg = new System.Windows.Forms.Label();
+            this.bttnShipUpdate = new System.Windows.Forms.Button();
+            this.bttnShipToEdit = new System.Windows.Forms.Button();
+            this.txtbNewMaxSpeed = new System.Windows.Forms.TextBox();
+            this.txtbNewAccelerate = new System.Windows.Forms.TextBox();
+            this.txtbNewTurnSpeed = new System.Windows.Forms.TextBox();
+            this.rtxtCurrentShipStats = new System.Windows.Forms.RichTextBox();
+            this.txtbShipEditing = new System.Windows.Forms.TextBox();
+            this.lablNewShipMaxSpeed = new System.Windows.Forms.Label();
+            this.lablNewShipAccelerate = new System.Windows.Forms.Label();
+            this.lablNewShipTurnSpeed = new System.Windows.Forms.Label();
+            this.lablCurrentShipStats = new System.Windows.Forms.Label();
+            this.lablShipEditing = new System.Windows.Forms.Label();
+            this.lablEditShip = new System.Windows.Forms.Label();
+>>>>>>> 38404402317eaf5533cfd02e9c2e5b28d17b3095
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnGetUserStats = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.nudFlagsCaptured = new System.Windows.Forms.NumericUpDown();
@@ -161,8 +193,23 @@
             this.lablEditShip = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
+<<<<<<< HEAD
             ((System.ComponentModel.ISupportInitialize)(this.gvUsers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
+=======
+=======
+            this.txtbConfirmPassword = new System.Windows.Forms.TextBox();
+            this.txtbPassword = new System.Windows.Forms.TextBox();
+            this.txtbUsername = new System.Windows.Forms.TextBox();
+            this.lablEmail = new System.Windows.Forms.Label();
+            this.lablConfirmPassword = new System.Windows.Forms.Label();
+            this.lablPassword = new System.Windows.Forms.Label();
+            this.lablUsername = new System.Windows.Forms.Label();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.lblUserStatError = new System.Windows.Forms.Label();
+            this.btnDelPower = new System.Windows.Forms.Button();
+            this.lblPwrError = new System.Windows.Forms.Label();
+>>>>>>> 38404402317eaf5533cfd02e9c2e5b28d17b3095
             ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFlagsCaptured)).BeginInit();
@@ -243,9 +290,28 @@
             // 
             // userPasswordDataGridViewTextBoxColumn
             // 
+<<<<<<< HEAD
             this.userPasswordDataGridViewTextBoxColumn.DataPropertyName = "userPassword";
             this.userPasswordDataGridViewTextBoxColumn.HeaderText = "userPassword";
             this.userPasswordDataGridViewTextBoxColumn.Name = "userPasswordDataGridViewTextBoxColumn";
+=======
+            this.tabPage5.Controls.Add(this.lblPwrError);
+            this.tabPage5.Controls.Add(this.btnDelPower);
+            this.tabPage5.Controls.Add(this.btnUpdatePwr);
+            this.tabPage5.Controls.Add(this.label16);
+            this.tabPage5.Controls.Add(this.nudPwrValue);
+            this.tabPage5.Controls.Add(this.label17);
+            this.tabPage5.Controls.Add(this.tbPowerupName);
+            this.tabPage5.Controls.Add(this.dgvPwrup);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(488, 486);
+            this.tabPage5.TabIndex = 6;
+            this.tabPage5.Text = "Powerups";
+            this.tabPage5.UseVisualStyleBackColor = true;
+>>>>>>> 0187f50c6dcf5dd78a3fcf9bfa1804582faa739e
+>>>>>>> 38404402317eaf5533cfd02e9c2e5b28d17b3095
             // 
             // userEmailDataGridViewTextBoxColumn
             // 
@@ -279,8 +345,203 @@
             // 
             // userBindingSource
             // 
+<<<<<<< HEAD
             this.userBindingSource.DataMember = "User";
             this.userBindingSource.DataSource = this.spaceUnionDataSet;
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+            this.lablEmailErrMsg.AutoSize = true;
+            this.lablEmailErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablEmailErrMsg.Location = new System.Drawing.Point(98, 269);
+            this.lablEmailErrMsg.Name = "lablEmailErrMsg";
+            this.lablEmailErrMsg.Size = new System.Drawing.Size(78, 13);
+            this.lablEmailErrMsg.TabIndex = 11;
+            this.lablEmailErrMsg.Text = "Email error msg";
+            this.lablEmailErrMsg.Visible = false;
+=======
+=======
+            this.dgvPwrup.AllowUserToAddRows = false;
+            this.dgvPwrup.AllowUserToDeleteRows = false;
+            this.dgvPwrup.AllowUserToResizeColumns = false;
+            this.dgvPwrup.AllowUserToResizeRows = false;
+>>>>>>> fb46d967fe33a8cf5f815b9106581044f6fde28b
+            this.dgvPwrup.AutoGenerateColumns = false;
+            this.dgvPwrup.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPwrup.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.powerupNameDataGridViewTextBoxColumn,
+            this.powerupValueDataGridViewTextBoxColumn});
+            this.dgvPwrup.DataSource = this.powerupBindingSource;
+            this.dgvPwrup.Enabled = false;
+            this.dgvPwrup.Location = new System.Drawing.Point(9, 7);
+            this.dgvPwrup.MultiSelect = false;
+            this.dgvPwrup.Name = "dgvPwrup";
+            this.dgvPwrup.ReadOnly = true;
+            this.dgvPwrup.Size = new System.Drawing.Size(244, 471);
+            this.dgvPwrup.TabIndex = 0;
+<<<<<<< HEAD
+>>>>>>> 0187f50c6dcf5dd78a3fcf9bfa1804582faa739e
+=======
+            this.dgvPwrup.TabStop = false;
+            // 
+            // powerupNameDataGridViewTextBoxColumn
+            // 
+            this.powerupNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.powerupNameDataGridViewTextBoxColumn.DataPropertyName = "PowerupName";
+            this.powerupNameDataGridViewTextBoxColumn.HeaderText = "PowerupName";
+            this.powerupNameDataGridViewTextBoxColumn.Name = "powerupNameDataGridViewTextBoxColumn";
+            this.powerupNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // powerupValueDataGridViewTextBoxColumn
+            // 
+            this.powerupValueDataGridViewTextBoxColumn.DataPropertyName = "PowerupValue";
+            this.powerupValueDataGridViewTextBoxColumn.HeaderText = "PowerupValue";
+            this.powerupValueDataGridViewTextBoxColumn.Name = "powerupValueDataGridViewTextBoxColumn";
+            this.powerupValueDataGridViewTextBoxColumn.ReadOnly = true;
+>>>>>>> fb46d967fe33a8cf5f815b9106581044f6fde28b
+            // 
+            // tabPage4
+            // 
+<<<<<<< HEAD
+            this.lablPasswordErrMsg.AutoSize = true;
+            this.lablPasswordErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablPasswordErrMsg.Location = new System.Drawing.Point(125, 109);
+            this.lablPasswordErrMsg.Name = "lablPasswordErrMsg";
+            this.lablPasswordErrMsg.Size = new System.Drawing.Size(99, 13);
+            this.lablPasswordErrMsg.TabIndex = 10;
+            this.lablPasswordErrMsg.Text = "Password error msg";
+            this.lablPasswordErrMsg.Visible = false;
+=======
+            this.tabPage4.BackgroundImage = global::AdminControlForm.Properties.Resources.dark_space;
+            this.tabPage4.Controls.Add(this.lablShipEditMaxSpeed);
+            this.tabPage4.Controls.Add(this.lablShipEditAccelerateErrMsg);
+            this.tabPage4.Controls.Add(this.lablShipEditTurnSpdErrMsg);
+            this.tabPage4.Controls.Add(this.bttnShipUpdate);
+            this.tabPage4.Controls.Add(this.bttnShipToEdit);
+            this.tabPage4.Controls.Add(this.txtbNewMaxSpeed);
+            this.tabPage4.Controls.Add(this.txtbNewAccelerate);
+            this.tabPage4.Controls.Add(this.txtbNewTurnSpeed);
+            this.tabPage4.Controls.Add(this.rtxtCurrentShipStats);
+            this.tabPage4.Controls.Add(this.txtbShipEditing);
+            this.tabPage4.Controls.Add(this.lablNewShipMaxSpeed);
+            this.tabPage4.Controls.Add(this.lablNewShipAccelerate);
+            this.tabPage4.Controls.Add(this.lablNewShipTurnSpeed);
+            this.tabPage4.Controls.Add(this.lablCurrentShipStats);
+            this.tabPage4.Controls.Add(this.lablShipEditing);
+            this.tabPage4.Controls.Add(this.lablEditShip);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(488, 486);
+            this.tabPage4.TabIndex = 5;
+            this.tabPage4.Text = "Edit Ship";
+            this.tabPage4.UseVisualStyleBackColor = true;
+>>>>>>> 0187f50c6dcf5dd78a3fcf9bfa1804582faa739e
+            // 
+            // lablShipEditMaxSpeed
+            // 
+<<<<<<< HEAD
+            this.lablUsernameErrMsg.AutoSize = true;
+            this.lablUsernameErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablUsernameErrMsg.Location = new System.Drawing.Point(132, 19);
+            this.lablUsernameErrMsg.Name = "lablUsernameErrMsg";
+            this.lablUsernameErrMsg.Size = new System.Drawing.Size(101, 13);
+            this.lablUsernameErrMsg.TabIndex = 9;
+            this.lablUsernameErrMsg.Text = "Username error msg";
+            this.lablUsernameErrMsg.Visible = false;
+=======
+            this.lablShipEditMaxSpeed.AutoSize = true;
+            this.lablShipEditMaxSpeed.ForeColor = System.Drawing.Color.Red;
+            this.lablShipEditMaxSpeed.Location = new System.Drawing.Point(173, 346);
+            this.lablShipEditMaxSpeed.Name = "lablShipEditMaxSpeed";
+            this.lablShipEditMaxSpeed.Size = new System.Drawing.Size(110, 13);
+            this.lablShipEditMaxSpeed.TabIndex = 16;
+            this.lablShipEditMaxSpeed.Text = "err msg for max speed";
+            this.lablShipEditMaxSpeed.Visible = false;
+            this.lablShipEditMaxSpeed.TextChanged += new System.EventHandler(this.validateMaxSpeedEdit);
+>>>>>>> 0187f50c6dcf5dd78a3fcf9bfa1804582faa739e
+            // 
+            // lablShipEditAccelerateErrMsg
+            // 
+<<<<<<< HEAD
+            this.txtbEmail.Location = new System.Drawing.Point(48, 287);
+            this.txtbEmail.Name = "txtbEmail";
+            this.txtbEmail.Size = new System.Drawing.Size(223, 20);
+            this.txtbEmail.TabIndex = 7;
+=======
+            this.lablShipEditAccelerateErrMsg.AutoSize = true;
+            this.lablShipEditAccelerateErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablShipEditAccelerateErrMsg.Location = new System.Drawing.Point(235, 283);
+            this.lablShipEditAccelerateErrMsg.Name = "lablShipEditAccelerateErrMsg";
+            this.lablShipEditAccelerateErrMsg.Size = new System.Drawing.Size(109, 13);
+            this.lablShipEditAccelerateErrMsg.TabIndex = 15;
+            this.lablShipEditAccelerateErrMsg.Text = "err msg for accelerate";
+            this.lablShipEditAccelerateErrMsg.Visible = false;
+            this.lablShipEditAccelerateErrMsg.TextChanged += new System.EventHandler(this.validateAccelerationEdit);
+>>>>>>> 0187f50c6dcf5dd78a3fcf9bfa1804582faa739e
+            // 
+            // lablShipEditTurnSpdErrMsg
+            // 
+<<<<<<< HEAD
+            this.lablEmail.AutoSize = true;
+            this.lablEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablEmail.ForeColor = System.Drawing.Color.White;
+            this.lablEmail.Location = new System.Drawing.Point(45, 267);
+            this.lablEmail.Name = "lablEmail";
+            this.lablEmail.Size = new System.Drawing.Size(47, 17);
+            this.lablEmail.TabIndex = 6;
+            this.lablEmail.Text = "Email";
+=======
+            this.lablShipEditTurnSpdErrMsg.AutoSize = true;
+            this.lablShipEditTurnSpdErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablShipEditTurnSpdErrMsg.Location = new System.Drawing.Point(179, 222);
+            this.lablShipEditTurnSpdErrMsg.Name = "lablShipEditTurnSpdErrMsg";
+            this.lablShipEditTurnSpdErrMsg.Size = new System.Drawing.Size(109, 13);
+            this.lablShipEditTurnSpdErrMsg.TabIndex = 14;
+            this.lablShipEditTurnSpdErrMsg.Text = "err msg for turn speed";
+            this.lablShipEditTurnSpdErrMsg.Visible = false;
+            this.lablShipEditTurnSpdErrMsg.TextChanged += new System.EventHandler(this.validateTurnSpeedEdit);
+>>>>>>> 0187f50c6dcf5dd78a3fcf9bfa1804582faa739e
+            // 
+            // bttnShipUpdate
+            // 
+<<<<<<< HEAD
+            this.txtbConfirmPassword.Location = new System.Drawing.Point(48, 221);
+            this.txtbConfirmPassword.Name = "txtbConfirmPassword";
+            this.txtbConfirmPassword.Size = new System.Drawing.Size(223, 20);
+            this.txtbConfirmPassword.TabIndex = 5;
+            this.txtbConfirmPassword.TextChanged += new System.EventHandler(this.validateConfPassword);
+=======
+            this.bttnShipUpdate.Location = new System.Drawing.Point(148, 402);
+            this.bttnShipUpdate.Name = "bttnShipUpdate";
+            this.bttnShipUpdate.Size = new System.Drawing.Size(91, 35);
+            this.bttnShipUpdate.TabIndex = 13;
+            this.bttnShipUpdate.Text = "Update Ship";
+            this.bttnShipUpdate.UseVisualStyleBackColor = true;
+            this.bttnShipUpdate.Click += new System.EventHandler(this.bttnShipUpdate_Click);
+>>>>>>> 0187f50c6dcf5dd78a3fcf9bfa1804582faa739e
+            // 
+            // bttnShipToEdit
+            // 
+<<<<<<< HEAD
+            this.lablConfirmPassword.AutoSize = true;
+            this.lablConfirmPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablConfirmPassword.ForeColor = System.Drawing.Color.White;
+            this.lablConfirmPassword.Location = new System.Drawing.Point(45, 201);
+            this.lablConfirmPassword.Name = "lablConfirmPassword";
+            this.lablConfirmPassword.Size = new System.Drawing.Size(137, 17);
+            this.lablConfirmPassword.TabIndex = 4;
+            this.lablConfirmPassword.Text = "Confirm Password";
+=======
+            this.bttnShipToEdit.Location = new System.Drawing.Point(124, 128);
+            this.bttnShipToEdit.Name = "bttnShipToEdit";
+            this.bttnShipToEdit.Size = new System.Drawing.Size(115, 23);
+            this.bttnShipToEdit.TabIndex = 12;
+            this.bttnShipToEdit.Text = "Retrieve Ship Stats";
+            this.bttnShipToEdit.UseVisualStyleBackColor = true;
+            this.bttnShipToEdit.Click += new System.EventHandler(this.bttnShipToEdit_Click);
+>>>>>>> 0187f50c6dcf5dd78a3fcf9bfa1804582faa739e
+>>>>>>> 38404402317eaf5533cfd02e9c2e5b28d17b3095
             // 
             // spaceUnionDataSet
             // 
@@ -315,6 +576,24 @@
             // 
             // tabPage3
             // 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+            this.lablUsernameToEdit.AutoSize = true;
+            this.lablUsernameToEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablUsernameToEdit.ForeColor = System.Drawing.Color.White;
+            this.lablUsernameToEdit.Location = new System.Drawing.Point(17, 207);
+            this.lablUsernameToEdit.Name = "lablUsernameToEdit";
+            this.lablUsernameToEdit.Size = new System.Drawing.Size(73, 15);
+            this.lablUsernameToEdit.TabIndex = 4;
+            this.lablUsernameToEdit.Text = "Username";
+=======
+=======
+            this.tabPage3.Controls.Add(this.lblUserStatError);
+>>>>>>> fb46d967fe33a8cf5f815b9106581044f6fde28b
+            this.tabPage3.Controls.Add(this.btnGetUserStats);
+>>>>>>> 38404402317eaf5533cfd02e9c2e5b28d17b3095
             this.tabPage3.Controls.Add(this.btnUpdate);
             this.tabPage3.Controls.Add(this.label14);
             this.tabPage3.Controls.Add(this.nudFlagsCaptured);
@@ -346,6 +625,17 @@
             this.tabPage3.TabIndex = 4;
             this.tabPage3.Text = "UserStats";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // btnGetUserStats
+            // 
+            this.btnGetUserStats.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnGetUserStats.Location = new System.Drawing.Point(338, 142);
+            this.btnGetUserStats.Name = "btnGetUserStats";
+            this.btnGetUserStats.Size = new System.Drawing.Size(101, 23);
+            this.btnGetUserStats.TabIndex = 26;
+            this.btnGetUserStats.Text = "Get User Stats";
+            this.btnGetUserStats.UseVisualStyleBackColor = true;
+            this.btnGetUserStats.Click += new System.EventHandler(this.btnGetUserStats_Click);
             // 
             // btnUpdate
             // 
@@ -1422,7 +1712,12 @@
             this.lablCurrentShipStats.TabIndex = 4;
             this.lablCurrentShipStats.Text = "Current Ship Stats";
             // 
+<<<<<<< HEAD
             // txtbShipEditing
+=======
+<<<<<<< HEAD
+            // btnGetUserStats
+>>>>>>> 38404402317eaf5533cfd02e9c2e5b28d17b3095
             // 
             this.txtbShipEditing.Location = new System.Drawing.Point(45, 82);
             this.txtbShipEditing.Name = "txtbShipEditing";
@@ -1442,6 +1737,7 @@
             // 
             // lablEditShip
             // 
+<<<<<<< HEAD
             this.lablEditShip.AutoSize = true;
             this.lablEditShip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lablEditShip.ForeColor = System.Drawing.Color.White;
@@ -1450,6 +1746,49 @@
             this.lablEditShip.Size = new System.Drawing.Size(97, 20);
             this.lablEditShip.TabIndex = 1;
             this.lablEditShip.Text = "Edit a Ship";
+=======
+            this.lablCurrentBlockStatus.AutoSize = true;
+            this.lablCurrentBlockStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablCurrentBlockStatus.ForeColor = System.Drawing.Color.White;
+            this.lablCurrentBlockStatus.Location = new System.Drawing.Point(17, 268);
+            this.lablCurrentBlockStatus.Name = "lablCurrentBlockStatus";
+            this.lablCurrentBlockStatus.Size = new System.Drawing.Size(137, 15);
+            this.lablCurrentBlockStatus.TabIndex = 14;
+            this.lablCurrentBlockStatus.Text = "Current Block Status";
+=======
+            // lblUserStatError
+            // 
+            this.lblUserStatError.AutoSize = true;
+            this.lblUserStatError.ForeColor = System.Drawing.Color.Red;
+            this.lblUserStatError.Location = new System.Drawing.Point(108, 172);
+            this.lblUserStatError.Name = "lblUserStatError";
+            this.lblUserStatError.Size = new System.Drawing.Size(85, 13);
+            this.lblUserStatError.TabIndex = 27;
+            this.lblUserStatError.Text = "- not a valid user";
+            this.lblUserStatError.Visible = false;
+            // 
+            // btnDelPower
+            // 
+            this.btnDelPower.Location = new System.Drawing.Point(387, 69);
+            this.btnDelPower.Name = "btnDelPower";
+            this.btnDelPower.Size = new System.Drawing.Size(95, 23);
+            this.btnDelPower.TabIndex = 27;
+            this.btnDelPower.Text = "Delete Powerup";
+            this.btnDelPower.UseVisualStyleBackColor = true;
+            this.btnDelPower.Click += new System.EventHandler(this.btnDelPower_Click);
+            // 
+            // lblPwrError
+            // 
+            this.lblPwrError.AutoSize = true;
+            this.lblPwrError.ForeColor = System.Drawing.Color.Red;
+            this.lblPwrError.Location = new System.Drawing.Point(345, 95);
+            this.lblPwrError.Name = "lblPwrError";
+            this.lblPwrError.Size = new System.Drawing.Size(135, 13);
+            this.lblPwrError.TabIndex = 28;
+            this.lblPwrError.Text = "- not a valid powerup name";
+            this.lblPwrError.Visible = false;
+>>>>>>> fb46d967fe33a8cf5f815b9106581044f6fde28b
+>>>>>>> 38404402317eaf5533cfd02e9c2e5b28d17b3095
             // 
             // AdminForm
             // 
@@ -1537,6 +1876,7 @@
         private System.Windows.Forms.CheckBox chkbBlockUnblockUser;
         private System.Windows.Forms.Label lablCurrentBlockStatus;
         private System.Windows.Forms.TextBox txtbCurrentBlockStatus;
+<<<<<<< HEAD
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label lablNewShipNameErrMsg;
         private System.Windows.Forms.TextBox txtbNewShipName;
@@ -1634,6 +1974,23 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn powerupIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn pwrNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn pwrValueDataGridViewTextBoxColumn;
+=======
+=======
+        private System.Windows.Forms.TextBox txtbConfirmPassword;
+        private System.Windows.Forms.TextBox txtbPassword;
+        private System.Windows.Forms.TextBox txtbUsername;
+        private System.Windows.Forms.Label lablEmail;
+        private System.Windows.Forms.Label lablConfirmPassword;
+        private System.Windows.Forms.Label lablPassword;
+        private System.Windows.Forms.Label lablUsername;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.Button btnGetUserStats;
+        private System.Windows.Forms.DataGridViewTextBoxColumn powerupNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn powerupValueDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Label lblUserStatError;
+        private System.Windows.Forms.Button btnDelPower;
+        private System.Windows.Forms.Label lblPwrError;
+>>>>>>> 38404402317eaf5533cfd02e9c2e5b28d17b3095
 
     }
 }
