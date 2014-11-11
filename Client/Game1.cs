@@ -264,8 +264,6 @@ namespace SpaceUnionXNA
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
-        /// 
-        /// select - layer5 added by Matthew Baldock
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {

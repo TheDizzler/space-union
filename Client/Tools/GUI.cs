@@ -11,7 +11,7 @@ using SpaceUnionXNA.StellarObjects;
 using SpaceUnionXNA.Tools;
 
 
-namespace SpaceUnionXNA {
+namespace SpaceUnionXNA.Tools {
 
 	public class GUI {
 

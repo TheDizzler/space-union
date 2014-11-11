@@ -15,6 +15,7 @@ using Nuclex.UserInterface.Controls;
 using System.Threading;
 using SpaceUnionXNA.Tools;
 using SpaceMenus;
+using SpaceMenus.Tools;
 
 namespace SpaceUnionXNA.Controllers
 {

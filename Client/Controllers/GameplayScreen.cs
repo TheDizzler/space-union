@@ -10,6 +10,7 @@ using SpaceUnionXNA.Ships;
 using SpaceUnionXNA.StellarObjects;
 using SpaceUnionXNA.Tools;
 using SpaceUnionXNA.Weapons;
+using SpaceUnionXNA.Animations;
 
 
 namespace SpaceUnionXNA.Controllers {
@@ -28,9 +29,9 @@ namespace SpaceUnionXNA.Controllers {
 		/// All objects in this list get added to the quadtree every update.
 		/// </summary>
 		public static List<Tangible> targets;
-	//	private List<LargeMassObject> planets;
-        private List<Vector2> respawnpoints;
-        private List<Vector2> usedspawn;
+		//	private List<LargeMassObject> planets;
+		private List<Vector2> respawnpoints;
+		private List<Vector2> usedspawn;
 		private Background background;
 		private Ship playerShip;
 		private Game1 game;
@@ -64,39 +65,37 @@ namespace SpaceUnionXNA.Controllers {
 			gen = new Random();
 			Assets = Game1.Assets;
 
-            asteroids = new List<Asteroid>();
-            ships = new List<Ship>();
-            inactiveShips = new List<Ship>();
-            targets = new List<Tangible>();
+			asteroids = new List<Asteroid>();
+			ships = new List<Ship>();
+			inactiveShips = new List<Ship>();
+			targets = new List<Tangible>();
 
-            respawnpoints = new List<Vector2>();
-            usedspawn = new List<Vector2>();
+			respawnpoints = new List<Vector2>();
+			usedspawn = new List<Vector2>();
 
-            respawnpoints.Add(new Vector2(worldWidth / 2, worldHeight - 100));
-            respawnpoints.Add(new Vector2(worldWidth - 100, worldHeight / 2));
-            respawnpoints.Add(new Vector2(worldWidth / 2, worldHeight));
-            respawnpoints.Add(new Vector2(100, worldHeight / 2));
-            respawnpoints.Add(new Vector2(100, 100));
-            respawnpoints.Add(new Vector2(worldWidth - 100, 100));
-            respawnpoints.Add(new Vector2(worldWidth - 100, worldHeight - 100));
-            respawnpoints.Add(new Vector2(100, worldHeight - 100));
+			respawnpoints.Add(new Vector2(worldWidth / 2, worldHeight - 100));
+			respawnpoints.Add(new Vector2(worldWidth - 100, worldHeight / 2));
+			respawnpoints.Add(new Vector2(worldWidth / 2, worldHeight));
+			respawnpoints.Add(new Vector2(100, worldHeight / 2));
+			respawnpoints.Add(new Vector2(100, 100));
+			respawnpoints.Add(new Vector2(worldWidth - 100, 100));
+			respawnpoints.Add(new Vector2(worldWidth - 100, worldHeight - 100));
+			respawnpoints.Add(new Vector2(100, worldHeight - 100));
 
-            for (int i = 0; i < 3; i++)
-            {
-                Ship enemyship = new Bug(game);
-                enemyship.Position = respawnpoints.ElementAt(i+3);
-                enemyship.blueTeam = true;
-                enemyship.rotation = (float)Math.PI / 4;
-                enemyship.controlAI();
-                ships.Add(enemyship);
-            }
-            for (int i = 0; i < 2; i++)
-            {
-                Ship friendlyship = new Scout(game);
-                friendlyship.Position = respawnpoints.ElementAt(i + 1);
-                friendlyship.redTeam = true;
-                ships.Add(friendlyship);
-            }
+			for (int i = 0; i < 3; i++) {
+				Ship enemyship = new Bug(game);
+				enemyship.Position = respawnpoints.ElementAt(i + 3);
+				enemyship.blueTeam = true;
+				enemyship.rotation = (float) Math.PI / 4;
+				enemyship.controlAI();
+				ships.Add(enemyship);
+			}
+			for (int i = 0; i < 2; i++) {
+				Ship friendlyship = new Scout(game);
+				friendlyship.Position = respawnpoints.ElementAt(i + 1);
+				friendlyship.redTeam = true;
+				ships.Add(friendlyship);
+			}
 
 
 			background = new Background(worldWidth, worldHeight, Assets.starfield2, Assets.starfield1, Assets.starfield1, Assets.starfield1);
@@ -134,8 +133,8 @@ namespace SpaceUnionXNA.Controllers {
 				targets.Add(ship);
 			for (int i = 0; i < 5; i++)
 				AddAsteroid(new Vector2(gen.Next(100, worldWidth), gen.Next(100, worldHeight)));
-		//	foreach (Planet planet in planets)
-		//		targets.Add(planet);
+			//	foreach (Planet planet in planets)
+			//		targets.Add(planet);
 
 
 		}
@@ -172,8 +171,8 @@ namespace SpaceUnionXNA.Controllers {
 			playerShip.control(keyState, gameTime);
 
 
-		//	foreach (Planet planet in planets)
-		//		planet.update(gameTime, quadTree, targets);
+			//	foreach (Planet planet in planets)
+			//		planet.update(gameTime, quadTree, targets);
 
 
 
@@ -197,25 +196,27 @@ namespace SpaceUnionXNA.Controllers {
 				ship.update(gameTime, quadTree);
 			}
 
-            foreach (Ship ship in inactiveShips.ToList())
-            {
-                Random randomspawn = new Random();
-                if (ship.isActive)
-                {
-                    ship.inactiveTime = TimeSpan.Zero;
-                    ship.Position = respawnpoints.ElementAt(randomspawn.Next(respawnpoints.Count));
-                    usedspawn.Add(respawnpoints.ElementAt(respawnpoints.IndexOf(ship.Position)));
-                    respawnpoints.RemoveAt(respawnpoints.IndexOf(ship.Position));
-                    ships.Add(ship);
-                    inactiveShips.Remove(ship);
-                }
-                ship.update(gameTime, quadTree);
-            }
-            foreach (Vector2 spawn in usedspawn.ToList())
-            {
-                respawnpoints.Add(spawn);
-                usedspawn.Remove(spawn);
-            }
+
+			foreach (Ship ship in inactiveShips.ToList()) {
+				Random randomspawn = new Random();
+				if (ship.isActive) {
+					ship.inactiveTime = TimeSpan.Zero;
+					ship.Position = respawnpoints.ElementAt(randomspawn.Next(respawnpoints.Count));
+					usedspawn.Add(respawnpoints.ElementAt(respawnpoints.IndexOf(ship.Position)));
+					respawnpoints.RemoveAt(respawnpoints.IndexOf(ship.Position));
+					ships.Add(ship);
+					//targets.Add(ship);
+					inactiveShips.Remove(ship);
+				}
+				ship.update(gameTime, quadTree);
+			}
+
+
+			foreach (Vector2 spawn in usedspawn.ToList()) {
+				respawnpoints.Add(spawn);
+				usedspawn.Remove(spawn);
+			}
+
 
 			for (int i = asteroids.Count - 1; i >= 0; i--) {
 				asteroids[i].update(gameTime, quadTree);
@@ -224,10 +225,15 @@ namespace SpaceUnionXNA.Controllers {
 				}
 			}
 
+
+			/** Camera Debugging **/
 			if (keyState.IsKeyDown(Keys.P))
 				mainCamera.zoom += Camera.zoomIncrement;
 			if (keyState.IsKeyDown(Keys.O))
 				mainCamera.zoom -= Camera.zoomIncrement;
+			/** Camera Debugging **/
+
+
 			mainCamera.setZoom(mouseState.ScrollWheelValue);
 			mainCamera.Position = playerShip.Position; // center the camera to player's position
 			mainCamera.update(gameTime);
@@ -257,7 +263,7 @@ namespace SpaceUnionXNA.Controllers {
 
 			drawScreen();
 
-
+			
 			spriteBatch.End();
 
 
@@ -286,8 +292,8 @@ namespace SpaceUnionXNA.Controllers {
 			foreach (Ship ship in ships)
 				ship.drawMiniMap(spriteBatch);
 
-		//	foreach (LargeMassObject planet in planets)
-		//		planet.draw(spriteBatch);
+			//	foreach (LargeMassObject planet in planets)
+			//		planet.draw(spriteBatch);
 
 
 			// Draw the Asteroids
@@ -306,8 +312,8 @@ namespace SpaceUnionXNA.Controllers {
 			foreach (Ship ship in ships)
 				ship.draw(spriteBatch);
 
-		//	foreach (LargeMassObject planet in planets)
-		//		planet.draw(spriteBatch);
+			//	foreach (LargeMassObject planet in planets)
+			//		planet.draw(spriteBatch);
 
 
 			// Draw the Asteroids
@@ -365,5 +371,5 @@ namespace SpaceUnionXNA.Controllers {
 											rectangleToDraw.Width,
 											thicknessOfBorder), borderColor);
 		}
-    }
+	}
 }

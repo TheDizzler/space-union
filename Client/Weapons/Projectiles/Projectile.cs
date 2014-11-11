@@ -56,9 +56,8 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 				position += moveThisUpdate;
 				base.update(position);
 
-
-
 				checkForCollision(quadTree, gameTime);
+
 			} else {
 				destroy();
 			}
@@ -77,11 +76,6 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 			}
 		}
 
-        public override void destroy()
-        {
-            isActive = false;
-            explosionEngine.createBigExplosion(position);
-        }
 
 		/// <summary>
 		/// Inflict damage on the target.

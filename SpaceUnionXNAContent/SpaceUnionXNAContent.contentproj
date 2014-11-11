@@ -190,11 +190,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Spaceships\scoutship %28128x128%29.png">
-      <Name>scoutship %28128x128%29</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Spaceships\shuttle.png">
       <Name>shuttle</Name>
       <Importer>TextureImporter</Importer>
@@ -223,7 +218,13 @@
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="Animations\redlaserbeam %2825x11%29.png">
+      <Name>redlaserbeam %2825x11%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="StellarObjects\asteroid%2856x56%29.png">
       <Name>asteroid%2856x56%29</Name>
@@ -244,6 +245,27 @@
   <ItemGroup>
     <Compile Include="WinFlags\WinFlag1.png">
       <Name>WinFlag1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Spaceships\scoutship %2864x64%29.png">
+      <Name>scoutship %2864x64%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Spaceships\rocket %2864x64%29.png">
+      <Name>rocket %2864x64%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="StellarObjects\rock %2832x32%29.png">
+      <Name>rock %2832x32%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

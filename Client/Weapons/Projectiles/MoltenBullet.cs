@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using SpaceUnionXNA.Controllers;
 using SpaceUnionXNA.Ships;
+using SpaceUnionXNA.Tools;
 
 
 namespace SpaceUnionXNA.Weapons.Projectiles {

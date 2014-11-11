@@ -15,7 +15,7 @@ namespace SpaceUnionXNA.Ships {
 		bool beamOn = false;
 
 		public Scout(Game1 game1)
-			: base(assets.stunt, assets.laser, game1) {
+			: base(assets.scout, assets.laser, game1) {
 
 			maxSpeed = 7;
 			accelSpeed = 250.5f;

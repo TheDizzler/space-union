@@ -81,7 +81,7 @@ namespace SpaceUnionXNA.Ships {
 
 		public int kills = 0;
 		public int deaths = 0;
-		
+
 		public bool blueTeam = false;
 		public bool redTeam = false;
 
@@ -99,8 +99,8 @@ namespace SpaceUnionXNA.Ships {
 
 			this.game = game1;
 			velocity = Vector2.Zero;
-			//scale = .3f;
-			mass = 10000;
+
+			mass = 1000;
 
 			miniMapIcon = new MapIcon(assets.shipMapIcon, position);
 
@@ -121,34 +121,37 @@ namespace SpaceUnionXNA.Ships {
 		/// <param name="quadTree"></param>
 		public virtual void update(GameTime gameTime, QuadTree quadTree) {
 
-			if (firing)
-				fire(gameTime);
+			if (isActive) {
+				if (firing)
+					fire(gameTime);
 
-			if (altFiring)
-				altFire(gameTime);
+				if (altFiring)
+					altFire(gameTime);
 
-			//if (willCollide)
-			//	collide(collideTarget, gameTime);
+				//if (willCollide)
+				//	collide(collideTarget, gameTime);
 
-			moveThisUpdate = velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
-			//checkForCollision2(quadTree, gameTime);
+				moveThisUpdate = velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
+				//checkForCollision2(quadTree, gameTime);
 
-			position += moveThisUpdate;
-			base.update(position);
+				position += moveThisUpdate;
+				base.update(position);
 
-			checkForCollision(quadTree, gameTime);
 
-			checkWorldEdge();
+				checkForCollision(quadTree, gameTime);
+
+				checkWorldEdge();
+
+				velocity *= dampening; // apply a little resistance. Any thrust should over power this.
+			}
 
 			mainWeapon.update(gameTime, quadTree);
 			additionalUpdate(gameTime, quadTree);
 
-			velocity *= dampening; // apply a little resistance. Any thrust should over power this.
-			if (isActive == false)
-			{
+			
+			if (isActive == false) {
 				inactiveTime = gameTime.TotalGameTime - inactiveStart;
-				if (inactiveTime.Seconds >= 2)
-				{
+				if (inactiveTime.Seconds >= 2) {
 					isActive = true;
 				}
 			}
@@ -231,9 +234,9 @@ namespace SpaceUnionXNA.Ships {
 			}
 
 			//Space key activates debugging brake
-			if (keyState.IsKeyDown(Keys.Space)) {
-				stop();
-			}
+			//if (keyState.IsKeyDown(Keys.Space)) {
+			//	stop();
+			//}
 
 			if (keyState.IsKeyDown(Keys.LeftControl)) {
 				//fire(gameTime);
@@ -253,10 +256,9 @@ namespace SpaceUnionXNA.Ships {
 
 		}
 
-        public virtual void controlAI()
-        {
-            firing = true;
-        }
+		public virtual void controlAI() {
+			firing = true;
+		}
 
 		/// <summary>
 		/// Power to main thruster
@@ -271,20 +273,6 @@ namespace SpaceUnionXNA.Ships {
 			acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
 			Vector2.Add(ref tempVelocity, ref acceleration, out velocity);
 
-			/*
-			if (Math.Abs(tempVelocity.Length()) > maxSpeed) {
-
-
-				
-					Vector2 tempVelocity2 = tempVelocity;
-					Vector2.Add(ref tempVelocity2, ref acceleration, out tempVelocity2);
-					if (Math.Abs(tempVelocity2.Length()) < tempVelocity.Length()) {
-						Vector2.Add(ref velocity, ref acceleration, out velocity);
-					}
-				} else if (Math.Abs(tempVelocity.Length()) < maxSpeed) {
-					Vector2.Add(ref velocity, ref acceleration, out velocity);
-				}
-			}*/
 		}
 
 
@@ -319,9 +307,8 @@ namespace SpaceUnionXNA.Ships {
 		protected abstract void altFire(GameTime gameTime);
 
 		public override void destroy() {
-			isActive = false;
 			explode();
-			//base.destroy();
+			base.destroy();
 		}
 
 		/// <summary>

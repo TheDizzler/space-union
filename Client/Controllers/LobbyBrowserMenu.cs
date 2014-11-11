@@ -13,6 +13,7 @@ using Nuclex.Input;
 using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;
 using SpaceMenus;
+using SpaceMenus.Tools;
 //NETWORKING
 //using Data_Structures;
 
