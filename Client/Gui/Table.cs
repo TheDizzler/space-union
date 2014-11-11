@@ -8,6 +8,8 @@ using SpaceUnionXNA.Gui;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceUnionXNA;
+using Nuclex.UserInterface.Controls.Desktop;
+using Nuclex.UserInterface;
 
 namespace SpaceUnionXNA.Gui
 {
@@ -32,11 +34,13 @@ namespace SpaceUnionXNA.Gui
         string[] ColumnNames;
         string[,] RowArray = new string[MAX_AMOUNT, MAX_AMOUNT];
         SpriteFont font;
+        ButtonControl[] joinButton = new ButtonControl[MAX_AMOUNT];
         int ColumnWidth;
         int currentPageAmount;
         bool BarEnabled;
         public int RowsPerPage { get; set; }
         int maxpages = 0;
+        int ButtonAmount;
         int[] pageFull = new int[MAX_AMOUNT];
         public Table(int column, string[] columnNames, int rowRectOriginX, int rowRectOriginY, int rowRectSizeY, int RowsBeforeScroll, int columnWidth, bool barEnabled)
         {
@@ -48,7 +52,7 @@ namespace SpaceUnionXNA.Gui
             RowsPerPage = RowsBeforeScroll;
             columnLine = new Rectangle[MAX_AMOUNT, NumberOfColumns + 1];
             RowRectOriginY = rowRectOriginY;
-            currentPage = 0;
+            currentPage = 1;
             RowRectOriginX = rowRectOriginX;
             RowRectSizeY = rowRectSizeY;
             Column1TextX = RowRectOriginX + 5;
@@ -70,17 +74,22 @@ namespace SpaceUnionXNA.Gui
 
         }
 
-        public void draw(SpriteBatch spriteBatch)
+        public void draw(SpriteBatch spriteBatch, Screen mainScreen)
         {
             spriteBatch.Draw(rowRectangleTexture, browserRectangle, Color.White);
             int maxPagePos = (rows % (RowsPerPage+1));
-            if (maxPagePos == 0)
+
+
+            if (maxPagePos == 1)
             {
                 maxPagePos = 1;
                 pageFull[currentPage] = 1;
-                //rows++;
-                
+                /*for (int i = currentPage * RowsPerPage; i < (currentPage * RowsPerPage + 1); i++)
+                {
+                    mainScreen.Desktop.Children.Remove(joinButton[i]);
+                }*/
             }
+            
 
             if (pageFull[currentPage] == 1)
             {
@@ -119,9 +128,22 @@ namespace SpaceUnionXNA.Gui
                     for (int i = 0, k = 0; i < NumberOfColumns; i++, k += ColumnWidth)
                     {
 
-                        spriteBatch.DrawString(font, RowArray[(currentPage*(RowsPerPage+1))+j, i],
+                        spriteBatch.DrawString(font, RowArray[((currentPage-1)*(RowsPerPage+1))+j, i],
                             new Vector2(Column1TextX + k, Column1TextY + j * RowRectSizeY), Color.Black, 0.0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0.5f);
+
+                        
                     }
+
+                    /*for (int i = currentPage * RowsPerPage; i < maxPagePos - 1 + (currentPage * RowsPerPage); i++)
+                    {
+                        joinButton[i] = GuiHelper.CreateButton("Join", -(int)(Column1TextX + (ColumnWidth * NumberOfColumns) - mainScreen.Width / 2 - ColumnWidth / 2), -(int)(Column1TextY * 1.2 - j * RowRectSizeY + mainScreen.Height / 2), 30, 15);
+                        joinButton[i].Pressed += delegate(object sender, EventArgs arguments)
+                        {
+
+                        };
+                        mainScreen.Desktop.Children.Add(joinButton[i]);
+                    }*/
+                    
                 }
                 
                 
@@ -143,7 +165,7 @@ namespace SpaceUnionXNA.Gui
             }
             
             rows++;
-            if (rows == (currentPage+1 * (RowsPerPage+1)))
+            if (rows == (currentPage * (RowsPerPage+1)))
             {
                 rows++;
                 currentPage++;

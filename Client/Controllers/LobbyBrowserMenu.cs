@@ -62,7 +62,7 @@ namespace SpaceUnionXNA.Controllers
         public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            LobbyBrowserTable.draw(spriteBatch);
+            LobbyBrowserTable.draw(spriteBatch, game.mainScreen);
             spriteBatch.End();
             game.gui_manager.Draw(gameTime);
         }
@@ -83,7 +83,7 @@ namespace SpaceUnionXNA.Controllers
                 LobbyBrowserTable.currentPage += 1;
             };
 
-            ButtonControl prevPageButton = GuiHelper.CreateButton("Prev", (-700), (int)(-(mainScreen.Height) / 2), 70, 32);
+            ButtonControl prevPageButton = GuiHelper.CreateButton("Prev", (-850), (int)(-(mainScreen.Height) / 2), 70, 32);
             prevPageButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 LobbyBrowserTable.currentPage -= 1;
