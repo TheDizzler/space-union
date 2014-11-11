@@ -274,6 +274,19 @@ namespace AdminControlForm
             int errCode = 0;
             User userInfo = new User();
 
+<<<<<<< HEAD
+            if (userTable.AdminGetUserInfo(txtbUserToEdit.Text, ref errCode, ref userInfo) ) {
+                txtbUserEditing.Text = userInfo.userName;
+
+                if (userInfo.userIsBlocked.Equals(BLOCKED)) {
+                    txtbCurrentBlockStatus.Text = "BLOCKED";
+                    chkbBlockUnblockUser.Text = "Do you want to UNBLOCK " + txtbUserEditing.Text;
+                }
+                else
+                {
+                    txtbCurrentBlockStatus.Text = "NOT BLOCKED";
+                    chkbBlockUnblockUser.Text = "Do you want to BLOCK " + txtbUserEditing.Text;
+=======
             if (userTable.AdminGetUserInfo(txtbUserToEdit.Text, ref errCode, ref userInfo))
             {
                 txtbUserEditing.Text = userInfo.userName;
@@ -299,6 +312,7 @@ namespace AdminControlForm
                     {
                         MessageBox.Show("Username may not exist");
                     }
+>>>>>>> 48286e7718e16b1c8fb74bb9f0cef61a4852fee7
                 }
             }
         }

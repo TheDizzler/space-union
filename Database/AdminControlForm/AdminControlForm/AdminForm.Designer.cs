@@ -86,6 +86,75 @@
             this.nudWins = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.tbUserStatName = new System.Windows.Forms.TextBox();
+//<<<<<<< HEAD
+//=======
+            this.gvStats = new System.Windows.Forms.DataGridView();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.lablShipEditMaxSpeed = new System.Windows.Forms.Label();
+            this.lablShipEditAccelerateErrMsg = new System.Windows.Forms.Label();
+            this.lablShipEditTurnSpdErrMsg = new System.Windows.Forms.Label();
+            this.bttnShipUpdate = new System.Windows.Forms.Button();
+            this.bttnShipToEdit = new System.Windows.Forms.Button();
+            this.txtbNewMaxSpeed = new System.Windows.Forms.TextBox();
+            this.lablNewShipMaxSpeed = new System.Windows.Forms.Label();
+            this.txtbNewAccelerate = new System.Windows.Forms.TextBox();
+            this.lablNewShipAccelerate = new System.Windows.Forms.Label();
+            this.txtbNewTurnSpeed = new System.Windows.Forms.TextBox();
+            this.lablNewShipTurnSpeed = new System.Windows.Forms.Label();
+            this.rtxtCurrentShipStats = new System.Windows.Forms.RichTextBox();
+            this.lablCurrentShipStats = new System.Windows.Forms.Label();
+            this.txtbShipEditing = new System.Windows.Forms.TextBox();
+            this.lablShipEditing = new System.Windows.Forms.Label();
+            this.lablEditShip = new System.Windows.Forms.Label();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.btnUpdatePwr = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            this.nudPwrValue = new System.Windows.Forms.NumericUpDown();
+            this.label17 = new System.Windows.Forms.Label();
+            this.tbPowerupName = new System.Windows.Forms.TextBox();
+            this.dgvPwrup = new System.Windows.Forms.DataGridView();
+            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.userTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UserTableAdapter();
+            this.userNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userPasswordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userEmailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userImageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userIsOnlineDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userIsBlockedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userIsAdminDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userStatsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.userStatsTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UserStatsTableAdapter();
+            this.userNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userstatWinDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userstatLoseDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userstatShotsFiredDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userstatHitsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userstatKillsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userstatDiedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userstatShipUsed1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userstatShipUsed2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userstatShipUsed3DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userstatFlagsCapturedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+//<<<<<<< HEAD
+
+            this.userStatsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.spaceUnionDataSet = new AdminControlForm.SpaceUnionDataSet();
+            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.userTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UserTableAdapter();
+            this.userStatsTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UserStatsTableAdapter();
+            this.editUserTab = new System.Windows.Forms.TabPage();
+            this.lablCurrentBlockStatus = new System.Windows.Forms.Label();
+            this.txtbCurrentBlockStatus = new System.Windows.Forms.TextBox();
+            this.chkbBlockUnblockUser = new System.Windows.Forms.CheckBox();
+            this.bttnBlockUnblock = new System.Windows.Forms.Button();
+            this.lablUserEditErrMsg = new System.Windows.Forms.Label();
+            this.txtbUserEditing = new System.Windows.Forms.TextBox();
+            this.lablUsernameToEdit = new System.Windows.Forms.Label();
+            this.bttnGetUserInfo = new System.Windows.Forms.Button();
+            this.lablUserToEdit = new System.Windows.Forms.Label();
+            this.txtbUserToEdit = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+//>>>>>>> 001b3c6b15349f23348d64b2257b01bc3d59fe5c
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.lablMaxSpeedErrMsg = new System.Windows.Forms.Label();
             this.lablAccelErrMsg = new System.Windows.Forms.Label();
@@ -93,6 +162,7 @@
             this.bttnAddShip = new System.Windows.Forms.Button();
             this.lablMaxSpeed = new System.Windows.Forms.Label();
             this.txtbMaxSpeed = new System.Windows.Forms.TextBox();
+//<<<<<<< HEAD
             this.txtbAccelerate = new System.Windows.Forms.TextBox();
             this.txtbTurnSpeed = new System.Windows.Forms.TextBox();
             this.txtbNewShipName = new System.Windows.Forms.TextBox();
@@ -134,6 +204,52 @@
             this.lablPassword = new System.Windows.Forms.Label();
             this.lablUsername = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
+//=======
+            this.lablAccelerate = new System.Windows.Forms.Label();
+            this.txtbAccelerate = new System.Windows.Forms.TextBox();
+            this.lablTurnSpeed = new System.Windows.Forms.Label();
+            this.txtbTurnSpeed = new System.Windows.Forms.TextBox();
+            this.lablNewShipNameErrMsg = new System.Windows.Forms.Label();
+            this.txtbNewShipName = new System.Windows.Forms.TextBox();
+            this.lablNewShipName = new System.Windows.Forms.Label();
+            this.lablAddNewShip = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.lablShipEditMaxSpeed = new System.Windows.Forms.Label();
+            this.lablShipEditAccelerateErrMsg = new System.Windows.Forms.Label();
+            this.lablShipEditTurnSpdErrMsg = new System.Windows.Forms.Label();
+            this.bttnShipUpdate = new System.Windows.Forms.Button();
+            this.bttnShipToEdit = new System.Windows.Forms.Button();
+            this.txtbNewMaxSpeed = new System.Windows.Forms.TextBox();
+            this.lablNewShipMaxSpeed = new System.Windows.Forms.Label();
+            this.txtbNewAccelerate = new System.Windows.Forms.TextBox();
+            this.lablNewShipAccelerate = new System.Windows.Forms.Label();
+            this.txtbNewTurnSpeed = new System.Windows.Forms.TextBox();
+            this.lablNewShipTurnSpeed = new System.Windows.Forms.Label();
+            this.rtxtCurrentShipStats = new System.Windows.Forms.RichTextBox();
+            this.lablCurrentShipStats = new System.Windows.Forms.Label();
+            this.txtbShipEditing = new System.Windows.Forms.TextBox();
+            this.lablShipEditing = new System.Windows.Forms.Label();
+            this.lablEditShip = new System.Windows.Forms.Label();
+
+            this.powerupsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.powerupsTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.PowerupsTableAdapter();
+            this.powerupIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pwrNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pwrValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+
+//=======
+            this.powerupBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.powerupTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.PowerupTableAdapter();
+            this.powerupNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.powerupValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+//>>>>>>> 0bd75cc0a11955da4fadfb7daf68c2293f4727ad
+            this.tabControl.SuspendLayout();
+            this.createUserTab.SuspendLayout();
+            this.editUserTab.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvUsers)).BeginInit();
+//>>>>>>> 001b3c6b15349f23348d64b2257b01bc3d59fe5c
             ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.powerupBindingSource)).BeginInit();
             this.tabPage5.SuspendLayout();
@@ -151,10 +267,31 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudShotsFired)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLoses)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWins)).BeginInit();
+//<<<<<<< HEAD
             this.tabPage2.SuspendLayout();
             this.editUserTab.SuspendLayout();
             this.createUserTab.SuspendLayout();
             this.tabControl.SuspendLayout();
+//=======
+            ((System.ComponentModel.ISupportInitialize)(this.gvStats)).BeginInit();
+//<<<<<<< HEAD
+
+            ((System.ComponentModel.ISupportInitialize)(this.userStatsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
+            this.editUserTab.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+
+//=======
+//>>>>>>> 0bd75cc0a11955da4fadfb7daf68c2293f4727ad
+            this.tabPage4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPwrValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPwrup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userStatsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.powerupBindingSource)).BeginInit();
+//>>>>>>> 001b3c6b15349f23348d64b2257b01bc3d59fe5c
             this.SuspendLayout();
             // 
             // spaceUnionDataSet
@@ -1334,7 +1471,31 @@
             this.lablEmail.TabIndex = 6;
             this.lablEmail.Text = "Email";
             // 
+//<<<<<<< HEAD
             // lablConfirmPassword
+//=======
+//<<<<<<< HEAD
+
+            // userStatsBindingSource
+            // 
+            this.userStatsBindingSource.DataMember = "UserStats";
+            this.userStatsBindingSource.DataSource = this.spaceUnionDataSet;
+            // 
+            // spaceUnionDataSet
+            // 
+            this.spaceUnionDataSet.DataSetName = "SpaceUnionDataSet";
+            this.spaceUnionDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // usersBindingSource
+            // 
+            this.userBindingSource.DataMember = "User";
+            this.userBindingSource.DataSource = this.spaceUnionDataSet;
+            // 
+            // userTableAdapter
+//=======
+            // powerupBindingSource
+//>>>>>>> 0bd75cc0a11955da4fadfb7daf68c2293f4727ad
+//>>>>>>> 001b3c6b15349f23348d64b2257b01bc3d59fe5c
             // 
             this.lablConfirmPassword.AutoSize = true;
             this.lablConfirmPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1383,8 +1544,509 @@
             this.tabControl.Size = new System.Drawing.Size(496, 512);
             this.tabControl.TabIndex = 0;
             // 
+//<<<<<<< HEAD
+            // txtbCurrentBlockStatus
+            // 
+//<<<<<<< HEAD
+//=======
+            this.txtbCurrentBlockStatus.Location = new System.Drawing.Point(20, 286);
+            this.txtbCurrentBlockStatus.Name = "txtbCurrentBlockStatus";
+            this.txtbCurrentBlockStatus.ReadOnly = true;
+            this.txtbCurrentBlockStatus.Size = new System.Drawing.Size(161, 20);
+            this.txtbCurrentBlockStatus.TabIndex = 13;
+            // 
+            // chkbBlockUnblockUser
+            // 
+            this.chkbBlockUnblockUser.AutoSize = true;
+            this.chkbBlockUnblockUser.ForeColor = System.Drawing.Color.White;
+            this.chkbBlockUnblockUser.Location = new System.Drawing.Point(20, 339);
+            this.chkbBlockUnblockUser.Name = "chkbBlockUnblockUser";
+            this.chkbBlockUnblockUser.Size = new System.Drawing.Size(168, 17);
+            this.chkbBlockUnblockUser.TabIndex = 12;
+            this.chkbBlockUnblockUser.Text = "Do you want to block the user";
+            this.chkbBlockUnblockUser.UseVisualStyleBackColor = true;
+            // 
+            // bttnBlockUnblock
+            // 
+            this.bttnBlockUnblock.Location = new System.Drawing.Point(82, 387);
+            this.bttnBlockUnblock.Name = "bttnBlockUnblock";
+            this.bttnBlockUnblock.Size = new System.Drawing.Size(99, 37);
+            this.bttnBlockUnblock.TabIndex = 11;
+            this.bttnBlockUnblock.Text = "Block/Unblock User";
+            this.bttnBlockUnblock.UseVisualStyleBackColor = true;
+            this.bttnBlockUnblock.Click += new System.EventHandler(this.bttnBlockUnblock_Click);
+            // 
+            // lablUserEditErrMsg
+            // 
+            this.lablUserEditErrMsg.AutoSize = true;
+            this.lablUserEditErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablUserEditErrMsg.Location = new System.Drawing.Point(251, 49);
+            this.lablUserEditErrMsg.Name = "lablUserEditErrMsg";
+            this.lablUserEditErrMsg.Size = new System.Drawing.Size(132, 13);
+            this.lablUserEditErrMsg.TabIndex = 9;
+            this.lablUserEditErrMsg.Text = "Error entering in Username";
+            this.lablUserEditErrMsg.Visible = false;
+            // 
+            // txtbUserEditing
+            // 
+            this.txtbUserEditing.Location = new System.Drawing.Point(20, 225);
+            this.txtbUserEditing.Name = "txtbUserEditing";
+            this.txtbUserEditing.ReadOnly = true;
+            this.txtbUserEditing.Size = new System.Drawing.Size(161, 20);
+            this.txtbUserEditing.TabIndex = 5;
+            // 
+            // lablUsernameToEdit
+            // 
+            this.lablUsernameToEdit.AutoSize = true;
+            this.lablUsernameToEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablUsernameToEdit.ForeColor = System.Drawing.Color.White;
+            this.lablUsernameToEdit.Location = new System.Drawing.Point(17, 207);
+            this.lablUsernameToEdit.Name = "lablUsernameToEdit";
+            this.lablUsernameToEdit.Size = new System.Drawing.Size(73, 15);
+            this.lablUsernameToEdit.TabIndex = 4;
+            this.lablUsernameToEdit.Text = "Username";
+            // 
+            // bttnGetUserInfo
+            // 
+            this.bttnGetUserInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bttnGetUserInfo.Location = new System.Drawing.Point(125, 72);
+            this.bttnGetUserInfo.Name = "bttnGetUserInfo";
+            this.bttnGetUserInfo.Size = new System.Drawing.Size(120, 28);
+            this.bttnGetUserInfo.TabIndex = 3;
+            this.bttnGetUserInfo.Text = "Retrieve User Info";
+            this.bttnGetUserInfo.UseVisualStyleBackColor = true;
+            this.bttnGetUserInfo.Click += new System.EventHandler(this.bttnGetUserInfo_Click);
+            // 
+            // lablUserToEdit
+            // 
+            this.lablUserToEdit.AutoSize = true;
+            this.lablUserToEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablUserToEdit.ForeColor = System.Drawing.Color.White;
+            this.lablUserToEdit.Location = new System.Drawing.Point(16, 178);
+            this.lablUserToEdit.Name = "lablUserToEdit";
+            this.lablUserToEdit.Size = new System.Drawing.Size(356, 20);
+            this.lablUserToEdit.TabIndex = 2;
+            this.lablUserToEdit.Text = "Info of the User you Want to Block/Unblock";
+            // 
+            // txtbUserToEdit
+            // 
+            this.txtbUserToEdit.Location = new System.Drawing.Point(13, 46);
+            this.txtbUserToEdit.Name = "txtbUserToEdit";
+            this.txtbUserToEdit.Size = new System.Drawing.Size(232, 20);
+            this.txtbUserToEdit.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(10, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(447, 17);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Enter the username of the user you want to block or unblock";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.BackgroundImage = global::AdminControlForm.Properties.Resources.dark_space;
+            this.tabPage2.Controls.Add(this.lablMaxSpeedErrMsg);
+            this.tabPage2.Controls.Add(this.lablAccelErrMsg);
+            this.tabPage2.Controls.Add(this.lablTurnSpeedErrMsg);
+            this.tabPage2.Controls.Add(this.bttnAddShip);
+            this.tabPage2.Controls.Add(this.lablMaxSpeed);
+            this.tabPage2.Controls.Add(this.txtbMaxSpeed);
+            this.tabPage2.Controls.Add(this.lablAccelerate);
+            this.tabPage2.Controls.Add(this.txtbAccelerate);
+            this.tabPage2.Controls.Add(this.lablTurnSpeed);
+            this.tabPage2.Controls.Add(this.txtbTurnSpeed);
+            this.tabPage2.Controls.Add(this.lablNewShipNameErrMsg);
+            this.tabPage2.Controls.Add(this.txtbNewShipName);
+            this.tabPage2.Controls.Add(this.lablNewShipName);
+            this.tabPage2.Controls.Add(this.lablAddNewShip);
+            this.tabPage2.Controls.Add(this.label2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(488, 486);
+            this.tabPage2.TabIndex = 3;
+            this.tabPage2.Text = "Add Ship";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // lablMaxSpeedErrMsg
+            // 
+            this.lablMaxSpeedErrMsg.AutoSize = true;
+            this.lablMaxSpeedErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablMaxSpeedErrMsg.Location = new System.Drawing.Point(187, 338);
+            this.lablMaxSpeedErrMsg.Name = "lablMaxSpeedErrMsg";
+            this.lablMaxSpeedErrMsg.Size = new System.Drawing.Size(95, 13);
+            this.lablMaxSpeedErrMsg.TabIndex = 14;
+            this.lablMaxSpeedErrMsg.Text = "max speed err msg";
+            this.lablMaxSpeedErrMsg.Visible = false;
+            // 
+            // lablAccelErrMsg
+            // 
+            this.lablAccelErrMsg.AutoSize = true;
+            this.lablAccelErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablAccelErrMsg.Location = new System.Drawing.Point(197, 239);
+            this.lablAccelErrMsg.Name = "lablAccelErrMsg";
+            this.lablAccelErrMsg.Size = new System.Drawing.Size(70, 13);
+            this.lablAccelErrMsg.TabIndex = 13;
+            this.lablAccelErrMsg.Text = "accel err msg";
+            this.lablAccelErrMsg.Visible = false;
+            // 
+            // lablTurnSpeedErrMsg
+            // 
+            this.lablTurnSpeedErrMsg.AutoSize = true;
+            this.lablTurnSpeedErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablTurnSpeedErrMsg.Location = new System.Drawing.Point(194, 145);
+            this.lablTurnSpeedErrMsg.Name = "lablTurnSpeedErrMsg";
+            this.lablTurnSpeedErrMsg.Size = new System.Drawing.Size(94, 13);
+            this.lablTurnSpeedErrMsg.TabIndex = 12;
+            this.lablTurnSpeedErrMsg.Text = "turn speed err msg";
+            this.lablTurnSpeedErrMsg.Visible = false;
+            // 
+            // bttnAddShip
+            // 
+            this.bttnAddShip.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bttnAddShip.Location = new System.Drawing.Point(140, 417);
+            this.bttnAddShip.Name = "bttnAddShip";
+            this.bttnAddShip.Size = new System.Drawing.Size(114, 40);
+            this.bttnAddShip.TabIndex = 11;
+            this.bttnAddShip.Text = "Add Ship";
+            this.bttnAddShip.UseVisualStyleBackColor = true;
+            this.bttnAddShip.Click += new System.EventHandler(this.bttnAddShip_Click);
+            // 
+            // lablMaxSpeed
+            // 
+            this.lablMaxSpeed.AutoSize = true;
+            this.lablMaxSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablMaxSpeed.ForeColor = System.Drawing.Color.White;
+            this.lablMaxSpeed.Location = new System.Drawing.Point(45, 334);
+            this.lablMaxSpeed.Name = "lablMaxSpeed";
+            this.lablMaxSpeed.Size = new System.Drawing.Size(136, 17);
+            this.lablMaxSpeed.TabIndex = 10;
+            this.lablMaxSpeed.Text = "Max Speed (float)";
+            // 
+            // txtbMaxSpeed
+            // 
+            this.txtbMaxSpeed.Location = new System.Drawing.Point(45, 354);
+            this.txtbMaxSpeed.Name = "txtbMaxSpeed";
+            this.txtbMaxSpeed.Size = new System.Drawing.Size(210, 20);
+            this.txtbMaxSpeed.TabIndex = 9;
+            this.txtbMaxSpeed.TextChanged += new System.EventHandler(this.validateMaxSpeed);
+            // 
+            // lablAccelerate
+            // 
+            this.lablAccelerate.AutoSize = true;
+            this.lablAccelerate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablAccelerate.ForeColor = System.Drawing.Color.White;
+            this.lablAccelerate.Location = new System.Drawing.Point(45, 239);
+            this.lablAccelerate.Name = "lablAccelerate";
+            this.lablAccelerate.Size = new System.Drawing.Size(147, 17);
+            this.lablAccelerate.TabIndex = 8;
+            this.lablAccelerate.Text = "Acceleration (float)";
+            // 
+            // txtbAccelerate
+            // 
+            this.txtbAccelerate.Location = new System.Drawing.Point(45, 259);
+            this.txtbAccelerate.Name = "txtbAccelerate";
+            this.txtbAccelerate.Size = new System.Drawing.Size(210, 20);
+            this.txtbAccelerate.TabIndex = 7;
+            this.txtbAccelerate.TextChanged += new System.EventHandler(this.validateAcceleration);
+            // 
+            // lablTurnSpeed
+            // 
+            this.lablTurnSpeed.AutoSize = true;
+            this.lablTurnSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablTurnSpeed.ForeColor = System.Drawing.Color.White;
+            this.lablTurnSpeed.Location = new System.Drawing.Point(45, 145);
+            this.lablTurnSpeed.Name = "lablTurnSpeed";
+            this.lablTurnSpeed.Size = new System.Drawing.Size(142, 17);
+            this.lablTurnSpeed.TabIndex = 6;
+            this.lablTurnSpeed.Text = "Turn Speed (float)";
+            // 
+            // txtbTurnSpeed
+            // 
+            this.txtbTurnSpeed.Location = new System.Drawing.Point(45, 165);
+            this.txtbTurnSpeed.Name = "txtbTurnSpeed";
+            this.txtbTurnSpeed.Size = new System.Drawing.Size(210, 20);
+            this.txtbTurnSpeed.TabIndex = 5;
+            this.txtbTurnSpeed.TextChanged += new System.EventHandler(this.validateTurnSpeed);
+            // 
+            // lablNewShipNameErrMsg
+            // 
+            this.lablNewShipNameErrMsg.AutoSize = true;
+            this.lablNewShipNameErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablNewShipNameErrMsg.Location = new System.Drawing.Point(137, 56);
+            this.lablNewShipNameErrMsg.Name = "lablNewShipNameErrMsg";
+            this.lablNewShipNameErrMsg.Size = new System.Drawing.Size(92, 13);
+            this.lablNewShipNameErrMsg.TabIndex = 4;
+            this.lablNewShipNameErrMsg.Text = "ship name err msg";
+            this.lablNewShipNameErrMsg.Visible = false;
+            // 
+            // txtbNewShipName
+            // 
+            this.txtbNewShipName.Location = new System.Drawing.Point(45, 74);
+            this.txtbNewShipName.Name = "txtbNewShipName";
+            this.txtbNewShipName.Size = new System.Drawing.Size(210, 20);
+            this.txtbNewShipName.TabIndex = 3;
+            this.txtbNewShipName.TextChanged += new System.EventHandler(this.validateShipName);
+            // 
+            // lablNewShipName
+            // 
+            this.lablNewShipName.AutoSize = true;
+            this.lablNewShipName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablNewShipName.ForeColor = System.Drawing.Color.White;
+            this.lablNewShipName.Location = new System.Drawing.Point(45, 54);
+            this.lablNewShipName.Name = "lablNewShipName";
+            this.lablNewShipName.Size = new System.Drawing.Size(86, 17);
+            this.lablNewShipName.TabIndex = 2;
+            this.lablNewShipName.Text = "Ship Name";
+            // 
+            // lablAddNewShip
+            // 
+            this.lablAddNewShip.AutoSize = true;
+            this.lablAddNewShip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablAddNewShip.ForeColor = System.Drawing.Color.White;
+            this.lablAddNewShip.Location = new System.Drawing.Point(19, 20);
+            this.lablAddNewShip.Name = "lablAddNewShip";
+            this.lablAddNewShip.Size = new System.Drawing.Size(136, 20);
+            this.lablAddNewShip.TabIndex = 1;
+            this.lablAddNewShip.Text = "Add a New Ship";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(20, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "label2";
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.BackgroundImage = global::AdminControlForm.Properties.Resources.dark_space;
+            this.tabPage4.Controls.Add(this.lablShipEditMaxSpeed);
+            this.tabPage4.Controls.Add(this.lablShipEditAccelerateErrMsg);
+            this.tabPage4.Controls.Add(this.lablShipEditTurnSpdErrMsg);
+            this.tabPage4.Controls.Add(this.bttnShipUpdate);
+            this.tabPage4.Controls.Add(this.bttnShipToEdit);
+            this.tabPage4.Controls.Add(this.txtbNewMaxSpeed);
+            this.tabPage4.Controls.Add(this.lablNewShipMaxSpeed);
+            this.tabPage4.Controls.Add(this.txtbNewAccelerate);
+            this.tabPage4.Controls.Add(this.lablNewShipAccelerate);
+            this.tabPage4.Controls.Add(this.txtbNewTurnSpeed);
+            this.tabPage4.Controls.Add(this.lablNewShipTurnSpeed);
+            this.tabPage4.Controls.Add(this.rtxtCurrentShipStats);
+            this.tabPage4.Controls.Add(this.lablCurrentShipStats);
+            this.tabPage4.Controls.Add(this.txtbShipEditing);
+            this.tabPage4.Controls.Add(this.lablShipEditing);
+            this.tabPage4.Controls.Add(this.lablEditShip);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(488, 486);
+            this.tabPage4.TabIndex = 5;
+            this.tabPage4.Text = "Edit Ship";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // lablShipEditMaxSpeed
+            // 
+            this.lablShipEditMaxSpeed.AutoSize = true;
+            this.lablShipEditMaxSpeed.ForeColor = System.Drawing.Color.Red;
+            this.lablShipEditMaxSpeed.Location = new System.Drawing.Point(173, 346);
+            this.lablShipEditMaxSpeed.Name = "lablShipEditMaxSpeed";
+            this.lablShipEditMaxSpeed.Size = new System.Drawing.Size(110, 13);
+            this.lablShipEditMaxSpeed.TabIndex = 16;
+            this.lablShipEditMaxSpeed.Text = "err msg for max speed";
+            this.lablShipEditMaxSpeed.Visible = false;
+            this.lablShipEditMaxSpeed.TextChanged += new System.EventHandler(this.validateMaxSpeedEdit);
+
+            // powerupsBindingSource
+            // 
+            this.powerupsBindingSource.DataMember = "Powerups";
+            this.powerupsBindingSource.DataSource = this.spaceUnionDataSet;
+            // 
+            // powerupsTableAdapter
+            // 
+            this.powerupsTableAdapter.ClearBeforeFill = true;
+            // 
+            // powerupIDDataGridViewTextBoxColumn
+            // 
+            this.powerupIDDataGridViewTextBoxColumn.DataPropertyName = "powerupID";
+            this.powerupIDDataGridViewTextBoxColumn.HeaderText = "powerupID";
+            this.powerupIDDataGridViewTextBoxColumn.Name = "powerupIDDataGridViewTextBoxColumn";
+            // 
+            // pwrNameDataGridViewTextBoxColumn
+            // 
+            this.pwrNameDataGridViewTextBoxColumn.DataPropertyName = "pwrName";
+            this.pwrNameDataGridViewTextBoxColumn.HeaderText = "pwrName";
+            this.pwrNameDataGridViewTextBoxColumn.Name = "pwrNameDataGridViewTextBoxColumn";
+            // 
+            // pwrValueDataGridViewTextBoxColumn
+            // 
+            this.pwrValueDataGridViewTextBoxColumn.DataPropertyName = "pwrValue";
+            this.pwrValueDataGridViewTextBoxColumn.HeaderText = "pwrValue";
+            this.pwrValueDataGridViewTextBoxColumn.Name = "pwrValueDataGridViewTextBoxColumn";
+
+            // 
+            // lablShipEditAccelerateErrMsg
+            // 
+            this.lablShipEditAccelerateErrMsg.AutoSize = true;
+            this.lablShipEditAccelerateErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablShipEditAccelerateErrMsg.Location = new System.Drawing.Point(235, 283);
+            this.lablShipEditAccelerateErrMsg.Name = "lablShipEditAccelerateErrMsg";
+            this.lablShipEditAccelerateErrMsg.Size = new System.Drawing.Size(109, 13);
+            this.lablShipEditAccelerateErrMsg.TabIndex = 15;
+            this.lablShipEditAccelerateErrMsg.Text = "err msg for accelerate";
+            this.lablShipEditAccelerateErrMsg.Visible = false;
+            this.lablShipEditAccelerateErrMsg.TextChanged += new System.EventHandler(this.validateAccelerationEdit);
+            // 
+            // lablShipEditTurnSpdErrMsg
+            // 
+            this.lablShipEditTurnSpdErrMsg.AutoSize = true;
+            this.lablShipEditTurnSpdErrMsg.ForeColor = System.Drawing.Color.Red;
+            this.lablShipEditTurnSpdErrMsg.Location = new System.Drawing.Point(179, 222);
+            this.lablShipEditTurnSpdErrMsg.Name = "lablShipEditTurnSpdErrMsg";
+            this.lablShipEditTurnSpdErrMsg.Size = new System.Drawing.Size(109, 13);
+            this.lablShipEditTurnSpdErrMsg.TabIndex = 14;
+            this.lablShipEditTurnSpdErrMsg.Text = "err msg for turn speed";
+            this.lablShipEditTurnSpdErrMsg.Visible = false;
+            this.lablShipEditTurnSpdErrMsg.TextChanged += new System.EventHandler(this.validateTurnSpeedEdit);
+            // 
+            // bttnShipUpdate
+            // 
+            this.bttnShipUpdate.Location = new System.Drawing.Point(148, 402);
+            this.bttnShipUpdate.Name = "bttnShipUpdate";
+            this.bttnShipUpdate.Size = new System.Drawing.Size(91, 35);
+            this.bttnShipUpdate.TabIndex = 13;
+            this.bttnShipUpdate.Text = "Update Ship";
+            this.bttnShipUpdate.UseVisualStyleBackColor = true;
+            this.bttnShipUpdate.Click += new System.EventHandler(this.bttnShipUpdate_Click);
+            // 
+            // bttnShipToEdit
+            // 
+            this.bttnShipToEdit.Location = new System.Drawing.Point(124, 128);
+            this.bttnShipToEdit.Name = "bttnShipToEdit";
+            this.bttnShipToEdit.Size = new System.Drawing.Size(115, 23);
+            this.bttnShipToEdit.TabIndex = 12;
+            this.bttnShipToEdit.Text = "Retrieve Ship Stats";
+            this.bttnShipToEdit.UseVisualStyleBackColor = true;
+            this.bttnShipToEdit.Click += new System.EventHandler(this.bttnShipToEdit_Click);
+            // 
+            // txtbNewMaxSpeed
+            // 
+            this.txtbNewMaxSpeed.Location = new System.Drawing.Point(45, 364);
+            this.txtbNewMaxSpeed.Name = "txtbNewMaxSpeed";
+            this.txtbNewMaxSpeed.Size = new System.Drawing.Size(194, 20);
+            this.txtbNewMaxSpeed.TabIndex = 11;
+            this.txtbNewMaxSpeed.TextChanged += new System.EventHandler(this.validateMaxSpeedEdit);
+            // 
+            // lablNewShipMaxSpeed
+            // 
+            this.lablNewShipMaxSpeed.AutoSize = true;
+            this.lablNewShipMaxSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablNewShipMaxSpeed.ForeColor = System.Drawing.Color.White;
+            this.lablNewShipMaxSpeed.Location = new System.Drawing.Point(45, 344);
+            this.lablNewShipMaxSpeed.Name = "lablNewShipMaxSpeed";
+            this.lablNewShipMaxSpeed.Size = new System.Drawing.Size(122, 17);
+            this.lablNewShipMaxSpeed.TabIndex = 10;
+            this.lablNewShipMaxSpeed.Text = "New Max Speed";
+            // 
+            // txtbNewAccelerate
+            // 
+            this.txtbNewAccelerate.Location = new System.Drawing.Point(45, 301);
+            this.txtbNewAccelerate.Name = "txtbNewAccelerate";
+            this.txtbNewAccelerate.Size = new System.Drawing.Size(194, 20);
+            this.txtbNewAccelerate.TabIndex = 9;
+            this.txtbNewAccelerate.TextChanged += new System.EventHandler(this.validateAccelerationEdit);
+            // 
+            // lablNewShipAccelerate
+            // 
+            this.lablNewShipAccelerate.AutoSize = true;
+            this.lablNewShipAccelerate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablNewShipAccelerate.ForeColor = System.Drawing.Color.White;
+            this.lablNewShipAccelerate.Location = new System.Drawing.Point(45, 281);
+            this.lablNewShipAccelerate.Name = "lablNewShipAccelerate";
+            this.lablNewShipAccelerate.Size = new System.Drawing.Size(184, 17);
+            this.lablNewShipAccelerate.TabIndex = 8;
+            this.lablNewShipAccelerate.Text = "New Acceleration Speed";
+            // 
+            // txtbNewTurnSpeed
+            // 
+            this.txtbNewTurnSpeed.Location = new System.Drawing.Point(45, 240);
+            this.txtbNewTurnSpeed.Name = "txtbNewTurnSpeed";
+            this.txtbNewTurnSpeed.Size = new System.Drawing.Size(194, 20);
+            this.txtbNewTurnSpeed.TabIndex = 7;
+            this.txtbNewTurnSpeed.TextChanged += new System.EventHandler(this.validateTurnSpeedEdit);
+            // 
+            // lablNewShipTurnSpeed
+            // 
+            this.lablNewShipTurnSpeed.AutoSize = true;
+            this.lablNewShipTurnSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablNewShipTurnSpeed.ForeColor = System.Drawing.Color.White;
+            this.lablNewShipTurnSpeed.Location = new System.Drawing.Point(45, 220);
+            this.lablNewShipTurnSpeed.Name = "lablNewShipTurnSpeed";
+            this.lablNewShipTurnSpeed.Size = new System.Drawing.Size(128, 17);
+            this.lablNewShipTurnSpeed.TabIndex = 6;
+            this.lablNewShipTurnSpeed.Text = "New Turn Speed";
+            // 
+            // rtxtCurrentShipStats
+            // 
+            this.rtxtCurrentShipStats.Location = new System.Drawing.Point(277, 81);
+            this.rtxtCurrentShipStats.Name = "rtxtCurrentShipStats";
+            this.rtxtCurrentShipStats.ReadOnly = true;
+            this.rtxtCurrentShipStats.Size = new System.Drawing.Size(194, 70);
+            this.rtxtCurrentShipStats.TabIndex = 5;
+            this.rtxtCurrentShipStats.Text = "";
+            // 
+            // lablCurrentShipStats
+            // 
+            this.lablCurrentShipStats.AutoSize = true;
+            this.lablCurrentShipStats.BackColor = System.Drawing.Color.Transparent;
+            this.lablCurrentShipStats.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablCurrentShipStats.ForeColor = System.Drawing.Color.White;
+            this.lablCurrentShipStats.Location = new System.Drawing.Point(280, 61);
+            this.lablCurrentShipStats.Name = "lablCurrentShipStats";
+            this.lablCurrentShipStats.Size = new System.Drawing.Size(141, 17);
+            this.lablCurrentShipStats.TabIndex = 4;
+            this.lablCurrentShipStats.Text = "Current Ship Stats";
+            // 
+            // txtbShipEditing
+            // 
+            this.txtbShipEditing.Location = new System.Drawing.Point(45, 82);
+            this.txtbShipEditing.Name = "txtbShipEditing";
+            this.txtbShipEditing.Size = new System.Drawing.Size(194, 20);
+            this.txtbShipEditing.TabIndex = 3;
+            // 
+            // lablShipEditing
+            // 
+            this.lablShipEditing.AutoSize = true;
+            this.lablShipEditing.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablShipEditing.ForeColor = System.Drawing.Color.White;
+            this.lablShipEditing.Location = new System.Drawing.Point(45, 61);
+            this.lablShipEditing.Name = "lablShipEditing";
+            this.lablShipEditing.Size = new System.Drawing.Size(185, 17);
+            this.lablShipEditing.TabIndex = 2;
+            this.lablShipEditing.Text = "Name of the Ship to Edit";
+            // 
+            // lablEditShip
+            // 
+            this.lablEditShip.AutoSize = true;
+            this.lablEditShip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lablEditShip.ForeColor = System.Drawing.Color.White;
+            this.lablEditShip.Location = new System.Drawing.Point(19, 20);
+            this.lablEditShip.Name = "lablEditShip";
+            this.lablEditShip.Size = new System.Drawing.Size(97, 20);
+            this.lablEditShip.TabIndex = 1;
+            this.lablEditShip.Text = "Edit a Ship";
+            // 
+=======
+>>>>>>> 0bd75cc0a11955da4fadfb7daf68c2293f4727ad
             // AdminForm
             // 
+>>>>>>> 001b3c6b15349f23348d64b2257b01bc3d59fe5c
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
@@ -1395,6 +2057,7 @@
             this.Name = "AdminForm";
             this.Text = "Admin Controls";
             this.Load += new System.EventHandler(this.AdminForm_Load);
+<<<<<<< HEAD
             ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.powerupBindingSource)).EndInit();
             this.tabPage5.ResumeLayout(false);
@@ -1403,6 +2066,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPwrup)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+=======
+            this.tabControl.ResumeLayout(false);
+            this.createUserTab.ResumeLayout(false);
+            this.createUserTab.PerformLayout();
+            this.editUserTab.ResumeLayout(false);
+            this.editUserTab.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvUsers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+//>>>>>>> 001b3c6b15349f23348d64b2257b01bc3d59fe5c
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFlagsCaptured)).EndInit();
@@ -1415,6 +2091,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudShotsFired)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLoses)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWins)).EndInit();
+//<<<<<<< HEAD
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.editUserTab.ResumeLayout(false);
@@ -1422,6 +2099,30 @@
             this.createUserTab.ResumeLayout(false);
             this.createUserTab.PerformLayout();
             this.tabControl.ResumeLayout(false);
+//=======
+            ((System.ComponentModel.ISupportInitialize)(this.gvStats)).EndInit();
+//<<<<<<< HEAD
+
+            ((System.ComponentModel.ISupportInitialize)(this.userStatsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
+            this.editUserTab.ResumeLayout(false);
+            this.editUserTab.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+
+//=======
+//>>>>>>> 0bd75cc0a11955da4fadfb7daf68c2293f4727ad
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPwrValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPwrup)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userStatsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.powerupBindingSource)).EndInit();
+//>/>>>>> 001b3c6b15349f23348d64b2257b01bc3d59fe5c
             this.ResumeLayout(false);
 
         }
