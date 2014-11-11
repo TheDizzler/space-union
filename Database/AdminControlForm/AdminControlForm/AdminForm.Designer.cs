@@ -88,7 +88,6 @@
             this.tbUserStatName = new System.Windows.Forms.TextBox();
 //<<<<<<< HEAD
 //=======
-            this.gvStats = new System.Windows.Forms.DataGridView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.lablShipEditMaxSpeed = new System.Windows.Forms.Label();
             this.lablShipEditAccelerateErrMsg = new System.Windows.Forms.Label();
@@ -113,35 +112,12 @@
             this.label17 = new System.Windows.Forms.Label();
             this.tbPowerupName = new System.Windows.Forms.TextBox();
             this.dgvPwrup = new System.Windows.Forms.DataGridView();
-            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.userTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UserTableAdapter();
-            this.userNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userPasswordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userEmailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userImageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userIsOnlineDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userIsBlockedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userIsAdminDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userStatsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.userStatsTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UserStatsTableAdapter();
-            this.userNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userstatWinDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userstatLoseDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userstatShotsFiredDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userstatHitsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userstatKillsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userstatDiedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userstatShipUsed1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userstatShipUsed2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userstatShipUsed3DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userstatFlagsCapturedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+
 //<<<<<<< HEAD
 
-            this.userStatsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            
             this.spaceUnionDataSet = new AdminControlForm.SpaceUnionDataSet();
-            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.userTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UserTableAdapter();
-            this.userStatsTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.UserStatsTableAdapter();
+           
             this.editUserTab = new System.Windows.Forms.TabPage();
             this.lablCurrentBlockStatus = new System.Windows.Forms.Label();
             this.txtbCurrentBlockStatus = new System.Windows.Forms.TextBox();
@@ -231,13 +207,6 @@
             this.txtbShipEditing = new System.Windows.Forms.TextBox();
             this.lablShipEditing = new System.Windows.Forms.Label();
             this.lablEditShip = new System.Windows.Forms.Label();
-
-            this.powerupsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.powerupsTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.PowerupsTableAdapter();
-            this.powerupIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pwrNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pwrValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-
 //=======
             this.powerupBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.powerupTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.PowerupTableAdapter();
@@ -248,7 +217,6 @@
             this.createUserTab.SuspendLayout();
             this.editUserTab.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gvUsers)).BeginInit();
 //>>>>>>> 001b3c6b15349f23348d64b2257b01bc3d59fe5c
             ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.powerupBindingSource)).BeginInit();
@@ -273,12 +241,11 @@
             this.createUserTab.SuspendLayout();
             this.tabControl.SuspendLayout();
 //=======
-            ((System.ComponentModel.ISupportInitialize)(this.gvStats)).BeginInit();
+
 //<<<<<<< HEAD
 
-            ((System.ComponentModel.ISupportInitialize)(this.userStatsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
+            
+            ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).BeginInit();           
             this.editUserTab.SuspendLayout();
             this.tabPage2.SuspendLayout();
 
@@ -287,9 +254,7 @@
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPwrValue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPwrup)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.userStatsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPwrup)).BeginInit();          
             ((System.ComponentModel.ISupportInitialize)(this.powerupBindingSource)).BeginInit();
 //>>>>>>> 001b3c6b15349f23348d64b2257b01bc3d59fe5c
             this.SuspendLayout();
@@ -1475,21 +1440,12 @@
             // lablConfirmPassword
 //=======
 //<<<<<<< HEAD
-
-            // userStatsBindingSource
-            // 
-            this.userStatsBindingSource.DataMember = "UserStats";
-            this.userStatsBindingSource.DataSource = this.spaceUnionDataSet;
             // 
             // spaceUnionDataSet
             // 
             this.spaceUnionDataSet.DataSetName = "SpaceUnionDataSet";
             this.spaceUnionDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // usersBindingSource
-            // 
-            this.userBindingSource.DataMember = "User";
-            this.userBindingSource.DataSource = this.spaceUnionDataSet;
+
             // 
             // userTableAdapter
 //=======
