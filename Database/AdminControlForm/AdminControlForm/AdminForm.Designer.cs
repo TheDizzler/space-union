@@ -61,7 +61,6 @@
             this.lablUserToEdit = new System.Windows.Forms.Label();
             this.txtbUserToEdit = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.spaceUnionDataSet = new AdminControlForm.SpaceUnionDataSet();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.lablMaxSpeedErrMsg = new System.Windows.Forms.Label();
             this.lablAccelErrMsg = new System.Windows.Forms.Label();
@@ -102,7 +101,6 @@
             this.nudWins = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.tbUserStatName = new System.Windows.Forms.TextBox();
-            this.gvStats = new System.Windows.Forms.DataGridView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.lablShipEditMaxSpeed = new System.Windows.Forms.Label();
             this.lablShipEditAccelerateErrMsg = new System.Windows.Forms.Label();
@@ -120,12 +118,12 @@
             this.txtbShipEditing = new System.Windows.Forms.TextBox();
             this.lablShipEditing = new System.Windows.Forms.Label();
             this.lablEditShip = new System.Windows.Forms.Label();
+            this.spaceUnionDataSet = new AdminControlForm.SpaceUnionDataSet();
             this.powerupsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.powerupsTableAdapter = new AdminControlForm.SpaceUnionDataSetTableAdapters.PowerupsTableAdapter();
             this.tabControl.SuspendLayout();
             this.createUserTab.SuspendLayout();
             this.editUserTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFlagsCaptured)).BeginInit();
@@ -138,8 +136,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudShotsFired)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLoses)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWins)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvStats)).BeginInit();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.powerupsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -504,11 +502,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Enter the username of the user you want to block or unblock";
             // 
-            // spaceUnionDataSet
-            // 
-            this.spaceUnionDataSet.DataSetName = "SpaceUnionDataSet";
-            this.spaceUnionDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // tabPage2
             // 
             this.tabPage2.BackgroundImage = global::AdminControlForm.Properties.Resources.deep_space_PS;
@@ -711,7 +704,6 @@
             this.tabPage3.Controls.Add(this.nudWins);
             this.tabPage3.Controls.Add(this.label4);
             this.tabPage3.Controls.Add(this.tbUserStatName);
-            this.tabPage3.Controls.Add(this.gvStats);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -908,14 +900,6 @@
             this.tbUserStatName.TabIndex = 2;
             this.tbUserStatName.TextChanged += new System.EventHandler(this.tbUserStatName_TextChanged);
             // 
-            // gvStats
-            // 
-            this.gvStats.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvStats.Location = new System.Drawing.Point(9, 6);
-            this.gvStats.Name = "gvStats";
-            this.gvStats.Size = new System.Drawing.Size(471, 223);
-            this.gvStats.TabIndex = 1;
-            // 
             // tabPage4
             // 
             this.tabPage4.BackgroundImage = global::AdminControlForm.Properties.Resources.deep_space_PS;
@@ -1106,6 +1090,11 @@
             this.lablEditShip.TabIndex = 1;
             this.lablEditShip.Text = "Edit a Ship";
             // 
+            // spaceUnionDataSet
+            // 
+            this.spaceUnionDataSet.DataSetName = "SpaceUnionDataSet";
+            this.spaceUnionDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // powerupsBindingSource
             // 
             this.powerupsBindingSource.DataMember = "Powerups";
@@ -1132,7 +1121,6 @@
             this.createUserTab.PerformLayout();
             this.editUserTab.ResumeLayout(false);
             this.editUserTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -1147,9 +1135,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudShotsFired)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLoses)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWins)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvStats)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spaceUnionDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.powerupsBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -1208,7 +1196,6 @@
         private System.Windows.Forms.Label lablTurnSpeedErrMsg;
 
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.DataGridView gvStats;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown nudWins;
         private System.Windows.Forms.Label label4;
