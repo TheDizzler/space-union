@@ -36,7 +36,7 @@ namespace SpaceUnionXNA.Ships {
 		/// <summary>
 		/// The non-directional speed of ship in pixels/second
 		/// </summary>
-		protected float currentSpeed = 0;
+		//protected float currentSpeed = 0;
 		/// <summary>
 		/// Turn speed in radians per second
 		/// </summary>
@@ -100,6 +100,8 @@ namespace SpaceUnionXNA.Ships {
 			this.game = game1;
 			velocity = Vector2.Zero;
 
+			currentHealth = maxHealth = 20;
+
 			mass = 1000;
 
 			miniMapIcon = new MapIcon(assets.shipMapIcon, position);
@@ -131,10 +133,12 @@ namespace SpaceUnionXNA.Ships {
 				//if (willCollide)
 				//	collide(collideTarget, gameTime);
 
-				moveThisUpdate = velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
+				//moveThisUpdate = velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
 				//checkForCollision2(quadTree, gameTime);
+				//position += moveThisUpdate;
 
-				position += moveThisUpdate;
+				position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
+
 				base.update(position);
 
 
@@ -145,17 +149,27 @@ namespace SpaceUnionXNA.Ships {
 				velocity *= dampening; // apply a little resistance. Any thrust should over power this.
 			}
 
+			/** NOTE: This gets called twice when a ship is made inactive on its update!
+			*	It would be great to keep these updating even when a ship is inactive
+			*	instead of orphaning its projectiles. */
 			mainWeapon.update(gameTime, quadTree);
 			additionalUpdate(gameTime, quadTree);
 
-			
+
 			if (isActive == false) {
 				inactiveTime = gameTime.TotalGameTime - inactiveStart;
 				if (inactiveTime.Seconds >= 2) {
 					isActive = true;
+					currentHealth = maxHealth;
 				}
 			}
 		}
+
+		public virtual void inactiveUpdate(GameTime gameTime) {
+
+
+		}
+
 
 		/// <summary>
 		/// If a ship has more than one main weapon, place the update code for it here.
@@ -268,11 +282,34 @@ namespace SpaceUnionXNA.Ships {
 		protected virtual void thrust(GameTime gameTime) {
 
 			Vector2 tempVelocity = velocity;
-			// Vectorize the unit acceleration
+			//Vectorize the unit acceleration
 			Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
 			acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
 			Vector2.Add(ref tempVelocity, ref acceleration, out velocity);
 
+
+
+			///Max speed logic by
+			///Matthew Baldock
+			///Steven Chen
+			//Vector2 tempVelocity = velocity;
+			//Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
+			//acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+			//float differencex;
+			//float differencey;
+			//Vector2 max = new Vector2((float) Math.Sqrt(maxSpeed * maxSpeed / 2), (float) Math.Sqrt(maxSpeed * maxSpeed / 2));
+			//Vector2.Add(ref tempVelocity, ref acceleration, out tempVelocity);
+			//float newangle = (float) Math.Atan(tempVelocity.Y / tempVelocity.X);
+			//if (tempVelocity.Length() > maxSpeed && newangle != rotation) {
+			//	differencex = (float) Math.Sin(rotation) * maxSpeed;
+			//	differencey = (float) -Math.Cos(rotation) * maxSpeed;
+			//	acceleration.X = differencex - velocity.X;
+			//	acceleration.Y = differencey - velocity.Y;
+			//	Vector2.Add(ref velocity, ref acceleration, out velocity);
+			//}
+			//if (tempVelocity.Length() < maxSpeed) {
+			//	Vector2.Add(ref velocity, ref acceleration, out velocity);
+			//}
 		}
 
 
@@ -308,6 +345,8 @@ namespace SpaceUnionXNA.Ships {
 
 		public override void destroy() {
 			explode();
+			velocity = Vector2.Zero;
+
 			base.destroy();
 		}
 
@@ -385,7 +424,7 @@ namespace SpaceUnionXNA.Ships {
 		//Debugging Ship Brake
 		public void stop() {
 			velocity = Vector2.Zero;
-			currentSpeed = 0;
+
 
 			explode();
 		}

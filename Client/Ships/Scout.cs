@@ -19,7 +19,7 @@ namespace SpaceUnionXNA.Ships {
 
 			maxSpeed = 7;
 			accelSpeed = 250.5f;
-			turnSpeed = .5f;
+			turnSpeed = .75f;
 			maxSpeed = 500;
 
 			weaponOrigin = new Vector2(position.X, position.Y - height / 2);

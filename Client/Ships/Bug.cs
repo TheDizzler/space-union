@@ -21,12 +21,13 @@ namespace SpaceUnionXNA.Ships {
 			accelSpeed = 100.0f;
 			turnSpeed = 9.5f;
 
+			currentHealth = maxHealth = 5;
+
 			mass = 500;
 
 			mainFireDelay = TimeSpan.FromSeconds(.5f);
 			altFireDelay = TimeSpan.FromSeconds(1f);
 
-			//mainWeapon = new Launcher<MoltenBullet>(10);
 			mainWeapon = Launcher<MoltenBullet>.CreateLauncher(this, (x, y) => new MoltenBullet(x, y), 8);
 			weaponOrigin = new Vector2(position.X, position.Y - height / 2); // start position of weapon
 		}

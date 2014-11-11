@@ -31,7 +31,7 @@ namespace SpaceUnionXNA.Controllers {
 		/// created. All objects remove themselves when destroy() is called.
 		/// </summary>
 		public static List<Tangible> targets;
-		//	private List<LargeMassObject> planets;
+		private List<LargeMassObject> planets;
 		private List<Vector2> respawnpoints;
 		private List<Vector2> usedspawn;
 		private Background background;

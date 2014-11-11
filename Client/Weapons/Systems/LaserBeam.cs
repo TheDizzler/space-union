@@ -72,7 +72,7 @@ namespace SpaceUnionXNA.Weapons.Systems {
 			animations.Add(name, anima);
 		}
 
-		
+
 
 		public void update(GameTime gameTime, QuadTree quadTree) {
 
@@ -88,36 +88,28 @@ namespace SpaceUnionXNA.Weapons.Systems {
 			distToTarget = 1;
 
 			// find targets within line of fire
-			/*List<Tangible> possibleCollisions = quadTree.retrieveNeighbors(owner);*/ /* This method and may result in missed ships.
-																		   * A different retriever using a raycast
-																		   will likely be necessary. -Tristan-*/
+			/*List<Tangible> possibleCollisions = quadTree.retrieveNeighbors(owner);*/
+			/* This method and may result in missed ships.
+* A different retriever using a raycast
+will likely be necessary. -Tristan-*/
 
 			List<Tangible> possibleCollisions = GameplayScreen.targets;
 
 			Tangible currentTarget = null;
 
 			foreach (Tangible target in possibleCollisions) {
-				if (target != owner) {
+				if (target != owner && target.isActive) {
 
 					if (ray.intersectsToRange(target.getHitBox())) {
 						float temp = ray.getDistance();
 						if (temp <= distToTarget) {
 							// fine hit detection
+							radical(target, temp, ref currentTarget);
 
-							//Color[] rawData = new Color[target.width * target.height];
-							//target.texture.GetData<Color>(rawData);
-
-							//Color[,] rawDataGrid = new Color[height, width];
-							//int row = 0, col = 0;
-							//for (row = 0; row < height; ++row)
-							//	for (col = 0; col < width; ++col)
-							//		rawDataGrid[row, col] = rawData[row * width + col];
 
 							//// get t0x and t0y in texture cooridinates
 							//Vector2 t0 = new Vector2(ray.t0x - (target.getX() - width / 2),
 							//	ray.t0y - (target.getY() - height / 2));
-
-							//Vector2 check = t0;
 
 							//for (int i = (int) (beamLength * temp); i < beamLength; ++i) {
 
@@ -135,9 +127,9 @@ namespace SpaceUnionXNA.Weapons.Systems {
 							//		break;
 							//	}
 
-							distToTarget = temp;
-							currentTarget = target;
-							//}
+
+
+
 						}
 					}
 				}
@@ -162,6 +154,54 @@ namespace SpaceUnionXNA.Weapons.Systems {
 			if (--startQuanta < 0)
 				startQuanta = 4;
 			beamOn = false;
+		}
+
+		private void radical(Tangible target, float temp, ref Tangible currentTarget) {
+
+			Color[] rawData = new Color[target.width * target.height];
+			target.texture.GetData<Color>(rawData);
+
+			Color[,] rawDataGrid = new Color[target.width, target.height];
+
+			for (int x = 0; x < target.width; ++x)
+				for (int y = 0; y < target.height; ++y)
+					rawDataGrid[x, y] = rawData[x + y * target.width];
+
+			float distanceTo = temp * beamLength;
+			// start checking pixel-by-pixel from this point
+			Vector2 startFrom = new Vector2(beamDirection.X * distanceTo + position.X, beamDirection.Y * distanceTo + position.Y);
+			Vector2 checkV = startFrom;
+			Point check = new Point((int) startFrom.X, (int) startFrom.Y);
+
+			Rectangle hb = target.getHitBox().getArray();
+			Vector2 length;
+			length = position - checkV;
+
+			if (length.Y > 0)
+				check.Y -= 1;
+			if (length.X > 0)
+				check.X -= 1;
+
+			// until out of hitbox or beamLength exceeded
+			while (hb.Contains(check)) {
+
+				Color color = rawDataGrid[Math.Abs(hb.X - check.X), Math.Abs(hb.Y - check.Y)];
+
+				// if color is not transparent
+				if (color.A != 0) {
+					distToTarget = length.Length() / beamLength;
+					currentTarget = target;
+					return;
+				}
+
+				checkV.X += beamDirection.X;
+				checkV.Y += beamDirection.Y;
+				length = position - checkV;
+				if (length.Length() > beamLength)
+					return;
+				check.X = (int) checkV.X;
+				check.Y = (int) checkV.Y;
+			}
 		}
 
 		private Rectangle getNextQuanta() {

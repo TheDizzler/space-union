@@ -53,62 +53,46 @@ namespace SpaceUnionXNA.Tools {
 		}
 
 		public void takeDamage(int amount, GameTime gameTime, Ship owner) {
-			if (this != owner)
-			{
+			//if (this != owner) {
 
-				// check last time taken damage
-				if (gameTime.TotalGameTime - previousDamageTime > damageTime)
-				{
-					// Reset our current time
-					previousDamageTime = gameTime.TotalGameTime;
-					currentHealth -= amount;
-				}
-				if (owner is Ship && this is Ship)
-				{
-					Ship target = (Ship)this;
-					if (owner.blueTeam && target.redTeam)
-					{
-						if (currentHealth <= 0)
-						{
-							owner.kills += 1;
-							destroy();
-						}
-					}
-					else if (owner.blueTeam && target.blueTeam)
-					{
-						if (currentHealth <= 0)
-						{
-							owner.kills -= 1;
-							destroy();
-						}
-					}
-					else if (owner.redTeam && target.blueTeam)
-					{
-						if (currentHealth <= 0)
-						{
-							owner.kills += 1;
-							destroy();
-						}
-					}
-					else if (owner.redTeam && target.redTeam)
-					{
-						if (currentHealth <= 0)
-						{
-							owner.kills -= 1;
-							destroy();
-						}
-					}
-				}
-				else
-				{
-					if (currentHealth <= 0)
-					{
+			// check last time taken damage
+			if (gameTime.TotalGameTime - previousDamageTime > damageTime) {
+				// Reset our current time
+				previousDamageTime = gameTime.TotalGameTime;
+				currentHealth -= amount;
+			}
+
+			if (owner is Ship && this is Ship) {
+				Ship target = (Ship) this;
+				if (owner.blueTeam && target.redTeam) {
+					if (currentHealth <= 0) {
 						owner.kills += 1;
 						destroy();
 					}
+				} else if (owner.blueTeam && target.blueTeam) {
+					if (currentHealth <= 0) {
+						owner.kills -= 1;
+						destroy();
+					}
+				} else if (owner.redTeam && target.blueTeam) {
+					if (currentHealth <= 0) {
+						owner.kills += 1;
+						destroy();
+					}
+				} else if (owner.redTeam && target.redTeam) {
+					if (currentHealth <= 0) {
+						owner.kills -= 1;
+						destroy();
+					}
 				}
-				
+			} else {
+				if (currentHealth <= 0) {
+					//owner.kills += 1;
+					destroy();
+				}
 			}
+
+			//}
 		}
 
 		/// <summary>
@@ -139,16 +123,11 @@ namespace SpaceUnionXNA.Tools {
 			return velocity.Y;
 		}
 
-		/// <summary>
-		/// A list of possible collisions this update.
-		/// </summary>
-		private List<float> possible = new List<float>();
-
 
 		protected Tangible(Texture2D tex, Vector2 pos)
 			: base(tex, pos) {
 
-			int padding = 20;
+			int padding = 0;
 			hitBox = new HitBox(position.X, position.Y, width + padding, height + padding);
 			isActive = true;
 			currentHealth = maxHealth;
@@ -172,7 +151,7 @@ namespace SpaceUnionXNA.Tools {
 		/// <param name="batch"></param>
 		public override void draw(SpriteBatch batch) {
 			base.draw(batch);
-			hitBox.draw(batch, assets); // Debug hitboxes
+			//hitBox.draw(batch, assets); // Debug hitboxes
 
 		}
 
@@ -196,9 +175,53 @@ namespace SpaceUnionXNA.Tools {
 			foreach (Tangible target in possibleCollisions.ToList<Tangible>()) {
 				if (target.isActive && target != this)
 					if (getHitBox().getArray().Intersects(target.getHitBox().getArray()))
-						collide(target, gameTime);
+						if (fineCheck(target))
+							collide(target, gameTime);
 			}
 
+		}
+
+		/// <summary>
+		/// A pixel-by-pixel collision detector. Useing texture.GetData(rawDataA) might be a little bit sketchy...
+		/// Code from http://gamedev.stackexchange.com/questions/15191/is-there-a-good-way-to-get-pixel-perfect-collision-detection-in-xna
+		/// </summary>
+		/// <param name="target"></param>
+		/// <returns></returns>
+		private bool fineCheck(Tangible target) {
+
+			Color[] rawDataA = new Color[this.width * this.height];
+			this.texture.GetData(rawDataA);
+			Color[] rawDataB = new Color[target.width * target.height];
+			target.texture.GetData(rawDataB);
+
+
+			Rectangle thisRect = this.getHitBox().getArray();
+			Rectangle targetRect = target.getHitBox().getArray();
+
+			// Find the bounds of the rectangle intersection
+			int top = Math.Max(thisRect.Top, targetRect.Top);
+			int bottom = Math.Min(thisRect.Bottom, targetRect.Bottom);
+
+			int left = Math.Max(thisRect.Left, targetRect.Left);
+			int right = Math.Min(thisRect.Right, targetRect.Right);
+
+			// for each pixel in the intersecting rectangle
+			for (int y = top; y < bottom; ++y) {
+				for (int x = left; x < right; ++x) {
+
+					Color colorA = rawDataA[(x - thisRect.Left) + (y - thisRect.Top) * thisRect.Width];
+					Color colorB = rawDataB[(x - targetRect.Left) + (y - targetRect.Top) * targetRect.Width];
+
+
+					// if both colors are not transparent
+					if (colorA.A != 0 && colorB.A != 0) {
+						//GUI.hitDetected = true;
+						return true;
+					}
+				}
+			}
+			//GUI.hitDetected = false;
+			return false;
 		}
 
 		/// <summary>
