@@ -16,7 +16,7 @@ namespace SpaceUnionXNA.Weapons.Systems {
 	public class LaserBeam : Sprite, WeaponSystem {
 
 
-		public int beamLength = 250;
+		public int beamLength = 75;
 
 		public Ship owner { get; set; }
 		public int weaponDamage { get; set; }
@@ -35,7 +35,7 @@ namespace SpaceUnionXNA.Weapons.Systems {
 		private  int startQuanta;
 
 		public LaserBeam(Vector2 startPoint, Ship ship)
-			: base(assets.guiRectangle, startPoint) {
+			: base(assets.redLaser, startPoint) {
 
 			owner = ship;
 
@@ -48,7 +48,7 @@ namespace SpaceUnionXNA.Weapons.Systems {
 		private void setupAnimation() {
 
 			// the size of each tile
-			setSize(5, 11); // must be explicitly set for tile sheets
+			setSize(1, 11); // must be explicitly set for tile sheets
 
 			AnimationClass anima = new AnimationClass();
 			addAnimation("laser", 0, 5, anima.copy());
@@ -181,11 +181,8 @@ namespace SpaceUnionXNA.Weapons.Systems {
 
 				spriteBatch.Draw(texture, position, rect,
 				animations[animation].color,
-				animations[animation].rotation,
-				origin,
-				scale,
-				animations[animation].spriteEffect,
-				0f);
+				rotation, origin, scale,
+				animations[animation].spriteEffect, 0f);
 			}
 			beamQuanta.Clear();
 

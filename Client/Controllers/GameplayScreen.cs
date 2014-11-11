@@ -27,6 +27,8 @@ namespace SpaceUnionXNA.Controllers {
 		protected List<Ship> inactiveShips;
 		/// <summary>
 		/// All objects in this list get added to the quadtree every update.
+		/// It is ESSENTIAL that newly spawned objects get added to this list when
+		/// created. All objects remove themselves when destroy() is called.
 		/// </summary>
 		public static List<Tangible> targets;
 		//	private List<LargeMassObject> planets;
@@ -205,7 +207,7 @@ namespace SpaceUnionXNA.Controllers {
 					usedspawn.Add(respawnpoints.ElementAt(respawnpoints.IndexOf(ship.Position)));
 					respawnpoints.RemoveAt(respawnpoints.IndexOf(ship.Position));
 					ships.Add(ship);
-					//targets.Add(ship);
+					targets.Add(ship);
 					inactiveShips.Remove(ship);
 				}
 				ship.update(gameTime, quadTree);
