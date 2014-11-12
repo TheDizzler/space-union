@@ -48,31 +48,25 @@ namespace SpaceUnionXNA.Controllers
         {
             //TODO: Change Label Colors to white
             //Account Name Label
-            LabelControl accountNameLabel = new LabelControl();
-            accountNameLabel.Text = "Account Name";
-            accountNameLabel.Bounds = new UniRectangle(200.0f, 150.0f, 110.0f, 24.0f);
+            LabelControl accountNameLabel = GuiHelper.CreateLabel("Account Name", -45, -125, 110, 24);
             mainScreen.Desktop.Children.Add(accountNameLabel);
 
             //Account Name Input
-            accountNameInput = new InputControl();
-            accountNameInput.Bounds = new UniRectangle(200.0f, 175.0f, 200.0f, 24.0f);
-            accountNameInput.Text = "";
+            accountNameInput = GuiHelper.CreateInput("", 0, -90, 200, 24);
             mainScreen.Desktop.Children.Add(accountNameInput);
 
             //Password Label
-            passwordLabel = new LabelControl();
-            passwordLabel.Text = "Password";
-            passwordLabel.Bounds = new UniRectangle(200.0f, 200.0f, 110.0f, 24.0f);
+            passwordLabel = GuiHelper.CreateLabel("Password", 0, -25, 110, 24);
             mainScreen.Desktop.Children.Add(passwordLabel);
             
             //TODO: Create Password field where characters show up as black circles
             //Password Input
-            passwordInput = new PasswordInputControl();
-            passwordInput.Bounds = new UniRectangle(200.0f, 225.0f, 200.0f, 24.0f);
+            passwordInput = GuiHelper.CreatePasswordInput(0, -55, 200, 24);
             mainScreen.Desktop.Children.Add(passwordInput);
+
             //TODO: Change to a contrasting color (Yellow)
             //Login Button.
-            ButtonControl loginButton = GuiHelper.CreateButton("Login", -415, -50, 150, 32);
+            ButtonControl loginButton = GuiHelper.CreateButton("Login", -24, 0, 150, 32);
             loginButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 /*
@@ -93,7 +87,7 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(loginButton);
 
             //Debug Button.
-            ButtonControl multiplayerButton = GuiHelper.CreateButton("Debug Game", -700, -400, 200, 50);
+            ButtonControl multiplayerButton = GuiHelper.CreateButton("Debug Game", -300, -300, 200, 50);
             multiplayerButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.StartGame();
@@ -101,7 +95,7 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(multiplayerButton);
 
             //Ship Select Button.
-            ButtonControl shipSelectButton = GuiHelper.CreateButton("Select Ship", -700, -350, 200, 50);
+            ButtonControl shipSelectButton = GuiHelper.CreateButton("Select Ship", -300, -225, 200, 50);
             shipSelectButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterShipSelectionScreen();
@@ -109,7 +103,7 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(shipSelectButton);
 
             //Button to close game.
-            ButtonControl quitButton = GuiHelper.CreateButton("Quit", -15, -15, 80, 32);
+            ButtonControl quitButton = GuiHelper.CreateButton("Quit", 200, 100, 80, 32);
             quitButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.Exit();

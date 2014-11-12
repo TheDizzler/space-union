@@ -40,7 +40,7 @@ namespace SpaceUnionXNA.Controllers
         private void CreateMenuControls(Screen mainScreen)
         {
             //Logout Button.
-            ButtonControl logoutButton = GuiHelper.CreateButton("Logout", -75, -400, 70, 32);
+            ButtonControl logoutButton = GuiHelper.CreateButton("Logout", 165, -175, 70, 32);
             logoutButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterLoginMenu();
@@ -48,7 +48,7 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(logoutButton);
 
             //Multiplayer Button.
-            ButtonControl multiplayerButton = GuiHelper.CreateButton("MULTIPLAYER", -435, -250, 200, 32);
+            ButtonControl multiplayerButton = GuiHelper.CreateButton("MULTIPLAYER", 0, -75, 200, 32);
             multiplayerButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterMultiplayerMenu();
@@ -56,7 +56,7 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(multiplayerButton);
 
             //Options Button.
-            ButtonControl optionsButton = GuiHelper.CreateButton("Options", -435, -200, 200, 32);
+            ButtonControl optionsButton = GuiHelper.CreateButton("Options", 0, -25, 200, 32);
             optionsButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterOptionsMenu();
@@ -64,7 +64,7 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(optionsButton);
 
             //Credits Button.
-            ButtonControl creditsButton = GuiHelper.CreateButton("Credits", -435, -150, 200, 32);
+            ButtonControl creditsButton = GuiHelper.CreateButton("Credits", 0, 25, 200, 32);
             creditsButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterCreditsMenu();
@@ -72,7 +72,7 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(creditsButton);
 
             //Button to close game.
-            ButtonControl quitButton = GuiHelper.CreateButton("Quit", -435, -100, 200, 32);
+            ButtonControl quitButton = GuiHelper.CreateButton("Quit", 0, 75, 200, 32);
             quitButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.Exit();
@@ -85,7 +85,7 @@ namespace SpaceUnionXNA.Controllers
             //playerUsernameLabel.Text = game.Player.Username.ToString();
             playerUsernameLabel.Text = "DEVELOPER";
 
-            playerUsernameLabel.Bounds = new UniRectangle(500.0f, 50.0f, 110.0f, 24.0f);
+            playerUsernameLabel.Bounds = GuiHelper.CenterBound(165, -225, 70, 32);
             mainScreen.Desktop.Children.Add(playerUsernameLabel);
 
         }
