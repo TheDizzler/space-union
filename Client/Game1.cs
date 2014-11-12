@@ -20,6 +20,8 @@ namespace SpaceUnionXNA
     /// </summary>
     public class Game1 : Game
     {
+        private int topBtmBorderPixels = 38;
+        private int leftRightBorderPixels = 14;
 
         public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -72,6 +74,10 @@ namespace SpaceUnionXNA
          * */
         //end created by Matthew
 
+        public string windowState = "Windowed";
+        public int width = 933;
+        public int height = 700;
+
         /// <summary>
         /// Game State Enum to track game states
         /// </summary>
@@ -93,30 +99,6 @@ namespace SpaceUnionXNA
         }
 
         public GameState currentGameState = GameState.Login;
-
-        public int getScreenWidth()
-        {
-            return Window.ClientBounds.Width;
-        }
-
-        public int getScreenHeight()
-        {
-            return Window.ClientBounds.Height;
-        }
-
-        //public void setScreenSize(int width, int height, bool fullScreen = false)
-        //{
-        //	if (fullScreen)
-        //	{
-        //		//width = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-        //		//height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-        //		Window.IsBorderless = true;
-        //	}
-        //	graphics.PreferredBackBufferHeight = height;
-        //	graphics.PreferredBackBufferWidth = width;
-        //	Window.Position = new Point(0, 0);
-        //	graphics.ApplyChanges();
-        //}
 
         public Game1()
             : base()
@@ -309,6 +291,86 @@ namespace SpaceUnionXNA
                     break;
             }
             base.Draw(gameTime);
+        }
+
+        public int getScreenWidth()
+        {
+            return Window.ClientBounds.Width;
+        }
+
+        public int getScreenHeight()
+        {
+            return Window.ClientBounds.Height;
+        }
+
+        /// <summary>
+        /// Author: Steven
+        /// Sets the client size based on the values passed in
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="fullScreen"></param>
+        public void setScreenSize(int width, int height, string WindowState)
+        {
+            this.width = width;
+            this.height = height;
+            var form = (System.Windows.Forms.Form)System.Windows.Forms.Form.FromHandle(Window.Handle);
+            if (WindowState == "Fullscreen")
+            {
+                graphics.IsFullScreen = true;
+                width = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                graphics.PreferredBackBufferHeight = height;
+                graphics.PreferredBackBufferWidth = width;
+                graphics.ApplyChanges();
+                mainScreen = new Screen(width, height);
+                gui_manager.Screen = mainScreen;
+            }
+            else if (WindowState == "Borderless")
+            {
+                graphics.IsFullScreen = false;
+                form.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+                form.WindowState = System.Windows.Forms.FormWindowState.Normal;
+                
+                width = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                graphics.PreferredBackBufferHeight = height;
+                graphics.PreferredBackBufferWidth = width;
+                graphics.ApplyChanges();
+                mainScreen = new Screen(width, height);
+                gui_manager.Screen = mainScreen;
+                form.ClientSize = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Size;
+                form.Location = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Location;
+            }
+            else
+            {
+                form.WindowState = System.Windows.Forms.FormWindowState.Normal;
+                form.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
+
+                if (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width == width)
+                    graphics.PreferredBackBufferWidth = width - leftRightBorderPixels;
+                else
+                    graphics.PreferredBackBufferWidth = width;
+
+                if (GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height == height)
+                {
+                    graphics.PreferredBackBufferHeight = height - topBtmBorderPixels;
+                }
+                else
+                {
+                    graphics.PreferredBackBufferHeight = height;
+                }
+                graphics.IsFullScreen = false;
+                
+                form.ClientSize = new System.Drawing.Size(width, height);
+                form.Location = new System.Drawing.Point(0, 0);
+            
+                mainScreen = new Screen(width, height);
+                gui_manager.Screen = mainScreen;
+                graphics.ApplyChanges();
+            }
+
+            windowState = WindowState;
         }
 
         public void EnterMainMenu()
