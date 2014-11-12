@@ -90,6 +90,7 @@ namespace SpaceUnionXNA.Controllers
                     }
                 }
                  */
+                game.EnterLobbyMenu();
             };
             mainScreen.Desktop.Children.Add(createLobbyButton);
         }
