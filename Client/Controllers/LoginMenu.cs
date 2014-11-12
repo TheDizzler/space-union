@@ -23,6 +23,8 @@ namespace SpaceUnionXNA.Controllers
         private Game1 game;
         private PasswordInputControl passwordInput;
         private LabelControl passwordLabel;
+        private LabelControl errorText;
+        private bool errors = false;
         InputControl accountNameInput;
 
 
@@ -53,6 +55,11 @@ namespace SpaceUnionXNA.Controllers
             accountNameLabel.Bounds = new UniRectangle(200.0f, 150.0f, 110.0f, 24.0f);
             mainScreen.Desktop.Children.Add(accountNameLabel);
 
+            //Error Text Label
+            errorText = new LabelControl();
+            errorText.Bounds = new UniRectangle(190.0f, 100.0f, 110.0f, 25.0f);
+            mainScreen.Desktop.Children.Add(errorText);
+
             //Account Name Input
             accountNameInput = new InputControl();
             accountNameInput.Bounds = new UniRectangle(200.0f, 175.0f, 200.0f, 24.0f);
@@ -75,20 +82,33 @@ namespace SpaceUnionXNA.Controllers
             ButtonControl loginButton = GuiHelper.CreateButton("Login", -415, -50, 150, 32);
             loginButton.Pressed += delegate(object sender, EventArgs arguments)
             {
-                /*
-                if (accountNameInput.Text != null)
+                errorText.Text = "";
+                errors = false;
+                if (accountNameInput.Text == "")
                 {
-                    game.Player.Username = accountNameInput.Text;
+                    errorText.Text += "Username field cannot be empty!\n";
+                    errors = true;
                 }
+                if (passwordInput.Text == "")
+                {
+                    errorText.Text += "Password field cannot be empty!";
+                    errors = true;
+                }
+                if (errors)
+                {
+                    return;
+                }
+                /*
+                game.Player.Username = accountNameInput.Text;
+                game.Player.Password = passwordInput.GetText();
 
                 game.Communication.sendLoginRequest(game.Player);
                 Thread.Sleep(2000);
                 game.Player = game.Communication.getPlayer();
                 Console.WriteLine(game.Player.Username);
-                if(game.Player != null)
+                if (game.Player != null)*/
                     game.EnterMainMenu();
-                 */
-                game.EnterMainMenu();
+                 
             };
             mainScreen.Desktop.Children.Add(loginButton);
 

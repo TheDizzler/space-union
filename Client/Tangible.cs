@@ -63,11 +63,50 @@ namespace SpaceUnionXNA {
 					previousDamageTime = gameTime.TotalGameTime;
 					currentHealth -= amount;
 				}
-
-			if (currentHealth <= 0) {
-				owner.kills += 1;
-				destroy();
-				}
+                if (owner is Ship && this is Ship)
+                {
+                    Ship target = (Ship)this;
+                    if (owner.blueTeam && target.redTeam)
+                    {
+                        if (currentHealth <= 0)
+                        {
+                            owner.kills += 1;
+                            destroy();
+                        }
+                    }
+                    else if (owner.blueTeam && target.blueTeam)
+                    {
+                        if (currentHealth <= 0)
+                        {
+                            owner.kills -= 1;
+                            destroy();
+                        }
+                    }
+                    else if (owner.redTeam && target.blueTeam)
+                    {
+                        if (currentHealth <= 0)
+                        {
+                            owner.kills += 1;
+                            destroy();
+                        }
+                    }
+                    else if (owner.redTeam && target.redTeam)
+                    {
+                        if (currentHealth <= 0)
+                        {
+                            owner.kills -= 1;
+                            destroy();
+                        }
+                    }
+                }
+                else
+                {
+                    if (currentHealth <= 0)
+                    {
+                        owner.kills += 1;
+                        destroy();
+                    }
+                }
 				
 			}
 		}

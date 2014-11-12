@@ -252,6 +252,12 @@ namespace SpaceUnionXNA.Ships {
 			lastState = keyState;
 
 		}
+
+        public virtual void controlAI()
+        {
+            firing = true;
+        }
+
 		/// <summary>
 		/// Power to main thruster
 		/// @Written by Troy. Edited by Tristan
