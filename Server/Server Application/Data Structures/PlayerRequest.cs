@@ -30,6 +30,8 @@ namespace Data_Structures
 
         public string RoomName { get; set; }
 
+        public bool Ready { get; set; }
+
         /// <summary>
         /// Construct a room list request.
         /// </summary>

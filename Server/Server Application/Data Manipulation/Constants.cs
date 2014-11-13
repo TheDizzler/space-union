@@ -8,7 +8,6 @@ namespace Data_Manipulation
 {
     public class Constants
     {
-        public const int MaxPlayersInRoom = 6;
         /// <summary>
         /// The number of total UDP outgoing or incoming connections. This number
         /// is equal to the maximum amount of players who can be in a game room.
@@ -98,7 +97,8 @@ namespace Data_Manipulation
         public const byte PLAYER_REQUEST_HEARTBEAT = 7;
 
         public const byte PLAYER_REQUEST_SHIP = 8;
-        public const byte PLAYER_REQUESTS_START = 9;
+
+        public const byte PLAYER_REQUEST_START = 9;
 
         // END REQUEST TYPES
 

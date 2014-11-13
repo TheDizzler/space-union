@@ -20,6 +20,7 @@ namespace Client_Comm_Module
         private List<GameMessage> messageQueue;
         private List<RoomInfo> roomInfoQueue;
         private List<RoomList> roomListQueue;
+        private List<PlayerRequest> startSignalQueue;
         private Player player = null;
 
         /// <summary>
@@ -30,6 +31,7 @@ namespace Client_Comm_Module
             messageQueue = new List<GameMessage>();
             roomInfoQueue = new List<RoomInfo>();
             roomListQueue = new List<RoomList>();
+            startSignalQueue = new List<PlayerRequest>();
 
             // NOTE: fix required to only listen to the server.
             TCPListener = new TcpListener(IPAddress.Any, Constants.TCPMessageClient);
@@ -74,6 +76,11 @@ namespace Client_Comm_Module
                         Console.WriteLine("-----------------ROOM INFO received-----------------");
                         roomInfoQueue.Add((RoomInfo)data);
                         break;
+
+                    case Constants.PLAYER_REQUEST_START:
+                        Console.WriteLine("-----------------GAME START reveived-----------------");
+                        startSignalQueue.Add((PlayerRequest)data);
+                        break;
                 }
             }
         }
@@ -116,6 +123,15 @@ namespace Client_Comm_Module
             RoomList roomList = roomListQueue.ElementAt(0);
             roomListQueue.RemoveAt(0);
             return roomList;
+        }
+
+        public PlayerRequest getStartSignal()
+        {
+            if (startSignalQueue.Count == 0)
+                return null;
+            PlayerRequest request = startSignalQueue.ElementAt(0);
+            startSignalQueue.RemoveAt(0);
+            return request;
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using Data_Structures;
 
 namespace Data_Manipulation
 {
@@ -103,19 +104,17 @@ namespace Data_Manipulation
         {
             Socket socket = listener.AcceptSocket();
             byte[] received = new byte[32768];
-            int size = 0;
-            try
-            {
-                size = socket.Receive(received);
-            }
-            catch (ArgumentException e) { Console.WriteLine(e.ToString()); return null; }
-            catch (SocketException e) { Console.WriteLine(e.ToString()); return null; }
-            catch (ObjectDisposedException e) { Console.WriteLine(e.ToString()); return null; }
-            catch (SecurityException e) { Console.WriteLine(e.ToString()); return null; }
+            int size = socket.Receive(received);
+            Console.WriteLine(size);
             byte[] input = new byte[size];
             Buffer.BlockCopy(received, 0, input, 0, size);
+            /*
+            for (int x = 0; x < size; x++)
+                input[x] = received[x];
+             */
+            object output = bytesToObject(input);
             socket.Close();
-            return bytesToObject(input);
+            return output;
         }
 
         /// <summary>
@@ -145,17 +144,18 @@ namespace Data_Manipulation
         /// </summary>
         /// <param name="target">The array of bytes to convert.</param>
         /// <returns>An object converted from the input.</returns>
-        public static Object bytesToObject(byte[] target)
+        public static Data bytesToObject(byte[] target)
         {
             BinaryFormatter bf = new BinaryFormatter();
             bf.AssemblyFormat = FormatterAssemblyStyle.Simple;
             bf.Binder = new TransmissionSerializationBinder();
             using (MemoryStream ms = new MemoryStream(target))
             {
-                object data = null;
+                Data data = null;
+                ms.Position = 0;
                 try
                 {
-                    data = (Object)bf.Deserialize(ms);
+                    data = (Data)bf.Deserialize(ms);
                 }
                 catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return null; }
                 catch (SerializationException e) { Console.WriteLine(e.ToString()); return null; }

@@ -133,6 +133,11 @@ namespace Client_Comm_Module
             return (roomInfo = receiver.getRoomInfo()) != null ? roomInfo : (Data)receiver.getRoomList();
         }
 
+        public void sendHeartbeatRequest(Player player)
+        {
+            sender.addMessageToQueue(new PlayerRequest(player, Constants.PLAYER_REQUEST_HEARTBEAT));
+        }
+
         public Data sendRoomInfoRequest(Player player, int roomNumber)
         {
             sender.addMessageToQueue(new PlayerRequest(player, roomNumber, Constants.PLAYER_REQUEST_ROOMINFO));
@@ -140,6 +145,21 @@ namespace Client_Comm_Module
             Thread.Sleep(ClientConstants.CLIENT_REQUEST_WAIT_TIME);
 
             return receiver.getRoomInfo();
+        }
+
+        public void sendReadyStatusUpdateRequest(Player player, int roomNumber)
+        {
+            sender.addMessageToQueue(new PlayerRequest(player, roomNumber, Constants.PLAYER_REQUEST_READY));
+        }
+
+        public void sendUpdateShipChoiceRequet(Player player, int roomNumber)
+        {
+            sender.addMessageToQueue(new PlayerRequest(player, roomNumber, Constants.PLAYER_REQUEST_SHIP));
+        }
+
+        public void sendStartRequest(Player player, int roomNumber)
+        {
+            sender.addMessageToQueue(new PlayerRequest(player, roomNumber, Constants.PLAYER_REQUEST_START));
         }
 
         public RoomInfo getRoominfo()
@@ -150,6 +170,11 @@ namespace Client_Comm_Module
         public RoomList getRoomList()
         {
             return receiver.getRoomList();
+        }
+
+        public PlayerRequest getGameStartSignal()
+        {
+            return receiver.getStartSignal();
         }
 
         public void sendRoomExitRequest(Player player, int roomNumber)
@@ -174,6 +199,8 @@ namespace Client_Comm_Module
                 return dataReceiver.Data;
             return null;
         }
+
+
 
         /// <summary>
         /// Gets the current IP address.

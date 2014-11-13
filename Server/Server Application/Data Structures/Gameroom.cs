@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Data_Manipulation;
 
 namespace Data_Structures
 {
@@ -51,7 +50,7 @@ namespace Data_Structures
         /// <returns>True if the player was successfully added. False otherwise.</returns>
         public bool addPlayer(Player player)
         {
-            if (Players < Constants.MaxPlayersInRoom)
+            if (Players < 6)
             {
                 GameData data = new GameData();
                 data.Player = player;
