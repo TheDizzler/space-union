@@ -5,33 +5,57 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace SpaceUnion.Tools {
+namespace SpaceUnionXNA.Tools {
 
 	/// <summary>
 	/// The base class for all objects that have visual representation
 	/// </summary>
 	public abstract class Sprite {
 
+		protected static AssetManager assets = Game1.Assets;
 
-        public int alphaValue;
-
-		protected Texture2D texture;
+		protected internal Texture2D texture;
 		/// <summary>
 		/// Sprite dimensions
 		/// </summary>
 		public int height, width;
 		/// <summary>
-		/// Top-left corner of sprite Game World (x, y) co-ordinates
+		/// Center of sprite in Game World (x, y) co-ordinates
 		/// </summary>
-		protected Vector2 position;
+		public Vector2 position;
+		/// <summary>
+		/// Get sprites center position in game world coordinates
+		/// </summary>
+		public Vector2 Position {
+			get { return position; }
+			set {
+				position = value;
+			}
+		}
+		/// <summary>
+		/// Get sprite's center X position
+		/// </summary>
+		/// <returns></returns>
+		public float getX() {
+
+			return position.X;
+		}
+		/// <summary>
+		/// Get sprite's center Y position
+		/// </summary>
+		/// <returns></returns>
+		public float getY() {
+
+			return position.Y;
+		}
 		/// <summary>
 		/// The center point of the sprite
 		/// </summary>
 		public Vector2 origin;
 		/// <summary>
-		/// Angle in radians of ship orientation
+		/// Angle in radians of sprite orientation
 		/// </summary>
-		protected float rotation;
+		public float rotation;
 
 		public double getRotation() {
 			return rotation;
@@ -39,55 +63,28 @@ namespace SpaceUnion.Tools {
 
 		protected float scale = 1.0f;
 
-		/// <summary>
-		/// Animation related variables
-		/// </summary>
+		/* Animation related variables */
 		public Dictionary<string, AnimationClass> animations
 			= new Dictionary<string, AnimationClass>();
 		protected int frameIndex = 0;
+		/// <summary>
+		/// The animation cycle currently showing
+		/// </summary>
 		public string animation;
 
-		protected float timeElapsed;
-		protected float timeToUpdate = .2f;
+		/// <summary>
+		/// Length of time (in seconds) current frame has been on screen.
+		/// </summary>
+		protected float frameTimeElapsed = 0;
+		/// <summary>
+		/// Length of time (in seconds) frame stays on screen.
+		/// </summary>
+		protected float frameLength;
 		public int FramesPerSecond {
-			set { timeToUpdate = (1f / value); }
+			set { frameLength = (1f / value); }
 		}
-		// End of animations
+		/* End of animations */
 
-		/// <summary>
-		/// Get sprites position from top left corner
-		/// </summary>
-		public Vector2 Position { get { return this.position; } }
-
-		/// <summary>
-		/// Get sprites center position in game world coordinates
-		/// </summary>
-		public Vector2 CenterPosition { get { return new Vector2(getX(), getY()); } }
-		/// <summary>
-		/// Get sprite's center X position
-		/// </summary>
-		/// <returns></returns>
-		public float getX() {
-
-			return position.X - width/2;
-		}
-        public int getAlpha()
-        {
-            return alphaValue;
-        }
-
-        public void setAlpha(int alpha)
-        {
-            this.alphaValue = alpha;
-        }
-		/// <summary>
-		/// Get sprite's center Y position
-		/// </summary>
-		/// <returns></returns>
-		public float getY() {
-
-			return position.Y - height/2;
-		}
 
 		/// <summary>
 		/// Constructor. May want to remove position as a required param.
@@ -98,10 +95,19 @@ namespace SpaceUnion.Tools {
 			texture = tex;
 			position = pos;
 
-			width = texture.Width;
-			height = texture.Height;
+			setSize(texture.Width, texture.Height);
 
-			origin = new Vector2(texture.Width / 2, texture.Height / 2);
+			animation = null;
+		}
+
+		/// <summary>
+		/// Sets width, height and origin of sprite
+		/// </summary>
+		protected void setSize(int wdth, int hght) {
+			width = wdth;
+			height = hght;
+
+			origin = new Vector2(width / 2, height / 2);
 		}
 
 
@@ -111,20 +117,19 @@ namespace SpaceUnion.Tools {
 		/// <param name="name"></param>
 		/// <param name="row"></param>
 		/// <param name="frameCount"></param>
-		/// <param name="frameSize"></param>
 		/// <param name="anima"></param>
 		public virtual void addAnimation(string name, int row, int frameCount,
-			int frameSize, AnimationClass anima) {
+			AnimationClass anima) {
 
 			Rectangle[] recs = new Rectangle[frameCount];
 
 			for (int i = 0; i < frameCount; i++)
-				recs[i] = new Rectangle(i * width,
-					(row - 1) * height, width, height);
+				recs[i] = new Rectangle(i + i * width,
+					row + (row) * height, width, height);
 
 			anima.frameCount = frameCount;
 			anima.frames = recs;
-			this.animations.Add(name, anima);
+			animations.Add(name, anima);
 		}
 
 		/// <summary>
@@ -132,16 +137,26 @@ namespace SpaceUnion.Tools {
 		/// </summary>
 		/// <param name="sBatch"></param>
 		public virtual void draw(SpriteBatch sBatch) {
-            sBatch.Draw(texture, position, null, new Color(255, 255, 255, (byte)MathHelper.Clamp(alphaValue, 0, 255)), rotation, origin, scale, SpriteEffects.None, 0);
+
+			if (animation == null)
+				sBatch.Draw(texture, position, null, Color.White, rotation, origin, scale, SpriteEffects.None, 0);
+			else
+				animate(sBatch);
 		}
 
 
-		/// <summary>
-		/// Draw to toolbar *LEGACY CODE*
-		/// </summary>
-		/// <param name="spriteBatch"></param>
-		/// <param name="portraitPosition"></param>
-		public virtual void draw(SpriteBatch spriteBatch, Vector2 portraitPosition) { }
+		private void animate(SpriteBatch sBatch) {
+
+			sBatch.Draw(texture, position,
+				animations[animation].frames[frameIndex],
+				animations[animation].color,
+				animations[animation].rotation,
+				origin,
+				animations[animation].scale,
+				animations[animation].spriteEffect,
+				0f);
+
+		}
 
 
 		/// <summary>
@@ -159,5 +174,6 @@ namespace SpaceUnion.Tools {
 			}
 			return false;
 		}
+
 	}
 }

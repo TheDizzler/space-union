@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-namespace SpaceUnion {
+namespace SpaceUnionXNA {
 
 	/// <summary>
 	/// Used sprite animations
@@ -21,10 +21,11 @@ namespace SpaceUnion {
 		public Color color = Color.White;
 		public Vector2 center;
 		public float rotation = 0f;
-		public float scale = 1f;
+		public float scale = 1.0f;
 		public SpriteEffects spriteEffect;
 		public bool isLooping = true;
 		public int frameCount;
+
 
 		public AnimationClass copy() {
 
