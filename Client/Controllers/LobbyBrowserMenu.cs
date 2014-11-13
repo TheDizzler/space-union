@@ -29,6 +29,7 @@ namespace SpaceUnionXNA.Controllers
         int rowRectOriginY = 125;
         int rowRectOriginX = 100;
         int rowRectSizeY = 15;
+        LabelControl pagesLabel;
         Table LobbyBrowserTable;
         ButtonControl prevPageButton;
         ButtonControl nextPageButton;
@@ -59,6 +60,12 @@ namespace SpaceUnionXNA.Controllers
                 Thread.Sleep(200);
             }
 
+            if (newState.IsKeyDown(Keys.D9))
+            {
+                LobbyBrowserTable.Clear();
+                Thread.Sleep(200);
+            }
+
             if (LobbyBrowserTable.currentPage == 1)
             {
                 prevPageButton.Enabled = false;
@@ -75,6 +82,7 @@ namespace SpaceUnionXNA.Controllers
             {
                 nextPageButton.Enabled = true;
             }
+            pagesLabel.Text = LobbyBrowserTable.currentPage + "/" + LobbyBrowserTable.maxPage;
         }
 
         public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
@@ -121,6 +129,12 @@ namespace SpaceUnionXNA.Controllers
             menuTitleLabel.Text = "Lobby Browser";
             menuTitleLabel.Bounds = GuiHelper.MENU_TITLE_LABEL;
             mainScreen.Desktop.Children.Add(menuTitleLabel);
+
+            
+            pagesLabel = new LabelControl();
+            pagesLabel.Text = LobbyBrowserTable.currentPage + "/" + LobbyBrowserTable.maxPage;
+            pagesLabel.Bounds = new UniRectangle(285.0f, 365.0f, 220.0f, 48.0f);
+            mainScreen.Desktop.Children.Add(pagesLabel);
         }
     }
 }

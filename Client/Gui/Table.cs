@@ -221,13 +221,27 @@ namespace SpaceUnionXNA.Gui
                 {
                     screen.Desktop.Children.Add(joinButton[i]);
                 }
+
             }
 
         }
 
         public void Clear()
         {
+            for (int i = 0; i < maxPage; i++)
+            {
+                pageFull[i] = 0;
+            }
+            for (int i = 0; i < rows; i++)
+            {
+                screen.Desktop.Children.Remove(joinButton[i]);
+            }
+            currentPage = 1;
+            maxPage = currentPage;
             rows = 0;
+            buttonsPerPage = 0;
+            
+
         }
 
         public void NextPage()
