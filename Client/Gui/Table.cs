@@ -38,59 +38,88 @@ namespace SpaceUnionXNA.Gui
         int ColumnWidth;
         int currentPageAmount;
         bool BarEnabled;
+        Rectangle[] columnMenuLine;
         public int RowsPerPage { get; set; }
-        int maxpages = 0;
-        int ButtonAmount;
+        int RowRectOriginDataY;
+        Rectangle TopRowLine;
+        Rectangle SecondRowLine;
+        Screen screen;
+        int buttonsPerPage = 0;
+        int Column1TextDataY;
+        public int maxPage { get; set; }
         int[] pageFull = new int[MAX_AMOUNT];
-        public Table(int column, string[] columnNames, int rowRectOriginX, int rowRectOriginY, int rowRectSizeY, int RowsBeforeScroll, int columnWidth, bool barEnabled)
+        public Table(int column, string[] columnNames, int rowRectOriginX, int rowRectOriginY, int rowRectSizeY, int RowsBeforeScroll, int columnWidth, bool barEnabled, Screen mainScreen)
         {
             font = Game1.Assets.font;
             NumberOfColumns = column;
             currentPageAmount = RowsBeforeScroll;
             ColumnNames = new string[column];
             ColumnNames = columnNames;
+            screen = mainScreen;
             RowsPerPage = RowsBeforeScroll;
-            columnLine = new Rectangle[MAX_AMOUNT, NumberOfColumns + 1];
+            columnLine = new Rectangle[MAX_AMOUNT, NumberOfColumns+1];
+            columnMenuLine = new Rectangle[NumberOfColumns+1];
             RowRectOriginY = rowRectOriginY;
             currentPage = 1;
             RowRectOriginX = rowRectOriginX;
             RowRectSizeY = rowRectSizeY;
+            RowRectOriginDataY = RowRectSizeY + RowRectOriginY;
             Column1TextX = RowRectOriginX + 5;
             Column1TextY = RowRectOriginY + 3;
+            Column1TextDataY = RowRectOriginDataY + 3;
             RowRectSizeX = column * columnWidth;
-            
             rowRectangleTexture = Game1.Assets.guiRectangle;
             columnLineTexture = Game1.Assets.guiRectangle;
             rowLineTexture = Game1.Assets.guiRectangle;
             rowRectangle[0] = new Rectangle(rowRectOriginX, rowRectOriginY, RowRectSizeX, rowRectSizeY);
-            browserRectangle = new Rectangle(rowRectOriginX, rowRectOriginY, RowRectSizeX, rowRectSizeY * RowsBeforeScroll);
+            browserRectangle = new Rectangle(rowRectOriginX, rowRectOriginY, RowRectSizeX, rowRectSizeY * (RowsBeforeScroll+1));
             rowLine[0] = new Rectangle(rowRectOriginX, rowRectOriginY, RowRectSizeX, 1);
             ColumnWidth = columnWidth;
             BarEnabled = barEnabled;
-            if (barEnabled == true)
-            {
-                rows = 1;
-            }
+            maxPage = currentPage;
+            
+            rows = 0;
+           
 
         }
 
-        public void draw(SpriteBatch spriteBatch, Screen mainScreen)
+        public void draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(rowRectangleTexture, browserRectangle, Color.White);
-            int maxPagePos = (rows % (RowsPerPage+1));
+            int maxPagePos = rows - ((currentPage-1) * RowsPerPage);
 
 
-            if (maxPagePos == 1)
-            {
-                maxPagePos = 1;
-                pageFull[currentPage] = 1;
-                /*for (int i = currentPage * RowsPerPage; i < (currentPage * RowsPerPage + 1); i++)
-                {
-                    mainScreen.Desktop.Children.Remove(joinButton[i]);
-                }*/
-            }
             
 
+            
+            
+            if (BarEnabled == true)
+            {
+               
+               TopRowLine = new Rectangle(RowRectOriginX, RowRectOriginY, RowRectSizeX, 1);
+               SecondRowLine = new Rectangle(RowRectOriginX, RowRectOriginY + ((1) * RowRectSizeY), RowRectSizeX, 1);
+               for (int k = ColumnWidth, c = 0; c < NumberOfColumns; c++, k += ColumnWidth)
+               {
+                columnMenuLine[c] = new Rectangle(k, RowRectOriginY, 1, RowRectSizeY);
+                    
+               }
+
+               spriteBatch.Draw(rowLineTexture, TopRowLine, Color.Black);
+               spriteBatch.Draw(rowLineTexture, SecondRowLine, Color.Black);
+
+               
+               for (int i = 0; i < NumberOfColumns; i++)
+               {
+                   spriteBatch.Draw(columnLineTexture, columnMenuLine[i], Color.Black);
+               }
+               for (int c = 0, k = 0; c < NumberOfColumns; c++, k += ColumnWidth)
+               {
+                   spriteBatch.DrawString(font, ColumnNames[c],
+                       new Vector2(Column1TextX + k, Column1TextY), Color.Black, 0.0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0.5f);
+               }
+               
+               
+            }
             if (pageFull[currentPage] == 1)
             {
                 maxPagePos = RowsPerPage;
@@ -98,78 +127,73 @@ namespace SpaceUnionXNA.Gui
             for (int j = 0; j < maxPagePos; j++)
             {
 
-                rowLine[j] = new Rectangle(RowRectOriginX, RowRectOriginY + (j * RowRectSizeY), RowRectSizeX, 1);
-                rowLine[j + 1] = new Rectangle(RowRectOriginX, RowRectOriginY + ((j + 1) * RowRectSizeY), RowRectSizeX, 1);
+                rowLine[j] = new Rectangle(RowRectOriginX, RowRectOriginDataY + (j * RowRectSizeY), RowRectSizeX, 1);
+                rowLine[j + 1] = new Rectangle(RowRectOriginX, RowRectOriginDataY + ((j + 1) * RowRectSizeY), RowRectSizeX, 1);
                 for (int k = ColumnWidth, c = 0; c < NumberOfColumns; c++, k += ColumnWidth)
                 {
-                    columnLine[j, c] = new Rectangle(k, RowRectOriginY + (j * RowRectSizeY), 1, RowRectSizeY);
+                    columnLine[j, c] = new Rectangle(k, RowRectOriginDataY + (j * RowRectSizeY), 1, RowRectSizeY);
                 }
-                spriteBatch.Draw(rowRectangleTexture, rowRectangle[j], Color.White);
                 spriteBatch.Draw(rowLineTexture, rowLine[j], Color.Black);
                 spriteBatch.Draw(rowLineTexture, rowLine[j + 1], Color.Black);
                 for (int i = 0; i < NumberOfColumns; i++)
                 {
                     spriteBatch.Draw(columnLineTexture, columnLine[j, i], Color.Black);
                 }
-                /*if (j == (RowsPerPage - 2))
+                
+               
+                for (int i = 0, k = 0; i < NumberOfColumns; i++, k += ColumnWidth)
                 {
-                    j = 0;
-                }*/
-                if (j == 0 && BarEnabled == true)
-                {
-                    for (int c = 0, k = 0; c < NumberOfColumns; c++, k += ColumnWidth)
-                    {
-                        spriteBatch.DrawString(font, ColumnNames[c],
-                            new Vector2(Column1TextX + k, Column1TextY), Color.Black, 0.0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0.5f);
-                    }
+
+                    spriteBatch.DrawString(font, RowArray[((currentPage-1)*(RowsPerPage))+j, i],
+                        new Vector2(Column1TextX + k, Column1TextDataY + j * RowRectSizeY), Color.Black, 0.0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0.5f);    
                 }
-                else
+
+                for (int i = (currentPage - 1) * RowsPerPage; i < maxPagePos + ((currentPage - 1) * RowsPerPage); i++)
                 {
-                    for (int i = 0, k = 0; i < NumberOfColumns; i++, k += ColumnWidth)
-                    {
-
-                        spriteBatch.DrawString(font, RowArray[((currentPage-1)*(RowsPerPage+1))+j, i],
-                            new Vector2(Column1TextX + k, Column1TextY + j * RowRectSizeY), Color.Black, 0.0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0.5f);
-
                         
-                    }
-
-                    /*for (int i = currentPage * RowsPerPage; i < maxPagePos - 1 + (currentPage * RowsPerPage); i++)
-                    {
-                        joinButton[i] = GuiHelper.CreateButton("Join", -(int)(Column1TextX + (ColumnWidth * NumberOfColumns) - mainScreen.Width / 2 - ColumnWidth / 2), -(int)(Column1TextY * 1.2 - j * RowRectSizeY + mainScreen.Height / 2), 30, 15);
-                        joinButton[i].Pressed += delegate(object sender, EventArgs arguments)
-                        {
-
-                        };
-                        mainScreen.Desktop.Children.Add(joinButton[i]);
-                    }*/
                     
                 }
+                    
+            }
                 
                 
                
                 
-            }
+      }
 
-            
 
-        }
+
+
 
         public void CreateNewRow(string[] rowArray)
         {
 
+            if (rows == ((currentPage) * (RowsPerPage)) && rows != 0)
+            {
+
+                pageFull[currentPage] = 1;
+                currentPage++;
+                maxPage++;
+                for (int i = 0; i < rows; i++)
+                {
+                    screen.Desktop.Children.Remove(joinButton[i]);
+                }
+                buttonsPerPage = 0;
+            }
             for (int j = 0; j < NumberOfColumns; j++)
             {
+
                 RowArray[rows, j] = rowArray[j];
 
             }
-            
-            rows++;
-            if (rows == (currentPage * (RowsPerPage+1)))
+            joinButton[rows] = GuiHelper.CreateButton("Join", -(int)(Column1TextX + (ColumnWidth * NumberOfColumns) - screen.Width / 2 - ColumnWidth / 2), -(int)(Column1TextDataY * 0.97 - buttonsPerPage * RowRectSizeY + screen.Height / 2), 30, 15);
+            joinButton[rows].Pressed += delegate(object sender, EventArgs arguments)
             {
-                rows++;
-                currentPage++;
-            }
+                //insert lobby joining code here
+            };
+            screen.Desktop.Children.Add(joinButton[rows]);
+            buttonsPerPage++;
+            rows++;
             
 
 
@@ -179,12 +203,59 @@ namespace SpaceUnionXNA.Gui
 
         public void RemoveLastRow()
         {
-            if ((rows != 1 && BarEnabled == true) || (rows != 0 && BarEnabled == false))
+            if (rows != 0)
             {
                 rows--;
+                buttonsPerPage--;
+                screen.Desktop.Children.Remove(joinButton[rows]);
 
             }
+            if (rows == ((currentPage-1) * (RowsPerPage)) && currentPage !=1)
+            {
+                
+                currentPage--;
+                maxPage--;
+                pageFull[currentPage] = 0;
+                buttonsPerPage = RowsPerPage;
+                for (int i = rows - RowsPerPage; i < rows - RowsPerPage + buttonsPerPage; i++)
+                {
+                    screen.Desktop.Children.Add(joinButton[i]);
+                }
+            }
 
+        }
+
+        public void Clear()
+        {
+            rows = 0;
+        }
+
+        public void NextPage()
+        {
+            for (int i = 0; i < currentPage * RowsPerPage; i++)
+            {
+                screen.Desktop.Children.Remove(joinButton[i]);
+            }
+            currentPage++;
+            for (int i = (currentPage - 1) * RowsPerPage; i < (currentPage) * RowsPerPage && joinButton[i] != null && i < rows; i++)
+            {
+                screen.Desktop.Children.Add(joinButton[i]);
+            }
+
+        }
+
+        public void PrevPage()
+        {
+            for (int i = 0; i < currentPage * RowsPerPage; i++)
+            {
+                screen.Desktop.Children.Remove(joinButton[i]);
+            }
+            
+            currentPage--;
+            for (int i = (currentPage - 1) * RowsPerPage; i < (currentPage) * RowsPerPage && joinButton[i] != null && i < rows; i++)
+            {
+                screen.Desktop.Children.Add(joinButton[i]);
+            }
         }
     }
 }

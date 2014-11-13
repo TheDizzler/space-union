@@ -30,13 +30,14 @@ namespace SpaceUnionXNA.Controllers
         int rowRectOriginX = 100;
         int rowRectSizeY = 15;
         Table LobbyBrowserTable;
-
+        ButtonControl prevPageButton;
+        ButtonControl nextPageButton;
         public LobbyBrowserMenu(Game1 game)
         {
             this.game = game;
-            game.mainScreen.Desktop.Children.Clear(); //Clear the gui
+            game.mainScreen.Desktop.Children.Clear(); //Clear the gui 
+            LobbyBrowserTable = new Table(6, new string[] { "Lobby Name", "Game Type", "Host Name", "Players", "Max. Players", "Ping" }, rowRectOriginX, rowRectOriginY, rowRectSizeY, 19, 100, true, game.mainScreen);
             CreateMenuControls(game.mainScreen);
-            LobbyBrowserTable = new Table(6, new string[] { "Lobby Name", "Game Type", "Host Name", "Players", "Max. Players", "Ping" }, rowRectOriginX, rowRectOriginY, rowRectSizeY, 19, 100, true);
         }
 
 
@@ -57,12 +58,29 @@ namespace SpaceUnionXNA.Controllers
                 LobbyBrowserTable.RemoveLastRow();
                 Thread.Sleep(200);
             }
+
+            if (LobbyBrowserTable.currentPage == 1)
+            {
+                prevPageButton.Enabled = false;
+            }
+            else
+            {
+                prevPageButton.Enabled = true;
+            }
+            if (LobbyBrowserTable.currentPage == LobbyBrowserTable.maxPage)
+            {
+                nextPageButton.Enabled = false;
+            }
+            else
+            {
+                nextPageButton.Enabled = true;
+            }
         }
 
         public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            LobbyBrowserTable.draw(spriteBatch, game.mainScreen);
+            LobbyBrowserTable.draw(spriteBatch);
             spriteBatch.End();
             game.gui_manager.Draw(gameTime);
         }
@@ -76,20 +94,28 @@ namespace SpaceUnionXNA.Controllers
                 game.EnterMultiplayerMenu();
             };
             mainScreen.Desktop.Children.Add(backButton);
-
-            ButtonControl nextPageButton = GuiHelper.CreateButton("Next", 0, (int)(-(mainScreen.Height) / 2), 70, 32);
-            nextPageButton.Pressed += delegate(object sender, EventArgs arguments)
-            {
-                LobbyBrowserTable.currentPage += 1;
-            };
-
-            ButtonControl prevPageButton = GuiHelper.CreateButton("Prev", (-850), (int)(-(mainScreen.Height) / 2), 70, 32);
+            prevPageButton = GuiHelper.CreateButton("Prev", (-850), (int)(-(mainScreen.Height) / 2), 70, 32);
             prevPageButton.Pressed += delegate(object sender, EventArgs arguments)
             {
-                LobbyBrowserTable.currentPage -= 1;
+                LobbyBrowserTable.PrevPage();
+
+               
             };
+           
+            nextPageButton = GuiHelper.CreateButton("Next", 0, (int)(-(mainScreen.Height) / 2), 70, 32);
+            nextPageButton.Pressed += delegate(object sender, EventArgs arguments)
+            {
+                LobbyBrowserTable.NextPage();
+
+                
+            };
+
+            
+
             mainScreen.Desktop.Children.Add(nextPageButton);
             mainScreen.Desktop.Children.Add(prevPageButton);
+            
+            
             //Menu Title Label
             LabelControl menuTitleLabel = new LabelControl();
             menuTitleLabel.Text = "Lobby Browser";
