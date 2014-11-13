@@ -32,9 +32,12 @@ namespace Server_Application
         /// </summary>
         TcpListener TCPListener = new TcpListener(IPAddress.Parse("0.0.0.0"), Constants.TCPMessageListener);
 
+        LoginRequests login;
+
         public DataReceiving(Server owner)
         {
             this.owner = owner;
+            login = new LoginRequests();
             setup();
         }
 
@@ -65,9 +68,13 @@ namespace Server_Application
                 switch (message.Type)
                 {
                     case Constants.LOGIN_REQUEST:
-                        new Thread(() => LoginRequests.handleLoginRequest((Player)message, owner)).Start();                        
+                        {
+                            new Thread(() => login.handleLoginRequest((Player)message, owner)).Start();
+                            Console.WriteLine("received login requests");
+                        }
                         break;
                     case Constants.PLAYER_REQUEST:
+                        //Console.WriteLine("received player request");
                         new Thread(() => handlePlayerRequest((PlayerRequest)message)).Start();
                         break;
                     case Constants.CHAT_MESSAGE:
@@ -87,7 +94,7 @@ namespace Server_Application
             while (true)
             {
                 GameData clientData = (GameData)DataControl.receiveUDPData((UdpClient)UDPListener);
-                new Thread(() => owner.updatePlayer(clientData)).Start();
+                owner.updatePlayer(clientData);
             }
         }
 
@@ -105,7 +112,7 @@ namespace Server_Application
                 case Constants.PLAYER_REQUEST_ROOMCREATE:
                     owner.createPlayerRequestedRoom(request.Sender, request.RoomName);
                     break;
-                case Constants.PLAYER_REQUEST_ROOMJOIN:
+                case Constants.PLAYER_REQUEST_ROOMJOIN: 
                     owner.addPlayerToRequestedRoom(request.Sender, request.RoomNumber);
                     break;
                 case Constants.PLAYER_REQUEST_ROOMEXIT:
@@ -113,6 +120,21 @@ namespace Server_Application
                     break;
                 case Constants.PLAYER_REQUEST_ROOMINFO:
                     owner.sendRoomInfo(request.Sender, request.RoomNumber);
+                    break;
+                case Constants.PLAYER_REQUEST_LOGOUT:
+                    owner.handleLogout(request.Sender);
+                    break;
+                case Constants.PLAYER_REQUEST_READY:
+                    owner.updatePlayerReadyStatus(request.Sender, request.RoomNumber);
+                    break;
+                case Constants.PLAYER_REQUEST_HEARTBEAT:
+                    owner.updateOnHeartbeat(request);
+                    break;
+                case Constants.PLAYER_REQUEST_SHIP:
+                    owner.updatePlayerShipChoice(request.Sender, request.RoomNumber);
+                    break;
+                case Constants.PLAYER_REQUESTS_START:
+                    owner.startGame(request.Sender, request.RoomNumber);
                     break;
             }
         }

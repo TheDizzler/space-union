@@ -90,6 +90,16 @@ namespace Data_Manipulation
 
         public const byte PLAYER_REQUEST_ROOMINFO = 4;
 
+        public const byte PLAYER_REQUEST_LOGOUT = 5;
+
+        public const byte PLAYER_REQUEST_READY = 6;
+
+        public const byte PLAYER_REQUEST_HEARTBEAT = 7;
+
+        public const byte PLAYER_REQUEST_SHIP = 8;
+
+        public const byte PLAYER_REQUEST_START = 9;
+
         // END REQUEST TYPES
 
 

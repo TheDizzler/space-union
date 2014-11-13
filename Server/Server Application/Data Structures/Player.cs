@@ -40,6 +40,12 @@ namespace Data_Structures
         /// The time this packet was received. Used to time out players from the server.
         /// </summary>
         public DateTime Time { get; set; }
+        /// <summary>
+        /// Ready status to start a game.
+        /// </summary>
+        public bool Ready { get; set; }
+
+        public byte ShipChoice { get; set; }
 
         public Player()
         {

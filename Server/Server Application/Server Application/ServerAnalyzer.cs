@@ -49,6 +49,14 @@ namespace Server_Application
             Console.WriteLine("Number of currently active game rooms: " + gamerooms.Count + "\n");
         }
 
+        public void getRoomInfo()
+        {
+            foreach (KeyValuePair<int, Gameroom> room in gamerooms)
+            {
+                Console.WriteLine("Room Number:" + room.Key + "   Room Name:" + room.Value.RoomName + "   Host:" + room.Value.Host.Username + "   Players:" + room.Value.Players);
+            }
+        }
+
         /// <summary>
         /// Checks the number of online players.
         /// </summary>

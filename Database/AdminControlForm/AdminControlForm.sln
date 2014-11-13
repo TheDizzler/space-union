@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminControlForm", "AdminControlForm\AdminControlForm.csproj", "{546571BE-AB59-4706-9517-ECEEDA6BB9C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminForm", "AdminControlForm\AdminForm.csproj", "{546571BE-AB59-4706-9517-ECEEDA6BB9C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceUnionDatabase", "..\SpaceUnionDatabase\SpaceUnionDatabase\SpaceUnionDatabase.csproj", "{45ED07C7-CA09-4371-912A-5DD22323BB40}"
 EndProject

@@ -90,7 +90,11 @@ namespace Server_Application
                         break;
                 }
                 if (ipAddress != null)
+                {
                     DataControl.sendTCPData(TCPClient, message, ipAddress, Constants.TCPMessageClient);
+                    //Console.WriteLine("Sent message to player: " + ((Player)message).Username + " " +  ((Player)message).Password);
+                }
+                    
             }
         }
 
