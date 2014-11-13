@@ -11,7 +11,7 @@ using System.Text;
 
 namespace SpaceUnionXNA.Controllers {
 	class TeamBattle : GameplayScreen {
-		TimeSpan teamBattleTime = new TimeSpan(0, 2, 5);
+		TimeSpan teamBattleTime = new TimeSpan(0, 2, 3);
         Game1 game;
 		public TeamBattle(Game1 game, SpriteBatch batch, Ship selectedship)
 			: base(game, batch, selectedship) {
@@ -22,7 +22,10 @@ namespace SpaceUnionXNA.Controllers {
 		}
 
 		public override void Update(GameTime gameTime) {
-
+            if (((TeamBattleGUI)gui).getRedTeamKills() == 15 || ((TeamBattleGUI)gui).getBlueTeamKills() == 15)
+            {
+                game.EnterMainMenu();
+            }
 			if (((TeamBattleGUI) gui).timeOver == true) {
                 game.EnterLobbyMenu();
 			} else {

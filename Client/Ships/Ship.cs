@@ -255,7 +255,7 @@ namespace SpaceUnionXNA.Ships {
 
         public virtual void controlAI()
         {
-            firing = true;
+            //firing = true;
         }
 
 		/// <summary>

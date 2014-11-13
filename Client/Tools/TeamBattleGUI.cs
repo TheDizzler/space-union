@@ -23,6 +23,16 @@ namespace SpaceUnionXNA.Tools {
 		private int blueTeamKills = 0;
 		public bool timeOver = false;
 
+        public int getRedTeamKills()
+        {
+            return redTeamKills;
+        }
+
+        public int getBlueTeamKills()
+        {
+            return blueTeamKills;
+        }
+
 		public TeamBattleGUI(Game1 game, Ship ship, TimeSpan time, List<Ship> ships, List<Ship> inactiveships)
 			: base(game, ship) {
 			//this.game = game;

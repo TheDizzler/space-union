@@ -25,6 +25,14 @@ namespace SpaceUnionXNA.Controllers
         public String lobbyTitle;
         LabelControl playersLabel;
 
+        LabelControl player1Label;
+        LabelControl player2Label;
+        LabelControl player3Label;
+        LabelControl player4Label;
+        LabelControl player5Label;
+        LabelControl player6Label;
+        bool isLeader = false;
+
         public LobbyMenu(Game1 game, String title)
         {
             this.game = game;
@@ -55,11 +63,45 @@ namespace SpaceUnionXNA.Controllers
             menuNameLabel.Bounds = GuiHelper.MENU_TITLE_LABEL;
             mainScreen.Desktop.Children.Add(menuNameLabel);
 
-            //Players Label
+            //Players Labels
             playersLabel = new LabelControl();
             playersLabel.Text = "Players:";
-            playersLabel.Bounds = new UniRectangle(10.0f, 80.0f, 120.0f, 16.0f);
+            playersLabel.Bounds = new UniRectangle(500.0f, 10.0f, 120.0f, 16.0f);
             mainScreen.Desktop.Children.Add(playersLabel);
+
+            player1Label = new LabelControl();
+            player1Label.Text = "Player 1";
+            player1Label.Bounds = new UniRectangle(500.0f, 30.0f, 120.0f, 16.0f);
+            mainScreen.Desktop.Children.Add(player1Label);
+
+            player2Label = new LabelControl();
+            player2Label.Text = "Player 2";
+            player2Label.Bounds = new UniRectangle(500.0f, 45.0f, 120.0f, 16.0f);
+            mainScreen.Desktop.Children.Add(player2Label);
+
+            player3Label = new LabelControl();
+            player3Label.Text = "Player 3";
+            player3Label.Bounds = new UniRectangle(500.0f, 60.0f, 120.0f, 16.0f);
+            mainScreen.Desktop.Children.Add(player3Label);
+
+            player4Label = new LabelControl();
+            player4Label.Text = "Player 4";
+            player4Label.Bounds = new UniRectangle(500.0f, 75.0f, 120.0f, 16.0f);
+            mainScreen.Desktop.Children.Add(player4Label);
+
+            player5Label = new LabelControl();
+            player5Label.Text = "Player 5";
+            player5Label.Bounds = new UniRectangle(500.0f, 90.0f, 120.0f, 16.0f);
+            mainScreen.Desktop.Children.Add(player5Label);
+
+            player6Label = new LabelControl();
+            player6Label.Text = "Player 6";
+            player6Label.Bounds = new UniRectangle(500.0f, 105.0f, 120.0f, 16.0f);
+            mainScreen.Desktop.Children.Add(player6Label);
+            
+
+
+            
 
             //Choose Chip Label
             LabelControl chooseShipLabel = new LabelControl();
@@ -100,8 +142,21 @@ namespace SpaceUnionXNA.Controllers
             ButtonControl startGameButton = GuiHelper.CreateButton("Start Game", -400, -75, 100, 60);
             startGameButton.Pressed += delegate(object sender, EventArgs arguments)
             {
-                game.EnterMainMenu();
+                if (readyUpButton.Selected == true 
+                    && (shipChoice_1.Selected == true || shipChoice_2.Selected == true || shipChoice_3.Selected == true))
+                {
+                    menuNameLabel.Text = "You are ready";
+                }
+                else
+                {
+                    menuNameLabel.Text = "You are not ready";
+                }
             };
+            if (!isLeader)
+            {
+                startGameButton.Enabled = false; 
+            }
+
             mainScreen.Desktop.Children.Add(startGameButton);
 
             //Cancel Button

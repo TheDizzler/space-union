@@ -159,7 +159,6 @@ namespace SpaceUnionXNA.Controllers {
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public virtual void Update(GameTime gameTime) {
-
 			quadTree.clear();
 			foreach (Tangible target in targets)
 				quadTree.insert(target);

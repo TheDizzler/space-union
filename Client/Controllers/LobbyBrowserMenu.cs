@@ -47,7 +47,7 @@ namespace SpaceUnionXNA.Controllers
         {
             mainScreen = screen;
             //Logout Button.
-            ButtonControl backButton = GuiHelper.CreateButton("Back", -75, -400, 70, 32);
+            ButtonControl backButton = GuiHelper.CreateButton("Back", -75, -200, 70, 32);
             backButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterMultiplayerMenu();
