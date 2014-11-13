@@ -8,11 +8,8 @@ namespace Data_Structures
 {
     /// <summary>
     /// Message containing the error code.
-    /// 0 - success
-    /// 1 - user blocked
-    /// 2 -
-    /// 3 - user is already logged in (online)
-    /// 4 - non-existent user / incorrect password
+    /// 0 - non-existent user / incorrect password
+    /// 1- user blocked
     /// </summary>
     [Serializable]
     public class ErrorMessage : Data

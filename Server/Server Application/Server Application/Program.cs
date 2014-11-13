@@ -43,6 +43,9 @@ namespace Server_Application
                     case "rooms":
                         analyzer.getNumberOfRooms();
                         break;
+                    case "roominfo":
+                        analyzer.getRoomInfo();
+                        break;
                     case "players":
                         analyzer.getNumberOfOnlinePlayers();
                         break;
@@ -61,8 +64,7 @@ namespace Server_Application
                     case "memory":
                         analyzer.usedMemory();
                         break;
-                    case "requests":
-                        server.getRequests();
+                    case "games":
                         break;
                     case "clear":
                         Console.Clear();

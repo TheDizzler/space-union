@@ -34,11 +34,11 @@ namespace Data_Structures
         /// Construct a room list request.
         /// </summary>
         /// <param name="sender">The sender of the request.</param>
-        public PlayerRequest(Player sender)
+        public PlayerRequest(Player sender, byte requestType)
         {
             Type        = 9;
             Sender      = sender;
-            RequestType = 0;
+            RequestType = requestType;
         }
 
         /// <summary>

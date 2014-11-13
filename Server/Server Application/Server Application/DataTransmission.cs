@@ -88,9 +88,13 @@ namespace Server_Application
                     case Constants.ROOM_INFO:
                         ipAddress = ((RoomInfo)message).Requester.IPAddress;
                         break;
+                    case Constants.PLAYER_REQUEST:
+                        ipAddress = ((PlayerRequest)message).Sender.IPAddress;
+                        break;
                 }
                 if (ipAddress != null)
                     DataControl.sendTCPData(TCPClient, message, ipAddress, Constants.TCPMessageClient);
+                    
             }
         }
 

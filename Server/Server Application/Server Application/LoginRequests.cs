@@ -27,7 +27,14 @@ namespace Server_Application
         public void handleLoginRequest(Player loginData, Server owner)
         {
             if (validateUserData(loginData, owner))
+            {
                 owner.addOnlinePlayer(loginData);
+                Console.WriteLine("Logged in user");
+            }
+            else
+            {
+                Console.WriteLine("Failed to login player: " + loginData.Username + "  " + loginData.Password);
+            }   
         }
 
         /// <summary>
@@ -49,6 +56,9 @@ namespace Server_Application
             // User name validation failed
             if (userTable.UserLogin(username, password, ref loginErrCode, ref user))
             {
+                isUserValid = true;
+
+                /* DONT PUT IN UNTIL UPDATING USER IS OFFLINE IS IMPLEMENTED */
                 if (userTable.UpdateUserIsOnline(username, isOnline, ref updateOnlineErrCode))
                 {
                     isUserValid = true;

@@ -104,7 +104,7 @@ namespace Client_Comm_Module
         /// <param name="player">The sender of the request.</param>
         public Data sendRoomListRequest(Player player)
         {
-            sender.addMessageToQueue(new PlayerRequest(player));
+            sender.addMessageToQueue(new PlayerRequest(player, Constants.PLAYER_REQUEST_ROOMLIST));
             Thread.Sleep(ClientConstants.CLIENT_REQUEST_WAIT_TIME);
             return receiver.getRoomList();
         }
@@ -142,10 +142,26 @@ namespace Client_Comm_Module
             return receiver.getRoomInfo();
         }
 
+        public RoomInfo getRoominfo()
+        {
+            return receiver.getRoomInfo();
+        }
+
+        public RoomList getRoomList()
+        {
+            return receiver.getRoomList();
+        }
+
         public void sendRoomExitRequest(Player player, int roomNumber)
         {
             sender.addMessageToQueue(new PlayerRequest(player, roomNumber, Constants.PLAYER_REQUEST_ROOMEXIT));
         }
+
+        public void sendLogoutRequest(Player player)
+        {
+            sender.addMessageToQueue(new PlayerRequest(player, Constants.PLAYER_REQUEST_LOGOUT));
+        }
+
         // GET FUNCTIONS ----------------------------------------------------
 
         /// <summary>

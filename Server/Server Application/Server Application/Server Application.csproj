@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatabaseRequests.cs" />
     <Compile Include="DataReceiving.cs" />
     <Compile Include="DataTransmission.cs" />
     <Compile Include="LoginRequests.cs" />

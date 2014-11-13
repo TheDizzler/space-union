@@ -41,6 +41,13 @@ namespace Data_Structures
         /// </summary>
         public DateTime Time { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool Ready { get; set; }
+
+        public byte ShipChoice { get; set; }
+
         public Player()
         {
             Type = 8;
