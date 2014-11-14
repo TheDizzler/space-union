@@ -20,7 +20,7 @@ namespace SpaceUnionXNA.Controllers {
 		private MouseState mouseState;
 		private SpriteBatch spriteBatch;
 
-		private QuadTree quadTree;
+		protected QuadTree quadTree;
 		private List<Asteroid> asteroids;
 		protected List<Ship> ships;
 		protected List<Ship> inactiveShips;
@@ -123,7 +123,7 @@ namespace SpaceUnionXNA.Controllers {
 				Width = gui.radarBox.Width, Height = gui.radarBox.Height
 			};
 
-			mainCamera = new Camera(mainViewport, worldWidth, worldHeight, 1.0f);
+			mainCamera = new Camera(mainViewport, worldWidth, worldHeight, 0.5f);
 			radarCamera = new Camera(radarViewport, worldWidth, worldHeight, 0.05f);
 
 
