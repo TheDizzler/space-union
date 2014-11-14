@@ -47,7 +47,7 @@ namespace SpaceUnionXNA.Controllers {
 
 		private int SCREEN_WIDTH;
 		private int SCREEN_HEIGHT;
-		private Viewport basicViewport;
+		protected Viewport basicViewport;
 
 
 
@@ -313,7 +313,8 @@ namespace SpaceUnionXNA.Controllers {
 			for (int i = 0; i < asteroids.Count; i++) {
 				asteroids[i].draw(spriteBatch);
 			}
-
+            drawBorder(spriteBatch, new Rectangle(0 - Assets.bug.Width/2-10, 0 - Assets.bug.Height/2-10, 
+                       worldWidth + Assets.bug.Width+20, worldHeight + Assets.bug.Height+20), 10, Color.White);
 			Game1.explosionEngine.draw(spriteBatch);
 		}
 

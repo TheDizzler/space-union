@@ -441,7 +441,7 @@ namespace SpaceUnionXNA
 
         public void EndMatch()
         {
-            currentGameState = GameState.MainMenu;
+            GraphicsDevice.Viewport = new Viewport(0, 0, this.getScreenWidth(), this.getScreenHeight());
             IsMouseVisible = true;
         }
     }
