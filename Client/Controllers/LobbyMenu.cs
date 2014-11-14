@@ -15,7 +15,7 @@ using Nuclex.UserInterface.Controls;
 //NETWORKING
 //using Data_Structures;
 using System.Threading;
-using SpaceMenus;
+using SpaceUnionXNA;
 
 namespace SpaceUnionXNA.Controllers
 {

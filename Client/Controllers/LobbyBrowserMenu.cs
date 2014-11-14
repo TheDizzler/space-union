@@ -12,40 +12,89 @@ using Nuclex.UserInterface.Controls.Desktop;
 using Nuclex.Input;
 using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;
-using SpaceMenus;
+using SpaceUnionXNA;
 //NETWORKING
 //using Data_Structures;
+using SpaceUnionXNA.Tools;
+
+
+using SpaceUnionXNA.Gui;
+using System.Threading;
 
 namespace SpaceUnionXNA.Controllers
 {
     public class LobbyBrowserMenu
     {
         private Game1 game;
-        //NETWORKING
-        //private RoomList roomList;
-        LabelControl lobbyListLabel;
-        Screen mainScreen;
-
+        int rowRectOriginY = 125;
+        int rowRectOriginX = 100;
+        int rowRectSizeY = 15;
+        LabelControl pagesLabel;
+        Table LobbyBrowserTable;
+        ButtonControl prevPageButton;
+        ButtonControl nextPageButton;
         public LobbyBrowserMenu(Game1 game)
         {
             this.game = game;
-            game.mainScreen.Desktop.Children.Clear(); //Clear the gui
+            game.mainScreen.Desktop.Children.Clear(); //Clear the gui 
+            LobbyBrowserTable = new Table(6, new string[] { "Lobby Name", "Game Type", "Host Name", "Players", "Max. Players", "Ping" }, rowRectOriginX, rowRectOriginY, rowRectSizeY, 19, 100, true, game.mainScreen);
             CreateMenuControls(game.mainScreen);
         }
 
+
+
         public void Update(GameTime gameTime)
         {
+            var newState = Keyboard.GetState();
 
+            if (newState.IsKeyDown(Keys.D1))
+            {
+                LobbyBrowserTable.CreateNewRow(new string[] { "CST", "Team Battle", "Konstantin", "3", "6", "100" });
+                Thread.Sleep(200);
+            }
+
+
+            if (newState.IsKeyDown(Keys.D0))
+            {
+                LobbyBrowserTable.RemoveLastRow();
+                Thread.Sleep(200);
+            }
+
+            if (newState.IsKeyDown(Keys.D9))
+            {
+                LobbyBrowserTable.Clear();
+                Thread.Sleep(200);
+            }
+
+            if (LobbyBrowserTable.currentPage == 1)
+            {
+                prevPageButton.Enabled = false;
+            }
+            else
+            {
+                prevPageButton.Enabled = true;
+            }
+            if (LobbyBrowserTable.currentPage == LobbyBrowserTable.maxPage)
+            {
+                nextPageButton.Enabled = false;
+            }
+            else
+            {
+                nextPageButton.Enabled = true;
+            }
+            pagesLabel.Text = LobbyBrowserTable.currentPage + "/" + LobbyBrowserTable.maxPage;
         }
 
-        public void DrawMenu(GameTime gameTime)
+        public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin();
+            LobbyBrowserTable.draw(spriteBatch);
+            spriteBatch.End();
             game.gui_manager.Draw(gameTime);
         }
 
-        private void CreateMenuControls(Screen screen)
+        private void CreateMenuControls(Screen mainScreen)
         {
-            mainScreen = screen;
             //Logout Button.
             ButtonControl backButton = GuiHelper.CreateButton("Back", -75, -200, 70, 32);
             backButton.Pressed += delegate(object sender, EventArgs arguments)
@@ -53,62 +102,39 @@ namespace SpaceUnionXNA.Controllers
                 game.EnterMultiplayerMenu();
             };
             mainScreen.Desktop.Children.Add(backButton);
-
-            //Refresh Button.
-            ButtonControl refreshButton = GuiHelper.CreateButton("Refresh", -75, -300, 70, 32);
-            refreshButton.Pressed += delegate(object sender, EventArgs arguments)
+            prevPageButton = GuiHelper.CreateButton("Prev", (-850), (int)(-(mainScreen.Height) / 2), 70, 32);
+            prevPageButton.Pressed += delegate(object sender, EventArgs arguments)
             {
-                refreshLobbyList();
-            };
-            mainScreen.Desktop.Children.Add(refreshButton);
+                LobbyBrowserTable.PrevPage();
 
+               
+            };
+           
+            nextPageButton = GuiHelper.CreateButton("Next", 0, (int)(-(mainScreen.Height) / 2), 70, 32);
+            nextPageButton.Pressed += delegate(object sender, EventArgs arguments)
+            {
+                LobbyBrowserTable.NextPage();
+
+                
+            };
+
+            
+
+            mainScreen.Desktop.Children.Add(nextPageButton);
+            mainScreen.Desktop.Children.Add(prevPageButton);
+            
+            
             //Menu Title Label
             LabelControl menuTitleLabel = new LabelControl();
             menuTitleLabel.Text = "Lobby Browser";
             menuTitleLabel.Bounds = GuiHelper.MENU_TITLE_LABEL;
             mainScreen.Desktop.Children.Add(menuTitleLabel);
 
-
-            //Lobby List Label
-            lobbyListLabel = new LabelControl();
-            lobbyListLabel.Text = "Info";
-            lobbyListLabel.Bounds = new UniRectangle(200.0f, 150.0f, 110.0f, 24.0f);
-            mainScreen.Desktop.Children.Add(lobbyListLabel);
-        }
-
-        private void refreshLobbyList() 
-        {
-            //NETWORKING
-            //roomList = (RoomList)game.Communication.sendRoomListRequest(game.Player);
-            createLobbyList();
-        }
-
-        private void createLobbyList() {
-            lobbyListLabel.Text = "";
-            /*
-            int i = 0;
-            int spacing = 50;
-            foreach(RoomInfo roomInfo in roomList.RoomInfoList)
-            {
-                i++;
-                ButtonControl joinLobbyButton = GuiHelper.CreateButton("Join "+ i, -75, -300+(spacing*i), 70, 32);
-                joinLobbyButton.Pressed += delegate(object sender, EventArgs arguments)
-                {
-                    Data requestRoomData = game.Communication.sendRoomJoinRequest(game.Player, roomInfo.RoomNumber);
-                    if (requestRoomData.Type == 10)
-                    {
-                        game.roomInfo = (RoomInfo)requestRoomData;
-                        game.EnterLobbyMenu();
-                    }
-                    else
-                    {
-                        game.EnterLobbyBrowserMenu();
-                    }
-                };
-                mainScreen.Desktop.Children.Add(joinLobbyButton);
-                lobbyListLabel.Text += ("LOBBY # " + roomInfo.RoomNumber + " HOST: " + roomInfo.Host.Username + "NAME" + roomInfo.RoomName); 
-            }
-             */
+            
+            pagesLabel = new LabelControl();
+            pagesLabel.Text = LobbyBrowserTable.currentPage + "/" + LobbyBrowserTable.maxPage;
+            pagesLabel.Bounds = new UniRectangle(285.0f, 365.0f, 220.0f, 48.0f);
+            mainScreen.Desktop.Children.Add(pagesLabel);
         }
     }
 }

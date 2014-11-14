@@ -14,7 +14,7 @@ using Nuclex.UserInterface.Controls.Desktop;
 using Nuclex.Input;
 using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;
-using SpaceMenus;
+using SpaceUnionXNA;
 
 namespace SpaceUnionXNA.Controllers
 {
