@@ -84,6 +84,7 @@ namespace SpaceUnionXNA.Controllers {
             for (int i = 0; i < 3; i++)
             {
                 Ship enemyship = new Bug(game);
+                enemyship.setUserName("Enemy" + i);
                 enemyship.Position = respawnpoints.ElementAt(i+3);
                 enemyship.blueTeam = true;
                 enemyship.rotation = (float)Math.PI / 4;
@@ -93,6 +94,7 @@ namespace SpaceUnionXNA.Controllers {
             for (int i = 0; i < 2; i++)
             {
                 Ship friendlyship = new Scout(game);
+                friendlyship.setUserName("Ally" + i);
                 friendlyship.Position = respawnpoints.ElementAt(i + 1);
                 friendlyship.redTeam = true;
                 ships.Add(friendlyship);
@@ -103,6 +105,7 @@ namespace SpaceUnionXNA.Controllers {
 
 
 			playerShip = selectedship;
+            playerShip.setUserName("Developer 1");
 			playerShip.Position = respawnpoints.ElementAt(0);
 			//playerShip.rotation = (float) (Math.PI/2);
 			//planets = new List<LargeMassObject>();
