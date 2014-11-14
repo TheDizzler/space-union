@@ -48,7 +48,8 @@ namespace Data_Manipulation
         public static object receiveUDPData(UdpClient client)
         {
             IPEndPoint ip = new IPEndPoint(IPAddress.Any, 0);
-            try            {
+            try            
+            {
                 byte[] data = client.Receive(ref ip);
                 return bytesToObject(data);
             }
@@ -102,19 +103,20 @@ namespace Data_Manipulation
         /// <param name="listener">The TCP listener through which to receive data.</param>
         public static object receiveTCPData(TcpListener listener)
         {
+            Stream stream = listener.AcceptTcpClient().GetStream();
+            long size = stream.Length;
+            byte[] input = new byte[size];
+            stream.Read(input, 0, (int)size);
+            return bytesToObject(input);
+            /*
             Socket socket = listener.AcceptSocket();
             byte[] received = new byte[32768];
             int size = socket.Receive(received);
-            Console.WriteLine(size);
             byte[] input = new byte[size];
             Buffer.BlockCopy(received, 0, input, 0, size);
-            /*
-            for (int x = 0; x < size; x++)
-                input[x] = received[x];
-             */
-            object output = bytesToObject(input);
             socket.Close();
-            return output;
+            return bytesToObject(input);
+            */
         }
 
         /// <summary>

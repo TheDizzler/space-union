@@ -37,7 +37,6 @@ namespace Server_Application
         /// Total list of online players.
         /// </summary>
         public ConcurrentDictionary<string, Player> OnlinePlayers { get; private set; }
-
         /// <summary>
         /// Allows read/write to the user table in the spaceunion database
         /// </summary>
@@ -224,7 +223,7 @@ namespace Server_Application
                 return;
             room.InGame = true;
             foreach (GameData p in room.getPlayerList())
-                addMessageToQueue(new PlayerRequest(p.Player, Constants.PLAYER_REQUESTS_START));
+                addMessageToQueue(new PlayerRequest(p.Player, Constants.PLAYER_REQUEST_START));
         }
 
         public void sendLoginConfirmation(Player player)
