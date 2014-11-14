@@ -200,11 +200,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Spaceships\ufoship %28128x128%29.png">
-      <Name>ufoship %28128x128%29</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Spaceships\zoidship.png">
       <Name>zoidship</Name>
       <Importer>TextureImporter</Importer>
@@ -266,6 +261,39 @@
   <ItemGroup>
     <Compile Include="StellarObjects\rock %2832x32%29.png">
       <Name>rock %2832x32%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SFX\Laser High 1.wav">
+      <Name>Laser High 1</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="SFX\Laser High 2.wav">
+      <Name>Laser High 2</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SFX\Laser High 0.wav">
+      <Name>Laser High 0</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SFX\Laser High 3.wav">
+      <Name>Laser High 3</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Spaceships\UFO %2839x39%29.png">
+      <Name>UFO %2839x39%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

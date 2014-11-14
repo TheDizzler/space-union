@@ -30,14 +30,18 @@ Content\Spaceships\bug (16x16).xnb
 Content\Spaceships\galactuship.xnb
 Content\Spaceships\shuttle.xnb
 Content\Spaceships\spaceshiptest.xnb
-Content\Spaceships\ufoship (128x128).xnb
 Content\Spaceships\zoidship.xnb
+Content\Animations\redlaserbeam (25x11).xnb
 Content\StellarObjects\asteroid(56x56).xnb
 Content\StellarObjects\moon (115x117).xnb
 Content\StellarObjects\waterplanet (256x256).xnb
 Content\WinFlags\WinFlag1.xnb
-Content\SpriteFonts\SpriteFont1.xnb
-Content\Animations\redlaserbeam (25x11).xnb
 Content\Spaceships\scoutship (64x64).xnb
 Content\Spaceships\rocket (64x64).xnb
 Content\StellarObjects\rock (32x32).xnb
+Content\SpriteFonts\SpriteFont1.xnb
+Content\SFX\Laser High 1.xnb
+Content\SFX\Laser High 2.xnb
+Content\SFX\Laser High 0.xnb
+Content\SFX\Laser High 3.xnb
+Content\Spaceships\UFO (39x39).xnb

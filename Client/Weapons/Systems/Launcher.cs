@@ -7,6 +7,7 @@ using SpaceUnionXNA.Controllers;
 using SpaceUnionXNA.Ships;
 using SpaceUnionXNA.Tools;
 using SpaceUnionXNA.Weapons.Projectiles;
+using Microsoft.Xna.Framework.Audio;
 
 
 namespace SpaceUnionXNA.Weapons.Systems {
@@ -33,7 +34,9 @@ namespace SpaceUnionXNA.Weapons.Systems {
 		/// A hard limit for how many projectiles a ship can have active at once.
 		/// </summary>
 		private short maxCapacity;
+		private Random random;
 
+		private  List<SoundEffect> fireSFXs;
 
 		public Ship owner { get; set; }
 
@@ -49,6 +52,7 @@ namespace SpaceUnionXNA.Weapons.Systems {
 
 			Launcher<ProjectileType> launcher = new Launcher<ProjectileType>(ship, maxCapacity);
 			launcher.projectileStore = fillStore(ship, maxCapacity, projectileClass);
+			launcher.fireSFXs = launcher.projectileStore[0].getFireSFX();
 
 			return launcher;
 		}
@@ -57,8 +61,11 @@ namespace SpaceUnionXNA.Weapons.Systems {
 		private static List<ProjectileType> fillStore(Ship ship, short max, Func<Vector2, Ship, ProjectileType> proj) {
 
 			List < ProjectileType >  temp = new List<ProjectileType>(max);
-			for (int i = 0; i < max; ++i)
+			for (int i = 0; i < max; ++i) {
 				temp.Add(proj(new Vector2(i * 2, i * 2), ship));
+				
+			}
+			
 			return temp;
 		}
 
@@ -73,10 +80,21 @@ namespace SpaceUnionXNA.Weapons.Systems {
 			maxCapacity = capacity;
 			projectiles = new List<ProjectileType>();
 
+			random = new Random();
+			
 		}
 
 
+		public void playFireSFX() {
 
+			int num = random.Next(fireSFXs.Count);
+			fireSFXs[num].Play();
+		}
+
+
+		public void playEmptySFX() {
+
+		}
 
 		/// <summary>
 		/// Fire a projectile from the launcher if there are any left
@@ -85,13 +103,17 @@ namespace SpaceUnionXNA.Weapons.Systems {
 		/// <param name="startPoint">Point where projectile is fired from.</param>
 		public void fire(Vector2 startPoint) {
 
+			ProjectileType proj;
+
 			if (projectileStore.Count - 1 >= 0) {
-				ProjectileType proj = projectileStore[projectileStore.Count - 1];
+				proj = projectileStore[projectileStore.Count - 1];
 				projectileStore.Remove(proj);
 				proj.launch(startPoint, (float) owner.getRotation(), owner.velocity);
 				projectiles.Add(proj);
 				GameplayScreen.targets.Add(proj);
-			}
+				playFireSFX();
+			} else
+				playEmptySFX();
 		}
 
 		/// <summary>

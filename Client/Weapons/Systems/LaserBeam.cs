@@ -89,9 +89,9 @@ namespace SpaceUnionXNA.Weapons.Systems {
 
 			// find targets within line of fire
 			/*List<Tangible> possibleCollisions = quadTree.retrieveNeighbors(owner);*/
-			/* This method and may result in missed ships.
-* A different retriever using a raycast
-will likely be necessary. -Tristan-*/
+														/* This method and may result in missed ships.
+														 * A different retriever using a raycast
+														 * will likely be necessary. -Tristan-*/
 
 			List<Tangible> possibleCollisions = GameplayScreen.targets;
 

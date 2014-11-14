@@ -281,35 +281,36 @@ namespace SpaceUnionXNA.Ships {
 		/// <param name="gameTime"></param>
 		protected virtual void thrust(GameTime gameTime) {
 
-			Vector2 tempVelocity = velocity;
-			//Vectorize the unit acceleration
-			Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
-			acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
-			Vector2.Add(ref tempVelocity, ref acceleration, out velocity);
+			//Vector2 tempVelocity = velocity;
+			////Vectorize the unit acceleration
+			//Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
+			//acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+			//Vector2.Add(ref tempVelocity, ref acceleration, out velocity);
 
 
 
 			///Max speed logic by
 			///Matthew Baldock
 			///Steven Chen
-			//Vector2 tempVelocity = velocity;
-			//Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
-			//acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
-			//float differencex;
-			//float differencey;
-			//Vector2 max = new Vector2((float) Math.Sqrt(maxSpeed * maxSpeed / 2), (float) Math.Sqrt(maxSpeed * maxSpeed / 2));
-			//Vector2.Add(ref tempVelocity, ref acceleration, out tempVelocity);
-			//float newangle = (float) Math.Atan(tempVelocity.Y / tempVelocity.X);
-			//if (tempVelocity.Length() > maxSpeed && newangle != rotation) {
-			//	differencex = (float) Math.Sin(rotation) * maxSpeed;
-			//	differencey = (float) -Math.Cos(rotation) * maxSpeed;
-			//	acceleration.X = differencex - velocity.X;
-			//	acceleration.Y = differencey - velocity.Y;
-			//	Vector2.Add(ref velocity, ref acceleration, out velocity);
-			//}
-			//if (tempVelocity.Length() < maxSpeed) {
-			//	Vector2.Add(ref velocity, ref acceleration, out velocity);
-			//}
+			Vector2 tempVelocity = velocity;
+			Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
+			acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+			float differencex;
+			float differencey;
+			Vector2 max = new Vector2((float) Math.Sqrt(maxSpeed * maxSpeed / 2), (float) Math.Sqrt(maxSpeed * maxSpeed / 2));
+			Vector2.Add(ref tempVelocity, ref acceleration, out tempVelocity);
+			float newangle = (float) Math.Atan(tempVelocity.Y / tempVelocity.X);
+
+			if (tempVelocity.Length() > maxSpeed && newangle != rotation) {
+				differencex = (float) Math.Sin(rotation) * maxSpeed;
+				differencey = (float) -Math.Cos(rotation) * maxSpeed;
+				acceleration.X = differencex - velocity.X;
+				acceleration.Y = differencey - velocity.Y;
+				Vector2.Add(ref velocity, ref acceleration, out velocity);
+			}
+			if (tempVelocity.Length() < maxSpeed) {
+				Vector2.Add(ref velocity, ref acceleration, out velocity);
+			}
 		}
 
 

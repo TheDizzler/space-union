@@ -3,6 +3,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceUnionXNA.Ships;
 using SpaceUnionXNA.Tools;
+using Microsoft.Xna.Framework.Audio;
+using System.Collections.Generic;
+
 
 
 namespace SpaceUnionXNA.Weapons.Projectiles {
@@ -39,6 +42,7 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 
 			owner = ship;
 			timeActive = 0;
+
 		}
 
 
@@ -105,6 +109,8 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 			isActive = true;
 		}
 
+
+		public abstract List<SoundEffect> getFireSFX();
 
 
 		public override void drawMiniMap(SpriteBatch batch) {

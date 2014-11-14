@@ -3,7 +3,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceUnionXNA.Ships;
 using SpaceUnionXNA.Tools;
-
+using System.Collections.Generic;
+using Microsoft.Xna.Framework.Audio;
 
 namespace SpaceUnionXNA.Weapons.Projectiles {
 	public class Missile : Projectile {
@@ -19,6 +20,17 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 
 		}
 
+
+		public override List<SoundEffect> getFireSFX() {
+
+			List<SoundEffect> fireSFXs = new List<SoundEffect>();
+			fireSFXs.Add(assets.laserbolt0);
+			fireSFXs.Add(assets.laserbolt1);
+			fireSFXs.Add(assets.laserbolt2);
+			fireSFXs.Add(assets.laserbolt3);
+
+			return fireSFXs;
+		}
 
 		/// <summary>
 		/// Add unique collision behaviour here

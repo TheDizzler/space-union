@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Audio;
 
 ///Edited by Matthew Baldock
 namespace SpaceUnionXNA.Tools {
@@ -116,6 +117,10 @@ namespace SpaceUnionXNA.Tools {
 		public Texture2D shipMapIcon;
 		public  Texture2D pixel;
 
+		/// <summary>
+		/// Created by Tristan
+		/// </summary>
+		public SoundEffect laserbolt0, laserbolt1, laserbolt2, laserbolt3;
 
 		public AssetManager(ContentManager cntnt) {
 
@@ -167,7 +172,7 @@ namespace SpaceUnionXNA.Tools {
 			asteroid = Content.Load<Texture2D>("StellarObjects/rock (32x32)");
 
 			spaceShipTest = Content.Load<Texture2D>("Spaceships/spaceshiptest");
-			ufo = Content.Load<Texture2D>("Spaceships/ufoship (128x128)");
+			ufo = Content.Load<Texture2D>("Spaceships/UFO (39x39)");
 			scout = Content.Load<Texture2D>("Spaceships/scoutship (64x64)");
 			lobstar = Content.Load<Texture2D>("Spaceships/rocket (64x64)");
 			///Added by Matthew Baldock
@@ -190,6 +195,12 @@ namespace SpaceUnionXNA.Tools {
 
 			pixel = new Texture2D(graphicsDevice, 1, 1, false, SurfaceFormat.Color);
 			pixel.SetData(new[] { Color.White });
+
+
+			laserbolt0 = Content.Load<SoundEffect>("SFX/Laser High 0");
+			laserbolt1 = Content.Load<SoundEffect>("SFX/Laser High 1");
+			laserbolt2 = Content.Load<SoundEffect>("SFX/Laser High 2");
+			laserbolt3 = Content.Load<SoundEffect>("SFX/Laser High 3");
 		}
 	}
 }
