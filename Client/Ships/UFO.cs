@@ -1,0 +1,72 @@
+﻿using System;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using SpaceUnionXNA.Tools;
+using SpaceUnionXNA.Weapons;
+using SpaceUnionXNA.Weapons.Projectiles;
+using SpaceUnionXNA.Weapons.Systems;
+
+
+namespace SpaceUnionXNA.Ships {
+	class UFO : Ship {
+
+		Shield shield;
+
+
+		public UFO(Game1 game)
+			: base(assets.ufo, assets.laser, game) {
+
+			accelSpeed = 500.5f;
+			turnSpeed = 4.5f;
+			maxSpeed = 500;
+			mainFireDelay = TimeSpan.FromSeconds(.5f);
+			altFireDelay = TimeSpan.FromSeconds(1f);
+			shield = new Shield(assets.shield, position);
+
+			weaponOrigin = new Vector2(position.X, position.Y - height / 2); // start position of weapon
+			mainWeapon = Launcher<Laser>.CreateLauncher(this, (x, y) => new Laser(x, y), 8);
+
+		}
+
+
+		public override void update(GameTime gameTime, QuadTree quadTree) {
+
+			base.update(gameTime, quadTree);
+			if (altFiring)
+				shield.update(gameTime, position);
+			else
+				shield.on = false;
+		}
+
+		public override void draw(SpriteBatch batch) {
+
+			base.draw(batch);
+			if (shield.on)
+				shield.draw(batch);
+		}
+
+
+		protected override void altFire(GameTime gameTime) {
+
+			if (gameTime.TotalGameTime - previousAltFireTime > altFireDelay) {
+
+				previousAltFireTime = gameTime.TotalGameTime;
+				shield.on = true;
+			}
+		}
+
+
+		protected override void additionalUpdate(GameTime gameTime, QuadTree quadTree) {
+
+		}
+
+		protected override void additionalDraw(SpriteBatch sBatch) {
+
+		}
+
+		protected override void additionalFire(GameTime gameTime) {
+
+		}
+
+	}
+}
