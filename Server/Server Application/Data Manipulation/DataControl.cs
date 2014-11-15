@@ -103,20 +103,14 @@ namespace Data_Manipulation
         /// <param name="listener">The TCP listener through which to receive data.</param>
         public static object receiveTCPData(TcpListener listener)
         {
-            Stream stream = listener.AcceptTcpClient().GetStream();
-            long size = stream.Length;
-            byte[] input = new byte[size];
-            stream.Read(input, 0, (int)size);
-            return bytesToObject(input);
-            /*
             Socket socket = listener.AcceptSocket();
             byte[] received = new byte[32768];
             int size = socket.Receive(received);
             byte[] input = new byte[size];
+            Console.WriteLine("Received connection" + size);
             Buffer.BlockCopy(received, 0, input, 0, size);
             socket.Close();
             return bytesToObject(input);
-            */
         }
 
         /// <summary>
