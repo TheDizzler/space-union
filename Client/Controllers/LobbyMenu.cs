@@ -46,7 +46,9 @@ namespace SpaceUnionXNA.Controllers
         {
             if (game.Communication.getGameStartSignal() != null)
             {
-                game.EnterMainMenu();
+                game.GameStarted = true;
+                Console.WriteLine("/////////////////////////////////// GAME STARTED /////////////////////////////////////////////////");
+                game.StartGame();
             }
         }
 
@@ -175,17 +177,17 @@ namespace SpaceUnionXNA.Controllers
                 if (roomInfo != null)
                     game.roomInfo = roomInfo;
                 
-                foreach (KeyValuePair<string, GameData> player in game.roomInfo.Players)
+                foreach (GameData player in game.roomInfo.Players)
                 {
-                    if (!player.Value.Player.Ready)
+                    if (!player.Player.Ready)
                     {
                         return;
                     }
                 }
-                //game.Communication.sendStartRequest(game.Player, game.roomInfo.RoomNumber);
+                game.Communication.sendStartRequest(game.Player, game.roomInfo.RoomNumber);
             };
 
-            if (game.Player.Username != game.roomInfo.Host.Username)
+            if (game.Player.Username != game.roomInfo.Host)
             {
                 startGameButton.Enabled = false;
             }
@@ -206,9 +208,13 @@ namespace SpaceUnionXNA.Controllers
         private void updatePlayerList()
         {
             int roomNumber = game.roomInfo.RoomNumber;
+            game.Player.GameRoom = roomNumber;
 
             while (game.currentGameState == SpaceUnionXNA.Game1.GameState.Lobby)
             {
+                if (game.GameStarted)
+                    break;
+
                 Console.WriteLine("Updating room info...");
                 //NETWORKING
                 RoomInfo roomInfo = (RoomInfo)game.Communication.sendRoomInfoRequest(game.Player, roomNumber);
@@ -217,27 +223,27 @@ namespace SpaceUnionXNA.Controllers
                     game.roomInfo = roomInfo;
                     playersLabel.Text = "Players: ";
                     int counter = 1;
-                    foreach (KeyValuePair<string, GameData> lobbyPlayer in game.roomInfo.Players.ToArray())
+                    foreach (GameData lobbyPlayer in game.roomInfo.Players)
                     {
                         switch (counter)
                         {
                             case (1):
-                                player1Label.Text = lobbyPlayer.Key + " Ready: " + lobbyPlayer.Value.Player.Ready + "Ship: " + lobbyPlayer.Value.Player.ShipChoice;
+                                player1Label.Text = lobbyPlayer.Player.Username + " Ready: " + lobbyPlayer.Player.Ready + "Ship: " + lobbyPlayer.Player.ShipChoice;
                                 break;
                             case (2):
-                                player2Label.Text = lobbyPlayer.Key + " Ready: " + lobbyPlayer.Value.Player.Ready + "Ship: " + lobbyPlayer.Value.Player.ShipChoice;
+                                player2Label.Text = lobbyPlayer.Player.Username + " Ready: " + lobbyPlayer.Player.Ready + "Ship: " + lobbyPlayer.Player.ShipChoice;
                                 break;
                             case (3):
-                                player3Label.Text = lobbyPlayer.Key + " Ready: " + lobbyPlayer.Value.Player.Ready + "Ship: " + lobbyPlayer.Value.Player.ShipChoice;
+                                player3Label.Text = lobbyPlayer.Player.Username + " Ready: " + lobbyPlayer.Player.Ready + "Ship: " + lobbyPlayer.Player.ShipChoice;
                                 break;
                             case (4):
-                                player4Label.Text = lobbyPlayer.Key + " Ready: " + lobbyPlayer.Value.Player.Ready + "Ship: " + lobbyPlayer.Value.Player.ShipChoice;
+                                player4Label.Text = lobbyPlayer.Player.Username + " Ready: " + lobbyPlayer.Player.Ready + "Ship: " + lobbyPlayer.Player.ShipChoice;
                                 break;
                             case (5):
-                                player5Label.Text = lobbyPlayer.Key + " Ready: " + lobbyPlayer.Value.Player.Ready + "Ship: " + lobbyPlayer.Value.Player.ShipChoice;
+                                player5Label.Text = lobbyPlayer.Player.Username + " Ready: " + lobbyPlayer.Player.Ready + "Ship: " + lobbyPlayer.Player.ShipChoice;
                                 break;
                             case (6):
-                                player6Label.Text = lobbyPlayer.Key + " Ready: " + lobbyPlayer.Value.Player.Ready + "Ship: " + lobbyPlayer.Value.Player.ShipChoice;
+                                player6Label.Text = lobbyPlayer.Player.Username + " Ready: " + lobbyPlayer.Player.Ready + "Ship: " + lobbyPlayer.Player.ShipChoice;
                                 break;
                         }
                         counter++;

@@ -76,6 +76,14 @@ namespace Client_Comm_Module
                     Thread.Sleep(ClientConstants.MESSAGE_SEND_INTERVAL);
                     continue;
                 }
+                if (message.Type == 9)
+                {
+                    Console.WriteLine("Message type sent: " + message.Type + "Request type: " + ((PlayerRequest)message).RequestType);
+                }
+                else
+                {
+                    Console.WriteLine("Message type sent: " + message.Type);
+                }
                 DataControl.sendTCPData(TCPClient, message, ClientConstants.SERVER_IPADDRESS, ClientConstants.TCPLoginListener);
             }
         }

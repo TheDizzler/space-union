@@ -12,19 +12,24 @@ using System.Text;
 namespace SpaceUnionXNA.Controllers {
 	class TeamBattle : GameplayScreen {
 		TimeSpan teamBattleTime = new TimeSpan(0, 2, 5);
-
+        Game1 game;
 		public TeamBattle(Game1 game, SpriteBatch batch, Ship selectedship)
 			: base(game, batch, selectedship) {
 
-
-			gui = new TeamBattleGUI(game, selectedship, teamBattleTime);
+                this.game = game;
+			gui = new TeamBattleGUI(game, selectedship, teamBattleTime, ships, inactiveShips);
 
 		}
 
 		public override void Update(GameTime gameTime) {
-
+            if (((TeamBattleGUI)gui).getRedTeamKills() == 5 || ((TeamBattleGUI)gui).getBlueTeamKills() == 5)
+            {
+                game.EndMatch();
+                game.EnterLobbyMenu();
+            }
 			if (((TeamBattleGUI) gui).timeOver == true) {
-				//do nothing
+                game.EndMatch();
+                game.EnterLobbyMenu();
 			} else {
 				base.Update(gameTime);
 			}
