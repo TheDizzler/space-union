@@ -12,17 +12,17 @@ namespace Data_Structures
     [Serializable]
     public class RoomInfo : Data
     {
-        public ConcurrentDictionary<string, GameData> Players { get; set; }
+        public GameData[] Players { get; set; }
         public int RoomNumber { get; set; }
         public string RoomName { get; set; }
-        public Player Host { get; set; }
+        public string Host { get; set; }
         public bool InGame { get; set; }
-        public Player Requester { get; set; }
+        public string RequesterIP { get; set; }
 
-        public RoomInfo(ConcurrentDictionary<string, GameData> players, 
+        public RoomInfo(GameData[] players, 
                         int roomNumber, 
                         string roomName, 
-                        Player host, 
+                        string host, 
                         bool inGame)
         {
             Type = 10;
@@ -33,12 +33,12 @@ namespace Data_Structures
             InGame     = inGame;
         }
 
-        public RoomInfo(ConcurrentDictionary<string, GameData> players,
+        public RoomInfo(GameData[] players,
                         int roomNumber,
                         string roomName,
-                        Player host,
+                        string host,
                         bool inGame,
-                        Player requester)
+                        string requester)
         {
             Type = 10;
             Players = players;
@@ -46,7 +46,7 @@ namespace Data_Structures
             RoomName = roomName;
             Host = host;
             InGame = inGame;
-            Requester = requester;
+            RequesterIP = requester;
         }
     }
 }

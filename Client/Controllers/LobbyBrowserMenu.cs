@@ -112,7 +112,7 @@ namespace SpaceUnionXNA.Controllers
                     
                 };
                 mainScreen.Desktop.Children.Add(joinLobbyButton);
-                lobbyListLabel.Text += ("LOBBY # " + roomInfo.RoomNumber + " HOST: " + roomInfo.Host.Username + "NAME" + roomInfo.RoomName); 
+                lobbyListLabel.Text += ("LOBBY # " + roomInfo.RoomNumber + " HOST: " + roomInfo.Host + "NAME" + roomInfo.RoomName); 
             }
              
         }

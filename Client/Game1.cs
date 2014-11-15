@@ -23,6 +23,7 @@ namespace SpaceUnionXNA
     /// </summary>
     public class Game1 : Game
     {
+        public bool GameStarted;
 
         public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -147,6 +148,10 @@ namespace SpaceUnionXNA
             IsFixedTimeStep = false;
 
             Assets = new AssetManager(Content);
+            GameStarted = false;
+
+            
+
             new Thread(heartbeat).Start();
         }
 
@@ -370,8 +375,9 @@ namespace SpaceUnionXNA
         public void StartGame()
         {
             //gameplayScreen = new GameplayScreen(this, spriteBatch, shipselectionScreen.getship());
-            currentGameState = GameState.Playing;
+            
             gameplayScreen = new TeamBattle(this, spriteBatch, shipselectionScreen.getship());
+            currentGameState = GameState.Playing;
             Viewport v = GraphicsDevice.Viewport;
             IsMouseVisible = false;
         }
@@ -379,7 +385,7 @@ namespace SpaceUnionXNA
 
         public void EndMatch()
         {
-            currentGameState = GameState.MainMenu;
+            GraphicsDevice.Viewport = new Viewport(0, 0, this.getScreenWidth(), this.getScreenHeight());
             IsMouseVisible = true;
         }
 
@@ -387,10 +393,12 @@ namespace SpaceUnionXNA
         {
             while (true)
             {
-                if(LoggedIn)
+                if (LoggedIn)
                     Communication.sendHeartbeatRequest(Player);
                 Thread.Sleep(1000);
             }
         }
+
+       
     }
 }

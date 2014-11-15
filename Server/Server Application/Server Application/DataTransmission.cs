@@ -86,7 +86,7 @@ namespace Server_Application
                         ipAddress = ((RoomList)message).Receiver.IPAddress;
                         break;
                     case Constants.ROOM_INFO:
-                        ipAddress = ((RoomInfo)message).Requester.IPAddress;
+                        ipAddress = ((RoomInfo)message).RequesterIP;
                         break;
                 }
                 if (ipAddress != null)
@@ -138,7 +138,10 @@ namespace Server_Application
                     {
                         GameFrame frame = room.Value.getGameFrame();
                         foreach (string ip in frame.IPList)
+                        {
+                            GameData[] data = frame.Data;
                             DataControl.sendUDPData(UDPClients[client], frame, ip, ((IPEndPoint)UDPClients[client].Client.LocalEndPoint).Port);
+                        }   
                     }
                 }
             }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -10,7 +11,6 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
-using Data_Structures;
 
 namespace Data_Manipulation
 {
@@ -48,7 +48,8 @@ namespace Data_Manipulation
         public static object receiveUDPData(UdpClient client)
         {
             IPEndPoint ip = new IPEndPoint(IPAddress.Any, 0);
-            try            {
+            try            
+            {
                 byte[] data = client.Receive(ref ip);
                 return bytesToObject(data);
             }
@@ -83,7 +84,7 @@ namespace Data_Manipulation
             }
             catch (ObjectDisposedException e) { Console.WriteLine(e.ToString()); return; }
             catch (InvalidOperationException e) { Console.WriteLine(e.ToString()); return; }
-            byte[] data = objectToBytes(input);
+            byte[] data = Compress(objectToBytes(input));
             try
             {
                 stream.Write(data, 0, data.Length);
@@ -102,19 +103,56 @@ namespace Data_Manipulation
         /// <param name="listener">The TCP listener through which to receive data.</param>
         public static object receiveTCPData(TcpListener listener)
         {
+            byte[] received = new byte[8196];
+            int size = 0;
             Socket socket = listener.AcceptSocket();
-            byte[] received = new byte[32768];
-            int size = socket.Receive(received);
-            Console.WriteLine(size);
-            byte[] input = new byte[size];
-            Buffer.BlockCopy(received, 0, input, 0, size);
-            /*
-            for (int x = 0; x < size; x++)
-                input[x] = received[x];
-             */
-            object output = bytesToObject(input);
-            socket.Close();
-            return output;
+            try
+            {
+                size = socket.Receive(received);
+                byte[] input = new byte[size];
+                Buffer.BlockCopy(received, 0, input, 0, size);
+                socket.Close();
+                return bytesToObject(Decompress(input));
+            }
+            catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return null; }
+            catch (SocketException e) { Console.WriteLine(e.ToString()); return null; }
+            catch (ObjectDisposedException e) { Console.WriteLine(e.ToString()); return null; }
+            catch (SecurityException e) { Console.WriteLine(e.ToString()); return null; }
+        }
+
+        private static byte[] Compress(byte[] data)
+        {
+            using (MemoryStream memory = new MemoryStream())
+            {
+                using (GZipStream gzip = new GZipStream(memory, CompressionMode.Compress, true))
+                {
+                    gzip.Write(data, 0, data.Length);
+                }
+                return memory.ToArray();
+            }
+        }
+
+        private static byte[] Decompress(byte[] data)
+        {
+            using (GZipStream stream = new GZipStream(new MemoryStream(data), CompressionMode.Decompress))
+            {
+                int size = 32768;
+                byte[] result = new byte[size];
+                using (MemoryStream memory = new MemoryStream())
+                {
+                    int bytesRead = 0;
+                    do
+                    {
+                        bytesRead = stream.Read(result, 0, size);
+                        if (bytesRead > 0)
+                        {
+                            memory.Write(result, 0, bytesRead);
+                        }
+                    }
+                    while (bytesRead > 0);
+                    return memory.ToArray();
+                }
+            }
         }
 
         /// <summary>
@@ -144,18 +182,18 @@ namespace Data_Manipulation
         /// </summary>
         /// <param name="target">The array of bytes to convert.</param>
         /// <returns>An object converted from the input.</returns>
-        public static Data bytesToObject(byte[] target)
+        public static object bytesToObject(byte[] target)
         {
             BinaryFormatter bf = new BinaryFormatter();
             bf.AssemblyFormat = FormatterAssemblyStyle.Simple;
             bf.Binder = new TransmissionSerializationBinder();
             using (MemoryStream ms = new MemoryStream(target))
             {
-                Data data = null;
+                object data = null;
                 ms.Position = 0;
                 try
                 {
-                    data = (Data)bf.Deserialize(ms);
+                    data = (object)bf.Deserialize(ms);
                 }
                 catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return null; }
                 catch (SerializationException e) { Console.WriteLine(e.ToString()); return null; }

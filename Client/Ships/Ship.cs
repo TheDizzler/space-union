@@ -16,6 +16,10 @@ namespace SpaceUnionXNA.Ships {
 	/// Base abstract ship class.
 	/// </summary>
 	public abstract class Ship : Tangible {
+        //test
+        SpriteFont font;
+        Vector2 username_label;
+        String username;
 
 		/// <summary>
 		/// Reference to Game1
@@ -104,7 +108,19 @@ namespace SpaceUnionXNA.Ships {
 
 			miniMapIcon = new MapIcon(assets.shipMapIcon, position);
 
+            //Test
+            font = Game1.Assets.font;
 		}
+
+        public void setUserName(String name)
+        {
+            username = name;
+        }
+
+        public string getUserName()
+        {
+            return username;
+        }
 
 		/* TEST */
 		public LaserBeam getBeam() {
@@ -120,6 +136,10 @@ namespace SpaceUnionXNA.Ships {
 		/// <param name="gameTime"></param>
 		/// <param name="quadTree"></param>
 		public virtual void update(GameTime gameTime, QuadTree quadTree) {
+
+            //Moving username
+            username_label.X = (position.X - 50);
+            username_label.Y = (position.Y - 50);
 
 			if (firing)
 				fire(gameTime);
@@ -168,7 +188,8 @@ namespace SpaceUnionXNA.Ships {
 		public override void draw(SpriteBatch sBatch) {
 
 			base.draw(sBatch);
-
+            sBatch.DrawString(font, username,
+                username_label, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 			mainWeapon.draw(sBatch);
 			additionalDraw(sBatch);
 		}
@@ -231,9 +252,11 @@ namespace SpaceUnionXNA.Ships {
 			}
 
 			//Space key activates debugging brake
+            /*
 			if (keyState.IsKeyDown(Keys.Space)) {
 				stop();
 			}
+            */
 
 			if (keyState.IsKeyDown(Keys.LeftControl)) {
 				//fire(gameTime);
@@ -252,6 +275,12 @@ namespace SpaceUnionXNA.Ships {
 			lastState = keyState;
 
 		}
+
+        public virtual void controlAI()
+        {
+            //firing = true;
+        }
+
 		/// <summary>
 		/// Power to main thruster
 		/// @Written by Troy. Edited by Tristan

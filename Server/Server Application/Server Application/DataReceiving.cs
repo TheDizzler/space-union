@@ -133,7 +133,7 @@ namespace Server_Application
                 case Constants.PLAYER_REQUEST_SHIP:
                     owner.updatePlayerShipChoice(request.Sender, request.RoomNumber);
                     break;
-                case Constants.PLAYER_REQUESTS_START:
+                case Constants.PLAYER_REQUEST_START:
                     owner.startGame(request.Sender, request.RoomNumber);
                     break;
             }

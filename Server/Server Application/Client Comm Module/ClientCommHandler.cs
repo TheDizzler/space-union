@@ -35,10 +35,11 @@ namespace Client_Comm_Module
         /// Gets the other players in the gameroom as an array.
         /// </summary>
         /// <returns>Gets an array of data about the positions of the other players.</returns>
-        public GameFrame getPlayersData()
+        /*public GameFrame getPlayersData()
         {
             return helper.getPlayersData();
         }
+        */
 
         /// <summary>
         /// Called when a GameSetupMessage is received.
@@ -193,7 +194,7 @@ namespace Client_Comm_Module
         /// Fetch a game data received from the server.
         /// </summary>
         /// <returns>Game data received from the server.</returns>
-        private GameFrame getGameData()
+        public GameFrame getGameData()
         {
             if (dataReceiver != null)
                 return dataReceiver.Data;

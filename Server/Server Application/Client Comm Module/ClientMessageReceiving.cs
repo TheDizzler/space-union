@@ -77,9 +77,12 @@ namespace Client_Comm_Module
                         roomInfoQueue.Add((RoomInfo)data);
                         break;
 
-                    case Constants.PLAYER_REQUEST_START:
-                        Console.WriteLine("-----------------GAME START reveived-----------------");
-                        startSignalQueue.Add((PlayerRequest)data);
+                    case Constants.PLAYER_REQUEST:
+                        if (((PlayerRequest)data).RequestType == Constants.PLAYER_REQUEST_START)
+                        {
+                            Console.WriteLine("-----------------GAME START reveived-----------------");
+                            startSignalQueue.Add((PlayerRequest)data);
+                        }
                         break;
                 }
             }
