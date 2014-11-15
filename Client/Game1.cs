@@ -54,6 +54,8 @@ namespace SpaceUnionXNA
         public LobbyMenu lobby_menu;
         public Screen mainScreen;
         ShipSelectionScreen shipselectionScreen;
+        public string currentSound = "Medium";
+        public string currentMusic = "Medium";
 
         //NETWORKING
         //public ClientCommHandler Communication { get; private set; }

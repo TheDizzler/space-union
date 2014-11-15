@@ -58,19 +58,15 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(menuTitleLabel);
 
             //Lobby Title Label.
-            LabelControl lobbyTitleLabel = new LabelControl();
-            lobbyTitleLabel.Text = "Lobby Title";
-            lobbyTitleLabel.Bounds = new UniRectangle(200.0f, 150.0f, 110.0f, 24.0f);
+            LabelControl lobbyTitleLabel = GuiHelper.CreateLabel("Lobby Title", -145, -125, 30, 30);
             mainScreen.Desktop.Children.Add(lobbyTitleLabel);
 
             //Lobby Title Text Entry.
-            lobbyTitleInput = new InputControl();
-            lobbyTitleInput.Bounds = new UniRectangle(200.0f, 175.0f, 200.0f, 24.0f);
-            lobbyTitleInput.Text = "";
+            lobbyTitleInput = GuiHelper.CreateInput("", -60, -95, 200, 30);
             mainScreen.Desktop.Children.Add(lobbyTitleInput);
 
             //Create Lobby Button.
-            ButtonControl createLobbyButton = GuiHelper.CreateButton("Create Lobby", -435, -150, 200, 32);
+            ButtonControl createLobbyButton = GuiHelper.CreateButton("Create Lobby", 0, 0, 200, 32);
             createLobbyButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterLobbyMenu();
