@@ -25,6 +25,7 @@ namespace SpaceUnionXNA
 
         public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        public ParticleEngine particleEngine;
 
         /// <summary>
         /// Contains all game assets (gfx, audio, etc.)
@@ -173,6 +174,9 @@ namespace SpaceUnionXNA
             Assets.loadContent(GraphicsDevice);
             explosionEngine = new ExplosionEngine(Assets);
 
+            List<Texture2D> textures = new List<Texture2D>();
+            textures.Add(Assets.moltenBullet);
+            particleEngine = new ParticleEngine(textures, new Vector2(400, 240));
             shipselectionScreen = new ShipSelectionScreen(this);
             IsMouseVisible = true;
         }
@@ -203,6 +207,9 @@ namespace SpaceUnionXNA
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed
                 || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            particleEngine.EmitterLocation = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+            particleEngine.Update();
             //Update the current state
             switch (currentGameState)
             {
@@ -252,7 +259,7 @@ namespace SpaceUnionXNA
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.LightSeaGreen);
-
+            particleEngine.Draw(spriteBatch);
             //Draw the current state
             switch (currentGameState)
             {

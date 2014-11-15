@@ -11,7 +11,7 @@ using System.Text;
 
 namespace SpaceUnionXNA.Controllers {
 	class TeamBattle : GameplayScreen {
-		TimeSpan teamBattleTime = new TimeSpan(0, 2, 3);
+		TimeSpan teamBattleTime = new TimeSpan(0, 2, 1);
         Game1 game;
 		public TeamBattle(Game1 game, SpriteBatch batch, Ship selectedship)
 			: base(game, batch, selectedship) {

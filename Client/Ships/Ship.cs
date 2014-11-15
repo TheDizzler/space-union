@@ -87,7 +87,6 @@ namespace SpaceUnionXNA.Ships {
 
 		public TimeSpan inactiveStart;
 		public TimeSpan inactiveTime = TimeSpan.Zero;
-
 		/// <summary>
 		/// Ship constructor
 		/// </summary>
@@ -101,7 +100,6 @@ namespace SpaceUnionXNA.Ships {
 			velocity = Vector2.Zero;
 			//scale = .3f;
 			mass = 10000;
-
 			miniMapIcon = new MapIcon(assets.shipMapIcon, position);
 
 		}
@@ -120,7 +118,7 @@ namespace SpaceUnionXNA.Ships {
 		/// <param name="gameTime"></param>
 		/// <param name="quadTree"></param>
 		public virtual void update(GameTime gameTime, QuadTree quadTree) {
-
+            
 			if (firing)
 				fire(gameTime);
 
@@ -132,7 +130,7 @@ namespace SpaceUnionXNA.Ships {
 
 			moveThisUpdate = velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
 			//checkForCollision2(quadTree, gameTime);
-
+            
 			position += moveThisUpdate;
 			base.update(position);
 
@@ -168,7 +166,6 @@ namespace SpaceUnionXNA.Ships {
 		public override void draw(SpriteBatch sBatch) {
 
 			base.draw(sBatch);
-
 			mainWeapon.draw(sBatch);
 			additionalDraw(sBatch);
 		}

@@ -132,6 +132,8 @@
     <Compile Include="Tools\HitBox.cs" />
     <Compile Include="Tools\HitCircle.cs" />
     <Compile Include="Tools\MapIcon.cs" />
+    <Compile Include="Tools\Particle.cs" />
+    <Compile Include="Tools\ParticleEngine.cs" />
     <Compile Include="Tools\PasswordInputControl.cs" />
     <Compile Include="Tools\QuadTree.cs" />
     <Compile Include="Tools\Ray2.cs" />

@@ -32,6 +32,7 @@ namespace SpaceUnionXNA.Controllers
         {
             this.game = game;
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
+            
             CreateMenuControls(game.mainScreen);
         }
 
