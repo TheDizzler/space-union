@@ -19,14 +19,14 @@ namespace SpaceUnionXNA.Ships {
 
 			maxSpeed = 7;
 			accelSpeed = 250.5f;
-			turnSpeed = .75f;
+			turnSpeed = 2.5f;
 			maxSpeed = 500;
 
 			mainWeapon = new HomingLauncher(this);
 			mainWeapon2 = new HomingLauncher(this);
 
-			weaponOrigin = new Vector2(position.X - 20, position.Y + 10);
-			weaponOrigin2 = new Vector2(position.X + 20, position.Y + 10);
+			weaponOrigin = new Vector2(position.X - 25, position.Y + 10);
+			weaponOrigin2 = new Vector2(position.X + 25, position.Y + 10);
 		}
 
 

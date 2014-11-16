@@ -26,7 +26,7 @@ namespace SpaceUnionXNA.Tools {
 		/// <param name="gameTime"></param>
 		public static void shipOnShip(Ship ship1, Ship ship2, GameTime gameTime) {
 
-			reflect(ship1, ship2);
+			//reflect(ship1, ship2);
 		}
 
 		/// <summary>

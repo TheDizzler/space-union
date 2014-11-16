@@ -29,7 +29,7 @@ namespace SpaceUnionXNA.Weapons.Systems {
 				missile.launch(startPoint, (float) owner.getRotation(), owner.velocity);
 				GameplayScreen.targets.Add(missile);
 				playFireSFX();
-				missile.isActive = true;
+				//missile.isActive = true;
 			} else
 				playEmptySFX();
 		}

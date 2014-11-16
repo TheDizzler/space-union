@@ -36,9 +36,8 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 
 
 			projectileTTL = 3.5f;
-			//projectileMoveSpeed = 1000.2f;
-			accelSpeed = 1000f;
-			turnSpeed = 4f;
+			accelSpeed = 250f;
+			turnSpeed = 10f;
 			weaponDamage = 10;
 			isActive = false;
 		}
@@ -46,41 +45,61 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 
 		public override void update(GameTime gameTime, QuadTree quadTree) {
 
-			if (target == null) {
-				target = findFirstTarget(quadTree);
-			}
-
-			if (target != null) {
-				// rotate towards target
-				double angle = Math.Atan2(this.Position.X - target.Position.X, this.Position.Y - target.Position.Y);
-				//System.Console.WriteLine(angle);
-				//if (rotation > angle - .025)
-				//	rotation += turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
-				//if (rotation < angle + .025)
-				//	rotation -= turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
-				rotation = (float) -angle;
-			}
-
 			timeActive += (float) gameTime.ElapsedGameTime.TotalSeconds;
 			if (projectileTTL > timeActive) {
 
-				Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
-				acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
-				Vector2.Add(ref velocity, ref acceleration, out velocity);
+				if (timeActive > .5) { // gives some time for missiles to get a safe distance from ship
+					if (target == null) {
+						target = findFirstTarget(quadTree);
+					}
+
+					if (target != null) {
+						// rotate towards target
+						double angle = Math.Atan2(this.Position.X - target.Position.X, this.Position.Y - target.Position.Y);
+						float difference = rotation - (float) -angle;
 
 
-				position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
+							//float checkPlus = rotation + turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+							//float checkMinus = rotation - turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
 
-				base.update(position);
+							if (difference < -.01)
+								rotation = rotation + turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+							else if (difference > .01)
+								rotation = rotation - turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+						
 
-				checkForCollision(quadTree, gameTime);
+						//rotation = (float) -angle;
+						//if (rotation > 6.283185 || rotation < -6.283185) {
+						//	rotation = rotation % 6.283185f;
+						//}
 
+					}
+				}
+				accelerate(gameTime, quadTree);
 			} else {
 				destroy();
 			}
 
 		}
 
+		private void accelerate(GameTime gameTime, QuadTree quadTree) {
+			Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
+			acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+			Vector2.Add(ref velocity, ref acceleration, out velocity);
+
+			position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
+
+			base.update(position);
+
+			checkForCollision(quadTree, gameTime);
+
+		}
+
+		/// <summary>
+		/// A very unintelligent target finder. Findest the first available target in list.
+		/// </summary>
+		/// <param name="quadTree"></param>
+		/// <returns></returns>
 		private Ship findFirstTarget(QuadTree quadTree) {
 
 			List<Tangible> possibleCollisions = quadTree.retrieve(this); // Need a better retrieve method for rays

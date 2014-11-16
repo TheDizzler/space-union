@@ -187,7 +187,7 @@ namespace SpaceUnionXNA.Tools {
 
 			laser = Content.Load<Texture2D>("Projectiles/laser");
 			missile = Content.Load<Texture2D>("Projectiles/short missile (16x16)");
-			homingMissile = Content.Load<Texture2D>("Projectiles/homing missile");
+			homingMissile = Content.Load<Texture2D>("Projectiles/homing missile smaller");
 			moltenBullet = Content.Load<Texture2D>("Projectiles/molten bullet (6x8)");
 			shield = Content.Load<Texture2D>("Animations/bubble shield sheet");
 			redLaser = Content.Load<Texture2D>("Animations/redlaserbeam (25x11)");
