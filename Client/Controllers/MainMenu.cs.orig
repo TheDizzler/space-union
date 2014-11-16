@@ -12,7 +12,12 @@ using Nuclex.UserInterface.Controls.Desktop;
 using Nuclex.Input;
 using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;
+<<<<<<< HEAD
+using SpaceMenus;
+using SpaceMenus.Tools;
+=======
 using SpaceUnionXNA;
+>>>>>>> f69d670d698219c86c54f2a3e1fa47abe9c6c745
 
 namespace SpaceUnionXNA.Controllers
 {

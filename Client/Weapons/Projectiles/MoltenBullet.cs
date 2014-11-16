@@ -51,14 +51,13 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 		/// <param name="target"></param>
 		/// <param name="gameTime"></param>
 		public override void doDamage(Tangible target, GameTime gameTime) {
-
+			explosionEngine.createSmallExplosion(position);
 			base.doDamage(target, gameTime); // base calls destroy by default
 		}
 
 
 		public override void destroy() {
 
-			explosionEngine.createSmallExplosion(position);
 			base.destroy();
 		}
 	}

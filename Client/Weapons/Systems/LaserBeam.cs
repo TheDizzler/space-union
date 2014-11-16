@@ -105,31 +105,6 @@ namespace SpaceUnionXNA.Weapons.Systems {
 						if (temp <= distToTarget) {
 							// fine hit detection
 							radical(target, temp, ref currentTarget);
-
-
-							//// get t0x and t0y in texture cooridinates
-							//Vector2 t0 = new Vector2(ray.t0x - (target.getX() - width / 2),
-							//	ray.t0y - (target.getY() - height / 2));
-
-							//for (int i = (int) (beamLength * temp); i < beamLength; ++i) {
-
-							//	check.X += beamDirection.X;
-							//	check.Y += beamDirection.Y;
-
-							//	if (check.X > col || check.X < 0 ||
-							//		check.Y > row || check.Y < 0)
-							//		break;
-
-							//	if (rawDataGrid[(int) check.Y, (int) check.X].A != 0) {
-							//		float add = (float) Math.Sqrt(check.X * check.X + check.Y * check.Y) / beamLength;
-							//		distToTarget = temp + add;
-							//		currentTarget = target;
-							//		break;
-							//	}
-
-
-
-
 						}
 					}
 				}
@@ -227,9 +202,6 @@ namespace SpaceUnionXNA.Weapons.Systems {
 			beamQuanta.Clear();
 
 		}
-
-
-
 
 
 		public void updatePosition(Vector2 startPoint, float rot) {

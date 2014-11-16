@@ -39,9 +39,11 @@ Content\WinFlags\WinFlag1.xnb
 Content\Spaceships\scoutship (64x64).xnb
 Content\Spaceships\rocket (64x64).xnb
 Content\StellarObjects\rock (32x32).xnb
+Content\Spaceships\UFO (39x39).xnb
 Content\SpriteFonts\SpriteFont1.xnb
 Content\SFX\Laser High 1.xnb
 Content\SFX\Laser High 2.xnb
 Content\SFX\Laser High 0.xnb
 Content\SFX\Laser High 3.xnb
-Content\Spaceships\UFO (39x39).xnb
+Content\Spaceships\scoutship BAK (64x64).xnb
+Content\Projectiles\homing missile.xnb

@@ -34,6 +34,10 @@ namespace SpaceUnionXNA.Ships {
 		/// </summary>
 		protected float accelSpeed = 20.0f;
 		/// <summary>
+		/// The non-directional speed of ship in pixels/second
+		/// </summary>
+		//protected float currentSpeed = 0;
+		/// <summary>
 		/// Turn speed in radians per second
 		/// </summary>
 		protected float turnSpeed = 4.5f;
@@ -104,13 +108,13 @@ namespace SpaceUnionXNA.Ships {
 
 		}
 
-		///* TEST */
-		//public LaserBeam getBeam() {
+		/* TEST */
+		public LaserBeam getBeam() {
 
-		//	if (this is Scout)
-		//		return ((LaserBeam) mainWeapon);
-		//	return null;
-		//}
+			if (this is Scout)
+				return ((LaserBeam) mainWeapon);
+			return null;
+		}
 
 		/// <summary>
 		/// @Written by Troy and Kyle with additions by Tristan.
@@ -118,13 +122,6 @@ namespace SpaceUnionXNA.Ships {
 		/// <param name="gameTime"></param>
 		/// <param name="quadTree"></param>
 		public virtual void update(GameTime gameTime, QuadTree quadTree) {
-
-			/** NOTE: This gets called twice when a ship is made inactive on its update!
-			*	It would be great to keep these updating even when a ship is inactive
-			*	instead of orphaning its projectiles. */
-			mainWeapon.update(gameTime, quadTree);
-			additionalUpdate(gameTime, quadTree);
-
 
 			if (isActive) {
 				if (firing)
@@ -152,7 +149,11 @@ namespace SpaceUnionXNA.Ships {
 				velocity *= dampening; // apply a little resistance. Any thrust should over power this.
 			}
 
-			
+			/** NOTE: This gets called twice when a ship is made inactive on its update!
+			*	It would be great to keep these updating even when a ship is inactive
+			*	instead of orphaning its projectiles. */
+			mainWeapon.update(gameTime, quadTree);
+			additionalUpdate(gameTime, quadTree);
 
 
 			if (isActive == false) {
@@ -183,10 +184,10 @@ namespace SpaceUnionXNA.Ships {
 		/// <param name="sBatch"></param>
 		public override void draw(SpriteBatch sBatch) {
 
+			base.draw(sBatch);
+
 			mainWeapon.draw(sBatch);
 			additionalDraw(sBatch);
-
-			base.draw(sBatch);
 		}
 
 		/// <summary>
@@ -269,9 +270,16 @@ namespace SpaceUnionXNA.Ships {
 
 		}
 
+<<<<<<< HEAD
 		public virtual void controlAI() {
 			firing = true;
 		}
+=======
+        public virtual void controlAI()
+        {
+            //firing = true;
+        }
+>>>>>>> f69d670d698219c86c54f2a3e1fa47abe9c6c745
 
 		/// <summary>
 		/// Power to main thruster

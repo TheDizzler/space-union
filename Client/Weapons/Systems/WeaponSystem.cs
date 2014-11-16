@@ -26,5 +26,7 @@ namespace SpaceUnionXNA.Weapons.Systems {
 
 		void draw(SpriteBatch sBatch);
 
+		void updatePosition(Vector2 startPoint, float rot);
+
 	}
 }

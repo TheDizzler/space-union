@@ -35,7 +35,7 @@ namespace SpaceUnionXNA.Controllers {
 		/* Default size of the ships */
 		const int WIDTH     = 128;
 		const int HEIGHT    = 128;
-		const int SHIPCOUNT = 4;   // Change value according to how many different ships are available
+		const int SHIPCOUNT = 5;   // Change value according to how many different ships are available
 		int shipsPerRow;
 
 
@@ -72,7 +72,8 @@ namespace SpaceUnionXNA.Controllers {
 			shipSelectionArray[0] = new ShipButton(new UFO(game));
 			shipSelectionArray[1] = new ShipButton(new Scout(game));
 			shipSelectionArray[2] = new ShipButton(new Zoid(game));
-			shipSelectionArray[3] = new ShipButton(new TestShip(game));
+			shipSelectionArray[3] = new ShipButton(new Bug(game));
+			shipSelectionArray[4] = new ShipButton(new Lobstar(game));
 
 			/* For Testing X amount of ships; Remove */
 			//for (int i = 0; i < SHIPCOUNT; i++)

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace SpaceMenus
+namespace SpaceUnionXNA
 {
     public class PasswordInputControl : Nuclex.UserInterface.Controls.Desktop.InputControl
     {

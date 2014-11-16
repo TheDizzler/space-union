@@ -21,7 +21,7 @@ namespace SpaceUnionXNA.Controllers {
 		private MouseState mouseState;
 		private SpriteBatch spriteBatch;
 
-		private QuadTree quadTree;
+		protected QuadTree quadTree;
 		private List<Asteroid> asteroids;
 		protected List<Ship> ships;
 		protected List<Ship> inactiveShips;
@@ -50,7 +50,7 @@ namespace SpaceUnionXNA.Controllers {
 
 		private int SCREEN_WIDTH;
 		private int SCREEN_HEIGHT;
-		private Viewport basicViewport;
+		protected Viewport basicViewport;
 
 
 
@@ -124,7 +124,7 @@ namespace SpaceUnionXNA.Controllers {
 				Width = gui.radarBox.Width, Height = gui.radarBox.Height
 			};
 
-			mainCamera = new Camera(mainViewport, worldWidth, worldHeight, 1.0f);
+			mainCamera = new Camera(mainViewport, worldWidth, worldHeight, 0.5f);
 			radarCamera = new Camera(radarViewport, worldWidth, worldHeight, 0.05f);
 
 
@@ -160,7 +160,6 @@ namespace SpaceUnionXNA.Controllers {
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public virtual void Update(GameTime gameTime) {
-
 			quadTree.clear();
 			foreach (Tangible target in targets)
 				quadTree.insert(target);
@@ -322,7 +321,8 @@ namespace SpaceUnionXNA.Controllers {
 			for (int i = 0; i < asteroids.Count; i++) {
 				asteroids[i].draw(spriteBatch);
 			}
-
+			drawBorder(spriteBatch, new Rectangle(0 - Assets.bug.Width/2-10, 0 - Assets.bug.Height/2-10, 
+					   worldWidth + Assets.bug.Width+20, worldHeight + Assets.bug.Height+20), 10, Color.White);
 			Game1.explosionEngine.draw(spriteBatch);
 		}
 

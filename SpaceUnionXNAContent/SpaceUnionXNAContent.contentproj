@@ -245,8 +245,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Spaceships\scoutship %2864x64%29.png">
-      <Name>scoutship %2864x64%29</Name>
+    <Compile Include="Spaceships\scoutship BAK %2864x64%29.png">
+      <Name>scoutship BAK %2864x64%29</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -294,6 +294,20 @@
   <ItemGroup>
     <Compile Include="Spaceships\UFO %2839x39%29.png">
       <Name>UFO %2839x39%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Spaceships\scoutship %2864x64%29.png">
+      <Name>scoutship %2864x64%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Projectiles\homing missile.png">
+      <Name>homing missile</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

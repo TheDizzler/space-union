@@ -10,7 +10,11 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceUnionXNA.Tools;
 
+<<<<<<< HEAD
+namespace SpaceMenus.Tools
+=======
 namespace SpaceUnionXNA
+>>>>>>> f69d670d698219c86c54f2a3e1fa47abe9c6c745
 {
     class GuiHelper
     {

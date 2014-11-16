@@ -17,7 +17,7 @@ namespace SpaceUnionXNA.Weapons.Systems {
 	/// @Written by Tristan.
 	/// </summary>
 	/// <typeparam name="ProjectileType">A Projectile Class</typeparam>
-	class Launcher<ProjectileType> : WeaponSystem where ProjectileType : Projectile {
+	public class Launcher<ProjectileType> : WeaponSystem where ProjectileType : Projectile {
 
 		/// <summary>
 		/// Total projectiles in flight.
@@ -61,10 +61,8 @@ namespace SpaceUnionXNA.Weapons.Systems {
 		private static List<ProjectileType> fillStore(Ship ship, short max, Func<Vector2, Ship, ProjectileType> proj) {
 
 			List < ProjectileType >  temp = new List<ProjectileType>(max);
-			for (int i = 0; i < max; ++i) {
+			for (int i = 0; i < max; ++i)
 				temp.Add(proj(new Vector2(i * 2, i * 2), ship));
-				
-			}
 			
 			return temp;
 		}
@@ -74,7 +72,7 @@ namespace SpaceUnionXNA.Weapons.Systems {
 		/// </summary>
 		/// <param name="ship"></param>
 		/// <param name="capacity"></param>
-		private Launcher(Ship ship, short capacity) {
+		protected Launcher(Ship ship, short capacity) {
 
 			owner = ship;
 			maxCapacity = capacity;
@@ -83,7 +81,6 @@ namespace SpaceUnionXNA.Weapons.Systems {
 			random = new Random();
 			
 		}
-
 
 		public void playFireSFX() {
 
@@ -134,12 +131,21 @@ namespace SpaceUnionXNA.Weapons.Systems {
 			}
 		}
 
+
+		public void updatePosition(Vector2 startPoint, float rot) {
+			foreach (ProjectileType projectile in projectileStore) {
+				projectile.position = startPoint;
+				projectile.rotation = rot;
+			}
+		}
+
+
 		/// <summary>
 		/// Recycle the projectile.
 		/// Puts it back in the projectileStore and puts it off the map.
 		/// </summary>
 		/// <param name="projectile"></param>
-		private void putInStore(ProjectileType projectile) {
+		protected void putInStore(ProjectileType projectile) {
 			projectileStore.Add(projectile);
 			//projectile.position = new Vector2(-25, -25);
 		}
@@ -149,7 +155,7 @@ namespace SpaceUnionXNA.Weapons.Systems {
 		/// itself (probably?) shouldn't draw.
 		/// </summary>
 		/// <param name="sBatch"></param>
-		public void draw(SpriteBatch sBatch) {
+		public virtual void draw(SpriteBatch sBatch) {
 			foreach (ProjectileType projectile in projectiles)
 				projectile.draw(sBatch);
 		}

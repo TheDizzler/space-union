@@ -46,7 +46,7 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 		}
 
 
-		public void update(GameTime gameTime, QuadTree quadTree) {
+		public virtual void update(GameTime gameTime, QuadTree quadTree) {
 
 			//if (willCollide)
 			//	collide(collideTarget, gameTime);

@@ -22,6 +22,18 @@ namespace SpaceUnionXNA.Tools {
 		private int redTeamKills = 0;
 		private int blueTeamKills = 0;
 		public bool timeOver = false;
+        public bool countedDown = false;
+        public TimeSpan countDown = new TimeSpan(0, 0, 5);
+
+        public int getRedTeamKills()
+        {
+            return redTeamKills;
+        }
+
+        public int getBlueTeamKills()
+        {
+            return blueTeamKills;
+        }
 
 		public TeamBattleGUI(Game1 game, Ship ship, TimeSpan time, List<Ship> ships, List<Ship> inactiveships)
 			: base(game, ship) {
@@ -39,6 +51,15 @@ namespace SpaceUnionXNA.Tools {
 		public override void update(GameTime gameTime, QuadTree quadTree) {
             redTeamKills = 0;
             blueTeamKills = 0;
+            if (!countedDown)
+            {
+                countDown -= gameTime.ElapsedGameTime;
+                if (countDown.Seconds <= 0)
+                {
+                    countedDown = true;
+                }
+                return;
+            }
 			if (teamBattleTime <= TimeSpan.Zero) {
 
 				timeOver = true;
@@ -89,7 +110,11 @@ namespace SpaceUnionXNA.Tools {
 				new Vector2(10, 30), Color.Blue, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 			spriteBatch.DrawString(font, "Time: " + teamBattleTime.ToString(@"hh\:mm\:ss"),
 				new Vector2(game.getScreenWidth() - 200, 10), Color.White, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
-
+            if (!countedDown)
+            {
+                spriteBatch.DrawString(font, countDown.Seconds.ToString(),
+                        new Vector2(game.getScreenWidth()/2, game.getScreenHeight()/2), Color.SpringGreen, 0.0f, Vector2.Zero, 5f, SpriteEffects.None, 0.5f);
+            }
 			if (timeOver == true) {
 
 				spriteBatch.Draw(guiRectangle, rect, Color.DarkSlateBlue);
