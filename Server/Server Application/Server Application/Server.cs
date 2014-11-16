@@ -106,7 +106,7 @@ namespace Server_Application
         public void removePlayerFromRoom(Player player, int roomNumber)
         {
             Gameroom room = getGameroom(roomNumber);
-            if (room == null)
+            if (room == null || player == null)
                 return;
             room.removePlayer(player);
             if (room.Players == 0)
@@ -119,8 +119,9 @@ namespace Server_Application
             Gameroom room = getGameroom(roomNumber);
             if (room == null)
                 return;
-            foreach (GameData p in room.getPlayerList())
-                addMessageToQueue(new RoomInfo(room.getPlayerList(), room.RoomNumber, room.RoomName, room.Host.Username, room.InGame, p.Player.IPAddress));
+            if(!room.InGame)
+                foreach (GameData p in room.getPlayerList())
+                    addMessageToQueue(new RoomInfo(room.getPlayerList(), room.RoomNumber, room.RoomName, room.Host.Username, room.InGame, p.Player.IPAddress));
         }
 
         /// <summary>
@@ -160,7 +161,7 @@ namespace Server_Application
         public void sendRoomInfo(Player player, int roomNumber)
         {
             Gameroom room = getGameroom(roomNumber);
-            if (room != null)
+            if (room != null && player != null)
                 addMessageToQueue(new RoomInfo(room.getPlayerList(), room.RoomNumber, room.RoomName, room.Host.Username, room.InGame, player.IPAddress));
         }
 
@@ -179,8 +180,9 @@ namespace Server_Application
 
         public void updateOnHeartbeat(PlayerRequest request)
         {
-            Console.WriteLine("\nUpdating heartbeat\n");
-            if(OnlinePlayers.ContainsKey(request.Sender.Username))
+            if (request == null)
+                return;
+            if (OnlinePlayers.ContainsKey(request.Sender.Username))
                 OnlinePlayers[request.Sender.Username].Time = DateTime.Now;
         }
 
@@ -191,6 +193,8 @@ namespace Server_Application
         /// <param name="roomName">The name of the room specified by the player.</param>
         public void createPlayerRequestedRoom(Player player, string roomName)
         {
+            if (player == null)
+                return;
             int assignedRoomNumber = findAvailableRoomNumber();
             if (assignedRoomNumber == 0)
             {
@@ -205,7 +209,7 @@ namespace Server_Application
         public void updatePlayerReadyStatus(Player player, int roomNumber)
         {
             Gameroom room = getGameroom(roomNumber);
-            if (room != null)
+            if (room != null && player != null)
             {
                 foreach (GameData p in room.getPlayerList())
                 {
@@ -221,7 +225,7 @@ namespace Server_Application
         public void updatePlayerShipChoice(Player player, int roomNumber) 
         {
             Gameroom room = getGameroom(roomNumber);
-            if (room != null)
+            if (room != null && player != null)
             {
                 foreach (GameData p in room.getPlayerList())
                 {
@@ -237,7 +241,7 @@ namespace Server_Application
         public void startGame(Player sender, int roomNumber)
         {
             Gameroom room = getGameroom(roomNumber);
-            if (room == null)
+            if (room == null || sender == null)
                 return;
             room.InGame = true;
             foreach (GameData p in room.getPlayerList())
@@ -246,11 +250,15 @@ namespace Server_Application
 
         public void sendLoginConfirmation(Player player)
         {
+            if (player == null)
+                return;
             addMessageToQueue(player);
         }
 
         public void handleLogout(Player player)
         {
+            if (player == null)
+                return;
             Player temp;
             int updateOnlinErrCode = 0;
             OnlinePlayers.TryRemove(player.Username, out temp);
@@ -284,10 +292,7 @@ namespace Server_Application
         {
             List<RoomInfo> list = new List<RoomInfo>();
             foreach (KeyValuePair<int, Gameroom> room in Gamerooms.ToArray())
-            {
-                RoomInfo info = new RoomInfo(room.Value.getPlayerList(), room.Value.RoomNumber, room.Value.RoomName, room.Value.Host.Username, room.Value.InGame);
-                list.Add(info);
-            }
+                list.Add(new RoomInfo(room.Value.getPlayerList(), room.Value.RoomNumber, room.Value.RoomName, room.Value.Host.Username, room.Value.InGame));
             return list;
         }
     }

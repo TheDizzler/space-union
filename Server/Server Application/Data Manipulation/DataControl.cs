@@ -72,29 +72,19 @@ namespace Data_Manipulation
             try
             {
                 client.Connect(ipaddress, port);
+                Stream stream = null;
+                stream = client.GetStream();
+                byte[] data = Compress(objectToBytes(input));
+                stream.Write(data, 0, data.Length);
             }
             catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return; }
             catch (ArgumentOutOfRangeException e) { Console.WriteLine(e.ToString()); return; }
             catch (SocketException e) { Console.WriteLine(e.ToString()); return; }
             catch (ObjectDisposedException e) { Console.WriteLine(e.ToString()); return; }
-            Stream stream = null;
-            try
-            {
-                stream = client.GetStream();
-            }
-            catch (ObjectDisposedException e) { Console.WriteLine(e.ToString()); return; }
             catch (InvalidOperationException e) { Console.WriteLine(e.ToString()); return; }
-            byte[] data = Compress(objectToBytes(input));
-            try
-            {
-                stream.Write(data, 0, data.Length);
-            }
-            catch (ArgumentOutOfRangeException e) { Console.WriteLine(e.ToString()); return; }
-            catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return; }
             catch (ArgumentException e) { Console.WriteLine(e.ToString()); return; }
             catch (IOException e) { Console.WriteLine(e.ToString()); return; }
             catch (NotSupportedException e) { Console.WriteLine(e.ToString()); return; }
-            catch (ObjectDisposedException e) { Console.WriteLine(e.ToString()); return; }
         }
 
         /// <summary>
@@ -105,9 +95,9 @@ namespace Data_Manipulation
         {
             byte[] received = new byte[8196];
             int size = 0;
-            Socket socket = listener.AcceptSocket();
             try
             {
+                Socket socket = listener.AcceptSocket();
                 size = socket.Receive(received);
                 byte[] input = new byte[size];
                 Buffer.BlockCopy(received, 0, input, 0, size);
@@ -118,6 +108,7 @@ namespace Data_Manipulation
             catch (SocketException e) { Console.WriteLine(e.ToString()); return null; }
             catch (ObjectDisposedException e) { Console.WriteLine(e.ToString()); return null; }
             catch (SecurityException e) { Console.WriteLine(e.ToString()); return null; }
+            catch (InvalidOperationException e) { Console.WriteLine(e.ToString()); return null; }
         }
 
         private static byte[] Compress(byte[] data)
@@ -143,11 +134,18 @@ namespace Data_Manipulation
                     int bytesRead = 0;
                     do
                     {
-                        bytesRead = stream.Read(result, 0, size);
-                        if (bytesRead > 0)
+                        try
                         {
-                            memory.Write(result, 0, bytesRead);
+                            bytesRead = stream.Read(result, 0, size);
+                            if (bytesRead > 0)
+                                memory.Write(result, 0, bytesRead);
                         }
+                        catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return null; }
+                        catch (NotSupportedException e) { Console.WriteLine(e.ToString()); return null; }
+                        catch (ArgumentException e) { Console.WriteLine(e.ToString()); return null; }
+                        catch (InvalidOperationException e) { Console.WriteLine(e.ToString()); return null; }
+                        catch (IOException e) { Console.WriteLine(e.ToString()); return null; }
+                        catch (InvalidDataException e) { Console.WriteLine(e.ToString()); return null; }
                     }
                     while (bytesRead > 0);
                     return memory.ToArray();
@@ -198,7 +196,6 @@ namespace Data_Manipulation
                 catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return null; }
                 catch (SerializationException e) { Console.WriteLine(e.ToString()); return null; }
                 catch (SecurityException e) { Console.WriteLine(e.ToString()); return null; }
-
                 return data;
             }
         }

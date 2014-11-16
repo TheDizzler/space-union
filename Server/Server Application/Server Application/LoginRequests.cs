@@ -18,7 +18,6 @@ namespace Server_Application
         /// Used to read/write to the user table in the SpaceUnion database
         /// </summary>
         private UserTableAccess userTable = new UserTableAccess();
-
         /// <summary>
         /// Handle the login request.
         /// </summary>
@@ -57,7 +56,6 @@ namespace Server_Application
             if (userTable.UserLogin(username, password, ref loginErrCode, ref user))
             {
                 isUserValid = true;
-
                 /* DONT PUT IN UNTIL UPDATING USER IS OFFLINE IS IMPLEMENTED */
                 if (userTable.UpdateUserIsOnline(username, isOnline, ref updateOnlineErrCode))
                 {

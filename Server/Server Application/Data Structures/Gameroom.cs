@@ -50,6 +50,8 @@ namespace Data_Structures
         /// <returns>True if the player was successfully added. False otherwise.</returns>
         public bool addPlayer(Player player)
         {
+            if (player == null)
+                return false;
             if (Players < 6)
             {
                 GameData data = new GameData();
@@ -73,6 +75,8 @@ namespace Data_Structures
 
         public void removePlayer(Player user)
         {
+            if (user == null)
+                return;
             if (Players > 0)
             {
                 GameData temp;

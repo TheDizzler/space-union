@@ -70,11 +70,9 @@ namespace Server_Application
                     case Constants.LOGIN_REQUEST:
                         {
                             new Thread(() => login.handleLoginRequest((Player)message, owner)).Start();
-                            Console.WriteLine("received login requests");
                         }
                         break;
                     case Constants.PLAYER_REQUEST:
-                        //Console.WriteLine("received player request");
                         new Thread(() => handlePlayerRequest((PlayerRequest)message)).Start();
                         break;
                     case Constants.CHAT_MESSAGE:

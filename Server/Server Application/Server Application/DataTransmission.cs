@@ -90,11 +90,7 @@ namespace Server_Application
                         break;
                 }
                 if (ipAddress != null)
-                {
                     DataControl.sendTCPData(TCPClient, message, ipAddress, Constants.TCPMessageClient);
-                    //Console.WriteLine("Sent message to player: " + ((Player)message).Username + " " +  ((Player)message).Password);
-                }
-                    
             }
         }
 
@@ -125,6 +121,8 @@ namespace Server_Application
         /// </summary>
         private void sendClientData(byte client)
         {
+            UdpClient sender = UDPClients[client];
+            int port = ((IPEndPoint)sender.Client.LocalEndPoint).Port;
             while (true)
             {
                 if (owner.Gamerooms.Count == 0)
@@ -137,11 +135,8 @@ namespace Server_Application
                     if (room.Value.InGame)
                     {
                         GameFrame frame = room.Value.getGameFrame();
-                        foreach (string ip in frame.IPList)
-                        {
-                            GameData[] data = frame.Data;
-                            DataControl.sendUDPData(UDPClients[client], frame, ip, ((IPEndPoint)UDPClients[client].Client.LocalEndPoint).Port);
-                        }   
+                        foreach (object ip in frame.ipAddresses(port))
+                            DataControl.sendUDPData(UDPClients[client], frame, (string)ip, port);
                     }
                 }
             }

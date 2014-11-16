@@ -19,11 +19,7 @@ namespace Data_Structures
         public bool InGame { get; set; }
         public string RequesterIP { get; set; }
 
-        public RoomInfo(GameData[] players, 
-                        int roomNumber, 
-                        string roomName, 
-                        string host, 
-                        bool inGame)
+        public RoomInfo(GameData[] players, int roomNumber, string roomName, string host, bool inGame)
         {
             Type = 10;
             Players    = players;
@@ -33,12 +29,7 @@ namespace Data_Structures
             InGame     = inGame;
         }
 
-        public RoomInfo(GameData[] players,
-                        int roomNumber,
-                        string roomName,
-                        string host,
-                        bool inGame,
-                        string requester)
+        public RoomInfo(GameData[] players, int roomNumber, string roomName, string host, bool inGame, string requester)
         {
             Type = 10;
             Players = players;
