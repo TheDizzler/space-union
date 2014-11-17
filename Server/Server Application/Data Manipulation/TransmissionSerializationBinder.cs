@@ -32,7 +32,7 @@ namespace Data_Manipulation
                     }
                 }
             }
-            catch (Exception e) { e.GetBaseException(); }
+            catch (Exception e) { ErrorLogging.Logging.Write(e.ToString()); }
             return typeToDeserialize;
         }
     }

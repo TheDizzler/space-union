@@ -11,6 +11,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using ErrorLogging;
 
 namespace Data_Manipulation
 {
@@ -34,10 +35,10 @@ namespace Data_Manipulation
             {
                 client.Send(output, output.Length, ipaddress, port);
             }
-            catch (ArgumentException e) { Console.WriteLine(e.ToString()); return; }
-            catch (ObjectDisposedException e) { Console.WriteLine(e.ToString()); return; }
-            catch (InvalidOperationException e) { Console.WriteLine(e.ToString()); return; }
-            catch (SocketException e) { Console.WriteLine(e.ToString()); return; }
+            catch (ArgumentException e) { ErrorLogging.Logging.Write(e.ToString()); return; }
+            catch (ObjectDisposedException e) { ErrorLogging.Logging.Write(e.ToString()); return; }
+            catch (InvalidOperationException e) { ErrorLogging.Logging.Write(e.ToString()); return; }
+            catch (SocketException e) { ErrorLogging.Logging.Write(e.ToString()); return; }
         }
 
         /// <summary>
@@ -53,8 +54,8 @@ namespace Data_Manipulation
                 byte[] data = client.Receive(ref ip);
                 return bytesToObject(data);
             }
-            catch (ObjectDisposedException e) { Console.WriteLine(e.ToString()); return null; }
-            catch (SocketException e) { Console.WriteLine(e.ToString()); return null; }
+            catch (ObjectDisposedException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
+            catch (SocketException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
         }
 
         /// <summary>
@@ -77,14 +78,14 @@ namespace Data_Manipulation
                 byte[] data = Compress(objectToBytes(input));
                 stream.Write(data, 0, data.Length);
             }
-            catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return; }
-            catch (ArgumentOutOfRangeException e) { Console.WriteLine(e.ToString()); return; }
-            catch (SocketException e) { Console.WriteLine(e.ToString()); return; }
-            catch (ObjectDisposedException e) { Console.WriteLine(e.ToString()); return; }
-            catch (InvalidOperationException e) { Console.WriteLine(e.ToString()); return; }
-            catch (ArgumentException e) { Console.WriteLine(e.ToString()); return; }
-            catch (IOException e) { Console.WriteLine(e.ToString()); return; }
-            catch (NotSupportedException e) { Console.WriteLine(e.ToString()); return; }
+            catch (ArgumentNullException e) { ErrorLogging.Logging.Write(e.ToString()); return; }
+            catch (ArgumentOutOfRangeException e) { ErrorLogging.Logging.Write(e.ToString()); return; }
+            catch (SocketException e) { ErrorLogging.Logging.Write(e.ToString()); return; }
+            catch (ObjectDisposedException e) { ErrorLogging.Logging.Write(e.ToString()); return; }
+            catch (InvalidOperationException e) { ErrorLogging.Logging.Write(e.ToString()); return; }
+            catch (ArgumentException e) { ErrorLogging.Logging.Write(e.ToString()); return; }
+            catch (IOException e) { ErrorLogging.Logging.Write(e.ToString()); return; }
+            catch (NotSupportedException e) { ErrorLogging.Logging.Write(e.ToString()); return; }
         }
 
         /// <summary>
@@ -104,11 +105,11 @@ namespace Data_Manipulation
                 socket.Close();
                 return bytesToObject(Decompress(input));
             }
-            catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return null; }
-            catch (SocketException e) { Console.WriteLine(e.ToString()); return null; }
-            catch (ObjectDisposedException e) { Console.WriteLine(e.ToString()); return null; }
-            catch (SecurityException e) { Console.WriteLine(e.ToString()); return null; }
-            catch (InvalidOperationException e) { Console.WriteLine(e.ToString()); return null; }
+            catch (ArgumentNullException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
+            catch (SocketException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
+            catch (ObjectDisposedException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
+            catch (SecurityException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
+            catch (InvalidOperationException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
         }
 
         private static byte[] Compress(byte[] data)
@@ -140,12 +141,12 @@ namespace Data_Manipulation
                             if (bytesRead > 0)
                                 memory.Write(result, 0, bytesRead);
                         }
-                        catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return null; }
-                        catch (NotSupportedException e) { Console.WriteLine(e.ToString()); return null; }
-                        catch (ArgumentException e) { Console.WriteLine(e.ToString()); return null; }
-                        catch (InvalidOperationException e) { Console.WriteLine(e.ToString()); return null; }
-                        catch (IOException e) { Console.WriteLine(e.ToString()); return null; }
-                        catch (InvalidDataException e) { Console.WriteLine(e.ToString()); return null; }
+                        catch (ArgumentNullException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
+                        catch (NotSupportedException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
+                        catch (ArgumentException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
+                        catch (InvalidOperationException e) { Console.WriteLine(e.ToString()); ErrorLogging.Logging.Write(e.ToString()); return null; }
+                        catch (IOException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
+                        catch (InvalidDataException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
                     }
                     while (bytesRead > 0);
                     return memory.ToArray();
@@ -169,9 +170,9 @@ namespace Data_Manipulation
                     bf.Serialize(ms, target);
                     return ms.ToArray();
                 }
-                catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return null; }
-                catch (SerializationException e) { Console.WriteLine(e.ToString()); return null; }
-                catch (SecurityException e) { Console.WriteLine(e.ToString()); return null; }
+                catch (ArgumentNullException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
+                catch (SerializationException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
+                catch (SecurityException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
             }
         }
 
@@ -193,9 +194,9 @@ namespace Data_Manipulation
                 {
                     data = (object)bf.Deserialize(ms);
                 }
-                catch (ArgumentNullException e) { Console.WriteLine(e.ToString()); return null; }
-                catch (SerializationException e) { Console.WriteLine(e.ToString()); return null; }
-                catch (SecurityException e) { Console.WriteLine(e.ToString()); return null; }
+                catch (ArgumentNullException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
+                catch (SerializationException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
+                catch (SecurityException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
                 return data;
             }
         }
