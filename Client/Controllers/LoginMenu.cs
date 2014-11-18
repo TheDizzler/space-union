@@ -111,7 +111,7 @@ namespace SpaceUnionXNA.Controllers
             ButtonControl multiplayerButton = GuiHelper.CreateButton("Debug Game", -300, -300, 200, 50);
             multiplayerButton.Pressed += delegate(object sender, EventArgs arguments)
             {
-                game.StartGame();
+                game.EnterControlMenu();
             };
             mainScreen.Desktop.Children.Add(multiplayerButton);
 

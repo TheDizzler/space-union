@@ -21,7 +21,7 @@ namespace SpaceUnionXNA.Ships {
 		/// Reference to Game1
 		/// </summary>
 		protected Game1 game;
-
+    
 		/// <summary>
 		/// A restistance to movement so all objects will enventual slow to a stop
 		/// (not realistic in space but may play better)
@@ -87,6 +87,15 @@ namespace SpaceUnionXNA.Ships {
 
 		public TimeSpan inactiveStart;
 		public TimeSpan inactiveTime = TimeSpan.Zero;
+
+        public enum shipAction
+        {
+            forward,
+            turnLeft,
+            turnRight,
+            shoot,
+            altShoot
+        }
 		/// <summary>
 		/// Ship constructor
 		/// </summary>
@@ -211,7 +220,11 @@ namespace SpaceUnionXNA.Ships {
 
 		public virtual void control(KeyboardState keyState, GameTime gameTime) {
 
-
+            
+            if (keyState.IsKeyDown(game.keylist[(int)shipAction.forward]))
+            {
+                thrust(gameTime);
+            }
 			//Up Key toggles back thruster
 			if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W)) {
 				thrust(gameTime);

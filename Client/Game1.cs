@@ -54,7 +54,10 @@ namespace SpaceUnionXNA
         public LobbyBrowserMenu lobby_browser_menu;
         public LobbyMenu lobby_menu;
         public Screen mainScreen;
+        public ControlMenu control_menu;
         ShipSelectionScreen shipselectionScreen;
+
+        public List<Keys> keylist;
 
         //NETWORKING
         //public ClientCommHandler Communication { get; private set; }
@@ -93,6 +96,7 @@ namespace SpaceUnionXNA
             MainMenu,
             Multiplayer,
             Options,
+            ControlMenu,
             Credits,
             CreateLobby,
             LobbyBrowser,
@@ -129,6 +133,8 @@ namespace SpaceUnionXNA
 
             IsFixedTimeStep = false;
 
+            keylist = new List<Keys>();
+            keylist.Add(Keys.G);
             Assets = new AssetManager(Content);
         }
 
@@ -243,6 +249,9 @@ namespace SpaceUnionXNA
                 case GameState.Select:
                     shipselectionScreen.update();
                     break;
+                case GameState.ControlMenu:
+                    control_menu.Update(gameTime);
+                    break;
                 default:
                     break;
             }
@@ -293,6 +302,9 @@ namespace SpaceUnionXNA
                     break;
                 case GameState.Select:
                     shipselectionScreen.draw(spriteBatch);
+                    break;
+                case GameState.ControlMenu:
+                    control_menu.DrawMenu(gameTime);
                     break;
                 default:
                     break;
@@ -434,6 +446,11 @@ namespace SpaceUnionXNA
             shipselectionScreen = new ShipSelectionScreen(this);
         }
 
+        public void EnterControlMenu() 
+        {
+            currentGameState = GameState.ControlMenu;
+            control_menu = new ControlMenu(this);
+        }
 
         public void StartGame()
         {

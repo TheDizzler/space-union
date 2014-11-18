@@ -90,6 +90,7 @@
     <Compile Include="Animations\ScrollingBackground.cs" />
     <Compile Include="Animations\ShortExplosion.cs" />
     <Compile Include="Background.cs" />
+    <Compile Include="Controllers\ControlMenu.cs" />
     <Compile Include="Controllers\CreateLobbyMenu.cs" />
     <Compile Include="Controllers\CreditsMenu.cs">
       <SubType>Code</SubType>

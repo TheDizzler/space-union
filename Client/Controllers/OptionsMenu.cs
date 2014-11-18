@@ -124,6 +124,14 @@ namespace SpaceUnionXNA.Controllers
 
             createResolutionDropDown(mainScreen);        
             createWindowState(mainScreen);
+
+            //Controls
+            ButtonControl keyBindings = GuiHelper.CreateButton("Key Bindings", -80, -25, 100, 25);
+            keyBindings.Pressed += delegate(object sender, EventArgs arugments)
+            {
+                game.EnterControlMenu();
+            };
+            mainScreen.Desktop.Children.Add(keyBindings);
         }
 
         private void createWindowState(Screen mainScreen) {
