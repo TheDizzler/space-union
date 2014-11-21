@@ -134,7 +134,11 @@ namespace SpaceUnionXNA
             IsFixedTimeStep = false;
 
             keylist = new List<Keys>();
-            keylist.Add(Keys.G);
+            keylist.Add(Keys.I);
+            keylist.Add(Keys.J);
+            keylist.Add(Keys.L);
+            keylist.Add(Keys.O);
+            keylist.Add(Keys.P);
             Assets = new AssetManager(Content);
         }
 

@@ -88,6 +88,7 @@ namespace SpaceUnionXNA.Ships {
 		public TimeSpan inactiveStart;
 		public TimeSpan inactiveTime = TimeSpan.Zero;
 
+        /* Used to map ship's actions to keys */
         public enum shipAction
         {
             forward,
@@ -96,6 +97,7 @@ namespace SpaceUnionXNA.Ships {
             shoot,
             altShoot
         }
+
 		/// <summary>
 		/// Ship constructor
 		/// </summary>
