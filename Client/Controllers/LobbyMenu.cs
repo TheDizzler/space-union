@@ -16,6 +16,7 @@ using Nuclex.UserInterface.Controls;
 //using Data_Structures;
 using System.Threading;
 using SpaceUnionXNA;
+using SpaceUnionXNA.Animations;
 
 namespace SpaceUnionXNA.Controllers
 {
@@ -31,6 +32,9 @@ namespace SpaceUnionXNA.Controllers
         LabelControl player4Label;
         LabelControl player5Label;
         LabelControl player6Label;
+        private ScrollingBackground scroll;
+        private Rectangle WhiteBackground;
+        private Texture2D Background;
         bool isLeader = false;
 
         public LobbyMenu(Game1 game, String title)
@@ -38,17 +42,31 @@ namespace SpaceUnionXNA.Controllers
             this.game = game;
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
             lobbyTitle = title;
+            scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
+            scroll.setPosition(new Vector2((int)0, (int)0));
             CreateMenuControls(game.mainScreen);
+            Background = Game1.Assets.guiRectangle;
             new Thread(updatePlayerList).Start();
         }
 
         public void Update(GameTime gameTime)
         {
-
+            scroll.update();
         }
 
-        public void DrawMenu(GameTime gameTime)
+        public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin();
+            //WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 150, (int)game.mainScreen.Height / 2 - 150, 300, 225);
+
+            //WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 162, (int)game.mainScreen.Height / 2 - 162, 575, 325);
+            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 325, (int)game.mainScreen.Height / 2 - 325, 650, 650);
+
+            scroll.draw(spriteBatch);
+            spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
+            //spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
+            //spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
+            spriteBatch.End();
             game.gui_manager.Draw(gameTime);
         }
 

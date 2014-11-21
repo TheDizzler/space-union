@@ -259,28 +259,28 @@ namespace SpaceUnionXNA
             switch (currentGameState)
             {
                 case GameState.Login:
-                    login_menu.DrawMenu(gameTime);
+                    login_menu.DrawMenu(gameTime, spriteBatch);
                     break;
                 case GameState.MainMenu:
-                    main_menu.DrawMenu(gameTime);
+                    main_menu.DrawMenu(gameTime, spriteBatch);
                     break;
                 case GameState.Multiplayer:
-                    multiplayer_menu.DrawMenu(gameTime);
+                    multiplayer_menu.DrawMenu(gameTime, spriteBatch);
                     break;
                 case GameState.Options:
-                    options_menu.DrawMenu(gameTime);
+                    options_menu.DrawMenu(gameTime, spriteBatch);
                     break;
                 case GameState.Credits:
-                    credits_menu.DrawMenu(gameTime);
+                    credits_menu.DrawMenu(gameTime, spriteBatch);
                     break;
                 case GameState.CreateLobby:
-                    create_lobby_menu.DrawMenu(gameTime);
+                    create_lobby_menu.DrawMenu(gameTime, spriteBatch);
                     break;
                 case GameState.LobbyBrowser:
                     lobby_browser_menu.DrawMenu(gameTime, spriteBatch);
                     break;
                 case GameState.Lobby:
-                    lobby_menu.DrawMenu(gameTime);
+                    lobby_menu.DrawMenu(gameTime, spriteBatch);
                     break;
                 case GameState.Playing:
                     GraphicsDevice.Clear(Color.Black);

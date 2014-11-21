@@ -13,28 +13,37 @@ using Nuclex.Input;
 using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;
 using SpaceUnionXNA;
+using SpaceUnionXNA.Animations;
 
 namespace SpaceUnionXNA.Controllers
 {
     public class MainMenu
     {
         private Game1 game;
+        private ScrollingBackground scroll;
 
         public MainMenu(Game1 game)
         {
             this.game = game;
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
+            scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
+            scroll.setPosition(new Vector2((int)0, (int)0));
             CreateMenuControls(game.mainScreen);
         }
 
         public void Update(GameTime gameTime)
         {
-            
+            scroll.update();
         }
 
-        public void DrawMenu(GameTime gameTime)
+        public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
         {
-           
+            spriteBatch.Begin();
+            //WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 150, (int)game.mainScreen.Height / 2 - 150, 300, 225);
+
+            scroll.draw(spriteBatch);
+            //spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
+            spriteBatch.End();
             game.gui_manager.Draw(gameTime);
         }
 
