@@ -355,6 +355,8 @@ namespace SpaceUnionXNA.Controllers
             }
 
             game.setScreenSize(int.Parse(width), int.Parse(height), currentWinLabel.Text);
+            scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
+            scroll.setPosition(new Vector2((int)0, (int)0));
             CreateMenuControls(game.mainScreen);
         }
 
