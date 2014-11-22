@@ -46,6 +46,18 @@ namespace Data_Structures
         /// The amount of times the current user has died.
         /// </summary>
         public byte Deaths { get; set; }
+        /// <summary>
+        /// Indicates whether or not the player
+        /// is currently active on the map or not.
+        /// </summary>
+        public bool IsActive { get; set; }
+        /// <summary>
+        /// True indicates Team Red, False indicates
+        /// Team Blue.
+        /// </summary>
+        public bool Team { get; set; }
+
+        public Projectile[] Bullets { get; set; }
 
         //projectiles fired, direction, velocity
 

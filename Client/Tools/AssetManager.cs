@@ -117,6 +117,10 @@ namespace SpaceUnionXNA.Tools {
 		public Texture2D shipMapIcon;
 		public  Texture2D pixel;
 
+        public Texture2D alpha_ship_texture;
+        public Texture2D theta_ship_texture;
+        public Texture2D omega_ship_texture;
+
 
 		public AssetManager(ContentManager cntnt) {
 
@@ -163,21 +167,22 @@ namespace SpaceUnionXNA.Tools {
 			explosionsBig = Content.Load<Texture2D>("Animations/big fireballs with blur");
 
 
-			waterPlanet = Content.Load<Texture2D>("StellarObjects/waterplanet (256x256)");
-			moon = Content.Load<Texture2D>("StellarObjects/moon (115x117)");
-			asteroid = Content.Load<Texture2D>("StellarObjects/asteroid(56x56)");
+			//waterPlanet = Content.Load<Texture2D>("StellarObjects/waterplanet (256x256)");
+			//moon = Content.Load<Texture2D>("StellarObjects/moon (115x117)");
+			//asteroid = Content.Load<Texture2D>("StellarObjects/asteroid(56x56)");
 
-			spaceShipTest = Content.Load<Texture2D>("Spaceships/spaceshiptest");
-			ufo = Content.Load<Texture2D>("Spaceships/ufoship (128x128)");
-			stunt = Content.Load<Texture2D>("Spaceships/scoutship (128x128)");
+			
+			alpha_ship_texture = Content.Load<Texture2D>("Spaceships/alpha_ship");
+            theta_ship_texture = Content.Load<Texture2D>("Spaceships/theta_ship");
+            omega_ship_texture = Content.Load<Texture2D>("Spaceships/omega_ship");
 			///Added by Matthew Baldock
-			zoid = Content.Load<Texture2D>("Spaceships/zoidship");
-			bug = Content.Load<Texture2D>("Spaceships/bug (16x16)");
+			//zoid = Content.Load<Texture2D>("Spaceships/zoidship");
+			//bug = Content.Load<Texture2D>("Spaceships/bug2 (16x16)");
 			///Added by Matthew Baldock
 			//galactusship = Content.Load<Texture2D>("Spaceships/galactuship.png");
 
 
-			winflag1 = Content.Load<Texture2D>("WinFlags/WinFlag1");
+			//winflag1 = Content.Load<Texture2D>("WinFlags/WinFlag1");
 
 			laser = Content.Load<Texture2D>("Projectiles/laser");
 			missile = Content.Load<Texture2D>("Projectiles/short missile (16x16)");

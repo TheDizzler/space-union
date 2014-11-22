@@ -32,13 +32,13 @@ namespace SpaceUnionXNA.Controllers
         LabelControl player5Label;
         LabelControl player6Label;
 
-        public LobbyMenu(Game1 game, String title)
+        public LobbyMenu(Game1 game)
         {
             this.game = game;
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
-            lobbyTitle = title;
             CreateMenuControls(game.mainScreen);
             game.Player.Ready = false;
+            game.GameStarted = false;
             new Thread(updatePlayerList).Start();
         }
 
@@ -46,8 +46,8 @@ namespace SpaceUnionXNA.Controllers
         {
             if (game.Communication.getGameStartSignal() != null)
             {
+                Console.WriteLine("ingame == true");
                 game.GameStarted = true;
-                Console.WriteLine("/////////////////////////////////// GAME STARTED /////////////////////////////////////////////////");
                 game.StartGame();
             }
         }
@@ -62,8 +62,7 @@ namespace SpaceUnionXNA.Controllers
             //Menu Name Label
             LabelControl menuNameLabel = new LabelControl();
             //NETWORKING
-            //menuNameLabel.Text = "Lobby: " + game.roomInfo.RoomName;
-            menuNameLabel.Text = "Lobby: ";
+            menuNameLabel.Text = "Lobby: " + game.roomInfo.RoomName;
 
             menuNameLabel.Bounds = GuiHelper.MENU_TITLE_LABEL;
             mainScreen.Desktop.Children.Add(menuNameLabel);
@@ -173,18 +172,21 @@ namespace SpaceUnionXNA.Controllers
             ButtonControl startGameButton = GuiHelper.CreateButton("Start Game", -400, -75, 100, 60);
             startGameButton.Pressed += delegate(object sender, EventArgs arguments)
             {
-                RoomInfo roomInfo = (RoomInfo)game.Communication.sendRoomInfoRequest(game.Player, game.roomInfo.RoomNumber);
-                if (roomInfo != null)
-                    game.roomInfo = roomInfo;
-                
-                foreach (GameData player in game.roomInfo.Players)
+                game.Communication.sendStartRequest(game.Player, game.roomInfo.RoomNumber);
+
+                /*
+                if (game.roomInfo != null)
                 {
-                    if (!player.Player.Ready)
+                    foreach (GameData player in game.roomInfo.Players)
                     {
-                        return;
+                        if (!player.Player.Ready)
+                        {
+                            return;
+                        }
                     }
                 }
                 game.Communication.sendStartRequest(game.Player, game.roomInfo.RoomNumber);
+                 */
             };
 
             if (game.Player.Username != game.roomInfo.Host)
@@ -210,14 +212,18 @@ namespace SpaceUnionXNA.Controllers
             int roomNumber = game.roomInfo.RoomNumber;
             game.Player.GameRoom = roomNumber;
 
+            
+            RoomInfo roomInfo;
             while (game.currentGameState == SpaceUnionXNA.Game1.GameState.Lobby)
             {
+                Console.WriteLine("Updating room info...");
+                Console.WriteLine("STATE: = " + game.currentGameState.ToString());
+
                 if (game.GameStarted)
                     break;
 
-                Console.WriteLine("Updating room info...");
                 //NETWORKING
-                RoomInfo roomInfo = (RoomInfo)game.Communication.sendRoomInfoRequest(game.Player, roomNumber);
+                roomInfo = (RoomInfo)game.Communication.sendRoomInfoRequest(game.Player, roomNumber);
                 if (roomInfo != null)
                 {
                     game.roomInfo = roomInfo;
@@ -248,7 +254,7 @@ namespace SpaceUnionXNA.Controllers
                         }
                         counter++;
                     }
-                    Thread.Sleep(500);
+                    Thread.Sleep(50);
                 }
             }
         }

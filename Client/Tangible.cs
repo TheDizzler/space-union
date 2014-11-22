@@ -43,7 +43,7 @@ namespace SpaceUnionXNA {
 			return hitBox;
 		}
 
-		protected int maxHealth = 1;
+		protected int maxHealth = 100;
 		protected int currentHealth;
 		/// <summary>
 		/// Get % health remaining
@@ -354,7 +354,7 @@ namespace SpaceUnionXNA {
 		/// </summary>
 		public virtual void destroy() {
 			isActive = false;
-			GameplayScreen.targets.Remove(this);
+			//GameplayScreen.targets.Remove(this);
 		}
 
 		/// <summary>

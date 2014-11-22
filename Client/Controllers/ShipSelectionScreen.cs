@@ -69,10 +69,10 @@ namespace SpaceUnionXNA.Controllers {
 
 			shipSelectionArray = new ShipButton[SHIPCOUNT];
 			/* Actual ships used; commented out to test other functions */
-			shipSelectionArray[0] = new ShipButton(new UFO(game));
-			shipSelectionArray[1] = new ShipButton(new Scout(game));
-			shipSelectionArray[2] = new ShipButton(new Zoid(game));
-			shipSelectionArray[3] = new ShipButton(new TestShip(game));
+			//shipSelectionArray[0] = new ShipButton(new UFO(game));
+			//shipSelectionArray[1] = new ShipButton(new Scout(game));
+			//shipSelectionArray[2] = new ShipButton(new Zoid(game));
+			//shipSelectionArray[3] = new ShipButton(new TestShip(game));
 
 			/* For Testing X amount of ships; Remove */
 			//for (int i = 0; i < SHIPCOUNT; i++)
@@ -88,7 +88,7 @@ namespace SpaceUnionXNA.Controllers {
 												  (int) (shipSelectHeight + 100)));
 
 			/* Sets the default selected ship */
-			selectedShip = new Bug(game);
+			selectedShip = new AlphaShip(game, Color.Blue);
 			displaySelectedShip(selectedShip);
 			hoverShipTexture = selectedShip.texture;
 			shipSelectionArray[0].selected = true;

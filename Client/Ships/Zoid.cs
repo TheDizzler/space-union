@@ -17,8 +17,8 @@ namespace SpaceUnionXNA.Ships {
 		/// Set up the ships unique attributes here.
 		/// </summary>
 		/// <param name="game1"></param>
-		public Zoid(Game1 game1)
-			: base(assets.zoid, assets.missile, game1) {
+		public Zoid(Game1 game1, Color teamColor)
+			: base(assets.zoid, assets.missile, game1, teamColor) {
 
 			maxSpeed = 7;
 			accelSpeed = 70.5f;

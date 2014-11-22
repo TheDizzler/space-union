@@ -11,7 +11,7 @@ namespace ErrorLogging
     public class Logging
     {
         private static FileStream Log { get; set; }
-        public static Logging()
+        static Logging()
         {
             string path = "";
             try

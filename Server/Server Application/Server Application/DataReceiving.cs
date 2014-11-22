@@ -65,12 +65,12 @@ namespace Server_Application
                 Data message = (Data)DataControl.receiveTCPData(TCPListener);
                 if (message == null)
                     continue;
+                Console.WriteLine("Received message: " + message.Type);
                 switch (message.Type)
                 {
                     case Constants.LOGIN_REQUEST:
-                        {
-                            new Thread(() => login.handleLoginRequest((Player)message, owner)).Start();
-                        }
+                        Console.WriteLine("Someone connected to login. " + ((Player)message).Username);
+                        new Thread(() => login.handleLoginRequest((Player)message, owner)).Start();
                         break;
                     case Constants.PLAYER_REQUEST:
                         new Thread(() => handlePlayerRequest((PlayerRequest)message)).Start();
@@ -93,6 +93,7 @@ namespace Server_Application
             {
                 GameData clientData = (GameData)DataControl.receiveUDPData((UdpClient)UDPListener);
                 owner.updatePlayer(clientData);
+                Console.WriteLine("Number of bullets: " + clientData.Bullets.Length);
             }
         }
 
@@ -133,6 +134,9 @@ namespace Server_Application
                     break;
                 case Constants.PLAYER_REQUEST_START:
                     owner.startGame(request.Sender, request.RoomNumber);
+                    break;
+                case Constants.PLAYER_REQUEST_END:
+
                     break;
             }
         }

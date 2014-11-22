@@ -128,27 +128,27 @@ namespace SpaceUnionXNA {
 			//spriteBatch.DrawString(font, "Screen coords: " + mouseScreen.Position,
 			//	line3Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 
-			spriteBatch.DrawString(font, "mouseWorld: " + mouseWorld,
-				line5Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
+			//spriteBatch.DrawString(font, "mouseWorld: " + mouseWorld,
+			//	line5Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 
-			//spriteBatch.DrawString(font, "Ship position: " + playerShip.position,
-			//	line3Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
+			spriteBatch.DrawString(font, "Ship position: " + playerShip.position,
+				line3Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 
-			spriteBatch.DrawString(font, "accel: " + accel,
-				line1Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
+			//spriteBatch.DrawString(font, "accel: " + accel,
+			//	line1Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 
 			//spriteBatch.DrawString(font, "totalTime: " + totalTime,
 			//	line7Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 
 			//spriteBatch.DrawString(font, "collidetarget: " + target,
 			//	line7Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
-
+            /*
 			if (playerShip is Scout) {
 				spriteBatch.DrawString(font, "BeamLength: " + playerShip.getBeam().beamLength
 					+ " distToTarget: " + playerShip.getBeam().distToTarget,
 					line7Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 			}
-
+            */
 			lastVelocity = playerShip.velocity;
 			lastPosition = playerShip.position;
 

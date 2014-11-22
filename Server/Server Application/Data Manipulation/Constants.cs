@@ -35,6 +35,7 @@ namespace Data_Manipulation
         /// </summary>
         public const int TCPMessageClient = 6983;
 
+        public const int GamePeriod = 10;
 
         // MESSAGE TYPES
 
@@ -99,6 +100,7 @@ namespace Data_Manipulation
         public const byte PLAYER_REQUEST_SHIP = 8;
 
         public const byte PLAYER_REQUEST_START = 9;
+        public const byte PLAYER_REQUEST_END = 10;
 
         // END REQUEST TYPES
 
