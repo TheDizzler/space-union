@@ -29,6 +29,7 @@ Content\Buttons\gamelobby.xnb
 Content\Buttons\createlobby.xnb
 Content\Buttons\lobbybrowser.xnb
 Content\Spaceships\galactuship.xnb
+<<<<<<< remotes/origin/gfx_Matthew:SpaceUnionContent/SpaceUnionContent/SpaceUnionContent.csproj.PSM.cachefile
 Content\SpriteFonts\SpriteFont1.xnb
 Content\Buttons\shipselection.xnb
 Content\Buttons\optionsbutton.xnb
@@ -53,3 +54,18 @@ Content\Backgrounds\beautifulbg.png
 Content\Backgrounds\doodlebg.png
 Content\StellarObjects\asteroid(56x56).png
 Content\Projectiles\short missile (16x16).png
+=======
+Content\Spaceships\shuttle.xnb
+Content\Spaceships\spaceshiptest.xnb
+Content\Spaceships\ufoship (128x128).xnb
+Content\Spaceships\zoidship.xnb
+Content\Animations\redlaserbeam (25x11).xnb
+Content\StellarObjects\asteroid(56x56).xnb
+Content\StellarObjects\moon (115x117).xnb
+Content\StellarObjects\waterplanet (256x256).xnb
+Content\WinFlags\WinFlag1.xnb
+Content\Spaceships\scoutship (64x64).xnb
+Content\Spaceships\rocket (64x64).xnb
+Content\StellarObjects\rock (32x32).xnb
+Content\SpriteFonts\SpriteFont1.xnb
+>>>>>>> local:Client/SpaceUnionXNA.csproj.Debug.cachefile

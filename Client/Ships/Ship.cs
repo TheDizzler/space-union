@@ -24,7 +24,7 @@ namespace SpaceUnion.Ships {
 		/// </summary>
 		public static float dampening = .1f;
 
-		protected float maxSpeed = 100;
+		protected float maxSpeed = 40;
 		/// <summary>
 		/// How many units(pixels) per second a ship will travel more per second of thrust
 		/// </summary>
@@ -141,6 +141,7 @@ namespace SpaceUnion.Ships {
 		/// No max speed cap
 		/// </summary>
 		/// <param name="gameTime"></param>
+<<<<<<< remotes/origin/gfx_Matthew
 		public virtual void thrust(GameTime gameTime) {
             ///Max speed logic by
             ///Matthew Baldock
@@ -174,6 +175,33 @@ namespace SpaceUnion.Ships {
             
             
            
+=======
+		protected virtual void thrust(GameTime gameTime) {
+            /*
+			Vector2 tempVelocity = velocity;
+			//Vectorize the unit acceleration
+			Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
+			acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+			Vector2.Add(ref tempVelocity, ref acceleration, out velocity);
+
+            */
+
+			///Max speed logic by
+			///Matthew Baldock
+			///Steven Chen
+			Vector2 tempVelocity = velocity;
+			Vector2 acceleration = new Vector2((float) Math.Sin(rotation), (float) -Math.Cos(rotation));
+			acceleration *= accelSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+			Vector2.Add(ref tempVelocity, ref acceleration, out tempVelocity);
+
+			if (tempVelocity.Length() > maxSpeed) {
+                acceleration *= 0;
+                Vector2.Add(ref velocity, ref acceleration, out velocity);
+			}
+			if (tempVelocity.Length() < maxSpeed) {
+				Vector2.Add(ref velocity, ref acceleration, out velocity);
+			}
+>>>>>>> local
 		}
 
 

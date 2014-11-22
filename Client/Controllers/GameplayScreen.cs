@@ -36,8 +36,13 @@ namespace SpaceUnion.Controllers {
 
 		private AssetManager Assets;
 
+<<<<<<< remotes/origin/gfx_Matthew
 		static public int worldWidth = 8000;
 		static public int worldHeight = 6000;
+=======
+		static public int worldWidth = 5000;
+		static public int worldHeight = 1600;
+>>>>>>> local
 
 		private int SCREEN_WIDTH;
 		private int SCREEN_HEIGHT;
@@ -156,7 +161,6 @@ namespace SpaceUnion.Controllers {
 
 			foreach (Planet planet in planets)
 				planet.update(gameTime, quadTree, targets);
-
 
 
 			/* Transform mouse input from view to world position
