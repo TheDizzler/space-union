@@ -214,6 +214,10 @@ namespace SpaceUnionXNA.Tools {
 			laserbolt1 = Content.Load<SoundEffect>("SFX/Laser High 1");
 			laserbolt2 = Content.Load<SoundEffect>("SFX/Laser High 2");
 			laserbolt3 = Content.Load<SoundEffect>("SFX/Laser High 3");
+
+
+            bgrndMusic1 = Content.Load<SoundEffect>("SFX/game_music_sample");
+            bgrndMusic2 = Content.Load<SoundEffect>("SFX/Test");
 		}
 	}
 }
