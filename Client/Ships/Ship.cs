@@ -221,12 +221,36 @@ namespace SpaceUnionXNA.Ships {
 
 
 		public virtual void control(KeyboardState keyState, GameTime gameTime) {
-
-            
+            /* Uses key bindings */
             if (keyState.IsKeyDown(game.keylist[(int)shipAction.forward]))
             {
                 thrust(gameTime);
             }
+            if (keyState.IsKeyDown(game.keylist[(int)shipAction.turnLeft]))
+            {
+                rotateLeft(gameTime);
+            }
+            if (keyState.IsKeyDown(game.keylist[(int)shipAction.turnRight]))
+            {
+                rotateRight(gameTime);
+            }
+            if (keyState.IsKeyDown(game.keylist[(int)shipAction.shoot]))
+            {
+                firing = true;
+            }
+            else
+            {
+                firing = false;
+            }
+            if (keyState.IsKeyDown(game.keylist[(int)shipAction.altShoot]))
+            {
+                altFiring = true;
+            }
+            else
+            {
+                altFiring = false;
+            }
+            /*
 			//Up Key toggles back thruster
 			if (keyState.IsKeyDown(Keys.Up) || keyState.IsKeyDown(Keys.W)) {
 				thrust(gameTime);
@@ -260,7 +284,7 @@ namespace SpaceUnionXNA.Ships {
 			} else {
 				altFiring = false;
 			}
-
+            */
 			lastState = keyState;
 
 		}
