@@ -26,8 +26,9 @@ namespace SpaceUnionXNA.Controllers
         private LabelControl errorText;
         private bool errors = false;
         InputControl accountNameInput;
-
-
+        private KeyboardState keyState;
+        private bool tabFlag = true;
+        
         public LoginMenu(Game1 game)
         {
             this.game = game;
@@ -44,6 +45,30 @@ namespace SpaceUnionXNA.Controllers
         public void DrawMenu(GameTime gameTime)
         {
             game.gui_manager.Draw(gameTime);
+            keyState = Keyboard.GetState();
+            
+            /* Switches between account input and password input */
+            if (keyState.IsKeyDown(Keys.Tab))
+            {
+                if (passwordInput.HasFocus)
+                {
+                    if (tabFlag)
+                        game.mainScreen.FocusedControl = accountNameInput;
+                }
+                else if (accountNameInput.HasFocus && accountNameInput.Text != "" && accountNameInput.Text[accountNameInput.Text.Length - 1].CompareTo((char)Keys.Tab) == 0)
+                {
+                    accountNameInput.Text = accountNameInput.Text.Substring(0, accountNameInput.Text.Length - 1);
+                    if (tabFlag)
+                        game.mainScreen.FocusedControl = passwordInput;
+                }
+                tabFlag = false;
+            }
+
+            /* Ensures that switching occurs only once per tab down */
+            if (keyState.IsKeyUp(Keys.Tab)) 
+            {
+                tabFlag = true;
+            }
             passwordLabel.Text = passwordInput.GetText();
         }
 

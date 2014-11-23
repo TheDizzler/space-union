@@ -55,6 +55,20 @@ namespace SpaceUnionXNA
                     this.CaretPosition = this.Text.Length;
                 }
             }
+            /* Added by Steven; Prevents tab character */
+            if (character.CompareTo((char)Keys.Tab) == 0)
+            {
+                if (enteredText.Length >= 1)
+                {
+                    this.Text = string.Empty;
+                    for (int i = 0; i < enteredText.Length - 1; i++)
+                    {
+                        this.Text += "*";
+                    }
+                    this.CaretPosition = this.Text.Length;
+                    enteredText = this.Text;
+                }
+            }
         }
         /*
         protected override void OnKeyReleased(Microsoft.Xna.Framework.Input.Keys key)

@@ -13,6 +13,7 @@ using Nuclex.UserInterface.Controls.Desktop;
 using Nuclex.Input;
 using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;
+
 using SpaceUnionXNA;
 
 namespace SpaceUnionXNA.Controllers
@@ -30,46 +31,70 @@ namespace SpaceUnionXNA.Controllers
         private ButtonControl currentKeyChange;
         private InputControl keyToEnter;
         private ButtonControl backButton;
-        
+        private LabelControl keyToEnterLabel;
+        private KeyboardState keyState;
+
         private bool changingKey = false;
         private string oldKey;
-        private bool eraseHelpText = true;
         private int keyToChange = 0;
+        private List<Keys> nonInputKeys;
+
+        private Screen screen;
 
         public ControlMenu(Game1 game)
         {
             this.game = game;
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
             CreateMenuControls(game.mainScreen);
+            screen = game.mainScreen;
+            nonInputKeys = new List<Keys>();
+            nonInputKeys.Add(Keys.LeftControl);
+            nonInputKeys.Add(Keys.LeftAlt);
+            nonInputKeys.Add(Keys.LeftShift);
+            nonInputKeys.Add(Keys.RightAlt);
+            nonInputKeys.Add(Keys.RightControl);
+            nonInputKeys.Add(Keys.RightShift);
         }
 
         public void Update(GameTime gameTime)
         {
-            /* Changes the input field to blank after user clicks on the field */
-            if (keyToEnter.HasFocus && eraseHelpText)
+ 
+        }
+
+        public void DrawMenu(GameTime gameTime)
+        {
+            game.gui_manager.Draw(gameTime);
+            keyState = Keyboard.GetState();
+
+            /* Used to allow for modifier keys to be bound */
+            if (changingKey)
             {
-                keyToEnter.Text = "";
-                eraseHelpText = false;
-                changingKey = true;
+                foreach (Keys key in nonInputKeys)
+                {
+                    if (keyState.IsKeyDown(key))
+                        keyToEnter.Text = "hi"; // Random text
+                }
             }
 
             /* Occurs after a key has been typed into the field and binds the new key */
             if (changingKey && keyToEnter.Text != "")
             {
-                char c;
-                c = char.ToUpper(keyToEnter.Text[0]);
-                validateKey();
-                currentKeyChange.Text = c.ToString();
-                changingKey = false;
-                game.keylist[keyToChange] = (Keys)((int)c);
-                keyToEnter.Bounds = GuiHelper.CenterBound(4000, 4000, 200, 32);
-            }
-        }
+                if (validateKey(keyState.GetPressedKeys()))
+                {
+                    currentKeyChange.Text = keyState.GetPressedKeys()[0].ToString();
+                    game.keylist[keyToChange] = keyState.GetPressedKeys()[0];
 
-        public void DrawMenu(GameTime gameTime)
-        {
-           
-            game.gui_manager.Draw(gameTime);
+                    keyToEnter.Bounds = GuiHelper.CenterBound(4000, 4000, 200, 32);
+                    keyToEnterLabel.Text = "";
+                    
+                    changingKey = false;
+                }
+                else
+                {
+                    keyToEnterLabel.Text = keyState.GetPressedKeys()[0].ToString() + " Key already in use, enter a new key";
+                    keyToEnter.Text = "";
+                }
+            }
         }
 
 
@@ -81,7 +106,7 @@ namespace SpaceUnionXNA.Controllers
             keyButton0 = GuiHelper.CreateButton(game.keylist[0].ToString(), 145, -175, 70, 32);
             keyButton0.Pressed += delegate(object sender, EventArgs arguments)
             { 
-                changeKey(0, keyButton0);       
+                changeKey(0, keyButton0, forwardLabel);       
             };
             mainScreen.Desktop.Children.Add(keyButton0);
 
@@ -91,7 +116,7 @@ namespace SpaceUnionXNA.Controllers
             keyButton1 = GuiHelper.CreateButton(game.keylist[1].ToString(), 145, -130, 70, 32);
             keyButton1.Pressed += delegate(object sender, EventArgs arguments)
             {
-                changeKey(1, keyButton1);
+                changeKey(1, keyButton1, leftLabel);
             };
             mainScreen.Desktop.Children.Add(keyButton1);
 
@@ -101,7 +126,7 @@ namespace SpaceUnionXNA.Controllers
             keyButton2 = GuiHelper.CreateButton(game.keylist[2].ToString(), 145, -85, 70, 32);
             keyButton2.Pressed += delegate(object sender, EventArgs arguments)
             {
-                changeKey(2, keyButton2);
+                changeKey(2, keyButton2, rightLabel);
             };
             mainScreen.Desktop.Children.Add(keyButton2);
 
@@ -111,7 +136,7 @@ namespace SpaceUnionXNA.Controllers
             keyButton3 = GuiHelper.CreateButton(game.keylist[3].ToString(), 145, -40, 70, 32);
             keyButton3.Pressed += delegate(object sender, EventArgs arguments)
             {
-                changeKey(3, keyButton3);
+                changeKey(3, keyButton3, fireLabel);
             };
             mainScreen.Desktop.Children.Add(keyButton3);
 
@@ -121,11 +146,15 @@ namespace SpaceUnionXNA.Controllers
             keyButton4 = GuiHelper.CreateButton(game.keylist[4].ToString(), 145, 5, 70, 32);
             keyButton4.Pressed += delegate(object sender, EventArgs arguments)
             {
-                changeKey(4, keyButton4);
+                changeKey(4, keyButton4, altFireLabel);
             };
             mainScreen.Desktop.Children.Add(keyButton4);
 
             // User input for key change
+            keyToEnterLabel = GuiHelper.CreateLabel("", 0, 110, 200, 32);
+            mainScreen.Desktop.Children.Add(keyToEnterLabel);
+
+            // Used to determine if the user pressed a key
             keyToEnter = GuiHelper.CreateInput("", 4000, 4000, 200, 32);
             mainScreen.Desktop.Children.Add(keyToEnter);
 
@@ -148,13 +177,32 @@ namespace SpaceUnionXNA.Controllers
         /// </summary>
         /// <param name="keyIndex"></param>
         /// <param name="currentButton"></param>
-        private void changeKey(int keyIndex, ButtonControl currentButton)
+        private void changeKey(int keyIndex, ButtonControl currentButton, LabelControl currentLabel)
         {
-            keyToEnter.Bounds = GuiHelper.CenterBound(0, 80, 200, 32);
-            currentKeyChange = currentButton;
             keyToChange = keyIndex;
+            currentKeyChange = currentButton;
             oldKey = keyToEnter.Text;
-            keyToEnter.Text = "Enter a new key";
+            
+            keyToEnter.Text = "";
+            screen.FocusedControl = keyToEnter;
+            
+            keyToEnterLabel.Text = "Enter a new key for " + currentLabel.Text;
+            changingKey = true;
+        }
+
+        /// <summary>
+        /// Checks for any existing keys already in use
+        /// </summary>
+        /// <param name="keys"></param>
+        /// <returns></returns>
+        private bool validateKey(Keys[] keys)
+        {
+            foreach (Keys key in game.keylist)
+            {
+                if (key == keys[0])
+                    return false;
+            }
+            return true;
         }
     }
 }

@@ -106,6 +106,91 @@ namespace SpaceUnionXNA.Controllers
             menuTitleLabel.Bounds = GuiHelper.MENU_TITLE_LABEL;
             mainScreen.Desktop.Children.Add(menuTitleLabel);
 
+            LabelControl currentSoundLabel = GuiHelper.CreateLabel(game.currentSound, 300, 0, 50, 25);
+
+            LabelControl currentMusicLabel = GuiHelper.CreateLabel(game.currentMusic, 300, 50, 50, 25);
+
+
+            LabelControl soundControlLabel = GuiHelper.CreateLabel("Sound", -100, 0, 50, 25);
+            mainScreen.Desktop.Children.Add(soundControlLabel);
+
+            LabelControl musicControlLabel = GuiHelper.CreateLabel("Music", -100, 50, 50, 25);
+            mainScreen.Desktop.Children.Add(musicControlLabel);
+
+            ButtonControl soundOffButton = GuiHelper.CreateButton("OFF", -35, 0, 70, 32);
+            soundOffButton.Pressed += delegate(object sender, EventArgs arguments)
+            {
+                currentSoundLabel.Text = "Off";
+                game.currentSound = "Off";
+
+            };
+            mainScreen.Desktop.Children.Add(soundOffButton);
+
+            ButtonControl soundLowButton = GuiHelper.CreateButton("LOW", 45, 0, 70, 32);
+            soundLowButton.Pressed += delegate(object sender, EventArgs arguments)
+            {
+                currentSoundLabel.Text = "Low";
+                game.currentSound = "Low";
+
+            };
+            mainScreen.Desktop.Children.Add(soundLowButton);
+
+            ButtonControl soundMediumButton = GuiHelper.CreateButton("MED", 125, 0, 70, 32);
+            soundMediumButton.Pressed += delegate(object sender, EventArgs arguments)
+            {
+                currentSoundLabel.Text = "Medium";
+                game.currentSound = "Medium";
+
+            };
+            mainScreen.Desktop.Children.Add(soundMediumButton);
+
+            ButtonControl soundHighButton = GuiHelper.CreateButton("HIGH", 210, 0, 70, 32);
+            soundHighButton.Pressed += delegate(object sender, EventArgs arguments)
+            {
+                currentSoundLabel.Text = "High";
+                game.currentSound = "High";
+
+            };
+            mainScreen.Desktop.Children.Add(soundHighButton);
+
+
+            ButtonControl musicOffButton = GuiHelper.CreateButton("OFF", -35, 50, 70, 32);
+            musicOffButton.Pressed += delegate(object sender, EventArgs arguments)
+            {
+                currentMusicLabel.Text = "Off";
+                game.currentMusic = "Off";
+
+            };
+            mainScreen.Desktop.Children.Add(musicOffButton);
+
+            ButtonControl musicLowButton = GuiHelper.CreateButton("LOW", 45, 50, 70, 32);
+            musicLowButton.Pressed += delegate(object sender, EventArgs arguments)
+            {
+                currentMusicLabel.Text = "Low";
+                game.currentMusic = "Low";
+
+            };
+            mainScreen.Desktop.Children.Add(musicLowButton);
+
+            ButtonControl musicMediumButton = GuiHelper.CreateButton("MED", 125, 50, 70, 32);
+            musicMediumButton.Pressed += delegate(object sender, EventArgs arguments)
+            {
+                currentMusicLabel.Text = "Medium";
+                game.currentMusic = "Medium";
+            };
+            mainScreen.Desktop.Children.Add(musicMediumButton);
+
+            ButtonControl musicHighButton = GuiHelper.CreateButton("HIGH", 210, 50, 70, 32);
+            musicHighButton.Pressed += delegate(object sender, EventArgs arguments)
+            {
+                currentMusicLabel.Text = "High";
+                game.currentMusic = "High";
+            };
+            mainScreen.Desktop.Children.Add(musicHighButton);
+            //Logout Button.
+            mainScreen.Desktop.Children.Add(currentSoundLabel);
+            mainScreen.Desktop.Children.Add(currentMusicLabel);
+            
             //Logout Button.
             ButtonControl logoutButton = GuiHelper.CreateButton("Back", 175, 275, 70, 32);
             logoutButton.Pressed += delegate(object sender, EventArgs arguments)

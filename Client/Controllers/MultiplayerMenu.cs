@@ -46,7 +46,8 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(menuTitleLabel);
             
             //Logout Button.
-            ButtonControl logoutButton = GuiHelper.CreateButton("Back", 0, 150, 70, 32);
+
+            ButtonControl logoutButton = GuiHelper.CreateButton("Back", 0, 100, 70, 32);
             logoutButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterMainMenu();
@@ -54,7 +55,7 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(logoutButton);
 
             //Multiplayer Button.
-            ButtonControl lobbyBrowserButton = GuiHelper.CreateButton("Lobby Browser", 0, 25, 200, 32);
+            ButtonControl lobbyBrowserButton = GuiHelper.CreateButton("Lobby Browser", 0, 0, 200, 32);
             lobbyBrowserButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterLobbyBrowserMenu();
@@ -62,7 +63,7 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(lobbyBrowserButton);
 
             //Create Lobby Button.
-            ButtonControl createLobbyButton = GuiHelper.CreateButton("Create Lobby", 0, -25, 200, 32);
+            ButtonControl createLobbyButton = GuiHelper.CreateButton("Create Lobby", 0, -100, 200, 32);
             createLobbyButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterCreateLobbyMenu();

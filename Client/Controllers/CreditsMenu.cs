@@ -46,7 +46,7 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(menuTitleLabel);
             
             //Logout Button.
-            ButtonControl logoutButton = GuiHelper.CreateButton("Back", -75, -400, 70, 32);
+            ButtonControl logoutButton = GuiHelper.CreateButton("Back", 0, 100, 70, 32);
             logoutButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterMainMenu();

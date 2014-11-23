@@ -56,6 +56,8 @@ namespace SpaceUnionXNA
         public Screen mainScreen;
         public ControlMenu control_menu;
         ShipSelectionScreen shipselectionScreen;
+        public string currentSound = "Medium";
+        public string currentMusic = "Medium";
 
         public List<Keys> keylist;
 
@@ -186,6 +188,7 @@ namespace SpaceUnionXNA
 
             List<Texture2D> textures = new List<Texture2D>();
             textures.Add(Assets.moltenBullet);
+            textures.Add(Assets.missile);
             particleEngine = new ParticleEngine(textures, new Vector2(400, 240));
             shipselectionScreen = new ShipSelectionScreen(this);
             IsMouseVisible = true;

@@ -97,8 +97,8 @@ namespace SpaceUnionXNA.Gui
             {
                
                TopRowLine = new Rectangle(RowRectOriginX, RowRectOriginY, RowRectSizeX, 1);
-               SecondRowLine = new Rectangle(RowRectOriginX, RowRectOriginY + ((1) * RowRectSizeY), RowRectSizeX, 1);
-               for (int k = ColumnWidth, c = 0; c < NumberOfColumns; c++, k += ColumnWidth)
+               SecondRowLine = new Rectangle(RowRectOriginX, RowRectOriginY + RowRectSizeY, RowRectSizeX, 1);
+               for (int k = RowRectOriginX, c = 0; c < NumberOfColumns; c++, k += ColumnWidth)
                {
                 columnMenuLine[c] = new Rectangle(k, RowRectOriginY, 1, RowRectSizeY);
                     
@@ -129,7 +129,7 @@ namespace SpaceUnionXNA.Gui
 
                 rowLine[j] = new Rectangle(RowRectOriginX, RowRectOriginDataY + (j * RowRectSizeY), RowRectSizeX, 1);
                 rowLine[j + 1] = new Rectangle(RowRectOriginX, RowRectOriginDataY + ((j + 1) * RowRectSizeY), RowRectSizeX, 1);
-                for (int k = ColumnWidth, c = 0; c < NumberOfColumns; c++, k += ColumnWidth)
+                for (int k = RowRectOriginX, c = 0; c < NumberOfColumns; c++, k += ColumnWidth)
                 {
                     columnLine[j, c] = new Rectangle(k, RowRectOriginDataY + (j * RowRectSizeY), 1, RowRectSizeY);
                 }
@@ -186,7 +186,7 @@ namespace SpaceUnionXNA.Gui
                 RowArray[rows, j] = rowArray[j];
 
             }
-            joinButton[rows] = GuiHelper.CreateButton("Join", -(int)(Column1TextX + (ColumnWidth * NumberOfColumns) - screen.Width / 2 - ColumnWidth / 2), -(int)(Column1TextDataY * 0.97 - buttonsPerPage * RowRectSizeY + screen.Height / 2), 30, 15);
+            joinButton[rows] = GuiHelper.CreateButton("Join", 275, buttonsPerPage * RowRectSizeY - 217, 30, 15);
             joinButton[rows].Pressed += delegate(object sender, EventArgs arguments)
             {
                 //insert lobby joining code here
