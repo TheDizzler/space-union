@@ -221,11 +221,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StellarObjects\asteroid%2856x56%29.png">
-      <Name>asteroid%2856x56%29</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="StellarObjects\moon %28115x117%29.png">
       <Name>moon %28115x117%29</Name>
       <Importer>TextureImporter</Importer>
