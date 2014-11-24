@@ -25,7 +25,7 @@ namespace SpaceUnionXNA
         /// <param name="height"></param>
         /// <param name="center"></param>
         /// <returns></returns>
-        public static ButtonControl CreateButton(String text, int offSetX, int offSetY, int width, int height, bool center = true, float XPos = 0.0f, float YPos = 0.0f) 
+        public static ButtonControl CreateButton(String text, int offSetX, int offSetY, int width, int height, bool center = true, float XPos = 0.0f, float YPos = 0.0f)
         {
             if (center)
             {
@@ -117,9 +117,22 @@ namespace SpaceUnionXNA
                 new UniScalar(XPos, offSetX), new UniScalar(YPos, offSetY), width, height);
             return option;
         }
-        
 
+        public static ChoiceControl CreateChoice(String text, int offSetX, int offSetY, int width, int height, bool center = true, float XPos = 0.0f, float YPos = 0.0f)
+        {
+            if (center)
+            {
+                XPos = 0.5f;
+                YPos = 0.5f;
+                offSetX = offSetX + (-1 * width / 2);
+                offSetY = offSetY + (-1 * height / 2);
+            }
+            ChoiceControl choice = new ChoiceControl();
+            choice.Text = text;
+            choice.Bounds = new UniRectangle(
+                new UniScalar(XPos, offSetX), new UniScalar(YPos, offSetY), width, height);
+            return choice;
+        }
         public static UniRectangle MENU_TITLE_LABEL = new UniRectangle(50.0f, 0.0f, 110.0f, 24.0f);
-
     }
 }

@@ -16,6 +16,7 @@ using Nuclex.UserInterface.Controls;
 //using Data_Structures;
 using System.Threading;
 using SpaceUnionXNA;
+using SpaceUnionXNA.Animations;
 
 
 namespace SpaceUnionXNA.Controllers
@@ -32,6 +33,9 @@ namespace SpaceUnionXNA.Controllers
         LabelControl player4Label;
         LabelControl player5Label;
         LabelControl player6Label;
+        private ScrollingBackground scroll;
+        private Rectangle WhiteBackground;
+        private Texture2D Background;
         bool isLeader = false;
 
         public LobbyMenu(Game1 game, String title)
@@ -39,17 +43,31 @@ namespace SpaceUnionXNA.Controllers
             this.game = game;
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
             lobbyTitle = title;
+            scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
+            scroll.setPosition(new Vector2((int)0, (int)0));
             CreateMenuControls(game.mainScreen);
+            Background = Game1.Assets.guiRectangle;
             new Thread(updatePlayerList).Start();
         }
 
         public void Update(GameTime gameTime)
         {
-
+            scroll.update();
         }
 
-        public void DrawMenu(GameTime gameTime)
+        public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin();
+            //WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 150, (int)game.mainScreen.Height / 2 - 150, 300, 225);
+
+            //WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 162, (int)game.mainScreen.Height / 2 - 162, 575, 325);
+            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 325, (int)game.mainScreen.Height / 2 - 325, 650, 650);
+
+            scroll.draw(spriteBatch);
+            spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
+            //spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
+            //spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
+            spriteBatch.End();
             game.gui_manager.Draw(gameTime);
         }
 
@@ -65,82 +83,47 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(menuNameLabel);
 
             //Players Labels
-            playersLabel = new LabelControl();
-            playersLabel.Text = "Players:";
-            playersLabel.Bounds = new UniRectangle(500.0f, 10.0f, 120.0f, 16.0f);
+            playersLabel = GuiHelper.CreateLabel("Players:", 150, -200, 120, 16);
             mainScreen.Desktop.Children.Add(playersLabel);
 
-            player1Label = new LabelControl();
-            player1Label.Text = "Player 1";
-            player1Label.Bounds = new UniRectangle(500.0f, 30.0f, 120.0f, 16.0f);
+            player1Label = GuiHelper.CreateLabel("Player 1", 150, -180, 120, 16);
             mainScreen.Desktop.Children.Add(player1Label);
 
-            player2Label = new LabelControl();
-            player2Label.Text = "Player 2";
-            player2Label.Bounds = new UniRectangle(500.0f, 45.0f, 120.0f, 16.0f);
+            player2Label = GuiHelper.CreateLabel("Player 2", 150, -160, 120, 16);
             mainScreen.Desktop.Children.Add(player2Label);
 
-            player3Label = new LabelControl();
-            player3Label.Text = "Player 3";
-            player3Label.Bounds = new UniRectangle(500.0f, 60.0f, 120.0f, 16.0f);
+            player3Label = GuiHelper.CreateLabel("Player 3", 150, -140, 120, 16);
             mainScreen.Desktop.Children.Add(player3Label);
 
-            player4Label = new LabelControl();
-            player4Label.Text = "Player 4";
-            player4Label.Bounds = new UniRectangle(500.0f, 75.0f, 120.0f, 16.0f);
+            player4Label = GuiHelper.CreateLabel("Player 4", 150, -120, 120, 16);
             mainScreen.Desktop.Children.Add(player4Label);
 
-            player5Label = new LabelControl();
-            player5Label.Text = "Player 5";
-            player5Label.Bounds = new UniRectangle(500.0f, 90.0f, 120.0f, 16.0f);
+            player5Label = GuiHelper.CreateLabel("Player 5", 150, -100, 120, 16);
             mainScreen.Desktop.Children.Add(player5Label);
-
-            player6Label = new LabelControl();
-            player6Label.Text = "Player 6";
-            player6Label.Bounds = new UniRectangle(500.0f, 105.0f, 120.0f, 16.0f);
+            
+            player6Label = GuiHelper.CreateLabel("Player 6", 150, -80, 120, 16);
             mainScreen.Desktop.Children.Add(player6Label);
-            
-
-
-            
 
             //Choose Chip Label
-            LabelControl chooseShipLabel = new LabelControl();
-            chooseShipLabel.Text = "Choose Your Ship";
-            chooseShipLabel.Bounds = new UniRectangle(10.0f, 100.0f, 120.0f, 16.0f);
+            LabelControl chooseShipLabel = GuiHelper.CreateLabel("Choose Your Ship", -200, -200, 120, 16);
             mainScreen.Desktop.Children.Add(chooseShipLabel);
 
             //Choosing Ship Options
-            ChoiceControl shipChoice_1 = new ChoiceControl();
-            shipChoice_1.Bounds = new UniRectangle(10.0f, 125.0f, 120.0f, 16.0f);
-            shipChoice_1.Text = "Alpha Class";
+            ChoiceControl shipChoice_1 = GuiHelper.CreateChoice("Alpha Class", -200, -180, 120, 16);
             mainScreen.Desktop.Children.Add(shipChoice_1);
 
-            ChoiceControl shipChoice_2 = new ChoiceControl();
-            shipChoice_2.Bounds = new UniRectangle(10.0f, 150.0f, 120.0f, 16.0f);
-            shipChoice_2.Text = "Theta Class";
+            ChoiceControl shipChoice_2 = GuiHelper.CreateChoice("Beta Class", -200, -160, 120, 16);
             mainScreen.Desktop.Children.Add(shipChoice_2);
 
-            ChoiceControl shipChoice_3 = new ChoiceControl();
-            shipChoice_3.Bounds = new UniRectangle(10.0f, 175.0f, 120.0f, 16.0f);
-            shipChoice_3.Text = "Omega Class";
+            ChoiceControl shipChoice_3 = GuiHelper.CreateChoice("Charlie Class", -200, -140, 120, 16);
             mainScreen.Desktop.Children.Add(shipChoice_3);
 
-            //Ready up Label
-            LabelControl readyUpLabel = new LabelControl();
-            readyUpLabel.Text = "I'm Ready!";
-            readyUpLabel.Bounds = new UniRectangle(115.0f, 300.0f, 110.0f, 24.0f);
-            mainScreen.Desktop.Children.Add(readyUpLabel);
-
             //Ready Up Button.
-            OptionControl readyUpButton = new OptionControl();
-            readyUpButton.Bounds = new UniRectangle(
-                        new UniScalar(1.0f, -600.0f), new UniScalar(1.0f, -85.0f), 50, 50
-            );
+            OptionControl readyUpButton = GuiHelper.CreateOption("I'm Ready!", -100, 150, 50, 50);
             mainScreen.Desktop.Children.Add(readyUpButton);
 
             //Start Game Button
-            ButtonControl startGameButton = GuiHelper.CreateButton("Start Game", -400, -75, 100, 60);
+            ButtonControl startGameButton = GuiHelper.CreateButton("Start Game", -200, 150, 100, 60);
             startGameButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 if (readyUpButton.Selected == true 
@@ -161,7 +144,7 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(startGameButton);
 
             //Cancel Button
-            ButtonControl cancelGameButton = GuiHelper.CreateButton("Cancel", -200, -75, 100, 60);
+            ButtonControl cancelGameButton = GuiHelper.CreateButton("Cancel", 200, 150, 100, 60);
             cancelGameButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 //NETWORKING

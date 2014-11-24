@@ -13,6 +13,7 @@ using Nuclex.Input;
 using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;
 using SpaceUnionXNA;
+using SpaceUnionXNA.Animations;
 //NETWORKING
 //using Data_Structures;
 
@@ -22,22 +23,34 @@ namespace SpaceUnionXNA.Controllers
     {
         private Game1 game;
         public String lobbyTitle;
+        private ScrollingBackground scroll;
+        private Rectangle WhiteBackground;
+        private Texture2D Background;
         private InputControl lobbyTitleInput;
 
         public CreateLobbyMenu(Game1 game)
         {
             this.game = game;
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
+            scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
+            scroll.setPosition(new Vector2((int)0, (int)0));
+            Background = Game1.Assets.guiRectangle;
             CreateMenuControls(game.mainScreen);
         }
 
         public void Update(GameTime gameTime)
         {
-
+            scroll.update();
         }
 
-        public void DrawMenu(GameTime gameTime)
+        public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin();
+
+            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 175, (int)game.mainScreen.Height / 2 - 165, 300, 225);
+            scroll.draw(spriteBatch);
+            spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
+            spriteBatch.End();
             game.gui_manager.Draw(gameTime);
         }
 
@@ -58,19 +71,15 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(menuTitleLabel);
 
             //Lobby Title Label.
-            LabelControl lobbyTitleLabel = new LabelControl();
-            lobbyTitleLabel.Text = "Lobby Title";
-            lobbyTitleLabel.Bounds = new UniRectangle(200.0f, 150.0f, 110.0f, 24.0f);
+            LabelControl lobbyTitleLabel = GuiHelper.CreateLabel("Lobby Title", -145, -125, 30, 30);
             mainScreen.Desktop.Children.Add(lobbyTitleLabel);
 
             //Lobby Title Text Entry.
-            lobbyTitleInput = new InputControl();
-            lobbyTitleInput.Bounds = new UniRectangle(200.0f, 175.0f, 200.0f, 24.0f);
-            lobbyTitleInput.Text = "";
+            lobbyTitleInput = GuiHelper.CreateInput("", -60, -95, 200, 30);
             mainScreen.Desktop.Children.Add(lobbyTitleInput);
 
             //Create Lobby Button.
-            ButtonControl createLobbyButton = GuiHelper.CreateButton("Create Lobby", -435, -150, 200, 32);
+            ButtonControl createLobbyButton = GuiHelper.CreateButton("Create Lobby", 0, 0, 200, 32);
             createLobbyButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterLobbyMenu();

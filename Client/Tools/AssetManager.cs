@@ -62,6 +62,9 @@ namespace SpaceUnionXNA.Tools {
 		/// </summary>
 		public Texture2D gameroom;
 		public Texture2D options;
+		public Texture2D createLobby2;
+		public Texture2D browseLobby;
+		public Texture2D spaceUnion;
 
 		// bgs and doodads
 		public Texture2D background;
@@ -123,6 +126,11 @@ namespace SpaceUnionXNA.Tools {
 		/// </summary>
 		public SoundEffect laserbolt0, laserbolt1, laserbolt2, laserbolt3;
 
+		/// <summary>
+		/// Created by Matthew
+		/// </summary>
+		public SoundEffect bgrndMusic1, bgrndMusic2;
+
 		public AssetManager(ContentManager cntnt) {
 
 			Content = cntnt;
@@ -154,6 +162,9 @@ namespace SpaceUnionXNA.Tools {
 			gamelobby = Content.Load<Texture2D>("Buttons/gamelobby");
 			gameroom = Content.Load<Texture2D>("Buttons/gameroom");
 			options = Content.Load<Texture2D>("Buttons/optionsbutton");
+			//createLobby2 = Content.Load<Texture2D>("Buttons/Create_Lobby");
+			//browseLobby = Content.Load<Texture2D>("Buttons/Browse_Lobby");
+			//spaceUnion = Content.Load<Texture2D>("Buttons/Space-Union");
 			///end added by Matthew Baldock
 
 			guiRectangle = new Texture2D(graphicsDevice, 1, 1);
@@ -199,10 +210,14 @@ namespace SpaceUnionXNA.Tools {
 			pixel.SetData(new[] { Color.White });
 
 
-			laserbolt0 = Content.Load<SoundEffect>("SFX/Laser High 0");
-			laserbolt1 = Content.Load<SoundEffect>("SFX/Laser High 1");
-			laserbolt2 = Content.Load<SoundEffect>("SFX/Laser High 2");
-			laserbolt3 = Content.Load<SoundEffect>("SFX/Laser High 3");
+			laserbolt0 = Content.Load<SoundEffect>("SFX/weapons/Laser High 0");
+			laserbolt1 = Content.Load<SoundEffect>("SFX/weapons/Laser High 1");
+			laserbolt2 = Content.Load<SoundEffect>("SFX/weapons/Laser High 2");
+			laserbolt3 = Content.Load<SoundEffect>("SFX/weapons/Laser High 3");
+
+
+			//bgrndMusic1 = Content.Load<SoundEffect>("SFX/game_music_sample");
+			//bgrndMusic2 = Content.Load<SoundEffect>("SFX/Test");
 		}
 	}
 }

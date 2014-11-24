@@ -21,24 +21,36 @@ using SpaceUnionXNA.Tools;
 
 using SpaceUnionXNA.Gui;
 using System.Threading;
+using SpaceUnionXNA.Animations;
 
 namespace SpaceUnionXNA.Controllers
 {
     public class LobbyBrowserMenu
     {
         private Game1 game;
-        int rowRectOriginY = 125;
-        int rowRectOriginX = 100;
-        int rowRectSizeY = 15;
+        
+        static int rowRectSizeY = 15;
+        static int rowsBeforeScroll = 19;
+        static int columns = 6;
         LabelControl pagesLabel;
+        static int columnWidth = 100;
+        int totalWidth = columns * columnWidth;
+        double totalHeight = (rowsBeforeScroll + 1) * rowRectSizeY;
         Table LobbyBrowserTable;
+        private ScrollingBackground scroll;
+        private Rectangle WhiteBackground;
         ButtonControl prevPageButton;
         ButtonControl nextPageButton;
         public LobbyBrowserMenu(Game1 game)
         {
+            
             this.game = game;
-            game.mainScreen.Desktop.Children.Clear(); //Clear the gui 
-            LobbyBrowserTable = new Table(6, new string[] { "Lobby Name", "Game Type", "Host Name", "Players", "Max. Players", "Ping" }, rowRectOriginX, rowRectOriginY, rowRectSizeY, 19, 100, true, game.mainScreen);
+            int rowRectOriginY = (int)(game.mainScreen.Height/2 - totalHeight/1.25);
+            int rowRectOriginX = (int)game.mainScreen.Width/2 - totalWidth/2;
+            game.mainScreen.Desktop.Children.Clear(); //Clear the gui
+            scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
+            scroll.setPosition(new Vector2((int)0, (int)0));
+            LobbyBrowserTable = new Table(columns, new string[] { "Lobby Name", "Game Type", "Host Name", "Players", "Max. Players", "Ping" }, rowRectOriginX, rowRectOriginY, rowRectSizeY, rowsBeforeScroll, columnWidth, true, game.mainScreen);
             CreateMenuControls(game.mainScreen);
         }
 
@@ -46,6 +58,7 @@ namespace SpaceUnionXNA.Controllers
 
         public void Update(GameTime gameTime)
         {
+            scroll.update();
             var newState = Keyboard.GetState();
 
             if (newState.IsKeyDown(Keys.D1))
@@ -89,7 +102,9 @@ namespace SpaceUnionXNA.Controllers
         public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
+            scroll.draw(spriteBatch);
             LobbyBrowserTable.draw(spriteBatch);
+            
             spriteBatch.End();
             game.gui_manager.Draw(gameTime);
         }
@@ -97,13 +112,13 @@ namespace SpaceUnionXNA.Controllers
         private void CreateMenuControls(Screen mainScreen)
         {
             //Logout Button.
-            ButtonControl backButton = GuiHelper.CreateButton("Back", -75, -200, 70, 32);
+            ButtonControl backButton = GuiHelper.CreateButton("Back", -25, 175, 70, 32);
             backButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterMultiplayerMenu();
             };
             mainScreen.Desktop.Children.Add(backButton);
-            prevPageButton = GuiHelper.CreateButton("Prev", (-850), (int)(-(mainScreen.Height) / 2), 70, 32);
+            prevPageButton = GuiHelper.CreateButton("Prev", -375, -100, 70, 32);
             prevPageButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 LobbyBrowserTable.PrevPage();
@@ -111,7 +126,7 @@ namespace SpaceUnionXNA.Controllers
                
             };
            
-            nextPageButton = GuiHelper.CreateButton("Next", 0, (int)(-(mainScreen.Height) / 2), 70, 32);
+            nextPageButton = GuiHelper.CreateButton("Next", 375, -100, 70, 32);
             nextPageButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 LobbyBrowserTable.NextPage();
@@ -132,9 +147,8 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(menuTitleLabel);
 
             
-            pagesLabel = new LabelControl();
-            pagesLabel.Text = LobbyBrowserTable.currentPage + "/" + LobbyBrowserTable.maxPage;
-            pagesLabel.Bounds = new UniRectangle(285.0f, 365.0f, 220.0f, 48.0f);
+            pagesLabel = GuiHelper.CreateLabel(LobbyBrowserTable.currentPage + "/" + LobbyBrowserTable.maxPage, -25, 100, 30, 30);
+            
             mainScreen.Desktop.Children.Add(pagesLabel);
         }
     }
