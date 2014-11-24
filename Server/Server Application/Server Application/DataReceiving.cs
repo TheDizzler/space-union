@@ -68,9 +68,7 @@ namespace Server_Application
                 switch (message.Type)
                 {
                     case Constants.LOGIN_REQUEST:
-                        {
-                            new Thread(() => login.handleLoginRequest((Player)message, owner)).Start();
-                        }
+                        new Thread(() => login.handleLoginRequest((Player)message, owner)).Start();
                         break;
                     case Constants.PLAYER_REQUEST:
                         new Thread(() => handlePlayerRequest((PlayerRequest)message)).Start();
