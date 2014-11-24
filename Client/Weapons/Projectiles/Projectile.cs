@@ -3,6 +3,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceUnionXNA.Ships;
 using SpaceUnionXNA.Tools;
+using Microsoft.Xna.Framework.Audio;
+using System.Collections.Generic;
+
 
 
 namespace SpaceUnionXNA.Weapons.Projectiles {
@@ -39,10 +42,11 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 
 			owner = ship;
 			timeActive = 0;
+
 		}
 
 
-		public void update(GameTime gameTime, QuadTree quadTree) {
+		public virtual void update(GameTime gameTime, QuadTree quadTree) {
 
 			//if (willCollide)
 			//	collide(collideTarget, gameTime);
@@ -56,9 +60,8 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 				position += moveThisUpdate;
 				base.update(position);
 
-
-
 				checkForCollision(quadTree, gameTime);
+
 			} else {
 				destroy();
 			}
@@ -77,11 +80,6 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 			}
 		}
 
-        public override void destroy()
-        {
-            isActive = false;
-            explosionEngine.createBigExplosion(position);
-        }
 
 		/// <summary>
 		/// Inflict damage on the target.
@@ -111,6 +109,8 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 			isActive = true;
 		}
 
+
+		public abstract List<SoundEffect> getFireSFX();
 
 
 		public override void drawMiniMap(SpriteBatch batch) {

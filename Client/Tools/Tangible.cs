@@ -9,7 +9,7 @@ using SpaceUnionXNA.Tools;
 using SpaceUnionXNA.Ships;
 
 
-namespace SpaceUnionXNA {
+namespace SpaceUnionXNA.Tools {
 
 	/// <summary>
 	/// If in an object can move, be hit or interated with physically it must implement
@@ -53,62 +53,46 @@ namespace SpaceUnionXNA {
 		}
 
 		public void takeDamage(int amount, GameTime gameTime, Ship owner) {
-			if (this != owner)
-			{
+			//if (this != owner) {
 
-				// check last time taken damage
-				if (gameTime.TotalGameTime - previousDamageTime > damageTime)
-				{
-					// Reset our current time
-					previousDamageTime = gameTime.TotalGameTime;
-					currentHealth -= amount;
-				}
-                if (owner is Ship && this is Ship)
-                {
-                    Ship target = (Ship)this;
-                    if (owner.blueTeam && target.redTeam)
-                    {
-                        if (currentHealth <= 0)
-                        {
-                            owner.kills += 1;
-                            destroy();
-                        }
-                    }
-                    else if (owner.blueTeam && target.blueTeam)
-                    {
-                        if (currentHealth <= 0)
-                        {
-                            owner.kills -= 1;
-                            destroy();
-                        }
-                    }
-                    else if (owner.redTeam && target.blueTeam)
-                    {
-                        if (currentHealth <= 0)
-                        {
-                            owner.kills += 1;
-                            destroy();
-                        }
-                    }
-                    else if (owner.redTeam && target.redTeam)
-                    {
-                        if (currentHealth <= 0)
-                        {
-                            owner.kills -= 1;
-                            destroy();
-                        }
-                    }
-                }
-                else
-                {
-                    if (currentHealth <= 0)
-                    {
-                        owner.kills += 1;
-                        destroy();
-                    }
-                }
-				
+			// check last time taken damage
+			if (gameTime.TotalGameTime - previousDamageTime > damageTime) {
+				// Reset our current time
+				previousDamageTime = gameTime.TotalGameTime;
+				currentHealth -= amount;
 			}
+
+			if (owner is Ship && this is Ship) {
+				Ship target = (Ship) this;
+				if (owner.blueTeam && target.redTeam) {
+					if (currentHealth <= 0) {
+						owner.kills += 1;
+						destroy();
+					}
+				} else if (owner.blueTeam && target.blueTeam) {
+					if (currentHealth <= 0) {
+						owner.kills -= 1;
+						destroy();
+					}
+				} else if (owner.redTeam && target.blueTeam) {
+					if (currentHealth <= 0) {
+						owner.kills += 1;
+						destroy();
+					}
+				} else if (owner.redTeam && target.redTeam) {
+					if (currentHealth <= 0) {
+						owner.kills -= 1;
+						destroy();
+					}
+				}
+			} else {
+				if (currentHealth <= 0) {
+					//owner.kills += 1;
+					destroy();
+				}
+			}
+
+			//}
 		}
 
 		/// <summary>
@@ -139,16 +123,11 @@ namespace SpaceUnionXNA {
 			return velocity.Y;
 		}
 
-		/// <summary>
-		/// A list of possible collisions this update.
-		/// </summary>
-		private List<float> possible = new List<float>();
-
 
 		protected Tangible(Texture2D tex, Vector2 pos)
 			: base(tex, pos) {
 
-			int padding = 20;
+			int padding = 0;
 			hitBox = new HitBox(position.X, position.Y, width + padding, height + padding);
 			isActive = true;
 			currentHealth = maxHealth;
@@ -172,7 +151,7 @@ namespace SpaceUnionXNA {
 		/// <param name="batch"></param>
 		public override void draw(SpriteBatch batch) {
 			base.draw(batch);
-			hitBox.draw(batch, assets); // Debug hitboxes
+			//hitBox.draw(batch, assets); // Debug hitboxes
 
 		}
 
@@ -193,12 +172,56 @@ namespace SpaceUnionXNA {
 
 			List<Tangible> possibleCollisions = quadTree.retrieve(this); // Need a better retrieve method for rays
 
-			foreach (Tangible target in possibleCollisions) {
+			foreach (Tangible target in possibleCollisions.ToList<Tangible>()) {
 				if (target.isActive && target != this)
 					if (getHitBox().getArray().Intersects(target.getHitBox().getArray()))
-						collide(target, gameTime);
+						if (fineCheck(target))
+							collide(target, gameTime);
 			}
 
+		}
+
+		/// <summary>
+		/// A pixel-by-pixel collision detector. Useing texture.GetData(rawDataA) might be a little bit sketchy...
+		/// Code from http://gamedev.stackexchange.com/questions/15191/is-there-a-good-way-to-get-pixel-perfect-collision-detection-in-xna
+		/// </summary>
+		/// <param name="target"></param>
+		/// <returns></returns>
+		private bool fineCheck(Tangible target) {
+
+			Color[] rawDataA = new Color[this.width * this.height];
+			this.texture.GetData(rawDataA);
+			Color[] rawDataB = new Color[target.width * target.height];
+			target.texture.GetData(rawDataB);
+
+
+			Rectangle thisRect = this.getHitBox().getArray();
+			Rectangle targetRect = target.getHitBox().getArray();
+
+			// Find the bounds of the rectangle intersection
+			int top = Math.Max(thisRect.Top, targetRect.Top);
+			int bottom = Math.Min(thisRect.Bottom, targetRect.Bottom);
+
+			int left = Math.Max(thisRect.Left, targetRect.Left);
+			int right = Math.Min(thisRect.Right, targetRect.Right);
+
+			// for each pixel in the intersecting rectangle
+			for (int y = top; y < bottom; ++y) {
+				for (int x = left; x < right; ++x) {
+
+					Color colorA = rawDataA[(x - thisRect.Left) + (y - thisRect.Top) * thisRect.Width];
+					Color colorB = rawDataB[(x - targetRect.Left) + (y - targetRect.Top) * targetRect.Width];
+
+
+					// if both colors are not transparent
+					if (colorA.A != 0 && colorB.A != 0) {
+						//GUI.hitDetected = true;
+						return true;
+					}
+				}
+			}
+			//GUI.hitDetected = false;
+			return false;
 		}
 
 		/// <summary>
@@ -284,95 +307,6 @@ namespace SpaceUnionXNA {
 			}
 		}
 
-		/// <summary>
-		/// Same as checkForCollision2 but with a check to avoid suicide.
-		/// </summary>
-		/// <param name="quadTree"></param>
-		/// <param name="gameTime"></param>
-		protected void checkForCollisionProjectile(QuadTree quadTree, GameTime gameTime, Ship owner) {
-			willCollide = false;
-			collideTarget = null;
-
-			if (moveThisUpdate.Length() == 0)
-				return;
-			Vector2 move = new Vector2();
-			Vector2.Normalize(ref moveThisUpdate, out move);
-
-			List<Tangible> possibleCollisions = quadTree.retrieve(this);
-
-			//Ray2 ray0 = new Ray2(hitBox.topLeft, move);
-			//Ray2 ray1 = new Ray2(hitBox.bottomLeft, move);
-			//Ray2 ray2 = new Ray2(hitBox.bottomRight, move);
-			//Ray2 ray3 = new Ray2(hitBox.topRight, move);
-			Ray2 ray4 = new Ray2(hitBox.position, move);
-
-			float dist0, dist1, dist2, dist3, dist4;
-			float shortestDist = move.Length();
-			//float shortestDist = velLength;
-
-
-			foreach (Tangible target in possibleCollisions) {
-				if (target == this || target == owner)
-					continue;
-
-				bool r0, r1, r2, r3, r4;
-
-				//note: it is necessary that each of these functions run
-				//r0 = ray0.intersects(target.getHitBox());
-				//r1 = ray1.intersects(target.getHitBox());
-				//r2 = ray2.intersects(target.getHitBox());
-				//r3 = ray3.intersects(target.getHitBox());
-				r4 = ray4.intersectsToRange(target.getHitBox());
-
-				//if (!r0 && !r1 && !r2 && !r3 && !r4) // If no rays intersect
-				//	continue;
-
-				if (!r4)
-					continue;
-
-				//dist0 = ray0.getDistance();
-				//dist1 = ray1.getDistance();
-				//dist2 = ray2.getDistance();
-				//dist3 = ray3.getDistance();
-				dist4 = ray4.getDistance();
-
-				//possible.Clear();
-
-				//if (0 <= dist0 && dist0 <= shortestDist)
-				//	setTarget(dist0, ref shortestDist, target);
-				////possible.Add(dist0);
-				//if (0 <= dist1 && dist1 <= shortestDist)
-				//	setTarget(dist1, ref shortestDist, target);
-				////possible.Add(dist1);
-				//if (0 <= dist2 && dist2 <= shortestDist)
-				//	setTarget(dist2, ref shortestDist, target);
-				////possible.Add(dist2);
-				//if (0 <= dist3 && dist3 <= shortestDist)
-				//	setTarget(dist3, ref shortestDist, target);
-				//possible.Add(dist3);
-				if (0 <= dist4 && dist4 <= shortestDist) {
-					shortestDist = dist4;
-					willCollide = true;
-					collideTarget = target;
-					Console.WriteLine("Set Target " + collideTarget.GetType() + " shortestDist: " + shortestDist);
-					//setTarget(dist4, ref shortestDist, target);
-				}
-				//possible.Add(dist4);
-
-				//float temp = possible.Min();
-				//if (temp < shortestDist) {
-				//	shortestDist = temp;
-				//	willCollide = true;
-				//	collideTarget = target;
-				//}
-			}
-
-			if (willCollide) {
-				//Vector2.Normalize(ref velocity, out moveThisUpdate);
-				moveThisUpdate = moveThisUpdate * shortestDist;
-				Console.WriteLine("Target " + collideTarget.GetType() + " shortestDist: " + shortestDist);
-			}
-		}
 
 		private void setTarget(float dist, ref float shortestDist, Tangible target) {
 			shortestDist = dist;

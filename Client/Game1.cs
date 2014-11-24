@@ -77,6 +77,7 @@ namespace SpaceUnionXNA
 		GameLobby gamelobby;
 		GameRoom gameroom;
 		Options options;
+<<<<<<< HEAD
          * */
         //end created by Matthew
 

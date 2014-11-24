@@ -11,74 +11,59 @@ using SpaceUnionXNA.Weapons.Systems;
 namespace SpaceUnionXNA.Ships {
 	class Scout : Ship {
 
-
-		bool beamOn = false;
+		private Vector2 weaponOrigin2;
+		private WeaponSystem mainWeapon2;
 
 		public Scout(Game1 game1)
-			: base(assets.stunt, assets.laser, game1) {
+			: base(assets.scout, assets.laser, game1) {
 
 			maxSpeed = 7;
 			accelSpeed = 250.5f;
-			turnSpeed = .5f;
+			turnSpeed = 2.5f;
 			maxSpeed = 500;
 
-			weaponOrigin = new Vector2(position.X, position.Y - height / 2);
+			mainWeapon = new HomingLauncher(this);
+			mainWeapon2 = new HomingLauncher(this);
 
-			mainWeapon = new LaserBeam(Vector2.Add(position, weaponOrigin), this);
+			weaponOrigin = new Vector2(position.X - 25, position.Y + 10);
+			weaponOrigin2 = new Vector2(position.X + 25, position.Y + 10);
 		}
+
+
 
 		/// <summary>
-		/// Main weapon fire method
+		/// Rotate where the weapon projectile originates from.
 		/// </summary>
-		/// <param name="gameTime"></param>
-		protected override void fire(GameTime gameTime) {
+		/// <param name="rotateAmount"></param>
+		protected override void rotateWeaponOrigin(float rotateAmount) {
 
+			Matrix transform = getWeaponOriginTransform(rotateAmount);
 
-			((LaserBeam) mainWeapon).updatePosition(Vector2.Add(position, weaponOrigin), rotation);
-			beamOn = true;
-
+			Vector2.TransformNormal(ref weaponOrigin, ref transform, out weaponOrigin);
+			Vector2.TransformNormal(ref weaponOrigin2, ref transform, out weaponOrigin2);
 		}
 
-
-
-		//public override void update(GameTime gameTime, QuadTree quadTree) {
-
-		//	position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
-		//	base.update(position);
-		//	((LaserBeam) mainWeapon).updatePosition(Vector2.Add(position, weaponOrigin), rotation);
-
-		//	checkWorldEdge();
-
-
-		//	if (beamOn)
-		//		mainWeapon.update(gameTime, quadTree);
-
-		//	checkForCollision(quadTree, gameTime);
-		//}
-
-		public override void draw(SpriteBatch sBatch) {
-
-			base.draw(sBatch);
-
-			//if (beamOn)
-				mainWeapon.draw(sBatch);
-		}
-
-
-		protected override void altFire(GameTime gameTime) {
-
-		}
 
 
 		protected override void additionalUpdate(GameTime gameTime, QuadTree quadTree) {
+			mainWeapon2.updatePosition(Vector2.Add(position, weaponOrigin2), rotation);
+			mainWeapon.updatePosition(Vector2.Add(position, weaponOrigin), rotation);
 
+
+			mainWeapon2.update(gameTime, quadTree);
 		}
 
-		protected override void additionalDraw(SpriteBatch sBatch) {
 
+		protected override void additionalDraw(SpriteBatch sBatch) {
+			mainWeapon2.draw(sBatch);
 		}
 
 		protected override void additionalFire(GameTime gameTime) {
+
+			mainWeapon2.fire(Vector2.Add(position, weaponOrigin2));
+		}
+
+		protected override void altFire(GameTime gameTime) {
 
 		}
 

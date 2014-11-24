@@ -84,8 +84,10 @@ namespace SpaceUnionXNA.Tools {
 			set { frameLength = (1f / value); }
 		}
 		/* End of animations */
-
-
+		/// <summary>
+		/// Color data for pixel-by-pixel hit detection.
+		/// </summary>
+		public  Color[,] rawData;
 		/// <summary>
 		/// Constructor. May want to remove position as a required param.
 		/// </summary>
@@ -97,6 +99,13 @@ namespace SpaceUnionXNA.Tools {
 
 			setSize(texture.Width, texture.Height);
 
+			Color[] data = new Color[this.width * this.height];
+			texture.GetData(data);
+			rawData = new Color[height, width];
+			int row = 0, col = 0;
+			for (row = 0; row < height; ++row)
+				for (col = 0; col < width; ++col)
+					rawData[row, col] = data[row * width + col];
 			animation = null;
 		}
 

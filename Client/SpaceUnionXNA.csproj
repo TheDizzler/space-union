@@ -89,8 +89,8 @@
     <Compile Include="Animations\Explosion.cs" />
     <Compile Include="Animations\ScrollingBackground.cs" />
     <Compile Include="Animations\ShortExplosion.cs" />
-    <Compile Include="Background.cs" />
     <Compile Include="Controllers\ControlMenu.cs" />
+    <Compile Include="Animations\Background.cs" />
     <Compile Include="Controllers\CreateLobbyMenu.cs" />
     <Compile Include="Controllers\CreditsMenu.cs">
       <SubType>Code</SubType>
@@ -106,7 +106,8 @@
     <Compile Include="Controllers\OptionsMenu.cs" />
     <Compile Include="Controllers\ShipSelectionScreen.cs" />
     <Compile Include="Controllers\TeamBattle.cs" />
-    <Compile Include="GUI.cs" />
+    <Compile Include="Ships\Lobstar.cs" />
+    <Compile Include="Tools\GUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
@@ -119,8 +120,8 @@
     <Compile Include="StellarObjects\Asteroid.cs" />
     <Compile Include="StellarObjects\LargeMassObject.cs" />
     <Compile Include="StellarObjects\Planet.cs" />
+    <Compile Include="Tools\Tangible.cs" />
     <Compile Include="Gui\Table.cs" />
-    <Compile Include="Tangible.cs" />
     <Compile Include="Tools\AnimationClass.cs" />
     <Compile Include="Tools\AssetManager.cs" />
     <Compile Include="Tools\BaseButton.cs" />
@@ -128,7 +129,6 @@
     <Compile Include="Tools\CollisionHandler.cs" />
     <Compile Include="Tools\CustomGUI.cs" />
     <Compile Include="Tools\ExplosionEngine.cs" />
-    <Compile Include="Tools\GeneralButton.cs" />
     <Compile Include="Tools\GuiHelper.cs" />
     <Compile Include="Tools\HitBox.cs" />
     <Compile Include="Tools\HitCircle.cs" />
@@ -141,10 +141,12 @@
     <Compile Include="Tools\ShipButton.cs" />
     <Compile Include="Tools\Sprite.cs" />
     <Compile Include="Tools\TeamBattleGUI.cs" />
+    <Compile Include="Weapons\Projectiles\HomingMissile.cs" />
     <Compile Include="Weapons\Projectiles\Laser.cs" />
     <Compile Include="Weapons\Projectiles\Missile.cs" />
     <Compile Include="Weapons\Projectiles\MoltenBullet.cs" />
     <Compile Include="Weapons\Projectiles\Projectile.cs" />
+    <Compile Include="Weapons\Systems\HomingLauncher.cs" />
     <Compile Include="Weapons\Systems\LaserBeam.cs" />
     <Compile Include="Weapons\Systems\Launcher.cs" />
     <Compile Include="Weapons\Systems\Shield.cs" />

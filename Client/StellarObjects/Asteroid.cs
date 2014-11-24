@@ -24,6 +24,11 @@ namespace SpaceUnionXNA.StellarObjects {
 		public int collisionDamage {
 			get { return damage; }
 		}
+		/// <summary>
+		/// Rotation speed of asteroid.
+		/// </summary>
+		private float spinSpeed = 0f;
+
 
 		public Asteroid(Texture2D tex, Vector2 pos)
 			: base(tex, pos) {
@@ -34,6 +39,9 @@ namespace SpaceUnionXNA.StellarObjects {
 			// move in a straight line
 			velocity = new Vector2((float) (Math.Sin(direction) * speed), (float) (-Math.Cos(direction) * speed));
 
+			// give random spin
+			spinSpeed = (float) r.NextDouble();
+
 			mass = 1000;
 			currentHealth = maxHealth = 1;
 		}
@@ -41,22 +49,24 @@ namespace SpaceUnionXNA.StellarObjects {
 		public void update(GameTime gameTime, QuadTree quadTree) {
 
 
-			if (willCollide)
-				collide(collideTarget, gameTime);
+			//if (willCollide)
+			//	collide(collideTarget, gameTime);
 
 			moveThisUpdate = velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
-			checkForCollision2(quadTree, gameTime);
+			//checkForCollision2(quadTree, gameTime);
 
 			position += moveThisUpdate;
 			base.update(position);
 
+			rotation += spinSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+
 			if (outOfBounds())
 				destroy();
 
-			
+
 			//checkWorldEdge();
 
-			//checkForCollision(quadTree, gameTime);
+			checkForCollision(quadTree, gameTime);
 		}
 
 
@@ -85,7 +95,7 @@ namespace SpaceUnionXNA.StellarObjects {
 		}
 
 
-		
+
 
 	}
 }

@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using SpaceUnionXNA.Tools;
 
 
-namespace SpaceUnionXNA {
+namespace SpaceUnionXNA.Animations {
 	class Background {
 
 		/// <summary>

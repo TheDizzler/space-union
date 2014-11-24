@@ -6,8 +6,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-//using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Audio;
+
 ///Edited by Matthew Baldock
 namespace SpaceUnionXNA.Tools {
 
@@ -16,56 +17,54 @@ namespace SpaceUnionXNA.Tools {
 	/// </summary>
 	public class AssetManager {
 
-		public   ContentManager Content;
+		public ContentManager Content;
+		public GraphicsDevice graphicsDevice;
 
 		// misc graphics
 		public SpriteFont font;
+		public Texture2D winflag1;
 
 		public Texture2D guiRectangle;
 		public Texture2D playButton;
 		/// <summary>
 		/// Ship selection button texture
-		/// 
 		/// Created by Matthew Baldock
 		/// </summary>
 		public Texture2D shipselection;
 		/// <summary>
 		/// Confirm button texture
-		/// 
 		/// Created by Matthew Baldock
 		/// </summary>
 		public Texture2D confirm;
 		/// <summary>
 		/// Lobby Options button texture
-		/// 
 		/// Created by Matthew Baldock
 		/// </summary>
 		public Texture2D lobbyoptions;
 		/// <summary>
 		/// Lobby Browser button texture
-		/// 
 		/// Created by Matthew Baldock
 		/// </summary>
 		public Texture2D lobbybrowser;
 		/// <summary>
 		/// Create Lobby button texture
-		/// 
 		/// Created by Matthew Baldock
 		/// </summary>
 		public Texture2D createlobby;
 		/// <summary>
 		/// Game Lobby button texture
-		/// 
 		/// Created by Matthew Baldock
 		/// </summary>
 		public Texture2D gamelobby;
 		/// <summary>
 		/// Game Room button texture
-		/// 
 		/// Created by Matthew Baldock
 		/// </summary>
 		public Texture2D gameroom;
 		public Texture2D options;
+        public Texture2D createLobby2;
+        public Texture2D browseLobby;
+        public Texture2D spaceUnion;
 
 		// bgs and doodads
 		public Texture2D background;
@@ -77,8 +76,10 @@ namespace SpaceUnionXNA.Tools {
 		public Texture2D explosionsBig;
 
 		// space objects
+		/// <summary>
+		/// Planetoids created by Tristan
+		/// </summary>
 		public Texture2D earth;
-		public Texture2D winflag1;
 		public Texture2D waterPlanet;
 		public Texture2D moon;
 		public Texture2D asteroid;
@@ -87,18 +88,20 @@ namespace SpaceUnionXNA.Tools {
 		public Texture2D shuttle;
 		public Texture2D spaceShipTest;
 
+		/// <summary>
+		/// Ufo, scout and Lobstar created by Tristan
+		/// </summary>
 		public Texture2D ufo;
-		public Texture2D stunt;
+		public Texture2D scout;
+		public Texture2D lobstar;
 		/// <summary>
 		/// Zoid ship texture
-		/// 
 		/// Created by Matthew Baldock
 		/// </summary>
 		public Texture2D zoid;
 
 		/// <summary>
 		/// Galactus Ship Texture
-		/// 
 		/// Created by Matthew Baldock
 		/// </summary>
 		public Texture2D galactusship;
@@ -106,17 +109,27 @@ namespace SpaceUnionXNA.Tools {
 
 
 
-		// projectiles
+		// weapons systems
 		public Texture2D laser;
 		public Texture2D missile;
+		public Texture2D homingMissile;
 		public Texture2D shield;
 		public Texture2D moltenBullet;
-		public GraphicsDevice graphicsDevice;
+		public Texture2D redLaser;
 
 		// radar icons
 		public Texture2D shipMapIcon;
 		public  Texture2D pixel;
 
+		/// <summary>
+		/// Created by Tristan
+		/// </summary>
+		public SoundEffect laserbolt0, laserbolt1, laserbolt2, laserbolt3;
+
+        /// <summary>
+        /// Created by Matthew
+        /// </summary>
+        public SoundEffect bgrndMusic1, bgrndMusic2;
 
 		public AssetManager(ContentManager cntnt) {
 
@@ -149,6 +162,9 @@ namespace SpaceUnionXNA.Tools {
 			gamelobby = Content.Load<Texture2D>("Buttons/gamelobby");
 			gameroom = Content.Load<Texture2D>("Buttons/gameroom");
 			options = Content.Load<Texture2D>("Buttons/optionsbutton");
+            //createLobby2 = Content.Load<Texture2D>("Buttons/Create_Lobby");
+            //browseLobby = Content.Load<Texture2D>("Buttons/Browse_Lobby");
+            //spaceUnion = Content.Load<Texture2D>("Buttons/Space-Union");
 			///end added by Matthew Baldock
 
 			guiRectangle = new Texture2D(graphicsDevice, 1, 1);
@@ -165,31 +181,43 @@ namespace SpaceUnionXNA.Tools {
 
 			waterPlanet = Content.Load<Texture2D>("StellarObjects/waterplanet (256x256)");
 			moon = Content.Load<Texture2D>("StellarObjects/moon (115x117)");
-			asteroid = Content.Load<Texture2D>("StellarObjects/asteroid(56x56)");
+			asteroid = Content.Load<Texture2D>("StellarObjects/rock (32x32)");
 
 			spaceShipTest = Content.Load<Texture2D>("Spaceships/spaceshiptest");
-			ufo = Content.Load<Texture2D>("Spaceships/ufoship (128x128)");
-			stunt = Content.Load<Texture2D>("Spaceships/scoutship (128x128)");
+			ufo = Content.Load<Texture2D>("Spaceships/UFO (39x39)");
+			scout = Content.Load<Texture2D>("Spaceships/scoutship (64x64)");
+			lobstar = Content.Load<Texture2D>("Spaceships/rocket (64x64)");
 			///Added by Matthew Baldock
 			zoid = Content.Load<Texture2D>("Spaceships/zoidship");
 			bug = Content.Load<Texture2D>("Spaceships/bug (16x16)");
 			///Added by Matthew Baldock
-			//galactusship = Content.Load<Texture2D>("Spaceships/galactuship.png");
+			galactusship = Content.Load<Texture2D>("Spaceships/galactuship");
 
 
 			winflag1 = Content.Load<Texture2D>("WinFlags/WinFlag1");
 
 			laser = Content.Load<Texture2D>("Projectiles/laser");
 			missile = Content.Load<Texture2D>("Projectiles/short missile (16x16)");
+			homingMissile = Content.Load<Texture2D>("Projectiles/homing missile smaller");
 			moltenBullet = Content.Load<Texture2D>("Projectiles/molten bullet (6x8)");
 			shield = Content.Load<Texture2D>("Animations/bubble shield sheet");
-
+			redLaser = Content.Load<Texture2D>("Animations/redlaserbeam (25x11)");
 
 			shipMapIcon = Content.Load<Texture2D>("MapIcons/reticle (16x16)");
 
 
 			pixel = new Texture2D(graphicsDevice, 1, 1, false, SurfaceFormat.Color);
 			pixel.SetData(new[] { Color.White });
+
+
+			laserbolt0 = Content.Load<SoundEffect>("SFX/Laser High 0");
+			laserbolt1 = Content.Load<SoundEffect>("SFX/Laser High 1");
+			laserbolt2 = Content.Load<SoundEffect>("SFX/Laser High 2");
+			laserbolt3 = Content.Load<SoundEffect>("SFX/Laser High 3");
+
+
+            //bgrndMusic1 = Content.Load<SoundEffect>("SFX/game_music_sample");
+            //bgrndMusic2 = Content.Load<SoundEffect>("SFX/Test");
 		}
 	}
 }
