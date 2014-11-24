@@ -266,26 +266,26 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SFX\Laser High 1.wav">
+    <Compile Include="SFX\weapons\Laser High 1.wav">
       <Name>Laser High 1</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="SFX\Laser High 2.wav">
+    <Compile Include="SFX\weapons\Laser High 2.wav">
       <Name>Laser High 2</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SFX\Laser High 0.wav">
+    <Compile Include="SFX\weapons\Laser High 0.wav">
       <Name>Laser High 0</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SFX\Laser High 3.wav">
+    <Compile Include="SFX\weapons\Laser High 3.wav">
       <Name>Laser High 3</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
@@ -317,6 +317,90 @@
       <Name>homing missile smaller</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SFX\explosions\explosion 11.wav">
+      <Name>explosion 11</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="SFX\explosions\explosion 12.wav">
+      <Name>explosion 12</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="SFX\explosions\explosion 13.wav">
+      <Name>explosion 13</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="SFX\explosions\explosion 14.wav">
+      <Name>explosion 14</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="SFX\explosions\explosion 15.wav">
+      <Name>explosion 15</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="SFX\explosions\explosion deep 01.wav">
+      <Name>explosion deep 01</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="SFX\explosions\explosion deep 02.wav">
+      <Name>explosion deep 02</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="SFX\explosions\explosion double hit 01.wav">
+      <Name>explosion double hit 01</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="SFX\explosions\explosion double hit 02.wav">
+      <Name>explosion double hit 02</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="SFX\explosions\explosion high.wav">
+      <Name>explosion high</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="SFX\explosions\explosion low01.wav">
+      <Name>explosion low01</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="SFX\explosions\explosion low02.wav">
+      <Name>explosion low02</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="SFX\explosions\explosion quickdouble 01.wav">
+      <Name>explosion quickdouble 01</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="SFX\explosions\explosion quickdouble 02.wav">
+      <Name>explosion quickdouble 02</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="SFX\explosions\explosion short.wav">
+      <Name>explosion short</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SFX\miscl\klaxxon01.wav">
+      <Name>klaxxon01</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
