@@ -60,6 +60,16 @@
     <XnaCompressContent>true</XnaCompressContent>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Client Comm Module">
+      <HintPath>..\Server\Server Application\Client Comm Module\bin\Debug\Client Comm Module.dll</HintPath>
+    </Reference>
+    <Reference Include="Data Manipulation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Server\Server Application\Client Comm Module\bin\Debug\Data Manipulation.dll</HintPath>
+    </Reference>
+    <Reference Include="Data Structures">
+      <HintPath>..\Server\Server Application\Client Comm Module\bin\Debug\Data Structures.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
@@ -104,19 +114,15 @@
     <Compile Include="Controllers\MainMenu.cs" />
     <Compile Include="Controllers\MultiplayerMenu.cs" />
     <Compile Include="Controllers\OptionsMenu.cs" />
-    <Compile Include="Controllers\ShipSelectionScreen.cs" />
     <Compile Include="Controllers\TeamBattle.cs" />
-    <Compile Include="Ships\Lobstar.cs" />
+    <Compile Include="Ships\AlphaShip.cs" />
+    <Compile Include="Ships\OmegaShip.cs" />
+    <Compile Include="Ships\ThetaShip.cs" />
     <Compile Include="Tools\GUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="Ships\Bug.cs" />
-    <Compile Include="Ships\Scout.cs" />
     <Compile Include="Ships\Ship.cs" />
-    <Compile Include="Ships\TestShip.cs" />
-    <Compile Include="Ships\UFO.cs" />
-    <Compile Include="Ships\Zoid.cs" />
     <Compile Include="StellarObjects\Asteroid.cs" />
     <Compile Include="StellarObjects\LargeMassObject.cs" />
     <Compile Include="StellarObjects\Planet.cs" />

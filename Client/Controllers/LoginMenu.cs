@@ -17,6 +17,8 @@ using SpaceUnionXNA.Tools;
 using SpaceUnionXNA;
 using SpaceUnionXNA.Animations;
 
+using Data_Structures;
+
 namespace SpaceUnionXNA.Controllers
 {
     public class LoginMenu
@@ -135,16 +137,31 @@ namespace SpaceUnionXNA.Controllers
                 {
                     return;
                 }
-                /*
-                game.Player.Username = accountNameInput.Text;
-                game.Player.Password = passwordInput.GetText();
 
+
+                if (accountNameInput.Text != null && passwordInput.Text != null)
+                {
+                    game.Player.Username = accountNameInput.Text;
+                    game.Player.Password = passwordInput.GetText();
+                }
+
+                game.Communication.sendLogoutRequest(game.Player);
+                Thread.Sleep(1000);
                 game.Communication.sendLoginRequest(game.Player);
-                Thread.Sleep(2000);
-                game.Player = game.Communication.getPlayer();
-                Console.WriteLine(game.Player.Username);
-                if (game.Player != null)*/
-                game.EnterMainMenu();
+                Thread.Sleep(3000);
+                Player player = null;
+
+                if ((player = game.Communication.getPlayer()) != null)
+                {
+                    game.Player = player;
+                    game.EnterMainMenu();
+                    game.LoggedIn = true;
+                }
+                else
+                {
+                    Console.WriteLine("Failed to log in with credentials");
+                }    
+
 
             };
             mainScreen.Desktop.Children.Add(loginButton);
@@ -153,17 +170,9 @@ namespace SpaceUnionXNA.Controllers
             ButtonControl multiplayerButton = GuiHelper.CreateButton("Debug Game", -300, -300, 200, 50);
             multiplayerButton.Pressed += delegate(object sender, EventArgs arguments)
             {
-                game.EnterControlMenu();
+                game.StartGame();
             };
             mainScreen.Desktop.Children.Add(multiplayerButton);
-
-            //Ship Select Button.
-            ButtonControl shipSelectButton = GuiHelper.CreateButton("Select Ship", -300, -225, 200, 50);
-            shipSelectButton.Pressed += delegate(object sender, EventArgs arguments)
-            {
-                game.EnterShipSelectionScreen();
-            };
-            mainScreen.Desktop.Children.Add(shipSelectButton);
 
             //Button to close game.
             ButtonControl quitButton = GuiHelper.CreateButton("Quit", 200, 100, 80, 32);

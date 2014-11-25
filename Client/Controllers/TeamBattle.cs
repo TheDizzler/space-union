@@ -14,11 +14,11 @@ namespace SpaceUnionXNA.Controllers {
 		TimeSpan teamBattleTime = new TimeSpan(0, 2, 5);
         Game1 game;
         private bool first = true;
-		public TeamBattle(Game1 game, SpriteBatch batch, Ship selectedship)
-			: base(game, batch, selectedship) {
+		public TeamBattle(Game1 game, SpriteBatch batch)
+			: base(game, batch) {
 
                 this.game = game;
-			gui = new TeamBattleGUI(game, selectedship, teamBattleTime, ships, inactiveShips);
+                gui = new TeamBattleGUI(game, teamBattleTime, ships.Values.ToList(), inactiveShips.Values.ToList());
 
 		}
 

@@ -47,7 +47,7 @@ namespace SpaceUnionXNA.Tools {
 		
 
 
-		public GUI(Game1 game, Ship ship) {
+		public GUI(Game1 game) {
 
 			guiRectangle = Game1.Assets.guiRectangle;
 			font = Game1.Assets.font;
@@ -58,8 +58,6 @@ namespace SpaceUnionXNA.Tools {
 			int screenHeight = game.getScreenHeight();
 			int guiY = screenHeight - 80;
 			int guiWidth =screenWidth;
-
-			playerShip = ship;
 
 			rect = new Rectangle(0, guiY, guiWidth, guiHeight);
 
@@ -104,12 +102,12 @@ namespace SpaceUnionXNA.Tools {
 		public virtual void update(GameTime gameTime, QuadTree quadTree) {
 
 			/* Debugging */
-			currentVelocity = playerShip.velocity;
+			//currentVelocity = playerShip.velocity;
 			accel = (currentVelocity - lastVelocity) / (float) gameTime.ElapsedGameTime.TotalSeconds;
 			totalTime += gameTime.ElapsedGameTime.TotalSeconds;
 
-			if (playerShip.collideTarget != null)
-				target = playerShip.collideTarget;
+			//if (playerShip.collideTarget != null)
+			//	target = playerShip.collideTarget;
 			/* Debugging */
 		}
 
@@ -149,8 +147,8 @@ namespace SpaceUnionXNA.Tools {
 			//		line7Pos, Color.Red, 0.0f, Vector2.Zero, 1f, SpriteEffects.None, 0.5f);
 			//}
 
-			lastVelocity = playerShip.velocity;
-			lastPosition = playerShip.position;
+			//lastVelocity = playerShip.velocity;
+			//lastPosition = playerShip.position;
 
 			/* Debugging */
 		}

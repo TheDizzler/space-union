@@ -35,14 +35,14 @@ namespace SpaceUnionXNA.Tools {
             return blueTeamKills;
         }
 
-		public TeamBattleGUI(Game1 game, Ship ship, TimeSpan time, List<Ship> ships, List<Ship> inactiveships)
-			: base(game, ship) {
+		public TeamBattleGUI(Game1 game, TimeSpan time, List<Ship> ships, List<Ship> inactiveships)
+			: base(game) {
 			//this.game = game;
 			teamBattleTime = time;
 			//gameOver = Game1.Assets.guiRectangle;
 			rect = new Rectangle(50, 50, game.getScreenWidth() - 100, game.getScreenHeight() - 100);
 			//playerShip = ship;
-			playerShip.redTeam = true;
+			//playerShip.redTeam = true;
             this.ships = ships;
             this.inactiveships = inactiveships;
 		}

@@ -12,11 +12,12 @@ using Nuclex.UserInterface.Controls.Desktop;
 using Nuclex.Input;
 using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;
-//NETWORKING
-//using Data_Structures;
+
+
 using System.Threading;
 using SpaceUnionXNA;
 using SpaceUnionXNA.Animations;
+using Data_Structures;
 
 
 namespace SpaceUnionXNA.Controllers
@@ -38,11 +39,10 @@ namespace SpaceUnionXNA.Controllers
         private Texture2D Background;
         bool isLeader = false;
 
-        public LobbyMenu(Game1 game, String title)
+        public LobbyMenu(Game1 game)
         {
             this.game = game;
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
-            lobbyTitle = title;
             scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
             scroll.setPosition(new Vector2((int)0, (int)0));
             CreateMenuControls(game.mainScreen);
@@ -53,6 +53,12 @@ namespace SpaceUnionXNA.Controllers
         public void Update(GameTime gameTime)
         {
             scroll.update();
+            if (game.Communication.getGameStartSignal() != null)
+            {
+                Console.WriteLine("ingame == true");
+                game.GameStarted = true;
+                game.StartGame();
+            }
         }
 
         public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
@@ -76,8 +82,7 @@ namespace SpaceUnionXNA.Controllers
             //Menu Name Label
             LabelControl menuNameLabel = new LabelControl();
             //NETWORKING
-            //menuNameLabel.Text = "Lobby: " + game.roomInfo.RoomName;
-            menuNameLabel.Text = "Lobby: ";
+            menuNameLabel.Text = "Lobby: " + game.roomInfo.RoomName;
 
             menuNameLabel.Bounds = GuiHelper.MENU_TITLE_LABEL;
             mainScreen.Desktop.Children.Add(menuNameLabel);
@@ -108,39 +113,73 @@ namespace SpaceUnionXNA.Controllers
             LabelControl chooseShipLabel = GuiHelper.CreateLabel("Choose Your Ship", -200, -200, 120, 16);
             mainScreen.Desktop.Children.Add(chooseShipLabel);
 
-            //Choosing Ship Options
+            //First Ship Choice Radio Button
             ChoiceControl shipChoice_1 = GuiHelper.CreateChoice("Alpha Class", -200, -180, 120, 16);
+            shipChoice_1.Changed += delegate(object sender, EventArgs arguments)
+            {
+                game.Player.ShipChoice = 0;
+                game.Communication.sendUpdateShipChoiceRequet(game.Player, game.roomInfo.RoomNumber);
+            };
             mainScreen.Desktop.Children.Add(shipChoice_1);
 
+            //Second Ship Choice Radio Button
             ChoiceControl shipChoice_2 = GuiHelper.CreateChoice("Beta Class", -200, -160, 120, 16);
+            shipChoice_2.Changed += delegate(object sender, EventArgs arguments)
+            {
+                game.Player.ShipChoice = 1;
+                game.Communication.sendUpdateShipChoiceRequet(game.Player, game.roomInfo.RoomNumber);
+            };
             mainScreen.Desktop.Children.Add(shipChoice_2);
 
+            //Third Ship Choice Radio Button
             ChoiceControl shipChoice_3 = GuiHelper.CreateChoice("Charlie Class", -200, -140, 120, 16);
+            shipChoice_3.Changed += delegate(object sender, EventArgs arguments)
+            {
+                game.Player.ShipChoice = 2;
+                game.Communication.sendUpdateShipChoiceRequet(game.Player, game.roomInfo.RoomNumber);
+            };
             mainScreen.Desktop.Children.Add(shipChoice_3);
+
+            //Default Ship Choice
+            shipChoice_1.Selected = true;
+            game.Player.ShipChoice = 0;
+            game.Communication.sendUpdateShipChoiceRequet(game.Player, game.roomInfo.RoomNumber);
 
             //Ready Up Button.
             OptionControl readyUpButton = GuiHelper.CreateOption("I'm Ready!", -100, 150, 50, 50);
+            readyUpButton.Changed += delegate(object sender, EventArgs arguments)
+            {
+                game.Player.Ready = readyUpButton.Selected;
+                game.Communication.sendReadyStatusUpdateRequest(game.Player, game.roomInfo.RoomNumber);
+                Console.WriteLine("Player is in the room: " + game.roomInfo.RoomNumber);
+            };
             mainScreen.Desktop.Children.Add(readyUpButton);
 
             //Start Game Button
             ButtonControl startGameButton = GuiHelper.CreateButton("Start Game", -200, 150, 100, 60);
             startGameButton.Pressed += delegate(object sender, EventArgs arguments)
             {
-                if (readyUpButton.Selected == true 
-                    && (shipChoice_1.Selected == true || shipChoice_2.Selected == true || shipChoice_3.Selected == true))
+                game.Communication.sendStartRequest(game.Player, game.roomInfo.RoomNumber);
+
+                /*
+                if (game.roomInfo != null)
                 {
-                    menuNameLabel.Text = "You are ready";
+                    foreach (GameData player in game.roomInfo.Players)
+                    {
+                        if (!player.Player.Ready)
+                        {
+                            return;
+                        }
+                    }
                 }
-                else
-                {
-                    menuNameLabel.Text = "You are not ready";
-                }
+                game.Communication.sendStartRequest(game.Player, game.roomInfo.RoomNumber);
+                 */
             };
-            if (!isLeader)
+
+            if (game.Player.Username != game.roomInfo.Host)
             {
                 startGameButton.Enabled = false; 
             }
-
             mainScreen.Desktop.Children.Add(startGameButton);
 
             //Cancel Button
@@ -148,27 +187,60 @@ namespace SpaceUnionXNA.Controllers
             cancelGameButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 //NETWORKING
-                //game.Communication.sendRoomExitRequest(game.Player, game.roomInfo.RoomNumber);
+                game.Communication.sendRoomExitRequest(game.Player, game.roomInfo.RoomNumber);
                 game.EnterLobbyBrowserMenu();
             };
             mainScreen.Desktop.Children.Add(cancelGameButton);
-
         }
 
         private void updatePlayerList()
         {
+            int roomNumber = game.roomInfo.RoomNumber;
+            game.Player.GameRoom = roomNumber;
+            RoomInfo roomInfo;
+
             while (game.currentGameState == SpaceUnionXNA.Game1.GameState.Lobby)
             {
+                Console.WriteLine("Updating room info...");
+                Console.WriteLine("STATE: = " + game.currentGameState.ToString());
+
+                if (game.GameStarted)
+                    break;
+
                 //NETWORKING
-                /*
-                game.roomInfo = (RoomInfo)game.Communication.sendRoomInfoRequest(game.Player, game.roomInfo.RoomNumber);
-                playersLabel.Text = "Players: ";
-                foreach (KeyValuePair<string, GameData> lobbyPlayer in game.roomInfo.Players.ToArray())
+                roomInfo = (RoomInfo)game.Communication.sendRoomInfoRequest(game.Player, roomNumber);
+                if (roomInfo != null)
                 {
-                    playersLabel.Text += lobbyPlayer.Key;
+                    game.roomInfo = roomInfo;
+                    playersLabel.Text = "Players: ";
+                    int counter = 1;
+                    foreach (GameData lobbyPlayer in game.roomInfo.Players)
+                    {
+                        switch (counter)
+                        {
+                            case (1):
+                                player1Label.Text = lobbyPlayer.Player.Username + " Ready: " + lobbyPlayer.Player.Ready + " Ship: " + lobbyPlayer.Player.ShipChoice;
+                                break;
+                            case (2):
+                                player2Label.Text = lobbyPlayer.Player.Username + " Ready: " + lobbyPlayer.Player.Ready + " Ship: " + lobbyPlayer.Player.ShipChoice;
+                                break;
+                            case (3):
+                                player3Label.Text = lobbyPlayer.Player.Username + " Ready: " + lobbyPlayer.Player.Ready + " Ship: " + lobbyPlayer.Player.ShipChoice;
+                                break;
+                            case (4):
+                                player4Label.Text = lobbyPlayer.Player.Username + " Ready: " + lobbyPlayer.Player.Ready + " Ship: " + lobbyPlayer.Player.ShipChoice;
+                                break;
+                            case (5):
+                                player5Label.Text = lobbyPlayer.Player.Username + " Ready: " + lobbyPlayer.Player.Ready + " Ship: " + lobbyPlayer.Player.ShipChoice;
+                                break;
+                            case (6):
+                                player6Label.Text = lobbyPlayer.Player.Username + " Ready: " + lobbyPlayer.Player.Ready + " Ship: " + lobbyPlayer.Player.ShipChoice;
+                                break;
+                        }
+                        counter++;
+                    }
+                    Thread.Sleep(50);
                 }
-                Thread.Sleep(3000);
-                 */
             }
         }
     }

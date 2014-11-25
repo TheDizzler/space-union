@@ -26,7 +26,7 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 		/// <summary>
 		/// length of time in seconds projectile has been active.
 		/// </summary>
-		protected float timeActive;
+        public float timeActive { get; set; }
 
 		public Ship owner { get; set; }
 		public int weaponDamage { get; set; }
@@ -41,30 +41,22 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 			: base(texture, position) {
 
 			owner = ship;
-			timeActive = 0;
-
 		}
 
 
 		public virtual void update(GameTime gameTime, QuadTree quadTree) {
-
-			//if (willCollide)
-			//	collide(collideTarget, gameTime);
-
-			timeActive += (float) gameTime.ElapsedGameTime.TotalSeconds;
-			if (projectileTTL > timeActive) {
-
-				moveThisUpdate = velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
-				//checkForCollisionProjectile(quadTree, gameTime, owner);
-
-				position += moveThisUpdate;
-				base.update(position);
-
-				checkForCollision(quadTree, gameTime);
-
-			} else {
-				destroy();
-			}
+            timeActive += 1;
+            if (projectileTTL > timeActive)
+            {
+                moveThisUpdate = velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                position += moveThisUpdate;
+                base.update(position);
+                checkForCollision(quadTree, gameTime);
+            }
+            else
+            {
+                destroy();
+            }
 		}
 
 
@@ -105,7 +97,6 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 			velocity = new Vector2((float) Math.Sin(rotation) * projectileMoveSpeed,
 				(float) -Math.Cos(rotation) * projectileMoveSpeed);
 			velocity += shipVelocity;
-			timeActive = 0;
 			isActive = true;
 		}
 

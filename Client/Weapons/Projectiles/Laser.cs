@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework.Audio;
 
 namespace SpaceUnionXNA.Weapons.Projectiles {
-	class Laser : Projectile {
+	public class Laser : Projectile {
 
 		public Laser(Vector2 startPoint, Ship ship)
 			: base(assets.laser, startPoint, ship) {
@@ -25,7 +25,6 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 			fireSFXs.Add(assets.laserbolt1);
 			fireSFXs.Add(assets.laserbolt2);
 			fireSFXs.Add(assets.laserbolt3);
-
 			return fireSFXs;
 		}
 

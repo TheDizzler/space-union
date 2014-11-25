@@ -14,8 +14,8 @@ using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;
 using SpaceUnionXNA;
 using SpaceUnionXNA.Animations;
-//NETWORKING
-//using Data_Structures;
+
+using Data_Structures;
 
 namespace SpaceUnionXNA.Controllers
 {
@@ -82,25 +82,29 @@ namespace SpaceUnionXNA.Controllers
             ButtonControl createLobbyButton = GuiHelper.CreateButton("Create Lobby", 0, 0, 200, 32);
             createLobbyButton.Pressed += delegate(object sender, EventArgs arguments)
             {
-                game.EnterLobbyMenu();
                 //NETWORKING
-                /*
-                if(lobbyTitleInput.Text != null){
-                    
+                if (lobbyTitleInput.Text != null)
+                {
+
                     Data lobbyData = game.Communication.sendRoomCreationRequest(game.Player, lobbyTitleInput.Text);
-                    
-                    if (lobbyData.Type == 10)
+
+                    if (lobbyData != null)
                     {
-                        game.roomInfo = (RoomInfo)lobbyData;
-                        game.EnterLobbyMenu();
+                        if (lobbyData.Type == 10)
+                        {
+                            game.roomInfo = (RoomInfo)lobbyData;
+                            game.EnterLobbyMenu();
+                        }
+                        else if (lobbyData.Type == 7)
+                        {
+                            Console.WriteLine("cannot create lobby");
+                        }
                     }
-                    else if (lobbyData.Type == 7)
+                    else
                     {
-                        Console.WriteLine("cannot create lobby");
+                        Console.WriteLine("Room could not be created.");
                     }
                 }
-                 */
-                game.EnterLobbyMenu();
             };
             mainScreen.Desktop.Children.Add(createLobbyButton);
         }

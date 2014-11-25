@@ -14,8 +14,7 @@ using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;
 using SpaceUnionXNA;
 
-//NETWORKING
-//using Data_Structures;
+using Data_Structures;
 using SpaceUnionXNA.Tools;
 
 
@@ -28,7 +27,10 @@ namespace SpaceUnionXNA.Controllers
     public class LobbyBrowserMenu
     {
         private Game1 game;
-        
+
+        //NETWORKING
+        private RoomList roomList;
+
         static int rowRectSizeY = 15;
         static int rowsBeforeScroll = 19;
         static int columns = 6;
@@ -43,7 +45,6 @@ namespace SpaceUnionXNA.Controllers
         ButtonControl nextPageButton;
         public LobbyBrowserMenu(Game1 game)
         {
-            
             this.game = game;
             int rowRectOriginY = (int)(game.mainScreen.Height/2 - totalHeight/1.25);
             int rowRectOriginX = (int)game.mainScreen.Width/2 - totalWidth/2;
@@ -52,27 +53,36 @@ namespace SpaceUnionXNA.Controllers
             scroll.setPosition(new Vector2((int)0, (int)0));
             LobbyBrowserTable = new Table(columns, new string[] { "Lobby Name", "Game Type", "Host Name", "Players", "Max. Players", "Ping" }, rowRectOriginX, rowRectOriginY, rowRectSizeY, rowsBeforeScroll, columnWidth, true, game.mainScreen);
             CreateMenuControls(game.mainScreen);
+            RefreshLobbyList();
         }
 
+        /// <summary>
+        /// Refreshes the lobby browser
+        /// </summary>
+        private void RefreshLobbyList()
+        {
+            //NETWORKING
+            RoomList temproom = (RoomList)game.Communication.sendRoomListRequest(game.Player);
+            if (temproom != null)
+                roomList = temproom;
+            CreateLobbyList();
+        }
 
+        public void CreateLobbyList()
+        {
+            int i = 0;
+            LobbyBrowserTable.Clear();
+            foreach (RoomInfo roomInfo in roomList.RoomInfoList)
+            {
+                i++;
+                LobbyBrowserTable.CreateNewRow(new string[] { roomInfo.RoomName, "Team Battle", roomInfo.Host, roomInfo.Players.Length.ToString(), "6", "Ping..." },roomInfo.RoomNumber,game);
+            }
+        }
 
         public void Update(GameTime gameTime)
         {
             scroll.update();
             var newState = Keyboard.GetState();
-
-            if (newState.IsKeyDown(Keys.D1))
-            {
-                LobbyBrowserTable.CreateNewRow(new string[] { "CST", "Team Battle", "Konstantin", "3", "6", "100" });
-                Thread.Sleep(200);
-            }
-
-
-            if (newState.IsKeyDown(Keys.D0))
-            {
-                LobbyBrowserTable.RemoveLastRow();
-                Thread.Sleep(200);
-            }
 
             if (newState.IsKeyDown(Keys.D9))
             {
@@ -111,13 +121,24 @@ namespace SpaceUnionXNA.Controllers
 
         private void CreateMenuControls(Screen mainScreen)
         {
-            //Logout Button.
+            //Back Button.
             ButtonControl backButton = GuiHelper.CreateButton("Back", -25, 175, 70, 32);
             backButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterMultiplayerMenu();
             };
             mainScreen.Desktop.Children.Add(backButton);
+
+            //Refresh Button.
+            ButtonControl refreshButton = GuiHelper.CreateButton("Refresh", 50, 175, 70, 32);
+            refreshButton.Pressed += delegate(object sender, EventArgs arguments)
+            {
+                RefreshLobbyList();
+            };
+            mainScreen.Desktop.Children.Add(refreshButton);
+
+
+
             prevPageButton = GuiHelper.CreateButton("Prev", -375, -100, 70, 32);
             prevPageButton.Pressed += delegate(object sender, EventArgs arguments)
             {
@@ -130,8 +151,6 @@ namespace SpaceUnionXNA.Controllers
             nextPageButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 LobbyBrowserTable.NextPage();
-
-                
             };
 
             

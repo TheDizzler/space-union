@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using SpaceUnionXNA;
 using Nuclex.UserInterface.Controls.Desktop;
 using Nuclex.UserInterface;
+using Data_Structures;
 
 namespace SpaceUnionXNA.Gui
 {
@@ -87,11 +88,6 @@ namespace SpaceUnionXNA.Gui
         {
             spriteBatch.Draw(rowRectangleTexture, browserRectangle, Color.White);
             int maxPagePos = rows - ((currentPage-1) * RowsPerPage);
-
-
-            
-
-            
             
             if (BarEnabled == true)
             {
@@ -116,9 +112,7 @@ namespace SpaceUnionXNA.Gui
                {
                    spriteBatch.DrawString(font, ColumnNames[c],
                        new Vector2(Column1TextX + k, Column1TextY), Color.Black, 0.0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0.5f);
-               }
-               
-               
+               }               
             }
             if (pageFull[currentPage] == 1)
             {
@@ -165,9 +159,8 @@ namespace SpaceUnionXNA.Gui
 
 
 
-        public void CreateNewRow(string[] rowArray)
+        public void CreateNewRow(string[] rowArray, int roomNumber, Game1 game)
         {
-
             if (rows == ((currentPage) * (RowsPerPage)) && rows != 0)
             {
 
@@ -182,23 +175,29 @@ namespace SpaceUnionXNA.Gui
             }
             for (int j = 0; j < NumberOfColumns; j++)
             {
-
                 RowArray[rows, j] = rowArray[j];
-
             }
             joinButton[rows] = GuiHelper.CreateButton("Join", 275, buttonsPerPage * RowRectSizeY - 217, 30, 15);
             joinButton[rows].Pressed += delegate(object sender, EventArgs arguments)
             {
-                //insert lobby joining code here
+                Data requestRoomData = game.Communication.sendRoomJoinRequest(game.Player, roomNumber);
+                if (requestRoomData != null)
+                {
+                    if (requestRoomData.Type == 10)
+                    {
+                        game.roomInfo = (RoomInfo)requestRoomData;
+                        Console.WriteLine(game.roomInfo.RoomNumber);
+                        game.EnterLobbyMenu();
+                    }
+                    else
+                    {
+                        game.EnterLobbyBrowserMenu();
+                    }
+                }
             };
             screen.Desktop.Children.Add(joinButton[rows]);
             buttonsPerPage++;
             rows++;
-            
-
-
-
-
         }
 
         public void RemoveLastRow()

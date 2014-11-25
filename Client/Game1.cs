@@ -13,6 +13,10 @@ using SpaceUnionXNA.Tools;
 using Nuclex.UserInterface;
 using Nuclex.Input;
 
+using Client_Comm_Module;
+using Data_Structures;
+using System.Threading;
+
 namespace SpaceUnionXNA
 {
     /// <summary>
@@ -41,8 +45,6 @@ namespace SpaceUnionXNA
         public GuiManager gui_manager;
         /// <summary>Manages input devices for the game</summary>
         public InputManager input_manager;
-        /// <summary>Initializes a new instance of the user interface demo</summary>
-        /// 
 
         //Menu Classes with Nuclex Framework
         public LoginMenu login_menu;
@@ -55,31 +57,20 @@ namespace SpaceUnionXNA
         public LobbyMenu lobby_menu;
         public Screen mainScreen;
         public ControlMenu control_menu;
-        ShipSelectionScreen shipselectionScreen;
         public string currentSound = "Medium";
         public string currentMusic = "Medium";
 
         public List<Keys> keylist;
 
+
         //NETWORKING
-        //public ClientCommHandler Communication { get; private set; }
-        //public Player Player { get; set; }
-        //public RoomInfo roomInfo;
+        public bool GameStarted;
+        public ClientCommHandler Communication { get; private set; }
+        public Player Player { get; set; }
+        public RoomInfo roomInfo;
+        public bool LoggedIn { get; set; }
 
         TeamBattle gameplayScreen;
-        //MainMenuScreen mainMenuScreen;
-        // Created by Matthew Baldock
-        /*
-		ShipSelectionScreen shipselectionScreen;
-		LobbyOptions lobbyoptions;
-		LobbyBrowser lobbybrowser;
-		CreateLobby createlobby;
-		GameLobby gamelobby;
-		GameRoom gameroom;
-		Options options;
-<<<<<<< HEAD
-         * */
-        //end created by Matthew
 
         public string windowState = "Windowed";
         public int width = 933;
@@ -108,6 +99,18 @@ namespace SpaceUnionXNA
 
         public GameState currentGameState = GameState.Login;
 
+        /// <summary>
+        /// Called when the program exits. Ensures that
+        /// all remaining threads are killed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        protected override void OnExiting(Object sender, EventArgs args)
+        {
+            base.OnExiting(sender, args);
+            Environment.Exit(Environment.ExitCode);
+        }
+
         public Game1()
             : base()
         {
@@ -115,27 +118,31 @@ namespace SpaceUnionXNA
             Content.RootDirectory = "Content";
 
             //Author: Troy Carefoot
+
+            //Create Managers
+            Assets = new AssetManager(Content);
             input_manager = new InputManager(Services, Window.Handle);
             gui_manager = new GuiManager(Services);
             Components.Add(this.input_manager);
             gui_manager.DrawOrder = 1000;
 
-            //NETWORKING
             //Author: Troy Carefoot
-            /*
+            //NETWORKING
             Communication = new ClientCommHandler();
             Player = new Player();
-            Player.Username = "Troy";
-            Player.Password = "loltroy";
+            Player.Username = "";
+            //Player.Password = "";
             Player.IPAddress = Communication.getLocalIPv4Address();
-             * */
-
+            GameStarted = false;
+            Communication.getReceiverContext().gameEnd += new ClientMessageReceiving.GameEndEventHandler(endGame);
+            //new Thread(heartbeat).Start();
 
             graphics.PreferredBackBufferWidth = 933;
             graphics.PreferredBackBufferHeight = 700;
 
             IsFixedTimeStep = false;
 
+            //Setting Up Key Bindings
             keylist = new List<Keys>();
             keylist.Add(Keys.W);
             keylist.Add(Keys.A);
@@ -144,7 +151,18 @@ namespace SpaceUnionXNA
             keylist.Add(Keys.RightShift);
             keylist.Add(Keys.O);
             keylist.Add(Keys.P);
-            Assets = new AssetManager(Content);
+
+            
+        }
+
+        /// <summary>
+        /// Ends the game in session.
+        /// </summary>
+        private void endGame()
+        {
+            EndMatch();
+            EnterLobbyMenu();
+            Console.WriteLine("------------------------Game Ended------------------------");
         }
 
 
@@ -172,7 +190,6 @@ namespace SpaceUnionXNA
 
             login_menu = new LoginMenu(this); //Users must login to play online
 
-            //graphics.IsFullScreen = true;
             graphics.ApplyChanges();
         }
 
@@ -193,7 +210,6 @@ namespace SpaceUnionXNA
             textures.Add(Assets.moltenBullet);
             textures.Add(Assets.missile);
             particleEngine = new ParticleEngine(textures, new Vector2(400, 240));
-            shipselectionScreen = new ShipSelectionScreen(this);
             IsMouseVisible = true;
         }
 
@@ -256,9 +272,6 @@ namespace SpaceUnionXNA
                 case GameState.Playing:
                     gameplayScreen.Update(gameTime);
                     break;
-                case GameState.Select:
-                    shipselectionScreen.update();
-                    break;
                 case GameState.ControlMenu:
                     control_menu.Update(gameTime);
                     break;
@@ -277,7 +290,7 @@ namespace SpaceUnionXNA
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.LightSeaGreen);
+            GraphicsDevice.Clear(Color.Black);
             particleEngine.Draw(spriteBatch);
             //Draw the current state
             switch (currentGameState)
@@ -309,9 +322,6 @@ namespace SpaceUnionXNA
                 case GameState.Playing:
                     GraphicsDevice.Clear(Color.Black);
                     gameplayScreen.draw(gameTime);
-                    break;
-                case GameState.Select:
-                    shipselectionScreen.draw(spriteBatch);
                     break;
                 case GameState.ControlMenu:
                     control_menu.DrawMenu(gameTime, spriteBatch);
@@ -447,13 +457,8 @@ namespace SpaceUnionXNA
         public void EnterLobbyMenu()
         {
             currentGameState = GameState.Lobby;
-            lobby_menu = new LobbyMenu(this, "Alice's Lobby");
-        }
-
-        public void EnterShipSelectionScreen()
-        {
-            currentGameState = GameState.Select;
-            shipselectionScreen = new ShipSelectionScreen(this);
+            IsMouseVisible = true;
+            lobby_menu = new LobbyMenu(this);
         }
 
         public void EnterControlMenu() 
@@ -465,18 +470,31 @@ namespace SpaceUnionXNA
         public void StartGame()
         {
             mainScreen.Desktop.Children.Clear(); //Clear the gui
-            //gameplayScreen = new GameplayScreen(this, spriteBatch, shipselectionScreen.getship());
             currentGameState = GameState.Playing;
-            gameplayScreen = new TeamBattle(this, spriteBatch, shipselectionScreen.getship());
+            gameplayScreen = new TeamBattle(this, spriteBatch);
             Viewport v = GraphicsDevice.Viewport;
             IsMouseVisible = false;
         }
-
 
         public void EndMatch()
         {
             currentGameState = GameState.MainMenu;
             IsMouseVisible = true;
         }
+
+        /*
+        //Sends an intermittent signal to server
+        //to indicate the player is still online.
+        private void heartbeat()
+        {
+            while (true)
+            {
+                if (LoggedIn)
+                    Communication.sendHeartbeatRequest(Player);
+                Thread.Sleep(1000);
+            }
+        }
+        */
+
     }
 }
