@@ -73,8 +73,7 @@ namespace Data_Manipulation
             try
             {
                 client.Connect(ipaddress, port);
-                Stream stream = null;
-                stream = client.GetStream();
+                Stream stream = client.GetStream();
                 byte[] data = Compress(objectToBytes(input));
                 stream.Write(data, 0, data.Length);
             }
@@ -128,13 +127,18 @@ namespace Data_Manipulation
         {
             using (GZipStream stream = new GZipStream(new MemoryStream(data), CompressionMode.Decompress))
             {
-                int size = 32768;
+                int size = 8196;
                 byte[] result = new byte[size];
                 using (MemoryStream memory = new MemoryStream())
                 {
                     int bytesRead = 0;
                     do
                     {
+                        bytesRead = stream.Read(result, 0, size);
+                        if (bytesRead > 0)
+                        {
+                            memory.Write(result, 0, bytesRead);
+                        }
                         try
                         {
                             bytesRead = stream.Read(result, 0, size);
@@ -144,7 +148,7 @@ namespace Data_Manipulation
                         catch (ArgumentNullException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
                         catch (NotSupportedException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
                         catch (ArgumentException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
-                        catch (InvalidOperationException e) { Console.WriteLine(e.ToString()); ErrorLogging.Logging.Write(e.ToString()); return null; }
+                        catch (InvalidOperationException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
                         catch (IOException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
                         catch (InvalidDataException e) { ErrorLogging.Logging.Write(e.ToString()); return null; }
                     }

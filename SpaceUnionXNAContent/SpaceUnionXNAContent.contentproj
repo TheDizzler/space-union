@@ -180,36 +180,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Spaceships\bug %2816x16%29.png">
-      <Name>bug %2816x16%29</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Spaceships\galactuship.png">
-      <Name>galactuship</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Spaceships\scoutship %28128x128%29.png">
-      <Name>scoutship %28128x128%29</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Spaceships\shuttle.png">
-      <Name>shuttle</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Spaceships\spaceshiptest.png">
-      <Name>spaceshiptest</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Spaceships\ufoship %28128x128%29.png">
-      <Name>ufoship %28128x128%29</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Spaceships\zoidship.png">
       <Name>zoidship</Name>
       <Importer>TextureImporter</Importer>
@@ -223,7 +193,13 @@
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="Spaceships\alpha_ship.png">
+      <Name>alpha_ship</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="StellarObjects\asteroid%2856x56%29.png">
       <Name>asteroid%2856x56%29</Name>
@@ -244,6 +220,20 @@
   <ItemGroup>
     <Compile Include="WinFlags\WinFlag1.png">
       <Name>WinFlag1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Spaceships\omega_ship.png">
+      <Name>omega_ship</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Spaceships\theta_ship.png">
+      <Name>theta_ship</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

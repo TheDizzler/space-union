@@ -65,6 +65,7 @@ namespace Server_Application
                         analyzer.usedMemory();
                         break;
                     case "games":
+                        server.listRooms();
                         break;
                     case "clear":
                         Console.Clear();

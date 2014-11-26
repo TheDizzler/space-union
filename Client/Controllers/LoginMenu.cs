@@ -80,14 +80,16 @@ namespace SpaceUnionXNA.Controllers
                 
                 if (accountNameInput.Text != null && passwordInput.Text != null)
                 {
-                    game.Player.Username = "User1";//accountNameInput.Text;
-                    game.Player.Password = "Pass123";//passwordInput.GetText();
+                    game.Player.Username = accountNameInput.Text;//accountNameInput.Text;
+                    game.Player.Password = passwordInput.GetText();//passwordInput.GetText();
                 }
+                
                 game.Communication.sendLogoutRequest(game.Player);
                 Thread.Sleep(1000);
                 game.Communication.sendLoginRequest(game.Player);
                 Thread.Sleep(1000);
                 Player player = null;
+
                 if ((player = game.Communication.getPlayer()) != null)
                 {
                     game.Player = player;
@@ -102,27 +104,12 @@ namespace SpaceUnionXNA.Controllers
             };
             mainScreen.Desktop.Children.Add(loginButton);
 
-            //Debug Button.
-            ButtonControl multiplayerButton = GuiHelper.CreateButton("Debug Game", -700, -400, 200, 50);
-            multiplayerButton.Pressed += delegate(object sender, EventArgs arguments)
-            {
-                game.StartGame();
-            };
-            mainScreen.Desktop.Children.Add(multiplayerButton);
-
-            //Ship Select Button.
-            ButtonControl shipSelectButton = GuiHelper.CreateButton("Select Ship", -700, -350, 200, 50);
-            shipSelectButton.Pressed += delegate(object sender, EventArgs arguments)
-            {
-                game.EnterShipSelectionScreen();
-            };
-            mainScreen.Desktop.Children.Add(shipSelectButton);
-
             //Button to close game.
             ButtonControl quitButton = GuiHelper.CreateButton("Quit", -15, -15, 80, 32);
             quitButton.Pressed += delegate(object sender, EventArgs arguments)
             {
-                game.Exit();
+                game.StartGame();
+                //game.Exit();
             };
             mainScreen.Desktop.Children.Add(quitButton);
         }

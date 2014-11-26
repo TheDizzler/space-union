@@ -130,7 +130,7 @@ namespace Server_Application
             {
                 if (owner.Gamerooms.Count == 0)
                 {
-                    Thread.Sleep(1);
+                    Thread.Sleep(5);
                     continue;
                 }
                 foreach (KeyValuePair<int, Gameroom> room in owner.Gamerooms.ToArray())
@@ -142,6 +142,7 @@ namespace Server_Application
                             DataControl.sendUDPData(UDPClients[client], frame, (string)ip, port);
                     }
                 }
+                Thread.Sleep(5);
             }
         }
 

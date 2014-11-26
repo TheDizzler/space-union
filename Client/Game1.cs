@@ -63,6 +63,9 @@ namespace SpaceUnionXNA
         public RoomInfo roomInfo;
         public bool LoggedIn { get; set; }
 
+        public int client_bounds_window_width; 
+        public int client_bounds_window_height;
+
         TeamBattle gameplayScreen;
         //MainMenuScreen mainMenuScreen;
         // Created by Matthew Baldock
@@ -99,14 +102,20 @@ namespace SpaceUnionXNA
 
         public GameState currentGameState = GameState.Login;
 
+        protected override void OnExiting(Object sender, EventArgs args)
+        {
+            base.OnExiting(sender, args);
+            Environment.Exit(Environment.ExitCode);
+        }
+
         public int getScreenWidth()
         {
-            return Window.ClientBounds.Width;
+            return client_bounds_window_width;
         }
 
         public int getScreenHeight()
         {
-            return Window.ClientBounds.Height;
+            return client_bounds_window_height;
         }
 
         //public void setScreenSize(int width, int height, bool fullScreen = false)
@@ -140,8 +149,9 @@ namespace SpaceUnionXNA
             //NETWORKING
             Communication = new ClientCommHandler();
             Player = new Player();
+            Player.Username = "";
+            //Player.Password = "";
             Player.IPAddress = Communication.getLocalIPv4Address();
-
             graphics.PreferredBackBufferWidth = 933;
             graphics.PreferredBackBufferHeight = 700;
 
@@ -149,12 +159,19 @@ namespace SpaceUnionXNA
 
             Assets = new AssetManager(Content);
             GameStarted = false;
+            Communication.getReceiverContext().gameEnd += new ClientMessageReceiving.GameEndEventHandler(endGame);
 
-            
-
-            new Thread(heartbeat).Start();
+            client_bounds_window_width = Window.ClientBounds.Width;
+            client_bounds_window_height = Window.ClientBounds.Height;
+            //new Thread(heartbeat).Start();
         }
 
+        private void endGame()
+        {
+            EndMatch();
+            EnterLobbyMenu();
+            Console.WriteLine("------------------------Game Ended------------------------");
+        }
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -171,6 +188,7 @@ namespace SpaceUnionXNA
             mainScreen = new Screen(viewport.Width, viewport.Height);
             gui_manager.Screen = mainScreen;
             gui_manager.Initialize();
+
 
             //Screen Margins
             mainScreen.Desktop.Bounds = new UniRectangle(
@@ -197,7 +215,7 @@ namespace SpaceUnionXNA
             Assets.loadContent(GraphicsDevice);
             explosionEngine = new ExplosionEngine(Assets);
 
-            shipselectionScreen = new ShipSelectionScreen(this);
+            //shipselectionScreen = new ShipSelectionScreen(this);
             IsMouseVisible = true;
         }
 
@@ -275,7 +293,7 @@ namespace SpaceUnionXNA
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.LightSeaGreen);
+            GraphicsDevice.Clear(Color.DarkGray);
 
             //Draw the current state
             switch (currentGameState)
@@ -362,7 +380,8 @@ namespace SpaceUnionXNA
         public void EnterLobbyMenu()
         {
             currentGameState = GameState.Lobby;
-            lobby_menu = new LobbyMenu(this, "Alice's Lobby");
+            IsMouseVisible = true;
+            lobby_menu = new LobbyMenu(this);
         }
 
         public void EnterShipSelectionScreen()
@@ -376,8 +395,9 @@ namespace SpaceUnionXNA
         {
             //gameplayScreen = new GameplayScreen(this, spriteBatch, shipselectionScreen.getship());
             
-            gameplayScreen = new TeamBattle(this, spriteBatch, shipselectionScreen.getship());
+            gameplayScreen = new TeamBattle(this, spriteBatch);
             currentGameState = GameState.Playing;
+            Console.WriteLine("state = " + currentGameState.ToString());
             Viewport v = GraphicsDevice.Viewport;
             IsMouseVisible = false;
         }
@@ -388,7 +408,7 @@ namespace SpaceUnionXNA
             GraphicsDevice.Viewport = new Viewport(0, 0, this.getScreenWidth(), this.getScreenHeight());
             IsMouseVisible = true;
         }
-
+        /*
         private void heartbeat()
         {
             while (true)
@@ -398,7 +418,7 @@ namespace SpaceUnionXNA
                 Thread.Sleep(1000);
             }
         }
-
+        */
        
     }
 }

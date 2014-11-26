@@ -48,6 +48,7 @@ namespace Server_Application
             OnlinePlayers = new ConcurrentDictionary<string, Player>();
             Receiving = new DataReceiving(this);
             Transmission = new DataTransmission(this);
+            new Thread(stopGame).Start();
             //new Thread(cleanRooms).Start();
         }
 
@@ -103,6 +104,35 @@ namespace Server_Application
             room.updatePlayer(player);
         }
 
+        public void stopGame()
+        {
+            while (true)
+            {
+                foreach (Gameroom room in Gamerooms.Values.ToArray())
+                {
+                    if ((DateTime.Now - room.GameStart).Minutes == Constants.GamePeriod && room.InGame)
+                    {
+                        room.InGame = false;
+                        foreach (GameData data in room.getPlayerList())
+                            addMessageToQueue(new PlayerRequest(data.Player, Constants.PLAYER_REQUEST_END));
+                        room.GameStart = DateTime.Now;
+                        room.stopGame();
+                    }
+                }
+                Thread.Sleep(1000);
+            }
+        }
+
+        public void listRooms()
+        {
+            foreach (Gameroom room in Gamerooms.Values.ToArray())
+            {
+                Console.WriteLine("Gameroom: " + room.RoomNumber);
+                foreach (GameData player in room.getPlayerList())
+                    Console.WriteLine("Player: " + player.Player.Username);
+            }
+        }
+
         public void removePlayerFromRoom(Player player, int roomNumber)
         {
             Gameroom room = getGameroom(roomNumber);
@@ -155,7 +185,8 @@ namespace Server_Application
         /// <param name="player">The player to send the room list to.</param>
         public void sendRoomList(Player player)
         {
-            addMessageToQueue(new RoomList(player, organizeRoomList()));
+            if(player != null)
+                addMessageToQueue(new RoomList(player, organizeRoomList()));
         }
 
         public void sendRoomInfo(Player player, int roomNumber)
@@ -173,17 +204,19 @@ namespace Server_Application
         public void addPlayerToRequestedRoom(Player player, int roomNumber)
         {
             Gameroom room = getGameroom(roomNumber);
-            if (room == null || !room.addPlayer(OnlinePlayers[player.Username]))
-                addMessageToQueue(new RoomList(player, organizeRoomList()));
+            if (room == null)
+                return;
+            if(!OnlinePlayers.ContainsKey(player.Username) || !room.addPlayer(OnlinePlayers[player.Username]))
+                return;
+            addMessageToQueue(new RoomList(player, organizeRoomList()));
             sendRoomUpdate(roomNumber);
         }
 
         public void updateOnHeartbeat(PlayerRequest request)
         {
-            if (request == null)
-                return;
-            if (OnlinePlayers.ContainsKey(request.Sender.Username))
-                OnlinePlayers[request.Sender.Username].Time = DateTime.Now;
+            if (request != null)
+                if (OnlinePlayers.ContainsKey(request.Sender.Username))
+                    OnlinePlayers[request.Sender.Username].Time = DateTime.Now;
         }
 
         /// <summary>
@@ -211,14 +244,9 @@ namespace Server_Application
             Gameroom room = getGameroom(roomNumber);
             if (room != null && player != null)
             {
-                foreach (GameData p in room.getPlayerList())
-                {
-                    if (p.Player.Username == player.Username)
-                    {
-                        p.Player.Ready = player.Ready;
-                        break;
-                    }
-                }
+                GameData temp = room.getPlayer(player.Username);
+                temp.Player.Ready = true;
+                room.updatePlayer(temp);
             }
         }
 
@@ -227,23 +255,19 @@ namespace Server_Application
             Gameroom room = getGameroom(roomNumber);
             if (room != null && player != null)
             {
-                foreach (GameData p in room.getPlayerList())
-                {
-                    if (p.Player.Username == player.Username)
-                    {
-                        p.Player.ShipChoice = player.ShipChoice;
-                        break;
-                    }
-                }
+                GameData temp = room.getPlayer(player.Username);
+                temp.Player.ShipChoice = player.ShipChoice;
+                room.updatePlayer(temp);
             }
         }
 
         public void startGame(Player sender, int roomNumber)
         {
             Gameroom room = getGameroom(roomNumber);
-            if (room == null || sender == null)
+            if (room == null || sender == null)// || room.Players % 2 == 1)
                 return;
             room.InGame = true;
+            room.GameStart = DateTime.Now;
             foreach (GameData p in room.getPlayerList())
                 addMessageToQueue(new PlayerRequest(p.Player, Constants.PLAYER_REQUEST_START));
         }

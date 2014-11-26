@@ -11,11 +11,9 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 			: base(assets.laser, startPoint, ship) {
 
 			projectileTTL = 5;
-			projectileMoveSpeed = 1000.2f;
-
+			projectileMoveSpeed = 2000.0f;
 
 			weaponDamage = 5;
-
 		}
 
 		/// <summary>

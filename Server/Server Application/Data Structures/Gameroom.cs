@@ -18,6 +18,7 @@ namespace Data_Structures
         public bool InGame { get; set; }
         public Player Host { get; set; }
         public int Players { get { return players.Count; } }
+        public DateTime GameStart { get; set; }
 
         public Gameroom() 
         {
@@ -58,6 +59,7 @@ namespace Data_Structures
                 data.Player = player;
                 data.Player.GameRoom = RoomNumber;
                 players.TryAdd(player.Username, data);
+                data.Team = (Players % 2 == 0) ? true : false;
                 return true;
             }
             return false;
@@ -66,6 +68,14 @@ namespace Data_Structures
         public void updatePlayer(GameData player)
         {
             players[player.Player.Username] = player;
+        }
+
+        public GameData getPlayer(string username)
+        {
+            if (!players.ContainsKey(username))
+                return null;
+            return players[username];
+
         }
 
         public GameData[] getPlayerList()
@@ -87,6 +97,21 @@ namespace Data_Structures
         public ConcurrentDictionary<string, GameData> getPlayers()
         {
             return players;
+        }
+
+        public void stopGame()
+        {
+            //send updates to database on player data
+            InGame = false;
+            foreach (GameData player in players.Values.ToArray())
+            {
+                player.Angle = 0;
+                player.Deaths = 0;
+                player.Health = 100;
+                player.Kills = 0;
+                player.XPosition = 0;
+                player.YPosition = 0;
+            }
         }
     }
 }
