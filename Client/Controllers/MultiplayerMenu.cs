@@ -21,6 +21,8 @@ namespace SpaceUnionXNA.Controllers
     {
         private Game1 game;
         private ScrollingBackground scroll;
+        private Texture2D TexBanner;
+        private Rectangle Banner;
 
         public MultiplayerMenu(Game1 game)
         {
@@ -28,6 +30,10 @@ namespace SpaceUnionXNA.Controllers
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
             scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
             scroll.setPosition(new Vector2((int)0, (int)0));
+
+            TexBanner = Game1.Assets.suMultiplayer;
+            Banner = new Rectangle((int)game.mainScreen.Width / 2 - 400, (int)game.mainScreen.Height / 2 - 150 - 250, 800, 250);
+
             CreateMenuControls(game.mainScreen);
         }
 
@@ -40,21 +46,15 @@ namespace SpaceUnionXNA.Controllers
         {
             spriteBatch.Begin();
             //WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 150, (int)game.mainScreen.Height / 2 - 150, 300, 225);
-
             scroll.draw(spriteBatch);
+            spriteBatch.Draw(TexBanner, Banner, Color.White);
             //spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
             spriteBatch.End();
             game.gui_manager.Draw(gameTime);
         }
 
         private void CreateMenuControls(Screen mainScreen)
-        {
-            //Menu Title Label
-            LabelControl menuTitleLabel = new LabelControl();
-            menuTitleLabel.Text = "Multiplayer";
-            menuTitleLabel.Bounds = GuiHelper.MENU_TITLE_LABEL;
-            mainScreen.Desktop.Children.Add(menuTitleLabel);
-            
+        {   
             //Logout Button.
             ButtonControl logoutButton = GuiHelper.CreateButton("Back", 0, 100, 70, 32);
             logoutButton.Pressed += delegate(object sender, EventArgs arguments)

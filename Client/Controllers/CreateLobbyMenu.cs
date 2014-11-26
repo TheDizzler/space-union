@@ -27,6 +27,8 @@ namespace SpaceUnionXNA.Controllers
         private Rectangle WhiteBackground;
         private Texture2D Background;
         private InputControl lobbyTitleInput;
+        private Texture2D TexBanner;
+        private Rectangle Banner;
 
         public CreateLobbyMenu(Game1 game)
         {
@@ -34,6 +36,10 @@ namespace SpaceUnionXNA.Controllers
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
             scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
             scroll.setPosition(new Vector2((int)0, (int)0));
+
+            TexBanner = Game1.Assets.suMultiCreate;
+            Banner = new Rectangle((int)game.mainScreen.Width / 2 - 400, (int)game.mainScreen.Height / 2 - 150 - 250, 800, 250);
+
             Background = Game1.Assets.guiRectangle;
             CreateMenuControls(game.mainScreen);
         }
@@ -49,6 +55,7 @@ namespace SpaceUnionXNA.Controllers
 
             WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 175, (int)game.mainScreen.Height / 2 - 165, 300, 225);
             scroll.draw(spriteBatch);
+            spriteBatch.Draw(TexBanner, Banner, Color.White);
             spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
             spriteBatch.End();
             game.gui_manager.Draw(gameTime);
@@ -63,12 +70,6 @@ namespace SpaceUnionXNA.Controllers
                 game.EnterMultiplayerMenu();
             };
             mainScreen.Desktop.Children.Add(backButton);
-
-            //Menu Title Label
-            LabelControl menuTitleLabel = new LabelControl();
-            menuTitleLabel.Text = "Create A New Lobby";
-            menuTitleLabel.Bounds = GuiHelper.MENU_TITLE_LABEL;
-            mainScreen.Desktop.Children.Add(menuTitleLabel);
 
             //Lobby Title Label.
             LabelControl lobbyTitleLabel = GuiHelper.CreateLabel("Lobby Title", -145, -125, 30, 30);

@@ -25,6 +25,9 @@ namespace SpaceUnionXNA.Controllers
         private ScrollingBackground scroll;
         private Rectangle WhiteBackground;
         private Texture2D Background;
+        private Texture2D TexBanner;
+        private Rectangle Banner;
+
         /* Key order mapped to the Enum in Ship.cs */
         private ButtonControl keyButton0;
         private ButtonControl keyButton1;
@@ -54,6 +57,9 @@ namespace SpaceUnionXNA.Controllers
             
             scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
             scroll.setPosition(new Vector2((int)0, (int)0));
+            TexBanner = Game1.Assets.suOptionKeys;
+            Banner = new Rectangle((int)game.mainScreen.Width / 2 - 400, (int)game.mainScreen.Height / 2 - 150 - 250, 800, 250);
+
             Background = Game1.Assets.guiRectangle;
             
             nonInputKeys = new List<Keys>();
@@ -73,8 +79,9 @@ namespace SpaceUnionXNA.Controllers
         public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 287, (int)game.mainScreen.Height / 2 - 212, 575, 425);
+            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 287, (int)game.mainScreen.Height / 2 - 200, 575, 425);
             scroll.draw(spriteBatch);
+            spriteBatch.Draw(TexBanner, Banner, Color.White);
             spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
             spriteBatch.End();
 
@@ -116,9 +123,9 @@ namespace SpaceUnionXNA.Controllers
         private void CreateMenuControls(Screen mainScreen)
         {
             //Forward key
-            LabelControl forwardLabel = GuiHelper.CreateLabel("Forward Thrust", -100, -175, 140, 32);
+            LabelControl forwardLabel = GuiHelper.CreateLabel("Forward Thrust", -100, -150, 140, 32);
             mainScreen.Desktop.Children.Add(forwardLabel);
-            keyButton0 = GuiHelper.CreateButton(game.keylist[0].ToString(), 145, -175, 100, 32);
+            keyButton0 = GuiHelper.CreateButton(game.keylist[0].ToString(), 145, -150, 100, 32);
             keyButton0.Pressed += delegate(object sender, EventArgs arguments)
             { 
                 changeKey(0, keyButton0, forwardLabel);       
@@ -126,9 +133,9 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(keyButton0);
 
             //Left key
-            LabelControl leftLabel = GuiHelper.CreateLabel("Turn Left", -100, -130, 140, 32);
+            LabelControl leftLabel = GuiHelper.CreateLabel("Turn Left", -100, -105, 140, 32);
             mainScreen.Desktop.Children.Add(leftLabel);
-            keyButton1 = GuiHelper.CreateButton(game.keylist[1].ToString(), 145, -130, 100, 32);
+            keyButton1 = GuiHelper.CreateButton(game.keylist[1].ToString(), 145, -105, 100, 32);
             keyButton1.Pressed += delegate(object sender, EventArgs arguments)
             {
                 changeKey(1, keyButton1, leftLabel);
@@ -136,9 +143,9 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(keyButton1);
 
             //Right key
-            LabelControl rightLabel = GuiHelper.CreateLabel("Turn Right", -100, -85, 140, 32);
+            LabelControl rightLabel = GuiHelper.CreateLabel("Turn Right", -100, -60, 140, 32);
             mainScreen.Desktop.Children.Add(rightLabel);
-            keyButton2 = GuiHelper.CreateButton(game.keylist[2].ToString(), 145, -85, 100, 32);
+            keyButton2 = GuiHelper.CreateButton(game.keylist[2].ToString(), 145, -60, 100, 32);
             keyButton2.Pressed += delegate(object sender, EventArgs arguments)
             {
                 changeKey(2, keyButton2, rightLabel);
@@ -146,9 +153,9 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(keyButton2);
 
             //Fire key
-            LabelControl fireLabel = GuiHelper.CreateLabel("Primary Fire", -100, -40, 140, 32);
+            LabelControl fireLabel = GuiHelper.CreateLabel("Primary Fire", -100, -15, 140, 32);
             mainScreen.Desktop.Children.Add(fireLabel);
-            keyButton3 = GuiHelper.CreateButton(game.keylist[3].ToString(), 145, -40, 100, 32);
+            keyButton3 = GuiHelper.CreateButton(game.keylist[3].ToString(), 145, -15, 100, 32);
             keyButton3.Pressed += delegate(object sender, EventArgs arguments)
             {
                 changeKey(3, keyButton3, fireLabel);
@@ -156,9 +163,9 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(keyButton3);
 
             //Alternate Fire key
-            LabelControl altFireLabel = GuiHelper.CreateLabel("Secondary Fire", -100, 5, 140, 32);
+            LabelControl altFireLabel = GuiHelper.CreateLabel("Secondary Fire", -100, 30, 140, 32);
             mainScreen.Desktop.Children.Add(altFireLabel);
-            keyButton4 = GuiHelper.CreateButton(game.keylist[4].ToString(), 145, 5, 100, 32);
+            keyButton4 = GuiHelper.CreateButton(game.keylist[4].ToString(), 145, 30, 100, 32);
             keyButton4.Pressed += delegate(object sender, EventArgs arguments)
             {
                 changeKey(4, keyButton4, altFireLabel);

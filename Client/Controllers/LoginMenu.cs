@@ -30,9 +30,12 @@ namespace SpaceUnionXNA.Controllers
         InputControl accountNameInput;
         private KeyboardState keyState;
         private bool tabFlag = true;
-        
+
         private Rectangle WhiteBackground;
         private Texture2D Background;
+
+        private Rectangle Banner;
+        private Texture2D TexBanner;
 
         public LoginMenu(Game1 game)
         {
@@ -41,8 +44,12 @@ namespace SpaceUnionXNA.Controllers
        
             scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
             scroll.setPosition(new Vector2((int)0, (int)0));
-            Background = Game1.Assets.guiRectangle;
             
+            Background = Game1.Assets.guiRectangle;
+            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 150, (int)game.mainScreen.Height / 2 - 150, 300, 225);
+
+            TexBanner = Game1.Assets.suBanner;
+            Banner = new Rectangle((int)game.mainScreen.Width / 2 - 150, (int)game.mainScreen.Height / 2 - 50 - 250, 300, 100);
             CreateMenuControls(game.mainScreen);
         }
 
@@ -54,11 +61,14 @@ namespace SpaceUnionXNA.Controllers
         public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 150, (int)game.mainScreen.Height / 2 - 150, 300, 225);
             
             scroll.draw(spriteBatch);
+            
             spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
+            spriteBatch.Draw(TexBanner, Banner, Color.White);
+            
             spriteBatch.End();
+
             game.gui_manager.Draw(gameTime);
             keyState = Keyboard.GetState();
             
@@ -153,7 +163,7 @@ namespace SpaceUnionXNA.Controllers
             ButtonControl multiplayerButton = GuiHelper.CreateButton("Debug Game", -300, -300, 200, 50);
             multiplayerButton.Pressed += delegate(object sender, EventArgs arguments)
             {
-                game.EnterControlMenu();
+                game.EnterLobbyMenu();
             };
             mainScreen.Desktop.Children.Add(multiplayerButton);
 

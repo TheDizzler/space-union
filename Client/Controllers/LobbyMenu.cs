@@ -26,16 +26,31 @@ namespace SpaceUnionXNA.Controllers
         private Game1 game;
         public String lobbyTitle;
         LabelControl playersLabel;
+        ChoiceControl shipChoice_1;
+        ChoiceControl shipChoice_2;
+        ChoiceControl shipChoice_3;
 
+        List<LabelControl> playerLabelList;
         LabelControl player1Label;
         LabelControl player2Label;
         LabelControl player3Label;
         LabelControl player4Label;
         LabelControl player5Label;
         LabelControl player6Label;
+
+        List<string> playerNameList;
+
+        /* Player list location from center */
+        private int pListX = 150;      
+        private int pListY = -150;     
+        private int pListSpacing = 20; // Space between each player 
+
         private ScrollingBackground scroll;
         private Rectangle WhiteBackground;
         private Texture2D Background;
+        private Texture2D TexBanner;
+        private Rectangle Banner;
+        
         bool isLeader = false;
 
         public LobbyMenu(Game1 game, String title)
@@ -45,6 +60,28 @@ namespace SpaceUnionXNA.Controllers
             lobbyTitle = title;
             scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
             scroll.setPosition(new Vector2((int)0, (int)0));
+
+            //TexBanner = Game1.Assets.suMultiLobby;
+            //Banner = new Rectangle((int)game.mainScreen.Width / 2 - 400, (int)game.mainScreen.Height / 2 - 150 - 250, 800, 250);
+
+            /* For constructing the list of players with LabelControls */
+            playerLabelList = new List<LabelControl>();
+            playerLabelList.Add(player1Label = GuiHelper.CreateLabel("Empty", 0, 0, 120, 16));
+            playerLabelList.Add(player2Label = GuiHelper.CreateLabel("Empty", 0, 0, 120, 16));
+            playerLabelList.Add(player3Label = GuiHelper.CreateLabel("Empty", 0, 0, 120, 16));
+            playerLabelList.Add(player4Label = GuiHelper.CreateLabel("Empty", 0, 0, 120, 16));
+            playerLabelList.Add(player5Label = GuiHelper.CreateLabel("Empty", 0, 0, 120, 16));
+            playerLabelList.Add(player6Label = GuiHelper.CreateLabel("Empty", 0, 0, 120, 16));
+
+            /* List of names used to correlate to the labels */
+            playerNameList = new List<string>();
+            playerNameList.Add("Player 1");
+            playerNameList.Add("Player 2");
+            playerNameList.Add("Player 3");
+            playerNameList.Add("Player 4");
+            playerNameList.Add("Player 5");
+            playerNameList.Add("Player 6");
+
             CreateMenuControls(game.mainScreen);
             Background = Game1.Assets.guiRectangle;
             new Thread(updatePlayerList).Start();
@@ -61,9 +98,11 @@ namespace SpaceUnionXNA.Controllers
             //WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 150, (int)game.mainScreen.Height / 2 - 150, 300, 225);
 
             //WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 162, (int)game.mainScreen.Height / 2 - 162, 575, 325);
-            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 325, (int)game.mainScreen.Height / 2 - 325, 650, 650);
+            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 325, (int)game.mainScreen.Height / 2 - 225, 650, 500);
 
             scroll.draw(spriteBatch);
+            //spriteBatch.Draw(TexBanner, Banner, Color.White);
+
             spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
             //spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
             //spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
@@ -82,41 +121,23 @@ namespace SpaceUnionXNA.Controllers
             menuNameLabel.Bounds = GuiHelper.MENU_TITLE_LABEL;
             mainScreen.Desktop.Children.Add(menuNameLabel);
 
+
             //Players Labels
-            playersLabel = GuiHelper.CreateLabel("Players:", 150, -200, 120, 16);
+            playersLabel = GuiHelper.CreateLabel("Players:", pListX, pListY - pListSpacing, 120, 16);
             mainScreen.Desktop.Children.Add(playersLabel);
-
-            player1Label = GuiHelper.CreateLabel("Player 1", 150, -180, 120, 16);
-            mainScreen.Desktop.Children.Add(player1Label);
-
-            player2Label = GuiHelper.CreateLabel("Player 2", 150, -160, 120, 16);
-            mainScreen.Desktop.Children.Add(player2Label);
-
-            player3Label = GuiHelper.CreateLabel("Player 3", 150, -140, 120, 16);
-            mainScreen.Desktop.Children.Add(player3Label);
-
-            player4Label = GuiHelper.CreateLabel("Player 4", 150, -120, 120, 16);
-            mainScreen.Desktop.Children.Add(player4Label);
-
-            player5Label = GuiHelper.CreateLabel("Player 5", 150, -100, 120, 16);
-            mainScreen.Desktop.Children.Add(player5Label);
             
-            player6Label = GuiHelper.CreateLabel("Player 6", 150, -80, 120, 16);
-            mainScreen.Desktop.Children.Add(player6Label);
+            int i = 0;
 
-            //Choose Chip Label
-            LabelControl chooseShipLabel = GuiHelper.CreateLabel("Choose Your Ship", -200, -200, 120, 16);
-            mainScreen.Desktop.Children.Add(chooseShipLabel);
+            foreach (LabelControl ctrl in playerLabelList)
+            {
+                //ctrl.Text = playerNameList[i]; // Use if using the List<string> to store player names
+                ctrl.Bounds = GuiHelper.CenterBound(pListX, pListY + i * pListSpacing, 120, 16);
+                mainScreen.Desktop.Children.Add(ctrl);
+                i++;
+            }
 
-            //Choosing Ship Options
-            ChoiceControl shipChoice_1 = GuiHelper.CreateChoice("Alpha Class", -200, -180, 120, 16);
-            mainScreen.Desktop.Children.Add(shipChoice_1);
 
-            ChoiceControl shipChoice_2 = GuiHelper.CreateChoice("Beta Class", -200, -160, 120, 16);
-            mainScreen.Desktop.Children.Add(shipChoice_2);
-
-            ChoiceControl shipChoice_3 = GuiHelper.CreateChoice("Charlie Class", -200, -140, 120, 16);
-            mainScreen.Desktop.Children.Add(shipChoice_3);
+            createShipSelection(mainScreen);
 
             //Ready Up Button.
             OptionControl readyUpButton = GuiHelper.CreateOption("I'm Ready!", -100, 150, 50, 50);
@@ -153,6 +174,23 @@ namespace SpaceUnionXNA.Controllers
             };
             mainScreen.Desktop.Children.Add(cancelGameButton);
 
+        }
+
+        private void createShipSelection(Screen mainScreen)
+        {
+            //Choose Ship Label
+            LabelControl chooseShipLabel = GuiHelper.CreateLabel("Choose Your Ship", -200, -175, 120, 16);
+            mainScreen.Desktop.Children.Add(chooseShipLabel);
+
+            //Choosing Ship Options
+            ChoiceControl shipChoice_1 = GuiHelper.CreateChoice("Alpha Class", -200, -180, 120, 16);
+            mainScreen.Desktop.Children.Add(shipChoice_1);
+
+            ChoiceControl shipChoice_2 = GuiHelper.CreateChoice("Beta Class", -200, -160, 120, 16);
+            mainScreen.Desktop.Children.Add(shipChoice_2);
+
+            ChoiceControl shipChoice_3 = GuiHelper.CreateChoice("Charlie Class", -200, -140, 120, 16);
+            mainScreen.Desktop.Children.Add(shipChoice_3);
         }
 
         private void updatePlayerList()

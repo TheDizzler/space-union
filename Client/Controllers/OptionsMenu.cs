@@ -35,6 +35,9 @@ namespace SpaceUnionXNA.Controllers
         private ScrollingBackground scroll;
         private Rectangle WhiteBackground;
         private Texture2D Background;
+        private Texture2D TexBanner;
+        private Rectangle Banner;
+
         private bool toggleReso = false;
         private int winState = 0;
 
@@ -43,8 +46,12 @@ namespace SpaceUnionXNA.Controllers
             this.game = game;
             Background = Game1.Assets.guiRectangle;
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
+            
             scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
             scroll.setPosition(new Vector2((int)0, (int)0));
+            TexBanner = Game1.Assets.suOption;
+            Banner = new Rectangle((int)game.mainScreen.Width / 2 - 400, (int)game.mainScreen.Height / 2 - 150 - 250, 800, 250);
+
             CreateMenuControls(game.mainScreen);
             clientHeight = game.getScreenHeight();
             clientWidth = game.getScreenWidth();
@@ -63,6 +70,7 @@ namespace SpaceUnionXNA.Controllers
             WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 287, (int)game.mainScreen.Height / 2 - 162, 575, 325);
 
             scroll.draw(spriteBatch);
+            spriteBatch.Draw(TexBanner, Banner, Color.White);
             spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
             //spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
             spriteBatch.End();
@@ -340,6 +348,7 @@ namespace SpaceUnionXNA.Controllers
             game.setScreenSize(int.Parse(width), int.Parse(height), currentWinLabel.Text);
             scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
             scroll.setPosition(new Vector2((int)0, (int)0));
+            Banner = new Rectangle((int)game.mainScreen.Width / 2 - 400, (int)game.mainScreen.Height / 2 - 150 - 250, 800, 250);
             CreateMenuControls(game.mainScreen);
         }
 

@@ -43,8 +43,20 @@ Content\Spaceships\UFO (39x39).xnb
 Content\Spaceships\scoutship (64x64).xnb
 Content\Projectiles\homing missile.xnb
 Content\Projectiles\homing missile smaller.xnb
+Content\Buttons\Browse_Lobby.xnb
+Content\Buttons\Create_Lobby.xnb
+Content\Buttons\Space-Union.xnb
 Content\SpriteFonts\SpriteFont1.xnb
 Content\SFX\Laser High 1.xnb
 Content\SFX\Laser High 2.xnb
 Content\SFX\Laser High 0.xnb
 Content\SFX\Laser High 3.xnb
+Content\SFX\game_music_sample.xnb
+Content\SFX\test.xnb
+Content\Buttons\SU_Credits.xnb
+Content\Buttons\SU_Multiplayer.xnb
+Content\Buttons\SU_M_BrowseLobby.xnb
+Content\Buttons\SU_M_CreateLobby.xnb
+Content\Buttons\SU_Options.xnb
+Content\Buttons\SU_O_KeyBindings.xnb
+Content\Buttons\Space-Union_Banner.xnb
