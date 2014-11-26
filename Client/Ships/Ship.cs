@@ -88,6 +88,7 @@ namespace SpaceUnionXNA.Ships
 
         public bool blueTeam = false;
         public bool redTeam = false;
+        public bool Team { get; set; }
 
         public TimeSpan inactiveStart;
         public TimeSpan inactiveTime = TimeSpan.Zero;
@@ -110,10 +111,16 @@ namespace SpaceUnionXNA.Ships
         /// <param name="tex">Ship texture</param>
         /// <param name="wpnTex">Weapon texture</param>
         /// <param name="game1"></param>
-        protected Ship(Texture2D tex, Texture2D wpnTex, Game1 game1, Color color)
+        protected Ship(Texture2D tex, Texture2D wpnTex, Game1 game1, bool team)
             : base(tex, Vector2.Zero)
         {
-            teamColor = color;
+            Team = team;
+
+            if (Team)
+                teamColor = Color.Blue;
+            else
+                teamColor = Color.Red;
+
             this.game = game1;
             velocity = Vector2.Zero;
 

@@ -25,7 +25,7 @@ namespace SpaceUnionXNA.Controllers {
 		public override void Update(GameTime gameTime) {
             if (first)
             {
-                base.Update(gameTime);
+                //base.Update(gameTime);
                 first = false;
                 return;
             }

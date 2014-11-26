@@ -65,5 +65,8 @@ namespace Data_Structures
         {
             Type = 1;
         }
+
+        //The initialization of positions
+        public byte SpawnPosition { get; set; }
     }
 }

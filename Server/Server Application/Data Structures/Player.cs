@@ -51,5 +51,6 @@ namespace Data_Structures
         {
             Type = 8;
         }
+
     }
 }

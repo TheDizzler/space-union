@@ -15,8 +15,8 @@ namespace SpaceUnionXNA.Ships
     /// </summary>
     class AlphaShip : Ship
     {
-        public AlphaShip(Game1 game1, Color teamColor)
-            : base(assets.ufo, assets.laser, game1, teamColor)
+        public AlphaShip(Game1 game1, bool team)
+            : base(assets.ufo, assets.laser, game1, team)
         {
             maxSpeed = 500;
             accelSpeed = 850.0f;

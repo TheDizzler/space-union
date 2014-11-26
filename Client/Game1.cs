@@ -64,11 +64,14 @@ namespace SpaceUnionXNA
 
 
         //NETWORKING
+        //Globals for networking purposes.
         public bool GameStarted;
         public ClientCommHandler Communication { get; private set; }
         public Player Player { get; set; }
         public RoomInfo roomInfo;
         public bool LoggedIn { get; set; }
+        public byte PlayerSpawnPosition { get; set; }
+        public bool PlayerTeam { get; set; }
 
         TeamBattle gameplayScreen;
 
@@ -495,6 +498,5 @@ namespace SpaceUnionXNA
             }
         }
         */
-
     }
 }

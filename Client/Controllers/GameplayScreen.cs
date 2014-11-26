@@ -77,40 +77,7 @@ namespace SpaceUnionXNA.Controllers
             inactiveShips = new Dictionary<String, Ship>();
             targets = new List<Tangible>();
 
-            //Assign all other ships in lobby to ship list.
-            if (game.roomInfo != null)
-            {
-                foreach (var p in game.roomInfo.Players)
-                {
-                    if (p.Player.Username != game.Player.Username)
-                    {
-                        Ship ship;
-                        switch (p.Player.ShipChoice)
-                        {
-                            case 0:
-                                ship = new AlphaShip(this.game, Color.Yellow);
-                                break;
-                            case 1:
-                                ship = new ThetaShip(this.game, Color.Yellow);
-                                break;
-                            case 2:
-                                ship = new OmegaShip(this.game, Color.Yellow);
-                                break;
-                            default:
-                                ship = new ThetaShip(this.game, Color.Yellow);
-                                break;
-                        }
-
-                        ship.username = p.Player.Username;
-                        ships.Add(ship.username, ship);
-                    }
-                    else
-                    {
-                        playerShipChoice = p.Player.ShipChoice;
-                    }
-                }
-            }
-
+            //Respawn Points
             respawnpoints = new List<Vector2>();
             usedspawn = new List<Vector2>();
 
@@ -122,6 +89,43 @@ namespace SpaceUnionXNA.Controllers
             respawnpoints.Add(new Vector2(worldWidth - 100, 100));
             respawnpoints.Add(new Vector2(worldWidth - 100, worldHeight - 100));
             respawnpoints.Add(new Vector2(100, worldHeight - 100));
+
+            int roomNumber = game.Player.GameRoom;
+            RoomInfo roomInfo = (RoomInfo)game.Communication.sendRoomInfoRequest(game.Player, roomNumber);
+
+            //Assign all other ships in lobby to ship list.
+            if (roomInfo != null)
+            {
+                foreach (var p in game.roomInfo.Players)
+                {
+                    if (p.Player.Username != game.Player.Username)
+                    {
+                        Ship ship;
+                        switch (p.Player.ShipChoice)
+                        {
+                            case 0:
+                                ship = new AlphaShip(this.game, p.Team);
+                                break;
+                            case 1:
+                                ship = new ThetaShip(this.game, p.Team);
+                                break;
+                            case 2:
+                                ship = new OmegaShip(this.game, p.Team);
+                                break;
+                            default:
+                                ship = new ThetaShip(this.game, p.Team);
+                                break;
+                        }
+                        ship.Position = respawnpoints.ElementAt(p.SpawnPosition);
+                        ship.username = p.Player.Username;
+                        ships.Add(ship.username, ship);
+                    }
+                    else
+                    {
+                        playerShipChoice = p.Player.ShipChoice;
+                    }
+                }
+            }
 
             /*
             for (int i = 0; i < 3; i++)
@@ -148,21 +152,21 @@ namespace SpaceUnionXNA.Controllers
             switch (playerShipChoice)
             {
                 case 0:
-                    playerShip = new AlphaShip(this.game, Color.Red);
+                    playerShip = new AlphaShip(this.game, game.PlayerTeam);
                     break;
                 case 1:
-                    playerShip = new ThetaShip(this.game, Color.Red);
+                    playerShip = new ThetaShip(this.game, game.PlayerTeam);
                     break;
                 case 2:
-                    playerShip = new OmegaShip(this.game, Color.Red);
+                    playerShip = new OmegaShip(this.game, game.PlayerTeam);
                     break;
                 default:
-                    playerShip = new AlphaShip(this.game, Color.Red);
+                    playerShip = new AlphaShip(this.game, game.PlayerTeam);
                     break;
             }
 
             playerShip.username = game.Player.Username;
-            playerShip.Position = respawnpoints.ElementAt(5);
+            playerShip.Position = respawnpoints.ElementAt(game.PlayerSpawnPosition);
 
             basicViewport = game.GraphicsDevice.Viewport;
 
@@ -189,8 +193,15 @@ namespace SpaceUnionXNA.Controllers
 
             ships.Add(game.Player.Username, playerShip);
 
-            //foreach (var key in ships.Keys)
-            //    targets.Add(ships[key]);
+            foreach (var key in ships.Keys)
+                targets.Add(ships[key]);
+
+            gameData.Angle = playerShip.rotation;
+            gameData.Player = this.game.Player;
+            gameData.XPosition = playerShip.Position.X;
+            gameData.YPosition = playerShip.Position.Y;
+            gameData.Bullets = ConvertProjectileToArray(playerShip.projectiles);
+            game.Communication.sendGameData(gameData);
         }
 
         /// <summary>
@@ -204,9 +215,9 @@ namespace SpaceUnionXNA.Controllers
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public virtual void Update(GameTime gameTime)
         {
-            //quadTree.clear();
-            //foreach (Tangible target in targets)
-            //    quadTree.insert(target);
+            quadTree.clear();
+            foreach (Tangible target in targets)
+                quadTree.insert(target);
 
 
             keyState = Keyboard.GetState(); //Get which keys are pressed or released
@@ -275,7 +286,6 @@ namespace SpaceUnionXNA.Controllers
             gameData.YPosition = playerShip.Position.Y;
             gameData.Bullets = ConvertProjectileToArray(playerShip.projectiles);
             game.Communication.sendGameData(gameData);
-
         }
 
         /// <summary>

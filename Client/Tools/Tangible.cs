@@ -87,7 +87,7 @@ namespace SpaceUnionXNA.Tools {
 				}
 			} else {
 				if (currentHealth <= 0) {
-					//owner.kills += 1;
+					owner.kills += 1;
 					destroy();
 				}
 			}

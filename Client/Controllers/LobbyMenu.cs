@@ -39,6 +39,8 @@ namespace SpaceUnionXNA.Controllers
         private Texture2D Background;
         bool isLeader = false;
 
+        PlayerRequest startGameSignal;
+
         public LobbyMenu(Game1 game)
         {
             this.game = game;
@@ -53,9 +55,12 @@ namespace SpaceUnionXNA.Controllers
         public void Update(GameTime gameTime)
         {
             scroll.update();
-            if (game.Communication.getGameStartSignal() != null)
+            startGameSignal = game.Communication.getGameStartSignal();
+            if (startGameSignal != null)
             {
                 Console.WriteLine("ingame == true");
+                game.PlayerSpawnPosition = startGameSignal.SpawnPosition;
+                game.PlayerTeam = startGameSignal.Team;
                 game.GameStarted = true;
                 game.StartGame();
             }

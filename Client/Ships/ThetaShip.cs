@@ -15,8 +15,8 @@ namespace SpaceUnionXNA.Ships
     /// </summary>
     class ThetaShip : Ship
     {
-        public ThetaShip(Game1 game1, Color teamColor)
-            : base(assets.scout, assets.laser, game1, teamColor)
+        public ThetaShip(Game1 game1, bool team)
+            : base(assets.scout, assets.laser, game1, team)
         {
             maxSpeed = 75;
             accelSpeed = 400.0f;
