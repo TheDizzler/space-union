@@ -15,6 +15,7 @@ using SpaceUnionXNA.Animations;
 using Data_Manipulation;
 using Data_Structures;
 using SpaceUnionXNA.Weapons.Projectiles;
+using System.Threading;
 
 namespace SpaceUnionXNA.Controllers
 {
@@ -153,20 +154,24 @@ namespace SpaceUnionXNA.Controllers
             {
                 case 0:
                     playerShip = new AlphaShip(this.game, game.PlayerTeam);
+                    playerShip.spawnPosition = game.PlayerSpawnPosition;
                     break;
                 case 1:
                     playerShip = new ThetaShip(this.game, game.PlayerTeam);
+                    playerShip.spawnPosition = game.PlayerSpawnPosition;
                     break;
                 case 2:
                     playerShip = new OmegaShip(this.game, game.PlayerTeam);
+                    playerShip.spawnPosition = game.PlayerSpawnPosition;
                     break;
                 default:
                     playerShip = new AlphaShip(this.game, game.PlayerTeam);
+                    playerShip.spawnPosition = game.PlayerSpawnPosition;
                     break;
             }
 
             playerShip.username = game.Player.Username;
-            playerShip.Position = respawnpoints.ElementAt(game.PlayerSpawnPosition);
+            playerShip.Position = respawnpoints.ElementAt(playerShip.spawnPosition);
 
             basicViewport = game.GraphicsDevice.Viewport;
 
@@ -198,8 +203,11 @@ namespace SpaceUnionXNA.Controllers
 
             gameData.Angle = playerShip.rotation;
             gameData.Player = this.game.Player;
+            gameData.IsActive = true;
             gameData.XPosition = playerShip.Position.X;
             gameData.YPosition = playerShip.Position.Y;
+            gameData.SpawnPosition = playerShip.spawnPosition;
+            gameData.Health = (byte)playerShip.currentHealth;
             gameData.Bullets = ConvertProjectileToArray(playerShip.projectiles);
             game.Communication.sendGameData(gameData);
         }
@@ -239,23 +247,42 @@ namespace SpaceUnionXNA.Controllers
 
             foreach (Ship ship in inactiveShips.Values.ToList())
             {
-                Random randomspawn = new Random();
-                if (ship.isActive)
-                {
-                    ship.inactiveTime = TimeSpan.Zero;
+                    if (ship.isActive)
+                    {
+                        ship.inactiveTime = TimeSpan.Zero;
+                        ship.Position = respawnpoints.ElementAt(ship.spawnPosition);
+                        Console.WriteLine("respawn");
+                        ships.Add(ship.username, ship);
+                        targets.Add(ship);
+                        inactiveShips.Remove(ship.username);
+                        if (ship.username == playerShip.username)
+                        {
+                            gameData.Angle = ship.rotation;
+                            gameData.Player = this.game.Player;
+                            gameData.XPosition = ship.Position.X;
+                            gameData.YPosition = ship.Position.Y;
+                            gameData.SpawnPosition = ship.spawnPosition; 
+                            gameData.Bullets = ConvertProjectileToArray(ship.projectiles);
+                            gameData.Health = (byte)ship.currentHealth;
+                            game.Communication.sendGameData(gameData);
+
+                        }
+                    /*
                     ship.Position = respawnpoints.ElementAt(randomspawn.Next(respawnpoints.Count));
                     usedspawn.Add(respawnpoints.ElementAt(respawnpoints.IndexOf(ship.Position)));
                     respawnpoints.RemoveAt(respawnpoints.IndexOf(ship.Position));
                     ships.Add(ship.username, ship);
                     inactiveShips.Remove(ship.username);
+                      */
                 }
                 ship.update(gameTime, quadTree);
             }
+            /*
             foreach (Vector2 spawn in usedspawn.ToList())
             {
                 respawnpoints.Add(spawn);
                 usedspawn.Remove(spawn);
-            }
+            }*/
 
 
             /** Camera Debugging **/
@@ -280,12 +307,18 @@ namespace SpaceUnionXNA.Controllers
 
             //Networking.
             //Send Game Data to Server
-            gameData.Angle = playerShip.rotation;
-            gameData.Player = this.game.Player;
-            gameData.XPosition = playerShip.Position.X;
-            gameData.YPosition = playerShip.Position.Y;
-            gameData.Bullets = ConvertProjectileToArray(playerShip.projectiles);
-            game.Communication.sendGameData(gameData);
+            if (playerShip.isActive)
+            {
+                gameData.Angle = playerShip.rotation;
+                gameData.Player = this.game.Player;
+                gameData.XPosition = playerShip.Position.X;
+                gameData.YPosition = playerShip.Position.Y;
+                gameData.SpawnPosition = playerShip.spawnPosition;
+                gameData.Bullets = ConvertProjectileToArray(playerShip.projectiles);
+                gameData.Health = (byte)playerShip.currentHealth;
+                game.Communication.sendGameData(gameData);
+            }
+            Thread.Sleep(2);
         }
 
         /// <summary>
@@ -308,9 +341,10 @@ namespace SpaceUnionXNA.Controllers
                 {
                     if (gameFrame.Data[i] != null && ships.ContainsKey(gameFrame.Data[i].Player.Username))
                     {
-                        //Console.WriteLine("x: " + gameFrame.Data[i].XPosition + " y:" + gameFrame.Data[i].YPosition);
+                        ships[gameFrame.Data[i].Player.Username].currentHealth = gameFrame.Data[i].Health;
                         ships[gameFrame.Data[i].Player.Username].projectiles = new List<Laser>();
                         ships[gameFrame.Data[i].Player.Username].projectiles = ConvertArrayProjectileToList(gameFrame.Data[i].Bullets, gameFrame.Data[i].Player.Username);
+                        ships[gameFrame.Data[i].Player.Username].spawnPosition = gameData.SpawnPosition;
                         ships[gameFrame.Data[i].Player.Username].position.X = gameFrame.Data[i].XPosition;
                         ships[gameFrame.Data[i].Player.Username].position.Y = gameFrame.Data[i].YPosition;
                         ships[gameFrame.Data[i].Player.Username].rotation = gameFrame.Data[i].Angle;
@@ -324,9 +358,9 @@ namespace SpaceUnionXNA.Controllers
 
 
             background.draw(spriteBatch, mainCamera);
-                drawBorder(spriteBatch, new Rectangle(0 - Assets.galactusship.Width / 2 - 10, 0 - Assets.galactusship.Height / 2 - 10,
-                       worldWidth + Assets.galactusship.Width + 20, worldHeight + Assets.galactusship.Height + 20), 10, Color.White);
-                drawShips();
+            drawBorder(spriteBatch, new Rectangle(0 - Assets.galactusship.Width / 2 - 10, 0 - Assets.galactusship.Height / 2 - 10,
+                   worldWidth + Assets.galactusship.Width + 20, worldHeight + Assets.galactusship.Height + 20), 10, Color.White);
+            drawShips();
             spriteBatch.End();
 
 
@@ -335,7 +369,7 @@ namespace SpaceUnionXNA.Controllers
              * static and not be affected by cameras. */
             game.graphics.GraphicsDevice.Viewport = basicViewport;
             spriteBatch.Begin();
-                gui.draw(spriteBatch);
+            gui.draw(spriteBatch);
             spriteBatch.End();
 
 
@@ -343,10 +377,10 @@ namespace SpaceUnionXNA.Controllers
             game.graphics.GraphicsDevice.Viewport = radarCamera.viewport;
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
                     SamplerState.LinearClamp, null, null, null, radarCamera.getTransformation());
-                drawGrid(); //draw grid
+            drawGrid(); //draw grid
 
-                foreach (Ship ship in ships.Values.ToList())
-                    ship.drawMiniMap(spriteBatch);
+            foreach (Ship ship in ships.Values.ToList())
+                ship.drawMiniMap(spriteBatch);
 
             spriteBatch.End();
         }
@@ -357,6 +391,7 @@ namespace SpaceUnionXNA.Controllers
             foreach (Ship ship in ships.Values.ToArray())
             {
                 ship.draw(spriteBatch);
+
                 if (ship.projectiles != null)
                 {
                     foreach (SpaceUnionXNA.Weapons.Projectiles.Projectile p in ship.projectiles)

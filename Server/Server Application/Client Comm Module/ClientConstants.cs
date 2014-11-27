@@ -11,8 +11,8 @@ namespace Client_Comm_Module
         /// <summary>
         /// The IP address of the server.
         /// </summary>
-        //public const string SERVER_IPADDRESS = "142.232.18.106";
-        public const string SERVER_IPADDRESS = "192.168.1.82";
+        public const string SERVER_IPADDRESS = "142.232.18.106";
+        //public const string SERVER_IPADDRESS = "192.168.1.82";
         /// <summary>
         /// The port used by the TCP login request client to send data to a game client.
         /// </summary>

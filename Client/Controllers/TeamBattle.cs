@@ -11,7 +11,7 @@ using System.Text;
 
 namespace SpaceUnionXNA.Controllers {
 	class TeamBattle : GameplayScreen {
-		TimeSpan teamBattleTime = new TimeSpan(0, 2, 5);
+		TimeSpan teamBattleTime = new TimeSpan(0, 30, 5);
         Game1 game;
         private bool first = true;
 		public TeamBattle(Game1 game, SpriteBatch batch)
@@ -40,8 +40,8 @@ namespace SpaceUnionXNA.Controllers {
                 game.EnterMainMenu();
             }
 			if (((TeamBattleGUI) gui).timeOver == true) {
-                game.EndMatch();
-                game.EnterMainMenu();
+                //game.EndMatch();
+                //game.EnterMainMenu();
 			} else {
 				base.Update(gameTime);
 			}

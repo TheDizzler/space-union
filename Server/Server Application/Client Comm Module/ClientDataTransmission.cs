@@ -89,7 +89,6 @@ namespace Client_Comm_Module
                     continue;
                 
                 }
-                Console.WriteLine("sendGameData()");
                 DataControl.sendUDPData(UDPClient, data, ClientConstants.SERVER_IPADDRESS, UDPPort);
                 Thread.Sleep(5);
             }

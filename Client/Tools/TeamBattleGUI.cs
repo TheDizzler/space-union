@@ -120,10 +120,10 @@ namespace SpaceUnionXNA.Tools {
 				spriteBatch.Draw(guiRectangle, rect, Color.DarkSlateBlue);
 				spriteBatch.DrawString(font, "Game Over",
 					new Vector2(200, 200), Color.DarkGoldenrod, 0.0f, Vector2.Zero, 5f, SpriteEffects.None, 0.5f);
-				spriteBatch.DrawString(font, "Your Kills: " + playerShip.kills,
-					new Vector2(210, 300), Color.Red, 0.0f, Vector2.Zero, 3.5f, SpriteEffects.None, 0.5f);
-				spriteBatch.DrawString(font, "Your Deaths: " + playerShip.deaths,
-					new Vector2(210, 400), Color.Blue, 0.0f, Vector2.Zero, 3.5f, SpriteEffects.None, 0.5f);
+				//spriteBatch.DrawString(font, "Your Kills: " + playerShip.kills,
+				//	new Vector2(210, 300), Color.Red, 0.0f, Vector2.Zero, 3.5f, SpriteEffects.None, 0.5f);
+				//spriteBatch.DrawString(font, "Your Deaths: " + playerShip.deaths,
+				//	new Vector2(210, 400), Color.Blue, 0.0f, Vector2.Zero, 3.5f, SpriteEffects.None, 0.5f);
 				button = new BaseButton(Game1.Assets.playButton);
 
 				button.setPosition(new Vector2(210, 500));

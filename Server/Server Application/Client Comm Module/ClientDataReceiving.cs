@@ -57,10 +57,6 @@ namespace Client_Comm_Module
                 if (!gameRunning)
                     continue;
                 Data = (GameFrame)DataControl.receiveUDPData(UDPListener);
-                if(Data.Data != null)
-                    foreach (GameData data in Data.Data)
-                        if(data.Bullets != null)
-                            Console.WriteLine(data.Bullets.Length);
             }
         }
 

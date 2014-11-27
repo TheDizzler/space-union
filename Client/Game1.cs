@@ -27,6 +27,8 @@ namespace SpaceUnionXNA
         private int topBtmBorderPixels = 38;
         private int leftRightBorderPixels = 14;
 
+        public delegate int SizeDelegate();
+
         public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         public ParticleEngine particleEngine;
@@ -47,19 +49,21 @@ namespace SpaceUnionXNA
         public InputManager input_manager;
 
         //Menu Classes with Nuclex Framework
-        public LoginMenu login_menu;
-        public MainMenu main_menu;
-        public MultiplayerMenu multiplayer_menu;
-        public OptionsMenu options_menu;
-        public CreditsMenu credits_menu;
-        public CreateLobbyMenu create_lobby_menu;
-        public LobbyBrowserMenu lobby_browser_menu;
-        public LobbyMenu lobby_menu;
-        public Screen mainScreen;
-        public ControlMenu control_menu;
-        public string currentSound = "Medium";
-        public string currentMusic = "Medium";
-
+        public LoginMenu login_menu;                
+        public MainMenu main_menu;                  
+        public MultiplayerMenu multiplayer_menu;    
+        public OptionsMenu options_menu;            
+        public CreditsMenu credits_menu;            
+        public CreateLobbyMenu create_lobby_menu;   
+        public LobbyBrowserMenu lobby_browser_menu; 
+        public LobbyMenu lobby_menu;                
+        public Screen mainScreen;                   
+        public ControlMenu control_menu;            
+        public string currentSound = "Medium";      
+        public string currentMusic = "Medium";      
+        public int screenWidth;               
+        public int screenHeight;           
+                                                    
         public List<Keys> keylist;
 
 
@@ -143,7 +147,8 @@ namespace SpaceUnionXNA
             graphics.PreferredBackBufferWidth = 933;
             graphics.PreferredBackBufferHeight = 700;
 
-            IsFixedTimeStep = false;
+            IsFixedTimeStep = true;
+            TargetElapsedTime = TimeSpan.FromMilliseconds(20);
 
             //Setting Up Key Bindings
             keylist = new List<Keys>();
@@ -154,8 +159,6 @@ namespace SpaceUnionXNA
             keylist.Add(Keys.RightShift);
             keylist.Add(Keys.O);
             keylist.Add(Keys.P);
-
-            
         }
 
         /// <summary>
@@ -182,6 +185,8 @@ namespace SpaceUnionXNA
             //Author: Troy Carefoot
             Viewport viewport = GraphicsDevice.Viewport;
             mainScreen = new Screen(viewport.Width, viewport.Height);
+            screenWidth = this.getScreenWidth();
+            screenHeight = this.getScreenHeight();
             gui_manager.Screen = mainScreen;
             gui_manager.Initialize();
 
@@ -343,6 +348,7 @@ namespace SpaceUnionXNA
         public int getScreenHeight()
         {
             return Window.ClientBounds.Height;
+
         }
 
         /// <summary>
@@ -481,7 +487,9 @@ namespace SpaceUnionXNA
 
         public void EndMatch()
         {
+            GraphicsDevice.Viewport = new Viewport(0, 0, screenWidth, screenHeight);
             currentGameState = GameState.MainMenu;
+            gameplayScreen = null;
             IsMouseVisible = true;
         }
 

@@ -45,11 +45,12 @@ namespace SpaceUnionXNA.Controllers
         {
             this.game = game;
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
-            scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
+            scroll = new ScrollingBackground(Game1.Assets.background) { height = game.screenHeight, width = game.screenWidth };
             scroll.setPosition(new Vector2((int)0, (int)0));
             CreateMenuControls(game.mainScreen);
             Background = Game1.Assets.guiRectangle;
             new Thread(updatePlayerList).Start();
+            game.IsMouseVisible = true;
         }
 
         public void Update(GameTime gameTime)
@@ -63,6 +64,7 @@ namespace SpaceUnionXNA.Controllers
                 game.PlayerTeam = startGameSignal.Team;
                 game.GameStarted = true;
                 game.StartGame();
+
             }
         }
 

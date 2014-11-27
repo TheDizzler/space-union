@@ -93,6 +93,8 @@ namespace SpaceUnionXNA.Ships
         public TimeSpan inactiveStart;
         public TimeSpan inactiveTime = TimeSpan.Zero;
 
+        public byte spawnPosition;
+
         /* Used to map ship's actions to keys */
         public enum shipAction
         {
@@ -117,9 +119,16 @@ namespace SpaceUnionXNA.Ships
             Team = team;
 
             if (Team)
+            {
                 teamColor = Color.Blue;
+                blueTeam = true;
+            }
             else
+            {
                 teamColor = Color.Red;
+                redTeam = true;
+            }
+
 
             this.game = game1;
             velocity = Vector2.Zero;
