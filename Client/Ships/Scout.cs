@@ -1,0 +1,71 @@
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using SpaceUnionXNA.Tools;
+using SpaceUnionXNA.Weapons;
+using SpaceUnionXNA.Weapons.Projectiles;
+using SpaceUnionXNA.Weapons.Systems;
+
+
+namespace SpaceUnionXNA.Ships {
+	class Scout : Ship {
+
+		private Vector2 weaponOrigin2;
+		private WeaponSystem mainWeapon2;
+
+		public Scout(Game1 game1)
+			: base(assets.scout, assets.laser, game1) {
+
+			maxSpeed = 7;
+			accelSpeed = 250.5f;
+			turnSpeed = 2.5f;
+			maxSpeed = 500;
+
+			mainWeapon = new HomingLauncher(this);
+			mainWeapon2 = new HomingLauncher(this);
+
+			weaponOrigin = new Vector2(position.X - 25, position.Y + 10);
+			weaponOrigin2 = new Vector2(position.X + 25, position.Y + 10);
+		}
+
+
+
+		/// <summary>
+		/// Rotate where the weapon projectile originates from.
+		/// </summary>
+		/// <param name="rotateAmount"></param>
+		protected override void rotateWeaponOrigin(float rotateAmount) {
+
+			Matrix transform = getWeaponOriginTransform(rotateAmount);
+
+			Vector2.TransformNormal(ref weaponOrigin, ref transform, out weaponOrigin);
+			Vector2.TransformNormal(ref weaponOrigin2, ref transform, out weaponOrigin2);
+		}
+
+
+
+		protected override void additionalUpdate(GameTime gameTime, QuadTree quadTree) {
+			mainWeapon2.updatePosition(Vector2.Add(position, weaponOrigin2), rotation);
+			mainWeapon.updatePosition(Vector2.Add(position, weaponOrigin), rotation);
+
+
+			mainWeapon2.update(gameTime, quadTree);
+		}
+
+
+		protected override void additionalDraw(SpriteBatch sBatch) {
+			mainWeapon2.draw(sBatch);
+		}
+
+		protected override void additionalFire(GameTime gameTime) {
+
+			mainWeapon2.fire(Vector2.Add(position, weaponOrigin2));
+		}
+
+		protected override void altFire(GameTime gameTime) {
+
+		}
+
+	}
+}
