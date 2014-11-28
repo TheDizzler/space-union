@@ -85,14 +85,14 @@ namespace SpaceUnionXNA.Tools {
 				//Matrix inverse = Matrix.Invert(Matrix.CreateTranslation(new Vector3(cameraPosition, 0)) * Matrix.CreateScale(new Vector3(zoom, zoom, 1)));
 				//Vector2 cmove = Vector2.Transform(new Vector2(leftBarrier, topBarrier), inverse);
 
-				if (cameraPosition.X < leftBarrier)
+				/*if (cameraPosition.X < leftBarrier)
 					cameraPosition.X = leftBarrier;
 				if (cameraPosition.X > rightBarrier)
 					cameraPosition.X = rightBarrier;
 				if (cameraPosition.Y < topBarrier)
 					cameraPosition.Y = topBarrier;
 				if (cameraPosition.Y > bottomBarrier)
-					cameraPosition.Y = bottomBarrier;
+					cameraPosition.Y = bottomBarrier;*/
 
 				
 			}
