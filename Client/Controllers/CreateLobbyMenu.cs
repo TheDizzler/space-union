@@ -14,6 +14,7 @@ using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;
 using SpaceUnionXNA;
 using SpaceUnionXNA.Animations;
+
 //NETWORKING
 //using Data_Structures;
 
@@ -29,7 +30,6 @@ namespace SpaceUnionXNA.Controllers
         private InputControl lobbyTitleInput;
         private Texture2D TexBanner;
         private Rectangle Banner;
-
         public CreateLobbyMenu(Game1 game)
         {
             this.game = game;
@@ -53,7 +53,7 @@ namespace SpaceUnionXNA.Controllers
         {
             spriteBatch.Begin();
 
-            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 175, (int)game.mainScreen.Height / 2 - 165, 300, 225);
+            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 175, (int)game.mainScreen.Height / 2 - 165, 350, 225);
             scroll.draw(spriteBatch);
             spriteBatch.Draw(TexBanner, Banner, Color.White);
             spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
@@ -64,7 +64,7 @@ namespace SpaceUnionXNA.Controllers
         private void CreateMenuControls(Screen mainScreen)
         {
             //Logout Button.
-            ButtonControl backButton = GuiHelper.CreateButton("Back", -75, -400, 70, 32);
+            ButtonControl backButton = GuiHelper.CreateButton("Back", 0, 0, 70, 32);
             backButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterMultiplayerMenu();
@@ -80,7 +80,7 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(lobbyTitleInput);
 
             //Create Lobby Button.
-            ButtonControl createLobbyButton = GuiHelper.CreateButton("Create Lobby", 0, 0, 200, 32);
+            ButtonControl createLobbyButton = GuiHelper.CreateButton("Create Lobby", 100, -95, 100, 32);
             createLobbyButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterLobbyMenu();

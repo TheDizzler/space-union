@@ -26,24 +26,28 @@ namespace SpaceUnionXNA.Controllers
     {
         private Game1 game;
         public String lobbyTitle;
+        private bool radioUpdate = false; 
 
         /* Ship selections */
         List<ChoiceControl> shipChoiceList;
         ChoiceControl shipChoice_1;
         ChoiceControl shipChoice_2;
         ChoiceControl shipChoice_3;
-        ChoiceControl shipChoice_4;
-        private Texture2D selectShipTexture;
-        private Texture2D hoverShipTexture;
         List<ShipButton> shipSelectionList;
         const int WIDTH = 64; 
         const int HEIGHT = 64;
         int shipsPerRow;
-        const int SHIPCOUNT = 4;
+        const int SHIPCOUNT = 3;
         ShipButton lastButton;
+        
+        /* Location for radio buttons */
         int choiceListX = -207;
         int choiceListSpacing = 64;
-        int choiceListY = -50;
+        int choiceListY = -20;
+
+        /* Location for ship icons */
+        int shipGridListX = 285;
+        int shipGridListY = 40;
 
         /* Label controls for players */
         LabelControl playersLabel;
@@ -59,7 +63,7 @@ namespace SpaceUnionXNA.Controllers
 
         /* Player list location from center */
         private int pListX = 150;      
-        private int pListY = -150;     
+        private int pListY = -100;     
         private int pListSpacing = 20; // Space between each player 
 
         private ScrollingBackground scroll;
@@ -75,11 +79,17 @@ namespace SpaceUnionXNA.Controllers
             this.game = game;
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
             lobbyTitle = title;
+
+            /* White background for UI */
+            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 325, (int)game.mainScreen.Height / 2 - 175, 650, 450);
+
+            /* Scrolling background */
             scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
             scroll.setPosition(new Vector2((int)0, (int)0));
 
-            //TexBanner = Game1.Assets.suMultiLobby;
-            //Banner = new Rectangle((int)game.mainScreen.Width / 2 - 400, (int)game.mainScreen.Height / 2 - 150 - 250, 800, 250);
+            /* Menu's Banner */
+            TexBanner = Game1.Assets.suMultiLobby;
+            Banner = new Rectangle((int)game.mainScreen.Width / 2 - 400, (int)game.mainScreen.Height / 2 - 150 - 250, 800, 250);
 
             /* For constructing the list of players with LabelControls */
             playerLabelList = new List<LabelControl>();
@@ -104,21 +114,19 @@ namespace SpaceUnionXNA.Controllers
             shipSelectionList.Add(new ShipButton(new UFO(game)));
 			shipSelectionList.Add(new ShipButton(new Scout(game)));
 			shipSelectionList.Add(new ShipButton(new Zoid(game)));
-            shipSelectionList.Add(new ShipButton(new Lobstar(game)));
 
             /* List of choices for ships */
             shipChoiceList = new List<ChoiceControl>();
             shipChoiceList.Add(shipChoice_1 = GuiHelper.CreateChoice("", 0, 0, 16, 16));
             shipChoiceList.Add(shipChoice_2 = GuiHelper.CreateChoice("", 0, 0, 16, 16));
             shipChoiceList.Add(shipChoice_3 = GuiHelper.CreateChoice("", 0, 0, 16, 16));
-            shipChoiceList.Add(shipChoice_4 = GuiHelper.CreateChoice("", 0, 0, 16, 16));
 
             /* Sets the default selected ship */
             lastButton = shipSelectionList[0];
             shipSelectionList[0].selected = true;
             shipChoiceList[0].Selected = true;
 
-            setGridDisplay(game.getScreenWidth() - 225, game.getScreenHeight() - 100);
+            setGridDisplay(game.getScreenWidth() - shipGridListX, game.getScreenHeight() - shipGridListY);
 
             CreateMenuControls(game.mainScreen);
             Background = Game1.Assets.guiRectangle;
@@ -133,6 +141,11 @@ namespace SpaceUnionXNA.Controllers
             foreach (ShipButton btn in shipSelectionList)
             {
                 btn.update(mouseState);
+            }
+
+            if (radioUpdate)
+            {
+
             }
 
             /* Allows for feedback of selecting a ship and sets the selected ship */
@@ -169,6 +182,22 @@ namespace SpaceUnionXNA.Controllers
             }
         }
 
+        public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            spriteBatch.Begin();
+           
+            scroll.draw(spriteBatch);
+            spriteBatch.Draw(TexBanner, Banner, Color.White);
+            spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
+
+            foreach (ShipButton btn in shipSelectionList)
+            {
+                btn.draw(spriteBatch);
+            }
+            spriteBatch.End();
+            game.gui_manager.Draw(gameTime);
+        }
+
         /// <summary>
         /// Sets the choice control to selected for the ship
         /// </summary>
@@ -183,21 +212,18 @@ namespace SpaceUnionXNA.Controllers
             shipChoiceList[index].Selected = true;
         }
 
-        public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
+        private void selectShipIcon(int index)
         {
-            spriteBatch.Begin();
-            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 325, (int)game.mainScreen.Height / 2 - 225, 650, 500);
-
-            scroll.draw(spriteBatch);
-
-            spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
-
             foreach (ShipButton btn in shipSelectionList)
             {
-                btn.draw(spriteBatch);
+                if (btn.selected == true)
+                {
+                    lastButton = btn;
+                }
+                btn.selected = false;
             }
-            spriteBatch.End();
-            game.gui_manager.Draw(gameTime);
+
+            shipSelectionList[index].selected = true;
         }
 
         /// <summary>
@@ -242,7 +268,6 @@ namespace SpaceUnionXNA.Controllers
             menuNameLabel.Bounds = GuiHelper.MENU_TITLE_LABEL;
             mainScreen.Desktop.Children.Add(menuNameLabel);
 
-
             //Players Labels
             playersLabel = GuiHelper.CreateLabel("Players:", pListX, pListY - pListSpacing, 120, 16);
             mainScreen.Desktop.Children.Add(playersLabel);
@@ -257,6 +282,18 @@ namespace SpaceUnionXNA.Controllers
                 i++;
             }
 
+            shipChoice_1.Changed += delegate(object sender, EventArgs arguments)
+            {
+                selectShipIcon(0);
+            };
+            shipChoice_2.Changed += delegate(object sender, EventArgs arguments)
+            {
+                selectShipIcon(1);
+            }; 
+            shipChoice_3.Changed += delegate(object sender, EventArgs arguments)
+            {
+                selectShipIcon(2);
+            }; 
 
             createShipSelection(mainScreen);
 
@@ -300,7 +337,7 @@ namespace SpaceUnionXNA.Controllers
         private void createShipSelection(Screen mainScreen)
         {
             //Choose Ship Label
-            LabelControl chooseShipLabel = GuiHelper.CreateLabel("Choose Your Ship", -200, -175, 120, 16);
+            LabelControl chooseShipLabel = GuiHelper.CreateLabel("Choose Your Ship", -200, -125, 120, 16);
             mainScreen.Desktop.Children.Add(chooseShipLabel);
 
             int i = 0;
