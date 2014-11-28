@@ -162,9 +162,9 @@ namespace SpaceUnionXNA.Tools {
 			gamelobby = Content.Load<Texture2D>("Buttons/gamelobby");
 			gameroom = Content.Load<Texture2D>("Buttons/gameroom");
 			options = Content.Load<Texture2D>("Buttons/optionsbutton");
-            createLobby2 = Content.Load<Texture2D>("Buttons/Create_Lobby");
-            browseLobby = Content.Load<Texture2D>("Buttons/Browse_Lobby");
-            spaceUnion = Content.Load<Texture2D>("Buttons/Space-Union");
+            //createLobby2 = Content.Load<Texture2D>("Buttons/Create_Lobby");
+            //browseLobby = Content.Load<Texture2D>("Buttons/Browse_Lobby");
+            //spaceUnion = Content.Load<Texture2D>("Buttons/Space-Union");
 			///end added by Matthew Baldock
 
 			guiRectangle = new Texture2D(graphicsDevice, 1, 1);
@@ -216,8 +216,8 @@ namespace SpaceUnionXNA.Tools {
 			laserbolt3 = Content.Load<SoundEffect>("SFX/Laser High 3");
 
 
-            bgrndMusic1 = Content.Load<SoundEffect>("SFX/game_music_sample");
-            bgrndMusic2 = Content.Load<SoundEffect>("SFX/Test");
+            //bgrndMusic1 = Content.Load<SoundEffect>("SFX/game_music_sample");
+            //bgrndMusic2 = Content.Load<SoundEffect>("SFX/Test");
 		}
 	}
 }
