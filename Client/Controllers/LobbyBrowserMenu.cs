@@ -57,7 +57,8 @@ namespace SpaceUnionXNA.Controllers
             LobbyBrowserTable = new Table(columns, new string[] { "Lobby Name", "Game Type", "Host Name", "Players", "Max. Players", "Ping" }, rowRectOriginX, rowRectOriginY, rowRectSizeY, rowsBeforeScroll, columnWidth, true, game.mainScreen);
 
             TexBanner = Game1.Assets.suMultiBrowse;
-            Banner = new Rectangle((int)game.mainScreen.Width / 2 - 400, (int)game.mainScreen.Height / 2 - 150 - 250, 800, 250);
+            Banner = new Rectangle((int)game.mainScreen.Width / 2 - UIConstants.SU_BANNER.X, (int)game.mainScreen.Height / 2 - UIConstants.SU_BANNER.Y,
+                UIConstants.SU_BANNER.Width, UIConstants.SU_BANNER.Height);
 
             CreateMenuControls(game.mainScreen);
         }
@@ -120,19 +121,25 @@ namespace SpaceUnionXNA.Controllers
         private void CreateMenuControls(Screen mainScreen)
         {
             //Logout Button.
-            ButtonControl backButton = GuiHelper.CreateButton("Back", 0, 260, 70, 32);
+            ButtonControl backButton = GuiHelper.CreateButton("Back",
+                UIConstants.BROWSE_BACK_BTN.X, UIConstants.BROWSE_BACK_BTN.Y,
+                UIConstants.BROWSE_BACK_BTN.Width, UIConstants.BROWSE_BACK_BTN.Height);
             backButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterMultiplayerMenu();
             };
             mainScreen.Desktop.Children.Add(backButton);
-            prevPageButton = GuiHelper.CreateButton("Prev", -350, 0, 70, 32);
+            prevPageButton = GuiHelper.CreateButton("Prev",
+                UIConstants.BROWSE_PREV_BTN.X, UIConstants.BROWSE_PREV_BTN.Y,
+                UIConstants.BROWSE_PREV_BTN.Width, UIConstants.BROWSE_PREV_BTN.Height);
             prevPageButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 LobbyBrowserTable.PrevPage();
             };
            
-            nextPageButton = GuiHelper.CreateButton("Next", 350, 0, 70, 32);
+            nextPageButton = GuiHelper.CreateButton("Next",
+                UIConstants.BROWSE_NEXT_BTN.X, UIConstants.BROWSE_NEXT_BTN.Y,
+                UIConstants.BROWSE_NEXT_BTN.Width, UIConstants.BROWSE_NEXT_BTN.Height);
             nextPageButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 LobbyBrowserTable.NextPage();
@@ -141,7 +148,9 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(nextPageButton);
             mainScreen.Desktop.Children.Add(prevPageButton);
             
-            pagesLabel = GuiHelper.CreateLabel(LobbyBrowserTable.currentPage + "/" + LobbyBrowserTable.maxPage, 0, 200, 30, 30);
+            pagesLabel = GuiHelper.CreateLabel(LobbyBrowserTable.currentPage + "/" + LobbyBrowserTable.maxPage,
+                UIConstants.BROWSE_PAGE_LABEL.X, UIConstants.BROWSE_PAGE_LABEL.Y,
+                UIConstants.BROWSE_PAGE_LABEL.Width, UIConstants.BROWSE_PAGE_LABEL.Height);
             
             mainScreen.Desktop.Children.Add(pagesLabel);
         }

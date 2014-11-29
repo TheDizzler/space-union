@@ -30,10 +30,12 @@ namespace SpaceUnionXNA.Controllers
         {
             this.game = game;
             scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
-            scroll.setPosition(new Vector2((int)0, (int)0));
+            scroll.setPosition(UIConstants.ORIGIN);
 
             TexBanner = Game1.Assets.suCredits;
-            Banner = new Rectangle((int)game.mainScreen.Width / 2 - 400, (int)game.mainScreen.Height / 2 - 150 - 250, 800, 250);
+            Banner = new Rectangle((int)game.mainScreen.Width / 2 - UIConstants.SU_BANNER.X, 
+                (int)game.mainScreen.Height / 2 - UIConstants.SU_BANNER.Y, 
+                UIConstants.SU_BANNER.Width, UIConstants.SU_BANNER.Height);
 
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
             LabelControl KonstantinBoyarinovLabel;
@@ -118,7 +120,9 @@ namespace SpaceUnionXNA.Controllers
             spriteBatch.Begin();
             //WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 150, (int)game.mainScreen.Height / 2 - 150, 300, 225);
 
-            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 325, (int)game.mainScreen.Height / 2 - 250, 650, 550);
+            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - UIConstants.CREDIT_WHITE_BG.X,
+                (int)game.mainScreen.Height / 2 - UIConstants.CREDIT_WHITE_BG.Y,
+                UIConstants.CREDIT_WHITE_BG.Width, UIConstants.CREDIT_WHITE_BG.Height);
 
             scroll.draw(spriteBatch);
             spriteBatch.Draw(TexBanner, Banner, Color.White);
@@ -135,7 +139,9 @@ namespace SpaceUnionXNA.Controllers
             //mainScreen.Desktop.Children.Add(menuTitleLabel);
             
             //Logout Button.
-            ButtonControl logoutButton = GuiHelper.CreateButton("Back", 0, 275, 70, 32);
+            ButtonControl logoutButton = GuiHelper.CreateButton("Back",
+                UIConstants.CREDIT_BACK_BTN.X, UIConstants.CREDIT_BACK_BTN.Y,
+                UIConstants.CREDIT_BACK_BTN.Width, UIConstants.CREDIT_BACK_BTN.Height);
             logoutButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterMainMenu();

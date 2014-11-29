@@ -35,10 +35,13 @@ namespace SpaceUnionXNA.Controllers
             this.game = game;
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
             scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
-            scroll.setPosition(new Vector2((int)0, (int)0));
+            scroll.setPosition(UIConstants.ORIGIN);
+            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - UIConstants.CREATE_WHITE_BG.X, (int)game.mainScreen.Height / 2 - UIConstants.CREATE_WHITE_BG.Y,
+                UIConstants.CREATE_WHITE_BG.Width, UIConstants.CREATE_WHITE_BG.Height);
 
             TexBanner = Game1.Assets.suMultiCreate;
-            Banner = new Rectangle((int)game.mainScreen.Width / 2 - 400, (int)game.mainScreen.Height / 2 - 150 - 250, 800, 250);
+            Banner = new Rectangle((int)game.mainScreen.Width / 2 - UIConstants.SU_BANNER.X, (int)game.mainScreen.Height / 2 - UIConstants.SU_BANNER.Y,
+                UIConstants.SU_BANNER.Width, UIConstants.SU_BANNER.Height);
 
             Background = Game1.Assets.guiRectangle;
             CreateMenuControls(game.mainScreen);
@@ -52,8 +55,6 @@ namespace SpaceUnionXNA.Controllers
         public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-
-            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 175, (int)game.mainScreen.Height / 2 - 165, 350, 225);
             scroll.draw(spriteBatch);
             spriteBatch.Draw(TexBanner, Banner, Color.White);
             spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
@@ -64,23 +65,25 @@ namespace SpaceUnionXNA.Controllers
         private void CreateMenuControls(Screen mainScreen)
         {
             //Logout Button.
-            ButtonControl backButton = GuiHelper.CreateButton("Back", 0, 0, 70, 32);
+            ButtonControl backButton = GuiHelper.CreateButton("Back",
+                UIConstants.CREATE_BACK_BTN.X, UIConstants.CREATE_BACK_BTN.Y,
+                UIConstants.CREATE_BACK_BTN.Width, UIConstants.CREATE_BACK_BTN.Height);
             backButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterMultiplayerMenu();
             };
             mainScreen.Desktop.Children.Add(backButton);
 
-            //Lobby Title Label.
-            LabelControl lobbyTitleLabel = GuiHelper.CreateLabel("Lobby Title", -145, -125, 30, 30);
-            mainScreen.Desktop.Children.Add(lobbyTitleLabel);
-
             //Lobby Title Text Entry.
-            lobbyTitleInput = GuiHelper.CreateInput("", -60, -95, 200, 30);
+            lobbyTitleInput = GuiHelper.CreateInput("",
+                UIConstants.CREATE_LOBBY_INPUT.X, UIConstants.CREATE_LOBBY_INPUT.Y,
+                UIConstants.CREATE_LOBBY_INPUT.Width, UIConstants.CREATE_LOBBY_INPUT.Height);
             mainScreen.Desktop.Children.Add(lobbyTitleInput);
 
             //Create Lobby Button.
-            ButtonControl createLobbyButton = GuiHelper.CreateButton("Create Lobby", 100, -95, 100, 32);
+            ButtonControl createLobbyButton = GuiHelper.CreateButton("Create Lobby",
+                UIConstants.CREATE_LOBBY_BTN.X, UIConstants.CREATE_LOBBY_BTN.Y,
+                UIConstants.CREATE_LOBBY_BTN.Width, UIConstants.CREATE_LOBBY_BTN.Height);
             createLobbyButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterLobbyMenu();

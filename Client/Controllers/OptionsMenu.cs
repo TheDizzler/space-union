@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -16,7 +15,7 @@ using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;
 using SpaceUnionXNA;
 using SpaceUnionXNA.Animations;
-
+using SpaceUnionXNA.Tools;
 
 namespace SpaceUnionXNA.Controllers
 {
@@ -37,7 +36,7 @@ namespace SpaceUnionXNA.Controllers
         private Texture2D Background;
         private Texture2D TexBanner;
         private Rectangle Banner;
-
+        
         private bool toggleReso = false;
         private int winState = 0;
 
@@ -48,9 +47,10 @@ namespace SpaceUnionXNA.Controllers
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
             
             scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
-            scroll.setPosition(new Vector2((int)0, (int)0));
+            scroll.setPosition(UIConstants.ORIGIN);
             TexBanner = Game1.Assets.suOption;
-            Banner = new Rectangle((int)game.mainScreen.Width / 2 - 400, (int)game.mainScreen.Height / 2 - 150 - 250, 800, 250);
+            Banner = new Rectangle((int)game.mainScreen.Width / 2 - UIConstants.SU_BANNER.X, (int)game.mainScreen.Height / 2 - UIConstants.SU_BANNER.Y,
+                UIConstants.SU_BANNER.Width, UIConstants.SU_BANNER.Height);
 
             CreateMenuControls(game.mainScreen);
             clientHeight = game.getScreenHeight();
@@ -65,14 +65,12 @@ namespace SpaceUnionXNA.Controllers
         public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            //WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 150, (int)game.mainScreen.Height / 2 - 150, 300, 225);
-
-            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 287, (int)game.mainScreen.Height / 2 - 162, 575, 325);
-
+            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - UIConstants.OPTION_WHITE_BG.X, 
+                (int)game.mainScreen.Height / 2 - UIConstants.OPTION_WHITE_BG.Y,
+                UIConstants.OPTION_WHITE_BG.Width, UIConstants.OPTION_WHITE_BG.Height);
             scroll.draw(spriteBatch);
             spriteBatch.Draw(TexBanner, Banner, Color.White);
             spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
-            //spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
             spriteBatch.End();
             game.gui_manager.Draw(gameTime);
         }
@@ -84,14 +82,10 @@ namespace SpaceUnionXNA.Controllers
         /// <param name="mainScreen"></param>
         private void CreateMenuControls(Screen mainScreen)
         {
-            //Menu Title Label
-            LabelControl menuTitleLabel = new LabelControl();
-            menuTitleLabel.Text = "Options";
-            menuTitleLabel.Bounds = GuiHelper.MENU_TITLE_LABEL;
-            mainScreen.Desktop.Children.Add(menuTitleLabel);
-
             //Logout Button.
-            ButtonControl logoutButton = GuiHelper.CreateButton("Back", 175, 275, 70, 32);
+            ButtonControl logoutButton = GuiHelper.CreateButton("Back",
+                UIConstants.OPTION_LOGOUT_BTN.X, UIConstants.OPTION_LOGOUT_BTN.Y,
+                UIConstants.OPTION_LOGOUT_BTN.Width, UIConstants.OPTION_LOGOUT_BTN.Height);
             logoutButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.EnterMainMenu();
@@ -99,7 +93,9 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(logoutButton);
 
             //Apply Changes button.
-            applyButton = GuiHelper.CreateButton("Apply", 250, 275, 70, 32);
+            applyButton = GuiHelper.CreateButton("Apply",
+                UIConstants.OPTION_APPLY_BTN.X, UIConstants.OPTION_APPLY_BTN.Y,
+                UIConstants.OPTION_APPLY_BTN.Width, UIConstants.OPTION_APPLY_BTN.Height);
             applyButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 applyChanges();
@@ -111,7 +107,9 @@ namespace SpaceUnionXNA.Controllers
             createSoundVolume(mainScreen);
 
             //Controls
-            ButtonControl keyBindings = GuiHelper.CreateButton("Key Bindings", -175, 100, 100, 25);
+            ButtonControl keyBindings = GuiHelper.CreateButton("Key Bindings",
+                UIConstants.OPTION_KEYS_BTN.X, UIConstants.OPTION_KEYS_BTN.Y,
+                UIConstants.OPTION_KEYS_BTN.Width, UIConstants.OPTION_KEYS_BTN.Height);
             keyBindings.Pressed += delegate(object sender, EventArgs arugments)
             {
                 game.EnterControlMenu();
@@ -125,20 +123,28 @@ namespace SpaceUnionXNA.Controllers
         /// </summary>
         /// <param name="mainScreen"></param>
         private void createWindowState(Screen mainScreen) {
-            LabelControl winTitleLabel = GuiHelper.CreateLabel("Display Mode", -200, -65, 50, 25);
+            LabelControl winTitleLabel = GuiHelper.CreateLabel("Display Mode",
+                UIConstants.OPTION_WINDOW_LABEL.X, UIConstants.OPTION_WINDOW_LABEL.Y,
+                UIConstants.OPTION_WINDOW_LABEL.Width, UIConstants.OPTION_WINDOW_LABEL.Height);
             mainScreen.Desktop.Children.Add(winTitleLabel);
 
-            ButtonControl leftWinToggle = GuiHelper.CreateButton("<", 0, -65, 25, 25);
+            ButtonControl leftWinToggle = GuiHelper.CreateButton("<",
+                UIConstants.OPTION_LEFT_BTN.X, UIConstants.OPTION_LEFT_BTN.Y,
+                UIConstants.OPTION_LEFT_BTN.Width, UIConstants.OPTION_LEFT_BTN.Height);
             leftWinToggle.Pressed += delegate(object sender, EventArgs arugments)
             {
                 toggleWindowState(-1);
             };
             mainScreen.Desktop.Children.Add(leftWinToggle);
 
-            currentWinLabel = GuiHelper.CreateLabel(game.windowState, 75, -65, 50, 25);
+            currentWinLabel = GuiHelper.CreateLabel(game.windowState,
+                UIConstants.OPTION_CURWIN_LABEL.X, UIConstants.OPTION_CURWIN_LABEL.Y,
+                UIConstants.OPTION_CURWIN_LABEL.Width, UIConstants.OPTION_CURWIN_LABEL.Height);
             mainScreen.Desktop.Children.Add(currentWinLabel);
 
-            ButtonControl rightWinToggle = GuiHelper.CreateButton(">", 165, -65, 25, 25);
+            ButtonControl rightWinToggle = GuiHelper.CreateButton(">",
+                UIConstants.OPTION_RIGHT_BTN.X, UIConstants.OPTION_RIGHT_BTN.Y,
+                UIConstants.OPTION_RIGHT_BTN.Width, UIConstants.OPTION_RIGHT_BTN.Height);
             rightWinToggle.Pressed += delegate(object sender, EventArgs arugments)
             {
                 toggleWindowState(1);
@@ -154,10 +160,14 @@ namespace SpaceUnionXNA.Controllers
         private void createSoundVolume(Screen mainScreen)
         {
             /* Sound volume control */
-            LabelControl soundControlLabel = GuiHelper.CreateLabel("Sound", -200, 0, 50, 25);
+            LabelControl soundControlLabel = GuiHelper.CreateLabel("Sound",
+                UIConstants.OPTION_SOUND_LABEL.X, UIConstants.OPTION_SOUND_LABEL.Y,
+                UIConstants.OPTION_SOUND_LABEL.Width, UIConstants.OPTION_SOUND_LABEL.Height);
             mainScreen.Desktop.Children.Add(soundControlLabel);
 
-            ButtonControl soundOffButton = GuiHelper.CreateButton("OFF", -115, 0, 70, 32);
+            ButtonControl soundOffButton = GuiHelper.CreateButton("OFF",
+                UIConstants.OPTION_SOUND_OFF_BTN.X, UIConstants.OPTION_SOUND_OFF_BTN.Y,
+                UIConstants.OPTION_SOUND_OFF_BTN.Width, UIConstants.OPTION_SOUND_OFF_BTN.Height);
             soundOffButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 currentSoundLabel.Text = "Off";
@@ -165,7 +175,9 @@ namespace SpaceUnionXNA.Controllers
             };
             mainScreen.Desktop.Children.Add(soundOffButton);
 
-            ButtonControl soundLowButton = GuiHelper.CreateButton("LOW", -35, 0, 70, 32);
+            ButtonControl soundLowButton = GuiHelper.CreateButton("LOW",
+                UIConstants.OPTION_SOUND_LOW_BTN.X, UIConstants.OPTION_SOUND_LOW_BTN.Y,
+                UIConstants.OPTION_SOUND_LOW_BTN.Width, UIConstants.OPTION_SOUND_LOW_BTN.Height);
             soundLowButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 currentSoundLabel.Text = "Low";
@@ -173,7 +185,9 @@ namespace SpaceUnionXNA.Controllers
             };
             mainScreen.Desktop.Children.Add(soundLowButton);
 
-            ButtonControl soundMediumButton = GuiHelper.CreateButton("MED", 45, 0, 70, 32);
+            ButtonControl soundMediumButton = GuiHelper.CreateButton("MED",
+                UIConstants.OPTION_SOUND_MED_BTN.X, UIConstants.OPTION_SOUND_MED_BTN.Y,
+                UIConstants.OPTION_SOUND_MED_BTN.Width, UIConstants.OPTION_SOUND_MED_BTN.Height);
             soundMediumButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 currentSoundLabel.Text = "Medium";
@@ -181,7 +195,9 @@ namespace SpaceUnionXNA.Controllers
             };
             mainScreen.Desktop.Children.Add(soundMediumButton);
 
-            ButtonControl soundHighButton = GuiHelper.CreateButton("HIGH", 125, 0, 70, 32);
+            ButtonControl soundHighButton = GuiHelper.CreateButton("HIGH",
+                UIConstants.OPTION_SOUND_HIGH_BTN.X, UIConstants.OPTION_SOUND_HIGH_BTN.Y,
+                UIConstants.OPTION_SOUND_HIGH_BTN.Width, UIConstants.OPTION_SOUND_HIGH_BTN.Height);
             soundHighButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 currentSoundLabel.Text = "High";
@@ -189,14 +205,20 @@ namespace SpaceUnionXNA.Controllers
             };
             mainScreen.Desktop.Children.Add(soundHighButton);
 
-            currentSoundLabel = GuiHelper.CreateLabel(game.currentSound, 205, 0, 50, 25);
+            currentSoundLabel = GuiHelper.CreateLabel(game.currentSound,
+                UIConstants.OPTION_SOUND_CUR_LABEL.X, UIConstants.OPTION_SOUND_CUR_LABEL.Y,
+                UIConstants.OPTION_SOUND_CUR_LABEL.Width, UIConstants.OPTION_SOUND_CUR_LABEL.Height);
             mainScreen.Desktop.Children.Add(currentSoundLabel);
 
             /* Music volume control */
-            LabelControl musicControlLabel = GuiHelper.CreateLabel("Music", -200, 50, 50, 25);
+            LabelControl musicControlLabel = GuiHelper.CreateLabel("Music",
+                UIConstants.OPTION_MUSIC_LABEL.X, UIConstants.OPTION_MUSIC_LABEL.Y,
+                UIConstants.OPTION_MUSIC_LABEL.Width, UIConstants.OPTION_MUSIC_LABEL.Height);
             mainScreen.Desktop.Children.Add(musicControlLabel);
 
-            ButtonControl musicOffButton = GuiHelper.CreateButton("OFF", -115, 50, 70, 32);
+            ButtonControl musicOffButton = GuiHelper.CreateButton("OFF",
+                UIConstants.OPTION_MUSIC_OFF_BTN.X, UIConstants.OPTION_MUSIC_OFF_BTN.Y,
+                UIConstants.OPTION_MUSIC_OFF_BTN.Width, UIConstants.OPTION_MUSIC_OFF_BTN.Height);
             musicOffButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 currentMusicLabel.Text = "Off";
@@ -204,7 +226,9 @@ namespace SpaceUnionXNA.Controllers
             };
             mainScreen.Desktop.Children.Add(musicOffButton);
 
-            ButtonControl musicLowButton = GuiHelper.CreateButton("LOW", -35, 50, 70, 32);
+            ButtonControl musicLowButton = GuiHelper.CreateButton("LOW",
+                UIConstants.OPTION_MUSIC_LOW_BTN.X, UIConstants.OPTION_MUSIC_LOW_BTN.Y,
+                UIConstants.OPTION_MUSIC_LOW_BTN.Width, UIConstants.OPTION_MUSIC_LOW_BTN.Height);
             musicLowButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 currentMusicLabel.Text = "Low";
@@ -213,7 +237,9 @@ namespace SpaceUnionXNA.Controllers
             };
             mainScreen.Desktop.Children.Add(musicLowButton);
 
-            ButtonControl musicMediumButton = GuiHelper.CreateButton("MED", 45, 50, 70, 32);
+            ButtonControl musicMediumButton = GuiHelper.CreateButton("MED",
+                UIConstants.OPTION_MUSIC_MED_BTN.X, UIConstants.OPTION_MUSIC_MED_BTN.Y,
+                UIConstants.OPTION_MUSIC_MED_BTN.Width, UIConstants.OPTION_MUSIC_MED_BTN.Height);
             musicMediumButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 currentMusicLabel.Text = "Medium";
@@ -221,7 +247,9 @@ namespace SpaceUnionXNA.Controllers
             };
             mainScreen.Desktop.Children.Add(musicMediumButton);
 
-            ButtonControl musicHighButton = GuiHelper.CreateButton("HIGH", 125, 50, 70, 32);
+            ButtonControl musicHighButton = GuiHelper.CreateButton("HIGH",
+                UIConstants.OPTION_MUSIC_HIGH_BTN.X, UIConstants.OPTION_MUSIC_HIGH_BTN.Y,
+                UIConstants.OPTION_MUSIC_HIGH_BTN.Width, UIConstants.OPTION_MUSIC_HIGH_BTN.Height);
             musicHighButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 currentMusicLabel.Text = "High";
@@ -229,7 +257,9 @@ namespace SpaceUnionXNA.Controllers
             };
             mainScreen.Desktop.Children.Add(musicHighButton);
 
-            currentMusicLabel = GuiHelper.CreateLabel(game.currentMusic, 205, 50, 50, 25);
+            currentMusicLabel = GuiHelper.CreateLabel(game.currentMusic,
+                UIConstants.OPTION_MUSIC_CUR_LABEL.X, UIConstants.OPTION_MUSIC_CUR_LABEL.Y,
+                UIConstants.OPTION_MUSIC_CUR_LABEL.Width, UIConstants.OPTION_MUSIC_CUR_LABEL.Height);
             mainScreen.Desktop.Children.Add(currentMusicLabel);
         }
 
@@ -240,23 +270,31 @@ namespace SpaceUnionXNA.Controllers
         /// <param name="mainScreen"></param>
         private void createResolutionDropDown(Screen mainScreen)
         {
-            resoTitleLabel = GuiHelper.CreateLabel("Resolution", -200, -100, 50, 25);
+            resoTitleLabel = GuiHelper.CreateLabel("Resolution",
+                UIConstants.OPTION_RESO_LABEL.X, UIConstants.OPTION_RESO_LABEL.Y,
+                UIConstants.OPTION_RESO_LABEL.Width, UIConstants.OPTION_RESO_LABEL.Height);
             mainScreen.Desktop.Children.Add(resoTitleLabel);
 
-            currentResoLabel = GuiHelper.CreateLabel(game.width + "x" + game.height, 25, -100, 50, 25);
+            currentResoLabel = GuiHelper.CreateLabel(game.width + "x" + game.height,
+                UIConstants.OPTION_RESO_CUR_LABEL.X, UIConstants.OPTION_RESO_CUR_LABEL.Y,
+                UIConstants.OPTION_RESO_CUR_LABEL.Width, UIConstants.OPTION_RESO_CUR_LABEL.Height);
             mainScreen.Desktop.Children.Add(currentResoLabel);
 
             //Toggle resolution list button.
-            ButtonControl toggleResoButton = GuiHelper.CreateButton("V", 165, -100, 25, 25);
+            ButtonControl toggleResoButton = GuiHelper.CreateButton("V",
+                UIConstants.OPTION_RESO_BTN.X, UIConstants.OPTION_RESO_BTN.Y,
+                UIConstants.OPTION_RESO_BTN.Width, UIConstants.OPTION_RESO_BTN.Height);
             toggleResoButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 if (toggleReso)
                 {
-                    resoList.Bounds = GuiHelper.CenterBound(-8000, -8000, 0, 0);
+                    resoList.Bounds = GuiHelper.CenterBound(UIConstants.OPTION_RESO_HIDE_LIST.X, UIConstants.OPTION_RESO_HIDE_LIST.Y,
+                        UIConstants.OPTION_RESO_HIDE_LIST.Width, UIConstants.OPTION_RESO_HIDE_LIST.Height);
                 }
                 else
                 {
-                    resoList.Bounds = GuiHelper.CenterBound(85, -35, 175, 100);
+                    resoList.Bounds = GuiHelper.CenterBound(UIConstants.OPTION_RESO_SHOW_LIST.X, UIConstants.OPTION_RESO_SHOW_LIST.Y,
+                        UIConstants.OPTION_RESO_SHOW_LIST.Width, UIConstants.OPTION_RESO_SHOW_LIST.Height);
                 }
                 toggleReso = !toggleReso;
             };
@@ -266,11 +304,12 @@ namespace SpaceUnionXNA.Controllers
             resoList = new ListControl();
             resoList.SelectionMode = ListSelectionMode.Single;
 
-            foreach (String reso in GetScreenResolutions())
+            foreach (String reso in Resolution.GetScreenResolutions())
             {
                 resoList.Items.Add(reso);
             }
-            resoList.Bounds = GuiHelper.CenterBound(-8000, -8000, 0, 100);
+            resoList.Bounds = GuiHelper.CenterBound(UIConstants.OPTION_RESO_HIDE_LIST.X, UIConstants.OPTION_RESO_HIDE_LIST.Y,
+                UIConstants.OPTION_RESO_HIDE_LIST.Width, UIConstants.OPTION_RESO_HIDE_LIST.Height);
 
             resoList.SelectionChanged += delegate(object sender, EventArgs arguments)
             {
@@ -281,7 +320,8 @@ namespace SpaceUnionXNA.Controllers
                     winState = 0;
                     toggleReso = false;
                 }
-                resoList.Bounds = new UniRectangle(-1000.0f, -1000.0f, 200.0f, 100.0f);
+                resoList.Bounds = GuiHelper.CenterBound(UIConstants.OPTION_RESO_HIDE_LIST.X, UIConstants.OPTION_RESO_HIDE_LIST.Y,
+                    UIConstants.OPTION_RESO_HIDE_LIST.Width, UIConstants.OPTION_RESO_HIDE_LIST.Height);
             };
             mainScreen.Desktop.Children.Add(resoList);
         }
@@ -306,11 +346,11 @@ namespace SpaceUnionXNA.Controllers
                     break;
                 case 1:
                     currentWinLabel.Text = "Borderless";
-                    currentResoLabel.Text = GetCurrentScreenResolution() + " (Borderless)";
+                    currentResoLabel.Text = Resolution.GetCurrentScreenResolution() + " (Borderless)";
                     break;
                 case 2:
                     currentWinLabel.Text = "Fullscreen";
-                    currentResoLabel.Text = GetCurrentScreenResolution() + " (Fullscreen)";
+                    currentResoLabel.Text = Resolution.GetCurrentScreenResolution() + " (Fullscreen)";
                     break;
             }
             
@@ -347,99 +387,10 @@ namespace SpaceUnionXNA.Controllers
 
             game.setScreenSize(int.Parse(width), int.Parse(height), currentWinLabel.Text);
             scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
-            scroll.setPosition(new Vector2((int)0, (int)0));
-            Banner = new Rectangle((int)game.mainScreen.Width / 2 - 400, (int)game.mainScreen.Height / 2 - 150 - 250, 800, 250);
+            scroll.setPosition(UIConstants.ORIGIN);
+            Banner = new Rectangle((int)game.mainScreen.Width / 2 - UIConstants.SU_BANNER.X, (int)game.mainScreen.Height / 2 - UIConstants.SU_BANNER.Y, 
+                UIConstants.SU_BANNER.Width, UIConstants.SU_BANNER.Height);
             CreateMenuControls(game.mainScreen);
-        }
-
-        /// <summary>
-        /// Source: http://stackoverflow.com/questions/10039339/get-the-supported-screen-resolutions-in-xna
-        /// Used to find all supported resolutions by the corresponding computer's graphic driver
-        /// Used over the built in XNA for easier filtering of resolutions
-        /// XNA will display all resolutions including for each refresh rate supported spooling out duplicate resolutions
-        /// @Added by Steven
-        /// </summary>
-        [StructLayout(LayoutKind.Sequential)]
-        internal struct DEVMODE
-        {
-            private const int CCHDEVICENAME = 0x20;
-            private const int CCHFORMNAME = 0x20;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x20)]
-            public string dmDeviceName;
-            public short dmSpecVersion;
-            public short dmDriverVersion;
-            public short dmSize;
-            public short dmDriverExtra;
-            public int dmFields;
-            public int dmPositionX;
-            public int dmPositionY;
-            public int dmDisplayOrientation;
-            public int dmDisplayFixedOutput;
-            public short dmColor;
-            public short dmDuplex;
-            public short dmYResolution;
-            public short dmTTOption;
-            public short dmCollate;
-
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x20)]
-            public string dmFormName;
-
-            public short dmLogPixels;
-            public int dmBitsPerPel;
-            public int dmPelsWidth;
-            public int dmPelsHeight;
-            public int dmDisplayFlags;
-            public int dmDisplayFrequency;
-            public int dmICMMethod;
-            public int dmICMIntent;
-            public int dmMediaType;
-            public int dmDitherType;
-            public int dmReserved1;
-            public int dmReserved2;
-            public int dmPanningWidth;
-            public int dmPanningHeight;
-        }
-
-        [DllImport("user32.dll")]
-        private static extern bool EnumDisplaySettings(string lpszDeviceName, int iModeNum, ref DEVMODE lpDevMode);
-
-        [DllImport("user32.dll")]
-        private static extern int GetSystemMetrics(int nIndex);
-
-        public static List<string> GetScreenResolutions()
-        {
-            var resolutions = new List<string>();
-
-            try
-            {
-                var devMode = new DEVMODE();
-                int i = 0;
-
-                while (EnumDisplaySettings(null, i, ref devMode))
-                {
-                    if (devMode.dmPelsWidth >= 800 && devMode.dmPelsHeight >= 600)
-                    {
-                        resolutions.Add(string.Format("{0}x{1}", devMode.dmPelsWidth, devMode.dmPelsHeight));
-                    }
-                    i++;
-                }
-
-                resolutions = resolutions.Distinct(StringComparer.InvariantCulture).ToList();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Could not get screen resolutions.");
-            }
-
-            return resolutions;
-        }
-
-        public static string GetCurrentScreenResolution()
-        {
-            int width = GetSystemMetrics(0x00);
-            int height = GetSystemMetrics(0x01);
-
-            return string.Format("{0}x{1}", width, height);
         }
     }
 }

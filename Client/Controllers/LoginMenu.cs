@@ -43,13 +43,20 @@ namespace SpaceUnionXNA.Controllers
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
        
             scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
-            scroll.setPosition(new Vector2((int)0, (int)0));
+            scroll.setPosition(UIConstants.ORIGIN);
             
             Background = Game1.Assets.guiRectangle;
-            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 150, (int)game.mainScreen.Height / 2 - 150, 300, 225);
+            WhiteBackground = new Rectangle(
+                (int)game.mainScreen.Width / 2 - UIConstants.LOGIN_WHITE_BG.X, 
+                (int)game.mainScreen.Height / 2 - UIConstants.LOGIN_WHITE_BG.Y, 
+                UIConstants.LOGIN_WHITE_BG.Width, UIConstants.LOGIN_WHITE_BG.Height);
 
             TexBanner = Game1.Assets.suBanner;
-            Banner = new Rectangle((int)game.mainScreen.Width / 2 - 150, (int)game.mainScreen.Height / 2 - 50 - 250, 300, 100);
+            Banner = new Rectangle(
+                (int)game.mainScreen.Width / 2 - UIConstants.LOGIN_BANNER.X, 
+                (int)game.mainScreen.Height / 2 - UIConstants.LOGIN_BANNER.Y,
+                UIConstants.LOGIN_BANNER.Width, UIConstants.LOGIN_BANNER.Height);
+
             CreateMenuControls(game.mainScreen);
         }
 
@@ -103,7 +110,9 @@ namespace SpaceUnionXNA.Controllers
             //TODO: Change Label Colors to white
             //Account Name Label
 
-            LabelControl accountNameLabel = GuiHelper.CreateLabel("Account Name", -45, -125, 110, 24);
+            LabelControl accountNameLabel = GuiHelper.CreateLabel("Account Name", 
+                UIConstants.LOGIN_ACCOUNT_LABEL.X, UIConstants.LOGIN_ACCOUNT_LABEL.Y,
+                UIConstants.LOGIN_ACCOUNT_LABEL.Width, UIConstants.LOGIN_ACCOUNT_LABEL.Height);
             mainScreen.Desktop.Children.Add(accountNameLabel);
 
             //Error Text Label
@@ -112,21 +121,28 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(errorText);
 
             //Account Name Input
-            accountNameInput = GuiHelper.CreateInput("", 0, -90, 200, 24);
+            accountNameInput = GuiHelper.CreateInput("",
+                UIConstants.LOGIN_ACCOUNT_INPUT.X, UIConstants.LOGIN_ACCOUNT_INPUT.Y,
+                UIConstants.LOGIN_ACCOUNT_INPUT.Width, UIConstants.LOGIN_ACCOUNT_INPUT.Height);
             mainScreen.Desktop.Children.Add(accountNameInput);
 
             //Password Label
-            passwordLabel = GuiHelper.CreateLabel("Password", 0, -25, 110, 24);
+            passwordLabel = GuiHelper.CreateLabel("Password",
+                UIConstants.LOGIN_PASSWORD_LABEL.X, UIConstants.LOGIN_PASSWORD_LABEL.Y,
+                UIConstants.LOGIN_ACCOUNT_LABEL.Width, UIConstants.LOGIN_PASSWORD_LABEL.Height);
             mainScreen.Desktop.Children.Add(passwordLabel);
 
             //TODO: Create Password field where characters show up as black circles
             //Password Input
-            passwordInput = GuiHelper.CreatePasswordInput(0, -55, 200, 24);
+            passwordInput = GuiHelper.CreatePasswordInput(UIConstants.LOGIN_PASSWORD_INPUT.X, UIConstants.LOGIN_PASSWORD_INPUT.Y,
+                UIConstants.LOGIN_PASSWORD_INPUT.Width, UIConstants.LOGIN_PASSWORD_INPUT.Height);
             mainScreen.Desktop.Children.Add(passwordInput);
 
             //TODO: Change to a contrasting color (Yellow)
             //Login Button.
-            ButtonControl loginButton = GuiHelper.CreateButton("Login", -24, 0, 150, 32);
+            ButtonControl loginButton = GuiHelper.CreateButton("Login",
+                UIConstants.LOGIN_BUTTON.X, UIConstants.LOGIN_BUTTON.Y,
+                UIConstants.LOGIN_BUTTON.Width, UIConstants.LOGIN_BUTTON.Height);
             loginButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 errorText.Text = "";
@@ -176,7 +192,9 @@ namespace SpaceUnionXNA.Controllers
             mainScreen.Desktop.Children.Add(shipSelectButton);
 
             //Button to close game.
-            ButtonControl quitButton = GuiHelper.CreateButton("Quit", 200, 100, 80, 32);
+            ButtonControl quitButton = GuiHelper.CreateButton("Quit",
+                UIConstants.LOGIN_QUIT.X, UIConstants.LOGIN_QUIT.Y, 
+                UIConstants.LOGIN_QUIT.Width, UIConstants.LOGIN_QUIT.Height);
             quitButton.Pressed += delegate(object sender, EventArgs arguments)
             {
                 game.Exit();

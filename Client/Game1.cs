@@ -22,7 +22,7 @@ namespace SpaceUnionXNA
     {
         private int topBtmBorderPixels = 38;
         private int leftRightBorderPixels = 14;
-
+        private Taskbar taskbar;
         public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         public ParticleEngine particleEngine;
@@ -113,7 +113,7 @@ namespace SpaceUnionXNA
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-
+            taskbar = new Taskbar();
             //Author: Troy Carefoot
             input_manager = new InputManager(Services, Window.Handle);
             gui_manager = new GuiManager(Services);
@@ -361,8 +361,28 @@ namespace SpaceUnionXNA
                 form.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
                 form.WindowState = System.Windows.Forms.FormWindowState.Normal;
                 
-                width = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
                 height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                width = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+
+                if (!taskbar.AutoHide)
+                {
+                    switch (taskbar.Position)
+                    {
+                        case TaskbarPosition.Bottom:
+                            height -= taskbar.Size.Height;
+                            break;
+                        case TaskbarPosition.Left:
+                            width -= taskbar.Size.Width;
+                            break;
+                        case TaskbarPosition.Right:
+                            width -= taskbar.Size.Width;
+                            break;
+                        case TaskbarPosition.Top:
+                            height -= taskbar.Size.Height;
+                            break;
+                    }
+                }
+
                 graphics.PreferredBackBufferHeight = height;
                 graphics.PreferredBackBufferWidth = width;
                 graphics.ApplyChanges();
