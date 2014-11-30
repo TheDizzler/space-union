@@ -23,7 +23,7 @@ namespace SpaceUnionXNA.Tools {
 		private int blueTeamKills = 0;
 		public bool timeOver = false;
         public bool countedDown = false;
-        public TimeSpan countDown = new TimeSpan(0, 0, 5);
+        public TimeSpan countDown = new TimeSpan(0, 0, 2);
 
         public int getRedTeamKills()
         {

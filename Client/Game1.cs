@@ -12,6 +12,7 @@ using SpaceUnionXNA.Controllers;
 using SpaceUnionXNA.Tools;
 using Nuclex.UserInterface;
 using Nuclex.Input;
+using SpaceUnionXNA.Animations;
 
 namespace SpaceUnionXNA {
 	/// <summary>
@@ -24,7 +25,7 @@ namespace SpaceUnionXNA {
 		public GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 		public ParticleEngine particleEngine;
-
+		public ScrollingBackground scroll;
 		/// <summary>
 		/// Contains all game assets (gfx, audio, etc.)
 		/// </summary>
@@ -64,7 +65,7 @@ namespace SpaceUnionXNA {
 		//public Player Player { get; set; }
 		//public RoomInfo roomInfo;
 
-		TeamBattle gameplayScreen;
+		GameplayScreen gameplayScreen;
 		//MainMenuScreen mainMenuScreen;
 		// Created by Matthew Baldock
 		/*
@@ -165,9 +166,10 @@ namespace SpaceUnionXNA {
 			);
 
 			login_menu = new LoginMenu(this); //Users must login to play online
+			
 
-			//graphics.IsFullScreen = true;
 			graphics.ApplyChanges();
+
 			MediaPlayer.IsRepeating = true;
 			MediaPlayer.Play(Assets.titleSong);
 
@@ -191,6 +193,10 @@ namespace SpaceUnionXNA {
 			textures.Add(Assets.missile);
 			particleEngine = new ParticleEngine(textures, new Vector2(400, 240));
 			shipselectionScreen = new ShipSelectionScreen(this);
+
+			scroll = new ScrollingBackground(Game1.Assets.background) { height = getScreenHeight(), width = getScreenWidth() };
+			scroll.setPosition(new Vector2((int) 0, (int) 0));
+
 			IsMouseVisible = true;
 		}
 
@@ -219,14 +225,17 @@ namespace SpaceUnionXNA {
 				|| Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
 
-			particleEngine.EmitterLocation = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
-			particleEngine.Update();
+			
+			//particleEngine.EmitterLocation = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+			//particleEngine.Update();
+
 			//Update the current state
 			switch (currentGameState) {
 				case GameState.Login:
 					login_menu.Update(gameTime);
 					break;
 				case GameState.MainMenu:
+					System.Console.WriteLine(currentGameState);
 					main_menu.Update(gameTime);
 					break;
 				case GameState.Multiplayer:
@@ -322,6 +331,74 @@ namespace SpaceUnionXNA {
 			return Window.ClientBounds.Height;
 		}
 
+		
+
+		public void EnterMainMenu() {
+			currentGameState = GameState.MainMenu;
+			main_menu = new MainMenu(this);
+		}
+
+		public void EnterLoginMenu() {
+			currentGameState = GameState.Login;
+			login_menu = new LoginMenu(this);
+		}
+
+		public void EnterMultiplayerMenu() {
+			currentGameState = GameState.Multiplayer;
+			multiplayer_menu = new MultiplayerMenu(this);
+		}
+
+		public void EnterOptionsMenu() {
+			currentGameState = GameState.Options;
+			options_menu = new OptionsMenu(this);
+		}
+
+		public void EnterCreditsMenu() {
+			currentGameState = GameState.Credits;
+			credits_menu = new CreditsMenu(this);
+		}
+
+		public void EnterCreateLobbyMenu() {
+			currentGameState = GameState.CreateLobby;
+			create_lobby_menu = new CreateLobbyMenu(this);
+		}
+
+		public void EnterLobbyBrowserMenu() {
+			currentGameState = GameState.LobbyBrowser;
+			lobby_browser_menu = new LobbyBrowserMenu(this);
+		}
+
+		public void EnterLobbyMenu() {
+			currentGameState = GameState.Lobby;
+			lobby_menu = new LobbyMenu(this, "Alice's Lobby");
+		}
+
+		public void EnterShipSelectionScreen() {
+			currentGameState = GameState.Select;
+			shipselectionScreen = new ShipSelectionScreen(this);
+		}
+
+		public void EnterControlMenu() {
+			currentGameState = GameState.ControlMenu;
+			control_menu = new ControlMenu(this);
+		}
+
+		public void StartGame() {
+			mainScreen.Desktop.Children.Clear(); //Clear the gui
+			//gameplayScreen = new GameplayScreen(this, spriteBatch, shipselectionScreen.getship());
+			currentGameState = GameState.Playing;
+			gameplayScreen = new TeamBattle(this, spriteBatch, shipselectionScreen.getship());
+			//Viewport v = GraphicsDevice.Viewport;
+			IsMouseVisible = false;
+		}
+
+
+		public void EndMatch() {
+			currentGameState = GameState.MainMenu;
+			IsMouseVisible = true;
+		}
+
+
 		/// <summary>
 		/// Author: Steven
 		/// Sets the client size based on the values passed in
@@ -381,71 +458,6 @@ namespace SpaceUnionXNA {
 			}
 
 			windowState = WindowState;
-		}
-
-		public void EnterMainMenu() {
-			currentGameState = GameState.MainMenu;
-			main_menu = new MainMenu(this);
-		}
-
-		public void EnterLoginMenu() {
-			currentGameState = GameState.Login;
-			login_menu = new LoginMenu(this);
-		}
-
-		public void EnterMultiplayerMenu() {
-			currentGameState = GameState.Multiplayer;
-			multiplayer_menu = new MultiplayerMenu(this);
-		}
-
-		public void EnterOptionsMenu() {
-			currentGameState = GameState.Options;
-			options_menu = new OptionsMenu(this);
-		}
-
-		public void EnterCreditsMenu() {
-			currentGameState = GameState.Credits;
-			credits_menu = new CreditsMenu(this);
-		}
-
-		public void EnterCreateLobbyMenu() {
-			currentGameState = GameState.CreateLobby;
-			create_lobby_menu = new CreateLobbyMenu(this);
-		}
-
-		public void EnterLobbyBrowserMenu() {
-			currentGameState = GameState.LobbyBrowser;
-			lobby_browser_menu = new LobbyBrowserMenu(this);
-		}
-
-		public void EnterLobbyMenu() {
-			currentGameState = GameState.Lobby;
-			lobby_menu = new LobbyMenu(this, "Alice's Lobby");
-		}
-
-		public void EnterShipSelectionScreen() {
-			currentGameState = GameState.Select;
-			shipselectionScreen = new ShipSelectionScreen(this);
-		}
-
-		public void EnterControlMenu() {
-			currentGameState = GameState.ControlMenu;
-			control_menu = new ControlMenu(this);
-		}
-
-		public void StartGame() {
-			mainScreen.Desktop.Children.Clear(); //Clear the gui
-			//gameplayScreen = new GameplayScreen(this, spriteBatch, shipselectionScreen.getship());
-			currentGameState = GameState.Playing;
-			gameplayScreen = new TeamBattle(this, spriteBatch, shipselectionScreen.getship());
-			Viewport v = GraphicsDevice.Viewport;
-			IsMouseVisible = false;
-		}
-
-
-		public void EndMatch() {
-			currentGameState = GameState.MainMenu;
-			IsMouseVisible = true;
 		}
 	}
 }

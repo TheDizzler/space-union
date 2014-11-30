@@ -171,15 +171,19 @@ namespace SpaceUnionXNA.Ships {
 					isActive = true;
 					currentHealth = maxHealth;
 				}
+
+				if (exploding) {
+					explodingTime += (float) gameTime.ElapsedGameTime.TotalSeconds;
+					if (explodingTime < .5f)
+						explode();
+					else {
+						exploding = false;
+						explodingTime = 0;
+					}
+				}
 			}
 
-			if (exploding) {
-				explodingTime += (float) gameTime.ElapsedGameTime.TotalSeconds;
-				if (explodingTime < .5f)
-					explode();
-				else
-					exploding = false;
-			}
+			
 		}
 
 		public virtual void inactiveUpdate(GameTime gameTime) {

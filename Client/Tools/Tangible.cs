@@ -76,7 +76,6 @@ namespace SpaceUnionXNA.Tools {
 				}
 			} else {
 				if (currentHealth <= 0) {
-					//owner.kills += 1;
 					destroy();
 				}
 			}
@@ -117,7 +116,7 @@ namespace SpaceUnionXNA.Tools {
 			int padding = 0;
 			hitBox = new HitBox(position.X, position.Y, width + padding, height + padding);
 			isActive = true;
-			currentHealth = maxHealth;
+			currentHealth = maxHealth = 5;
 
 			damageTime = TimeSpan.FromSeconds(.1);
 		}

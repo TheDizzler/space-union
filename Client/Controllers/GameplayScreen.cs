@@ -36,10 +36,10 @@ namespace SpaceUnionXNA.Controllers {
 		private List<Vector2> respawnpoints;
 		private List<Vector2> usedspawn;
 		private Background background;
-		private Ship playerShip;
+		protected Ship playerShip;
 		private Game1 game;
-		private Camera mainCamera;
-		private Camera radarCamera;
+		protected Camera mainCamera;
+		protected Camera radarCamera;
 		protected GUI gui;
 
 		Random gen;
@@ -138,9 +138,10 @@ namespace SpaceUnionXNA.Controllers {
 				AddAsteroid(new Vector2(gen.Next(100, worldWidth), gen.Next(100, worldHeight)));
 			//	foreach (Planet planet in planets)
 			//		targets.Add(planet);
-			Assets.klaxxon.Play();
+
 			MediaPlayer.Stop();
-			MediaPlayer.Play(Assets.battleSong);
+			Game1.Assets.klaxxon.Play();
+			MediaPlayer.Play(Game1.Assets.battleSong);
 		}
 
 
@@ -189,18 +190,6 @@ namespace SpaceUnionXNA.Controllers {
 			//if (asteroids.Count < 50)
 			//	AddAsteroid(new Vector2(gen.Next(100, 4000), gen.Next(100, 2000)));
 
-
-			//if (!playerShip.isActive) {
-			//	playerShip.inactiveStart = gameTime.TotalGameTime;
-			//} else {
-			//	Random randomspawn = new Random();
-			//	playerShip.inactiveTime = TimeSpan.Zero;
-			//	playerShip.Position = respawnpoints.ElementAt(randomspawn.Next(respawnpoints.Count));
-			//	usedspawn.Add(respawnpoints.ElementAt(respawnpoints.IndexOf(playerShip.Position)));
-			//	respawnpoints.RemoveAt(respawnpoints.IndexOf(playerShip.Position));
-			//	targets.Add(playerShip);
-			//}
-			//playerShip.update(gameTime, quadTree);
 
 			foreach (Ship ship in ships.ToList()) {
 				if (!ship.isActive) {

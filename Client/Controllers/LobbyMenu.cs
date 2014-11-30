@@ -33,7 +33,7 @@ namespace SpaceUnionXNA.Controllers
         LabelControl player4Label;
         LabelControl player5Label;
         LabelControl player6Label;
-        private ScrollingBackground scroll;
+        
         private Rectangle WhiteBackground;
         private Texture2D Background;
         bool isLeader = false;
@@ -43,8 +43,7 @@ namespace SpaceUnionXNA.Controllers
             this.game = game;
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
             lobbyTitle = title;
-            scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
-            scroll.setPosition(new Vector2((int)0, (int)0));
+            
             CreateMenuControls(game.mainScreen);
             Background = Game1.Assets.guiRectangle;
             new Thread(updatePlayerList).Start();
@@ -52,7 +51,7 @@ namespace SpaceUnionXNA.Controllers
 
         public void Update(GameTime gameTime)
         {
-            scroll.update();
+			game.scroll.update();
         }
 
         public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
@@ -63,7 +62,7 @@ namespace SpaceUnionXNA.Controllers
             //WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 162, (int)game.mainScreen.Height / 2 - 162, 575, 325);
             WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 325, (int)game.mainScreen.Height / 2 - 325, 650, 650);
 
-            scroll.draw(spriteBatch);
+			game.scroll.draw(spriteBatch);
             spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
             //spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
             //spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);

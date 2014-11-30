@@ -33,7 +33,7 @@ namespace SpaceUnionXNA.Controllers
 		private LabelControl currentWinLabel;
 		private LabelControl currentMusicLabel;
 		private LabelControl currentSoundLabel;
-		private ScrollingBackground scroll;
+		
 		private Rectangle WhiteBackground;
 		private Texture2D Background;
 		private bool toggleReso = false;
@@ -44,8 +44,7 @@ namespace SpaceUnionXNA.Controllers
 			this.game = game;
 			Background = Game1.Assets.guiRectangle;
 			game.mainScreen.Desktop.Children.Clear(); //Clear the gui
-			scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
-			scroll.setPosition(new Vector2((int)0, (int)0));
+			
 			CreateMenuControls(game.mainScreen);
 			clientHeight = game.getScreenHeight();
 			clientWidth = game.getScreenWidth();
@@ -53,7 +52,7 @@ namespace SpaceUnionXNA.Controllers
 
 		public void Update(GameTime gameTime)
 		{
-			scroll.update();
+			game.scroll.update();
 		}
 
 		public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
@@ -63,7 +62,7 @@ namespace SpaceUnionXNA.Controllers
 
 			WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 287, (int)game.mainScreen.Height / 2 - 162, 575, 325);
 
-			scroll.draw(spriteBatch);
+			game.scroll.draw(spriteBatch);
 			spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
 			//spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
 			spriteBatch.End();
@@ -164,7 +163,7 @@ namespace SpaceUnionXNA.Controllers
 			{
 				currentSoundLabel.Text = "Low";
 				game.currentSound = "Low";
-				SoundEffect.MasterVolume = .33f;
+				SoundEffect.MasterVolume = .10f;
 			};
 			mainScreen.Desktop.Children.Add(soundLowButton);
 
@@ -173,7 +172,7 @@ namespace SpaceUnionXNA.Controllers
 			{
 				currentSoundLabel.Text = "Medium";
 				game.currentSound = "Medium";
-				SoundEffect.MasterVolume = .66f;
+				SoundEffect.MasterVolume = .50f;
 			};
 			mainScreen.Desktop.Children.Add(soundMediumButton);
 
@@ -347,8 +346,9 @@ namespace SpaceUnionXNA.Controllers
 			}
 
 			game.setScreenSize(int.Parse(width), int.Parse(height), currentWinLabel.Text);
-			scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
-			scroll.setPosition(new Vector2((int)0, (int)0));
+			game.scroll.height = game.getScreenHeight();
+			game.scroll.width = game.getScreenWidth();
+			game.scroll.setPosition(new Vector2((int)0, (int)0));
 			CreateMenuControls(game.mainScreen);
 		}
 

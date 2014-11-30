@@ -22,7 +22,7 @@ namespace SpaceUnionXNA.Controllers
     public class ControlMenu
     {
         private Game1 game;
-        private ScrollingBackground scroll;
+
         private Rectangle WhiteBackground;
         private Texture2D Background;
         /* Key order mapped to the Enum in Ship.cs */
@@ -52,8 +52,6 @@ namespace SpaceUnionXNA.Controllers
             CreateMenuControls(game.mainScreen);
             screen = game.mainScreen;
             
-            scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
-            scroll.setPosition(new Vector2((int)0, (int)0));
             Background = Game1.Assets.guiRectangle;
             
             nonInputKeys = new List<Keys>();
@@ -67,14 +65,14 @@ namespace SpaceUnionXNA.Controllers
 
         public void Update(GameTime gameTime)
         {
-            scroll.update();
+			game.scroll.update();
         }
 
         public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
             WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 287, (int)game.mainScreen.Height / 2 - 212, 575, 425);
-            scroll.draw(spriteBatch);
+			game.scroll.draw(spriteBatch);
             spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
             spriteBatch.End();
 

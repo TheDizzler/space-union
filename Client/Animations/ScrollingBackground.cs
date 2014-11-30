@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using SpaceUnionXNA.Tools;
 namespace SpaceUnionXNA.Animations
 {
-    class ScrollingBackground :Sprite
+    public class ScrollingBackground :Sprite
     {
         /// <summary>
         /// Create 2 textures and 2 rectangles to hold image

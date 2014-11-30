@@ -25,7 +25,7 @@ namespace SpaceUnionXNA.Controllers
         private PasswordInputControl passwordInput;
         private LabelControl passwordLabel;
         private LabelControl errorText;
-        private ScrollingBackground scroll;
+        
         private bool errors = false;
         InputControl accountNameInput;
         private KeyboardState keyState;
@@ -39,8 +39,7 @@ namespace SpaceUnionXNA.Controllers
             this.game = game;
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
        
-            scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
-            scroll.setPosition(new Vector2((int)0, (int)0));
+            
             Background = Game1.Assets.guiRectangle;
             
             CreateMenuControls(game.mainScreen);
@@ -48,15 +47,15 @@ namespace SpaceUnionXNA.Controllers
 
         public void Update(GameTime gameTime)
         {
-            scroll.update();
+			game.scroll.update();
         }
 
         public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
             WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 150, (int)game.mainScreen.Height / 2 - 150, 300, 225);
-            
-            scroll.draw(spriteBatch);
+
+			game.scroll.draw(spriteBatch);
             spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
             spriteBatch.End();
             game.gui_manager.Draw(gameTime);

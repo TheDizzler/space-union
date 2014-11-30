@@ -18,7 +18,7 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 			projectileTTL = 0.5f;
 			projectileMoveSpeed = 500f;
 
-			weaponDamage = 1;
+			weaponDamage = 3;
 			
 		}
 

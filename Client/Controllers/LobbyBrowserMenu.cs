@@ -37,7 +37,7 @@ namespace SpaceUnionXNA.Controllers
         int totalWidth = columns * columnWidth;
         double totalHeight = (rowsBeforeScroll + 1) * rowRectSizeY;
         Table LobbyBrowserTable;
-        private ScrollingBackground scroll;
+        
         private Rectangle WhiteBackground;
         ButtonControl prevPageButton;
         ButtonControl nextPageButton;
@@ -48,8 +48,6 @@ namespace SpaceUnionXNA.Controllers
             int rowRectOriginY = (int)(game.mainScreen.Height/2 - totalHeight/1.25);
             int rowRectOriginX = (int)game.mainScreen.Width/2 - totalWidth/2;
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
-            scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
-            scroll.setPosition(new Vector2((int)0, (int)0));
             LobbyBrowserTable = new Table(columns, new string[] { "Lobby Name", "Game Type", "Host Name", "Players", "Max. Players", "Ping" }, rowRectOriginX, rowRectOriginY, rowRectSizeY, rowsBeforeScroll, columnWidth, true, game.mainScreen);
             CreateMenuControls(game.mainScreen);
         }
@@ -58,7 +56,7 @@ namespace SpaceUnionXNA.Controllers
 
         public void Update(GameTime gameTime)
         {
-            scroll.update();
+			game.scroll.update();
             var newState = Keyboard.GetState();
 
             if (newState.IsKeyDown(Keys.D1))
@@ -102,7 +100,7 @@ namespace SpaceUnionXNA.Controllers
         public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            scroll.draw(spriteBatch);
+			game.scroll.draw(spriteBatch);
             LobbyBrowserTable.draw(spriteBatch);
             
             spriteBatch.End();

@@ -17,93 +17,84 @@ using SpaceUnionXNA.Animations;
 //NETWORKING
 //using Data_Structures;
 
-namespace SpaceUnionXNA.Controllers
-{
-    public class CreateLobbyMenu
-    {
-        private Game1 game;
-        public String lobbyTitle;
-        private ScrollingBackground scroll;
-        private Rectangle WhiteBackground;
-        private Texture2D Background;
-        private InputControl lobbyTitleInput;
+namespace SpaceUnionXNA.Controllers {
+	public class CreateLobbyMenu {
+		private Game1 game;
+		public String lobbyTitle;
 
-        public CreateLobbyMenu(Game1 game)
-        {
-            this.game = game;
-            game.mainScreen.Desktop.Children.Clear(); //Clear the gui
-            scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
-            scroll.setPosition(new Vector2((int)0, (int)0));
-            Background = Game1.Assets.guiRectangle;
-            CreateMenuControls(game.mainScreen);
-        }
+		private Rectangle WhiteBackground;
+		private Texture2D Background;
+		private InputControl lobbyTitleInput;
 
-        public void Update(GameTime gameTime)
-        {
-            scroll.update();
-        }
+		public CreateLobbyMenu(Game1 game) {
+			this.game = game;
+			game.mainScreen.Desktop.Children.Clear(); //Clear the gui
 
-        public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            spriteBatch.Begin();
+			Background = Game1.Assets.guiRectangle;
+			CreateMenuControls(game.mainScreen);
+		}
 
-            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 175, (int)game.mainScreen.Height / 2 - 165, 300, 225);
-            scroll.draw(spriteBatch);
-            spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
-            spriteBatch.End();
-            game.gui_manager.Draw(gameTime);
-        }
+		public void Update(GameTime gameTime) {
+			game.scroll.update();
+		}
 
-        private void CreateMenuControls(Screen mainScreen)
-        {
-            //Logout Button.
-            ButtonControl backButton = GuiHelper.CreateButton("Back", -75, -400, 70, 32);
-            backButton.Pressed += delegate(object sender, EventArgs arguments)
-            {
-                game.EnterMultiplayerMenu();
-            };
-            mainScreen.Desktop.Children.Add(backButton);
+		public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch) {
+			spriteBatch.Begin();
 
-            //Menu Title Label
-            LabelControl menuTitleLabel = new LabelControl();
-            menuTitleLabel.Text = "Create A New Lobby";
-            menuTitleLabel.Bounds = GuiHelper.MENU_TITLE_LABEL;
-            mainScreen.Desktop.Children.Add(menuTitleLabel);
+			WhiteBackground = new Rectangle((int) game.mainScreen.Width / 2 - 175, (int) game.mainScreen.Height / 2 - 165, 300, 225);
+			game.scroll.draw(spriteBatch);
+			spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
+			spriteBatch.End();
+			game.gui_manager.Draw(gameTime);
+		}
 
-            //Lobby Title Label.
-            LabelControl lobbyTitleLabel = GuiHelper.CreateLabel("Lobby Title", -145, -125, 30, 30);
-            mainScreen.Desktop.Children.Add(lobbyTitleLabel);
+		private void CreateMenuControls(Screen mainScreen) {
+			//Logout Button.
+			ButtonControl backButton = GuiHelper.CreateButton("Back", -75, -400, 70, 32);
+			backButton.Pressed += delegate(object sender, EventArgs arguments) {
+				game.EnterMultiplayerMenu();
+			};
+			mainScreen.Desktop.Children.Add(backButton);
 
-            //Lobby Title Text Entry.
-            lobbyTitleInput = GuiHelper.CreateInput("", -60, -95, 200, 30);
-            mainScreen.Desktop.Children.Add(lobbyTitleInput);
+			//Menu Title Label
+			LabelControl menuTitleLabel = new LabelControl();
+			menuTitleLabel.Text = "Create A New Lobby";
+			menuTitleLabel.Bounds = GuiHelper.MENU_TITLE_LABEL;
+			mainScreen.Desktop.Children.Add(menuTitleLabel);
 
-            //Create Lobby Button.
-            ButtonControl createLobbyButton = GuiHelper.CreateButton("Create Lobby", 0, 0, 200, 32);
-            createLobbyButton.Pressed += delegate(object sender, EventArgs arguments)
-            {
-                game.EnterLobbyMenu();
-                //NETWORKING
-                /*
-                if(lobbyTitleInput.Text != null){
+			//Lobby Title Label.
+			LabelControl lobbyTitleLabel = GuiHelper.CreateLabel("Lobby Title", -145, -125, 30, 30);
+			mainScreen.Desktop.Children.Add(lobbyTitleLabel);
+
+			//Lobby Title Text Entry.
+			lobbyTitleInput = GuiHelper.CreateInput("", -60, -95, 200, 30);
+			mainScreen.Desktop.Children.Add(lobbyTitleInput);
+
+			//Create Lobby Button.
+			ButtonControl createLobbyButton = GuiHelper.CreateButton("Create Lobby", 0, 0, 200, 32);
+			createLobbyButton.Pressed += delegate(object sender, EventArgs arguments) {
+				game.EnterLobbyMenu();
+				//NETWORKING
+				/*
+				if(lobbyTitleInput.Text != null){
                     
-                    Data lobbyData = game.Communication.sendRoomCreationRequest(game.Player, lobbyTitleInput.Text);
+					Data lobbyData = game.Communication.sendRoomCreationRequest(game.Player, lobbyTitleInput.Text);
                     
-                    if (lobbyData.Type == 10)
-                    {
-                        game.roomInfo = (RoomInfo)lobbyData;
-                        game.EnterLobbyMenu();
-                    }
-                    else if (lobbyData.Type == 7)
-                    {
-                        Console.WriteLine("cannot create lobby");
-                    }
-                }
-                 */
-                game.EnterLobbyMenu();
-            };
-            mainScreen.Desktop.Children.Add(createLobbyButton);
-        }
+					if (lobbyData.Type == 10)
+					{
+						game.roomInfo = (RoomInfo)lobbyData;
+						game.EnterLobbyMenu();
+					}
+					else if (lobbyData.Type == 7)
+					{
+						Console.WriteLine("cannot create lobby");
+					}
+				}
+				 */
+				game.EnterLobbyMenu();
+			};
+			mainScreen.Desktop.Children.Add(createLobbyButton);
+		}
 
-    }
+	}
 }
