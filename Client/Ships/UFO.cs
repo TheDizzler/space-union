@@ -14,18 +14,22 @@ namespace SpaceUnionXNA.Ships {
 
 
 		public UFO(Game1 game)
-			: base(assets.ufo, assets.laser, game) {
+			: base(assets.ufo, game) {
 
-			accelSpeed = 500.5f;
+			description = "Fast acceleration and quick turning make the UFO the most agile ship. However, its weak armor and bullets means it has to stay one step ahead of its enemies.";
+
+
+			currentHealth = maxHealth = 20;
+			accelSpeed = 1000f;
 			turnSpeed = 4.5f;
-			maxSpeed = 500;
-			mainFireDelay = TimeSpan.FromSeconds(.5f);
+			maxSpeed = 300;
+
+			mainFireDelay = TimeSpan.FromSeconds(.15f);
 			altFireDelay = TimeSpan.FromSeconds(1f);
 			shield = new Shield(assets.shield, position);
 
+			mainWeapon = Launcher<MoltenBullet>.CreateLauncher(this, (x, y) => new MoltenBullet(x, y), 3);
 			weaponOrigin = new Vector2(position.X, position.Y - height / 2); // start position of weapon
-			mainWeapon = Launcher<Laser>.CreateLauncher(this, (x, y) => new Laser(x, y), 8);
-
 		}
 
 
@@ -44,7 +48,6 @@ namespace SpaceUnionXNA.Ships {
 			if (shield.on)
 				shield.draw(batch);
 		}
-
 
 		protected override void altFire(GameTime gameTime) {
 

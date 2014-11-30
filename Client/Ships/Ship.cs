@@ -22,6 +22,8 @@ namespace SpaceUnionXNA.Ships {
 		/// </summary>
 		protected Game1 game;
 
+		public String description = "Add description here";
+
 		/// <summary>
 		/// A restistance to movement so all objects will enventual slow to a stop
 		/// (not realistic in space but may play better)
@@ -83,8 +85,13 @@ namespace SpaceUnionXNA.Ships {
 
 		public TimeSpan inactiveStart;
 		public TimeSpan inactiveTime = TimeSpan.Zero;
+		private  bool exploding;
+		private  float explodingTime;
 
-		/* Used to map ship's actions to keys */
+		/// <summary>
+		///  Used to map ship's actions to keys
+		///  @Written by Steven
+		/// </summary>
 		public enum shipAction {
 			forward,
 			turnLeft,
@@ -99,7 +106,7 @@ namespace SpaceUnionXNA.Ships {
 		/// <param name="tex">Ship texture</param>
 		/// <param name="wpnTex">Weapon texture</param>
 		/// <param name="game1"></param>
-		protected Ship(Texture2D tex, Texture2D wpnTex, Game1 game1)
+		protected Ship(Texture2D tex, Game1 game1)
 			: base(tex, Vector2.Zero) {
 
 			this.game = game1;
@@ -113,6 +120,7 @@ namespace SpaceUnionXNA.Ships {
 
 		}
 
+
 		///* TEST */
 		//public LaserBeam getBeam() {
 
@@ -120,6 +128,7 @@ namespace SpaceUnionXNA.Ships {
 		//		return ((LaserBeam) mainWeapon);
 		//	return null;
 		//}
+
 
 		/// <summary>
 		/// @Written by Troy and Kyle with additions by Tristan.
@@ -140,13 +149,6 @@ namespace SpaceUnionXNA.Ships {
 
 				if (altFiring)
 					altFire(gameTime);
-
-				//if (willCollide)
-				//	collide(collideTarget, gameTime);
-
-				//moveThisUpdate = velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
-				//checkForCollision2(quadTree, gameTime);
-				//position += moveThisUpdate;
 
 				position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -169,6 +171,14 @@ namespace SpaceUnionXNA.Ships {
 					isActive = true;
 					currentHealth = maxHealth;
 				}
+			}
+
+			if (exploding) {
+				explodingTime += (float) gameTime.ElapsedGameTime.TotalSeconds;
+				if (explodingTime < .5f)
+					explode();
+				else
+					exploding = false;
 			}
 		}
 
@@ -283,8 +293,7 @@ namespace SpaceUnionXNA.Ships {
 			if (tempVelocity.Length() > maxSpeed) {
 				acceleration *= 0;
 				Vector2.Add(ref velocity, ref acceleration, out velocity);
-			}
-			if (tempVelocity.Length() < maxSpeed) {
+			} else if (tempVelocity.Length() < maxSpeed) {
 				Vector2.Add(ref velocity, ref acceleration, out velocity);
 			}
 
@@ -323,9 +332,10 @@ namespace SpaceUnionXNA.Ships {
 		protected abstract void altFire(GameTime gameTime);
 
 		public override void destroy() {
-			explode();
+			exploding = true;
 			velocity = Vector2.Zero;
 
+			assets.explosionsSFX[15].Play();
 			base.destroy();
 		}
 
@@ -400,12 +410,12 @@ namespace SpaceUnionXNA.Ships {
 				* Matrix.CreateTranslation(origin.X, origin.Y, 0);
 		}
 
-		//Debugging Ship Brake
-		public void stop() {
-			velocity = Vector2.Zero;
+		////Debugging Ship Brake
+		//public void stop() {
+		//	velocity = Vector2.Zero;
 
-			explode();
-		}
+		//	explode();
+		//}
 
 	}
 }

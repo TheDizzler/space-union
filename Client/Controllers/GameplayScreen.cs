@@ -11,6 +11,7 @@ using SpaceUnionXNA.StellarObjects;
 using SpaceUnionXNA.Tools;
 using SpaceUnionXNA.Weapons;
 using SpaceUnionXNA.Animations;
+using Microsoft.Xna.Framework.Media;
 
 
 namespace SpaceUnionXNA.Controllers {
@@ -85,7 +86,7 @@ namespace SpaceUnionXNA.Controllers {
 			respawnpoints.Add(new Vector2(100, worldHeight - 100));
 
 			for (int i = 0; i < 3; i++) {
-				Ship enemyship = new Bug(game);
+				Ship enemyship = new Scout(game);
 				enemyship.Position = respawnpoints.ElementAt(i + 3);
 				enemyship.blueTeam = true;
 				enemyship.rotation = (float) Math.PI / 4;
@@ -93,7 +94,7 @@ namespace SpaceUnionXNA.Controllers {
 				ships.Add(enemyship);
 			}
 			for (int i = 0; i < 2; i++) {
-				Ship friendlyship = new Scout(game);
+				Ship friendlyship = new Bug(game);
 				friendlyship.Position = respawnpoints.ElementAt(i + 1);
 				friendlyship.redTeam = true;
 				ships.Add(friendlyship);
@@ -137,8 +138,9 @@ namespace SpaceUnionXNA.Controllers {
 				AddAsteroid(new Vector2(gen.Next(100, worldWidth), gen.Next(100, worldHeight)));
 			//	foreach (Planet planet in planets)
 			//		targets.Add(planet);
-
-
+			Assets.klaxxon.Play();
+			MediaPlayer.Stop();
+			MediaPlayer.Play(Assets.battleSong);
 		}
 
 
@@ -214,7 +216,12 @@ namespace SpaceUnionXNA.Controllers {
 				Random randomspawn = new Random();
 				if (ship.isActive) {
 					ship.inactiveTime = TimeSpan.Zero;
-					ship.Position = respawnpoints.ElementAt(randomspawn.Next(respawnpoints.Count));
+					ship.resetHealth();
+					Vector2 position = respawnpoints.ElementAt(randomspawn.Next(respawnpoints.Count));
+					while (spawnPointOccupied(position)) {
+						position = respawnpoints.ElementAt(randomspawn.Next(respawnpoints.Count));
+					}
+					ship.Position = position;
 					usedspawn.Add(respawnpoints.ElementAt(respawnpoints.IndexOf(ship.Position)));
 					respawnpoints.RemoveAt(respawnpoints.IndexOf(ship.Position));
 					ships.Add(ship);
@@ -257,7 +264,19 @@ namespace SpaceUnionXNA.Controllers {
 			Game1.explosionEngine.update(gameTime);
 
 			gui.update(gameTime, quadTree);
+		}
 
+		private bool spawnPointOccupied(Vector2 position) {
+
+			foreach (Tangible target in targets) {
+				if (target.isActive) {
+					
+					if (target.getHitBox().rectHitBox.Contains(new Point((int)position.X, (int)position.Y))) {
+						return true;
+					}
+				}
+			}
+			return false;
 		}
 
 		/// <summary>
@@ -276,7 +295,7 @@ namespace SpaceUnionXNA.Controllers {
 
 			drawScreen();
 
-			
+
 			spriteBatch.End();
 
 
@@ -333,8 +352,8 @@ namespace SpaceUnionXNA.Controllers {
 			for (int i = 0; i < asteroids.Count; i++) {
 				asteroids[i].draw(spriteBatch);
 			}
-			drawBorder(spriteBatch, new Rectangle(0 - Assets.bug.Width/2-10, 0 - Assets.bug.Height/2-10, 
-					   worldWidth + Assets.bug.Width+20, worldHeight + Assets.bug.Height+20), 10, Color.White);
+			drawBorder(spriteBatch, new Rectangle(0 - Assets.bug.Width / 2 - 10, 0 - Assets.bug.Height / 2 - 10,
+					   worldWidth + Assets.bug.Width + 20, worldHeight + Assets.bug.Height + 20), 10, Color.White);
 			Game1.explosionEngine.draw(spriteBatch);
 		}
 

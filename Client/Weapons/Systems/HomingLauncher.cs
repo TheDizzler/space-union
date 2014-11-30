@@ -13,13 +13,17 @@ namespace SpaceUnionXNA.Weapons.Systems {
 	public class HomingLauncher : WeaponSystem {
 
 		HomingMissile missile;
-
+		private  List<SoundEffect> fireSFXs;
+		private Random random;
 
 		public Ship owner { get; set; }
 
 		public HomingLauncher(Ship ship) {
 			owner = ship;
 			missile = new HomingMissile(Vector2.Zero, ship);
+
+			fireSFXs = missile.getFireSFX();
+			random = new Random();
 		}
 
 
@@ -53,8 +57,8 @@ namespace SpaceUnionXNA.Weapons.Systems {
 
 		public void playFireSFX() {
 
-			//int num = random.Next(fireSFXs.Count);
-			//fireSFXs[num].Play();
+			int num = random.Next(fireSFXs.Count);
+			fireSFXs[num].Play();
 		}
 
 

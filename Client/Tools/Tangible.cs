@@ -53,7 +53,6 @@ namespace SpaceUnionXNA.Tools {
 		}
 
 		public void takeDamage(int amount, GameTime gameTime, Ship owner) {
-			//if (this != owner) {
 
 			// check last time taken damage
 			if (gameTime.TotalGameTime - previousDamageTime > damageTime) {
@@ -64,22 +63,12 @@ namespace SpaceUnionXNA.Tools {
 
 			if (owner is Ship && this is Ship) {
 				Ship target = (Ship) this;
-				if (owner.blueTeam && target.redTeam) {
+				if (owner.blueTeam != target.blueTeam) {
 					if (currentHealth <= 0) {
 						owner.kills += 1;
 						destroy();
 					}
-				} else if (owner.blueTeam && target.blueTeam) {
-					if (currentHealth <= 0) {
-						owner.kills -= 1;
-						destroy();
-					}
-				} else if (owner.redTeam && target.blueTeam) {
-					if (currentHealth <= 0) {
-						owner.kills += 1;
-						destroy();
-					}
-				} else if (owner.redTeam && target.redTeam) {
+				} else {
 					if (currentHealth <= 0) {
 						owner.kills -= 1;
 						destroy();
@@ -91,8 +80,6 @@ namespace SpaceUnionXNA.Tools {
 					destroy();
 				}
 			}
-
-			//}
 		}
 
 		/// <summary>
@@ -132,7 +119,7 @@ namespace SpaceUnionXNA.Tools {
 			isActive = true;
 			currentHealth = maxHealth;
 
-			damageTime = TimeSpan.FromSeconds(1);
+			damageTime = TimeSpan.FromSeconds(.1);
 		}
 
 		/// <summary>
@@ -155,6 +142,11 @@ namespace SpaceUnionXNA.Tools {
 
 		}
 
+
+		public void resetHealth() {
+
+			currentHealth = maxHealth;
+		}
 		/// <summary>
 		/// What to draw on the minimap for this object.
 		/// </summary>
@@ -175,8 +167,14 @@ namespace SpaceUnionXNA.Tools {
 			foreach (Tangible target in possibleCollisions.ToList<Tangible>()) {
 				if (target.isActive && target != this)
 					if (getHitBox().getArray().Intersects(target.getHitBox().getArray()))
-						if (fineCheck(target))
+						if (fineCheck(target)) {
+							//Vector2 repositionThis = this.velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
+							//Vector2 repositionTarget = target.velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
 							collide(target, gameTime);
+							// nudge the objects backwards so they don't intertwine
+							//this.position -= repositionThis;
+							//target.position -= repositionTarget;
+						}
 			}
 
 		}

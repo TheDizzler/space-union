@@ -15,7 +15,7 @@ namespace SpaceUnionXNA.Ships {
 	class Bug : Ship {
 
 		public Bug(Game1 game1)
-			: base(assets.bug, assets.moltenBullet, game1) {
+			: base(assets.bug, game1) {
 
 			maxSpeed = 300;
 			accelSpeed = 100.0f;

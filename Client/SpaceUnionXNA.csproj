@@ -106,6 +106,7 @@
     <Compile Include="Controllers\OptionsMenu.cs" />
     <Compile Include="Controllers\ShipSelectionScreen.cs" />
     <Compile Include="Controllers\TeamBattle.cs" />
+    <Compile Include="Ships\Galactuship.cs" />
     <Compile Include="Ships\Lobstar.cs" />
     <Compile Include="Tools\GUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -114,7 +115,6 @@
     <Compile Include="Ships\Bug.cs" />
     <Compile Include="Ships\Scout.cs" />
     <Compile Include="Ships\Ship.cs" />
-    <Compile Include="Ships\TestShip.cs" />
     <Compile Include="Ships\UFO.cs" />
     <Compile Include="Ships\Zoid.cs" />
     <Compile Include="StellarObjects\Asteroid.cs" />

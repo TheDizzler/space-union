@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 ///Edited by Matthew Baldock
 namespace SpaceUnionXNA.Tools {
@@ -125,11 +126,18 @@ namespace SpaceUnionXNA.Tools {
 		/// Created by Tristan
 		/// </summary>
 		public SoundEffect laserbolt0, laserbolt1, laserbolt2, laserbolt3;
+		public SoundEffect klaxxon;
+		public SoundEffect torpedo;
+		public  SoundEffect plasmaburst;
+		public List<SoundEffect> explosionsSFX;
+		
 
+		public Song titleSong;
 		/// <summary>
-		/// Created by Matthew
+		/// Written by Matthew, arranged by Tristan
 		/// </summary>
-		public SoundEffect bgrndMusic1, bgrndMusic2;
+		public Song battleSong;
+		
 
 		public AssetManager(ContentManager cntnt) {
 
@@ -215,9 +223,31 @@ namespace SpaceUnionXNA.Tools {
 			laserbolt2 = Content.Load<SoundEffect>("SFX/weapons/Laser High 2");
 			laserbolt3 = Content.Load<SoundEffect>("SFX/weapons/Laser High 3");
 
+			plasmaburst = Content.Load<SoundEffect>("SFX/weapons/plasma burst");
 
-			//bgrndMusic1 = Content.Load<SoundEffect>("SFX/game_music_sample");
-			//bgrndMusic2 = Content.Load<SoundEffect>("SFX/Test");
+			torpedo = Content.Load<SoundEffect>("SFX/weapons/torpedo");
+
+			klaxxon = Content.Load<SoundEffect>("SFX/miscl/klaxxon01");
+			
+			explosionsSFX = new List<SoundEffect>();
+			explosionsSFX.Add(Content.Load<SoundEffect>("SFX/explosions/explosion 11"));
+			explosionsSFX.Add(Content.Load<SoundEffect>("SFX/explosions/explosion 12"));
+			explosionsSFX.Add(Content.Load<SoundEffect>("SFX/explosions/explosion 13"));
+			explosionsSFX.Add(Content.Load<SoundEffect>("SFX/explosions/explosion 14"));
+			explosionsSFX.Add(Content.Load<SoundEffect>("SFX/explosions/explosion 15"));
+			explosionsSFX.Add(Content.Load<SoundEffect>("SFX/explosions/explosion deep 01"));
+			explosionsSFX.Add(Content.Load<SoundEffect>("SFX/explosions/explosion deep 02"));
+			explosionsSFX.Add(Content.Load<SoundEffect>("SFX/explosions/explosion double hit 01"));
+			explosionsSFX.Add(Content.Load<SoundEffect>("SFX/explosions/explosion double hit 02"));
+			explosionsSFX.Add(Content.Load<SoundEffect>("SFX/explosions/explosion high"));
+			explosionsSFX.Add(Content.Load<SoundEffect>("SFX/explosions/explosion low 01"));
+			explosionsSFX.Add(Content.Load<SoundEffect>("SFX/explosions/explosion low 02"));
+			explosionsSFX.Add(Content.Load<SoundEffect>("SFX/explosions/explosion quickdouble 01"));
+			explosionsSFX.Add(Content.Load<SoundEffect>("SFX/explosions/explosion quickdouble 02"));
+			explosionsSFX.Add(Content.Load<SoundEffect>("SFX/explosions/explosion short"));
+			explosionsSFX.Add(Content.Load<SoundEffect>("SFX/explosions/multi-explosion"));
+			titleSong = Content.Load<Song>("Music/mystery");
+			battleSong = Content.Load<Song>("Music/battle stations");
 		}
 	}
 }

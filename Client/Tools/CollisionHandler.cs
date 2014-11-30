@@ -26,7 +26,7 @@ namespace SpaceUnionXNA.Tools {
 		/// <param name="gameTime"></param>
 		public static void shipOnShip(Ship ship1, Ship ship2, GameTime gameTime) {
 
-			//reflect(ship1, ship2);
+			//elasticCollision(ship1, ship2);
 		}
 
 		/// <summary>
@@ -50,7 +50,7 @@ namespace SpaceUnionXNA.Tools {
 		public static void shipOnAsteroid(Ship ship, Asteroid asteroid, GameTime gameTime) {
 			ship.takeDamage(asteroid.collisionDamage, gameTime, ship);
 			//asteroid.takeDamage(asteroid.collisionDamage, gameTime);
-			reflect(ship, asteroid);
+			elasticCollision(ship, asteroid);
 		}
 
 		/// <summary>
@@ -61,7 +61,7 @@ namespace SpaceUnionXNA.Tools {
 		/// <param name="gameTime"></param>
 		public static void asteroidOnAsteroid(Asteroid asteroid1, Asteroid asteroid2, GameTime gameTime) {
 
-			reflect(asteroid1, asteroid2);
+			elasticCollision(asteroid1, asteroid2);
 		}
 
 		/// <summary>
@@ -115,27 +115,50 @@ namespace SpaceUnionXNA.Tools {
 
 		}
 
-		/// <summary> *DEPRECATED?*
-		/// Helper function for ray casting.
-		/// Finds how far along the ray that the collision occurs (t in the parametric equation)
+		/// <summary>
+		/// An elastic collision that takes angle of contact into consideration but not mass.
+		/// @Written by Tristan
 		/// </summary>
-		/// <param name="lineStart"></param>
-		/// <param name="lineEnd"></param>
-		/// <param name="rayStart">the point the ray (or segment) originates from</param>
-		/// <param name="rayEnd">either the end point of segment for the direction of the ray</param>
-		/// <returns>for a segment 0 to 1 means a hit, for a ray any positive number is a hit </returns>
-		public static float findT(Vector2 lineStart, Vector2 lineEnd, Vector2 rayStart, Vector2 rayEnd) {
+		/// <param name="tangible1"></param>
+		/// <param name="tangible2"></param>
+		public static void elasticCollision(Tangible tangible1, Tangible tangible2) {
 
-			float dividend = rayStart.X * (lineEnd.Y - lineStart.Y) + lineStart.X * (rayStart.Y - lineEnd.Y) + lineEnd.X * (lineStart.Y - rayStart.Y);
-			float divisor = lineEnd.X * (rayEnd.Y - rayStart.Y) - lineStart.X * (rayEnd.Y - rayStart.Y) - lineEnd.Y * (rayEnd.X - rayStart.X) + lineStart.Y * (rayEnd.X - rayStart.X);
 
-			if (Math.Abs(divisor) < Ray2.EPSILON) // someone goofed
-				return -1;
+			Vector2 v2 = tangible2.velocity;
+			// Change frame of reference to tangible2
+			Vector2 u1 = tangible1.velocity - v2;
+			Vector2 u2 = Vector2.Zero;
 
-			return dividend / divisor;
+			// Find vector between center of masses
+			Vector2 c = new Vector2(tangible2.position.X - tangible1.position.X, tangible2.position.Y - tangible1.position.Y);
+			c.Normalize();
 
+			// Find rotation for u1 to be aligned with y-axis and rotate c by that angle
+			float rotation = (float) Math.Acos(u1.Y / u1.Length());
+
+
+			Vector2 cR = Vector2.Transform(c, Matrix.CreateRotationZ(rotation));
+			// Find angle of deflection
+			float deflection = (float) Math.Acos(cR.Y / cR.Length());
+
+			// Solve for u1prime and u2prime scalar values
+			Vector2 u1prime = Vector2.Zero, u2prime = Vector2.Zero;
+			float u1primeLength = u1.Length() * (float) Math.Sin(deflection);
+			float u2primeLength = u1.Length() * (float) Math.Cos(deflection);
+
+			// find c's parallel
+			Vector2 p = new Vector2(-c.Y, c.X);
+
+			// find u1prime & u2prime
+			u1prime.X = u1primeLength * p.X;
+			u1prime.Y = u1primeLength * p.Y;
+
+			u2prime.X = u2primeLength * c.X;
+			u2prime.Y = u2primeLength * c.Y;
+
+			// Change back to lab frame and calculate final velocities
+			tangible1.velocity = u1prime + v2;
+			tangible2.velocity = u2prime + v2;
 		}
-
-
 	}
 }

@@ -13,7 +13,7 @@ namespace SpaceUnionXNA.Tools {
 
 		public int width;
 		public int height;
-		private Rectangle rectHitBox;
+		public Rectangle rectHitBox;
 		/// <summary>
 		/// Hit box coordinates
 		/// </summary>
@@ -80,10 +80,10 @@ namespace SpaceUnionXNA.Tools {
 		}
 
 
-		public void createHitCircle(Vector2 pos, int radius) {
+		//public void createHitCircle(Vector2 pos, int radius) {
 
-			circles.Add(new HitCircle(pos, radius));
-		}
+		//	circles.Add(new HitCircle(pos, radius));
+		//}
 
 		/// <summary>
 		/// Debugging draw.

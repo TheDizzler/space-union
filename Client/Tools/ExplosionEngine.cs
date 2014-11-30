@@ -31,6 +31,7 @@ namespace SpaceUnionXNA.Tools {
 		/// <param name="ship"></param>
 		public void explodeShip(Ship ship) {
 
+			
 			// generate an explosion in a random spot on ship
 			Vector2 location = new Vector2(ship.getX() + gen.Next(ship.width) - ship.width / 2,
 				ship.getY() - gen.Next(ship.height) + ship.height / 2);

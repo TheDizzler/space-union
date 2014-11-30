@@ -365,13 +365,13 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="SFX\explosions\explosion low01.wav">
-      <Name>explosion low01</Name>
+    <Compile Include="SFX\explosions\explosion low 01.wav">
+      <Name>explosion low 01</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
-    <Compile Include="SFX\explosions\explosion low02.wav">
-      <Name>explosion low02</Name>
+    <Compile Include="SFX\explosions\explosion low 02.wav">
+      <Name>explosion low 02</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
@@ -394,6 +394,48 @@
   <ItemGroup>
     <Compile Include="SFX\miscl\klaxxon01.wav">
       <Name>klaxxon01</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Music\mystery.mp3">
+      <Name>mystery</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Music\battle stations.mp3">
+      <Name>battle stations</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SFX\weapons\plasma burst.wav">
+      <Name>plasma burst</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SFX\weapons\laserbeam.wav">
+      <Name>laserbeam</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SFX\explosions\multi-explosion.wav">
+      <Name>multi-explosion</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SFX\weapons\torpedo.wav">
+      <Name>torpedo</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>

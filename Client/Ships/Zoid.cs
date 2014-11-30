@@ -18,7 +18,7 @@ namespace SpaceUnionXNA.Ships {
 		/// </summary>
 		/// <param name="game1"></param>
 		public Zoid(Game1 game1)
-			: base(assets.zoid, assets.missile, game1) {
+			: base(assets.zoid, game1) {
 
 			maxSpeed = 7;
 			accelSpeed = 70.5f;

@@ -25,7 +25,7 @@ namespace SpaceUnionXNA.Controllers {
 		Ship selectedShip;
 		Rectangle selectShipRect;
 		Rectangle hoverShipRect;
-       // Rectangle confirmShipRect;
+	   // Rectangle confirmShipRect;
 		Rectangle selectShipTextureRect;
 		Rectangle hoverShipTextureRect;
 		Texture2D guiRectangle;
@@ -35,7 +35,7 @@ namespace SpaceUnionXNA.Controllers {
 		/* Default size of the ships */
 		const int WIDTH     = 128;
 		const int HEIGHT    = 128;
-		const int SHIPCOUNT = 5;   // Change value according to how many different ships are available
+		const int SHIPCOUNT = 6;   // Change value according to how many different ships are available
 		int shipsPerRow;
 
 
@@ -74,7 +74,7 @@ namespace SpaceUnionXNA.Controllers {
 			shipSelectionArray[2] = new ShipButton(new Zoid(game));
 			shipSelectionArray[3] = new ShipButton(new Bug(game));
 			shipSelectionArray[4] = new ShipButton(new Lobstar(game));
-
+			shipSelectionArray[5] = new ShipButton(new Galactuship(game));
 			/* For Testing X amount of ships; Remove */
 			//for (int i = 0; i < SHIPCOUNT; i++)
 			//{
@@ -89,7 +89,7 @@ namespace SpaceUnionXNA.Controllers {
 												  (int) (shipSelectHeight + 100)));
 
 			/* Sets the default selected ship */
-			selectedShip = new Bug(game);
+			selectedShip = shipSelectionArray[0].getShip();
 			displaySelectedShip(selectedShip);
 			hoverShipTexture = selectedShip.texture;
 			shipSelectionArray[0].selected = true;
@@ -97,17 +97,6 @@ namespace SpaceUnionXNA.Controllers {
 
 		}
 
-        /// <summary>
-        /// Get ship for gameplay screen
-        /// </summary>
-        /// 
-        /// Created by Matthew Baldock
-        /// <returns></returns>
-
-        public void setScrollDisplay()
-        {
-
-		}
 
 		/// <summary>
 		/// Sets the ships in a grid fashion
@@ -155,17 +144,17 @@ namespace SpaceUnionXNA.Controllers {
 		}
 
 
-        /// <summary>
-        /// Update the screen
-        /// </summary>
-        /// Created by Matthew Baldock
-        /// Edited by Steven Chen
+		/// <summary>
+		/// Update the screen
+		/// </summary>
+		/// Created by Matthew Baldock
+		/// Edited by Steven Chen
 
-        public void displaySelectedShip(Ship ship)
-        {
-            selectShipTexture = ship.texture;
-            selectShipTextureRect = new Rectangle(10, shipSelectHeight + (shipDescHeight / 2) - (HEIGHT / 2), 128, 128);
-        }
+		public void displaySelectedShip(Ship ship)
+		{
+			selectShipTexture = ship.texture;
+			selectShipTextureRect = new Rectangle(10, shipSelectHeight + (shipDescHeight / 2) - (HEIGHT / 2), 128, 128);
+		}
 
 		public void displayHoverShip(Ship ship) {
 			hoverShipTexture = ship.texture;
@@ -227,7 +216,7 @@ namespace SpaceUnionXNA.Controllers {
 
 			spriteBatch.Draw(guiRectangle, selectShipRect, Color.Yellow);
 			spriteBatch.Draw(guiRectangle, hoverShipRect, Color.CadetBlue);
-           // spriteBatch.Draw(guiRectangle, confirmShipRect, Color.Green);
+		   // spriteBatch.Draw(guiRectangle, confirmShipRect, Color.Green);
 			spriteBatch.Draw(selectShipTexture, selectShipTextureRect, Color.White);
 			spriteBatch.Draw(hoverShipTexture, hoverShipTextureRect, Color.White);
 			confirmButton.draw(spriteBatch);

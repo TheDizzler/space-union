@@ -16,7 +16,7 @@ namespace SpaceUnionXNA.Weapons.Systems {
 	public class LaserBeam : Sprite, WeaponSystem {
 
 
-		public int beamLength = 75;
+		public int beamLength;
 
 		public Ship owner { get; set; }
 		public int weaponDamage { get; set; }
@@ -24,7 +24,7 @@ namespace SpaceUnionXNA.Weapons.Systems {
 		/// The bounds of the smallest constituent of the beam. Most likely a pixel
 		/// or very close to one.
 		/// </summary>
-		private Rectangle beamQuantum;
+		//private Rectangle beamQuantum;
 		/// <summary>
 		/// List of all the beamQuanta that will combine to create the beam.
 		/// </summary>
@@ -34,13 +34,17 @@ namespace SpaceUnionXNA.Weapons.Systems {
 		private  bool beamOn;
 		private  int startQuanta;
 
+
+		int check = 0;
+
+
 		public LaserBeam(Vector2 startPoint, Ship ship)
 			: base(assets.redLaser, startPoint) {
 
 			owner = ship;
 
 			weaponDamage = 1;
-			beamLength = 250;
+			beamLength = 275;
 
 			setupAnimation();
 		}
@@ -89,9 +93,9 @@ namespace SpaceUnionXNA.Weapons.Systems {
 
 			// find targets within line of fire
 			/*List<Tangible> possibleCollisions = quadTree.retrieveNeighbors(owner);*/
-														/* This method and may result in missed ships.
-														 * A different retriever using a raycast
-														 * will likely be necessary. -Tristan-*/
+			/* This method and may result in missed ships.
+			 * A different retriever using a raycast
+			 * will likely be necessary. -Tristan-*/
 
 			List<Tangible> possibleCollisions = GameplayScreen.targets;
 
@@ -101,10 +105,14 @@ namespace SpaceUnionXNA.Weapons.Systems {
 				if (target != owner && target.isActive) {
 
 					if (ray.intersectsToRange(target.getHitBox())) {
+						Console.Out.WriteLine("check " + check++);
 						float temp = ray.getDistance();
 						if (temp <= distToTarget) {
 							// fine hit detection
 							radical(target, temp, ref currentTarget);
+							//currentTarget = target;
+							//distToTarget = temp;
+							//break;
 						}
 					}
 				}
@@ -135,9 +143,7 @@ namespace SpaceUnionXNA.Weapons.Systems {
 
 			Color[] rawData = new Color[target.width * target.height];
 			target.texture.GetData<Color>(rawData);
-
 			Color[,] rawDataGrid = new Color[target.width, target.height];
-
 			for (int x = 0; x < target.width; ++x)
 				for (int y = 0; y < target.height; ++y)
 					rawDataGrid[x, y] = rawData[x + y * target.width];
@@ -147,28 +153,22 @@ namespace SpaceUnionXNA.Weapons.Systems {
 			Vector2 startFrom = new Vector2(beamDirection.X * distanceTo + position.X, beamDirection.Y * distanceTo + position.Y);
 			Vector2 checkV = startFrom;
 			Point check = new Point((int) startFrom.X, (int) startFrom.Y);
-
 			Rectangle hb = target.getHitBox().getArray();
 			Vector2 length;
 			length = position - checkV;
-
 			if (length.Y > 0)
 				check.Y -= 1;
 			if (length.X > 0)
 				check.X -= 1;
-
 			// until out of hitbox or beamLength exceeded
 			while (hb.Contains(check)) {
-
 				Color color = rawDataGrid[Math.Abs(hb.X - check.X), Math.Abs(hb.Y - check.Y)];
-
 				// if color is not transparent
 				if (color.A != 0) {
 					distToTarget = length.Length() / beamLength;
 					currentTarget = target;
 					return;
 				}
-
 				checkV.X += beamDirection.X;
 				checkV.Y += beamDirection.Y;
 				length = position - checkV;
@@ -180,27 +180,23 @@ namespace SpaceUnionXNA.Weapons.Systems {
 		}
 
 		private Rectangle getNextQuanta() {
-
 			return animations[animation].frames[frameIndex];
 		}
 
-
 		public override void draw(SpriteBatch spriteBatch) {
-			foreach (Rectangle rect in beamQuanta) {
 
+			foreach (Rectangle rect in beamQuanta) {
 				position.X += beamDirection.X;
 				position.Y += beamDirection.Y;
 				//beamQuantum.X = (int) position.X;
 				//beamQuantum.Y = (int) position.Y;
 				//spriteBatch.Draw(dot, beamQuantum, Color.White);
-
 				spriteBatch.Draw(texture, position, rect,
-				animations[animation].color,
-				rotation, origin, scale,
-				animations[animation].spriteEffect, 0f);
+					animations[animation].color,
+					rotation, origin, scale,
+					animations[animation].spriteEffect, 0f);
 			}
 			beamQuanta.Clear();
-
 		}
 
 

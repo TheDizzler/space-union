@@ -7,14 +7,6 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using SpaceUnionXNA.Ships;
 using SpaceUnionXNA.Tools;
-
-
-using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using SpaceUnionXNA.Ships;
-using SpaceUnionXNA.Tools;
 using SpaceUnionXNA.Controllers;
 
 namespace SpaceUnionXNA.Weapons.Projectiles {
@@ -35,8 +27,8 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 			: base(assets.homingMissile, startPoint, ship) {
 
 
-			projectileTTL = 3.5f;
-			accelSpeed = 250f;
+			projectileTTL = 2.5f;
+			accelSpeed = 300f;
 			turnSpeed = 10f;
 			weaponDamage = 10;
 			isActive = false;
@@ -120,10 +112,10 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 		public override List<SoundEffect> getFireSFX() {
 
 			List<SoundEffect> fireSFXs = new List<SoundEffect>();
-			fireSFXs.Add(assets.laserbolt0);
-			fireSFXs.Add(assets.laserbolt1);
-			fireSFXs.Add(assets.laserbolt2);
-			fireSFXs.Add(assets.laserbolt3);
+			fireSFXs.Add(assets.torpedo);
+			//fireSFXs.Add(assets.laserbolt1);
+			//fireSFXs.Add(assets.laserbolt2);
+			//fireSFXs.Add(assets.laserbolt3);
 
 			return fireSFXs;
 		}

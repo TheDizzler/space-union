@@ -15,10 +15,13 @@ namespace SpaceUnionXNA.Ships {
 		private WeaponSystem mainWeapon2;
 
 		public Scout(Game1 game1)
-			: base(assets.scout, assets.laser, game1) {
+			: base(assets.scout, game1) {
 
-			maxSpeed = 7;
-			accelSpeed = 250.5f;
+			description = "Fast and manuverable, the scout ship is ideal for hit-and-runs. Its homing missiles have enemy recognition but lack sophisticated target selection.";
+
+			currentHealth = maxHealth = 30;
+
+			accelSpeed = 250f;
 			turnSpeed = 2.5f;
 			maxSpeed = 500;
 

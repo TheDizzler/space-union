@@ -15,10 +15,10 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 			: base(assets.moltenBullet, startPoint, ship) {
 
 
-			projectileTTL = 1.5f;
+			projectileTTL = 0.5f;
 			projectileMoveSpeed = 500f;
 
-			weaponDamage = 5;
+			weaponDamage = 1;
 			
 		}
 

@@ -14,7 +14,7 @@ namespace SpaceUnionXNA.Ships {
 	class Lobstar : Ship {
 
 		public Lobstar(Game1 game1)
-			: base(assets.lobstar, assets.moltenBullet, game1) {
+			: base(assets.lobstar, game1) {
 
 			maxSpeed = 300;
 			accelSpeed = 100.0f;

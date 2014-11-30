@@ -14,9 +14,9 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 
 
 			projectileTTL = .5f;
-			projectileMoveSpeed = 2000.2f;
+			projectileMoveSpeed = 1000.2f;
 
-			weaponDamage = 1;
+			weaponDamage = 5;
 
 		}
 
@@ -24,10 +24,10 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 		public override List<SoundEffect> getFireSFX() {
 
 			List<SoundEffect> fireSFXs = new List<SoundEffect>();
-			fireSFXs.Add(assets.laserbolt0);
-			fireSFXs.Add(assets.laserbolt1);
-			fireSFXs.Add(assets.laserbolt2);
-			fireSFXs.Add(assets.laserbolt3);
+			fireSFXs.Add(assets.plasmaburst);
+			//fireSFXs.Add(assets.laserbolt1);
+			//fireSFXs.Add(assets.laserbolt2);
+			//fireSFXs.Add(assets.laserbolt3);
 
 			return fireSFXs;
 		}
@@ -49,6 +49,9 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 		/// <param name="gameTime"></param>
 		public override void doDamage(Tangible target, GameTime gameTime) {
 			explosionEngine.createSmallExplosion(position);
+
+			assets.explosionsSFX[9].Play();
+			assets.explosionsSFX[10].Play();
 			base.doDamage(target, gameTime);
 		}
 
