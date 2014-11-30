@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceUnionXNA", "SpaceUnionXNA.csproj", "{E89F9F3D-1BC6-49DA-82AF-C26E580D468C}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "SpaceUnionXNAContent", "..\SpaceUnionXNAContent\SpaceUnionXNAContent.contentproj", "{052E28CA-8D74-4712-AA9B-3A4BE6FDE2B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpaceUnionXNAContent", "..\SpaceUnionXNAContent\SpaceUnionXNAContent.contentproj", "{052E28CA-8D74-4712-AA9B-3A4BE6FDE2B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
