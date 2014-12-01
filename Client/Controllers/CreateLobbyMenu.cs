@@ -14,6 +14,7 @@ using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;
 using SpaceUnionXNA;
 using SpaceUnionXNA.Animations;
+
 //NETWORKING
 //using Data_Structures;
 
@@ -25,10 +26,20 @@ namespace SpaceUnionXNA.Controllers {
 		private Rectangle WhiteBackground;
 		private Texture2D Background;
 		private InputControl lobbyTitleInput;
+		private Texture2D TexBanner;
+		private Rectangle Banner;
+
 
 		public CreateLobbyMenu(Game1 game) {
 			this.game = game;
 			game.mainScreen.Desktop.Children.Clear(); //Clear the gui
+
+			WhiteBackground = new Rectangle((int) game.mainScreen.Width / 2 - UIConstants.CREATE_WHITE_BG.X, (int) game.mainScreen.Height / 2 - UIConstants.CREATE_WHITE_BG.Y,
+				UIConstants.CREATE_WHITE_BG.Width, UIConstants.CREATE_WHITE_BG.Height);
+
+			TexBanner = Game1.Assets.suMultiCreate;
+			Banner = new Rectangle((int) game.mainScreen.Width / 2 - UIConstants.SU_BANNER.X, (int) game.mainScreen.Height / 2 - UIConstants.SU_BANNER.Y,
+				UIConstants.SU_BANNER.Width, UIConstants.SU_BANNER.Height);
 
 			Background = Game1.Assets.guiRectangle;
 			CreateMenuControls(game.mainScreen);
@@ -41,8 +52,8 @@ namespace SpaceUnionXNA.Controllers {
 		public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch) {
 			spriteBatch.Begin();
 
-			WhiteBackground = new Rectangle((int) game.mainScreen.Width / 2 - 175, (int) game.mainScreen.Height / 2 - 165, 300, 225);
 			game.scroll.draw(spriteBatch);
+			spriteBatch.Draw(TexBanner, Banner, Color.White);
 			spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
 			spriteBatch.End();
 			game.gui_manager.Draw(gameTime);
@@ -50,47 +61,39 @@ namespace SpaceUnionXNA.Controllers {
 
 		private void CreateMenuControls(Screen mainScreen) {
 			//Logout Button.
-			ButtonControl backButton = GuiHelper.CreateButton("Back", -75, -400, 70, 32);
+			ButtonControl backButton = GuiHelper.CreateButton("Back",
+			UIConstants.CREATE_BACK_BTN.X, UIConstants.CREATE_BACK_BTN.Y,
+			UIConstants.CREATE_BACK_BTN.Width, UIConstants.CREATE_BACK_BTN.Height);
 			backButton.Pressed += delegate(object sender, EventArgs arguments) {
 				game.EnterMultiplayerMenu();
 			};
 			mainScreen.Desktop.Children.Add(backButton);
-
-			//Menu Title Label
-			LabelControl menuTitleLabel = new LabelControl();
-			menuTitleLabel.Text = "Create A New Lobby";
-			menuTitleLabel.Bounds = GuiHelper.MENU_TITLE_LABEL;
-			mainScreen.Desktop.Children.Add(menuTitleLabel);
-
-			//Lobby Title Label.
-			LabelControl lobbyTitleLabel = GuiHelper.CreateLabel("Lobby Title", -145, -125, 30, 30);
-			mainScreen.Desktop.Children.Add(lobbyTitleLabel);
-
 			//Lobby Title Text Entry.
-			lobbyTitleInput = GuiHelper.CreateInput("", -60, -95, 200, 30);
+			lobbyTitleInput = GuiHelper.CreateInput("",
+			UIConstants.CREATE_LOBBY_INPUT.X, UIConstants.CREATE_LOBBY_INPUT.Y,
+			UIConstants.CREATE_LOBBY_INPUT.Width, UIConstants.CREATE_LOBBY_INPUT.Height);
 			mainScreen.Desktop.Children.Add(lobbyTitleInput);
-
 			//Create Lobby Button.
-			ButtonControl createLobbyButton = GuiHelper.CreateButton("Create Lobby", 0, 0, 200, 32);
+			ButtonControl createLobbyButton = GuiHelper.CreateButton("Create Lobby",
+			UIConstants.CREATE_LOBBY_BTN.X, UIConstants.CREATE_LOBBY_BTN.Y,
+			UIConstants.CREATE_LOBBY_BTN.Width, UIConstants.CREATE_LOBBY_BTN.Height);
 			createLobbyButton.Pressed += delegate(object sender, EventArgs arguments) {
 				game.EnterLobbyMenu();
 				//NETWORKING
 				/*
 				if(lobbyTitleInput.Text != null){
-                    
-					Data lobbyData = game.Communication.sendRoomCreationRequest(game.Player, lobbyTitleInput.Text);
-                    
-					if (lobbyData.Type == 10)
-					{
-						game.roomInfo = (RoomInfo)lobbyData;
-						game.EnterLobbyMenu();
-					}
-					else if (lobbyData.Type == 7)
-					{
-						Console.WriteLine("cannot create lobby");
-					}
+				Data lobbyData = game.Communication.sendRoomCreationRequest(game.Player, lobbyTitleInput.Text);
+				if (lobbyData.Type == 10)
+				{
+				game.roomInfo = (RoomInfo)lobbyData;
+				game.EnterLobbyMenu();
 				}
-				 */
+				else if (lobbyData.Type == 7)
+				{
+				Console.WriteLine("cannot create lobby");
+				}
+				}
+				*/
 				game.EnterLobbyMenu();
 			};
 			mainScreen.Desktop.Children.Add(createLobbyButton);

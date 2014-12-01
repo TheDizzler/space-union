@@ -30,7 +30,7 @@ namespace SpaceUnionXNA.Controllers
         InputControl accountNameInput;
         private KeyboardState keyState;
         private bool tabFlag = true;
-        
+
         private Rectangle WhiteBackground;
         private Texture2D Background;
 
@@ -41,6 +41,14 @@ namespace SpaceUnionXNA.Controllers
         {
             this.game = game;
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
+       
+<<<<<<< HEAD
+            
+            Background = Game1.Assets.guiRectangle;
+=======
+            scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
+            scroll.setPosition(UIConstants.ORIGIN);
+>>>>>>> c615f154551ca3e691165763de7b7a11b80c03df
             
             Background = Game1.Assets.guiRectangle;
             WhiteBackground = new Rectangle(
@@ -65,8 +73,15 @@ namespace SpaceUnionXNA.Controllers
         public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
+<<<<<<< HEAD
+            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 150, (int)game.mainScreen.Height / 2 - 150, 300, 225);
 
 			game.scroll.draw(spriteBatch);
+=======
+            
+            scroll.draw(spriteBatch);
+            
+>>>>>>> c615f154551ca3e691165763de7b7a11b80c03df
             spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
             spriteBatch.Draw(TexBanner, Banner, Color.White);
             
@@ -175,7 +190,11 @@ namespace SpaceUnionXNA.Controllers
             ButtonControl multiplayerButton = GuiHelper.CreateButton("Debug Game", -300, -300, 200, 50);
             multiplayerButton.Pressed += delegate(object sender, EventArgs arguments)
             {
+<<<<<<< HEAD
+                game.StartGame();
+=======
                 game.EnterLobbyMenu();
+>>>>>>> c615f154551ca3e691165763de7b7a11b80c03df
             };
             mainScreen.Desktop.Children.Add(multiplayerButton);
 

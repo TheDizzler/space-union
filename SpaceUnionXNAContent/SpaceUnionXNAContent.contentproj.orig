@@ -315,6 +315,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="SFX\explosions\explosion 11.wav">
       <Name>explosion 11</Name>
       <Importer>WavImporter</Importer>
@@ -415,32 +416,7 @@
   <ItemGroup>
     <Compile Include="SFX\weapons\plasma burst.wav">
       <Name>plasma burst</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="SFX\weapons\laserbeam.wav">
-      <Name>laserbeam</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="SFX\explosions\multi-explosion.wav">
-      <Name>multi-explosion</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="SFX\weapons\torpedo.wav">
-      <Name>torpedo</Name>
-      <Importer>WavImporter</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
+=======
     <Compile Include="Buttons\Browse_Lobby.png">
       <Name>Browse_Lobby</Name>
       <Importer>TextureImporter</Importer>
@@ -465,11 +441,32 @@
     </Compile>
     <Compile Include="SFX\test.wav">
       <Name>test</Name>
+>>>>>>> c615f154551ca3e691165763de7b7a11b80c03df
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+    <Compile Include="SFX\weapons\laserbeam.wav">
+      <Name>laserbeam</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SFX\explosions\multi-explosion.wav">
+      <Name>multi-explosion</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SFX\weapons\torpedo.wav">
+      <Name>torpedo</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+=======
     <Compile Include="Buttons\SU_Credits.png">
       <Name>SU_Credits</Name>
       <Importer>TextureImporter</Importer>
@@ -513,6 +510,7 @@
       <Name>SU_M_Lobby</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+>>>>>>> c615f154551ca3e691165763de7b7a11b80c03df
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

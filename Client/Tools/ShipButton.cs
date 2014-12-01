@@ -68,7 +68,7 @@ namespace SpaceUnionXNA.Tools {
 			else if (selected) {
 				spriteBatch.Draw(texture, buttonRectangle, Color.Yellow);
 			} else
-				spriteBatch.Draw(texture, buttonRectangle, Color.White);
+				spriteBatch.Draw(texture, buttonRectangle, Color.White * 0.4f);
 		}
 
 		public Ship getShip() {

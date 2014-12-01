@@ -51,7 +51,12 @@ namespace SpaceUnionXNA.Controllers
             int rowRectOriginY = (int)(game.mainScreen.Height/2 - totalHeight/2);
             int rowRectOriginX = (int)game.mainScreen.Width/2 - totalWidth/2;
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
+<<<<<<< HEAD
+=======
             
+            scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
+            scroll.setPosition(new Vector2((int)0, (int)0));
+>>>>>>> c615f154551ca3e691165763de7b7a11b80c03df
             LobbyBrowserTable = new Table(columns, new string[] { "Lobby Name", "Game Type", "Host Name", "Players", "Max. Players", "Ping" }, rowRectOriginX, rowRectOriginY, rowRectSizeY, rowsBeforeScroll, columnWidth, true, game.mainScreen);
 
             TexBanner = Game1.Assets.suMultiBrowse;

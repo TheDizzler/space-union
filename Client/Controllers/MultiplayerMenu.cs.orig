@@ -20,20 +20,29 @@ namespace SpaceUnionXNA.Controllers
     public class MultiplayerMenu
     {
         private Game1 game;
+<<<<<<< HEAD
         
+=======
+        private ScrollingBackground scroll;
         private Texture2D TexBanner;
         private Rectangle Banner;
+>>>>>>> c615f154551ca3e691165763de7b7a11b80c03df
 
         public MultiplayerMenu(Game1 game)
         {
             this.game = game;
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
+<<<<<<< HEAD
             
+=======
+            scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
+            scroll.setPosition(UIConstants.ORIGIN);
 
             TexBanner = Game1.Assets.suMultiplayer;
             Banner = new Rectangle((int)game.mainScreen.Width / 2 - UIConstants.SU_BANNER.X, (int)game.mainScreen.Height / 2 - UIConstants.SU_BANNER.Y,
                 UIConstants.SU_BANNER.Width, UIConstants.SU_BANNER.Height);
 
+>>>>>>> c615f154551ca3e691165763de7b7a11b80c03df
             CreateMenuControls(game.mainScreen);
         }
 
@@ -45,8 +54,15 @@ namespace SpaceUnionXNA.Controllers
         public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
+<<<<<<< HEAD
+            //WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 150, (int)game.mainScreen.Height / 2 - 150, 300, 225);
+
 			game.scroll.draw(spriteBatch);
+            //spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
+=======
+            scroll.draw(spriteBatch);
             spriteBatch.Draw(TexBanner, Banner, Color.White);
+>>>>>>> c615f154551ca3e691165763de7b7a11b80c03df
             spriteBatch.End();
             game.gui_manager.Draw(gameTime);
         }

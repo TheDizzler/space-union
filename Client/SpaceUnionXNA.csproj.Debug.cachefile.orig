@@ -35,14 +35,18 @@ Content\Animations\redlaserbeam (25x11).xnb
 Content\StellarObjects\moon (115x117).xnb
 Content\StellarObjects\waterplanet (256x256).xnb
 Content\WinFlags\WinFlag1.xnb
-Content\Spaceships\scoutship (64x64).xnb
+Content\Spaceships\scoutship BAK (64x64).xnb
 Content\Spaceships\rocket (64x64).xnb
 Content\StellarObjects\rock (32x32).xnb
 Content\Spaceships\UFO (39x39).xnb
-Content\SpriteFonts\SpriteFont1.xnb
-Content\Spaceships\scoutship BAK (64x64).xnb
+Content\Spaceships\scoutship (64x64).xnb
 Content\Projectiles\homing missile.xnb
 Content\Projectiles\homing missile smaller.xnb
+Content\Buttons\Browse_Lobby.xnb
+Content\Buttons\Create_Lobby.xnb
+Content\Buttons\Space-Union.xnb
+Content\SpriteFonts\SpriteFont1.xnb
+<<<<<<< HEAD
 Content\SFX\weapons\Laser High 1.xnb
 Content\SFX\weapons\Laser High 2.xnb
 Content\SFX\weapons\Laser High 0.xnb
@@ -69,9 +73,15 @@ Content\SFX\weapons\plasma burst.xnb
 Content\SFX\weapons\laserbeam.xnb
 Content\SFX\explosions\multi-explosion.xnb
 Content\SFX\weapons\torpedo.xnb
-Content\Buttons\Browse_Lobby.xnb
-Content\Buttons\Create_Lobby.xnb
-Content\Buttons\Space-Union.xnb
+Content\Music\mystery.wma
+Content\Music\battle stations.wma
+=======
+Content\SFX\Laser High 1.xnb
+Content\SFX\Laser High 2.xnb
+Content\SFX\Laser High 0.xnb
+Content\SFX\Laser High 3.xnb
+Content\SFX\game_music_sample.xnb
+Content\SFX\test.xnb
 Content\Buttons\SU_Credits.xnb
 Content\Buttons\SU_Multiplayer.xnb
 Content\Buttons\SU_M_BrowseLobby.xnb
@@ -80,7 +90,4 @@ Content\Buttons\SU_Options.xnb
 Content\Buttons\SU_O_KeyBindings.xnb
 Content\Buttons\Space-Union_Banner.xnb
 Content\Buttons\SU_M_Lobby.xnb
-Content\SFX\game_music_sample.xnb
-Content\SFX\test.xnb
-Content\Music\mystery.wma
-Content\Music\battle stations.wma
+>>>>>>> c615f154551ca3e691165763de7b7a11b80c03df

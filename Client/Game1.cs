@@ -21,7 +21,7 @@ namespace SpaceUnionXNA {
 	public class Game1 : Game {
 		private int topBtmBorderPixels = 38;
 		private int leftRightBorderPixels = 14;
-
+		private Taskbar taskbar;
 		public GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 		public ParticleEngine particleEngine;
@@ -109,7 +109,7 @@ namespace SpaceUnionXNA {
 			: base() {
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
-
+			taskbar = new Taskbar();
 			//Author: Troy Carefoot
 			input_manager = new InputManager(Services, Window.Handle);
 			gui_manager = new GuiManager(Services);
@@ -195,8 +195,7 @@ namespace SpaceUnionXNA {
 			shipselectionScreen = new ShipSelectionScreen(this);
 
 			scroll = new ScrollingBackground(Game1.Assets.background) { height = getScreenHeight(), width = getScreenWidth() };
-			scroll.setPosition(new Vector2((int) 0, (int) 0));
-
+			scroll.setPosition(UIConstants.ORIGIN);
 			IsMouseVisible = true;
 		}
 
@@ -424,8 +423,28 @@ namespace SpaceUnionXNA {
 				form.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 				form.WindowState = System.Windows.Forms.FormWindowState.Normal;
 
-				width = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
 				height = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+				width = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+
+				if (!taskbar.AutoHide)
+				{
+					switch (taskbar.Position)
+					{
+						case TaskbarPosition.Bottom:
+							height -= taskbar.Size.Height;
+							break;
+						case TaskbarPosition.Left:
+							width -= taskbar.Size.Width;
+							break;
+						case TaskbarPosition.Right:
+							width -= taskbar.Size.Width;
+							break;
+						case TaskbarPosition.Top:
+							height -= taskbar.Size.Height;
+							break;
+					}
+				}
+
 				graphics.PreferredBackBufferHeight = height;
 				graphics.PreferredBackBufferWidth = width;
 				graphics.ApplyChanges();

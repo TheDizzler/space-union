@@ -66,6 +66,15 @@ namespace SpaceUnionXNA.Tools {
 		public Texture2D createLobby2;
 		public Texture2D browseLobby;
 		public Texture2D spaceUnion;
+        public Texture2D suCredits;
+        public Texture2D suMultiBrowse;
+        public Texture2D suMultiCreate;
+        public Texture2D suMultiplayer;
+        public Texture2D suOption;
+        public Texture2D suOptionKeys;
+        public Texture2D suBanner;
+        public Texture2D suMultiLobby;
+
 
 		// bgs and doodads
 		public Texture2D background;
@@ -170,9 +179,18 @@ namespace SpaceUnionXNA.Tools {
 			gamelobby = Content.Load<Texture2D>("Buttons/gamelobby");
 			gameroom = Content.Load<Texture2D>("Buttons/gameroom");
 			options = Content.Load<Texture2D>("Buttons/optionsbutton");
-			//createLobby2 = Content.Load<Texture2D>("Buttons/Create_Lobby");
-			//browseLobby = Content.Load<Texture2D>("Buttons/Browse_Lobby");
-			//spaceUnion = Content.Load<Texture2D>("Buttons/Space-Union");
+            createLobby2 = Content.Load<Texture2D>("Buttons/Create_Lobby");
+            browseLobby = Content.Load<Texture2D>("Buttons/Browse_Lobby");
+            suBanner = Content.Load<Texture2D>("Buttons/Space-Union_Banner");
+            spaceUnion = Content.Load<Texture2D>("Buttons/Space-Union");
+            suCredits = Content.Load<Texture2D>("Buttons/SU_Credits");
+            suMultiBrowse = Content.Load<Texture2D>("Buttons/SU_M_BrowseLobby");
+            suMultiCreate = Content.Load<Texture2D>("Buttons/SU_M_CreateLobby");
+            suMultiplayer = Content.Load<Texture2D>("Buttons/SU_Multiplayer");
+            suOption = Content.Load<Texture2D>("Buttons/SU_Options");
+            suOptionKeys = Content.Load<Texture2D>("Buttons/SU_O_KeyBindings");
+            suMultiLobby = Content.Load<Texture2D>("Buttons/SU_M_Lobby");
+
 			///end added by Matthew Baldock
 
 			guiRectangle = new Texture2D(graphicsDevice, 1, 1);

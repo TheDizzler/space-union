@@ -29,14 +29,18 @@ namespace SpaceUnionXNA.Controllers
         public CreditsMenu(Game1 game)
         {
             this.game = game;
+<<<<<<< HEAD
             
-            
+=======
+            scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
+            scroll.setPosition(UIConstants.ORIGIN);
 
             TexBanner = Game1.Assets.suCredits;
             Banner = new Rectangle((int)game.mainScreen.Width / 2 - UIConstants.SU_BANNER.X, 
                 (int)game.mainScreen.Height / 2 - UIConstants.SU_BANNER.Y, 
                 UIConstants.SU_BANNER.Width, UIConstants.SU_BANNER.Height);
 
+>>>>>>> c615f154551ca3e691165763de7b7a11b80c03df
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
             LabelControl KonstantinBoyarinovLabel;
             LabelControl MikhailDimchukLabel;
@@ -124,8 +128,12 @@ namespace SpaceUnionXNA.Controllers
                 (int)game.mainScreen.Height / 2 - UIConstants.CREDIT_WHITE_BG.Y,
                 UIConstants.CREDIT_WHITE_BG.Width, UIConstants.CREDIT_WHITE_BG.Height);
 
+<<<<<<< HEAD
 			game.scroll.draw(spriteBatch);
+=======
+            scroll.draw(spriteBatch);
             spriteBatch.Draw(TexBanner, Banner, Color.White);
+>>>>>>> c615f154551ca3e691165763de7b7a11b80c03df
             spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
             //spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
             spriteBatch.End();

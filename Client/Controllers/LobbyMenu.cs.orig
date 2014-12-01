@@ -49,9 +49,14 @@ namespace SpaceUnionXNA.Controllers
         LabelControl player4Label;
         LabelControl player5Label;
         LabelControl player6Label;
+<<<<<<< HEAD
+        
+=======
 
         List<string> playerNameList;
        
+        private ScrollingBackground scroll;
+>>>>>>> c615f154551ca3e691165763de7b7a11b80c03df
         private Rectangle WhiteBackground;
         private Texture2D Background;
         private Texture2D TexBanner;
@@ -64,12 +69,17 @@ namespace SpaceUnionXNA.Controllers
             this.game = game;
             game.mainScreen.Desktop.Children.Clear(); //Clear the gui
             lobbyTitle = title;
+<<<<<<< HEAD
             
+=======
+
             /* White background for UI */
             WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - UIConstants.LOBBY_WHITE_BG.X, (int)game.mainScreen.Height / 2 - UIConstants.LOBBY_WHITE_BG.Y,
                 UIConstants.LOBBY_WHITE_BG.Width, UIConstants.LOBBY_WHITE_BG.Height);
 
             /* Scrolling background */
+            scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
+            scroll.setPosition(UIConstants.ORIGIN);
 
             /* Menu's Banner */
             TexBanner = Game1.Assets.suMultiLobby;
@@ -113,6 +123,7 @@ namespace SpaceUnionXNA.Controllers
 
             setGridDisplay(game.getScreenWidth() - UIConstants.LOBBY_SHIP_GRID.X, game.getScreenHeight() - UIConstants.LOBBY_SHIP_GRID.Y);
 
+>>>>>>> c615f154551ca3e691165763de7b7a11b80c03df
             CreateMenuControls(game.mainScreen);
             Background = Game1.Assets.guiRectangle;
             new Thread(updatePlayerList).Start();
@@ -120,7 +131,10 @@ namespace SpaceUnionXNA.Controllers
 
         public void Update(GameTime gameTime)
         {
+<<<<<<< HEAD
 			game.scroll.update();
+=======
+            scroll.update();
             MouseState mouseState = Mouse.GetState();
 
             foreach (ShipButton btn in shipSelectionList)
@@ -160,14 +174,24 @@ namespace SpaceUnionXNA.Controllers
                     }
                 }
             }
+>>>>>>> c615f154551ca3e691165763de7b7a11b80c03df
         }
 
         public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-           
+<<<<<<< HEAD
+            //WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 150, (int)game.mainScreen.Height / 2 - 150, 300, 225);
+
+            //WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 162, (int)game.mainScreen.Height / 2 - 162, 575, 325);
+            WhiteBackground = new Rectangle((int)game.mainScreen.Width / 2 - 325, (int)game.mainScreen.Height / 2 - 325, 650, 650);
+
 			game.scroll.draw(spriteBatch);
+=======
+           
+            scroll.draw(spriteBatch);
             spriteBatch.Draw(TexBanner, Banner, Color.White);
+>>>>>>> c615f154551ca3e691165763de7b7a11b80c03df
             spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
 
             foreach (ShipButton btn in shipSelectionList)

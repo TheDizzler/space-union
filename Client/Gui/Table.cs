@@ -186,7 +186,7 @@ namespace SpaceUnionXNA.Gui
                 RowArray[rows, j] = rowArray[j];
 
             }
-            joinButton[rows] = GuiHelper.CreateButton("Join", 275, buttonsPerPage * RowRectSizeY - 217, 30, 15);
+            joinButton[rows] = GuiHelper.CreateButton("Join", 275, buttonsPerPage * RowRectSizeY - 127, 30, 15);
             joinButton[rows].Pressed += delegate(object sender, EventArgs arguments)
             {
                 //insert lobby joining code here
