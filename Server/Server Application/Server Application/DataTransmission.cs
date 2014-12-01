@@ -142,7 +142,7 @@ namespace Server_Application
                             DataControl.sendUDPData(UDPClients[client], frame, (string)ip, port);
                     }
                 }
-                Thread.Sleep(5);
+                Thread.Sleep(20);
             }
         }
 

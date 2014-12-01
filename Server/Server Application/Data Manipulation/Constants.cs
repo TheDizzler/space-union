@@ -35,7 +35,7 @@ namespace Data_Manipulation
         /// </summary>
         public const int TCPMessageClient = 6983;
 
-        public const int GamePeriod = 10;
+        public const int GamePeriod = 30;
 
         // MESSAGE TYPES
 

@@ -26,7 +26,7 @@ namespace Server_Application
         /// <param name="owner">The </param>
         public void handleLoginRequest(Player loginData, Server owner)
         {
-            if (validateUserData(loginData, owner))
+            if (true)//validateUserData(loginData, owner))
             {
                 owner.addOnlinePlayer(loginData);
                 Console.WriteLine("Logged in user");

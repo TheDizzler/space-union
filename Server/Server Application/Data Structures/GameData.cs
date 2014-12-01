@@ -40,12 +40,12 @@ namespace Data_Structures
         /// <summary>
         /// The amount of players the current user has killed.
         /// </summary>
-        public byte Kills { get; set; }
+        public int Kills { get; set; }
 
         /// <summary>
         /// The amount of times the current user has died.
         /// </summary>
-        public byte Deaths { get; set; }
+        public int Deaths { get; set; }
         /// <summary>
         /// Indicates whether or not the player
         /// is currently active on the map or not.
@@ -65,5 +65,7 @@ namespace Data_Structures
         {
             Type = 1;
         }
+
+        public byte SpawnPosition { get; set; }
     }
 }

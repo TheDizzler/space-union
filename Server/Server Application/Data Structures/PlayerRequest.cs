@@ -32,6 +32,10 @@ namespace Data_Structures
 
         public bool Ready { get; set; }
 
+        public bool Team { get; set; }
+
+        public byte SpawnPosition { get; set; }
+
         /// <summary>
         /// Construct a room list request.
         /// </summary>
@@ -68,5 +72,21 @@ namespace Data_Structures
             RequestType = requestType;
             RoomNumber  = roomNumber;
         }
+
+
+        /// <summary>
+        /// Start game player request.
+        /// Parameters for team and spawn position assigned by server.
+        /// </summary>
+        /// <param name="sender">The sender of the request.</param>
+        public PlayerRequest(Player sender, byte requestType, bool team, byte spawnPosition)
+        {
+            Type = 9;
+            Sender = sender;
+            RequestType = requestType;
+            Team = team;
+            SpawnPosition = spawnPosition;
+        }
+
     }
 }

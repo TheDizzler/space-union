@@ -132,9 +132,6 @@ namespace Server_Application
                 case Constants.PLAYER_REQUEST_START:
                     owner.startGame(request.Sender, request.RoomNumber);
                     break;
-                case Constants.PLAYER_REQUEST_END:
-
-                    break;
             }
         }
     }

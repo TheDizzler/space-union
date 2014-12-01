@@ -49,40 +49,38 @@ namespace Server_Application
             Receiving = new DataReceiving(this);
             Transmission = new DataTransmission(this);
             new Thread(stopGame).Start();
-            new Thread(cleanRooms).Start();
+            //new Thread(cleanRooms).Start();
         }
 
         private void cleanRooms()
         {
-            Gameroom temproom;
-            Player tempplayer;
-            while(true)
+            while (true)
             {
-                foreach(KeyValuePair<int, Gameroom> room in Gamerooms.ToArray())
+                foreach (KeyValuePair<int, Gameroom> room in Gamerooms.ToArray())
                 {
-                    if (room.Value.InGame)
+                    if (room.Value.Players == 0)
                     {
-                        if (room.Value.Players == 0)
+                        Gameroom temp;
+                        Gamerooms.TryRemove(room.Key, out temp);
+                        continue;
+                    }
+                    foreach (GameData player in room.Value.getPlayerList())
+                    {
+                        if (compareTime(player.Player.Time, 10))
                         {
-                            Gamerooms.TryRemove(room.Key, out temproom);
-                        }   
-                        else
-                        {
-                            foreach (GameData player in room.Value.getPlayerList())
-                            {
-                                if (compareTime(player.Player.Time, 5))
-                                    room.Value.removePlayer(player.Player);
-                            }
-                        }   
+                            room.Value.removePlayer(player.Player);
+                        }
                     }
                 }
-                foreach(KeyValuePair<string, Player> player in OnlinePlayers.ToArray())
+                foreach (KeyValuePair<string, Player> player in OnlinePlayers.ToArray())
                 {
-                    if (compareTime(player.Value.Time, 5))
-                        OnlinePlayers.TryRemove(player.Key, out tempplayer);
-                    //make sure data is updated
-                }  
-                Thread.Sleep(5000);
+                    if (compareTime(player.Value.Time, 10))
+                    {
+                        Player temp;
+                        OnlinePlayers.TryRemove(player.Key, out temp);
+                    }
+                }
+                Thread.Sleep(10000);
             }
         }
 
@@ -206,10 +204,12 @@ namespace Server_Application
         public void addPlayerToRequestedRoom(Player player, int roomNumber)
         {
             Gameroom room = getGameroom(roomNumber);
-            if (room == null || !OnlinePlayers.ContainsKey(player.Username) || !room.addPlayer(OnlinePlayers[player.Username]))
-                addMessageToQueue(new RoomList(player, organizeRoomList()));
-            else
-                sendRoomUpdate(roomNumber);
+            if (room == null)
+                return;
+            if(!OnlinePlayers.ContainsKey(player.Username) || !room.addPlayer(OnlinePlayers[player.Username]))
+                return;
+            addMessageToQueue(new RoomList(player, organizeRoomList()));
+            sendRoomUpdate(roomNumber);
         }
 
         public void updateOnHeartbeat(PlayerRequest request)
@@ -242,12 +242,13 @@ namespace Server_Application
         public void updatePlayerReadyStatus(Player player, int roomNumber)
         {
             Gameroom room = getGameroom(roomNumber);
-            if (room != null && player != null)
-            {
-                GameData temp = room.getPlayer(player.Username);
-                temp.Player.Ready = true;
-                room.updatePlayer(temp);
-            }
+            if (room == null || player == null)
+                return;
+            GameData temp = room.getPlayer(player.Username);
+            if (temp == null)
+                return;
+            temp.Player.Ready = true;
+            room.updatePlayer(temp);
         }
 
         public void updatePlayerShipChoice(Player player, int roomNumber) 
@@ -256,8 +257,11 @@ namespace Server_Application
             if (room != null && player != null)
             {
                 GameData temp = room.getPlayer(player.Username);
-                temp.Player.ShipChoice = player.ShipChoice;
-                room.updatePlayer(temp);
+                if (temp != null)
+                {
+                    temp.Player.ShipChoice = player.ShipChoice;
+                    room.updatePlayer(temp);
+                }
             }
         }
 
@@ -268,8 +272,15 @@ namespace Server_Application
                 return;
             room.InGame = true;
             room.GameStart = DateTime.Now;
+            byte spawnPositionCounter = 1; //Represents a player's spawn position from spawn list.
             foreach (GameData p in room.getPlayerList())
-                addMessageToQueue(new PlayerRequest(p.Player, Constants.PLAYER_REQUEST_START));
+            {
+                p.SpawnPosition = spawnPositionCounter;
+                //p.Team = (spawnPositionCounter % 2 != 0) ? true : false;
+                spawnPositionCounter++;
+                addMessageToQueue(new PlayerRequest(p.Player, Constants.PLAYER_REQUEST_START, p.Team, p.SpawnPosition));
+                Console.WriteLine("Player: " + p.Player.Username + " Team: " + p.Team);
+            }
         }
 
         public void sendLoginConfirmation(Player player)
