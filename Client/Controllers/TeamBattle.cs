@@ -14,7 +14,10 @@ namespace SpaceUnionXNA.Controllers {
 	class TeamBattle : GameplayScreen {
 		TimeSpan teamBattleTime = new TimeSpan(0, 0, 15);
 		Game1 game;
-		private bool first = true;
+		/// <summary>
+		/// Indicates whether screen has been set up. 
+		/// </summary>
+		private bool initialized = true;
 		public TeamBattle(Game1 game, SpriteBatch batch, Ship selectedship)
 			: base(game, batch, selectedship) {
 
@@ -24,14 +27,14 @@ namespace SpaceUnionXNA.Controllers {
 		}
 
 		public override void Update(GameTime gameTime) {
-			if (first) {
+			if (initialized) {
 				//base.Update(gameTime);
 				mainCamera.Position = playerShip.Position; // center the camera to player's position
 				mainCamera.update(gameTime);
 
 				radarCamera.Position = playerShip.Position; // center the camera to player's position
 				radarCamera.update(gameTime);
-				first = false;
+				initialized = false;
 				return;
 			}
 			if (!((TeamBattleGUI) gui).countedDown) {
@@ -39,12 +42,12 @@ namespace SpaceUnionXNA.Controllers {
 				return;
 			}
 			if (((TeamBattleGUI) gui).getRedTeamKills() == 15 || ((TeamBattleGUI) gui).getBlueTeamKills() == 15) {
-				//game.EndMatch();
-				game.EnterMainMenu();
+				game.EndMatch();
+				//game.EnterMainMenu();
 			}
 			if (((TeamBattleGUI) gui).timeOver == true) {
-				//game.EndMatch();
-				game.EnterMainMenu();
+				game.EndMatch();
+				//game.EnterMainMenu();
 			} else {
 				base.Update(gameTime);
 

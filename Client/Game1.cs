@@ -170,6 +170,7 @@ namespace SpaceUnionXNA {
 
 			graphics.ApplyChanges();
 
+			// @Written by Tristan
 			MediaPlayer.IsRepeating = true;
 			MediaPlayer.Play(Assets.titleSong);
 
@@ -333,6 +334,7 @@ namespace SpaceUnionXNA {
 		
 
 		public void EnterMainMenu() {
+			Viewport viewport = GraphicsDevice.Viewport;
 			currentGameState = GameState.MainMenu;
 			main_menu = new MainMenu(this);
 		}
@@ -393,7 +395,9 @@ namespace SpaceUnionXNA {
 
 
 		public void EndMatch() {
+			GraphicsDevice.Viewport = new Viewport(0, 0, getScreenWidth(), getScreenHeight());
 			currentGameState = GameState.MainMenu;
+			gameplayScreen = null;
 			IsMouseVisible = true;
 		}
 
