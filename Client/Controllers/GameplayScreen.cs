@@ -192,33 +192,57 @@ namespace SpaceUnionXNA.Controllers {
 
 
 			foreach (Ship ship in ships.ToList()) {
+
+				ship.update(gameTime, quadTree);
+
 				if (!ship.isActive) {
-					ship.inactiveStart = gameTime.TotalGameTime;
-					inactiveShips.Add(ship);
-					ships.Remove(ship);
-				}
-				ship.update(gameTime, quadTree);
-			}
-
-
-			foreach (Ship ship in inactiveShips.ToList()) {
-				Random randomspawn = new Random();
-				if (ship.isActive) {
-					ship.inactiveTime = TimeSpan.Zero;
-					ship.resetHealth();
-					Vector2 position = respawnpoints.ElementAt(randomspawn.Next(respawnpoints.Count));
-					while (spawnPointOccupied(position)) {
-						position = respawnpoints.ElementAt(randomspawn.Next(respawnpoints.Count));
+					if (ship.inactiveTime.Seconds >= 2) {
+						Random randomspawn = new Random();
+						ship.isActive = true;
+						targets.Add(ship);
+						ship.inactiveTime = TimeSpan.Zero;
+						ship.resetHealth();
+						Vector2 position = respawnpoints.ElementAt(randomspawn.Next(respawnpoints.Count));
+						while (spawnPointOccupied(position)) {
+							position = respawnpoints.ElementAt(randomspawn.Next(respawnpoints.Count));
+						}
+						ship.Position = position;
+						usedspawn.Add(respawnpoints.ElementAt(respawnpoints.IndexOf(ship.Position)));
+						respawnpoints.RemoveAt(respawnpoints.IndexOf(ship.Position));
 					}
-					ship.Position = position;
-					usedspawn.Add(respawnpoints.ElementAt(respawnpoints.IndexOf(ship.Position)));
-					respawnpoints.RemoveAt(respawnpoints.IndexOf(ship.Position));
-					ships.Add(ship);
-					targets.Add(ship);
-					inactiveShips.Remove(ship);
+
 				}
-				ship.update(gameTime, quadTree);
 			}
+
+
+			//foreach (Ship ship in ships.ToList()) {
+			//	if (!ship.isActive) {
+			//		ship.inactiveStart = gameTime.TotalGameTime;
+			//		inactiveShips.Add(ship);
+			//		ships.Remove(ship);
+			//	} else
+			//		ship.update(gameTime, quadTree);
+			//}
+
+
+			//foreach (Ship ship in inactiveShips.ToList()) {
+			//	Random randomspawn = new Random();
+			//	if (ship.isActive) {
+			//		ship.inactiveTime = TimeSpan.Zero;
+			//		ship.resetHealth();
+			//		Vector2 position = respawnpoints.ElementAt(randomspawn.Next(respawnpoints.Count));
+			//		while (spawnPointOccupied(position)) {
+			//			position = respawnpoints.ElementAt(randomspawn.Next(respawnpoints.Count));
+			//		}
+			//		ship.Position = position;
+			//		usedspawn.Add(respawnpoints.ElementAt(respawnpoints.IndexOf(ship.Position)));
+			//		respawnpoints.RemoveAt(respawnpoints.IndexOf(ship.Position));
+			//		ships.Add(ship);
+			//		targets.Add(ship);
+			//		inactiveShips.Remove(ship);
+			//	}
+			//	ship.update(gameTime, quadTree);
+			//}
 
 
 			foreach (Vector2 spawn in usedspawn.ToList()) {
@@ -259,8 +283,8 @@ namespace SpaceUnionXNA.Controllers {
 
 			foreach (Tangible target in targets) {
 				if (target.isActive) {
-					
-					if (target.getHitBox().rectHitBox.Contains(new Point((int)position.X, (int)position.Y))) {
+
+					if (target.getHitBox().rectHitBox.Contains(new Point((int) position.X, (int) position.Y))) {
 						return true;
 					}
 				}

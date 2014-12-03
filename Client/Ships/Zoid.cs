@@ -27,7 +27,8 @@ namespace SpaceUnionXNA.Ships {
 			mainFireDelay = TimeSpan.FromSeconds(.2f);
 			altFireDelay = TimeSpan.FromSeconds(1f);
 
-			
+			currentHealth = maxHealth = 35;
+
 			mainWeapon = Launcher<Missile>.CreateLauncher(this, (x, y) => new Missile(x, y), 4);
 			mainWeapon2 = Launcher<Missile>.CreateLauncher(this, (x, y) => new Missile(x, y), 4);
 

@@ -33,7 +33,6 @@ namespace SpaceUnionXNA.Weapons.Systems {
 				missile.launch(startPoint, (float) owner.getRotation(), owner.velocity);
 				GameplayScreen.targets.Add(missile);
 				playFireSFX();
-				//missile.isActive = true;
 			} else
 				playEmptySFX();
 		}
@@ -44,7 +43,8 @@ namespace SpaceUnionXNA.Weapons.Systems {
 		}
 
 		public void draw(SpriteBatch sBatch) {
-			missile.draw(sBatch);
+			if (missile.isActive || owner.isActive)
+				missile.draw(sBatch);
 		}
 
 		public void updatePosition(Vector2 startPoint, float rot) {

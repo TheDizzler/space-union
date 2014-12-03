@@ -83,8 +83,7 @@ namespace SpaceUnionXNA.Ships {
 		public bool blueTeam = false;
 		public bool redTeam = false;
 
-		public TimeSpan inactiveStart;
-		public TimeSpan inactiveTime = TimeSpan.Zero;
+
 		private  bool exploding;
 		private  float explodingTime;
 
@@ -160,17 +159,9 @@ namespace SpaceUnionXNA.Ships {
 				checkWorldEdge();
 
 				velocity *= dampening; // apply a little resistance. Any thrust should over power this.
-			}
+			} else {
 
-
-
-
-			if (isActive == false) {
 				inactiveTime = gameTime.TotalGameTime - inactiveStart;
-				if (inactiveTime.Seconds >= 2) {
-					isActive = true;
-					currentHealth = maxHealth;
-				}
 
 				if (exploding) {
 					explodingTime += (float) gameTime.ElapsedGameTime.TotalSeconds;
@@ -181,9 +172,15 @@ namespace SpaceUnionXNA.Ships {
 						explodingTime = 0;
 					}
 				}
+
+				//if (inactiveTime.Seconds >= 2) {
+				//	isActive = true;
+				//	currentHealth = maxHealth;
+				//	inactiveTime = TimeSpan.Zero;
+				//}
 			}
 
-			
+
 		}
 
 		public virtual void inactiveUpdate(GameTime gameTime) {
@@ -207,8 +204,8 @@ namespace SpaceUnionXNA.Ships {
 
 			mainWeapon.draw(sBatch);
 			additionalDraw(sBatch);
-
-			base.draw(sBatch);
+			if (isActive)
+				base.draw(sBatch);
 		}
 
 		/// <summary>
@@ -336,6 +333,7 @@ namespace SpaceUnionXNA.Ships {
 		protected abstract void altFire(GameTime gameTime);
 
 		public override void destroy() {
+
 			exploding = true;
 			velocity = Vector2.Zero;
 

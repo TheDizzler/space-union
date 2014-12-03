@@ -237,7 +237,6 @@ namespace SpaceUnionXNA {
 					login_menu.Update(gameTime);
 					break;
 				case GameState.MainMenu:
-					System.Console.WriteLine(currentGameState);
 					main_menu.Update(gameTime);
 					break;
 				case GameState.Multiplayer:
@@ -336,15 +335,18 @@ namespace SpaceUnionXNA {
 		
 
 		public void EnterMainMenu() {
-			Viewport viewport = GraphicsDevice.Viewport;
+			
 			currentGameState = GameState.MainMenu;
 			main_menu = new MainMenu(this);
+			if (MediaPlayer.State == MediaState.Stopped)
+				MediaPlayer.Play(Assets.titleSong);
 		}
 
 		public void EnterLoginMenu() {
 			currentGameState = GameState.Login;
 			login_menu = new LoginMenu(this);
-			MediaPlayer.Play(Assets.titleSong);
+			if(MediaPlayer.State == MediaState.Stopped)
+				MediaPlayer.Play(Assets.titleSong);
 		}
 
 		public void EnterMultiplayerMenu() {

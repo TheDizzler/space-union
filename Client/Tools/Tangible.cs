@@ -52,6 +52,8 @@ namespace SpaceUnionXNA.Tools {
 			get { return currentHealth / maxHealth; }
 		}
 
+		public TimeSpan inactiveStart;
+		public TimeSpan inactiveTime = TimeSpan.Zero;
 		public void takeDamage(int amount, GameTime gameTime, Ship owner) {
 
 			// check last time taken damage
@@ -59,24 +61,27 @@ namespace SpaceUnionXNA.Tools {
 				// Reset our current time
 				previousDamageTime = gameTime.TotalGameTime;
 				currentHealth -= amount;
-			}
 
-			if (owner is Ship && this is Ship) {
-				Ship target = (Ship) this;
-				if (owner.blueTeam != target.blueTeam) {
-					if (currentHealth <= 0) {
-						owner.kills += 1;
-						destroy();
+
+				if (owner is Ship && this is Ship) {
+					Ship target = (Ship) this;
+					if (owner.blueTeam != target.blueTeam) {
+						if (currentHealth <= 0) {
+							owner.kills += 1;
+							inactiveStart = gameTime.TotalGameTime;
+							destroy();
+						}
+					} else {
+						if (currentHealth <= 0) {
+							owner.kills -= 1;
+							inactiveStart = gameTime.TotalGameTime;
+							destroy();
+						}
 					}
 				} else {
 					if (currentHealth <= 0) {
-						owner.kills -= 1;
 						destroy();
 					}
-				}
-			} else {
-				if (currentHealth <= 0) {
-					destroy();
 				}
 			}
 		}
@@ -181,6 +186,7 @@ namespace SpaceUnionXNA.Tools {
 		/// <summary>
 		/// A pixel-by-pixel collision detector. Useing texture.GetData(rawDataA) might be a little bit sketchy...
 		/// Code from http://gamedev.stackexchange.com/questions/15191/is-there-a-good-way-to-get-pixel-perfect-collision-detection-in-xna
+		/// Implemented by Tristan
 		/// </summary>
 		/// <param name="target"></param>
 		/// <returns></returns>
@@ -313,6 +319,7 @@ namespace SpaceUnionXNA.Tools {
 
 		/// <summary>
 		/// The actions to take when a collision occurs.
+		/// @Written by Tristan
 		/// </summary>
 		/// <param name="target"></param>
 		/// <param name="gameTime"></param>

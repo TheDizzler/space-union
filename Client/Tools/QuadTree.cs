@@ -131,6 +131,7 @@ namespace SpaceUnionXNA.Tools {
 		/// <param name="pRect"></param>
 		public void insert(Tangible tangible) {
 
+
 			if (nodes[0] != null) { // if child nodes exist
 				int index = getIndex(tangible); // into which node should this go?
 
