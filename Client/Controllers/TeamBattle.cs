@@ -12,7 +12,7 @@ using System.Text;
 
 namespace SpaceUnionXNA.Controllers {
 	class TeamBattle : GameplayScreen {
-		TimeSpan teamBattleTime = new TimeSpan(0, 0, 15);
+		TimeSpan teamBattleTime = new TimeSpan(0, 1, 15);
 		Game1 game;
 		/// <summary>
 		/// Indicates whether screen has been set up. 
@@ -43,16 +43,14 @@ namespace SpaceUnionXNA.Controllers {
 			}
 			if (((TeamBattleGUI) gui).getRedTeamKills() == 15 || ((TeamBattleGUI) gui).getBlueTeamKills() == 15) {
 				game.EndMatch();
-				//game.EnterMainMenu();
+				game.EnterMainMenu();
 			}
 			if (((TeamBattleGUI) gui).timeOver == true) {
 				game.EndMatch();
-				//game.EnterMainMenu();
+				game.EnterMainMenu();
 			} else {
 				base.Update(gameTime);
-
 			}
-
 		}
 	}
 }
