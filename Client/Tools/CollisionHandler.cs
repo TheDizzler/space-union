@@ -26,7 +26,8 @@ namespace SpaceUnionXNA.Tools {
 		/// <param name="gameTime"></param>
 		public static void shipOnShip(Ship ship1, Ship ship2, GameTime gameTime) {
 
-			elasticCollision(ship1, ship2);
+			//elasticCollision(ship1, ship2);
+			reflect(ship1, ship2);
 		}
 
 		/// <summary>
@@ -50,7 +51,8 @@ namespace SpaceUnionXNA.Tools {
 		public static void shipOnAsteroid(Ship ship, Asteroid asteroid, GameTime gameTime) {
 			ship.takeDamage(asteroid.collisionDamage, gameTime, ship);
 			//asteroid.takeDamage(asteroid.collisionDamage, gameTime);
-			elasticCollision(ship, asteroid);
+			//elasticCollision(ship, asteroid);
+			reflect(ship, asteroid);
 		}
 
 		/// <summary>

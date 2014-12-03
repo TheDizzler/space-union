@@ -203,9 +203,9 @@ namespace SpaceUnionXNA.Controllers {
 						ship.inactiveTime = TimeSpan.Zero;
 						ship.resetHealth();
 						Vector2 position = respawnpoints.ElementAt(randomspawn.Next(respawnpoints.Count));
-						while (spawnPointOccupied(position)) {
+						while (spawnPointOccupied(position))
 							position = respawnpoints.ElementAt(randomspawn.Next(respawnpoints.Count));
-						}
+						
 						ship.Position = position;
 						usedspawn.Add(respawnpoints.ElementAt(respawnpoints.IndexOf(ship.Position)));
 						respawnpoints.RemoveAt(respawnpoints.IndexOf(ship.Position));
