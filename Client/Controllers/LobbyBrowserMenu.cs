@@ -46,7 +46,6 @@ namespace SpaceUnionXNA.Controllers
 
         public LobbyBrowserMenu(Game1 game)
         {
-            
             this.game = game;
             int rowRectOriginY = (int)(game.mainScreen.Height/2 - totalHeight/2);
             int rowRectOriginX = (int)game.mainScreen.Width/2 - totalWidth/2;

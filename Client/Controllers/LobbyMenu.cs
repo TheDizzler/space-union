@@ -60,6 +60,11 @@ namespace SpaceUnionXNA.Controllers
         
         bool isLeader = false;
 
+        /// <summary>
+        /// @Author Steven
+        /// </summary>
+        /// <param name="game"></param>
+        /// <param name="title"></param>
         public LobbyMenu(Game1 game, String title)
         {
             this.game = game;
@@ -121,6 +126,10 @@ namespace SpaceUnionXNA.Controllers
             new Thread(updatePlayerList).Start();
         }
 
+        /// <summary>
+        /// @Author Steven
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void Update(GameTime gameTime)
         {
             scroll.update();
@@ -183,6 +192,7 @@ namespace SpaceUnionXNA.Controllers
 
         /// <summary>
         /// Sets the choice control to selected for the ship
+        /// @Author Steven
         /// </summary>
         /// <param name="index"></param>
         private void selectship(int index)
@@ -195,6 +205,11 @@ namespace SpaceUnionXNA.Controllers
             shipChoiceList[index].Selected = true;
         }
 
+        /// <summary>
+        /// Sets the ship icon clicked on to be selected
+        /// @Author Steven
+        /// </summary>
+        /// <param name="index"></param>
         private void selectShipIcon(int index)
         {
             foreach (ShipButton btn in shipSelectionList)
@@ -211,6 +226,7 @@ namespace SpaceUnionXNA.Controllers
 
         /// <summary>
         /// Sets the ships in a grid fashion
+        /// @Author Steven
         /// </summary>
         public void setGridDisplay(int screenWidth, int screenHeight)
         {
@@ -240,6 +256,10 @@ namespace SpaceUnionXNA.Controllers
             }
         }
 
+        /// <summary>
+        /// @Author Troy, Edited by Steven
+        /// </summary>
+        /// <param name="mainScreen"></param>
         private void CreateMenuControls(Screen mainScreen)
         {
             //Menu Name Label
@@ -327,6 +347,11 @@ namespace SpaceUnionXNA.Controllers
 
         }
 
+        /// <summary>
+        /// Builds the UI for the ships to be selected
+        /// @Author Steven
+        /// </summary>
+        /// <param name="mainScreen"></param>
         private void createShipSelection(Screen mainScreen)
         {
             //Choose Ship Label
@@ -344,16 +369,6 @@ namespace SpaceUnionXNA.Controllers
                 mainScreen.Desktop.Children.Add(choice);
                 i++;
             }
-            /*
-            //Choosing Ship Options
-            ChoiceControl shipChoice_1 = GuiHelper.CreateChoice("Alpha Class", -200, -180, 120, 16);
-            mainScreen.Desktop.Children.Add(shipChoice_1);
-
-            ChoiceControl shipChoice_2 = GuiHelper.CreateChoice("Beta Class", -200, -160, 120, 16);
-            mainScreen.Desktop.Children.Add(shipChoice_2);
-
-            ChoiceControl shipChoice_3 = GuiHelper.CreateChoice("Charlie Class", -200, -140, 120, 16);
-            mainScreen.Desktop.Children.Add(shipChoice_3);*/
         }
 
         private void updatePlayerList()

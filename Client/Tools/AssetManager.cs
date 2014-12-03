@@ -73,7 +73,7 @@ namespace SpaceUnionXNA.Tools {
         public Texture2D suOptionKeys;
         public Texture2D suBanner;
         public Texture2D suMultiLobby;
-
+        public Texture2D loading;
 
 		// bgs and doodads
 		public Texture2D background;
@@ -182,6 +182,7 @@ namespace SpaceUnionXNA.Tools {
             suOption = Content.Load<Texture2D>("Buttons/SU_Options");
             suOptionKeys = Content.Load<Texture2D>("Buttons/SU_O_KeyBindings");
             suMultiLobby = Content.Load<Texture2D>("Buttons/SU_M_Lobby");
+            loading = Content.Load<Texture2D>("Buttons/loading");
 
 			///end added by Matthew Baldock
 

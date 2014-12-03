@@ -136,6 +136,8 @@ namespace SpaceUnionXNA
 
             IsFixedTimeStep = false;
 
+            /* Initial key bindings when the game starts up
+             * Added by Steven */
             keylist = new List<Keys>();
             keylist.Add(Keys.W);
             keylist.Add(Keys.A);
@@ -333,8 +335,8 @@ namespace SpaceUnionXNA
         }
 
         /// <summary>
-        /// Author: Steven
         /// Sets the client size based on the values passed in
+        /// @Author Steven
         /// </summary>
         /// <param name="width"></param>
         /// <param name="height"></param>

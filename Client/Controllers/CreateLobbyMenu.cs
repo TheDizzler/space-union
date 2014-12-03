@@ -30,6 +30,11 @@ namespace SpaceUnionXNA.Controllers
         private InputControl lobbyTitleInput;
         private Texture2D TexBanner;
         private Rectangle Banner;
+
+        /// <summary>
+        /// @Author Troy, Edited by Steven
+        /// </summary>
+        /// <param name="game"></param>
         public CreateLobbyMenu(Game1 game)
         {
             this.game = game;
@@ -62,6 +67,10 @@ namespace SpaceUnionXNA.Controllers
             game.gui_manager.Draw(gameTime);
         }
 
+        /// <summary>
+        /// @Author Troy, Edited by Steven
+        /// </summary>
+        /// <param name="mainScreen"></param>
         private void CreateMenuControls(Screen mainScreen)
         {
             //Logout Button.

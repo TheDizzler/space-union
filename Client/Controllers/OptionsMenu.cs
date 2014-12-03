@@ -119,7 +119,7 @@ namespace SpaceUnionXNA.Controllers
 
         /// <summary>
         /// Constructs the interface of resolution selection
-        /// @Written by Steven
+        /// @Author Steven
         /// </summary>
         /// <param name="mainScreen"></param>
         private void createWindowState(Screen mainScreen) {
@@ -154,7 +154,7 @@ namespace SpaceUnionXNA.Controllers
 
         /// <summary>
         /// Constructs the volume interface for both Music and Sound
-        /// @Written by Konstantin and Edited by Steven
+        /// @Author Konstantin and Edited by Steven
         /// </summary>
         /// <param name="mainScreen"></param>
         private void createSoundVolume(Screen mainScreen)
@@ -265,7 +265,7 @@ namespace SpaceUnionXNA.Controllers
 
         /// <summary>
         /// Constructs the drop down menu for available resolutions
-        /// @Written by Steven
+        /// @Author Steven
         /// </summary>
         /// <param name="mainScreen"></param>
         private void createResolutionDropDown(Screen mainScreen)
@@ -328,7 +328,7 @@ namespace SpaceUnionXNA.Controllers
 
         /// <summary>
         /// Toggles between Windowed, Borderless and Fullscreen
-        /// @Written by Steven
+        /// @Author Steven
         /// </summary>
         /// <param name="num"></param>
         private void toggleWindowState(int num)
@@ -358,7 +358,7 @@ namespace SpaceUnionXNA.Controllers
 
         /// <summary>
         /// Apply the changes and updates the screen
-        /// @Written by Steven and Edited by Konstantin
+        /// @Author Steven and Edited by Konstantin
         /// </summary>
         private void applyChanges()
         {

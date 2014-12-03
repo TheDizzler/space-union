@@ -15,8 +15,9 @@ namespace SpaceUnionXNA
     class GuiHelper
     {
         /// <summary>
-        /// Takes the center of the button and places it at the center of the client, 
+        /// Takes the center of the control and places it at the center of the client, 
         /// makes the center of the client coordinate (0, 0)
+        /// @Author Troy, Edited by Steven
         /// </summary>
         /// <param name="text"></param>
         /// <param name="offSetX"></param>
@@ -41,6 +42,20 @@ namespace SpaceUnionXNA
             return button;
         }
 
+        /// <summary>
+        /// Takes the center of the control and places it at the center of the client, 
+        /// makes the center of the client coordinate (0, 0)
+        /// @Added by Steven
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="offSetX"></param>
+        /// <param name="offSetY"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="center"></param>
+        /// <param name="XPos"></param>
+        /// <param name="YPos"></param>
+        /// <returns></returns>
         public static LabelControl CreateLabel(String text, int offSetX, int offSetY, int width, int height, bool center = true, float XPos = 0.0f, float YPos = 0.0f)
         {
             if (center)
@@ -57,6 +72,20 @@ namespace SpaceUnionXNA
             return label;
         }
 
+        /// <summary>
+        /// Takes the center of the control and places it at the center of the client, 
+        /// makes the center of the client coordinate (0, 0)
+        /// @Added by Steven
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="offSetX"></param>
+        /// <param name="offSetY"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="center"></param>
+        /// <param name="XPos"></param>
+        /// <param name="YPos"></param>
+        /// <returns></returns>
         public static InputControl CreateInput(String text, int offSetX, int offSetY, int width, int height, bool center = true, float XPos = 0.0f, float YPos = 0.0f)
         {
             if (center)
@@ -73,6 +102,19 @@ namespace SpaceUnionXNA
             return input;
         }
 
+        /// <summary>
+        /// Takes the center of the control and places it at the center of the client, 
+        /// makes the center of the client coordinate (0, 0)
+        /// @Added by Steven
+        /// </summary>
+        /// <param name="offSetX"></param>
+        /// <param name="offSetY"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="center"></param>
+        /// <param name="XPos"></param>
+        /// <param name="YPos"></param>
+        /// <returns></returns>
         public static PasswordInputControl CreatePasswordInput(int offSetX, int offSetY, int width, int height, bool center = true, float XPos = 0.0f, float YPos = 0.0f)
         {
             if (center)
@@ -88,6 +130,18 @@ namespace SpaceUnionXNA
             return input;
         }
 
+        /// <summary>
+        /// Moves the control to a new location
+        /// @Added by Steven
+        /// </summary>
+        /// <param name="offSetX"></param>
+        /// <param name="offSetY"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="center"></param>
+        /// <param name="XPos"></param>
+        /// <param name="YPos"></param>
+        /// <returns></returns>
         public static UniRectangle CenterBound(int offSetX, int offSetY, int width, int height, bool center = true, float XPos = 0.0f, float YPos = 0.0f)
         {
             if (center)
@@ -102,6 +156,20 @@ namespace SpaceUnionXNA
             return bounds;
         }
 
+        /// <summary>
+        /// Takes the center of the control and places it at the center of the client, 
+        /// makes the center of the client coordinate (0, 0)
+        /// @Added by Steven
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="offSetX"></param>
+        /// <param name="offSetY"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="center"></param>
+        /// <param name="XPos"></param>
+        /// <param name="YPos"></param>
+        /// <returns></returns>
         public static OptionControl CreateOption(String text, int offSetX, int offSetY, int width, int height, bool center = true, float XPos = 0.0f, float YPos = 0.0f)
         {
             if (center)
@@ -118,6 +186,20 @@ namespace SpaceUnionXNA
             return option;
         }
 
+        /// <summary>
+        /// Takes the center of the control and places it at the center of the client, 
+        /// makes the center of the client coordinate (0, 0)
+        /// @Added by Steven
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="offSetX"></param>
+        /// <param name="offSetY"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="center"></param>
+        /// <param name="XPos"></param>
+        /// <param name="YPos"></param>
+        /// <returns></returns>
         public static ChoiceControl CreateChoice(String text, int offSetX, int offSetY, int width, int height, bool center = true, float XPos = 0.0f, float YPos = 0.0f)
         {
             if (center)

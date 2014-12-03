@@ -11,14 +11,15 @@ using System.Text;
 
 namespace SpaceUnionXNA.Controllers {
 	class TeamBattle : GameplayScreen {
-		TimeSpan teamBattleTime = new TimeSpan(0, 2, 5);
+		TimeSpan teamBattleTime = new TimeSpan(0, 0, 5);
         Game1 game;
         private bool first = true;
+
 		public TeamBattle(Game1 game, SpriteBatch batch, Ship selectedship)
 			: base(game, batch, selectedship) {
 
-                this.game = game;
-			gui = new TeamBattleGUI(game, selectedship, teamBattleTime, ships, inactiveShips);
+            this.game = game;
+            gui = new TeamBattleGUI(game, selectedship, teamBattleTime, ships, inactiveShips);
 
 		}
 
