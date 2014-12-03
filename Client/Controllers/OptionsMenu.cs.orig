@@ -112,6 +112,7 @@ namespace SpaceUnionXNA.Controllers
             ButtonControl keyBindings = GuiHelper.CreateButton("Key Bindings",
                 UIConstants.OPTION_KEYS_BTN.X, UIConstants.OPTION_KEYS_BTN.Y,
                 UIConstants.OPTION_KEYS_BTN.Width, UIConstants.OPTION_KEYS_BTN.Height);
+<<<<<<< HEAD
 			keyBindings.Pressed += delegate(object sender, EventArgs arugments)
 			{
 				game.EnterControlMenu();
@@ -121,10 +122,25 @@ namespace SpaceUnionXNA.Controllers
 
 		/// <summary>
 		/// Constructs the interface of resolution selection
-        /// @Author Steven
+		/// @Written by Steven
 		/// </summary>
 		/// <param name="mainScreen"></param>
 		private void createWindowState(Screen mainScreen) {
+=======
+            keyBindings.Pressed += delegate(object sender, EventArgs arugments)
+            {
+                game.EnterControlMenu();
+            };
+            mainScreen.Desktop.Children.Add(keyBindings);
+        }
+
+        /// <summary>
+        /// Constructs the interface of resolution selection
+        /// @Author Steven
+        /// </summary>
+        /// <param name="mainScreen"></param>
+        private void createWindowState(Screen mainScreen) {
+>>>>>>> b505f90ae222e285adc4c1c5a5d7d466926141d7
             LabelControl winTitleLabel = GuiHelper.CreateLabel("Display Mode",
                 UIConstants.OPTION_WINDOW_LABEL.X, UIConstants.OPTION_WINDOW_LABEL.Y,
                 UIConstants.OPTION_WINDOW_LABEL.Width, UIConstants.OPTION_WINDOW_LABEL.Height);
@@ -147,6 +163,7 @@ namespace SpaceUnionXNA.Controllers
             ButtonControl rightWinToggle = GuiHelper.CreateButton(">",
                 UIConstants.OPTION_RIGHT_BTN.X, UIConstants.OPTION_RIGHT_BTN.Y,
                 UIConstants.OPTION_RIGHT_BTN.Width, UIConstants.OPTION_RIGHT_BTN.Height);
+<<<<<<< HEAD
 			rightWinToggle.Pressed += delegate(object sender, EventArgs arugments)
 			{
 				toggleWindowState(1);
@@ -156,12 +173,29 @@ namespace SpaceUnionXNA.Controllers
 
 		/// <summary>
 		/// Constructs the volume interface for both Music and Sound
-        /// @Author Konstantin and Edited by Steven
+		/// @Written by Konstantin and Edited by Steven
 		/// </summary>
 		/// <param name="mainScreen"></param>
 		private void createSoundVolume(Screen mainScreen)
 		{
 			/* Sound volume control */
+=======
+            rightWinToggle.Pressed += delegate(object sender, EventArgs arugments)
+            {
+                toggleWindowState(1);
+            };
+            mainScreen.Desktop.Children.Add(rightWinToggle);
+        }
+
+        /// <summary>
+        /// Constructs the volume interface for both Music and Sound
+        /// @Author Konstantin and Edited by Steven
+        /// </summary>
+        /// <param name="mainScreen"></param>
+        private void createSoundVolume(Screen mainScreen)
+        {
+            /* Sound volume control */
+>>>>>>> b505f90ae222e285adc4c1c5a5d7d466926141d7
             LabelControl soundControlLabel = GuiHelper.CreateLabel("Sound",
                 UIConstants.OPTION_SOUND_LABEL.X, UIConstants.OPTION_SOUND_LABEL.Y,
                 UIConstants.OPTION_SOUND_LABEL.Width, UIConstants.OPTION_SOUND_LABEL.Height);
@@ -270,16 +304,29 @@ namespace SpaceUnionXNA.Controllers
             currentMusicLabel = GuiHelper.CreateLabel(game.currentMusic,
                 UIConstants.OPTION_MUSIC_CUR_LABEL.X, UIConstants.OPTION_MUSIC_CUR_LABEL.Y,
                 UIConstants.OPTION_MUSIC_CUR_LABEL.Width, UIConstants.OPTION_MUSIC_CUR_LABEL.Height);
+<<<<<<< HEAD
 			mainScreen.Desktop.Children.Add(currentMusicLabel);
 		}
 
 		/// <summary>
 		/// Constructs the drop down menu for available resolutions
-        /// @Author Steven
+		/// @Written by Steven
 		/// </summary>
 		/// <param name="mainScreen"></param>
 		private void createResolutionDropDown(Screen mainScreen)
 		{
+=======
+            mainScreen.Desktop.Children.Add(currentMusicLabel);
+        }
+
+        /// <summary>
+        /// Constructs the drop down menu for available resolutions
+        /// @Author Steven
+        /// </summary>
+        /// <param name="mainScreen"></param>
+        private void createResolutionDropDown(Screen mainScreen)
+        {
+>>>>>>> b505f90ae222e285adc4c1c5a5d7d466926141d7
             resoTitleLabel = GuiHelper.CreateLabel("Resolution",
                 UIConstants.OPTION_RESO_LABEL.X, UIConstants.OPTION_RESO_LABEL.Y,
                 UIConstants.OPTION_RESO_LABEL.Width, UIConstants.OPTION_RESO_LABEL.Height);
@@ -332,13 +379,14 @@ namespace SpaceUnionXNA.Controllers
 				}
                 resoList.Bounds = GuiHelper.CenterBound(UIConstants.OPTION_RESO_HIDE_LIST.X, UIConstants.OPTION_RESO_HIDE_LIST.Y,
                     UIConstants.OPTION_RESO_HIDE_LIST.Width, UIConstants.OPTION_RESO_HIDE_LIST.Height);
+<<<<<<< HEAD
 			};
 			mainScreen.Desktop.Children.Add(resoList);
 		}
 
 		/// <summary>
 		/// Toggles between Windowed, Borderless and Fullscreen
-        /// @Author Steven
+		/// @Written by Steven
 		/// </summary>
 		/// <param name="num"></param>
 		private void toggleWindowState(int num)
@@ -356,6 +404,32 @@ namespace SpaceUnionXNA.Controllers
 					break;
 				case 1:
 					currentWinLabel.Text = "Borderless";
+=======
+            };
+            mainScreen.Desktop.Children.Add(resoList);
+        }
+
+        /// <summary>
+        /// Toggles between Windowed, Borderless and Fullscreen
+        /// @Author Steven
+        /// </summary>
+        /// <param name="num"></param>
+        private void toggleWindowState(int num)
+        {
+            winState += num;
+            if (winState < 0)
+                winState = 2;
+            else if (winState > 2)
+                winState = 0;
+            switch (winState)
+            {
+                case 0:
+                    currentWinLabel.Text = "Windowed";
+                    currentResoLabel.Text = game.width + "x" + game.height;
+                    break;
+                case 1:
+                    currentWinLabel.Text = "Borderless";
+>>>>>>> b505f90ae222e285adc4c1c5a5d7d466926141d7
                     currentResoLabel.Text = Resolution.GetCurrentScreenResolution() + " (Borderless)";
 					break;
 				case 2:
@@ -368,7 +442,7 @@ namespace SpaceUnionXNA.Controllers
 
 		/// <summary>
 		/// Apply the changes and updates the screen
-        /// @Author Steven and Edited by Konstantin
+		/// @Written by Steven and Edited by Konstantin
 		/// </summary>
 		private void applyChanges()
 		{
@@ -400,6 +474,43 @@ namespace SpaceUnionXNA.Controllers
 			game.scroll.width = game.getScreenWidth();
 			game.scroll.setPosition(UIConstants.ORIGIN);
             
+<<<<<<< HEAD
+=======
+        }
+
+        /// <summary>
+        /// Apply the changes and updates the screen
+        /// @Author Steven and Edited by Konstantin
+        /// </summary>
+        private void applyChanges()
+        {
+            string width = "";
+            string height = "";
+            bool xFound = false;
+
+            for (int i = 0; i < currentResoLabel.Text.Length; i++)
+            {
+                if (Char.IsDigit(currentResoLabel.Text[i]))
+                {
+                    if (xFound)
+                    {
+                        height += currentResoLabel.Text[i];
+                    }
+                    else
+                    {
+                        width += currentResoLabel.Text[i];
+                    }
+                }
+                else
+                {
+                    xFound = true;
+                }
+            }
+
+            game.setScreenSize(int.Parse(width), int.Parse(height), currentWinLabel.Text);
+            scroll = new ScrollingBackground(Game1.Assets.background) { height = game.getScreenHeight(), width = game.getScreenWidth() };
+            scroll.setPosition(UIConstants.ORIGIN);
+>>>>>>> b505f90ae222e285adc4c1c5a5d7d466926141d7
             Banner = new Rectangle((int)game.mainScreen.Width / 2 - UIConstants.SU_BANNER.X, (int)game.mainScreen.Height / 2 - UIConstants.SU_BANNER.Y, 
                 UIConstants.SU_BANNER.Width, UIConstants.SU_BANNER.Height);
 			CreateMenuControls(game.mainScreen);

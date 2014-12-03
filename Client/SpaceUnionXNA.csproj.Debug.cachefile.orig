@@ -80,8 +80,11 @@ Content\Buttons\SU_Options.xnb
 Content\Buttons\SU_O_KeyBindings.xnb
 Content\Buttons\Space-Union_Banner.xnb
 Content\Buttons\SU_M_Lobby.xnb
+<<<<<<< HEAD
 Content\SFX\game_music_sample.xnb
 Content\SFX\test.xnb
-Content\Buttons\Loading.xnb
 Content\Music\mystery.wma
 Content\Music\battle stations.wma
+=======
+Content\Buttons\Loading.xnb
+>>>>>>> b505f90ae222e285adc4c1c5a5d7d466926141d7

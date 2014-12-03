@@ -19,6 +19,10 @@ using SpaceUnionXNA.Animations;
 
 namespace SpaceUnionXNA.Controllers
 {
+    /// <summary>
+    /// Allows the user to set their own key bindings, changes persist as long as the game is still running
+    /// @Author Steven
+    /// </summary>
 	public class ControlMenu
 	{
 		private Game1 game;
@@ -148,7 +152,9 @@ namespace SpaceUnionXNA.Controllers
 
 		private void CreateMenuControls(Screen mainScreen)
 		{
+            /* Constructs the labels and key buttons UI */
 			int i = 0;
+
 			foreach (LabelControl lbl in keyLabelList)
 			{
 				lbl.Bounds = GuiHelper.CenterBound(UIConstants.CONTROL_KEY_LABEL.X, UIConstants.CONTROL_KEY_LABEL.Y + i * UIConstants.CONTROL_KEY_SPACE,
@@ -218,6 +224,7 @@ namespace SpaceUnionXNA.Controllers
 
 		/// <summary>
 		/// Sets the key index and sets the changing key
+        /// @Author Steven
 		/// </summary>
 		/// <param name="keyIndex"></param>
 		/// <param name="currentButton"></param>
@@ -236,6 +243,7 @@ namespace SpaceUnionXNA.Controllers
 
 		/// <summary>
 		/// Checks for any existing keys already in use
+        /// @Author Steven
 		/// </summary>
 		/// <param name="keys"></param>
 		/// <returns></returns>

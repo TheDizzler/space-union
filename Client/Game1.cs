@@ -132,6 +132,8 @@ namespace SpaceUnionXNA {
 
 			IsFixedTimeStep = false;
 
+			/* Initial key bindings when the game starts up
+			 * Added by Steven */
 			keylist = new List<Keys>();
 			keylist.Add(Keys.W);
 			keylist.Add(Keys.A);
@@ -342,6 +344,7 @@ namespace SpaceUnionXNA {
 		public void EnterLoginMenu() {
 			currentGameState = GameState.Login;
 			login_menu = new LoginMenu(this);
+			MediaPlayer.Play(Assets.titleSong);
 		}
 
 		public void EnterMultiplayerMenu() {
@@ -389,7 +392,6 @@ namespace SpaceUnionXNA {
 			//gameplayScreen = new GameplayScreen(this, spriteBatch, shipselectionScreen.getship());
 			currentGameState = GameState.Playing;
 			gameplayScreen = new TeamBattle(this, spriteBatch, shipselectionScreen.getship());
-			//Viewport v = GraphicsDevice.Viewport;
 			IsMouseVisible = false;
 		}
 
@@ -397,14 +399,15 @@ namespace SpaceUnionXNA {
 		public void EndMatch() {
 			GraphicsDevice.Viewport = new Viewport(0, 0, getScreenWidth(), getScreenHeight());
 			currentGameState = GameState.MainMenu;
+			MediaPlayer.Stop();
 			gameplayScreen = null;
 			IsMouseVisible = true;
 		}
 
 
 		/// <summary>
-		/// Author: Steven
 		/// Sets the client size based on the values passed in
+		/// @Author Steven
 		/// </summary>
 		/// <param name="width"></param>
 		/// <param name="height"></param>

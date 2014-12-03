@@ -11,6 +11,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace SpaceUnionXNA.Controllers
 {
+    /// <summary>
+    /// Uses Rectangle to store the location and size of the nuclex controls
+    /// @Author Steven
+    /// </summary>
     class UIConstants
     {
         /* Scrolling background constants */

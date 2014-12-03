@@ -12,6 +12,7 @@ using System.Text;
 
 namespace SpaceUnionXNA.Controllers {
 	class TeamBattle : GameplayScreen {
+<<<<<<< HEAD
 		TimeSpan teamBattleTime = new TimeSpan(0, 1, 15);
 		Game1 game;
 		/// <summary>
@@ -22,7 +23,18 @@ namespace SpaceUnionXNA.Controllers {
 			: base(game, batch, selectedship) {
 
 			this.game = game;
+			gui = new TeamBattleGUI(game, selectedship, teamBattleTime, ships, inactiveShips);
+=======
+		TimeSpan teamBattleTime = new TimeSpan(0, 0, 5);
+        Game1 game;
+        private bool first = true;
+
+		public TeamBattle(Game1 game, SpriteBatch batch, Ship selectedship)
+			: base(game, batch, selectedship) {
+
+            this.game = game;
             gui = new TeamBattleGUI(game, selectedship, teamBattleTime, ships, inactiveShips);
+>>>>>>> b505f90ae222e285adc4c1c5a5d7d466926141d7
 
 		}
 

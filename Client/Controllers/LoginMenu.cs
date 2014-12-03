@@ -36,7 +36,17 @@ namespace SpaceUnionXNA.Controllers
 
 		private Rectangle Banner;
 		private Texture2D TexBanner;
+        private Texture2D Loading;
+        private float RotationAngle;
 
+        /* Testing */
+        private Vector3 origin;
+        private Vector3 screenpos;
+        
+        /// <summary>
+        /// @Author Troy, Edited by Steven, Konstantin
+        /// </summary>
+        /// <param name="game"></param>
 		public LoginMenu(Game1 game)
 		{
 			this.game = game;
@@ -49,10 +59,17 @@ namespace SpaceUnionXNA.Controllers
 				UIConstants.LOGIN_WHITE_BG.Width, UIConstants.LOGIN_WHITE_BG.Height);
 
 			TexBanner = Game1.Assets.suBanner;
+            Loading = Game1.Assets.loading;
 			Banner = new Rectangle(
 				(int)game.mainScreen.Width / 2 - UIConstants.LOGIN_BANNER.X, 
 				(int)game.mainScreen.Height / 2 - UIConstants.LOGIN_BANNER.Y,
 				UIConstants.LOGIN_BANNER.Width, UIConstants.LOGIN_BANNER.Height);
+
+            origin.X = TexBanner.Width / 2;
+            origin.Y = TexBanner.Height / 2;
+            screenpos.X = game.getScreenWidth() / 2;
+            screenpos.Y = game.getScreenHeight() / 2;
+
 
 			CreateMenuControls(game.mainScreen);
 		}
@@ -60,22 +77,55 @@ namespace SpaceUnionXNA.Controllers
 		public void Update(GameTime gameTime)
 		{
 			game.scroll.update();
+            /* Sets the rotation speed of the banner/loading */
+            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            RotationAngle += elapsed;
+            float circle = MathHelper.Pi * 2;
+            RotationAngle = RotationAngle % circle;
+
 		}
 
+        /// <summary>
+        /// @Author Troy, Edited by Steven
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="spriteBatch"></param>
 		public void DrawMenu(GameTime gameTime, SpriteBatch spriteBatch)
 		{
 			spriteBatch.Begin();
 
 			game.scroll.draw(spriteBatch);
 			spriteBatch.Draw(Background, WhiteBackground, Color.White * 0.75f);
+            spriteBatch.End();
+
+            /* Horizontal rotation banner 
+             * Added by Steven */
+            Matrix matrix = Matrix.CreateTranslation(-game.getScreenWidth() / 2, 0, 0) *
+                            Matrix.CreateRotationY(RotationAngle) *
+                            Matrix.CreateTranslation(game.getScreenWidth() / 2, 0, 0) *
+                            Matrix.CreateScale(1, 1, 0);
+
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, matrix);
 			spriteBatch.Draw(TexBanner, Banner, Color.White);
+            spriteBatch.End();
 			
+            // For the 2nd banner to show up
+            matrix = Matrix.CreateTranslation(-game.getScreenWidth() / 2, 0, 0) *
+                     Matrix.CreateRotationY(RotationAngle + (float)Math.PI) *
+                     Matrix.CreateTranslation(game.getScreenWidth() / 2, 0, 0) *
+                     Matrix.CreateScale(1, 1, 0);
+
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, matrix);
+            spriteBatch.Draw(Loading, Banner, Color.White);
 			spriteBatch.End();
+
 
 			game.gui_manager.Draw(gameTime);
 			keyState = Keyboard.GetState();
 			
-			/* Switches between account input and password input */
+            /* Switches between account input and password input 
+             * Added by Steven */
 			if (keyState.IsKeyDown(Keys.Tab))
 			{
 				if (passwordInput.HasFocus)
@@ -92,7 +142,8 @@ namespace SpaceUnionXNA.Controllers
 				tabFlag = false;
 			}
 
-			/* Ensures that switching occurs only once per tab down */
+            /* Ensures that switching occurs only once per tab down 
+             * Added by Steven */
 			if (keyState.IsKeyUp(Keys.Tab)) 
 			{
 				tabFlag = true;
@@ -101,6 +152,11 @@ namespace SpaceUnionXNA.Controllers
 			passwordLabel.Text = passwordInput.GetText();
 			
 		}
+
+        /// <summary>
+        /// @Author Troy, Edited by Steven
+        /// </summary>
+        /// <param name="mainScreen"></param>
 		private void CreateMenuControls(Screen mainScreen)
 		{
 			//TODO: Change Label Colors to white

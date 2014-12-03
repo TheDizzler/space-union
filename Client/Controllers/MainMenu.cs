@@ -25,6 +25,10 @@ namespace SpaceUnionXNA.Controllers
 		private Rectangle Banner;
 		private Texture2D TexBanner;
 
+        /// <summary>
+        /// @Author Troy, Edited by Steven
+        /// </summary>
+        /// <param name="game"></param>
 		public MainMenu(Game1 game)
 		{
 			this.game = game;
@@ -54,7 +58,7 @@ namespace SpaceUnionXNA.Controllers
 		}
 
 		/// <summary>
-		/// @Author Troy, Revised by Steven
+        /// @Author Troy, Edited by Steven
 		/// </summary>
 		/// <param name="mainScreen"></param>
 		private void CreateMenuControls(Screen mainScreen)

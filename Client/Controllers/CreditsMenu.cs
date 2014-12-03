@@ -17,6 +17,9 @@ using SpaceUnionXNA.Animations;
 
 namespace SpaceUnionXNA.Controllers
 {
+    /// <summary>
+    /// @Author Konstantin Edited by Steven
+    /// </summary>
 	public class CreditsMenu
 	{
 		private Game1 game;

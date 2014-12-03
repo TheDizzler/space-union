@@ -7,6 +7,11 @@ using System.Text;
 
 namespace SpaceUnionXNA.Tools
 {
+    /// <summary>
+    /// Used to find information about the user's setting for their taskbar
+    /// http://winsharp93.wordpress.com/2009/06/29/find-out-size-and-position-of-the-taskbar/
+    /// @Added by Steven
+    /// </summary>
     public enum TaskbarPosition
     {
         Unknown = -1,
