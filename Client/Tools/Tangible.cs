@@ -147,7 +147,7 @@ namespace SpaceUnionXNA.Tools {
 		}
 
 
-		public void resetHealth() {
+		protected void resetHealth() {
 
 			currentHealth = maxHealth;
 		}

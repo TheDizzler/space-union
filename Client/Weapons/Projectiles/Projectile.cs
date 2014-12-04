@@ -100,6 +100,7 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 		/// <param name="shipVelocity"></param>
 		public void launch(Vector2 startPoint, float direction, Vector2 shipVelocity) {
 
+			currentHealth = maxHealth;
 			rotation = direction;
 			position = startPoint;
 			velocity = new Vector2((float) Math.Sin(rotation) * projectileMoveSpeed,

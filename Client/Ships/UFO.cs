@@ -49,6 +49,7 @@ namespace SpaceUnionXNA.Ships {
 				shield.draw(batch);
 		}
 
+
 		protected override void altFire(GameTime gameTime) {
 
 			if (gameTime.TotalGameTime - previousAltFireTime > altFireDelay) {

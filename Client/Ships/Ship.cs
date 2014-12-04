@@ -332,6 +332,14 @@ namespace SpaceUnionXNA.Ships {
 		/// <param name="gameTime"></param>
 		protected abstract void altFire(GameTime gameTime);
 
+
+		public void resetShip() {
+			resetHealth();
+			inactiveTime = TimeSpan.Zero;
+			rotateWeaponOrigin(-rotation);
+			rotation = 0;
+		}
+
 		public override void destroy() {
 
 			exploding = true;
@@ -348,7 +356,6 @@ namespace SpaceUnionXNA.Ships {
 
 			explosionEngine.explodeShip(this);
 		}
-
 
 		/// <summary>
 		/// Rotates the ship left
@@ -419,5 +426,7 @@ namespace SpaceUnionXNA.Ships {
 		//	explode();
 		//}
 
+
+		
 	}
 }

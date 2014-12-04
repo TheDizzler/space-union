@@ -171,8 +171,8 @@ namespace SpaceUnionXNA.Controllers {
 			keyState = Keyboard.GetState(); //Get which keys are pressed or released
 			mouseState = Mouse.GetState();
 
-
-			playerShip.control(keyState, gameTime);
+			if (playerShip.isActive)
+				playerShip.control(keyState, gameTime);
 
 
 			//	foreach (Planet planet in planets)
@@ -200,12 +200,12 @@ namespace SpaceUnionXNA.Controllers {
 						Random randomspawn = new Random();
 						ship.isActive = true;
 						targets.Add(ship);
-						ship.inactiveTime = TimeSpan.Zero;
-						ship.resetHealth();
+						
+						ship.resetShip();
 						Vector2 position = respawnpoints.ElementAt(randomspawn.Next(respawnpoints.Count));
 						while (spawnPointOccupied(position))
 							position = respawnpoints.ElementAt(randomspawn.Next(respawnpoints.Count));
-						
+
 						ship.Position = position;
 						usedspawn.Add(respawnpoints.ElementAt(respawnpoints.IndexOf(ship.Position)));
 						respawnpoints.RemoveAt(respawnpoints.IndexOf(ship.Position));
