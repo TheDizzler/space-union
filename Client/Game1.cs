@@ -24,8 +24,9 @@ namespace SpaceUnionXNA {
 		private Taskbar taskbar;
 		public GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
-		public ParticleEngine particleEngine;
+		public static ParticleEngine particleEngine;
 		public ScrollingBackground scroll;
+
 		/// <summary>
 		/// Contains all game assets (gfx, audio, etc.)
 		/// </summary>
@@ -192,9 +193,10 @@ namespace SpaceUnionXNA {
 			explosionEngine = new ExplosionEngine(Assets);
 
 			List<Texture2D> textures = new List<Texture2D>();
-			textures.Add(Assets.moltenBullet);
-			textures.Add(Assets.missile);
+			textures.Add(Assets.guiRectangle);
+			//textures.Add(Assets.missile);
 			particleEngine = new ParticleEngine(textures, new Vector2(400, 240));
+
 			shipselectionScreen = new ShipSelectionScreen(this);
 
 			scroll = new ScrollingBackground(Game1.Assets.background) { height = getScreenHeight(), width = getScreenWidth() };
@@ -227,9 +229,9 @@ namespace SpaceUnionXNA {
 				|| Keyboard.GetState().IsKeyDown(Keys.Escape))
 				Exit();
 
-			
+
 			//particleEngine.EmitterLocation = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
-			//particleEngine.Update();
+			particleEngine.Update(gameTime);
 
 			//Update the current state
 			switch (currentGameState) {
@@ -281,7 +283,9 @@ namespace SpaceUnionXNA {
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime) {
 			GraphicsDevice.Clear(Color.LightSeaGreen);
-			particleEngine.Draw(spriteBatch);
+
+			
+
 			//Draw the current state
 			switch (currentGameState) {
 				case GameState.Login:

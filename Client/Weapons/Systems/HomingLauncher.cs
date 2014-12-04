@@ -49,8 +49,8 @@ namespace SpaceUnionXNA.Weapons.Systems {
 
 		public void updatePosition(Vector2 startPoint, float rot) {
 			if (!missile.isActive) {
-				missile.position = startPoint;
-				missile.rotation = rot;
+				missile.reArm(startPoint, rot);
+				
 			}
 		}
 

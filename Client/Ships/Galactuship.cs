@@ -33,6 +33,9 @@ namespace SpaceUnionXNA.Ships {
 			weaponOrigin = new Vector2(position.X - width / 3, position.Y - height / 2);
 			weaponOrigin2 = new Vector2(position.X + width / 3, position.Y - height / 2);
 
+			engineOrigins.Add(new Vector2(position.X - width / 8, position.Y + height / 2.5f));
+			engineOrigins.Add(new Vector2(position.X + width / 8, position.Y + height / 2.5f));
+
 		}
 
 
@@ -45,6 +48,12 @@ namespace SpaceUnionXNA.Ships {
 
 			Vector2.TransformNormal(ref weaponOrigin, ref transform, out weaponOrigin);
 			Vector2.TransformNormal(ref weaponOrigin2, ref transform, out weaponOrigin2);
+
+			for (int i = 0; i < engineOrigins.Count; ++i) {
+				Vector2 temp = engineOrigins[i];
+				Vector2.TransformNormal(ref temp, ref transform, out temp);
+				engineOrigins[i] = temp;
+			}
 		}
 
 		protected override void additionalUpdate(GameTime gameTime, QuadTree quadTree) {

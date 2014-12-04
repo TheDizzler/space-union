@@ -308,6 +308,7 @@ namespace SpaceUnionXNA.Controllers {
 
 			drawScreen();
 
+			Game1.particleEngine.Draw(spriteBatch);
 
 			spriteBatch.End();
 

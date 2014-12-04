@@ -86,6 +86,14 @@ namespace SpaceUnionXNA.Ships {
 
 		private  bool exploding;
 		private  float explodingTime;
+		/// <summary>
+		/// The rate at which particle exhaust are ejected from engines
+		/// </summary>
+		private  float lastThrustEmission = 1f;
+		/// <summary>
+		/// Locations of engine exhaust emitters.
+		/// </summary>
+		protected  List<Vector2> engineOrigins;
 
 		/// <summary>
 		///  Used to map ship's actions to keys
@@ -116,6 +124,8 @@ namespace SpaceUnionXNA.Ships {
 			mass = 1000;
 
 			miniMapIcon = new MapIcon(assets.shipMapIcon, position);
+
+			engineOrigins = new List<Vector2>();
 
 		}
 
@@ -152,8 +162,7 @@ namespace SpaceUnionXNA.Ships {
 				position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
 
 				base.update(position);
-
-
+				
 				checkForCollision(quadTree, gameTime);
 
 				checkWorldEdge();
@@ -298,6 +307,13 @@ namespace SpaceUnionXNA.Ships {
 				Vector2.Add(ref velocity, ref acceleration, out velocity);
 			}
 
+			lastThrustEmission += (float) gameTime.ElapsedGameTime.TotalSeconds;
+			if (lastThrustEmission > .15) {
+				foreach (Vector2 engine in engineOrigins)
+					Game1.particleEngine.createThrustParticle(Vector2.Add(position, engine), acceleration, 1.5f);
+				lastThrustEmission = 0;
+			}
+
 		}
 
 
@@ -402,8 +418,15 @@ namespace SpaceUnionXNA.Ships {
 		/// </summary>
 		/// <param name="rotateAmount"></param>
 		protected virtual void rotateWeaponOrigin(float rotateAmount) {
+
 			Matrix transform = getWeaponOriginTransform(rotateAmount);
 			Vector2.TransformNormal(ref weaponOrigin, ref transform, out weaponOrigin);
+
+			for(int i = 0; i < engineOrigins.Count; ++i) {
+				Vector2 temp = engineOrigins[i];
+				Vector2.TransformNormal(ref temp, ref transform, out temp);
+				engineOrigins[i] = temp;
+			}
 		}
 
 		/// <summary>

@@ -30,6 +30,9 @@ namespace SpaceUnionXNA.Ships {
 
 			mainWeapon = Launcher<MoltenBullet>.CreateLauncher(this, (x, y) => new MoltenBullet(x, y), 3);
 			weaponOrigin = new Vector2(position.X, position.Y - height / 2); // start position of weapon
+
+			engineOrigins.Add(new Vector2(position.X - width / 4, position.Y + height / 2));
+			engineOrigins.Add(new Vector2(position.X + width / 4, position.Y + height / 2));
 		}
 
 

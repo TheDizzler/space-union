@@ -10,6 +10,11 @@ using SpaceUnionXNA.Tools;
 using SpaceUnionXNA.Controllers;
 
 namespace SpaceUnionXNA.Weapons.Projectiles {
+
+	/// <summary>
+	/// A Projectile that tracks its target.
+	/// @Written by Tristan
+	/// </summary>
 	public class HomingMissile : Projectile {
 
 		protected float maxSpeed = 5000;
@@ -22,6 +27,8 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 		/// </summary>
 		protected float turnSpeed;
 		protected Ship target;
+		private  Vector2 engineOrigin;
+		private  float lastThrustEmission = 10f;
 
 		public HomingMissile(Vector2 startPoint, Ship ship)
 			: base(assets.homingMissile, startPoint, ship) {
@@ -32,6 +39,8 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 			turnSpeed = 10f;
 			weaponDamage = 10;
 			isActive = false;
+
+			engineOrigin = new Vector2(position.X, position.Y + height / 2);
 		}
 
 
@@ -46,19 +55,31 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 					}
 
 					if (target != null) {
+
+						float oldRotation = rotation;
+
 						// rotate towards target
 						double angle = Math.Atan2(this.Position.X - target.Position.X, this.Position.Y - target.Position.Y);
 						float difference = rotation - (float) -angle;
 
 
-							//float checkPlus = rotation + turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
-							//float checkMinus = rotation - turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+						//float checkPlus = rotation + turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+						//float checkMinus = rotation - turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
 
-							if (difference < -.01)
-								rotation = rotation + turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
-							else if (difference > .01)
-								rotation = rotation - turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
-						
+						if (difference < -.01)
+							rotation = rotation + turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+						else if (difference > .01)
+							rotation = rotation - turnSpeed * (float) gameTime.ElapsedGameTime.TotalSeconds;
+
+						if (rotation > 6.283185 || rotation < -6.283185) {
+							rotation = rotation % 6.283185f;
+						}
+
+						Matrix transform = Matrix.CreateTranslation(-origin.X, -origin.Y, 0)
+							* Matrix.CreateRotationZ(rotation - oldRotation)
+							* Matrix.CreateTranslation(origin.X, origin.Y, 0);
+
+						Vector2.TransformNormal(ref engineOrigin, ref transform, out engineOrigin);
 
 						//rotation = (float) -angle;
 						//if (rotation > 6.283185 || rotation < -6.283185) {
@@ -80,6 +101,12 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 			Vector2.Add(ref velocity, ref acceleration, out velocity);
 
 			position += velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
+
+			lastThrustEmission += (float) gameTime.ElapsedGameTime.TotalSeconds;
+			if (lastThrustEmission > .15) {
+				Game1.particleEngine.createThrustParticle(Vector2.Add(position, engineOrigin), acceleration, .5f);
+				lastThrustEmission = 0;
+			}
 
 			base.update(position);
 
@@ -144,6 +171,22 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 		public override void destroy() {
 			target = null;
 			base.destroy();
+		}
+
+
+		public void reArm(Vector2 startPoint, float rot) {
+
+			float oldRotation = rotation;
+
+			position = startPoint;
+			rotation = rot;
+
+			//engineOrigin = new Vector2(position.X, position.Y + height / 2);
+
+			Matrix transform = Matrix.CreateTranslation(-origin.X, -origin.Y, 0)
+							* Matrix.CreateRotationZ(rotation - oldRotation)
+							* Matrix.CreateTranslation(origin.X, origin.Y, 0);
+			Vector2.TransformNormal(ref engineOrigin, ref transform, out engineOrigin);
 		}
 	}
 }

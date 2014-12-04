@@ -29,6 +29,8 @@ namespace SpaceUnionXNA.Ships {
 
 			mainWeapon = new LaserBeam(Vector2.Add(position, weaponOrigin), this);
 			weaponOrigin = new Vector2(position.X, position.Y - height / 2); // start position of weapon
+
+			engineOrigins.Add(new Vector2(position.X, position.Y + height / 2));
 		}
 
 
