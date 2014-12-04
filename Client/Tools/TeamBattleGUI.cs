@@ -18,7 +18,7 @@ namespace SpaceUnionXNA.Tools {
 		//private Ship playerShip;
 		private BaseButton button = new BaseButton(Game1.Assets.playButton);
 		private List<Ship> ships;
-		private List<Ship> inactiveships;
+		//private List<Ship> inactiveships;
 		private int redTeamKills = 0;
 		private int blueTeamKills = 0;
 		public bool timeOver = false;
@@ -35,7 +35,7 @@ namespace SpaceUnionXNA.Tools {
 			return blueTeamKills;
 		}
 
-		public TeamBattleGUI(Game1 game, Ship ship, TimeSpan time, List<Ship> ships, List<Ship> inactiveships)
+		public TeamBattleGUI(Game1 game, Ship ship, TimeSpan time, List<Ship> ships)
 			: base(game, ship) {
 			//this.game = game;
 			teamBattleTime = time;
@@ -44,7 +44,7 @@ namespace SpaceUnionXNA.Tools {
 			//playerShip = ship;
 			playerShip.redTeam = true;
 			this.ships = ships;
-			this.inactiveships = inactiveships;
+			//this.inactiveships = inactiveships;
 		}
 
 
@@ -86,17 +86,17 @@ namespace SpaceUnionXNA.Tools {
 						blueTeamKills += ship.kills;
 					}
 				}
-				foreach (Ship ship in inactiveships)
-				{
-					if (ship.redTeam == true)
-					{
-						redTeamKills += ship.kills;
-					}
-					if (ship.blueTeam == true)
-					{
-						blueTeamKills += ship.kills;
-					}
-				}
+				//foreach (Ship ship in inactiveships)
+				//{
+				//	if (ship.redTeam == true)
+				//	{
+				//		redTeamKills += ship.kills;
+				//	}
+				//	if (ship.blueTeam == true)
+				//	{
+				//		blueTeamKills += ship.kills;
+				//	}
+				//}
 
 			}
 		}

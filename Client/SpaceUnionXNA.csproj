@@ -106,7 +106,9 @@
     <Compile Include="Controllers\OptionsMenu.cs" />
     <Compile Include="Controllers\ShipSelectionScreen.cs" />
     <Compile Include="Controllers\TeamBattle.cs" />
+    <Compile Include="Maps\Map.cs" />
     <Compile Include="Ships\Galactuship.cs" />
+    <Compile Include="Tools\MultiValueDictionary.cs" />
     <Compile Include="UIConstants.cs" />
     <Compile Include="Ships\Lobstar.cs" />
     <Compile Include="Tools\GUI.cs" />

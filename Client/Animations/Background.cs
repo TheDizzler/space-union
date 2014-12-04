@@ -8,7 +8,8 @@ using SpaceUnionXNA.Tools;
 
 
 namespace SpaceUnionXNA.Animations {
-	class Background {
+	
+	public class Background {
 
 		/// <summary>
 		/// The Dimensions of the level
@@ -45,7 +46,7 @@ namespace SpaceUnionXNA.Animations {
 				new Rectangle((int) (camera.Position.X * 0.6), (int) (camera.Position.Y * 0.6), worldWidth / 5, worldHeight / 5),
 				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
 			spriteBatch.Draw(layer3,
-				new Rectangle((int) (camera.Position.X * 0.4), (int) (camera.Position.Y * 0.4), worldWidth / 6, worldHeight / 6),
+				new Rectangle((int) (camera.Position.X * 0.4), (int) (camera.Position.Y * 0.4), worldWidth, worldHeight),
 				null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
 		}
 	}

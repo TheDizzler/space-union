@@ -40,7 +40,6 @@ namespace SpaceUnionXNA.Ships {
 		/// <param name="gameTime"></param>
 		protected override void fire(GameTime gameTime) {
 
-
 			((LaserBeam) mainWeapon).updatePosition(Vector2.Add(position, weaponOrigin), rotation);
 
 		}

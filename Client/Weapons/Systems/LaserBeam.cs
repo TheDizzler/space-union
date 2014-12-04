@@ -105,11 +105,12 @@ namespace SpaceUnionXNA.Weapons.Systems {
 				if (target != owner && target.isActive) {
 
 					if (ray.intersectsToRange(target.getHitBox())) {
-						Console.Out.WriteLine("check " + check++);
+						//Console.Out.WriteLine("check " + check++);
 						float temp = ray.getDistance();
 						if (temp <= distToTarget) {
 							// fine hit detection
 							radical(target, temp, ref currentTarget);
+							//ray.getDistanceDebug();
 							//currentTarget = target;
 							//distToTarget = temp;
 							//break;
@@ -120,6 +121,8 @@ namespace SpaceUnionXNA.Weapons.Systems {
 
 			if (currentTarget != null) {
 				doDamage(currentTarget, gameTime);
+				Console.Out.Write("target: " + currentTarget.GetType());
+				Console.Out.WriteLine("distToTarget: " + distToTarget);
 			}
 
 			frameIndex = startQuanta;

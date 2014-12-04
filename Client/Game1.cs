@@ -13,6 +13,7 @@ using SpaceUnionXNA.Tools;
 using Nuclex.UserInterface;
 using Nuclex.Input;
 using SpaceUnionXNA.Animations;
+using SpaceUnionXNA.Maps;
 
 namespace SpaceUnionXNA {
 	/// <summary>
@@ -397,7 +398,7 @@ namespace SpaceUnionXNA {
 			mainScreen.Desktop.Children.Clear(); //Clear the gui
 			//gameplayScreen = new GameplayScreen(this, spriteBatch, shipselectionScreen.getship());
 			currentGameState = GameState.Playing;
-			gameplayScreen = new TeamBattle(this, spriteBatch, shipselectionScreen.getship());
+			gameplayScreen = new TeamBattle(this, spriteBatch, shipselectionScreen.getship(), new Map(2000, 2000));
 			IsMouseVisible = false;
 		}
 

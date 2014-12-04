@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework;
 using SpaceUnionXNA.Ships;
 using SpaceUnionXNA.StellarObjects;
 using SpaceUnionXNA.Weapons;
+using SpaceUnion.Tools;
+using SpaceUnionXNA.Weapons.Projectiles;
 
 
 namespace SpaceUnionXNA.Tools {
@@ -16,6 +18,63 @@ namespace SpaceUnionXNA.Tools {
 	/// @Written by Tristan
 	/// </summary>
 	public static class CollisionHandler {
+
+
+		/// <summary>
+		/// Holds all pending collisions.
+		/// </summary>
+		public static MultiValueDictionary<Tangible, Tangible> collisions = new MultiValueDictionary<Tangible, Tangible>();
+		/// <summary>
+		/// At end of update dictionary needs to be erased.
+		/// </summary>
+		public static void update(GameTime gameTime) {
+			// Go through each collision
+			foreach (Tangible key in collisions.Keys) {
+				foreach (Tangible value in collisions.GetValues(key, false)) {
+					// determine if value is a projectile
+					if (value is Projectile)
+						value.collide(key, gameTime);
+					else
+						key.collide(value, gameTime);
+					//determine what kind of collision is occuring
+					//else if (key is Ship) {
+					// if (value is Ship)
+					// shipOnShip(key, value);
+					// if (value is Asteroid)
+					// shipOnAsteroid(key, value);
+					//}
+				}
+			}
+			collisions.Clear();
+		}
+		/// <summary>
+		/// Add a collision to be handled.
+		/// </summary>
+		/// <param name="tangible1"></param>
+		/// <param name="tangible2"></param>
+		public static void addCollision(Tangible tangible1, Tangible tangible2) {
+			// check to see if collision already is in dictionary to prevent a double calculation of collision
+			if (!collisionExists(tangible1, tangible2)) {
+				collisions.Add(tangible1, tangible2);
+			}
+		}
+		/// <summary>
+		/// Since collisions are added as the original updater being tangible1, any overlaps are likely
+		/// to have tangible2 being the key, therefore tangible2 is checked first in each && statement
+		/// </summary>
+		/// <param name="tangible1"></param>
+		/// <param name="tangible2"></param>
+		/// <returns>True if the collision already exists, false otherwise</returns>
+		private static bool collisionExists(Tangible tangible1, Tangible tangible2) {
+			// If this collision already exists, dictionary has to contain one or the other as a key
+			if (!collisions.ContainsKey(tangible2) && !collisions.ContainsKey(tangible1)) {
+				return false;
+			}
+			// The collision may exist as key-value pair of <tangible1, tangible2> or <tangible2, tangible1>
+			if (!collisions.ContainsValue(tangible2, tangible1) && !collisions.ContainsValue(tangible1, tangible2))
+				return false;
+			return true;
+		}
 
 
 		/// <summary>

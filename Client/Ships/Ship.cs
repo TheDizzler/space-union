@@ -146,9 +146,6 @@ namespace SpaceUnionXNA.Ships {
 		/// <param name="quadTree"></param>
 		public virtual void update(GameTime gameTime, QuadTree quadTree) {
 
-			/** NOTE: This gets called twice when a ship is made inactive on its update!
-			*	It would be great to keep these updating even when a ship is inactive
-			*	instead of orphaning its projectiles. */
 			mainWeapon.update(gameTime, quadTree);
 			additionalUpdate(gameTime, quadTree);
 
@@ -188,11 +185,6 @@ namespace SpaceUnionXNA.Ships {
 				//	inactiveTime = TimeSpan.Zero;
 				//}
 			}
-
-
-		}
-
-		public virtual void inactiveUpdate(GameTime gameTime) {
 
 
 		}

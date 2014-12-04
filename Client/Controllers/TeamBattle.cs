@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using SpaceUnionXNA.Maps;
 using SpaceUnionXNA.Ships;
 using SpaceUnionXNA.StellarObjects;
 using SpaceUnionXNA.Tools;
@@ -18,11 +19,11 @@ namespace SpaceUnionXNA.Controllers {
 		/// Indicates whether screen has been set up. 
 		/// </summary>
 		private bool initialized = true;
-		public TeamBattle(Game1 game, SpriteBatch batch, Ship selectedship)
-			: base(game, batch, selectedship) {
+		public TeamBattle(Game1 game, SpriteBatch batch, Ship selectedship, Map map)
+			: base(game, batch, selectedship, map) {
 
 			this.game = game;
-            gui = new TeamBattleGUI(game, selectedship, teamBattleTime, ships, inactiveShips);
+			gui = new TeamBattleGUI(game, selectedship, teamBattleTime, ships);
 
 		}
 
