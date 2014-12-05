@@ -29,8 +29,8 @@ namespace SpaceUnionXNA.Ships {
 
 			currentHealth = maxHealth = 35;
 
-			mainWeapon = Launcher<Missile>.CreateLauncher(this, (x, y) => new Missile(x, y), 4);
-			mainWeapon2 = Launcher<Missile>.CreateLauncher(this, (x, y) => new Missile(x, y), 4);
+			mainWeapon = Launcher<Missile>.CreateLauncher(this, (x, y) => new Missile(x, y, game), 4);
+			mainWeapon2 = Launcher<Missile>.CreateLauncher(this, (x, y) => new Missile(x, y, game), 4);
 
 			weaponOrigin = new Vector2(position.X - width / 3, position.Y - height / 2);
 			weaponOrigin2 = new Vector2(position.X + width / 3, position.Y - height / 2);

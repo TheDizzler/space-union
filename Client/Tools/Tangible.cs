@@ -54,8 +54,8 @@ namespace SpaceUnionXNA.Tools {
 
 		public TimeSpan inactiveStart;
 		public TimeSpan inactiveTime = TimeSpan.Zero;
-		public void takeDamage(int amount, GameTime gameTime, Ship owner) {
-
+		public void takeDamage(int amount, GameTime gameTime, Ship attacker) {
+			System.Console.WriteLine("ouc at " + gameTime.TotalGameTime.TotalMilliseconds);
 			// check last time taken damage
 			if (gameTime.TotalGameTime - previousDamageTime > damageTime) {
 				// Reset our current time
@@ -63,23 +63,24 @@ namespace SpaceUnionXNA.Tools {
 				currentHealth -= amount;
 
 
-				if (owner is Ship && this is Ship) {
+				if (attacker is Ship && this is Ship) {
 					Ship target = (Ship) this;
-					if (owner.blueTeam != target.blueTeam) {
+					if (attacker.blueTeam != target.blueTeam) {
 						if (currentHealth <= 0) {
-							owner.kills += 1;
+							attacker.kills += 1;
 							inactiveStart = gameTime.TotalGameTime;
 							destroy();
 						}
 					} else {
 						if (currentHealth <= 0) {
-							owner.kills -= 1;
+							attacker.kills -= 1;
 							inactiveStart = gameTime.TotalGameTime;
 							destroy();
 						}
 					}
 				} else {
 					if (currentHealth <= 0) {
+						inactiveStart = gameTime.TotalGameTime;
 						destroy();
 					}
 				}
@@ -106,6 +107,7 @@ namespace SpaceUnionXNA.Tools {
 
 		protected bool willCollide;
 		public Tangible collideTarget;
+		protected Game1 game;
 
 		public float getVelocityX() {
 			return velocity.X;
@@ -115,8 +117,10 @@ namespace SpaceUnionXNA.Tools {
 		}
 
 
-		protected Tangible(Texture2D tex, Vector2 pos)
+		protected Tangible(Texture2D tex, Vector2 pos, Game1 game)
 			: base(tex, pos) {
+
+			this.game = game;
 
 			int padding = 0;
 			hitBox = new HitBox(position.X, position.Y, width + padding, height + padding);
@@ -165,7 +169,8 @@ namespace SpaceUnionXNA.Tools {
 		/// <param name="gameTime"></param>
 		protected virtual void checkForCollision(QuadTree quadTree, GameTime gameTime) {
 
-
+			if (!this.isActive)
+				return;
 			List<Tangible> possibleCollisions = quadTree.retrieve(this); // Need a better retrieve method for rays
 
 			foreach (Tangible target in possibleCollisions.ToList<Tangible>()) {
@@ -174,7 +179,8 @@ namespace SpaceUnionXNA.Tools {
 						if (fineCheck(target)) {
 							//Vector2 repositionThis = this.velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
 							//Vector2 repositionTarget = target.velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
-							collide(target, gameTime);
+							//collide(target, gameTime);
+							game.collisionHandler.addCollision(this, target, gameTime);
 							// nudge the objects backwards so they don't intertwine
 							//this.position -= repositionThis;
 							//target.position -= repositionTarget;
@@ -331,7 +337,9 @@ namespace SpaceUnionXNA.Tools {
 		/// </summary>
 		public virtual void destroy() {
 			isActive = false;
+			System.Console.WriteLine("Before Count: " + GameplayScreen.targets.Count);
 			GameplayScreen.targets.Remove(this);
+			System.Console.WriteLine("After Count: " + GameplayScreen.targets.Count);
 		}
 
 		/// <summary>
@@ -339,19 +347,19 @@ namespace SpaceUnionXNA.Tools {
 		/// </summary>
 		protected void checkWorldEdge() {
 			if (position.X <= 0) {
-				position.X = 0;
+				position.X = 0 + width / 2;
 				velocity.X = 0;
 			}
 			if (position.X >= GameplayScreen.worldWidth) {
-				position.X = GameplayScreen.worldWidth;
+				position.X = GameplayScreen.worldWidth - width/2;
 				velocity.X = 0;
 			}
 			if (position.Y <= 0) {
-				position.Y = 0;
+				position.Y = 0 + height / 2;
 				velocity.Y = 0;
 			}
 			if (position.Y >= GameplayScreen.worldHeight) {
-				position.Y = GameplayScreen.worldHeight;
+				position.Y = GameplayScreen.worldHeight - height / 2;
 				velocity.Y = 0;
 			}
 		}

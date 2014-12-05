@@ -9,8 +9,8 @@ using Microsoft.Xna.Framework.Audio;
 namespace SpaceUnionXNA.Weapons.Projectiles {
 	public class Missile : Projectile {
 
-		public Missile(Vector2 startPoint, Ship ship)
-			: base(assets.missile, startPoint, ship) {
+		public Missile(Vector2 startPoint, Ship ship, Game1 game)
+			: base(assets.missile, startPoint, ship, game) {
 
 
 			projectileTTL = .5f;

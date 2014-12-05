@@ -11,8 +11,8 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 
 		
 
-		public MoltenBullet(Vector2 startPoint, Ship ship)
-			: base(assets.moltenBullet, startPoint, ship) {
+		public MoltenBullet(Vector2 startPoint, Ship ship, Game1 game)
+			: base(assets.moltenBullet, startPoint, ship, game) {
 
 
 			projectileTTL = 0.5f;

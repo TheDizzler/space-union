@@ -26,10 +26,10 @@ namespace SpaceUnionXNA.StellarObjects {
 		/// <param name="pos">Location in game coordinates of planet</param>
 		/// <param name="mass">100 is weak, 1000 is very strong</param>
 		/// <param name="range">Range (in pixels) that gravitational effects span</param>
-		protected LargeMassObject(Texture2D tex, Vector2 pos, float mass, float range)
-			: base(tex, pos) {
+		protected LargeMassObject(Texture2D tex, Vector2 pos, float mass, float range, Game1 game)
+			: base(tex, pos, game) {
 
-			this.mass = mass * 100000;
+			this.mass = mass * 50000;
 			this.range = range;
 
 			maxHealth = 10000;
@@ -42,6 +42,7 @@ namespace SpaceUnionXNA.StellarObjects {
 			pull(gameTime, targets); // this could benefit from the quadtree but would require some tweaking
 
 			checkForCollision(quadTree, gameTime);
+			velocity = Vector2.Zero;
 		}
 
 		/// <summary>

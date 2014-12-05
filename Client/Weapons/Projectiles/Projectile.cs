@@ -37,8 +37,8 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 		/// <param name="texture">Projectile texture</param>
 		/// <param name="position">Location being fired from</param>
 		/// <param name="ship">Origin of the projectile</param>
-		protected Projectile(Texture2D texture, Vector2 position, Ship ship)
-			: base(texture, position) {
+		protected Projectile(Texture2D texture, Vector2 position, Ship ship, Game1 game)
+			: base(texture, position, game) {
 
 			owner = ship;
 			timeActive = 0;

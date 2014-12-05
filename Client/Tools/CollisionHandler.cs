@@ -17,47 +17,45 @@ namespace SpaceUnionXNA.Tools {
 	/// Will likely expand to include ray casting.
 	/// @Written by Tristan
 	/// </summary>
-	public static class CollisionHandler {
+	public class CollisionHandler {
 
 
 		/// <summary>
 		/// Holds all pending collisions.
 		/// </summary>
-		public static MultiValueDictionary<Tangible, Tangible> collisions = new MultiValueDictionary<Tangible, Tangible>();
+		public MultiValueDictionary<Tangible, Tangible> collisions = new MultiValueDictionary<Tangible, Tangible>();
+
 		/// <summary>
-		/// At end of update dictionary needs to be erased.
+		/// At end of update dictionary needs to be erased.(?)
 		/// </summary>
-		public static void update(GameTime gameTime) {
+		/// <param name="gameTime"></param>
+		public void update(GameTime gameTime) {
 			// Go through each collision
 			foreach (Tangible key in collisions.Keys) {
 				foreach (Tangible value in collisions.GetValues(key, false)) {
-					// determine if value is a projectile
-					if (value is Projectile)
-						value.collide(key, gameTime);
-					else
-						key.collide(value, gameTime);
-					//determine what kind of collision is occuring
-					//else if (key is Ship) {
-					// if (value is Ship)
-					// shipOnShip(key, value);
-					// if (value is Asteroid)
-					// shipOnAsteroid(key, value);
-					//}
+					//System.Console.WriteLine("Resolving collision " + key.GetType().Name + " with " + value.GetType().Name + " at " + gameTime.TotalGameTime.TotalMilliseconds);
+					key.collide(value, gameTime);
 				}
 			}
+			//System.Console.WriteLine("Before collisions.Count " + collisions.Count);
 			collisions.Clear();
+			//System.Console.WriteLine("After collisions.Count " + collisions.Count);
 		}
+
 		/// <summary>
 		/// Add a collision to be handled.
 		/// </summary>
 		/// <param name="tangible1"></param>
 		/// <param name="tangible2"></param>
-		public static void addCollision(Tangible tangible1, Tangible tangible2) {
+		public void addCollision(Tangible tangible1, Tangible tangible2, GameTime gameTime) {
 			// check to see if collision already is in dictionary to prevent a double calculation of collision
 			if (!collisionExists(tangible1, tangible2)) {
 				collisions.Add(tangible1, tangible2);
-			}
+				System.Console.WriteLine("new collision " + tangible1.GetType().Name + " with " + tangible2.GetType().Name + " at " + gameTime.TotalGameTime.TotalMilliseconds);
+			} else
+			System.Console.WriteLine("Collision already exists at " + gameTime.TotalGameTime.TotalMilliseconds);
 		}
+
 		/// <summary>
 		/// Since collisions are added as the original updater being tangible1, any overlaps are likely
 		/// to have tangible2 being the key, therefore tangible2 is checked first in each && statement
@@ -65,11 +63,11 @@ namespace SpaceUnionXNA.Tools {
 		/// <param name="tangible1"></param>
 		/// <param name="tangible2"></param>
 		/// <returns>True if the collision already exists, false otherwise</returns>
-		private static bool collisionExists(Tangible tangible1, Tangible tangible2) {
+		private bool collisionExists(Tangible tangible1, Tangible tangible2) {
 			// If this collision already exists, dictionary has to contain one or the other as a key
-			if (!collisions.ContainsKey(tangible2) && !collisions.ContainsKey(tangible1)) {
-				return false;
-			}
+			//if (!collisions.ContainsKey(tangible2) && !collisions.ContainsKey(tangible1)) {
+			//	return false;
+			//}
 			// The collision may exist as key-value pair of <tangible1, tangible2> or <tangible2, tangible1>
 			if (!collisions.ContainsValue(tangible2, tangible1) && !collisions.ContainsValue(tangible1, tangible2))
 				return false;
@@ -83,7 +81,7 @@ namespace SpaceUnionXNA.Tools {
 		/// <param name="ship1"></param>
 		/// <param name="ship2"></param>
 		/// <param name="gameTime"></param>
-		public static void shipOnShip(Ship ship1, Ship ship2, GameTime gameTime) {
+		public void shipOnShip(Ship ship1, Ship ship2, GameTime gameTime) {
 
 			//elasticCollision(ship1, ship2);
 			reflect(ship1, ship2);
@@ -95,10 +93,12 @@ namespace SpaceUnionXNA.Tools {
 		/// <param name="ship"></param>
 		/// <param name="planet"></param>
 		/// <param name="gameTime"></param>
-		public static void shipOnPlanet(Ship ship, Planet planet, GameTime gameTime) {
+		public void shipOnPlanet(Ship ship, Planet planet, GameTime gameTime) {
 
-			ship.takeDamage(planet.collisionDamage, gameTime, ship);
-			reflect(ship, planet);
+			reflectPlanet(ship, planet);
+			//elasticCollision(ship, planet);
+			ship.takeDamage(planet.collisionDamage, gameTime, null);
+
 		}
 
 		/// <summary>
@@ -107,11 +107,11 @@ namespace SpaceUnionXNA.Tools {
 		/// <param name="ship"></param>
 		/// <param name="asteroid"></param>
 		/// <param name="gameTime"></param>
-		public static void shipOnAsteroid(Ship ship, Asteroid asteroid, GameTime gameTime) {
-			ship.takeDamage(asteroid.collisionDamage, gameTime, ship);
+		public void shipOnAsteroid(Ship ship, Asteroid asteroid, GameTime gameTime) {
+			elasticCollision(ship, asteroid);
+			//reflect(ship, asteroid);
+			//ship.takeDamage(asteroid.collisionDamage, gameTime, null);
 			//asteroid.takeDamage(asteroid.collisionDamage, gameTime);
-			//elasticCollision(ship, asteroid);
-			reflect(ship, asteroid);
 		}
 
 		/// <summary>
@@ -120,7 +120,7 @@ namespace SpaceUnionXNA.Tools {
 		/// <param name="asteroid1"></param>
 		/// <param name="asteroid2"></param>
 		/// <param name="gameTime"></param>
-		public static void asteroidOnAsteroid(Asteroid asteroid1, Asteroid asteroid2, GameTime gameTime) {
+		public void asteroidOnAsteroid(Asteroid asteroid1, Asteroid asteroid2, GameTime gameTime) {
 
 			elasticCollision(asteroid1, asteroid2);
 		}
@@ -131,7 +131,7 @@ namespace SpaceUnionXNA.Tools {
 		/// <param name="asteroid"></param>
 		/// <param name="planet"></param>
 		/// <param name="gameTime"></param>
-		public static void asteroidOnPlanet(Asteroid asteroid, Planet planet, GameTime gameTime) {
+		public void asteroidOnPlanet(Asteroid asteroid, Planet planet, GameTime gameTime) {
 
 			asteroid.destroy();
 		}
@@ -142,7 +142,7 @@ namespace SpaceUnionXNA.Tools {
 		/// <param name="planet1"></param>
 		/// <param name="planet2"></param>
 		/// <param name="gameTime"></param>
-		public static void planetOnPlanet(Planet planet1, Planet planet2, GameTime gameTime) {
+		public void planetOnPlanet(Planet planet1, Planet planet2, GameTime gameTime) {
 			throw new NotImplementedException();
 		}
 
@@ -152,10 +152,10 @@ namespace SpaceUnionXNA.Tools {
 		/// "Bounce" an object off of another. Not great.... :/
 		/// @Written by Tristan with help fromXNA 4.0 Game Development by Example -Jaegers Packt(2010)
 		/// </summary>
-		public static void reflect(Tangible tangible1, Tangible tangible2) {
+		public void reflect(Tangible tangible1, Tangible tangible2) {
 
 			Vector2 combinedMassVel = // if both masses stick together (inelastic collision) than the resulting velocity is combinedMassVel
-				(tangible1.velocity + tangible2.velocity) / (tangible1.mass + tangible2.mass);
+				(tangible1.velocity + tangible2.velocity) / 2;
 
 			Vector2 normal1 = tangible2.position - tangible1.position;
 			normal1.Normalize();
@@ -170,10 +170,20 @@ namespace SpaceUnionXNA.Tools {
 			tangible2.velocity = Vector2.Reflect(tangible2.velocity, normal1);
 			tangible2.velocity += combinedMassVel;
 
-			//Vector2 tang1VelFinal = (tangible1.velocity * (tangible1.mass - tangible2.mass) + 2 * tangible2.mass * tangible2.velocity) / (tangible1.mass + tangible1.mass);
-			//tang1VelFinal += tangible1.velocity;
+
+		}
 
 
+		private void reflectPlanet(Ship ship, Planet planet) {
+
+			Vector2 combinedMassVel = ship.velocity / 5;
+
+			Vector2 normal1 = planet.position - ship.position;
+			normal1.Normalize();
+
+			ship.velocity -= combinedMassVel;
+			ship.velocity = Vector2.Reflect(ship.velocity, normal1);
+			ship.velocity += combinedMassVel;
 		}
 
 		/// <summary>
@@ -182,7 +192,7 @@ namespace SpaceUnionXNA.Tools {
 		/// </summary>
 		/// <param name="tangible1"></param>
 		/// <param name="tangible2"></param>
-		public static void elasticCollision(Tangible tangible1, Tangible tangible2) {
+		public void elasticCollision(Tangible tangible1, Tangible tangible2) {
 
 
 			Vector2 v2 = tangible2.velocity;

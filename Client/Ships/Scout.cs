@@ -14,8 +14,8 @@ namespace SpaceUnionXNA.Ships {
 		private Vector2 weaponOrigin2;
 		private WeaponSystem mainWeapon2;
 
-		public Scout(Game1 game1)
-			: base(assets.scout, game1) {
+		public Scout(Game1 game)
+			: base(assets.scout, game) {
 
 			description = "Fast and manuverable, the scout ship is ideal for hit-and-runs. Its homing missiles have enemy recognition but lack sophisticated target selection.";
 
@@ -25,8 +25,8 @@ namespace SpaceUnionXNA.Ships {
 			turnSpeed = 2.5f;
 			maxSpeed = 500;
 
-			mainWeapon = new HomingLauncher(this);
-			mainWeapon2 = new HomingLauncher(this);
+			mainWeapon = new HomingLauncher(this, game);
+			mainWeapon2 = new HomingLauncher(this, game);
 
 			weaponOrigin = new Vector2(position.X - 25, position.Y + 10);
 			weaponOrigin2 = new Vector2(position.X + 25, position.Y + 10);

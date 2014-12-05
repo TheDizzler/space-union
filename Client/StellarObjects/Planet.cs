@@ -29,8 +29,8 @@ namespace SpaceUnionXNA.StellarObjects {
 		/// <param name="pos">Location in game coordinates of planet</param>
 		/// <param name="mass">100 is weak, 1000 is very strong</param>
 		/// <param name="range">Range (in pixels) that gravitational effects span</param>
-		public Planet(Texture2D tex, Vector2 pos, float mass, float range)
-			: base(tex, pos, mass, range) {
+		public Planet(Texture2D tex, Vector2 pos, float mass, float range, Game1 game)
+			: base(tex, pos, mass, range, game) {
 
 				
 		}
@@ -45,11 +45,11 @@ namespace SpaceUnionXNA.StellarObjects {
 			if (target is Projectile)
 				target.collide(this, gameTime);
 			else if (target is Ship)
-				CollisionHandler.shipOnPlanet((Ship) target, this, gameTime);
+				game.collisionHandler.shipOnPlanet((Ship) target, this, gameTime);
 			else if (target is Asteroid)
-				CollisionHandler.asteroidOnPlanet((Asteroid) target, this, gameTime);
+				game.collisionHandler.asteroidOnPlanet((Asteroid) target, this, gameTime);
 			else if (target is Planet)
-				CollisionHandler.planetOnPlanet(this, (Planet) target, gameTime);
+				game.collisionHandler.planetOnPlanet(this, (Planet) target, gameTime);
 			else
 				throw new NotImplementedException();
 		}

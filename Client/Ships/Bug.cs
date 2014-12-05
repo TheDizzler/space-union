@@ -28,7 +28,7 @@ namespace SpaceUnionXNA.Ships {
 			mainFireDelay = TimeSpan.FromSeconds(.5f);
 			altFireDelay = TimeSpan.FromSeconds(1f);
 
-			mainWeapon = Launcher<MoltenBullet>.CreateLauncher(this, (x, y) => new MoltenBullet(x, y), 2);
+			mainWeapon = Launcher<MoltenBullet>.CreateLauncher(this, (x, y) => new MoltenBullet(x, y, game), 2);
 			weaponOrigin = new Vector2(position.X, position.Y - height / 2); // start position of weapon
 
 			engineOrigins.Add(new Vector2(position.X - width / 4, position.Y + height / 2));

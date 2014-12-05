@@ -12,8 +12,8 @@ namespace SpaceUnionXNA.Ships {
 		private Vector2 weaponOrigin2;
 		private WeaponSystem mainWeapon2;
 
-		public Galactuship(Game1 game1)
-			: base(assets.galactusship, game1) {
+		public Galactuship(Game1 game)
+			: base(assets.galactusship, game) {
 
 
 			// description = "Fast and manuverable, the scout ship is ideal for hit and runs. Its homing missiles ";
@@ -27,8 +27,8 @@ namespace SpaceUnionXNA.Ships {
 			mainFireDelay = TimeSpan.FromSeconds(.2f);
 			altFireDelay = TimeSpan.FromSeconds(1f);
 
-			mainWeapon = Launcher<Missile>.CreateLauncher(this, (x, y) => new Missile(x, y), 4);
-			mainWeapon2 = Launcher<Missile>.CreateLauncher(this, (x, y) => new Missile(x, y), 4);
+			mainWeapon = Launcher<Missile>.CreateLauncher(this, (x, y) => new Missile(x, y, game), 4);
+			mainWeapon2 = Launcher<Missile>.CreateLauncher(this, (x, y) => new Missile(x, y, game), 4);
 
 			weaponOrigin = new Vector2(position.X - width / 3, position.Y - height / 2);
 			weaponOrigin2 = new Vector2(position.X + width / 3, position.Y - height / 2);

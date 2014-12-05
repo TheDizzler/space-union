@@ -30,8 +30,8 @@ namespace SpaceUnionXNA.Weapons.Projectiles {
 		private  Vector2 engineOrigin;
 		private  float lastThrustEmission = 10f;
 
-		public HomingMissile(Vector2 startPoint, Ship ship)
-			: base(assets.homingMissile, startPoint, ship) {
+		public HomingMissile(Vector2 startPoint, Ship ship, Game1 game)
+			: base(assets.homingMissile, startPoint, ship, game) {
 
 
 			projectileTTL = 2.5f;

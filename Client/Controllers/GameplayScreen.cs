@@ -43,6 +43,7 @@ namespace SpaceUnionXNA.Controllers {
 		protected Camera radarCamera;
 		protected GUI gui;
 
+		
 		//Random gen;
 
 		private AssetManager Assets;
@@ -69,7 +70,7 @@ namespace SpaceUnionXNA.Controllers {
 			SCREEN_HEIGHT = game.getScreenHeight();
 			SCREEN_WIDTH = game.getScreenWidth();
 
-
+			
 			quadTree = new QuadTree(0, new Rectangle(0, 0, level.worldWidth, level.worldHeight));
 
 			spriteBatch = batch;
@@ -82,35 +83,21 @@ namespace SpaceUnionXNA.Controllers {
 			//inactiveShips = new List<Ship>();
 			targets = new List<Tangible>();
 			level.init(targets);
-			//respawnpoints = new List<Vector2>();
-			//usedspawn = new List<Vector2>();
 
-			//respawnpoints.Add(new Vector2(worldWidth / 2, worldHeight - 100));
-			//respawnpoints.Add(new Vector2(worldWidth - 100, worldHeight / 2));
-			//respawnpoints.Add(new Vector2(worldWidth / 2, worldHeight));
-			//respawnpoints.Add(new Vector2(100, worldHeight / 2));
-			//respawnpoints.Add(new Vector2(100, 100));
-			//respawnpoints.Add(new Vector2(worldWidth - 100, 100));
-			//respawnpoints.Add(new Vector2(worldWidth - 100, worldHeight - 100));
-			//respawnpoints.Add(new Vector2(100, worldHeight - 100));
-
-			for (int i = 0; i < 3; i++) {
-				Ship enemyship = new Scout(game);
-				enemyship.Position = level.respawnpoints.ElementAt(i + 3);
-				enemyship.blueTeam = true;
-				enemyship.rotation = (float) Math.PI / 4;
-				enemyship.controlAI();
-				ships.Add(enemyship);
-			}
+			//for (int i = 0; i < 3; i++) {
+			//	Ship enemyship = new Scout(game);
+			//	enemyship.Position = level.respawnpoints.ElementAt(i + 3);
+			//	enemyship.blueTeam = true;
+			//	enemyship.rotation = (float) Math.PI / 4;
+			//	enemyship.controlAI();
+			//	ships.Add(enemyship);
+			//}
 			for (int i = 0; i < 2; i++) {
-				Ship friendlyship = new Bug(game);
+				Ship friendlyship = new Lobstar(game);
 				friendlyship.Position = level.respawnpoints.ElementAt(i + 1);
 				friendlyship.redTeam = true;
 				ships.Add(friendlyship);
 			}
-
-
-			//background = new Background(worldWidth, worldHeight, Assets.starfield2, Assets.starfield1, Assets.starfield1, Assets.starfield1);
 
 
 			playerShip = selectedship;
@@ -141,10 +128,6 @@ namespace SpaceUnionXNA.Controllers {
 
 			foreach (Ship ship in ships)
 				targets.Add(ship);
-			//for (int i = 0; i < 5; i++)
-			//	AddAsteroid(new Vector2(gen.Next(100, worldWidth), gen.Next(100, worldHeight)));
-			////	foreach (Planet planet in planets)
-			////		targets.Add(planet);
 
 			MediaPlayer.Stop();
 			Game1.Assets.klaxxon.Play();
@@ -170,6 +153,7 @@ namespace SpaceUnionXNA.Controllers {
 		/// </summary>
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public virtual void Update(GameTime gameTime) {
+			//System.Console.WriteLine("tick");
 			quadTree.clear();
 			foreach (Tangible target in targets)
 				quadTree.insert(target);
@@ -190,10 +174,6 @@ namespace SpaceUnionXNA.Controllers {
 			//   new Vector2(mouseState.X, mouseState.Y), inverse);
 
 
-			//if (asteroids.Count < 50)
-			//	AddAsteroid(new Vector2(gen.Next(100, 4000), gen.Next(100, 2000)));
-
-
 			foreach (Ship ship in ships.ToList()) {
 
 				ship.update(gameTime, quadTree);
@@ -202,24 +182,13 @@ namespace SpaceUnionXNA.Controllers {
 					if (ship.inactiveTime.Seconds >= 2) {
 						level.respawn(ship);
 					}
-
 				}
 			}
 
 			level.update(gameTime, quadTree);
-			//foreach (Vector2 spawn in usedspawn.ToList()) {
-			//	respawnpoints.Add(spawn);
-			//	usedspawn.Remove(spawn);
-			//}
 
 
-			//for (int i = asteroids.Count - 1; i >= 0; i--) {
-			//	asteroids[i].update(gameTime, quadTree);
-			//	if (!asteroids[i].isActive) {
-			//		asteroids.RemoveAt(i);
-			//	}
-			//}
-
+			
 
 			/** Camera Debugging **/
 			if (keyState.IsKeyDown(Keys.P))
@@ -239,20 +208,10 @@ namespace SpaceUnionXNA.Controllers {
 			Game1.explosionEngine.update(gameTime);
 
 			gui.update(gameTime, quadTree);
+			game.collisionHandler.update(gameTime);
+
 		}
 
-		//private bool spawnPointOccupied(Vector2 position) {
-
-		//	foreach (Tangible target in targets) {
-		//		if (target.isActive) {
-
-		//			if (target.getHitBox().rectHitBox.Contains(new Point((int) position.X, (int) position.Y))) {
-		//				return true;
-		//			}
-		//		}
-		//	}
-		//	return false;
-		//}
 
 		/// <summary>
 		/// This is called when the game should draw itself.
@@ -291,22 +250,10 @@ namespace SpaceUnionXNA.Controllers {
 			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
 				SamplerState.LinearClamp, null, null, null, radarCamera.getTransformation());
 
-
-			//draw grid
-			//drawGrid();
-
+			level.drawMiniMap(spriteBatch);
 
 			foreach (Ship ship in ships)
 				ship.drawMiniMap(spriteBatch);
-
-			//foreach (LargeMassObject planet in planets)
-			//	planet.draw(spriteBatch);
-
-			//level.drawMiniMap(spriteBatch);
-			//// Draw the Asteroids
-			//for (int i = 0; i < asteroids.Count; i++) {
-			//	asteroids[i].draw(spriteBatch);
-			//}
 
 
 			spriteBatch.End();

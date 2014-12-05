@@ -17,11 +17,6 @@ namespace SpaceUnionXNA.Ships {
 	/// </summary>
 	public abstract class Ship : Tangible {
 
-		/// <summary>
-		/// Reference to Game1
-		/// </summary>
-		protected Game1 game;
-
 		public String description = "Add description here";
 
 		/// <summary>
@@ -113,10 +108,10 @@ namespace SpaceUnionXNA.Ships {
 		/// <param name="tex">Ship texture</param>
 		/// <param name="wpnTex">Weapon texture</param>
 		/// <param name="game1"></param>
-		protected Ship(Texture2D tex, Game1 game1)
-			: base(tex, Vector2.Zero) {
+		protected Ship(Texture2D tex, Game1 game)
+			: base(tex, Vector2.Zero, game) {
 
-			this.game = game1;
+			
 			velocity = Vector2.Zero;
 
 			currentHealth = maxHealth = 20;
@@ -178,12 +173,6 @@ namespace SpaceUnionXNA.Ships {
 						explodingTime = 0;
 					}
 				}
-
-				//if (inactiveTime.Seconds >= 2) {
-				//	isActive = true;
-				//	currentHealth = maxHealth;
-				//	inactiveTime = TimeSpan.Zero;
-				//}
 			}
 
 
@@ -238,11 +227,11 @@ namespace SpaceUnionXNA.Ships {
 			if (target is Projectile)
 				target.collide(this, gameTime); // the projectile can handle it from here
 			else if (target is Ship)
-				CollisionHandler.shipOnShip(this, (Ship) target, gameTime);
+				game.collisionHandler.shipOnShip(this, (Ship) target, gameTime);
 			else if (target is Asteroid)
-				CollisionHandler.shipOnAsteroid(this, (Asteroid) target, gameTime);
+				game.collisionHandler.shipOnAsteroid(this, (Asteroid) target, gameTime);
 			else if (target is Planet)
-				CollisionHandler.shipOnPlanet(this, (Planet) target, gameTime);
+				game.collisionHandler.shipOnPlanet(this, (Planet) target, gameTime);
 			else
 				throw new NotImplementedException();
 		}

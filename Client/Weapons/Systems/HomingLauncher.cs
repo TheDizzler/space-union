@@ -18,9 +18,9 @@ namespace SpaceUnionXNA.Weapons.Systems {
 
 		public Ship owner { get; set; }
 
-		public HomingLauncher(Ship ship) {
+		public HomingLauncher(Ship ship, Game1 game) {
 			owner = ship;
-			missile = new HomingMissile(Vector2.Zero, ship);
+			missile = new HomingMissile(Vector2.Zero, ship, game);
 
 			fireSFXs = missile.getFireSFX();
 			random = new Random();

@@ -30,9 +30,10 @@ namespace SpaceUnionXNA.StellarObjects {
 		private float spinSpeed = 0f;
 
 
-		public Asteroid(Texture2D tex, Vector2 pos)
-			: base(tex, pos) {
+		public Asteroid(Texture2D tex, Vector2 pos, Game1 game)
+			: base(tex, pos, game) {
 
+			
 			Random r = new Random();
 			double direction = r.NextDouble() * 2 * Math.PI; // angle of velocity
 			int speed = r.Next(500); // speed in pixels per second
@@ -85,11 +86,11 @@ namespace SpaceUnionXNA.StellarObjects {
 			if (target is Projectile)
 				target.collide(this, gameTime);
 			else if (target is Ship)
-				CollisionHandler.shipOnAsteroid((Ship) target, this, gameTime);
+				game.collisionHandler.shipOnAsteroid((Ship) target, this, gameTime);
 			else if (target is Asteroid)
-				CollisionHandler.asteroidOnAsteroid(this, (Asteroid) target, gameTime);
+				game.collisionHandler.asteroidOnAsteroid(this, (Asteroid) target, gameTime);
 			else if (target is Planet)
-				CollisionHandler.asteroidOnPlanet(this, (Planet) target, gameTime);
+				game.collisionHandler.asteroidOnPlanet(this, (Planet) target, gameTime);
 			else
 				throw new NotImplementedException();
 		}

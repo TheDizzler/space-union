@@ -23,10 +23,12 @@ namespace SpaceUnionXNA.Maps {
 		public Background background;
 
 		Random gen;
+		protected Game1 game;
 
 
-		public Map(int mapWidth, int mapHeight) {
+		public Map(int mapWidth, int mapHeight, Game1 game) {
 			
+			this.game = game;
 			gen = new Random();
 
 			worldWidth = mapWidth;
@@ -52,8 +54,8 @@ namespace SpaceUnionXNA.Maps {
 				Game1.Assets.starfield1, Game1.Assets.starfield1);
 
 			planets = new List<LargeMassObject>();
-			planets.Add(new Planet(Game1.Assets.waterPlanet, new Vector2(4000, 3000), 500f, 1000));
-			planets.Add(new Planet(Game1.Assets.moon, new Vector2(1000, 1000), 250f, 800));
+			planets.Add(new Planet(Game1.Assets.waterPlanet, new Vector2(4000, 3000), 500f, 1000, game));
+			planets.Add(new Planet(Game1.Assets.moon, new Vector2(1000, 1000), 250f, 800, game));
 		}
 
 
@@ -67,7 +69,7 @@ namespace SpaceUnionXNA.Maps {
 
 
 		private void AddAsteroid(Vector2 position) {
-			Asteroid asteroid = new Asteroid(Game1.Assets.asteroid, position);
+			Asteroid asteroid = new Asteroid(Game1.Assets.asteroid, position, game);
 			asteroids.Add(asteroid);
 			targets.Add(asteroid);
 		}

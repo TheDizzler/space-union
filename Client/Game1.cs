@@ -60,6 +60,8 @@ namespace SpaceUnionXNA {
 		public string currentSound = "Medium";
 		public string currentMusic = "Medium";
 
+		public CollisionHandler collisionHandler;
+
 		public List<Keys> keylist;
 
 		//NETWORKING
@@ -170,14 +172,12 @@ namespace SpaceUnionXNA {
 			);
 
 			login_menu = new LoginMenu(this); //Users must login to play online
-			
 
+			collisionHandler = new CollisionHandler();
 			graphics.ApplyChanges();
 
-			// @Written by Tristan
 			MediaPlayer.IsRepeating = true;
 			MediaPlayer.Play(Assets.titleSong);
-
 			SoundEffect.MasterVolume = .15f;
 		}
 
@@ -398,7 +398,7 @@ namespace SpaceUnionXNA {
 			mainScreen.Desktop.Children.Clear(); //Clear the gui
 			//gameplayScreen = new GameplayScreen(this, spriteBatch, shipselectionScreen.getship());
 			currentGameState = GameState.Playing;
-			gameplayScreen = new TeamBattle(this, spriteBatch, shipselectionScreen.getship(), new Map(2000, 2000));
+			gameplayScreen = new TeamBattle(this, spriteBatch, shipselectionScreen.getship(), new Map(2000, 2000, this));
 			IsMouseVisible = false;
 		}
 

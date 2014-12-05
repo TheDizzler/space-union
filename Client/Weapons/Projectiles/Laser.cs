@@ -8,8 +8,8 @@ using Microsoft.Xna.Framework.Audio;
 namespace SpaceUnionXNA.Weapons.Projectiles {
 	class Laser : Projectile {
 
-		public Laser(Vector2 startPoint, Ship ship)
-			: base(assets.laser, startPoint, ship) {
+		public Laser(Vector2 startPoint, Ship ship, Game1 game)
+			: base(assets.laser, startPoint, ship, game) {
 
 			projectileTTL = 5;
 			projectileMoveSpeed = 1000.2f;
