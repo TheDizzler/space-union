@@ -17,7 +17,7 @@ namespace SpaceUnionXNA.StellarObjects {
 		/// <summary>
 		/// Damage given from collision
 		/// </summary>
-		private int damage = 20;
+		private int damage = 5;
 		public int collisionDamage {
 			get { return damage; }
 		}

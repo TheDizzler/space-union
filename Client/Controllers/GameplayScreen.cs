@@ -93,7 +93,7 @@ namespace SpaceUnionXNA.Controllers {
 			//	ships.Add(enemyship);
 			//}
 			for (int i = 0; i < 2; i++) {
-				Ship friendlyship = new Lobstar(game);
+				Ship friendlyship = new Galactuship(game);
 				friendlyship.Position = level.respawnpoints.ElementAt(i + 1);
 				friendlyship.redTeam = true;
 				ships.Add(friendlyship);
@@ -101,7 +101,7 @@ namespace SpaceUnionXNA.Controllers {
 
 
 			playerShip = selectedship;
-			playerShip.Position = level.respawnpoints.ElementAt(0);
+			playerShip.Position = level.respawnpoints.ElementAt(5);
 			//playerShip.rotation = (float) (Math.PI/2);
 
 			basicViewport = game.GraphicsDevice.Viewport;

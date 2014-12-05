@@ -66,15 +66,15 @@ namespace SpaceUnionXNA.Tools {
 		public Texture2D createLobby2;
 		public Texture2D browseLobby;
 		public Texture2D spaceUnion;
-        public Texture2D suCredits;
-        public Texture2D suMultiBrowse;
-        public Texture2D suMultiCreate;
-        public Texture2D suMultiplayer;
-        public Texture2D suOption;
-        public Texture2D suOptionKeys;
-        public Texture2D suBanner;
-        public Texture2D suMultiLobby;
-        public Texture2D loading;
+		public Texture2D suCredits;
+		public Texture2D suMultiBrowse;
+		public Texture2D suMultiCreate;
+		public Texture2D suMultiplayer;
+		public Texture2D suOption;
+		public Texture2D suOptionKeys;
+		public Texture2D suBanner;
+		public Texture2D suMultiLobby;
+		public Texture2D loading;
 
 		// bgs and doodads
 		public Texture2D background;
@@ -126,7 +126,7 @@ namespace SpaceUnionXNA.Tools {
 		public Texture2D shield;
 		public Texture2D moltenBullet;
 		public Texture2D redLaser;
-
+		public Texture2D redLaser2;
 		// radar icons
 		public Texture2D shipMapIcon;
 		public  Texture2D pixel;
@@ -179,18 +179,18 @@ namespace SpaceUnionXNA.Tools {
 			gamelobby = Content.Load<Texture2D>("Buttons/gamelobby");
 			gameroom = Content.Load<Texture2D>("Buttons/gameroom");
 			options = Content.Load<Texture2D>("Buttons/optionsbutton");
-            createLobby2 = Content.Load<Texture2D>("Buttons/Create_Lobby");
-            browseLobby = Content.Load<Texture2D>("Buttons/Browse_Lobby");
-            suBanner = Content.Load<Texture2D>("Buttons/Space-Union_Banner");
-            spaceUnion = Content.Load<Texture2D>("Buttons/Space-Union");
-            suCredits = Content.Load<Texture2D>("Buttons/SU_Credits");
-            suMultiBrowse = Content.Load<Texture2D>("Buttons/SU_M_BrowseLobby");
-            suMultiCreate = Content.Load<Texture2D>("Buttons/SU_M_CreateLobby");
-            suMultiplayer = Content.Load<Texture2D>("Buttons/SU_Multiplayer");
-            suOption = Content.Load<Texture2D>("Buttons/SU_Options");
-            suOptionKeys = Content.Load<Texture2D>("Buttons/SU_O_KeyBindings");
-            suMultiLobby = Content.Load<Texture2D>("Buttons/SU_M_Lobby");
-            loading = Content.Load<Texture2D>("Buttons/loading");
+			createLobby2 = Content.Load<Texture2D>("Buttons/Create_Lobby");
+			browseLobby = Content.Load<Texture2D>("Buttons/Browse_Lobby");
+			suBanner = Content.Load<Texture2D>("Buttons/Space-Union_Banner");
+			spaceUnion = Content.Load<Texture2D>("Buttons/Space-Union");
+			suCredits = Content.Load<Texture2D>("Buttons/SU_Credits");
+			suMultiBrowse = Content.Load<Texture2D>("Buttons/SU_M_BrowseLobby");
+			suMultiCreate = Content.Load<Texture2D>("Buttons/SU_M_CreateLobby");
+			suMultiplayer = Content.Load<Texture2D>("Buttons/SU_Multiplayer");
+			suOption = Content.Load<Texture2D>("Buttons/SU_Options");
+			suOptionKeys = Content.Load<Texture2D>("Buttons/SU_O_KeyBindings");
+			suMultiLobby = Content.Load<Texture2D>("Buttons/SU_M_Lobby");
+			loading = Content.Load<Texture2D>("Buttons/loading");
 
 			///end added by Matthew Baldock
 
@@ -229,7 +229,7 @@ namespace SpaceUnionXNA.Tools {
 			moltenBullet = Content.Load<Texture2D>("Projectiles/molten bullet (6x8)");
 			shield = Content.Load<Texture2D>("Animations/bubble shield sheet");
 			redLaser = Content.Load<Texture2D>("Animations/redlaserbeam (25x11)");
-
+			redLaser2 = Content.Load<Texture2D>("Animations/redlaserbeam (50x22)");
 			shipMapIcon = Content.Load<Texture2D>("MapIcons/reticle (16x16)");
 
 

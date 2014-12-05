@@ -55,7 +55,7 @@ namespace SpaceUnionXNA.Tools {
 		public TimeSpan inactiveStart;
 		public TimeSpan inactiveTime = TimeSpan.Zero;
 		public void takeDamage(int amount, GameTime gameTime, Ship attacker) {
-			System.Console.WriteLine("ouc at " + gameTime.TotalGameTime.TotalMilliseconds);
+			
 			// check last time taken damage
 			if (gameTime.TotalGameTime - previousDamageTime > damageTime) {
 				// Reset our current time
@@ -179,8 +179,8 @@ namespace SpaceUnionXNA.Tools {
 						if (fineCheck(target)) {
 							//Vector2 repositionThis = this.velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
 							//Vector2 repositionTarget = target.velocity * (float) gameTime.ElapsedGameTime.TotalSeconds;
-							//collide(target, gameTime);
-							game.collisionHandler.addCollision(this, target, gameTime);
+							collide(target, gameTime);
+							//game.collisionHandler.addCollision(this, target, gameTime);
 							// nudge the objects backwards so they don't intertwine
 							//this.position -= repositionThis;
 							//target.position -= repositionTarget;
@@ -337,9 +337,7 @@ namespace SpaceUnionXNA.Tools {
 		/// </summary>
 		public virtual void destroy() {
 			isActive = false;
-			System.Console.WriteLine("Before Count: " + GameplayScreen.targets.Count);
 			GameplayScreen.targets.Remove(this);
-			System.Console.WriteLine("After Count: " + GameplayScreen.targets.Count);
 		}
 
 		/// <summary>
@@ -347,19 +345,19 @@ namespace SpaceUnionXNA.Tools {
 		/// </summary>
 		protected void checkWorldEdge() {
 			if (position.X <= 0) {
-				position.X = 0 + width / 2;
+				position.X = 0 + width / 4;
 				velocity.X = 0;
 			}
 			if (position.X >= GameplayScreen.worldWidth) {
-				position.X = GameplayScreen.worldWidth - width/2;
+				position.X = GameplayScreen.worldWidth - width / 4;
 				velocity.X = 0;
 			}
 			if (position.Y <= 0) {
-				position.Y = 0 + height / 2;
+				position.Y = 0 + height / 4;
 				velocity.Y = 0;
 			}
 			if (position.Y >= GameplayScreen.worldHeight) {
-				position.Y = GameplayScreen.worldHeight - height / 2;
+				position.Y = GameplayScreen.worldHeight - height / 4;
 				velocity.Y = 0;
 			}
 		}

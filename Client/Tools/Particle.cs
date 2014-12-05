@@ -22,6 +22,7 @@ namespace SpaceUnionXNA.Tools {
 		public float TTL { get; set; }                // The 'time to live' of the particle
 		private  float timeLapsed;
 		public  bool isActive;
+		private  float red, green, blue, alpha;
 
 		public Particle(Texture2D texture, Vector2 position, Vector2 velocity,
 			float angle, float angularVelocity, Color clr, float size, float ttl) {
@@ -33,6 +34,10 @@ namespace SpaceUnionXNA.Tools {
 			color = clr;
 			Size = size;
 			TTL = ttl;
+			red = color.R / 255;
+			green = color.G / 255;
+			blue = color.B / 255;
+			alpha = color.A / 255;
 			isActive = true;
 		}
 
@@ -50,7 +55,7 @@ namespace SpaceUnionXNA.Tools {
 			Rectangle sourceRectangle = new Rectangle(0, 0, Texture.Width, Texture.Height);
 			Vector2 origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
 
-			color = new Color(1 - (timeLapsed / TTL), 1 - timeLapsed*4f / TTL, 0);
+			color = new Color(red - (timeLapsed / TTL), green - timeLapsed * 4f / TTL, blue - (timeLapsed * 4f / TTL));
 			spriteBatch.Draw(Texture, Position, sourceRectangle, color,
 				Angle, origin, Size, SpriteEffects.None, 0f);
 		}

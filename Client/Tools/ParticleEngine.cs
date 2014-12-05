@@ -64,7 +64,7 @@ namespace SpaceUnionXNA.Tools {
 
 		public void createThrustParticle(Vector2 location, Vector2 shipAccel, float timeToLive) {
 
-			Texture2D texture = textures[random.Next(textures.Count)];
+			Texture2D texture = textures[0];
 			Vector2 position = location;
 			Vector2 velocity = -shipAccel;
 			float angle = 0;
@@ -74,6 +74,18 @@ namespace SpaceUnionXNA.Tools {
 			float ttl = timeToLive;
 
 			particles.Add(new Particle(texture, position, velocity, angle, angularVelocity, color, size, ttl));
+		}
+
+		public void createSparkle(Vector2 quantaPosition, int offset, double intensity, Vector2 velocity) {
+
+			Texture2D texture = textures[0];
+			Vector2 position = quantaPosition + new Vector2(offset, offset);
+			float angularVelocity = 0.1f * (float) (random.NextDouble() * 2 - 1);
+			Color color = new Color(1f, 0, 1f);
+			float size = 1f;
+			float ttl = .5f;
+
+			particles.Add(new Particle(texture, position, velocity / 2, 0f, angularVelocity, color, size, ttl));
 		}
 	}
 }

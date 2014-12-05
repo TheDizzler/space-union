@@ -29,7 +29,7 @@ namespace SpaceUnionXNA.StellarObjects {
 		protected LargeMassObject(Texture2D tex, Vector2 pos, float mass, float range, Game1 game)
 			: base(tex, pos, game) {
 
-			this.mass = mass * 50000;
+			this.mass = mass * 35000;
 			this.range = range;
 
 			maxHealth = 10000;

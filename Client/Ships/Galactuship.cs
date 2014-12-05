@@ -71,7 +71,7 @@ namespace SpaceUnionXNA.Ships {
 		}
 
 		protected override void altFire(GameTime gameTime) {
-			throw new NotImplementedException();
+			//throw new NotImplementedException();
 		}
 	}
 }

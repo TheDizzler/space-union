@@ -34,17 +34,16 @@ namespace SpaceUnionXNA.Weapons.Systems {
 		private  bool beamOn;
 		private  int startQuanta;
 
-
-		int check = 0;
+		Random particleSeed = new Random();
 
 
 		public LaserBeam(Vector2 startPoint, Ship ship)
-			: base(assets.redLaser, startPoint) {
+			: base(assets.redLaser2, startPoint) {
 
 			owner = ship;
 
 			weaponDamage = 1;
-			beamLength = 275;
+			beamLength = 175;
 
 			setupAnimation();
 		}
@@ -52,10 +51,10 @@ namespace SpaceUnionXNA.Weapons.Systems {
 		private void setupAnimation() {
 
 			// the size of each tile
-			setSize(1, 11); // must be explicitly set for tile sheets
+			setSize(3, 11); // must be explicitly set for tile sheets
 
 			AnimationClass anima = new AnimationClass();
-			addAnimation("laser", 0, 5, anima.copy());
+			addAnimation("laser", 0, 10, anima.copy());
 
 			frameLength = .8f;
 			animation = "laser";
@@ -70,7 +69,7 @@ namespace SpaceUnionXNA.Weapons.Systems {
 			for (int i = 0; i < frameCount; i++)
 				recs[i] = new Rectangle(i * width,
 					row * height, width, height);
-
+			anima.rotation = (float)Math.PI/4;
 			anima.frameCount = frameCount;
 			anima.frames = recs;
 			animations.Add(name, anima);
@@ -93,9 +92,9 @@ namespace SpaceUnionXNA.Weapons.Systems {
 
 			// find targets within line of fire
 			/*List<Tangible> possibleCollisions = quadTree.retrieveNeighbors(owner);*/
-			/* This method and may result in missed ships.
-			 * A different retriever using a raycast
-			 * will likely be necessary. -Tristan-*/
+										/* This method and may result in missed ships.
+										 * A different retriever using a raycast
+										 * will likely be necessary. -Tristan-*/
 
 			List<Tangible> possibleCollisions = GameplayScreen.targets;
 
@@ -105,15 +104,11 @@ namespace SpaceUnionXNA.Weapons.Systems {
 				if (target != owner && target.isActive) {
 
 					if (ray.intersectsToRange(target.getHitBox())) {
-						//Console.Out.WriteLine("check " + check++);
+						
 						float temp = ray.getDistance();
 						if (temp <= distToTarget) {
 							// fine hit detection
-							radical(target, temp, ref currentTarget);
-							//ray.getDistanceDebug();
-							//currentTarget = target;
-							//distToTarget = temp;
-							//break;
+							narrowCheck(target, temp, ref currentTarget);
 						}
 					}
 				}
@@ -121,16 +116,11 @@ namespace SpaceUnionXNA.Weapons.Systems {
 
 			if (currentTarget != null) {
 				doDamage(currentTarget, gameTime);
-				Console.Out.Write("target: " + currentTarget.GetType());
-				Console.Out.WriteLine("distToTarget: " + distToTarget);
 			}
 
 			frameIndex = startQuanta;
 
 			for (int i = 0; i < beamLength * distToTarget; ++i) {
-
-				//beamQuanta.Add(assets.Content.Load<Texture2D>("Projectiles/molten bullet (6x8)"));// test texture
-
 
 				beamQuanta.Add(getNextQuanta());
 				if (++frameIndex > 4)
@@ -142,7 +132,7 @@ namespace SpaceUnionXNA.Weapons.Systems {
 			beamOn = false;
 		}
 
-		private void radical(Tangible target, float temp, ref Tangible currentTarget) {
+		private void narrowCheck(Tangible target, float temp, ref Tangible currentTarget) {
 
 			Color[] rawData = new Color[target.width * target.height];
 			target.texture.GetData<Color>(rawData);
@@ -188,16 +178,31 @@ namespace SpaceUnionXNA.Weapons.Systems {
 
 		public override void draw(SpriteBatch spriteBatch) {
 
+			int numParticles = 0;
+			Vector2 quantaPosition = position;
+
+			Random rand1 = new Random();
+			Random rand2 = new Random();
+			int interation = 0;
+
 			foreach (Rectangle rect in beamQuanta) {
-				position.X += beamDirection.X;
-				position.Y += beamDirection.Y;
-				//beamQuantum.X = (int) position.X;
-				//beamQuantum.Y = (int) position.Y;
-				//spriteBatch.Draw(dot, beamQuantum, Color.White);
-				spriteBatch.Draw(texture, position, rect,
+
+				quantaPosition.X += beamDirection.X;
+				quantaPosition.Y += beamDirection.Y;
+
+				//numParticles = particleSeed.Next(3) -1;
+				//for (int i = 0; i < numParticles; ++i) {
+				if (interation % 17 == 0)
+					Game1.particleEngine.createSparkle(quantaPosition, rand1.Next(10) - 5, rand2.NextDouble(), owner.velocity);
+				if (interation % 8 == 0)
+					Game1.particleEngine.createSparkle(quantaPosition, particleSeed.Next(10) - 5, rand1.NextDouble(), owner.velocity);
+				
+				spriteBatch.Draw(texture, quantaPosition, rect,
 					animations[animation].color,
 					rotation, origin, scale,
 					animations[animation].spriteEffect, 0f);
+
+				interation++;
 			}
 			beamQuanta.Clear();
 		}
